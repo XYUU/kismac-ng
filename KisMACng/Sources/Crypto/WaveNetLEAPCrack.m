@@ -2,7 +2,7 @@
         
         File:			WaveNetLEAPCrack.m
         Program:		KisMAC
-	Author:			Michael Roßberg
+	Author:			Michael Rossberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -60,7 +60,8 @@ struct leapClientData {
 - (BOOL)crackLEAPWithWordlist:(NSString*)wordlist andImportController:(ImportController*)im {
     char wrd[100];
     FILE* fptr;
-    unsigned int i, words, keys, curKey;
+    unsigned int i, words, curKey;
+	int keys;
     struct leapClientData *c;
     WaveClient *wc;
     unsigned char pwhash[MD4_DIGEST_LENGTH];
@@ -98,7 +99,10 @@ struct leapClientData {
         }
     }
 
-    NSAssert(keys!=0, @"There must be more keys");
+    if (keys<=0) {
+		_crackErrorString = [NSLocalizedString(@"The captured challenge response packets are not sufficient to perform this attack", @"Error description for LEAP crack.") retain];
+		return NO;
+	}
     
     words = 0;
     wrd[90]=0;

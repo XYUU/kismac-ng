@@ -149,7 +149,17 @@
         }
     }
 }
+- (IBAction)importImageForMap:(id)sender {
+    NSOpenPanel *op;
 
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:NO];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:[NSImage imageFileTypes]]==NSOKButton) {
+		[ScriptingEngine selfSendEvent:'KImI' withDefaultArgString:[op filename]];
+    }
+}
 - (IBAction)importPCPFile:(id)sender {
     NSOpenPanel *op;
     int i;

@@ -2,9 +2,9 @@
         
         File:			AirCrackWrapper.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -152,7 +152,7 @@ wait_for_master:
 
     if( safe_read( mc_pipe[child][0], buf, 14 ) != 14 )
     {
-        perror( "in calc_votes: read()" );
+        //perror( "in calc_votes: read()" );
         return;
     }
 

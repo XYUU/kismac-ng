@@ -120,7 +120,6 @@
                 exportToServer = id; 
                 exportWarD = id; 
                 gpsDebugToConsole = id; 
-                importImage = id; 
                 importMapFromServer = id; 
                 importNetstumbler = id; 
                 injectPackets = id; 
@@ -198,6 +197,7 @@
                 bruteforce40bitAlpha = id; 
                 bruteforce40bitLow = id; 
                 bruteforceNewsham = id; 
+                importImageForMap = id; 
                 importKisMACFile = id; 
                 importPCPFile = id; 
                 new = id; 

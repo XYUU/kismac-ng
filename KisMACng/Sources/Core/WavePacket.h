@@ -117,7 +117,7 @@ typedef enum _leapAuthCode {
     int _length;		//length of body
     int _headerLength;		//length of real header
 
-    int aMACAddress[30];	//the mac addresses
+    UInt8 _MACAddress[30];	//the mac addresses
     
     //WPA stuff
     int _wpaCipher;
@@ -145,8 +145,11 @@ typedef enum _leapAuthCode {
 - (UInt8*)frame;
 - (int)isResolved;	//for wep cracking 
 - (NSString*)ssid;
+
+- (UInt8*)rawSenderID;
 - (NSString*)clientFromID;
 - (NSString*)clientToID;
+- (UInt8*)rawBSSID;
 - (NSString*)BSSIDString;
 - (bool)BSSID:(UInt8*)bssid;
 - (bool)ID:(UInt8*)ident;

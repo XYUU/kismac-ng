@@ -2,9 +2,9 @@
         
         File:			WaveScanner.mm
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Ro§berg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -46,14 +46,13 @@
     self = [super init];
     if (!self) return nil;
     
-    aScanning=NO;
-    aScanThreadUp=NO;
+    _scanning=NO;
     _driver = 0;
     
     srandom(55445);	//does not have to be to really random
     
-    scanInterval = 0.25;
-    graphLength = 0;
+    _scanInterval = 0.25;
+    _graphLength = 0;
     _soundBusy = NO;
     
     return self;
@@ -275,10 +274,14 @@
 //well loads a saved file
 -(bool) loadFromFile:(NSString*)fileName {
     id data;
-    NSDictionary *d;
-    
+    BOOL ret = YES;
+	NSDictionary *d;
+    NSAutoreleasePool *p;
+	
     if (!fileName) return NO;
     
+	p = [[NSAutoreleasePool alloc] init];
+	
     data = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
     if (![data isKindOfClass:[NSDictionary class]]) {
@@ -289,19 +292,26 @@
     d = data;
     
     if ([d objectForKey:@"Creator"]) { //could be a new file
-        [[WaveHelper trace] setTrace:[d objectForKey:@"Trace"]];
-        return [_container loadData:[d objectForKey:@"Networks"]];
+        ret &= [[WaveHelper trace] setTrace:[d objectForKey:@"Trace"]];
+        ret &= [_container loadData:[d objectForKey:@"Networks"]];
     } else {
-        return [_container loadLegacyData:d]; //try to read legacy data
+        ret &= [_container loadLegacyData:d]; //try to read legacy data
     }
+	
+	[p release];
+	return ret;
 }
 
 //imports the data from a saved file
 -(bool) importFromFile:(NSString*)fileName {
     id data;
+    BOOL ret = YES;
     NSDictionary *d;
+    NSAutoreleasePool *p;
     
     if (!fileName) return NO;
+
+	p = [[NSAutoreleasePool alloc] init];
     
     data = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
@@ -313,11 +323,14 @@
     d = data;
     
     if ([d objectForKey:@"Creator"]) { //could be a new file
-        [[WaveHelper trace] setTrace:[d objectForKey:@"Trace"]];
-        return [_container importData:[d objectForKey:@"Networks"]];
+        ret &= [[WaveHelper trace] addTrace:[d objectForKey:@"Trace"]];
+        ret &= [_container importData:[d objectForKey:@"Networks"]];
     } else {
-        return [_container importLegacyData:d]; //try to read legacy data
+        ret &= [_container importLegacyData:d]; //try to read legacy data
     }
+	
+	[p release];
+	return ret;
 }
 
 //imports the data from a netstumbler file
@@ -366,6 +379,7 @@
 #pragma mark -
 
 -(void)clearAllNetworks {
+	[[WaveHelper trace] setTrace:nil];
     [_container clearAllEntries];
 }
 
@@ -431,10 +445,10 @@ got:
 
 #pragma mark -
 -(void)performScan:(NSTimer)timer {
-    [_container scanUpdate:graphLength];
+    [_container scanUpdate:_graphLength];
     
-    if(graphLength < MAX_YIELD_SIZE)
-        graphLength++;
+    if(_graphLength < MAX_YIELD_SIZE)
+        _graphLength++;
 
     [aController updateNetworkTable:self complete:NO];
     
@@ -451,9 +465,9 @@ got:
     float interval;
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     
-    interval = [defs floatForKey:@"activeScanInterval"];
+    interval = [defs floatForKey:@"active_scanInterval"];
     
-    while (aScanning) {
+    while (_scanning) {
         nets = [wd networksInRange];
         
         if (nets) {
@@ -520,7 +534,7 @@ got:
         }
     }
     
-    w=[[WavePacket alloc] init];
+    w = [[WavePacket alloc] init];
 
     if (_geigerSound!=Nil) {
         geiger=[NSSound soundNamed:_geigerSound];
@@ -528,7 +542,7 @@ got:
     } else geiger=Nil;
     
     [wd startCapture:0];
-    while (aScanning) {				//this is for canceling
+    while (_scanning) {				//this is for canceling
         frame = [wd nextFrame];                 //captures the next frame (locking)
         if (frame==NULL) 
 			break;
@@ -543,9 +557,13 @@ got:
 				if ([_container addPacket:w liveCapture:YES]==NO) continue; // the packet shall be dropped
 
 				if ((dumpFilter==1)||((dumpFilter==2)&&([w type]==IEEE80211_TYPE_DATA))||((dumpFilter==3)&&([w isResolved]!=-1))) [w dump:f]; //dump if needed
-							
-				if ((geiger!=Nil) && ((_packets % aGeigerInt)==0)) {
-					if (_soundBusy) aGeigerInt+=10;
+				
+				if (_deauthing && [w toDS]) {
+					[self deauthenticateClient:[w rawSenderID] inNetworkWithBSSID:[w rawBSSID]];
+				}
+				
+				if ((geiger!=Nil) && ((_packets % _geigerInt)==0)) {
+					if (_soundBusy) _geigerInt+=10;
 					else {
 						_soundBusy=YES;
 						[geiger play];
@@ -553,7 +571,7 @@ got:
 				}
 				
 				_packets++;
-				aBytes+=[w length];
+				_bytes+=[w length];
 			}
 		} @finally {}
     }
@@ -585,8 +603,8 @@ error:
     NSArray *a;
     unsigned int i;
     
-    if (!aScanning) {			//we are already scanning
-        aScanning=YES;
+    if (!_scanning) {			//we are already scanning
+        _scanning=YES;
         a = [WaveHelper getWaveDrivers];
         [WaveHelper secureReplace:&_drivers withObject:a];
         
@@ -595,7 +613,7 @@ error:
             [NSThread detachNewThreadSelector:@selector(doScan:) toTarget:self withObject:w];
         }
         
-        _scanTimer = [NSTimer scheduledTimerWithTimeInterval:scanInterval target:self selector:@selector(performScan:) userInfo:Nil repeats:TRUE];
+        _scanTimer = [NSTimer scheduledTimerWithTimeInterval:_scanInterval target:self selector:@selector(performScan:) userInfo:Nil repeats:TRUE];
         if (_hopTimer == Nil)
             _hopTimer=[NSTimer scheduledTimerWithTimeInterval:aFreq target:self selector:@selector(doChannelHop:) userInfo:Nil repeats:TRUE];
     }
@@ -604,8 +622,8 @@ error:
 }
 
 - (bool)stopScanning {
-    if (aScanning) {
-        aScanning=NO;
+    if (_scanning) {
+        _scanning=NO;
         [_scanTimer invalidate];
         _scanTimer = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:KisMACStopScanForced object:self];
@@ -641,16 +659,16 @@ error:
     if ((newSound==Nil)||(newGeigerInt==0)) return;
     
     _geigerSound=[newSound retain];
-    aGeigerInt=newGeigerInt;
+    _geigerInt=newGeigerInt;
 }
 
 #pragma mark -
 
 - (NSTimeInterval)scanInterval {
-    return scanInterval;
+    return _scanInterval;
 }
 - (int)graphLength {
-    return graphLength;
+    return _graphLength;
 }
 
 //#define DUMP_DUMPS
@@ -821,6 +839,31 @@ error:
     frame.hdr.sequenceControl=random() & 0x0FFF;
 
     [w sendFrame:(UInt8*)&frame withLength:sizeof(frame) atInterval:interval];
+    
+    return YES;
+}
+
+- (bool) deauthenticateClient:(UInt8*)client inNetworkWithBSSID:(UInt8*)bssid {
+    WaveDriver *w;
+
+    struct {
+        WLFrame hdr;
+        UInt16  reason;
+    }__attribute__ ((packed)) frame;
+
+	if (!client || !bssid) return NO;
+    w = [self getInjectionDriver];
+    if (!w) return NO;
+    
+    memset(&frame,0,sizeof(frame));
+    frame.hdr.frameControl = IEEE80211_TYPE_MGT | IEEE80211_SUBTYPE_DEAUTH | IEEE80211_DIR_FROMDS;
+    memcpy(frame.hdr.address1, client, 6);	// out target
+    memcpy(frame.hdr.address2, bssid, 6);
+    memcpy(frame.hdr.address3, bssid, 6);
+    frame.hdr.dataLen=2;
+    frame.reason=NSSwapHostShortToLittle(2);
+    
+    [w sendFrame:(UInt8*)&frame withLength:sizeof(frame) atInterval:0];
     
     return YES;
 }
@@ -1044,7 +1087,7 @@ error:
 
 #pragma mark -
 
-- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool {
+- (void)sound:(NSSound *)sound didFinishPlaying:(bool)aBool {
     _soundBusy=NO;
 }
 
@@ -1052,7 +1095,7 @@ error:
     [self stopSendingFrames];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    aScanning=NO;
+    _scanning=NO;
     [super dealloc];
 }
 

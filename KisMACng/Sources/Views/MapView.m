@@ -2,9 +2,9 @@
         
         File:			MapView.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Roßberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -50,7 +50,8 @@
     [self addSubView:_moveContainer];
 
     _netContainer = [[BISubView alloc] initWithSize:NSMakeSize(300000,300000)];
-    [_moveContainer addSubView:_netContainer];
+    [_netContainer setVisible:NO];
+	[_moveContainer addSubView:_netContainer];
 
     _selmode = selShowCurPos;
     _pView = [[PointView alloc] init];
@@ -236,6 +237,12 @@
     [self setNeedsDisplay:YES];
     
     return YES;
+}
+
+- (BOOL)hasValidMap {
+    if (!_mapImage) return NO;
+    if ([_mapImage size].width <= 1 || [_mapImage size].height <= 1) return NO;
+	return YES;
 }
 
 - (BOOL)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord {
@@ -565,7 +572,12 @@
 
 
 - (void)setShowNetworks:(BOOL)show {
-    [_netContainer setVisible:show];
+    if (show && [_statusView visible]) {
+		NSBeep(); //we got some error status
+		return;
+	}
+	
+	[_netContainer setVisible:show];
     [_showNetworks setState:(show ? NSOnState : NSOffState)];
     [self setNeedsDisplay:YES];
 }

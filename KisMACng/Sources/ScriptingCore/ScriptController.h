@@ -43,6 +43,7 @@
 - (IBAction)openKisMAPFile:(id)sender;
 
 - (IBAction)importKisMACFile:(id)sender;
+- (IBAction)importImageForMap:(id)sender;
 - (IBAction)importPCPFile:(id)sender;
 
 - (IBAction)saveKisMACFile:(id)sender;

@@ -3,8 +3,8 @@
         File:			GPSController.h
         Program:		KisMAC
 		Author:			Michael Rossberg, Robin Darroch
-                                mick@binaervarianz.de
-		Description:		KisMAC is a wireless stumbler for MacOS X.
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 

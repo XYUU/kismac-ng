@@ -15,6 +15,7 @@
                 "KisMAC.stopScan"               = "stopScan:";
                 "KisMAC.New"                    = "new:";
                 "KisMAC.ImportKisMAC"           = "importKisMAC:";
+                "KisMAC.ImportImageForMap"      = "importImageForMap:";
                 "KisMAC.ImportPCAP"             = "importPCAP:";
                 "NSCoreSuite.Save"              = "save:";
                 "KisMAC.SelectNetworkAtIndex"   = "selectNetworkAtIndex:";
@@ -70,6 +71,11 @@
         }; 
         ImportKisMAC = {
             AppleEventCode = KImK; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        }; 
+        ImportImageForMap = {
+            AppleEventCode = KImI; 
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
         }; 

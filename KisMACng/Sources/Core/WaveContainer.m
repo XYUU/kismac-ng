@@ -686,44 +686,17 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
 - (void) clearEntry:(WaveNet*)net {
     unsigned char *ID = [net rawID];
     unsigned int i, l, entry = LOOKUPSIZE;
-    //unsigned int firstentry, lentry = LOOKUPSIZE;
+	WaveNet* n;
     
+	//make sure no one messes with us
     _dropAll = YES;
     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
-    [net autorelease];
     
+	n = net;
+	
     for(i = 0; i < LOOKUPSIZE; i++) 
         _lookup[i] = LOOKUPSIZE;
         
-    //delete the net in the hashtable
-    /*l = hashForMAC(ID);
-    firstentry = l;
-    
-    //first possbile entry
-    //lentry will contain the last entry with the same hash value
-    i=_lookup[l];
-    while (i != LOOKUPSIZE) {
-        //is it the right entry?
-        if (memcmp(ID, _idList[i].ID, 6)==0) entry = i;
-        else if (entry!=LOOKUPSIZE) {
-            if (hashForMAC(_idList[i].ID)==l) lentry = l;
-        }
-        l = (l + 1) % LOOKUPSIZE;
-        i=_lookup[l];
-    }
-    
-    if (entry==LOOKUPSIZE) {
-        NSAssert(i<_sortedCount, @"Error: net is not in hash table. This is prohibited!");
-        _dropAll = NO;
-        return;
-    }
-  
-    if (lentry!=LOOKUPSIZE) {
-        //actually we would have to switch other entries with other MACs back too!!!!
-        _lookup[firstentry] = _lookup[lentry];
-        _lookup[lentry] = LOOKUPSIZE;
-    } else _lookup[firstentry] = LOOKUPSIZE;
-    */
     //find the entry in the sorted list
     for (i=0; i<_sortedCount; i++)
         if (memcmp(ID, _idList[_sortedList[i]].ID, 6)==0) break;
@@ -760,7 +733,8 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
 
     //enable capture engine again
     _dropAll = NO;
-        
+	[n autorelease];
+	
     return;
 }
 

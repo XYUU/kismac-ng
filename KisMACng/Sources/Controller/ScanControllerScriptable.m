@@ -209,6 +209,35 @@
     return NO;
 }
 
+- (BOOL)importImageForMap:(NSString*)filename {
+	BOOL ret;
+    NSImage *img;
+	
+    NSParameterAssert(filename);
+    
+    filename = [filename standardPath];
+    
+	[self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
+	
+	[self clearAreaMap];
+
+	img = [[NSImage alloc] initWithContentsOfFile:filename];
+	if (!img) {
+		NSLog(@"Warning unknow file format!");
+		NSBeep();
+		[self busyDone];
+		return NO;
+	}
+	
+    [_mappingView setMap: img];
+    [img release];
+    [self showMap];
+	[self busyDone];
+        
+	return ret;
+	
+}
+
 - (BOOL)importPCAP:(NSString*)filename {
     NSParameterAssert(filename);
     filename = [filename standardPath];

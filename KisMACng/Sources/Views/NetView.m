@@ -2,9 +2,9 @@
 
         File:			NetView.m
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Ro§berg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -41,9 +41,10 @@
         _wep = 0;
         _wp._lat = 0;
         _wp._long = 0;
-	_wp._elevation = 0;
+		_wp._elevation = 0;
         _network = network;
         [[WaveHelper mapView] addNetView:self];
+		_attachedToSuperView = YES;
     }
     return self;
 }
@@ -168,12 +169,17 @@
     return [img autorelease];
 }
 
-- (void)dealloc {
+- (BOOL)removeFromSuperView {
+	if (!_attachedToSuperView) return NO;
     [[WaveHelper mapView] removeNetView:self];
-    
+	return YES;
+}
+
+- (void)dealloc {
+    [self removeFromSuperView];
+	
     [[WaveHelper mapView] setNeedsDisplay:YES];
     [WaveHelper secureRelease:&_name];
-    [WaveHelper secureRelease:&_network];
     [WaveHelper secureRelease:&_netImg];
     [WaveHelper secureRelease:&_netColor];
     

@@ -152,7 +152,6 @@ typedef enum {
 - (IBAction)showPrefs:(id)sender;
 
 - (IBAction)importNetstumbler:(id)sender;
-- (IBAction)importImage:(id)sender;
 - (IBAction)importMapFromServer:(id)sender;
 
 - (IBAction)exportNS:(id)sender;

@@ -39,6 +39,7 @@
 - (id)new:(NSScriptCommand *)command;
 - (id)save:(NSScriptCommand *)command;
 - (id)importKisMAC:(NSScriptCommand *)command;
+- (id)importImageForMap:(NSScriptCommand *)command;
 - (id)importPCAP:(NSScriptCommand *)command;
 - (id)downloadMap:(NSScriptCommand*)command;
 

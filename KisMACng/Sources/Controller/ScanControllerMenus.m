@@ -2,9 +2,9 @@
         
         File:			ScanControllerMenus.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -61,26 +61,6 @@
 #pragma mark -
 #pragma mark FILE MENU
 #pragma mark -
-
-- (IBAction)importImage:(id)sender {
-    aOP=[NSOpenPanel openPanel];
-    [aOP setAllowsMultipleSelection:NO];
-    [aOP setCanChooseFiles:YES];
-    [aOP setCanChooseDirectories:NO];
-    if ([aOP runModalForTypes:[NSImage imageFileTypes]]==NSOKButton) {
-        [self clearAreaMap];
-        [self showBusy:@selector(performImportMap:) withArg:[[aOP filenames] objectAtIndex:0]];
-    }
-}
-- (void)performImportMap:(id)filename {
-    NSImage *x;
-    [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), filename]];  
-  
-    x=[[NSImage alloc] initWithContentsOfFile:filename];
-    [_mappingView setMap:x];
-    [x release];
-    [self showMap];
-}
 
 - (IBAction)importMapFromServer:(id)sender {
     DownloadMapController* dmc = [[DownloadMapController alloc] initWithWindowNibName:@"DownloadMap"];
@@ -497,9 +477,7 @@
 #pragma mark -
 
 - (IBAction)injectPackets:(id)sender {
-    //NSRunAlertPanel(@"Warning", @"I am not quiet happy with this function. It currently needs two cards. One Airport Card (needs to be set as default) and one PrismII Card. Orinoco cards will not work!\n\n What does packet reinjection?\n In this version KisMAC will re-send ARP-packets into an WEP-enabled network. This will cause a response. Basically it generates a lot of traffic, which will enable us to break into not busy networks. Do a deauthentication before injection, in order to make sure that there have been a couple of arp-packets.\n\nIf this works for you please drop me a mail.",
-    //NULL, NULL, NULL);
-    //return;
+
 	if ([_curNet type] != networkTypeManaged) {
 		[_window showAlertMessage: NSLocalizedString(@"KisMAC can only attack managed networks!", "Error for packet reinjection") title: NSLocalizedString(@"Re-Injection failed", "Error for packet reinjection") button: NULL];
 		return;
@@ -520,6 +498,7 @@
     } else {
         [self stopActiveAttacks];
     }
+	
 }
 - (IBAction)deautheticateNetwork:(id)sender {
     if ([aDeauthMenu state]==NSOffState && [self startActiveAttack] && [scanner deauthenticateNetwork:_curNet atInterval:100]) {
@@ -544,7 +523,12 @@
 
 - (IBAction)showCurNetArea:(id)sender {
    if ([sender state] == NSOffState) {
-        [self stopScan];
+        if (![[WaveHelper mapView] hasValidMap]) {
+			[_window showAlertMessage:NSLocalizedString(@"You have to load a map in order to perform this action", "area mapping failure") title:NSLocalizedString(@"Area mapping failed", "error box title") button:nil];
+			return;
+		}
+		
+		[self stopScan];
 
         _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
         [_importController setTitle: NSLocalizedString(@"Caching Map...", "Title of busy dialog")];
@@ -582,6 +566,10 @@
     unsigned int i;
     
     if ([sender state] == NSOffState) {
+        if (![[WaveHelper mapView] hasValidMap]) {
+			[_window showAlertMessage:NSLocalizedString(@"You have to load a map in order to perform this action", "area mapping failure") title:NSLocalizedString(@"Area mapping failed", "error box title") button:nil];
+			return;
+		}
         [self stopScan];
         
         _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];

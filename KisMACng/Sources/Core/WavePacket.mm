@@ -137,7 +137,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
                 
                 // if either the from or the to ap bit set we are managed
                 if (_isToDS|_isFrDS) _netType = networkTypeManaged;
-                else if (memcmp(&aMACAddress[12], "\x00\x00\x00\x00\x00\x00", 6)==0) _netType = networkTypeLucentTunnel;
+                else if (memcmp(&_MACAddress[12], "\x00\x00\x00\x00\x00\x00", 6)==0) _netType = networkTypeLucentTunnel;
                 else _netType = networkTypeAdHoc;
             }
             
@@ -221,9 +221,9 @@ bool inline is8021xPacket(const UInt8* fileData) {
         
 
     //copy all those interesting MAC addresses
-    memset(aMACAddress,0,30*sizeof(int));
-    for (i=0;i<18;i++) aMACAddress[i]=f->address1[i];
-    for (i=0;i<6 ;i++) aMACAddress[18+i]=f->address4[i];
+    memset(_MACAddress, 0, 30);
+    for (i=0;i<18;i++) _MACAddress[i]    = f->address1[i] & 0xFF;
+    for (i=0;i<6 ;i++) _MACAddress[18+i] = f->address4[i] & 0xFF;
     
     //important for pcap
     gettimeofday(&aCreationTime,NULL);
@@ -256,8 +256,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
             else if((_isToDS)&&(!_isFrDS)) i=0;
             else if((!_isToDS)&&(_isFrDS)) i=1;
             else for(y=0;y<6;y++) {
-                if (aMACAddress[y]>aMACAddress[y+6]) { i=0; break; }
-                else if (aMACAddress[y]<aMACAddress[y+6]) { i=1; break; }
+                if (_MACAddress[y]>_MACAddress[y+6]) { i=0; break; }
+                else if (_MACAddress[y]<_MACAddress[y+6]) { i=1; break; }
             }
             break;
         default:
@@ -265,14 +265,14 @@ bool inline is8021xPacket(const UInt8* fileData) {
     }
     if (i==4) return nil;
     
-    for (y=0;y<6;y++) x[y]=aMACAddress[(i*6)+y];
+    for (y=0;y<6;y++) x[y]=_MACAddress[(i*6)+y];
     return [NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
 
 }
 
 //returns the the id of the sending client
-- (NSString*)clientFromID {
-    int i=4, y, x[6];
+- (UInt8*)rawSenderID {
+    int i=4;
 
     switch (_type) {
         case IEEE80211_TYPE_MGT:
@@ -290,10 +290,17 @@ bool inline is8021xPacket(const UInt8* fileData) {
         default:
             break;
     }
-    if (i==4) return Nil;
+    if (i==4) return nil;
     
-    for (y=0;y<6;y++) x[y]=aMACAddress[(i*6)+y];
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
+    return &_MACAddress[i*6];
+}
+
+- (NSString*)clientFromID {
+	UInt8* mac;
+	mac = [self rawSenderID];
+	
+    if (!mac) return nil;
+    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]];
 }
 
 //What can I say? returns the the id of the recieving client
@@ -319,18 +326,18 @@ bool inline is8021xPacket(const UInt8* fileData) {
     }
     if (i==4) return Nil;
     
-    for (y=0;y<6;y++) x[y]=aMACAddress[(i*6)+y];
+    for (y=0;y<6;y++) x[y]=_MACAddress[(i*6)+y];
     return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
 }
 
 //What can I say? returns the bssid
-- (NSString*)BSSIDString {
-    int i=4, y, x[6];
+- (UInt8*)rawBSSID {
+    int i=4;
 
     switch (_type) {
         case IEEE80211_TYPE_MGT:
             //probe requests are BS
-            if (_subtype!=IEEE80211_SUBTYPE_PROBE_REQ) i=2;
+            if (_subtype != IEEE80211_SUBTYPE_PROBE_REQ) i=2;
             else if (_netType == networkTypeProbe) i=1;
             break; 
         case IEEE80211_TYPE_CTL:
@@ -347,38 +354,26 @@ bool inline is8021xPacket(const UInt8* fileData) {
         default:
             break;
     }
-    if (i==4) return @"<no bssid>";
+    if (i==4) return nil;
     
-    for (y=0;y<6;y++) x[y]=aMACAddress[(i*6)+y];
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
+    return &_MACAddress[i*6];
+}
+
+- (NSString*)BSSIDString {
+	UInt8* mac;
+	mac = [self rawBSSID];
+	
+    if (!mac) return @"<no bssid>";
+    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]];
 }
 
 - (bool)BSSID:(UInt8*)bssid {
-    int i=4, y;
-
-    switch (_type) {
-        case IEEE80211_TYPE_MGT:
-            //probe requests are BS
-            if (_subtype!=IEEE80211_SUBTYPE_PROBE_REQ) i=2;
-            else if (_netType == networkTypeProbe) i=1;
-            break; 
-        case IEEE80211_TYPE_CTL:
-            if (_subtype==IEEE80211_SUBTYPE_PS_POLL) i=0;
-            break;
-        case IEEE80211_TYPE_DATA:
-            if((!_isToDS)&&(!_isFrDS)) {
-                if (_netType == networkTypeLucentTunnel) i=1;
-                else i=2;
-            }
-            else if((_isToDS)&&(!_isFrDS)) i=0;
-            else if((!_isToDS)&&(_isFrDS)) i=1;
-            break;
-        default:
-            break;
-    }
-    if (i==4) return NO;
-    
-    for (y=0;y<6;y++) bssid[y]=aMACAddress[(i*6)+y];
+	UInt8* mac;
+	mac = [self rawBSSID];
+	
+    if (!mac) return NO;
+    memcpy(bssid, mac, 6);
+	
     return YES;
 }
 
@@ -402,8 +397,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
             else if((_isToDS)&&(!_isFrDS)) i=0;
             else if((!_isToDS)&&(_isFrDS)) i=1;
             else for(y=0;y<6;y++) {
-                if (aMACAddress[y]>aMACAddress[y+6]) { i=0; break; }
-                else if (aMACAddress[y]<aMACAddress[y+6]) { i=1; break; }
+                if (_MACAddress[y] > _MACAddress[y+6]) { i=0; break; }
+                else if (_MACAddress[y] < _MACAddress[y+6]) { i=1; break; }
             }
             break;
         default:
@@ -411,7 +406,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
     }
     if (i==4) return NO;
     
-    for (y=0;y<6;y++) netid[y]=aMACAddress[(i*6)+y];
+    for (y=0;y<6;y++) netid[y] = _MACAddress[(i*6)+y];
     return YES;
 }
 
@@ -437,7 +432,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
 
 -(id)init {
     if (self = [super init]) {
-        memset(aMACAddress,0,30*sizeof(int));
+        memset(_MACAddress, 0, 30);
         _frame = NULL;
     }
     return self;

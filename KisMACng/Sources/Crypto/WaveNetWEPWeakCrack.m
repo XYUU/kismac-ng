@@ -67,7 +67,7 @@
         const UInt8 *k = [d bytes];
         int i;
         
-        _password = [[NSMutableString stringWithFormat:@"%.2x", k[0]] retain];
+        _password = [[NSMutableString stringWithFormat:@"%.2X", k[0]] retain];
         for (i=1; i<len;i++)
             [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", k[i]]];
 		

@@ -42,6 +42,7 @@ enum traceState {
 - (BOOL)addPoint:(waypoint)w;
 - (void)cut;
 
+- (BOOL)addTrace:(NSMutableArray*)trace;
 - (BOOL)setTrace:(NSMutableArray*)trace;
 - (NSMutableArray*)trace;
 

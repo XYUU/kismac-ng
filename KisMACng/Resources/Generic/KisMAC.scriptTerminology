@@ -44,6 +44,11 @@
             Description = "imports a KisMAC file";
             UnnamedArgument = { Description = "The file to be imported."; };
         };
+		ImportImageForMap = {
+            Name = importImageForMap;
+            Description = "imports an image file and handles it as a map";
+            UnnamedArgument = { Description = "The file to be imported."; };
+        };
 		ImportPCAP = {
             Name = importPCAP;
             Description = "imports a PCAP file, with 802.11 packets and without prism headers";

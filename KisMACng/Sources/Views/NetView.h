@@ -37,6 +37,7 @@
     WaveNet         *_network;
     NSImage         *_netImg;
     NSColor         *_netColor;
+	BOOL			_attachedToSuperView;
 }
 
 - (id)initWithNetwork:(WaveNet*)network;
@@ -47,5 +48,7 @@
 
 - (void)align;
 - (NSImage*)generateImage;
+
+- (BOOL)removeFromSuperView;
 
 @end

@@ -2,9 +2,9 @@
         
         File:			Trace.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -68,12 +68,20 @@
     _state = stateNoPointPresent;
 }
 
+- (BOOL)addTrace:(NSMutableArray*)trace {
+	int i;
+	for (i = 0; i < [trace count]; i++) {
+		[_trace insertObject:[trace objectAtIndex:i] atIndex:0];
+	}
+    return YES;
+}
+
 - (BOOL)setTrace:(NSMutableArray*)trace {
     [_trace autorelease];
     if (!trace) _trace = [NSMutableArray array];
     else _trace = trace;
     [_trace retain];
-    _state = stateNoPointPresent;
+    [self cut];
     return YES;
 }
 

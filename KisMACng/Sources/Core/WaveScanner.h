@@ -2,9 +2,9 @@
         
         File:			WaveScanner.h
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Ro§berg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -61,8 +61,8 @@ struct __beaconFrame {
     NSString* _geigerSound;             //sound file for the geiger counter
 
     int _packets;			//packet count
-    int aGeigerInt;
-    int aBytes;				//bytes since last refresh (for graph)
+    int _geigerInt;
+    int _bytes;				//bytes since last refresh (for graph)
     bool _soundBusy;			//are we clicking?
     
     NSArray *_drivers;
@@ -72,16 +72,16 @@ struct __beaconFrame {
     bool _beaconFlooding;
     struct __beaconFrame _beaconFrame;
     
-    int graphLength;
-    NSTimeInterval scanInterval;	//refresh interval
+    int _graphLength;
+    NSTimeInterval _scanInterval;	//refresh interval
     
     UInt8 _MACs[18];
     int  _injReplies;
     int  aPacketType;
     bool aScanRange;
-    bool aScanning;
+    bool _scanning;
     bool _injecting;
-    bool aScanThreadUp;
+    bool _deauthing;
     double aFreq;
     int  _driver;
     
@@ -123,8 +123,9 @@ struct __beaconFrame {
 - (NSString*) tryToInject:(WaveNet*)net;
 - (bool) authFloodNetwork:(WaveNet*)net;
 - (bool) deauthenticateNetwork:(WaveNet*)net atInterval:(int)interval;
+- (bool) deauthenticateClient:(UInt8*)client inNetworkWithBSSID:(UInt8*)bssid;
 - (bool) beaconFlood;
 - (bool) stopSendingFrames;
 
-- (void) sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool;
+- (void) sound:(NSSound *)sound didFinishPlaying:(bool)abool;
 @end

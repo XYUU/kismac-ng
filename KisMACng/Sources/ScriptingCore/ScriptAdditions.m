@@ -66,6 +66,9 @@
 - (id)importKisMAC:(NSScriptCommand *)command {
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importKisMAC:[command directParameter]]];
 }
+- (id)importImageForMap:(NSScriptCommand *)command {
+    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importImageForMap:[command directParameter]]];
+}
 - (id)importPCAP:(NSScriptCommand *)command {
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importPCAP:[command directParameter]]];
 }

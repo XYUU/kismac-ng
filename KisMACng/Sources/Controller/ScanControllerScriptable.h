@@ -43,6 +43,7 @@
 - (BOOL)new;
 - (BOOL)open:(NSString*)filename;
 - (BOOL)importKisMAC:(NSString*)filename;
+- (BOOL)importImageForMap:(NSString*)filename;
 - (BOOL)importPCAP:(NSString*)filename;
 - (BOOL)downloadMapFrom:(NSString*)server forPoint:(waypoint)w resolution:(NSSize)size zoomLevel:(int)zoom;
 - (BOOL)save:(NSString*)filename;

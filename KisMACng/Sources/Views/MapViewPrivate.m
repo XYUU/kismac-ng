@@ -2,9 +2,9 @@
         
         File:			MapViewPrivate.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -117,6 +117,7 @@
 #pragma mark -
 
 - (void)_updateStatus {
+	[_netContainer setVisible:NO];
     if (!_mapImage) {
         [_statusView setVisible:YES];
         [self _setStatus:NSLocalizedString(@"No map loaded! Please import or load one first.", "map view status")];
@@ -134,6 +135,7 @@
         [self _setStatus:NSLocalizedString(@"The coordinates of waypoints are too close!", "map view status")]; 
     } else {
         [_statusView setVisible:NO];
+		[_netContainer setVisible: [_showNetworks state]==NSOnState];
         if (_visible) [self setNeedsDisplay:YES];
     }
 }

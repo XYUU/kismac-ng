@@ -81,6 +81,7 @@ enum selmode {
 - (NSData*)pdfData;
 
 - (BOOL)setMap:(NSImage*)map;
+- (BOOL)hasValidMap;
 - (BOOL)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
 - (void)setVisible:(BOOL)visible;
 - (BOOL)setCurrentPostionToLatitude:(double)lat andLongitude:(double)lon;

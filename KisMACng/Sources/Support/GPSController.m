@@ -411,18 +411,7 @@ int ss(char* inp, char* outp) {
 	date = [[NSDate alloc] init];
     
 	if (updated) {
-        if (_reliable) {
-            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
-                waypoint w;
-                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
-                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
-                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
-            }
-        } else {
-            [[WaveHelper trace] cut];
-        }
 		timeinterval = [date timeIntervalSinceDate:_lastUpdate];
-        [WaveHelper secureReplace:&_lastUpdate withObject:date];
 
         if ((_reliable)||(_onNoFix==0)) {
             if (ns.dir != 'S') _ns.dir = 'N';
@@ -467,11 +456,24 @@ int ss(char* inp, char* outp) {
             _ew.coordinates = 0;
             _velkt = 0;
         }
+
+        [WaveHelper secureReplace:&_lastUpdate withObject:date];
+
+        if (_reliable) {
+            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
+                waypoint w;
+                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
+                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
+            }
+        } else {
+            [[WaveHelper trace] cut];
+        }
     }
     
     [date release];
     [subpool release];
-	
+
     return YES;
 }
 
@@ -516,16 +518,6 @@ int ss(char* inp, char* outp) {
         
         if (_debugEnabled) NSLog(@"GPSd data updated.");
 		
-		if (_reliable) {
-            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
-                waypoint w;
-                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
-                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
-                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
-            }
-        } else {
-            [[WaveHelper trace] cut];
-        }
 		timeinterval = [date timeIntervalSinceDate:_lastUpdate];
         [WaveHelper secureReplace:&_lastUpdate withObject:date];
 
@@ -571,13 +563,25 @@ int ss(char* inp, char* outp) {
             _ew.coordinates = 0;
             _velkt = 0;
         }
+
+		if (_reliable) {
+            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
+                waypoint w;
+                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
+                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
+            }
+        } else {
+            [[WaveHelper trace] cut];
+        }
+
     } else {
         NSLog(@"GPSd parsing failure");
     }
     
     [date release];
     [subpool release];
-	
+
     return YES;
 }
 

@@ -2,9 +2,9 @@
         
         File:			WaveNet.mm
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Ro§berg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -1343,6 +1343,8 @@ typedef int (*SORTFUNC)(id, id, void *);
     [aLat release];
     [aLong release];
     [aElev release];
+	
+	[_netView removeFromSuperView];
     [_netView release];
     [_coordinates release];
     [_dataLock unlock];
