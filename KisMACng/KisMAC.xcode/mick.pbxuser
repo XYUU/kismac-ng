@@ -66,7 +66,7 @@
 	002E7DF806A86C6F00C9D931 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 1777}}";
-			sepNavSelRange = "{2777, 0}";
+			sepNavSelRange = "{3358, 0}";
 			sepNavVisRect = "{{0, 1288}, {964, 463}}";
 		};
 	};
@@ -166,14 +166,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1358, 9169}}";
 			sepNavSelRange = "{25106, 0}";
-			sepNavVisRect = "{{0, 8706}, {964, 463}}";
+			sepNavVisRect = "{{0, 8694}, {964, 463}}";
 		};
 	};
 	003533AB06A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {3602, 10891}}";
 			sepNavSelRange = "{26280, 0}";
-			sepNavVisRect = "{{0, 10303}, {964, 463}}";
+			sepNavVisRect = "{{0, 10290}, {964, 463}}";
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
@@ -284,9 +284,9 @@
 	};
 	003533C206A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 12109}}";
-			sepNavSelRange = "{20879, 8}";
-			sepNavVisRect = "{{0, 9168}, {964, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2096, 12179}}";
+			sepNavSelRange = "{2214, 0}";
+			sepNavVisRect = "{{0, 712}, {1239, 410}}";
 		};
 	};
 	003533C306A5DD8500AB4577 = {
@@ -456,12 +456,12 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 1385}}";
 			sepNavSelRange = "{2292, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 463}}";
+			sepNavVisRect = "{{0, 910}, {964, 463}}";
 		};
 	};
 	0035341006A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1124, 4199}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1124, 1890}}";
 			sepNavSelRange = "{1124, 17}";
 			sepNavVisRect = "{{0, 0}, {964, 463}}";
 		};
@@ -567,8 +567,8 @@
 	0035342306A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1310, 4661}}";
-			sepNavSelRange = "{10736, 817}";
-			sepNavVisRect = "{{0, 4198}, {964, 463}}";
+			sepNavSelRange = "{11554, 0}";
+			sepNavVisRect = "{{0, 2407}, {964, 463}}";
 		};
 	};
 	0035342406A5DD8500AB4577 = {
@@ -581,8 +581,8 @@
 	0035342506A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2306, 1749}}";
-			sepNavSelRange = "{1036, 38}";
-			sepNavVisRect = "{{0, 196}, {964, 463}}";
+			sepNavSelRange = "{3689, 819}";
+			sepNavVisRect = "{{0, 0}, {964, 463}}";
 		};
 	};
 	005E817006FDCFF20016F5E7 = {
@@ -599,585 +599,55 @@
 			sepNavVisRect = "{{0, 1498}, {964, 690}}";
 		};
 	};
-	007B3FE4072D09E600678F0E = {
-		fRef = 00FF593C06C630CC006C7F1E;
+	0084D51E072E79E800F48720 = {
+		fRef = 00F57CAB06A8887F0035AE2F;
 		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.h: 23";
+		name = "CHANGES: 23";
 		rLen = 0;
-		rLoc = 884;
+		rLoc = 785;
 		rType = 0;
-		vrLen = 1206;
+		vrLen = 1260;
 		vrLoc = 0;
 	};
-	007B3FE7072D09E600678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 117";
-		rLen = 0;
-		rLoc = 6120;
-		rType = 0;
-		vrLen = 1047;
-		vrLoc = 6808;
-	};
-	007B3FE8072D09E600678F0E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 318";
-		rLen = 0;
-		rLoc = 10168;
-		rType = 0;
-		vrLen = 1094;
-		vrLoc = 1128;
-	};
-	007B3FE9072D09E600678F0E = {
-		fRef = 00FF593C06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.h: 23";
-		rLen = 0;
-		rLoc = 884;
-		rType = 0;
-		vrLen = 1206;
-		vrLoc = 0;
-	};
-	007B3FEA072D09E600678F0E = {
-		fRef = 0035340F06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriver.h: 89";
-		rLen = 0;
-		rLoc = 2292;
-		rType = 0;
-		vrLen = 801;
-		vrLoc = 1711;
-	};
-	007B3FF0072D0A2900678F0E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 76";
-		rLen = 0;
-		rLoc = 2441;
-		rType = 0;
-		vrLen = 1143;
-		vrLoc = 1076;
-	};
-	007B3FF1072D0A2900678F0E = {
-		fRef = 0035340F06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriver.h: 89";
-		rLen = 0;
-		rLoc = 2292;
-		rType = 0;
-		vrLen = 1105;
-		vrLoc = 0;
-	};
-	007B3FF3072D0A2900678F0E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 76";
-		rLen = 0;
-		rLoc = 2441;
-		rType = 0;
-		vrLen = 1143;
-		vrLoc = 1076;
-	};
-	007B3FF4072D0A2900678F0E = {
-		fRef = 0035340F06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriver.h: 89";
-		rLen = 0;
-		rLoc = 2292;
-		rType = 0;
-		vrLen = 1105;
-		vrLoc = 0;
-	};
-	007B3FF9072D0A7A00678F0E = {
-		fRef = 0035341006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = WaveDriverPrismGT;
-		rLen = 17;
-		rLoc = 1124;
-		rType = 0;
-		vrLen = 1256;
-		vrLoc = 0;
-	};
-	007B3FFB072D0A7A00678F0E = {
-		fRef = 0035341006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = WaveDriverPrismGT;
-		rLen = 17;
-		rLoc = 1124;
-		rType = 0;
-		vrLen = 1256;
-		vrLoc = 0;
-	};
-	007B4000072D0BD700678F0E = {
+	0084D51F072E79E800F48720 = {
 		fRef = 00F57CAC06A8887F0035AE2F;
 		isa = PBXTextBookmark;
-		name = "TODO: 19";
+		name = "TODO: 8";
 		rLen = 0;
-		rLoc = 392;
+		rLoc = 52;
 		rType = 0;
-		vrLen = 753;
+		vrLen = 754;
 		vrLoc = 0;
 	};
-	007B4001072D0BD700678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 7032;
-		rType = 0;
-		vrLen = 1047;
-		vrLoc = 6808;
-	};
-	007B4002072D0BD700678F0E = {
-		fRef = 0035342206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "DecryptController.h: 26";
-		rLen = 0;
-		rLoc = 971;
-		rType = 0;
-		vrLen = 1273;
-		vrLoc = 0;
-	};
-	007B4003072D0BD700678F0E = {
-		fRef = 0035342306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 10736;
-		rType = 0;
-		vrLen = 955;
-		vrLoc = 10605;
-	};
-	007B4004072D0BD700678F0E = {
-		fRef = 002E7DF806A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "ImportController.m: 99";
-		rLen = 0;
-		rLoc = 2777;
-		rType = 0;
-		vrLen = 765;
-		vrLoc = 2599;
-	};
-	007B4005072D0BD700678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "    [[self window] setDelegate:self];\n";
-		rLen = 38;
-		rLoc = 1036;
-		rType = 0;
-		vrLen = 1084;
-		vrLoc = 481;
-	};
-	007B4006072D0BD700678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "- (void)awakeFromNib ";
-		rLen = 21;
-		rLoc = 1714;
-		rType = 0;
-		vrLen = 1118;
-		vrLoc = 1084;
-	};
-	007B4007072D0BD700678F0E = {
+	0084D520072E79E800F48720 = {
 		fRef = 00F57CAC06A8887F0035AE2F;
 		isa = PBXTextBookmark;
-		name = "TODO: 19";
+		name = "TODO: 12";
 		rLen = 0;
-		rLoc = 392;
+		rLoc = 133;
 		rType = 0;
-		vrLen = 753;
+		vrLen = 754;
 		vrLoc = 0;
 	};
-	007B4008072D0BD700678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
+	0084D521072E79E800F48720 = {
+		fRef = 00F57CAB06A8887F0035AE2F;
 		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 7032;
+		name = "CHANGES: 23";
+		rLen = 0;
+		rLoc = 785;
 		rType = 0;
-		vrLen = 1047;
-		vrLoc = 6808;
-	};
-	007B4009072D0BD700678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "\n#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}\n";
-		rLen = 819;
-		rLoc = 3689;
-		rType = 0;
-		vrLen = 1077;
+		vrLen = 1260;
 		vrLoc = 0;
 	};
-	007B400A072D0BD700678F0E = {
-		fRef = 002E7DF806A86C6F00C9D931;
+	0084D522072E79E800F48720 = {
+		fRef = 00F57CAC06A8887F0035AE2F;
 		isa = PBXTextBookmark;
-		name = "ImportController.m: dealloc";
+		name = "TODO: 1";
 		rLen = 0;
-		rLoc = 3358;
+		rLoc = 0;
 		rType = 0;
-		vrLen = 765;
-		vrLoc = 2599;
-	};
-	007B400B072D0BD700678F0E = {
-		fRef = 0035342306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "DecryptController.m: 326";
-		rLen = 0;
-		rLoc = 11554;
-		rType = 0;
-		vrLen = 1137;
-		vrLoc = 5998;
-	};
-	007B400C072D0BD700678F0E = {
-		fRef = 002E7DF806A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "ImportController.m: 99";
-		rLen = 0;
-		rLoc = 2777;
-		rType = 0;
-		vrLen = 765;
-		vrLoc = 2599;
-	};
-	007B400D072D0BD700678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "- (void)awakeFromNib {\n    [[self window] setDelegate:self];\n}\n";
-		rLen = 63;
-		rLoc = 1013;
-		rType = 0;
-		vrLen = 1077;
+		vrLen = 1036;
 		vrLoc = 0;
-	};
-	007B400E072D0BD700678F0E = {
-		fRef = 0035342206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "DecryptController.h: 26";
-		rLen = 0;
-		rLoc = 971;
-		rType = 0;
-		vrLen = 1273;
-		vrLoc = 0;
-	};
-	007B400F072D0BD700678F0E = {
-		fRef = 0035342306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = close;
-		rLen = 0;
-		rLoc = 9954;
-		rType = 0;
-		vrLen = 1063;
-		vrLoc = 9400;
-	};
-	007B4010072D0BD700678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "    [[self window] performClose:sender];\n";
-		rLen = 41;
-		rLoc = 3646;
-		rType = 0;
-		vrLen = 951;
-		vrLoc = 3562;
-	};
-	007B4011072D0BD700678F0E = {
-		fRef = 0035342306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 10736;
-		rType = 0;
-		vrLen = 955;
-		vrLoc = 10605;
-	};
-	007B4012072D0BD700678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 276";
-		rLen = 0;
-		rLoc = 9981;
-		rType = 0;
-		vrLen = 1167;
-		vrLoc = 1139;
-	};
-	007B4013072D0BD700678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "    [[self window] performClose:sender];\n";
-		rLen = 41;
-		rLoc = 3646;
-		rType = 0;
-		vrLen = 951;
-		vrLoc = 3562;
-	};
-	007B4014072D0BD700678F0E = {
-		fRef = 002E7DF806A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "ImportController.m: 99";
-		rLen = 0;
-		rLoc = 2777;
-		rType = 0;
-		vrLen = 765;
-		vrLoc = 2599;
-	};
-	007B4015072D0BD800678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "- (void)awakeFromNib ";
-		rLen = 21;
-		rLoc = 1714;
-		rType = 0;
-		vrLen = 1118;
-		vrLoc = 1084;
-	};
-	007B4016072D0BD800678F0E = {
-		fRef = 0035342506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "    [[self window] setDelegate:self];\n";
-		rLen = 38;
-		rLoc = 1036;
-		rType = 0;
-		vrLen = 1084;
-		vrLoc = 481;
-	};
-	007B4021072D0C5800678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 36";
-		rLen = 0;
-		rLoc = 1412;
-		rType = 0;
-		vrLen = 1076;
-		vrLoc = 1084;
-	};
-	007B4022072D0C5800678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 147";
-		rLen = 0;
-		rLoc = 7166;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B4447072D0D7000678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 38";
-		rLen = 0;
-		rLoc = 1452;
-		rType = 0;
-		vrLen = 1076;
-		vrLoc = 1084;
-	};
-	007B4448072D0D7000678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 38";
-		rLen = 0;
-		rLoc = 1452;
-		rType = 0;
-		vrLen = 1076;
-		vrLoc = 1084;
-	};
-	007B444B072D0D7000678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 147";
-		rLen = 0;
-		rLoc = 7166;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B444D072D0D9600678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B444E072D0DA400678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 38";
-		rLen = 0;
-		rLoc = 1452;
-		rType = 0;
-		vrLen = 1076;
-		vrLoc = 1084;
-	};
-	007B444F072D0DA400678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "CrashReportController.m: 38";
-		rLen = 0;
-		rLoc = 1452;
-		rType = 0;
-		vrLen = 1076;
-		vrLoc = 1084;
-	};
-	007B4450072D0DA400678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B4453072D0DCE00678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B4454072D0E6600678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 9164;
-		rType = 0;
-		vrLen = 1042;
-		vrLoc = 8945;
-	};
-	007B4455072D0E6600678F0E = {
-		fRef = 003533AB06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanControllerMenus.m: 752";
-		rLen = 0;
-		rLoc = 26280;
-		rType = 0;
-		vrLen = 903;
-		vrLoc = 25904;
-	};
-	007B4456072D0E6600678F0E = {
-		fRef = 003533AA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "- (NSRect)windowWillUseStandardFrame:(NSWindow *)sender defaultFrame:(NSRect)defaultFrame ";
-		rLen = 90;
-		rLoc = 23408;
-		rType = 0;
-		vrLen = 993;
-		vrLoc = 23088;
-	};
-	007B4457072D0E6600678F0E = {
-		fRef = 0035342106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#pragma mark Fade Out Code\n\n- (BOOL)windowShouldClose:(id)sender {\n    // Set up our timer to periodically call the fade: method.\n    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];\n    \n    return NO;\n}\n\n- (void)fade:(NSTimer *)timer {\n    if ([[self window] alphaValue] > 0.0) {\n        // If window is still partially opaque, reduce its opacity.\n        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];\n    } else {\n        // Otherwise, if window is completely transparent, destroy the timer and close the window.\n        [timer invalidate];\n        [timer release];\n        \n        [[self window] close];\n        \n        // Make the window fully opaque again for next time.\n        [[self window] setAlphaValue:1.0];\n    }\n}";
-		rLen = 817;
-		rLoc = 9164;
-		rType = 0;
-		vrLen = 1042;
-		vrLoc = 8945;
-	};
-	007B4458072D0E6600678F0E = {
-		fRef = 003533AB06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanControllerMenus.m: 752";
-		rLen = 0;
-		rLoc = 26280;
-		rType = 0;
-		vrLen = 903;
-		vrLoc = 25904;
-	};
-	007B4459072D0E6600678F0E = {
-		fRef = 003533AA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanController.m: 641";
-		rLen = 0;
-		rLoc = 25106;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 24544;
-	};
-	007B445A072D0E6600678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B445B072D0ECB00678F0E = {
-		fRef = 003533AA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanController.m: fade:";
-		rLen = 0;
-		rLoc = 25106;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 24544;
-	};
-	007B445C072D0ECB00678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B445D072D0ED600678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B445E072D0EE500678F0E = {
-		fRef = 003533AA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanController.m: fade:";
-		rLen = 0;
-		rLoc = 25106;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 24544;
-	};
-	007B445F072D0EE500678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
-	};
-	007B4460072D126900678F0E = {
-		fRef = 003533AA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanController.m: fade:";
-		rLen = 0;
-		rLoc = 25106;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 24544;
-	};
-	007B4461072D126900678F0E = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 139";
-		rLen = 0;
-		rLoc = 6980;
-		rType = 0;
-		vrLen = 1082;
-		vrLoc = 6616;
 	};
 	00875D190708ADB300CACFCB = {
 		uiCtxt = {
@@ -1206,16 +676,6 @@
 			sepNavSelRange = "{1315, 0}";
 			sepNavVisRect = "{{0, 440}, {964, 478}}";
 		};
-	};
-	0089587D072BFA7C00D64171 = {
-		fRef = 002E7DF606A86C6F00C9D931;
-		isa = PBXTextBookmark;
-		name = "DownloadMapController.m: 147";
-		rLen = 0;
-		rLoc = 7166;
-		rType = 0;
-		vrLen = 1113;
-		vrLoc = 6616;
 	};
 	00909C5406DB52A0002FB6AB = {
 		fileReference = 0035341606A5DD8500AB4577;
@@ -1504,16 +964,16 @@
 	};
 	00F57CAB06A8887F0035AE2F = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 3920}}";
-			sepNavSelRange = "{735, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 3948}}";
+			sepNavSelRange = "{785, 0}";
 			sepNavVisRect = "{{0, 0}, {964, 478}}";
 		};
 	};
 	00F57CAC06A8887F0035AE2F = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 727}}";
-			sepNavSelRange = "{538, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 463}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 657}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {964, 478}}";
 		};
 	};
 	00F57CBC06A99A8B0035AE2F = {
@@ -1540,9 +1000,9 @@
 	};
 	00FF593D06C630CC006C7F1E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2204, 4983}}";
-			sepNavSelRange = "{2441, 0}";
-			sepNavVisRect = "{{0, 411}, {964, 463}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2204, 2716}}";
+			sepNavSelRange = "{10168, 0}";
+			sepNavVisRect = "{{0, 434}, {964, 463}}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA = {
@@ -1691,7 +1151,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 120393040;
+			PBXPerProjectTemplateStateSaveDate = 120486287;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -2122,68 +1582,14 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 120393040;
+			PBXWorkspaceStateSaveDate = 120486287;
 		};
 		perUserProjectItems = {
-			007B3FE4072D09E600678F0E = 007B3FE4072D09E600678F0E;
-			007B3FE7072D09E600678F0E = 007B3FE7072D09E600678F0E;
-			007B3FE8072D09E600678F0E = 007B3FE8072D09E600678F0E;
-			007B3FE9072D09E600678F0E = 007B3FE9072D09E600678F0E;
-			007B3FEA072D09E600678F0E = 007B3FEA072D09E600678F0E;
-			007B3FF0072D0A2900678F0E = 007B3FF0072D0A2900678F0E;
-			007B3FF1072D0A2900678F0E = 007B3FF1072D0A2900678F0E;
-			007B3FF3072D0A2900678F0E = 007B3FF3072D0A2900678F0E;
-			007B3FF4072D0A2900678F0E = 007B3FF4072D0A2900678F0E;
-			007B3FF9072D0A7A00678F0E = 007B3FF9072D0A7A00678F0E;
-			007B3FFB072D0A7A00678F0E = 007B3FFB072D0A7A00678F0E;
-			007B4000072D0BD700678F0E = 007B4000072D0BD700678F0E;
-			007B4001072D0BD700678F0E = 007B4001072D0BD700678F0E;
-			007B4002072D0BD700678F0E = 007B4002072D0BD700678F0E;
-			007B4003072D0BD700678F0E = 007B4003072D0BD700678F0E;
-			007B4004072D0BD700678F0E = 007B4004072D0BD700678F0E;
-			007B4005072D0BD700678F0E = 007B4005072D0BD700678F0E;
-			007B4006072D0BD700678F0E = 007B4006072D0BD700678F0E;
-			007B4007072D0BD700678F0E = 007B4007072D0BD700678F0E;
-			007B4008072D0BD700678F0E = 007B4008072D0BD700678F0E;
-			007B4009072D0BD700678F0E = 007B4009072D0BD700678F0E;
-			007B400A072D0BD700678F0E = 007B400A072D0BD700678F0E;
-			007B400B072D0BD700678F0E = 007B400B072D0BD700678F0E;
-			007B400C072D0BD700678F0E = 007B400C072D0BD700678F0E;
-			007B400D072D0BD700678F0E = 007B400D072D0BD700678F0E;
-			007B400E072D0BD700678F0E = 007B400E072D0BD700678F0E;
-			007B400F072D0BD700678F0E = 007B400F072D0BD700678F0E;
-			007B4010072D0BD700678F0E = 007B4010072D0BD700678F0E;
-			007B4011072D0BD700678F0E = 007B4011072D0BD700678F0E;
-			007B4012072D0BD700678F0E = 007B4012072D0BD700678F0E;
-			007B4013072D0BD700678F0E = 007B4013072D0BD700678F0E;
-			007B4014072D0BD700678F0E = 007B4014072D0BD700678F0E;
-			007B4015072D0BD800678F0E = 007B4015072D0BD800678F0E;
-			007B4016072D0BD800678F0E = 007B4016072D0BD800678F0E;
-			007B4021072D0C5800678F0E = 007B4021072D0C5800678F0E;
-			007B4022072D0C5800678F0E = 007B4022072D0C5800678F0E;
-			007B4447072D0D7000678F0E = 007B4447072D0D7000678F0E;
-			007B4448072D0D7000678F0E = 007B4448072D0D7000678F0E;
-			007B444B072D0D7000678F0E = 007B444B072D0D7000678F0E;
-			007B444D072D0D9600678F0E = 007B444D072D0D9600678F0E;
-			007B444E072D0DA400678F0E = 007B444E072D0DA400678F0E;
-			007B444F072D0DA400678F0E = 007B444F072D0DA400678F0E;
-			007B4450072D0DA400678F0E = 007B4450072D0DA400678F0E;
-			007B4453072D0DCE00678F0E = 007B4453072D0DCE00678F0E;
-			007B4454072D0E6600678F0E = 007B4454072D0E6600678F0E;
-			007B4455072D0E6600678F0E = 007B4455072D0E6600678F0E;
-			007B4456072D0E6600678F0E = 007B4456072D0E6600678F0E;
-			007B4457072D0E6600678F0E = 007B4457072D0E6600678F0E;
-			007B4458072D0E6600678F0E = 007B4458072D0E6600678F0E;
-			007B4459072D0E6600678F0E = 007B4459072D0E6600678F0E;
-			007B445A072D0E6600678F0E = 007B445A072D0E6600678F0E;
-			007B445B072D0ECB00678F0E = 007B445B072D0ECB00678F0E;
-			007B445C072D0ECB00678F0E = 007B445C072D0ECB00678F0E;
-			007B445D072D0ED600678F0E = 007B445D072D0ED600678F0E;
-			007B445E072D0EE500678F0E = 007B445E072D0EE500678F0E;
-			007B445F072D0EE500678F0E = 007B445F072D0EE500678F0E;
-			007B4460072D126900678F0E = 007B4460072D126900678F0E;
-			007B4461072D126900678F0E = 007B4461072D126900678F0E;
-			0089587D072BFA7C00D64171 = 0089587D072BFA7C00D64171;
+			0084D51E072E79E800F48720 = 0084D51E072E79E800F48720;
+			0084D51F072E79E800F48720 = 0084D51F072E79E800F48720;
+			0084D520072E79E800F48720 = 0084D520072E79E800F48720;
+			0084D521072E79E800F48720 = 0084D521072E79E800F48720;
+			0084D522072E79E800F48720 = 0084D522072E79E800F48720;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {

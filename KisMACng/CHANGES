@@ -19,6 +19,8 @@ using aircrack code for weak scheduling attacks now
 kismap files use pdf internally to not screw up vector formats
 weak scheduling attack works while scanning
 speak again if network found again after 2 minutes
+SSIDs are now interpreted as UTF8
+windows fade out
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view

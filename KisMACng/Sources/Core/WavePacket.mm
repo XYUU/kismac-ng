@@ -54,7 +54,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
 //scans through variable length fields for ssid
 -(void) parseTaggedData:(unsigned char*) packet length:(int) length {
     int len;
-    
+    char ssid[33];
+	
     _originalChannel = 0;
     
     [WaveHelper secureRelease:&_SSID];
@@ -62,8 +63,16 @@ bool inline is8021xPacket(const UInt8* fileData) {
         switch (*packet) {
         case IEEE80211_ELEMID_SSID:
             len=(*(packet+1));
-            if ((length >= len+2) && (_SSID == Nil))
-                _SSID = [[NSString stringWithCString:(char*)(packet+2) length:len] retain];
+            if ((length >= len+2) && (_SSID == Nil) && (len <= 32)) {
+				memcpy(ssid, packet+2, len);
+				ssid[len]=0;
+				@try  {
+					_SSID = [[NSString stringWithUTF8String:ssid] retain];
+				}
+				@catch (NSException *exception) {
+					_SSID = [[NSString stringWithCString:(char*)(packet+2) length:len] retain];
+				}
+			}
             break;
         case IEEE80211_ELEMID_DSPARMS:
             len=(*(packet+1));
