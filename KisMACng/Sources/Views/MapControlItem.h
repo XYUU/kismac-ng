@@ -42,13 +42,16 @@ typedef struct {
     colState    _current;
     colState    _delta;
     colState    _target;
+	float		_slideScale;
     NSLock      *_zoomLock;
+    NSLock      *_slideLock;
     NSTimer     *_timeout;
 	int			_index;
 	NSPoint		_parentLocation;
 }
 
 - (id)initForID:(int)i;
+- (void)slide:(BOOL)visible forParentLocation:(NSPoint)parentLocation;
 - (void)mouseEntered:(NSPoint)parentLocation;
 - (void)mouseClicked:(NSPoint)parentLocation;
 

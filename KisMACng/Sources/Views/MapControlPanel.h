@@ -29,10 +29,13 @@
 @class MapControlItem;
 
 @interface MapControlPanel : BISubView {
+	BOOL _restrictedMode;
     MapControlItem  *_items[6];
 }
 
+- (void)setRestrictedMode:(BOOL)restricedMode;
 - (void)mouseMovedToPoint:(NSPoint)p;
 - (void)mouseDownAtPoint:(NSPoint)p;
+- (void)slide:(BOOL)visible;
 
 @end

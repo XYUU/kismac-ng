@@ -41,19 +41,53 @@
     self = [super init];
     if (!self) return nil;
     
-	[self setSize:NSMakeSize(3 * CONTROLSIZE, 2 * CONTROLSIZE)];
 	for (x=0; x<3; x++) {
         for (y=0; y<2; y++) {
 			i = (x + (y * 3));
 			_items[i] = [[MapControlItem alloc] initForID:i];
 			[self addSubView:_items[i]];
-			[_items[i] setLocation:NSMakePoint(x*CONTROLSIZE, y*CONTROLSIZE)];
 		}
 	}
+	[self setRestrictedMode:NO];
+	
     return self;
 }
 
-- (void)mouseMovedToPoint:(NSPoint)p {
+- (void)setRestrictedMode:(BOOL)restricedMode {
+    int x, y;
+	NSPoint p;
+	p = [self location];
+	
+	if (restricedMode) {
+		_restrictedMode = restricedMode;
+		p.x += CONTROLSIZE;
+		[_items[0] setVisible:NO];
+		[_items[1] setVisible:NO];
+		[_items[2] setVisible:NO];
+		[_items[3] setLocation:NSMakePoint(0, 0)];
+		[_items[4] setVisible:NO];
+		[_items[5] setLocation:NSMakePoint(CONTROLSIZE, 0)];
+		[[WaveHelper mapView] setNeedsDisplayInRect:_frame];		
+		[self setSize:NSMakeSize(2 * CONTROLSIZE, 1 * CONTROLSIZE)];
+		[self setLocation:p];
+		[self slide:YES];
+	} else {
+		_restrictedMode = restricedMode;
+		p.x -= CONTROLSIZE;
+		[[WaveHelper mapView] setNeedsDisplayInRect:_frame];
+		[self setSize:NSMakeSize(3 * CONTROLSIZE, 2 * CONTROLSIZE)];
+		[self setLocation:p];
+		for (x=0; x<3; x++) {
+			for (y=0; y<2; y++) {
+				[_items[(x + (y * 3))] setLocation:NSMakePoint(x*CONTROLSIZE, y*CONTROLSIZE)];
+				[_items[(x + (y * 3))] setVisible:YES];
+			}
+		}
+		[self slide:YES];
+	}
+}
+
+- (int)itemAtPoint:(NSPoint)p {
     int x, y, i;
     p.x -= _frame.origin.x;
     p.y -= _frame.origin.y;
@@ -62,29 +96,27 @@
     y = p.y / CONTROLSIZE;
     if (x > 2 || y > 1) {
         NSLog(@"MapControlPanel: Mouse out of bounds %f %f", p.x, p.y);
-        return;
+        return 3;
     }
     
     i = x + (y * 3);
-	NSAssert(i>=0 && i < 6, @"Index is out of bounds");
+	if (_restrictedMode) {
+		if (i == 0) i = 3;
+		else if (i == 1) i = 5;
+		NSAssert(i==3 || i == 5, @"Index is out of bounds");
+	} else {
+		NSAssert(i>=0 && i < 6, @"Index is out of bounds");
+	}
+	return i;
+}
+
+- (void)mouseMovedToPoint:(NSPoint)p {
+	int i = [self itemAtPoint:p];
 	[_items[i] mouseEntered:_frame.origin];
 }
 
 - (void)mouseDownAtPoint:(NSPoint)p {
-    int x, y, i;
-    p.x -= _frame.origin.x;
-    p.y -= _frame.origin.y;
-        
-    x = p.x / CONTROLSIZE;
-    y = p.y / CONTROLSIZE;
-    if (x > 2 || y > 1) {
-        NSLog(@"MapControlPanel: Mouse out of bounds %f %f", p.x, p.y);
-        return;
-    }
-    
-    i = x + (y * 3);
-
-	NSAssert(i>=0 && i < 6, @"Index is out of bounds");
+	int i = [self itemAtPoint:p];
 	[_items[i] mouseClicked:_frame.origin];
     
     switch(i) {
@@ -109,14 +141,25 @@
     }
 }
 
+- (void)slide:(BOOL)visible {
+	int i;
+
+	if (_restrictedMode) {
+		[_items[3] slide:visible forParentLocation:_frame.origin];
+		[_items[5] slide:visible forParentLocation:_frame.origin];
+	} else {
+		for (i = 0; i < 6; i++) {
+			[_items[i] slide:visible forParentLocation:_frame.origin];
+		}
+	}
+}
+
 #pragma mark -
 
 - (void)dealloc {
     int i;
     for (i = 0; i < 6; i++) {
-        if (_items[i]) {
-            [_items[i] release];
-        }
+		[_items[i] release];
     }
     
     [super dealloc];

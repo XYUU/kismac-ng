@@ -94,7 +94,16 @@ inline col delta(col c1, col c2, int speed) {
 
 - (void)_drawFrameForIndex:(int)index {
     NSBezierPath *b = [NSBezierPath bezierPath];
-    
+    NSAffineTransform *trans;
+	
+	trans = [NSAffineTransform transform];
+	[trans scaleBy:_slideScale];
+	[trans rotateByDegrees:90.0 - (90.0 * _slideScale)];
+	[trans translateXBy:-CONTROLSIZE/2 yBy:-CONTROLSIZE/2];
+	NSAffineTransform *t = [NSAffineTransform transform];
+	[t translateXBy:CONTROLSIZE/2 yBy:CONTROLSIZE/2];
+	[trans appendTransform:t];
+	
     [b moveToPoint:NSMakePoint(OFFSET, BORDER)];
     
     [b appendBezierPathWithArcWithCenter:NSMakePoint(CONTROLSIZE - OFFSET, OFFSET) radius:CURVERAD
@@ -110,7 +119,8 @@ inline col delta(col c1, col c2, int speed) {
 			       startAngle:180
 				 endAngle:270];
     [b closePath];
-    
+    b = [trans transformBezierPath:b];
+	
     [col2NSColor(_current.fill) set];
     [b fill];
     
@@ -149,6 +159,8 @@ inline col delta(col c1, col c2, int speed) {
     }
 	
     [b closePath];
+	b = [trans transformBezierPath:b];
+	
     [b fill];
 }
 
@@ -167,8 +179,10 @@ inline col delta(col c1, col c2, int speed) {
     
 	_index = i;
     _zoomLock = [[NSLock alloc] init];
+    _slideLock = [[NSLock alloc] init];
 	_current.fill    = fillColor();
 	_current.border  = borderColor();
+	_slideScale = 1;
     [self _generateCache];
     
     return self;
@@ -202,6 +216,13 @@ inline col delta(col c1, col c2, int speed) {
         [_timeout invalidate];
     }
     _timeout = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timeout:) userInfo:nil repeats:NO];
+}
+
+- (void)slide:(BOOL)visible forParentLocation:(NSPoint)parentLocation {
+	_slideScale = visible ? 0 : 1;
+	_parentLocation = parentLocation;
+
+    [NSThread detachNewThreadSelector:@selector(slideThread:) toTarget:self withObject:[NSNumber numberWithBool:visible]];
 }
 
 - (void)timeout:(NSTimer*)timer {
@@ -242,6 +263,35 @@ inline col delta(col c1, col c2, int speed) {
     [subpool release];
 }
 
+- (void)slideThread:(id)object {
+    NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
+	BOOL slideIn = [object boolValue];
+    NSRect f = _frame;
+	f.origin.x += _parentLocation.x;
+	f.origin.y += _parentLocation.y;
+	
+    if([_slideLock tryLock]) {
+        [self retain];
+		if (slideIn) [self setVisible:YES];
+        while(slideIn ? _slideScale < 1.1 : _slideScale > 0.1) {
+			if (slideIn) _slideScale += 0.1;
+			else _slideScale -= 0.1;
+            [self _generateCache];
+            [[WaveHelper mapView] setNeedsDisplayInRect:f];
+            [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        }
+		if (slideIn) {
+			_slideScale = 1;
+			[self _generateCache];
+            [[WaveHelper mapView] setNeedsDisplayInRect:f];
+		} else [self setVisible:NO];
+        [self release];
+        [_slideLock unlock];
+    }
+
+    [subpool release];
+}
+
 
 #pragma mark -
 
@@ -250,7 +300,8 @@ inline col delta(col c1, col c2, int speed) {
 		[_timeout invalidate];
 	}
     
-    [_zoomLock release];
+    [_zoomLock  release];
+    [_slideLock release];
     [super dealloc];
 }
 

@@ -55,6 +55,7 @@ enum selmode {
     MapControlPanel     *_controlPanel;
     PointView           *_pView;
     BOOL                _visible;
+	BOOL				_autoCenter;
     NSImage             *_mapImage;
     NSImage             *_orgImage;
     Trace               *_trace;
@@ -92,6 +93,8 @@ enum selmode {
 
 - (void)setShowNetworks:(BOOL)show;
 - (void)setShowTrace:(BOOL)show;
+
+- (IBAction)autoCenter:(id)sender;
 
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;

@@ -221,7 +221,7 @@
     _center.y = [_mapImage size].height / 2;
     _zoomFact = 1.0;
     
-    [_controlPanel setVisible:YES];
+	[_controlPanel setVisible:YES];
     [[WaveHelper mainWindow] invalidateCursorRectsForView:self];
     
     [self _updateStatus];
@@ -417,7 +417,22 @@
 
 #pragma mark -
 
+- (IBAction)autoCenter:(id)sender {
+	if ([sender state] == NSOffState) {
+		_autoCenter = YES;
+		[_controlPanel setRestrictedMode:YES];
+		[sender setState:NSOnState];
+		[[WaveHelper mainWindow] invalidateCursorRectsForView:self]; 
+	} else {
+		_autoCenter = NO;
+		[_controlPanel setRestrictedMode:NO];
+		[sender setState:NSOffState];
+		[[WaveHelper mainWindow] invalidateCursorRectsForView:self];	
+	}
+}
+
 #define ZOOMFACT 1.5
+
 - (IBAction)zoomIn:(id)sender {
     if (_zoomFact > 20) {
         NSBeep();
@@ -439,22 +454,38 @@
 }
 
 - (IBAction)goLeft:(id)sender {
-    _center.x -= 40.0 / _zoomFact;
+	if (_autoCenter) {
+		NSBeep();
+		return;
+    }
+	_center.x -= 40.0 / _zoomFact;
     [self _align];
     [self setNeedsDisplay:YES];
 }
 - (IBAction)goRight:(id)sender{
-    _center.x += 40.0 / _zoomFact;
+    if (_autoCenter) {
+		NSBeep();
+		return;
+    }
+	_center.x += 40.0 / _zoomFact;
     [self _align];
     [self setNeedsDisplay:YES];
 }
 - (IBAction)goUp:(id)sender {
-    _center.y += 40.0 / _zoomFact;
+    if (_autoCenter) {
+		NSBeep();
+		return;
+    }
+	_center.y += 40.0 / _zoomFact;
     [self _align];
     [self setNeedsDisplay:YES];
 }
 - (IBAction)goDown:(id)sender {
-    _center.y -= 40.0 / _zoomFact;
+    if (_autoCenter) {
+		NSBeep();
+		return;
+    }
+	_center.y -= 40.0 / _zoomFact;
     [self _align];
     [self setNeedsDisplay:YES];
 }
