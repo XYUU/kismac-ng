@@ -39,4 +39,8 @@
 - (BOOL)bruteforce40bitAlpha;
 - (BOOL)bruteforce40bitAll;
 
+- (BOOL)wordlist40bitApple:(NSString*)wordlist;
+- (BOOL)wordlist104bitApple:(NSString*)wordlist;
+- (BOOL)wordlist104bitMD5:(NSString*)wordlist;
+
 @end

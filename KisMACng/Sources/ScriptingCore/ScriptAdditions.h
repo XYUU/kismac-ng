@@ -48,6 +48,10 @@
 - (id)bruteforce40bitAlpha:(NSScriptCommand *)command;
 - (id)bruteforce40bitAll:(NSScriptCommand *)command;
 
+- (id)wordlist40bitApple:(NSScriptCommand *)command;
+- (id)wordlist104bitApple:(NSScriptCommand *)command;
+- (id)wordlist104bitMD5:(NSScriptCommand *)command;
+
 - (id)busy:(NSScriptCommand *)command;
 
 @end

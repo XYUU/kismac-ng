@@ -320,5 +320,32 @@
     return YES;
 }
 
+- (BOOL)wordlist40bitApple:(NSString*)wordlist {
+    WEPCHECKS;
+    
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple40...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performWordlist40bitApple:) toTarget:_curNet withObject:[wordlist standardPath]];
+    
+    return YES;
+}
+- (BOOL)wordlist104bitApple:(NSString*)wordlist {
+    WEPCHECKS;
+    
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple104...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performWordlist104bitApple:) toTarget:_curNet withObject:[wordlist standardPath]];
+    
+    return YES;
+}
+- (BOOL)wordlist104bitMD5:(NSString*)wordlist {
+    WEPCHECKS;
+    
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-MD5...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performWordlist104bitMD5:) toTarget:_curNet withObject:[wordlist standardPath]];
+    
+    return YES;
+}
 
 @end

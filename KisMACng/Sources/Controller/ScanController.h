@@ -148,7 +148,6 @@ typedef enum {
 - (IBAction)changeSearchValue:(id)sender;
 @end
 
-
 @interface ScanController(MenuExtension) 
 - (IBAction)showPrefs:(id)sender;
 
@@ -166,11 +165,9 @@ typedef enum {
 
 - (IBAction)decryptPCAPFile:(id)sender;
 
-
 - (IBAction)selChannel:(id)sender;
 - (IBAction)selChannelRange:(id)sender;
 - (IBAction)setAutoAdjustTimer:(id)sender;
-
 
 - (IBAction)clearNetwork:(id)sender;
 - (IBAction)joinNetwork:(id)sender;
@@ -182,25 +179,18 @@ typedef enum {
 - (IBAction)weakCrackGeneric:(id)sender;
 - (IBAction)weakCrack40bit:(id)sender;
 - (IBAction)weakCrack104bit:(id)sender;
-- (IBAction)wordCrackApple40bit:(id)sender;
-- (IBAction)wordCrackApple104bit:(id)sender;
-- (IBAction)wordCrackMD5104bit:(id)sender;
 - (IBAction)wordCrackWPA:(id)sender;
 - (IBAction)wordCrackLEAP:(id)sender;
-
 
 - (IBAction)restartGPS:(id)sender;
 - (IBAction)showCurNetArea:(id)sender;
 - (IBAction)showAllNetArea:(id)sender;
 
-
 - (IBAction)closeActiveWindow:(id)sender;
-
 
 - (IBAction)openWebsiteURL:(id)sender;
 - (IBAction)openDonateURL:(id)sender;
 - (IBAction)showContextHelp:(id)sender;
-
 
 - (IBAction)debugSaveStressTest:(id)sender;
 - (IBAction)gpsDebugToConsole:(id)sender;

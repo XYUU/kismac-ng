@@ -1,8 +1,8 @@
 /*
         
-        File:			ScriptController.h
+        File:			MapView.h
         Program:		KisMAC
-	Author:			Michael Rossberg
+	Author:			Michael Roßberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -24,36 +24,15 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import <BIGL/BIGL.h>
 
-
-@interface ScriptController : NSObject {
-
+@interface MapView : BIGLView {
+    NSString            *_status;
+    NSImage             *_statusImg;
+    NSString            *_gpsStatus;
+    BIGLImageView       *_map;
+    BIGLImageView       *_statusView;
+    BIGLTextView        *_gpsStatusView;
 }
 
-- (IBAction)showNetworks:(id)sender;
-- (IBAction)showTrafficView:(id)sender;
-- (IBAction)showMap:(id)sender;
-- (IBAction)showDetails:(id)sender;
-
-- (IBAction)toggleScan:(id)sender;
-
-- (IBAction)new:(id)sender;
-
-- (IBAction)openKisMACFile:(id)sender;
-- (IBAction)openKisMAPFile:(id)sender;
-
-- (IBAction)importPCPFile:(id)sender;
-
-- (IBAction)saveKisMACFile:(id)sender;
-- (IBAction)saveKisMACFileAs:(id)sender;
-- (IBAction)saveKisMAPFile:(id)sender;
-
-- (IBAction)bruteforceNewsham:(id)sender;
-- (IBAction)bruteforce40bitLow:(id)sender;
-- (IBAction)bruteforce40bitAlpha:(id)sender;
-- (IBAction)bruteforce40bitAll:(id)sender;
-
-- (IBAction)wordlist40bitApple:(id)sender;
-- (IBAction)wordlist104bitApple:(id)sender;
-- (IBAction)wordlist104bitMD5:(id)sender;
 @end

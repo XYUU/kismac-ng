@@ -256,6 +256,50 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
+		00F9C4B806DA9DCC00E357F0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = "wrapper.pb-project";
+			name = KisMAC.xcode;
+			path = ../../KisMAC.xcode;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		00F9C4BF06DA9DCF00E357F0 = {
+			children = (
+				00F9C4C006DA9DCF00E357F0,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00F9C4C006DA9DCF00E357F0 = {
+			fileType = wrapper.application;
+			isa = PBXReferenceProxy;
+			path = KisMAC.app;
+			refType = 3;
+			remoteRef = 00F9C62006DA9DEF00E357F0;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00F9C62006DA9DEF00E357F0 = {
+			containerPortal = 00F9C4B806DA9DCC00E357F0;
+			isa = PBXContainerItemProxy;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = KisMAC;
+		};
+		00F9C62906DA9E2B00E357F0 = {
+			containerPortal = 00F9C4B806DA9DCC00E357F0;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = KisMAC;
+		};
+		00F9C62A06DA9E2B00E357F0 = {
+			isa = PBXTargetDependency;
+			name = "KisMAC (from KisMAC.xcode)";
+			targetProxy = 00F9C62906DA9E2B00E357F0;
+		};
 		00FC4EE40647F6C800F2220A = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -512,8 +556,7 @@
 			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
@@ -561,8 +604,6 @@
 //294
 		29B97313FDCFA39411CA2CEA = {
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = /Developer/SDKs/MacOSX10.2.7.sdk;
 			};
 			buildStyles = (
 				4A9504CCFFE6A4B311CA0CBA,
@@ -572,12 +613,19 @@
 			isa = PBXProject;
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 00F9C4BF06DA9DCF00E357F0;
+					ProjectRef = 00F9C4B806DA9DCC00E357F0;
+				},
+			);
 			targets = (
 				8D1107260486CEB800E47090,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
 			children = (
+				00F9C4B806DA9DCC00E357F0,
 				080E96DDFE201D6D7F000001,
 				29B97315FDCFA39411CA2CEA,
 				29B97317FDCFA39411CA2CEA,
@@ -653,8 +701,7 @@
 			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
@@ -662,8 +709,7 @@
 			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
@@ -699,8 +745,6 @@
 //4A3
 //4A4
 		4A9504CCFFE6A4B311CA0CBA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
@@ -715,8 +759,6 @@
 			name = Development;
 		};
 		4A9504CDFFE6A4B311CA0CBA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -765,6 +807,7 @@
 				WRAPPER_EXTENSION = app;
 			};
 			dependencies = (
+				00F9C62A06DA9E2B00E357F0,
 			);
 			isa = PBXNativeTarget;
 			name = "KisMAC Installer";

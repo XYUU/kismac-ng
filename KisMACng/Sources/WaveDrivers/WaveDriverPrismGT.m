@@ -321,13 +321,14 @@ typedef struct {
         
         f->dataLen = f->length = frameSize - sizeof(rfmonHeader) - headerLength;
         memcpy(f + 1, tempframe + sizeof(rfmonHeader) + headerLength, f->dataLen);
+        
         f->silence = head->rssi & 0x7F;
         f->channel = [WaveHelper freq2chan:NSSwapLittleShortToHost(head->freq)];
         break;
     }
     
     _packets++;
-    return (WLFrame*)frame;
+    return f;
 }
 
 #pragma mark -

@@ -23,7 +23,6 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-
 #import "WaveNetWEPCrack.h"
 #import "WaveHelper.h"
 #import "../3rd Party/FCS.h"
@@ -32,22 +31,20 @@
 
 @implementation WaveNet(WEPBruteforceCrackExtension) 
 
-
 #define RET { [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
+#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 10) RET; }
 
 - (void)performBruteforce40bitLow:(NSObject*)obj {
-    unsigned int i, foundCRC, counter, length;
+    unsigned int i, foundCRC, counter, length = 0;
     unsigned char key[16], currentGuess[16], skeletonStateArray[256], currentStateArray[256];
     unsigned char y, z, tmp, xov;
-    const char *data;
+    const char *data = nil;
     BOOL isInit;
     ImportController *controller;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    if (_password != Nil) RET;
-    if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET;
-    if ([aPacketsLog count] < 10) RET;
-    
+    CHECK;
+        
     controller = [WaveHelper importController];
     
     isInit = NO;
@@ -167,18 +164,16 @@
 }
 
 - (void)performBruteforce40bitAlpha:(NSObject*)obj {
-    unsigned int i, foundCRC, counter, length;
+    unsigned int i, foundCRC, counter, length = 0;
     unsigned char key[16], currentGuess[16], skeletonStateArray[256], currentStateArray[256];
     unsigned char y, z, tmp, xov;
-    const char *data;
+    const char *data = nil;
     BOOL isInit;
     ImportController *controller;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    if (_password != Nil) RET;
-    if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET;
-    if ([aPacketsLog count] < 10) RET;
-    
+    CHECK;
+
     controller = [WaveHelper importController];
 
     isInit = false;
@@ -300,17 +295,15 @@
 }
 
 - (void)performBruteforce40bitAll:(NSObject*)obj {
-    unsigned int i, foundCRC, counter, length;
+    unsigned int i, foundCRC, counter, length = 0;
     unsigned char key[16], currentGuess[16], skeletonStateArray[256], currentStateArray[256];
     unsigned char y, z, tmp, xov;
-    const char *data;
+    const char *data = nil;
     BOOL isInit;
     ImportController *controller;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    if (_password != Nil) RET;
-    if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET;
-    if ([aPacketsLog count] < 10) RET;
+    CHECK;
     
     controller = [WaveHelper importController];
 
@@ -412,10 +405,10 @@
 #define KEYNUM 4
 - (void)performBruteforceNewsham:(NSObject*)obj {	
     unsigned char key[KEYNUM][KEYLENGTH + 3], skeletonStateArray[256], currentStateArray[256];
-    unsigned int i, foundCRC, counter, length;
+    unsigned int i, foundCRC, counter, length = 0;
     unsigned char y, z, tmp, xov, l, j, curGuess[16];
     unsigned int w, x, q, k, selKey;
-    const char *data;
+    const char *data = nil;
     BOOL isInit;
     ImportController *controller;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

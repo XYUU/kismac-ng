@@ -1,8 +1,8 @@
 /*
         
-        File:			ScriptController.h
+        File:			WaveNetWEPWordlist.h
         Program:		KisMAC
-	Author:			Michael Rossberg
+	Author:			Michael Roßberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -23,37 +23,11 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import "WaveNet.h"
 
-
-@interface ScriptController : NSObject {
-
-}
-
-- (IBAction)showNetworks:(id)sender;
-- (IBAction)showTrafficView:(id)sender;
-- (IBAction)showMap:(id)sender;
-- (IBAction)showDetails:(id)sender;
-
-- (IBAction)toggleScan:(id)sender;
-
-- (IBAction)new:(id)sender;
-
-- (IBAction)openKisMACFile:(id)sender;
-- (IBAction)openKisMAPFile:(id)sender;
-
-- (IBAction)importPCPFile:(id)sender;
-
-- (IBAction)saveKisMACFile:(id)sender;
-- (IBAction)saveKisMACFileAs:(id)sender;
-- (IBAction)saveKisMAPFile:(id)sender;
-
-- (IBAction)bruteforceNewsham:(id)sender;
-- (IBAction)bruteforce40bitLow:(id)sender;
-- (IBAction)bruteforce40bitAlpha:(id)sender;
-- (IBAction)bruteforce40bitAll:(id)sender;
-
-- (IBAction)wordlist40bitApple:(id)sender;
-- (IBAction)wordlist104bitApple:(id)sender;
-- (IBAction)wordlist104bitMD5:(id)sender;
+@interface WaveNet(WEPWorlistCrackExtension)
+- (void)performWordlist40bitApple:(NSString*)wordlist;
+- (void)performWordlist104bitApple:(NSString*)wordlist;
+- (void)performWordlist104bitMD5:(NSString*)wordlist;
 @end

@@ -23,6 +23,9 @@
                 "KisMAC.Bruteforce40bitLow"     = "bruteforce40bitLow:";
                 "KisMAC.Bruteforce40bitAlpha"   = "bruteforce40bitAlpha:";
                 "KisMAC.Bruteforce40bitAll"     = "bruteforce40bitAll:";
+                "KisMAC.Wordlist40bitApple"     = "wordlist40bitApple:";
+                "KisMAC.Wordlist104bitApple"    = "wordlist104bitApple:";
+                "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
                 "KisMAC.Busy"                   = "busy:";
             }; 
         };
@@ -90,6 +93,21 @@
         Bruteforce40bitAll = {
             AppleEventCode = KCBA; 
             CommandClass = NSScriptCommand;
+        };
+        Wordlist40bitApple = {
+            AppleEventCode = KCWa; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        };
+        Wordlist104bitApple = {
+            AppleEventCode = KCWA; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        };
+        Wordlist104bitMD5 = {
+            AppleEventCode = KCWM; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
         };
         Busy = {
             AppleEventCode = KBus; 

@@ -178,7 +178,6 @@
         for (i = 0; i < [[op filenames] count]; i++)
             [ScriptController selfSendEvent:'KImP' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
-
 }
 
 #pragma mark -
@@ -246,6 +245,52 @@
     [ScriptController selfSendEvent:'KCBA'];
 }
 
+#pragma mark -
+
+- (IBAction)wordlist40bitApple:(id)sender {
+    WEPCHECKS;
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:nil]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++)
+            [ScriptController selfSendEvent:'KCWa' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+    }
+}
+
+- (IBAction)wordlist104bitApple:(id)sender {
+    WEPCHECKS;
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:nil]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++)
+            [ScriptController selfSendEvent:'KCWA' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+    }
+}
+
+- (IBAction)wordlist104bitMD5:(id)sender {
+    WEPCHECKS;
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:nil]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++)
+            [ScriptController selfSendEvent:'KCWM' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+    }
+}
 #pragma mark -
 
 - (void)dealloc {

@@ -76,7 +76,7 @@
     _texSize = NSMakeSize(0, 0);
     _color = [[NSColor clearColor] retain];
     _borderColor = [[NSColor clearColor] retain];
-    _marginSize = NSMakeSize(4,2);
+    _marginSize = NSMakeSize(8,4);
     _string = [[NSAttributedString alloc] init];
 
     return self;

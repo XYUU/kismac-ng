@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Installer.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.binaervarianz.kismac.installer</string>
+	<string>de.binaervarianz.kismac.installer</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

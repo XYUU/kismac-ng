@@ -9,6 +9,9 @@ scan button mit setstate
 made speech queue working
 reworked delete single net option
 search box is working
+added Prism GT Support
+moved to subversion
+minor bugfixes in installer
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view

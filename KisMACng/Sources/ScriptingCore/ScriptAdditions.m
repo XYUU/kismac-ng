@@ -103,5 +103,18 @@
    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] bruteforce40bitAll]];
 }
 
+- (id)wordlist40bitApple:(NSScriptCommand *)command {
+   return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist40bitApple:[command directParameter]]];
+}
+
+- (id)wordlist104bitApple:(NSScriptCommand *)command {
+   return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitApple:[command directParameter]]];
+}
+
+- (id)wordlist104bitMD5:(NSScriptCommand *)command {
+   return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitMD5:[command directParameter]]];
+}
+
+
 
 @end

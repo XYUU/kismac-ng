@@ -37,6 +37,7 @@
             }; 
             SUPERCLASS = NSObject; 
         }, 
+        {CLASS = MapView; LANGUAGE = ObjC; SUPERCLASS = BIGLView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {
             ACTIONS = {
@@ -108,10 +109,7 @@
                 weakCrack104bit = id; 
                 weakCrack40bit = id; 
                 weakCrackGeneric = id; 
-                wordCrackApple104bit = id; 
-                wordCrackApple40bit = id; 
                 wordCrackLEAP = id; 
-                wordCrackMD5104bit = id; 
                 wordCrackWPA = id; 
             }; 
             CLASS = ScanController; 
@@ -185,6 +183,9 @@
                 showNetworks = id; 
                 showTrafficView = id; 
                 toggleScan = id; 
+                wordlist104bitApple = id; 
+                wordlist104bitMD5 = id; 
+                wordlist40bitApple = id; 
             }; 
             CLASS = ScriptController; 
             LANGUAGE = ObjC; 

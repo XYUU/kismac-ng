@@ -34,9 +34,6 @@
     NSLock* zoomLock;
 
     NSColor *_backgroundColor;
-    NSColor *_gridColor;
-    NSColor *_graphColor;
-    NSColor *_textColor;
 
     NSRect graphRect;
     NSTimeInterval scanInterval;
@@ -66,8 +63,6 @@
 
 - (void)setBackgroundColor:(NSColor *)newColor;
 - (void)setGridColor:(NSColor *)newColor;
-- (void)setTextColor:(NSColor *)newColor;
-- (void)setGraphColor:(NSColor *)newColor;
 
 - (void)updateGraph;
 - (void)updateDataForRect:(NSRect)rect;

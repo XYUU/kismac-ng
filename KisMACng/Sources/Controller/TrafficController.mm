@@ -37,9 +37,7 @@
     _graphs = [[NSMutableArray array] retain];
     
     [self setBackgroundColor:[NSColor blackColor]];
-    [self setTextColor:[NSColor colorWithCalibratedRed:96.0/255.0 green:123.0/255.0 blue:173.0/255.0 alpha:1]];
-    [self setGridColor:[NSColor colorWithCalibratedRed:96.0/255.0 green:123.0/255.0 blue:173.0/255.0 alpha:0.5]];
-    [self setGraphColor:[NSColor redColor]];
+    [self setGridColor:[NSColor colorWithCalibratedRed:96.0/255.0 green:123.0/255.0 blue:173.0/255.0 alpha:1]];
 
     zoomLock = [[NSLock alloc] init];
     
@@ -88,13 +86,6 @@
 
 #pragma mark -
 
-- (void)setGraphColor:(NSColor *)newColor {
-    if (_graphColor != newColor) {
-        [_graphColor release];
-        _graphColor = [newColor retain];
-    }
-}
-
 - (void)setBackgroundColor:(NSColor *)newColor {
    [_view setBackgroundColor:newColor];
 }
@@ -102,13 +93,6 @@
 - (void)setGridColor:(NSColor *)newColor {
     [_grid      setColor:newColor];
     [_gridFrame setColor:newColor];
-}
-
-- (void)setTextColor:(NSColor *)newColor {
-    if (_textColor != newColor) {
-        [_textColor release];
-        _textColor = [newColor retain];
-    }
 }
 
 - (IBAction)setTimeLength:(id)sender {
@@ -577,9 +561,6 @@
     [colorArray release];
     [allNets release];
     
-    [_graphColor release];
-    [_gridColor release];
-    [_textColor release];
     [_grid release];
     
     [_graphs release];

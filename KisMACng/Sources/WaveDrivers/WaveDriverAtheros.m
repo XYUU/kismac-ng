@@ -29,21 +29,22 @@
 #import "ImportController.h"
 #import "WaveHelper.h"
 
-#define driverName "AtherosWIFIController"
+#define driverName "AtheroJack"
 
 static bool explicitlyLoadedAtheros = NO;
 
 typedef enum WLUCMethods {
-    kWLUserClientOpen,                      // kIOUCScalarIScalarO, 0, 0
-    kWLUserClientClose,                     // kIOUCScalarIScalarO, 0, 0
-    kWLUserClientEnable,                    // kIOUCScalarIScalarO, 0, 0
-    kWLUserClientDisable,                   // kIOUCScalarIScalarO, 0, 0
-    kWLUserClientGetFrequency,              // kIOUCScalarIScalarO, 0, 1
-    kWLUserClientSetFrequency,              // kIOUCScalarIScalarO, 1, 0
-    kWLUserClientGetOpMode,                 // kIOUCScalarIScalarO, 0, 1
-    kWLUserClientSetOpMode,                 // kIOUCScalarIScalarO, 1, 0
-    kWLUserClientSupportedOpModes,          // kIOUCScalarIScalarO, 0, 1
-    kWLUserClientLastMethod,
+    kWiFiUserClientOpen,                // kIOUCScalarIScalarO, 0, 0
+    kWiFiUserClientClose,               // kIOUCScalarIScalarO, 0, 0
+    kWiFiUserClientGetLinkSpeed,        // kIOUCScalarIScalarO, 0, 1
+    kWiFiUserClientGetConnectionState,  // kIOUCScalarIScalarO, 0, 1
+    kWiFiUserClientGetFrequency,        // kIOUCScalarIScalarO, 0, 1
+    kWiFiUserClientSetFrequency,        // kIOUCScalarIScalarO, 0, 1
+    kWiFiUserClientSetSSID,             // kIOUCScalarIStructI, 0, 1
+    kWiFiUserClientSetWEPKey,           // kIOUCScalarIStructI, 0, 1
+    kWiFiUserClientGetScan,             // kIOUCScalarIStructO, 0, 1
+    kWiFiUserClientSetMode,             // kIOUCScalarIScalarO, 1, 0
+    kWiFiUserClientLastMethod,
 } WLUCMethod;
 
 enum _operationMode {
@@ -171,15 +172,6 @@ enum _operationMode {
         }
     }
 
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWLUserClientSetOpMode, 1, 0, _operationModeMonitor);
-    if (kernResult != KERN_SUCCESS) {
-        NSLog(@"setOpMode: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
-        return NO;
-    }
-
-    [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
-    
     kernResult = IOConnectMapMemory(_userClientPort,
                                     _userClientMap,
                                     mach_task_self(),
@@ -216,7 +208,7 @@ enum _operationMode {
     if(!self) return Nil;
 
     _userClientNotify = 0xdeadbeef;
-    _userClientMap = 0xdeadbeef;
+    _userClientMap = 0xdeadface;
     _driverName = driverName;
     
     kern_return_t kernResult;
@@ -224,7 +216,7 @@ enum _operationMode {
     kernResult = [self _connect];
     if (kernResult != KERN_SUCCESS) return Nil;
     
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientOpen, 0, 0);
+    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWiFiUserClientOpen, 0, 0);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"open: IOConnectMethodScalarIScalarO: %x (driver not loaded?)\n", kernResult);
         [self release];
@@ -243,7 +235,7 @@ enum _operationMode {
     if (![self allowsChannelHopping]) return 0;
     
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWLUserClientGetFrequency, 0, 1, &channel);
+                                               kWiFiUserClientGetFrequency, 0, 1, &channel);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"getChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return 0;
@@ -256,7 +248,7 @@ enum _operationMode {
     kern_return_t kernResult;
  
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWLUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
+                                               kWiFiUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
     if (kernResult != KERN_SUCCESS) {
         //NSLog(@"setChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
@@ -268,13 +260,13 @@ enum _operationMode {
 - (bool) startCapture:(unsigned short)newChannel {
     kern_return_t kernResult;
 
-    [self setChannel: newChannel];
+    /*[self setChannel: newChannel];
      
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientEnable, 0, 0);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"startCapture: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
-    }
+    }*/
     
     return YES;
 }
@@ -282,29 +274,42 @@ enum _operationMode {
 -(bool) stopCapture {
     kern_return_t kernResult;
 
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientDisable, 0, 0);
+    /*kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientDisable, 0, 0);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
     }
 
     while (IODataQueueDataAvailable(_packetQueue)) IODataQueueDequeue(_packetQueue, NULL, 0);
-
+*/
     return YES;
 }
 
 #pragma mark -
+
+struct _Prism_HEADER {
+    UInt16 status;
+    UInt16 channel;
+    UInt16 len;
+    UInt8  silence;
+    UInt8  signal;
+    UInt8  rate;
+    UInt8  rx_flow;
+    UInt8  tx_rtry;
+    UInt8  tx_rate;
+    UInt16 txControl;
+} __attribute__((packed));
 
 - (WLFrame*) nextFrame {
     static UInt8  frame[2364];
     UInt8  tempframe[2364];
     UInt32 frameSize = 2364;
     kern_return_t kernResult;
-    UInt16 dataLen;
+    UInt32 headerLength;
     WLFrame *f;
+    UInt16 isToDS, isFrDS, subtype;
     
-    
-    do {
+    while(YES) {
         while (!IODataQueueDataAvailable(_packetQueue)) {
             kernResult = IODataQueueWaitForAvailableData(_packetQueue,
                                                          _packetQueuePort);
@@ -313,28 +318,56 @@ enum _operationMode {
                 return NULL;
             }
         }
-
+        
         kernResult = IODataQueueDequeue(_packetQueue, tempframe, &frameSize);
-    } while (kernResult != KERN_SUCCESS);
-    
-    /*{
-        NSLog(@"nextFrame: IODataQueueDequeue: 0x%x\n", kernResult);
-        return NULL;
-    }
-    else {*/
-    
-        f = (WLFrame*)tempframe;
+        if (kernResult != KERN_SUCCESS) {
+            NSLog(@"nextFrame: IODataQueueDequeue: 0x%x\n", kernResult);
+            return NULL;
+        }
         
-        memcpy(frame, tempframe, 38);
-        dataLen = (f->reserved1 > 28) ? f->reserved1 - 28 : 0;
         
-        memcpy(frame + sizeof(WLFrame), &f->address4[0], dataLen);
+        memset(frame, 0, sizeof(frame));
+        memcpy(frame, tempframe, frameSize >= sizeof(WLPrismHeader) + 30 ? sizeof(WLPrismHeader) + 30 : frameSize);
         f = (WLFrame*)frame;
-        f->dataLen = dataLen;
-        f->length = dataLen ;
+            
+        UInt16 type=(f->frameControl & IEEE80211_TYPE_MASK);
+        
+        //depending on the frame we have to figure the length of the header
+        switch(type) {
+            case IEEE80211_TYPE_DATA: //Data Frames
+                isToDS = ((f->frameControl & IEEE80211_DIR_TODS) ? YES : NO);
+                isFrDS = ((f->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
+                if (isToDS&&isFrDS) headerLength=30; //WDS Frames are longer
+                else headerLength=24;
+                break;
+            case IEEE80211_TYPE_CTL: //Control Frames
+                subtype=(f->frameControl & IEEE80211_SUBTYPE_MASK);
+                switch(subtype) {
+                    case IEEE80211_SUBTYPE_PS_POLL:
+                    case IEEE80211_SUBTYPE_RTS:
+                        headerLength=16;
+                        break;
+                    case IEEE80211_SUBTYPE_CTS:
+                    case IEEE80211_SUBTYPE_ACK:
+                        headerLength=10;
+                        break;
+                    default:
+                        continue;
+                }
+                break;
+            case IEEE80211_TYPE_MGT: //Management Frame
+                headerLength=24;
+                break;
+            default:
+                continue;
+        }
+        
+        f->dataLen = f->length = frameSize - sizeof(struct _Prism_HEADER) - headerLength;
+        memcpy(f + 1, tempframe + sizeof(struct _Prism_HEADER) + headerLength, f->dataLen);
+        
         _packets++;
-        return (WLFrame*)frame;
-    //}
+        return f;
+    }
 }
 
 
@@ -352,7 +385,7 @@ enum _operationMode {
 
 -(void) dealloc {
     kern_return_t kernResult;
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort,kWLUserClientClose,0, 0);
+    kernResult = IOConnectMethodScalarIScalarO(_userClientPort,kWiFiUserClientClose,0, 0);
     if (kernResult != KERN_SUCCESS) NSLog(@"close: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
     kernResult = [self _disconnect];
     [super dealloc];

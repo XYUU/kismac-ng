@@ -1,20 +1,28 @@
+check airport not coming back
+check the gps support!!!
+
 inspect atheros
-
-check the sudo option!!!
-
 athero jack 255 signal quality
 opengl everywhere(TM)
 apple script support
 
-Add Prism GT Support
+---could be done with apple script---
+auto-save function          (done)
+scan at start up            (done)
+Add Default Passwords check (parts done)
 
-more work on injection attacks
+make trace saveable
+rework and extend help files
 
-wšrterbuch mit john the ripper
+.021
 add better WPA detection
-
+show 802.11g/a/b accesspoint
+show ip addresses traffic...
 Add IP Detection
 
+later
+more work on injection attacks
+wšrterbuch mit john the ripper
 XML im/export
 
 GET /gif?&CT=53.000000:13.000000:100000&IC=&W=640&H=512&FAM=myblast HTTP/1.0
@@ -24,20 +32,15 @@ Connection: close
 
 http://www.multimap.com/map/browse.cgi?scale=4000000&lon=9.3666667&lat=48.0333333
 
----could be done with apple script---
-auto-save function          (done)
-start at start up           (done)
-Add Default Passwords check (parts done)
 
 ----------------Low Priority-------------------------------------------------------------------------------
 display other information (velocity) in the bottom bar, along with latitude and longitude
 add pref for "database Mode"  Nets are auto saved and opened every time run, can be searched etc.
 Find nearby networks  (from saved list)
 Filter Networks by range  (show all nets within 10 miles of current location?)
-FIlter Networks by time (show all nets seen within last 10 min)
+Filter Networks by time (show all nets seen within last 10 min)
 
 centre the blinking blue dot on the screen
-make trace saveable
 
 get system units pref to determine miles/km and meters/feet (overide?)
 (add support to show every channel as a different network)
@@ -47,4 +50,3 @@ multiple points
 multiple maps automatically loaded...
 =>requires both a new map engine with support for conical projections etc.
 
-rework and extend help files

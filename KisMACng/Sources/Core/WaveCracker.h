@@ -59,12 +59,8 @@ typedef void (*keyfunction)(unsigned char *);
 }
 
 -(void) crackWithKeyByteLength:(unsigned int)a net:(WaveNet*)aNet breath:(unsigned int)b import:(ImportController*)im;	
--(void) crackWithWordlist:(NSArray*)filenames useCipher:(unsigned int)a net:(WaveNet*)aNet import:(ImportController*)i;
 
                                                                                 //try to crack the key of a 8*a bit network based on weak keys
 - (NSString*)key;								//returns the cracked key
 
-- (int)doWordlistAttack40Apple:(WaveNet *)aNet withWordlist:(NSString*)filename;
-- (int)doWordlistAttack104Apple:(WaveNet *)aNet withWordlist:(NSString*)filename;
-- (int)doWordlistAttack104MD5:(WaveNet *)aNet withWordlist:(NSString*)filename;
 @end

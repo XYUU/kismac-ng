@@ -1378,7 +1378,6 @@ typedef int (*SORTFUNC)(id, id, void *);
         return NO;
     }
     
-    
     if (_password) {
         _crackErrorString = [NSLocalizedString(@"KisMAC did already reveal the password.", @"Error description for WPA crack.") retain];
         [im terminateWithCode:-1];
@@ -1423,39 +1422,6 @@ typedef int (*SORTFUNC)(id, id, void *);
     
     return YES;
 }
-
-- (BOOL)crackWithWordlistUseCipher:(unsigned int)a import:(ImportController*)im {
-    NSOpenPanel *aOP;
-    
-    [WaveHelper secureRelease:&_crackErrorString];
-    
-    if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) {
-        _crackErrorString = [NSLocalizedString(@"The selected network is not WEP encrypted", @"Error description for cracking.") retain];
-        [im terminateWithCode:-1];
-    }
-
-    if (_password) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did already reveal the password.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    if (_cracker==Nil) _cracker=[[WaveCracker alloc] init];
-    aOP=[NSOpenPanel openPanel];
-    [aOP setAllowsMultipleSelection:YES];
-    [aOP setCanChooseFiles:YES];
-    [aOP setCanChooseDirectories:NO];
-    if ([aOP runModalForTypes:nil]==NSOKButton) {
-        //from now on only this error is possible
-        _crackErrorString = [NSLocalizedString(@"The key was none of the tested passwords.", @"Error description for WPA crack.") retain];
-        [_cracker crackWithWordlist:[aOP filenames] useCipher:a net:self import:im];
-    } else {
-        [im terminateWithCode:-2];
-        return NO;
-    }
-    return YES;
-}
-
 
 #pragma mark -
 #pragma mark Reinjection stuff

@@ -623,41 +623,6 @@
         [_curNet crackWithKeyByteLength:13 breath:2 import:_importController];
     }
 }
-- (IBAction)wordCrackApple40bit:(id)sender {
-    if ([[_curNet weakPacketsLog] count] < 5) {
-        [self showNeedMorePacketsDialog];
-        return;
-    }
-    if (_curNet==Nil) return;
-    
-    _crackType = 2;
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple40...", "busy dialog")];
-    [_curNet crackWithWordlistUseCipher:1 import:_importController];
-}
-
-- (IBAction)wordCrackApple104bit:(id)sender {
-    if ([[_curNet weakPacketsLog] count] < 5) {
-        [self showNeedMorePacketsDialog];
-        return;
-    }
-    if (_curNet==Nil) return;
-    
-    _crackType = 2;
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple104...", "busy dialog")];
-    [_curNet crackWithWordlistUseCipher:2 import:_importController];
-}
-
-- (IBAction)wordCrackMD5104bit:(id)sender {
-    if ([[_curNet weakPacketsLog] count] < 5) {
-        [self showNeedMorePacketsDialog];
-        return;
-    }
-    if (_curNet==Nil) return;
-    
-    _crackType = 2;
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-MD5...", "busy dialog")];
-    [_curNet crackWithWordlistUseCipher:3 import:_importController];
-}
 
 - (IBAction)wordCrackWPA:(id)sender {
     if (_curNet==Nil) return;

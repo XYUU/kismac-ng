@@ -180,7 +180,6 @@ struct graphStruct {
 - (BOOL)crackWPAWithImportController:(ImportController*)im;
 - (BOOL)crackLEAPWithImportController:(ImportController*)im;
 - (BOOL)crackWithKeyByteLength:(unsigned int)a breath:(unsigned int)b import:(ImportController*)im;
-- (BOOL)crackWithWordlistUseCipher:(unsigned int)a import:(ImportController*)im;
 - (void)reinjectWithImportController:(ImportController*)im andScanner:(id)scanner;
 
 - (NSString*)crackError;

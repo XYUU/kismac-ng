@@ -223,12 +223,8 @@
     
     if (tab != tabNetworks) [self hideDetails];
  
-    //NSView *oldView = [_mainView contentView];
-    //[_mainView setContentView:_zoomView];
-    //[_slideView zoomFrom:oldView to:view];
     [_mainView setContentView:view];
     [_window display];
-    //[_slideView cleanUpZoom];
 }
 
 - (void)showDetailsFor:(WaveNet*)net {
@@ -472,11 +468,8 @@
       
     [self performSelector:_busyFunction withObject:obj];
         
-    //[NSThread detachNewThreadSelector:@selector(busyThread:) toTarget:self withObject:obj];
     [obj release];
 
-    //if (_doModal) [NSApp runModalForWindow:[_importController window]];
-    
     [NSApp endSheet: [_importController window]];        
     [[_importController window] close];
     [_importController stopAnimation];
@@ -487,8 +480,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [self performSelector:_busyFunction withObject:anObject];
-    //[self modalDone:nil];
-
+    
     _doModal = NO;
     
     [NSApp endSheet: [_importController window]];        

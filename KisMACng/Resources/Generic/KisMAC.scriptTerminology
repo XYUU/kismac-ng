@@ -74,6 +74,21 @@
             Name = bruteforce40bitAll;
             Description = "start an attack against a 40-bit network";
         };
+        Wordlist40bitApple = {
+            Name = wordlist40bitApple;
+            Description = "start a wordlist attack against a 40-bit apple network";
+            UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
+        };
+        Wordlist104bitApple = {
+            Name = wordlist104bitApple;
+            Description = "start a wordlist attack against a 104-bit apple network";
+            UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
+        };
+        Wordlist104bitMD5 = {
+            Name = wordlist104bitMD5;
+            Description = "start a wordlist attack against a 104-bit generic network";
+            UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
+        };
         Busy = {
             Name = busy;
             Description = "Returns true if there is an asynchronous operation still taking place";

@@ -242,13 +242,14 @@
 							<array>
 								<string>089C166AFE841209C02AAC07</string>
 								<string>247142CAFF3F8F9811CA285C</string>
+								<string>089C167CFE841241C02AAC07</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
+									<integer>4</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -285,7 +286,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GTDriver.cpp</string>
+								<string>GTDriver.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -293,27 +294,26 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GTDriver.cpp</string>
+										<string>GTDriver.h</string>
 										<key>bookmark</key>
-										<string>00A7FBA506C6DA9E00A6BB8F</string>
+										<string>00A6B07906DB4B030059E82B</string>
 										<key>history</key>
 										<array>
-											<string>00FF58D306C62C82006C7F1E</string>
 											<string>00FF59FD06C63D43006C7F1E</string>
 											<string>00FF5B0106C656A1006C7F1E</string>
 											<string>00FF5C3B06C68099006C7F1E</string>
-											<string>00FF5C9806C6856C006C7F1E</string>
-											<string>00FF5C9F06C685C6006C7F1E</string>
-											<string>00A7FBA106C6DA4800A6BB8F</string>
+											<string>008F87C906D90B65005E3361</string>
+											<string>008F87D506D90B8C005E3361</string>
+											<string>008F87D606D90B8C005E3361</string>
+											<string>00A6B06E06DB4ABD0059E82B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
-											<string>00FF58D606C62C82006C7F1E</string>
 											<string>00FF58D706C62C82006C7F1E</string>
 											<string>00FF59FF06C63D43006C7F1E</string>
-											<string>00FF5C9A06C6856C006C7F1E</string>
-											<string>00FF5C9B06C6856C006C7F1E</string>
-											<string>00FF5CA106C685C6006C7F1E</string>
+											<string>008F87CC06D90B65005E3361</string>
+											<string>008F87CD06D90B65005E3361</string>
+											<string>008F87D806D90B8C005E3361</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -371,9 +371,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>00A7FBA306C6DA4800A6BB8F</string>
+				<string>00A6B07006DB4ABD0059E82B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>00A7FBA406C6DA4800A6BB8F</string>
+				<string>00A6B07106DB4ABD0059E82B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -401,6 +401,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/mick/openDev/GTDriver/GTDriver.xcode</string>
 	</array>
 	<key>WindowString</key>
@@ -644,7 +645,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{0, 0}, {781, 105}}</string>
+										<string>{{0, 0}, {781, 106}}</string>
 										<key>RubberWindowFrame</key>
 										<string>21 339 781 470 0 0 1280 832 </string>
 									</dict>
@@ -655,7 +656,7 @@
 								</dict>
 							</array>
 							<key>Proportion</key>
-							<string>105pt</string>
+							<string>106pt</string>
 						</dict>
 						<dict>
 							<key>BecomeActive</key>
@@ -670,7 +671,7 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 112}, {781, 315}}</string>
+								<string>{{0, 113}, {781, 315}}</string>
 								<key>RubberWindowFrame</key>
 								<string>21 339 781 470 0 0 1280 832 </string>
 							</dict>
@@ -695,8 +696,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>00FF5C4606C680F4006C7F1E</string>
-				<string>00FF5C4706C680F4006C7F1E</string>
+				<string>00A6B06406DB4A740059E82B</string>
+				<string>00A6B06506DB4A740059E82B</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>

@@ -9,4 +9,12 @@
 
 #include <Carbon/Carbon.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 unsigned long UPDC32(unsigned long octet, unsigned long crc);
+
+#ifdef __cplusplus
+}
+#endif
