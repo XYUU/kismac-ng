@@ -78,7 +78,22 @@
 	UKStringsEqual(@"00:12:DA:9E:85:D0", [self clientFromID]);
 	UKStringsEqual(@"FF:FF:FF:FF:FF:FF", [self clientToID]);
 	UKStringsEqual(@"ahzfnet", [self SSID]);
+}
+
+- (void) testWPAData {
+	WLFrame *f;
+	UInt8 frame[] = "\x08\x41\xd5\x00\x00\x11\x24\x08\xe2\x8b\x00\x30\x65\x1b\xf0\x86\x00\xe0\x7d\xb2\x1e\x95\x30\x3a\x02\x22\xd0\x20\x00\x00\x00\x00\x76\xac\x64\x73\x16\x7d\xb9\x25\x59\xac\x03\x59\x99\xaf\x81\xec\xb6\x72\xed\xd3\x31\xaf\xc7\x63\xb1\x60\x7d\x37\x1f\xf3\x31\x3a\x3d\x03\x39\xa6\x97\x76\xa4\xbf\xa5\x3d\x15\xe0\x2e\xab\xdb\xe8\xdb\x17\x43\x95\xa6\x34\x28\xd9\x97\x21\x55\x1f";
+	f = [WaveHelper dataToWLFrame:frame length:sizeof(frame)-1];
+	[self parseFrame: f];
 	
+	UKIntsEqual(IEEE80211_TYPE_DATA, [self type]);
+	UKTrue([self toDS]);
+	UKFalse([self fromDS]);
+	UKIntsEqual(68, [self bodyLength]);
+	UKIntsEqual(encryptionTypeWPA, [self wep]);
+	UKStringsEqual(@"00:11:24:08:E2:8B", [self BSSIDString]);
+	UKStringsEqual(@"00:30:65:1B:F0:86", [self clientFromID]);
+	UKStringsEqual(@"00:E0:7D:B2:1E:95", [self clientToID]);
 }
 
 @end

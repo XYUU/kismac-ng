@@ -89,7 +89,7 @@ struct pointCoords {
 			a = [NSMutableArray arrayWithCapacity:[(NSData*)obj length] / sizeof(struct pointCoords)];
 			pL = (const struct pointCoords *)[obj bytes];
 		
-			for (j = 0; i < ([(NSData*)obj length] / sizeof(struct pointCoords)); i++) {
+			for (j = 0; j < ([(NSData*)obj length] / sizeof(struct pointCoords)); j++) {
 				vp = [BIValuePair new];
 				[vp setPairX:pL->x Y:pL->y];
 				[a addObject:[vp autorelease]];

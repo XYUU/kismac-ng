@@ -58,7 +58,7 @@
     
     if ((_data[iv[2]])[iv[1]] == nil) {
         (_data[iv[2]])[iv[1]] = malloc(256 * 3);
-        NSAssert(_data[iv[2]], @"malloc failed");
+        NSAssert((_data[iv[2]])[iv[1]], @"malloc failed");
         memset((_data[iv[2]])[iv[1]], 0, 256 * 3);
     }
     

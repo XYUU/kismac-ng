@@ -132,7 +132,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
     int i;
     UInt16 p;
     NSMutableArray *ar;
-    
+    UInt8* data;
+	
     if (f==NULL) return NO;
     
     [WaveHelper secureRelease:&_SSID];
@@ -174,16 +175,18 @@ bool inline is8021xPacket(const UInt8* fileData) {
             }
             
             _length=f->dataLen;	//this was prepared in kernel land
-            
+            data = (UInt8*)(f + 1);
             if (_length >= 24 && is8021xPacket((UInt8*)(f+1))) {
                 _isEAP = YES;
                 
                 if ([self isWPAKeyPacket]) _isWep = encryptionTypeWPA;
                 else if ([self isLEAPKeyPacket]) _isWep = encryptionTypeLEAP;
+				else if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
                 else if (f->frameControl & IEEE80211_WEP) _isWep = encryptionTypeWEP;     //is just WEP
                 else _isWep = encryptionTypeNone;
             } else {
-                if (f->frameControl & IEEE80211_WEP) _isWep = encryptionTypeWEP;     //is just WEP
+                if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
+                else if (f->frameControl & IEEE80211_WEP) _isWep = encryptionTypeWEP;     //is just WEP
                 else _isWep = encryptionTypeNone;
             }
             break;            

@@ -826,7 +826,10 @@ int lengthSort(id string1, id string2, void *context)
                     }
                     
                     if (body[3] <= 3) { //record the IV for a later weak key attack
-                        if (_ivData[body[3]] == nil) _ivData[body[3]] = [[WaveWeakContainer alloc] init];
+                        if (_ivData[body[3]] == nil) {
+							_ivData[body[3]] = [[WaveWeakContainer alloc] init];
+							NSAssert(_ivData[body[3]], @"unable to allocate weak container");
+						}
                         @synchronized (_ivData[body[3]]) {
                             [_ivData[body[3]] setBytes:&body[4] forIV:&body[0]];
                         }

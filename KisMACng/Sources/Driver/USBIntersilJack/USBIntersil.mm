@@ -2,9 +2,9 @@
         
         File:			USBIntersil.mm
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -70,9 +70,10 @@ static struct identStruct devices[] = {
     { 0x124a, 0x4017}, //29 AirVast WN-220?
     { 0x9016, 0x182d}, //30 Sitecom WL-022 - new version
 	{ 0x0707, 0xee04}, //31 SMC WUSB32
+	{ 0x1915, 0x2236}, //32 WUSB11 version 3.0
 };
 
-#define dDeviceCount 31
+#define dDeviceCount 32
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );
 
