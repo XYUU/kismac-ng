@@ -24,8 +24,10 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import <BIGL/BIGL.h>
+#import "BIView.h"
 #import <BIGeneric/BIValuePair.h>
+
+#define INVALIDPOINT NSMakePoint(-100, -100)
 
 enum selmode {
     selCurPos = 0,
@@ -33,13 +35,21 @@ enum selmode {
     selWaypoint2 = 2,
 };
 
-@interface MapView : BIGLView {
+@class NetView;
+@class BIImageView;
+@class BITextView;
+@class BISubView;
+@class MapControlPanel;
+@class PointView;
+
+@interface MapView : BIView {
     NSString            *_status;
-    NSImage             *_statusImg;
     NSString            *_gpsStatus;
-    BIGLImageView       *_map;
-    BIGLImageView       *_statusView;
-    BIGLTextView        *_gpsStatusView;
+    BITextView          *_statusView;
+    BISubView           *_netContainer;
+    BITextView          *_gpsStatusView;
+    MapControlPanel     *_controlPanel;
+    PointView           *_pView;
     BOOL                _visible;
     NSImage             *_mapImage;
     NSImage             *_orgImage;
@@ -48,18 +58,30 @@ enum selmode {
     NSPoint             _old;
     NSPoint             _point[3];
     NSPoint             _center;
-    NSPoint             _clipOffset;
     float               _zoomFact;
     
-    BOOL                _clipX, _clipY;
     enum selmode        _selmode;
+    
+   IBOutlet NSMenuItem  *_showNetworks;
 }
+
+- (BOOL)saveToFile:(NSString*)fileName;
+- (BOOL)loadFromFile:(NSString*)fileName;
 
 - (BOOL)setMap:(NSImage*)map;
 - (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
 - (void)setVisible:(BOOL)visible;
+- (NSPoint)pixelForCoordinate:(waypoint)wp;
+- (void)addNetView:(NetView*)view;
+- (void)removeNetView:(NetView*)view;
+
+- (void)setShowNetworks:(BOOL)show;
 
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;
+- (IBAction)goLeft:(id)sender;
+- (IBAction)goRight:(id)sender;
+- (IBAction)goUp:(id)sender;
+- (IBAction)goDown:(id)sender;
 
 @end

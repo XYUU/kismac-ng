@@ -7,7 +7,7 @@
 //
 
 #import "BIToolbar.h"
-#import "BIView.h"
+#import "BIToolbarView.h"
 
 @implementation BIToolbar
 
@@ -21,7 +21,7 @@
 }
 
 - (void)_setToolbarView:(id)view {
-    BIView *b = [[BIView alloc] initWithFrame:NSMakeRect(0,0,1000,1000)];
+    BIToolbarView *b = [[BIToolbarView alloc] initWithFrame:NSMakeRect(0,0,1000,1000)];
     [view addSubview:[b autorelease] positioned:NSWindowBelow relativeTo:nil];
     [super _setToolbarView:view];
 }

@@ -1,8 +1,8 @@
 /*
         
-        File:			MapViewPrivate.h
+        File:			NetView.h
         Program:		KisMAC
-	Author:			Michael Ro√überg
+	Author:			Michael Roßberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -23,16 +23,30 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import "MapView.h"
+#import <AppKit/AppKit.h>
+#import "WavePacket.h"
+#import "BIImageView.h"
+#import <BIGeneric/BIValuePair.h>
 
-@interface MapView(Private)
+@class WaveNet;
 
-- (void)_align;
-- (void)_alignStatus;
-- (void)_alignNetworks;
-- (void)_alignControlPanel;
-- (void)_setStatus:(NSString*)status;
-- (void)_updateStatus;
-- (void)_setGPSStatus:(NSString*)status;
+@interface NetView : BIImageView {
+    NSString        *_name;
+    encryptionType  _wep;
+    waypoint        _wp;
+    WaveNet         *_network;
+    NSImage         *_netImg;
+    NSColor         *_netColor;
+    BOOL            _registered;
+}
+
+- (id)initWithNetwork:(WaveNet*)network;
+- (void)setName:(NSString*)name;
+- (void)setWep:(encryptionType)wep;
+- (void)setCoord:(waypoint)wp;
+- (waypoint)coord;
+
+- (void)align;
+- (NSImage*)generateImage;
 
 @end

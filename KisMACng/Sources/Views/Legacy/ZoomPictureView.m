@@ -550,6 +550,7 @@ extern NSString *const KisMACAdvNetViewInvalid;
     a = _subviews;
     for (i=0;i<[a count];i++) {
         o=[a objectAtIndex:i];
+        
         if ([o isMemberOfClass:[NetView class]]) {
             n = (NetView*)o;
             [n setNetVisible:_showNetworks];

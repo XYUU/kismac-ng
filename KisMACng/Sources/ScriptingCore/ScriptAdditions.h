@@ -52,6 +52,8 @@
 - (id)wordlist104bitApple:(NSScriptCommand *)command;
 - (id)wordlist104bitMD5:(NSScriptCommand *)command;
 
+- (id)showNetworksInMap:(NSScriptCommand*)command;
+
 - (id)busy:(NSScriptCommand *)command;
 
 @end

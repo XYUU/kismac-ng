@@ -35,6 +35,7 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
 @implementation BIGLView
 
 - (void)prepareOpenGL {
+    _offset = NSZeroPoint;
     glShadeModel(GL_SMOOTH);		// Enable smooth shading
     glEnable(GL_DEPTH_TEST);
     
@@ -110,16 +111,17 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
 - (void) reshape {
     [super reshape];
     NSRect rectView = [self bounds];
-    float nRange = 100;
+    float nRange = 1;
     
     if (![_lock tryLock]) return;
-    glViewport (0, 0, rectView.size.width, rectView.size.height);
+    glViewport (_offset.x, _offset.y, rectView.size.width, rectView.size.height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
-    glOrtho(0, rectView.size.width, 0, rectView.size.height, -nRange, nRange);
+    glOrtho(_offset.x, rectView.size.width+_offset.x, _offset.y, rectView.size.height+_offset.y, -nRange, nRange);
         
     glMatrixMode(GL_MODELVIEW);
+    glFinish();
     [_lock unlock];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BIGLMainViewResized object:self userInfo:nil];
@@ -233,6 +235,7 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
 - (BOOL)removeSubView:(BIGLSubView*)subView {
     NSParameterAssert(subView);
 
+    [_lock lock];
     if (![_subViews containsObject:subView]) {
         [_lock unlock];
         return NO;
@@ -253,7 +256,6 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
 
 - (void)dealloc {
     [_subViews release];
-    [_obj release];
     [_lock release];
     [super dealloc];
 }

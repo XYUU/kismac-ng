@@ -6,10 +6,10 @@
 //  Copyright (c) 2004 __MyCompanyName__. All rights reserved.
 //
 
-#import "BIView.h"
+#import "BIToolbarView.h"
 
 
-@implementation BIView
+@implementation BIToolbarView
 
 - (void)drawRect:(NSRect)rect {
     int i;

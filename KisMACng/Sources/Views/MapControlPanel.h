@@ -1,8 +1,8 @@
 /*
         
-        File:			NetView.h
+        File:			MapControlPanel.h
         Program:		KisMAC
-	Author:			Michael Roßberg
+	Author:			Michael Ro√überg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -24,24 +24,28 @@
 */
 
 #import <AppKit/AppKit.h>
-#import "ZoomPictureView.h"
-#import "WavePacket.h"
+#import "BIImageView.h"
 
-@interface NetView : NSView {
-    NSString        *_name;
-    encryptionType  _wep;
-    bool            _visible;
-    waypoint        _wp;
-    id              _network;
-    NSImage         *_img;
-    NSColor         *_netColor;
+typedef struct {
+    float red;
+    float green;
+    float blue;
+    float alpha;
+} col;
+
+typedef struct {
+    col border;
+    col fill;
+} colState;
+
+@interface MapControlPanel : BIImageView {
+    colState    _current[6];
+    colState    _delta[6];
+    colState    _target[6];
+    NSLock      *_zoomLock;
+    NSTimer     *_timeouts[6];
 }
 
-- (void)setNetwork:(id)network;
-- (void)setNetVisible:(bool)visible;
-- (void)setName:(NSString*)name;
-- (void)setWep:(encryptionType)wep;
-- (void)setCoord:(waypoint)wp;
-- (waypoint)coord;
-
+- (void)mouseMovedToPoint:(NSPoint)p;
+- (void)mouseDownAtPoint:(NSPoint)p;
 @end

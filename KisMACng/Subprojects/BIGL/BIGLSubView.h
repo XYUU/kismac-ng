@@ -36,9 +36,11 @@
 
 - (void)setLocation:(NSPoint)loc;
 - (void)setVisible:(BOOL)visible;
+- (BOOL)visible;
 
 - (BOOL)addSubView:(BIGLSubView*)subView;
 - (BOOL)removeSubView:(BIGLSubView*)subView;
+- (NSArray*)subViews;
 
 - (void)drawSubAtPoint:(NSPoint)p;
 - (BOOL)drawAtPoint:(NSPoint)p;

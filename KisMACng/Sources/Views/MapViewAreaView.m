@@ -32,7 +32,6 @@
 - (void)clearAreaNet {
     if (_mapImage) {
         [WaveHelper secureReplace:&_mapImage withObject:_orgImage];
-        [self _adjustZoom];
         [self setNeedsDisplay:YES];
     }
     //TODO implement

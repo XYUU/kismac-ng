@@ -2,6 +2,7 @@
     IBClasses = (
         {CLASS = BIButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {CLASS = BIGLView; LANGUAGE = ObjC; SUPERCLASS = NSOpenGLView; }, 
+        {CLASS = BIToolbarView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = BIView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = BIZoomView; LANGUAGE = ObjC; SUPERCLASS = BIGLView; }, 
         {CLASS = ColoredRowOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
@@ -41,9 +42,17 @@
             ACTIONS = {zoomIn = id; zoomOut = id; }; 
             CLASS = MapView; 
             LANGUAGE = ObjC; 
-            SUPERCLASS = BIGLView; 
+            OUTLETS = {"_showNetworks" = NSMenuItem; }; 
+            SUPERCLASS = BIView; 
         }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {
+            CLASS = NSToolbarClippedItemsIndicator; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSPopUpButton; 
+        }, 
+        {CLASS = NSToolbarItemViewer; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = NSToolbarView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             ACTIONS = {
                 apply = id; 
@@ -185,6 +194,7 @@
                 showDetails = id; 
                 showMap = id; 
                 showNetworks = id; 
+                showNetworksInMap = id; 
                 showTrafficView = id; 
                 toggleScan = id; 
                 wordlist104bitApple = id; 
@@ -262,6 +272,11 @@
                 "_wpView" = WayPointView; 
             }; 
             SUPERCLASS = NSImageView; 
+        }, 
+        {
+            CLASS = "_NSToolbarItemViewerLabelCellPopUpCell"; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSPopUpButtonCell; 
         }
     ); 
     IBVersion = 1; 

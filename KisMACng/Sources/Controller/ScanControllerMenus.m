@@ -93,12 +93,28 @@
     [dmc showWindow:self];
     [[dmc window] makeKeyAndOrderFront:self];
 }
+
 - (IBAction)doImportMapFromServer:(id)sender {
     DownloadMapController* dmc = sender;
+    NSImage *x;
     
     if ([dmc mapLocation]) {
         [self clearAreaMap];
-        [self showBusy:@selector(performImportMapFromServer:) withArg:[dmc mapLocation]];
+        [self showBusyWithText:NSLocalizedString(@"Importing from Server...", "Status for busy dialog")];
+       
+        NS_DURING
+            x=[[NSImage alloc] initWithContentsOfURL:[dmc mapLocation]];
+            if (x) {
+                [_mappingView setMap:x];
+                [x release];
+                _asyncFailure = NO;
+            } else _asyncFailure = YES;
+        NS_HANDLER
+            _asyncFailure = YES;
+        NS_ENDHANDLER
+        
+        [self busyDone];
+        
         if (_asyncFailure) NSBeginCriticalAlertSheet(
             NSLocalizedString(@"Import failed", "Import failure dialog title"),
             OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
@@ -111,23 +127,6 @@
             [self showMap];
         }
     }
-}
-
-- (void)performImportMapFromServer:(id)url {
-    NSImage *x;
-
-     [_importController setTitle:NSLocalizedString(@"Importing from Server...", "Status for busy dialog")];  
-   
-    NS_DURING
-        x=[[NSImage alloc] initWithContentsOfURL:url];
-        if (x) {
-            [_mappingView setMap:x];
-            [x release];
-            _asyncFailure = NO;
-        } else _asyncFailure = YES;
-    NS_HANDLER
-        _asyncFailure = YES;
-    NS_ENDHANDLER
 }
 
 - (IBAction)importFile:(id)sender {

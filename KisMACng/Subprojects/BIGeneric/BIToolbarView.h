@@ -8,7 +8,7 @@
 
 #import <AppKit/AppKit.h>
 
-@interface BIView : NSView {
+@interface BIToolbarView : NSView {
 
 }
 

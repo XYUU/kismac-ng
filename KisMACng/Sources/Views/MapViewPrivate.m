@@ -24,103 +24,71 @@
 */
 
 #import "MapViewPrivate.h"
+#import "MapView.h"
 #import "WaveHelper.h"
+#import "NetView.h"
+#import "BITextView.h"
+#import "MapControlPanel.h"
 
 @implementation MapView(Private)
 
-#define CLIPSIZE 1024.0
-
 - (void)_align {
     NSPoint loc;
-
-    loc.x = (_frame.size.width - [_statusImg size].width)  / 2;
-    loc.y = (_frame.size.height- [_statusImg size].height) / 2;
-    [_statusView setLocation:loc];
     
-    if (_clipX) {
-        loc.x =  (_frame.size.width - CLIPSIZE) / 2.0;
-    } else {
-        loc.x =  (_frame.size.width  / 2) + ((_center.x - _clipOffset.x - [_mapImage size].width)  * _zoomFact);
-    }
+    loc.x = -_center.x * _zoomFact + (_frame.size.width / 2);
+    loc.y = -_center.y * _zoomFact + (_frame.size.height / 2);
     
-    if (_clipY) {
-        loc.y =  (_frame.size.height - CLIPSIZE) / 2.0;
-    } else {
-        loc.y =  (_frame.size.height / 2) + ((_center.y - _clipOffset.y - [_mapImage size].height) * _zoomFact) ;
-    }
-    [_map setLocation:loc];
+    [_netContainer setLocation:loc];
 }
 
-- (void)_adjustZoom {
-    NSSize mapImageSize = [_mapImage size];
-    NSImage *img;
-    NSSize startSize, finalSize;
-    NSPoint clipStart = NSZeroPoint;
-    _clipX = _clipY = NO;
+- (void)_alignStatus {
+    NSPoint loc;
     
-    //_center needs to be at new size already!!!
-    if ((mapImageSize.width * _zoomFact) > CLIPSIZE) {  // we need to clip something away :/
-        _clipX = YES;
-        startSize.width = CLIPSIZE / _zoomFact;
-        finalSize.width = CLIPSIZE;
-        clipStart.x = mapImageSize.width - _center.x - (CLIPSIZE / 2.0 / _zoomFact);
-    } else {
-        finalSize.width = mapImageSize.width * _zoomFact;
-        startSize.width = mapImageSize.width;
-    }
-    
-    if ((mapImageSize.height * _zoomFact) > CLIPSIZE) { // we need to clip something away :/
-        _clipY = YES;
-        finalSize.height = CLIPSIZE;
-        startSize.height = CLIPSIZE / _zoomFact;
-        clipStart.y = mapImageSize.height -_center.y - (CLIPSIZE / 2.0 / _zoomFact);
-    } else {
-        finalSize.height = mapImageSize.height * _zoomFact;
-        startSize.height = mapImageSize.height;
-    }
-    img = [[NSImage alloc] initWithSize:finalSize];
-    
-    [img lockFocus];
-    [_mapImage drawInRect:NSMakeRect(0, 0, finalSize.width, finalSize.height) fromRect:NSMakeRect(clipStart.x, clipStart.y, startSize.width, startSize.height) operation:NSCompositeCopy fraction:1.0];
-    [img unlockFocus];
+    loc.x = (_frame.size.width - [_statusView size].width)  / 2;
+    loc.y = (_frame.size.height- [_statusView size].height) / 2;
+    [_statusView setLocation:loc];
+}
 
-    NS_DURING
-        [_map setImage:img];
-    NS_HANDLER
-        NSLog(@"Image is probably too big :(");
-    NS_ENDHANDLER
+- (void)_alignControlPanel {
+    NSPoint loc;
     
-    [img release];
+    loc.x =  (_frame.size.width - [_controlPanel size].width - 5);
+    loc.y = 5;
+    [_controlPanel setLocation:loc];
+}
+
+- (void)_alignNetworks {
+    int i;
+    NSArray *subviews;
+    
+    subviews = [_netContainer subViews];
+    for (i = 0; i < [subviews count]; i++) {
+        NSObject *o = [subviews objectAtIndex:i];
+        if ([o isMemberOfClass:[NetView class]]) [(NetView*)o align];
+    }
+    [self _align];
 }
 
 - (void)_setStatus:(NSString*)status {
     NSMutableDictionary* attrs = [[[NSMutableDictionary alloc] init] autorelease];
-    NSFont* textFont = [NSFont fontWithName:@"Monaco" size:14];
-    NSSize size;
-    NSColor *red = [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:1];
+    NSFont* textFont = [NSFont fontWithName:@"Monaco" size:16];
+    NSColor *col = [NSColor redColor];
     
-    [WaveHelper secureReplace:&_status withObject:status];
+    [WaveHelper secureReplace:&_gpsStatus withObject:status];
     
     [attrs setObject:textFont forKey:NSFontAttributeName];
-    [attrs setObject:red forKey:NSForegroundColorAttributeName];
+    [attrs setObject:col forKey:NSForegroundColorAttributeName];
     
-    size = [_status sizeWithAttributes:attrs];
-    size.width += 20;
-    size.height += 10;
+    NSAttributedString *a = [[[NSAttributedString alloc] initWithString:_gpsStatus attributes:attrs] autorelease];
+    [_statusView setString:a];
+    [_statusView setBorderColor:col];
+    [_statusView setBackgroundColor:[NSColor colorWithDeviceRed:0.3 green:0 blue:0 alpha:0.5]];
     
-    [WaveHelper secureReplace:&_statusImg withObject:[[[NSImage alloc] initWithSize:size] autorelease]];
-    [_statusImg lockFocus];
-    [[NSColor colorWithCalibratedRed:0.3 green:0 blue:0 alpha:0.5] set];
-    [[NSBezierPath bezierPathWithRect:NSMakeRect(0,0,size.width,size.height)] fill];
-    [red set];
-    [[NSBezierPath bezierPathWithRect:NSMakeRect(1,1,size.width-2,size.height-2)] stroke];
-    [_status drawAtPoint:NSMakePoint(10,5) withAttributes:attrs];
-    [_statusImg unlockFocus];
-    
-    [_statusView setImage:_statusImg];
-    [self _align];
+    [self _alignStatus];
     if (_visible) [self setNeedsDisplay:YES];
 }
+
+#pragma mark -
 
 - (void)_updateStatus {
     if (!_mapImage) {
@@ -131,7 +99,13 @@
         [self _setStatus:NSLocalizedString(@"Waypoint 1 is not set!", "map view status")];
     } else if (_wp[selWaypoint2]._lat == 0 && _wp[selWaypoint2]._long == 0) {
         [_statusView setVisible:YES];
-        [self _setStatus:NSLocalizedString(@"Waypoint 2 is not set!", "map view status")];
+        [self _setStatus:NSLocalizedString(@"Waypoint 2 is not set!", "map view status")]; 
+    } else if (abs(_point[selWaypoint1].x - _point[selWaypoint2].x) < 5 || abs(_point[selWaypoint1].y - _point[selWaypoint2].y) < 5) {
+        [_statusView setVisible:YES];
+        [self _setStatus:NSLocalizedString(@"The waypoints are too close!", "map view status")]; 
+    } else if (fabs(_wp[selWaypoint1]._lat - _wp[selWaypoint2]._lat) < 0.001 || fabs(_wp[selWaypoint1]._long - _wp[selWaypoint2]._long) < 0.001) {
+        [_statusView setVisible:YES];
+        [self _setStatus:NSLocalizedString(@"The coordinates of waypoints are too close!", "map view status")]; 
     } else {
         [_statusView setVisible:NO];
         if (_visible) [self setNeedsDisplay:YES];

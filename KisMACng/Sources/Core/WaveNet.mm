@@ -35,6 +35,8 @@
 #import "WaveNetWPACrackAltivec.h"
 #import "WaveScanner.h"
 #import "KisMACNotifications.h"
+#import "GPSController.h"
+#import "NetView.h"
 
 #define AMOD(x, y) ((x) % (y) < 0 ? ((x) % (y)) + (y) : (x) % (y))
 #define N 256
@@ -60,8 +62,7 @@ int lengthSort(id string1, id string2, void *context)
     
     _dataLock = [[NSRecursiveLock alloc] init];
     [_dataLock lock];
-    _netView = [[NetView alloc] initWithFrame:NSMakeRect(0, 0, 200, 30)];
-    [_netView setNetwork:self];
+    _netView = [[NetView alloc] initWithNetwork:self];
     
     aID = nil;
     
@@ -187,8 +188,7 @@ int lengthSort(id string1, id string2, void *context)
         if (_originalChannel == 0) _originalChannel = aChannel;
         _gotData = NO;
         
-        _netView = [[NetView alloc] initWithFrame:NSMakeRect(0, 0, 200, 30)];
-        [_netView setNetwork:self];
+        _netView = [[NetView alloc] initWithNetwork:self];
         [_netView setWep:_isWep];
         [_netView setName:_SSID];
         [_netView setCoord:wp];
@@ -261,8 +261,7 @@ int lengthSort(id string1, id string2, void *context)
     wp._long = ew_coord * (ew_dir == 'E' ? 1.0 : -1.0);
     wp._elevation = 0;
 
-    _netView = [[NetView alloc] initWithFrame:NSMakeRect(0, 0, 200, 30)];
-    [_netView setNetwork:self];
+    _netView = [[NetView alloc] initWithNetwork:self];
     [_netView setWep:_isWep];
     [_netView setName:_SSID];
     [_netView setCoord:wp];
@@ -1479,7 +1478,6 @@ typedef int (*SORTFUNC)(id, id, void *);
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_netView removeFromSuperview];
 
     [_dataLock lock];
     [aID release];

@@ -56,4 +56,6 @@
 - (IBAction)wordlist40bitApple:(id)sender;
 - (IBAction)wordlist104bitApple:(id)sender;
 - (IBAction)wordlist104bitMD5:(id)sender;
+
+- (IBAction)showNetworksInMap:(id)sender;
 @end

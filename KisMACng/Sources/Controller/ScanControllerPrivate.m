@@ -214,11 +214,12 @@
     [_trafficButton     setImage: [NSImage imageNamed:tab == tabTraffic  ? @"traffic-highlight.tif"  : @"traffic-button.tif"]];
     [_mapButton         setImage: [NSImage imageNamed:tab == tabMap      ? @"map-highlight.tif"      : @"map-button.tif"]];
     [_detailsButton     setImage: [NSImage imageNamed:tab == tabDetails  ? @"details-highlight.tif"  : @"details-button.tif"]];
-    
+    [_window            setAcceptsMouseMovedEvents: tab == tabMap]; //need to track the mouse in this view
+
     if (tab != tabNetworks) [self hideDetails];
  
     [_mainView setContentView:view];
-    [_window display];
+    if (_importOpen == 0) [_window display];  //seems to be not possible if in modal mode
 }
 
 - (void)showDetailsFor:(WaveNet*)net {
@@ -410,7 +411,7 @@
 - (void)showBusyWithText:(NSString*)title {
     NSParameterAssert(title);
     
-    if (_importOpen++) return; //we are already busy
+    if (_importOpen++ > 0) return; //we are already busy
     
     _importController = [[ImportController alloc] initWithWindowNibName:@"Import"];
     if (!_importController) {
@@ -426,7 +427,7 @@
 - (void)showCrackBusyWithText:(NSString*)title {
     NSParameterAssert(title);
     
-    if (_importOpen++) return; //we are already busy
+    if (_importOpen++ > 0) return; //we are already busy
     
     _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
     if (!_importController) {
@@ -440,7 +441,7 @@
 }
 
 - (void)busyDone {
-    if (--_importOpen) return; //still retains
+    if (--_importOpen > 0) return; //still retains
     
     [NSApp endSheet:[_importController window]];
     [[_importController window] orderOut:self];

@@ -30,9 +30,8 @@
     BOOL            _initialized;
     NSMutableArray  *_subViews;
     GLfloat         _color[4];
-    SEL             _selector;
-    NSObject        *_obj;
     NSLock          *_lock;
+    NSPoint         _offset;
 }
 
 - (BOOL)addSubView:(BIGLSubView*)subView;

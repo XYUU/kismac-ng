@@ -27,6 +27,7 @@
                 "KisMAC.Wordlist104bitApple"    = "wordlist104bitApple:";
                 "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
                 "KisMAC.Busy"                   = "busy:";
+                "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
             }; 
         };
     };
@@ -112,6 +113,11 @@
         Busy = {
             AppleEventCode = KBus; 
             CommandClass = NSScriptCommand;
+        };
+        ShowNetworksInMap = {
+            AppleEventCode = KMSN;
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSNumber<Bool>"; };
         };
     };
     UsedFeatures = (UnnamedArguments);

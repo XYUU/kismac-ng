@@ -26,6 +26,8 @@
 #import "ScriptAdditions.h"
 #import "ScanController.h"
 #import "ScanControllerScriptable.h"
+#import "WaveHelper.h"
+#import "MapView.h"
 
 @implementation NSApplication (APLApplicationExtensions)
 
@@ -115,6 +117,9 @@
    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitMD5:[command directParameter]]];
 }
 
-
+- (id)showNetworksInMap:(NSScriptCommand*)command {
+    [[WaveHelper mapView] setShowNetworks:[[command directParameter] boolValue]];
+    return [NSNumber numberWithBool:YES];    
+}
 
 @end

@@ -28,6 +28,7 @@
 #import "WaveHelper.h"
 #import "WaveNet.h"
 #import "ImportController.h"
+#import "ZoomPictureView.h"
 
 extern NSString *const KisMACAdvNetViewInvalid;
 

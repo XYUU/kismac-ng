@@ -90,6 +90,8 @@
 - (void)drawSubAtPoint:(NSPoint)p {
     NSRect bounds;
     
+    if (!_img) return;
+    
     if (!_texName) 
         [self genTexture];
     

@@ -26,7 +26,6 @@
 #import <Cocoa/Cocoa.h>
 #import "WavePacket.h"
 #import "ImportController.h"
-#import "NetView.h"
 #import "Apple80211.h"
 
 enum {
@@ -40,6 +39,8 @@ struct graphStruct {
     int packetData[MAX_YIELD_SIZE + 1];
     int signalData[MAX_YIELD_SIZE + 1];
 };
+
+@class NetView;
 
 @interface WaveNet : NSObject {
     int aNetID;			//network ID

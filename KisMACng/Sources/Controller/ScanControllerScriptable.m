@@ -138,7 +138,8 @@
         [_window setDocumentEdited:NO];
         
         [self busyDone];
-        
+        [self showNetworks];
+       
         return ret;
     } else if ([[[filename pathExtension] lowercaseString] isEqualToString:@"kismap"]) {
         [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Opening %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
@@ -146,9 +147,9 @@
         [self clearAreaMap];
         
         ret = [_mappingView loadFromFile:filename];
-        [self showMap];
         
         [self busyDone];
+        [self showMap];
         
         return ret;
     } 

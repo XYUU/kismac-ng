@@ -435,7 +435,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = BIView.h;
+			path = BIToolbarView.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -443,7 +443,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
-			path = BIView.m;
+			path = BIToolbarView.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};

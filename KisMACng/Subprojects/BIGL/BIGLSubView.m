@@ -52,6 +52,9 @@
     [_subViews removeObject:subView];
     return YES;
 }
+- (NSArray*)subViews {
+    return _subViews;
+}
 
 #pragma mark -
 
@@ -63,8 +66,12 @@
     _visible = visible;
 }
 
-- (void)drawSubAtPoint:(NSPoint)p {
+- (BOOL)visible {
+    return _visible;
+}
 
+- (void)drawSubAtPoint:(NSPoint)p {
+    //done in subclasses
 }
 
 - (BOOL)drawAtPoint:(NSPoint)p {

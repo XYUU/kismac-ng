@@ -291,6 +291,15 @@
             [ScriptController selfSendEvent:'KCWM' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
+
+
+- (IBAction)showNetworksInMap:(id)sender {
+    BOOL show = ([sender state] == NSOffState);
+    
+    [ScriptController selfSendEvent:'KMSN' withDefaultArg:[NSAppleEventDescriptor descriptorWithBoolean:show]];
+}
+
+
 #pragma mark -
 
 - (void)dealloc {

@@ -8,7 +8,7 @@
  */
 
 #include <BIGeneric/BIToolbar.h>
-#include <BIGeneric/BIView.h>
+#include <BIGeneric/BIToolbarView.h>
 #include <BIGeneric/BIZoomView.h>
 #include <BIGeneric/BINSExtensions.h>
 #include <BIGeneric/BISpeechController.h>

@@ -24,6 +24,7 @@
 */
 
 #import "NetView.h"
+#import "MapView.h"
 #import "WaveNet.h"
 #import "WaveHelper.h"
 
@@ -31,153 +32,153 @@
 
 @implementation NetView
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
+- (id)initWithNetwork:(WaveNet*)network {
+    self = [super init];
     if (self) {
         _name = [[NSString stringWithString:@"<no ssid>"] retain];
-        _img = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
         _netColor = [[NSColor yellowColor] retain];
         _wep = 0;
         _wp._lat = 0;
         _wp._long = 0;
 	_wp._elevation = 0;
-        _visible = YES;
-        _network = nil;
-        //TODO
-        //[[WaveHelper mapView] addSubview:self];
-        //[[WaveHelper mapView] alignPoint];
+        _network = network;
+        _registered = NO;
     }
     return self;
 }
 
-- (void)setNetwork:(id)network {
-    [WaveHelper secureReplace:&_network withObject:network];
-}
-
--(void) setNetVisible:(bool)visible {
-    _visible = visible;
-}
-
 - (void) setName:(NSString*)name {
     [WaveHelper secureReplace:&_name withObject:name];
-    [self setNeedsDisplay:YES];
+    [self setImage:[self generateImage]];
+    [[WaveHelper mapView] setNeedsDisplay:YES];
 }
 
 - (void) setWep:(encryptionType)wep {
     _wep = wep;
 
-    [WaveHelper secureRelease:&_img];
+    [WaveHelper secureRelease:&_netImg];
     [WaveHelper secureRelease:&_netColor];
     
     switch (_wep) {
     case encryptionTypeUnknown:
-        _img = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
         _netColor = [[NSColor yellowColor] retain];
         break;
     case encryptionTypeNone:
-        _img = [[NSImage imageNamed:@"NetworkNoEnc.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkNoEnc.tif"] retain];
         _netColor = [[NSColor greenColor] retain];
         break;
     case encryptionTypeWEP:
     case encryptionTypeWEP40:
-        _img = [[NSImage imageNamed:@"NetworkWEP.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkWEP.tif"] retain];
         _netColor = [[NSColor redColor] retain];
         break;
     case encryptionTypeWPA:
-        _img = [[NSImage imageNamed:@"NetworkWPA.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkWPA.tif"] retain];
         _netColor = [[NSColor blueColor] retain];
         break;
     case encryptionTypeLEAP:
-        _img = [[NSImage imageNamed:@"NetworkLEAP.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkLEAP.tif"] retain];
         _netColor = [[NSColor cyanColor] retain];
         break;
     default:
-        _img = [[NSImage imageNamed:@"NetworkStrange.tif"] retain];
+        _netImg = [[NSImage imageNamed:@"NetworkStrange.tif"] retain];
         _netColor = [[NSColor magentaColor] retain];
     }
     
-    [self setNeedsDisplay:YES];
+    [self setImage:[self generateImage]];
+    [[WaveHelper mapView] setNeedsDisplay:YES];
 }
 
 -(void) setCoord:(waypoint)wp {
     _wp = wp;
-    //[[WaveHelper mapView] alignPoint];
+    [self align];
 }
 
--(waypoint) coord {
+- (waypoint)coord {
     return _wp;
 }
 
-- (void)setFrame:(NSRect)frameRect {
-    [super setFrame:frameRect];
-    [self setNeedsDisplay:YES];
-}
+#pragma mark -
 
 - (void)mouseDown:(NSEvent *)theEvent {
     if ([theEvent clickCount] == 2) [_network joinNetwork];
-    else [[WaveHelper zoomPictureView] mouseDown:theEvent];
+    else [[WaveHelper mapView] mouseDown:theEvent];
 }
 
-- (void)drawRect:(NSRect)rect {
-#ifndef USE_FAST_IMAGE_VIEWS
-    NSRect q;
-    float z;
-    NSBezierPath *x;
-#endif
-    float r = 14;
-    NSBezierPath *legendPath = [[NSBezierPath alloc] init];
+- (void)align {
+    NSPoint p;
+    p = [[WaveHelper mapView] pixelForCoordinate:_wp];
+
+    if (!_visible || (p.x == INVALIDPOINT.x && p.y == INVALIDPOINT.y)) {
+        if (_registered) [[WaveHelper mapView] removeNetView:self];
+        return;
+    }
+        
+    if (!_registered) {
+        [[WaveHelper mapView] addNetView:self];
+    }
+    
+    [self setLocation:p];
+}
+
+- (void)setLocation:(NSPoint)loc {
+    [super setLocation:NSMakePoint(loc.x - 7.5, loc.y - ([_img size].height / 2))];
+}
+
+- (NSImage*)generateImage {
+    float r = 15;
+    NSBezierPath *legendPath = [NSBezierPath bezierPath];
     NSFont* textFont = [NSFont fontWithName:@"Monaco" size:12];
-    NSMutableDictionary* attrs = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
+    NSString *name;
+    NSSize size = NSZeroSize;
+    NSImage *img;
+        
+    if (!_visible) return [[[NSImage alloc] initWithSize:NSMakeSize(0,0)] autorelease];
     
-    if (!_visible) return;
-    
-    if ([[_name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0) {
-        NSSize size;
+    name =[_name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]; 
+    if ([name length] > 0) {
         [attrs setObject:textFont forKey:NSFontAttributeName];
         
         size = [_name sizeWithAttributes:attrs];
         size.height+=5;
         size.width+=10;
-        
-        [legendPath appendBezierPathWithRect:NSMakeRect(r+10, (_frame.size.height - 10 - size.height)/2, size.width, size.height)];
+    }
+    
+    float height = fmax(r, size.height);
+    img = [[NSImage alloc] initWithSize:NSMakeSize(size.width + r + 10, height)];
+    [img lockFocus];
+    
+    if ([name length]) {
+        [legendPath appendBezierPathWithRect:NSMakeRect(r+5, (height - size.height)/2, size.width, size.height)];
         [[[NSColor blackColor] colorWithAlphaComponent:0.75] set];
         [legendPath fill];
         [[[NSColor whiteColor] colorWithAlphaComponent:0.3] set];
         [NSBezierPath setDefaultLineWidth:2];
         [legendPath stroke];
-        [legendPath release];
-    
+        
         [attrs setObject:_netColor forKey:NSForegroundColorAttributeName];
-        [_name drawAtPoint:NSMakePoint(r+15, (_frame.size.height - 5 - size.height)/2) withAttributes:attrs];
+        [_name drawAtPoint:NSMakePoint(r+10, (height + 5 - size.height)/2) withAttributes:attrs];
     }
    
-#ifdef USE_FAST_IMAGE_VIEWS
-    [_img dissolveToPoint:NSMakePoint(0,0) fraction:1.0];
-#else
-    q.size.height=q.size.width=r;
+    [_netImg dissolveToPoint:NSMakePoint(0, (height - r)/2) fraction:1.0];
     
-    q.origin.x=(5);
-    q.origin.y=(_frame.size.height - 10 - r)/2;
+    [img unlockFocus];
     
-    for (z=(r/2-1);z>=0;z--) {
-        [[_netColor blendedColorWithFraction:(z/(r/2-1)) ofColor:[NSColor blackColor]] set];
-        x=[NSBezierPath bezierPathWithOvalInRect:q];
-        [x setLineWidth:1.5];
-        [x stroke];
-        q.origin.x++;
-        q.origin.y++;
-        q.size.height-=2;
-        q.size.width-=2;
-    }
-#endif
-
+    return [img autorelease];
 }
 
--(void) dealloc {
+- (void)dealloc {
+    if (_registered) [[WaveHelper mapView] removeNetView:self];
+    
     [[WaveHelper mapView] setNeedsDisplay:YES];
     [WaveHelper secureRelease:&_name];
     [WaveHelper secureRelease:&_network];
-    [WaveHelper secureRelease:&_img];
+    [WaveHelper secureRelease:&_netImg];
     [WaveHelper secureRelease:&_netColor];
+    
+    [super dealloc];
 }
 @end

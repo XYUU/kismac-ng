@@ -89,6 +89,11 @@
             Description = "start a wordlist attack against a 104-bit generic network";
             UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
         };
+        ShowNetworksInMap = {
+            Name = showNetworksInMap;
+            Description = "set whether networks are shown in the map view";
+            UnnamedArgument = { Description = "show or not ;)"; };        
+        };
         Busy = {
             Name = busy;
             Description = "Returns true if there is an asynchronous operation still taking place";
