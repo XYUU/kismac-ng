@@ -157,7 +157,8 @@
     }
     
     NSRect rec;
-    rec.size=NSMakeSize(1, 1);
+	NSSize orgSize = [_mapImage size];
+    rec.size = NSMakeSize(orgSize.width / width, orgSize.height / height);
     
     if ([_mapImage lockFocus]) {
         NS_DURING
@@ -170,9 +171,9 @@
                     r =  (i >> 16) & 0xFF;
                     g =  (i >> 8 ) & 0xFF;
                     b =  (i      ) & 0xFF;
-        
-                    [[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0] set];
-                    rec.origin=NSMakePoint(x,y);
+					
+					[[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0] set];
+					rec.origin=NSMakePoint(x * rec.size.width, y * rec.size.height);
                     [NSBezierPath fillRect:rec];
                 }
         NS_HANDLER
