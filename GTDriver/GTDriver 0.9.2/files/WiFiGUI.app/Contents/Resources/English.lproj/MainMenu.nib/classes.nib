@@ -1,0 +1,37 @@
+{
+    IBClasses = (
+        {CLASS = AuthenticationView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                joinNamedNetwork = id; 
+                joinNetwork = id; 
+                joinOtherNetwork = id; 
+                openPrefs = id; 
+                updateEncryptionType = id; 
+                updateValidPassword = id; 
+            }; 
+            CLASS = WiFiGUI; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_encryptionType" = NSPopUpButton; 
+                "_joinButton" = NSButton; 
+                "_joinWindow" = NSWindow; 
+                "_menu" = NSMenu; 
+                "_passwordBox" = NSTextField; 
+                "_passwordLabel" = NSTextField; 
+                "_passwordView" = NSBox; 
+                "_ssidList" = NSComboBox; 
+                "_wepKeyBox" = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = defAuthView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {passwordTextField = id; }; 
+            SUPERCLASS = AuthenticationView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,0 +1,53 @@
+<HTML>
+
+<HEAD>
+<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+<TITLE>KisMAC Manual - The Main View</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff">
+<A NAME="KisMAC_Main_View"></A>
+
+<DIV ALIGN="left">
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR HEIGHT="40">
+<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
+<TD WIDTH="6" HEIGHT="40"></TD>
+<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>KisMAC Manual - The Main View</B></FONT></TD>
+</TR>
+</TABLE>
+<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">This is an overview of KisMACs main view...</FONT>
+<P ALIGN="center"><IMG SRC="../gfx/mainview.png" HEIGHT="401" WIDTH="625" BORDER="0" ALT="Main View">
+<P>
+<OL>
+    <LI>Use the &quot;Scan&quot; button to start and stop the scanning proccess. KisMAC will automatically load the required drivers. You might need to enter your password, depending on your preferences.
+    <LI>The buttons in the middle switch between the different views. You will need to select a network in order to show the &qout;Details&quot; view. It is also possible to make this selection from the &quot;Window&quot; menu.
+    <LI>The progress indicator spins, whenever KisMAC performs a scan. If the selected driver supports channel hopping, you will see the currently active channel in hexadecimal values (eg. 12 is shown as C).
+    <LI>The network table shows all encountered networks. All entries will be ordered by the selected row. A double-click will automatically switch to the &quot;Details&quot; view of the selected network. The following colums are shown:
+        <UL>
+            <LI><B>Ch</B> - the last channel KisMAC recieved packets for this network
+            <LI><B>SSID</B> - the name of the network. Hidden networks will be decloaked automatically in passive mode.
+            <LI><B>BSSID</B> - a unique ID of the network. Usually the MAC address of the accesspoint.
+            <LI><B>Enc</B> - encryption of the network. Networks with LEAP will be detected in passive mode only after recieving an authentication packet. WPA networks will not be correctly identified in active mode.
+            <LI><B>Type</B> - KisMAC can detect ad-hoc, managed and tunnels.
+            <LI><B>Signal</B> - the current signal-noise-ratio
+            <LI><B>Avg</B> - the average SNR. You can chose the time in the preferences.
+            <LI><B>Max</B> - maximum signal-noise-ratio
+            <LI><B>Packets</B> - the number of packets that KisMAC recieved for this network. This field will be zero in active mode.
+            <LI><B>Data</B> - the total network traffic, which has been observed. This field will be zero in active mode, too.
+            <LI><B>Last Seen</B> - time of the last recieved packet
+        </UL>
+    <LI>The search field will allow you to filter all unwanted networks. Currently only the SSID fields will be searched.
+</OL>
+    
+<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR VALIGN="top">
+<TD ALIGN="left"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="index.html">back</A></FONT></TD>
+<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='scanning' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>GTDriver</string>
+	<key>CFBundleIdentifier</key>
+	<string>de.binaervarianz.driver.GTDriver</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0d1</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>PrismGTDevice</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>de.binaervarianz.driver.GTDriver</string>
+			<key>IOClass</key>
+			<string>GTDriver</string>
+			<key>IOMatchCategory</key>
+			<string>IODefaultMatchCategory</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci10b7,6001</string>
+				<string>pci1260,3890</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>5000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOUserClientClass</key>
+			<string>WiFiUserClient</string>
+		</dict>
+	</dict>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.iokit.IONetworkingFamily</key>
+		<string>1.1.3</string>
+		<key>com.apple.iokit.IOPCIFamily</key>
+		<string>1.2</string>
+		<key>com.apple.kernel.iokit</key>
+		<string>6.0</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,100 @@
+{
+    Name = "KisMAC";
+    AppleEventCode = "BIKM";
+    
+    Classes = {
+        NSApplication = {
+            Superclass = "NSCoreSuite.NSApplication";
+            AppleEventCode = "capp";
+            SupportedCommands = {
+                "KisMAC.showNetworks"           = "showNetworks:"; 
+                "KisMAC.showTraffic"            = "showTraffic:"; 
+                "KisMAC.showMap"                = "showMap:";
+                "KisMAC.showDetails"            = "showDetails:";
+                "KisMAC.startScan"              = "startScan:";
+                "KisMAC.stopScan"               = "stopScan:";
+                "KisMAC.New"                    = "new:";
+                "KisMAC.ImportPCAP"             = "importPCAP:";
+                "NSCoreSuite.Save"              = "save:";
+                "KisMAC.SelectNetworkAtIndex"   = "selectNetworkAtIndex:";
+                "KisMAC.SelectNetworkWithBSSID" = "selectNetworkWithBSSID:";
+                "KisMAC.NetworkCount"           = "networkCount:";
+                "KisMAC.BruteforceNewsham"      = "bruteforceNewsham:";
+                "KisMAC.Bruteforce40bitLow"     = "bruteforce40bitLow:";
+                "KisMAC.Bruteforce40bitAlpha"   = "bruteforce40bitAlpha:";
+                "KisMAC.Bruteforce40bitAll"     = "bruteforce40bitAll:";
+                "KisMAC.Busy"                   = "busy:";
+            }; 
+        };
+    };
+    Commands = {
+        showNetworks = {
+            AppleEventCode = KshN;
+            CommandClass = NSScriptCommand; 
+        }; 
+        showTraffic = {
+            AppleEventCode = KshT; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        showMap = {
+            AppleEventCode = KshM; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        showDetails = {
+            AppleEventCode = KshD; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        startScan = {
+            AppleEventCode = KsaS; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        stopScan = {
+            AppleEventCode = KsoS; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        New = {
+            AppleEventCode = KNew; 
+            CommandClass = NSScriptCommand; 
+        }; 
+        ImportPCAP = {
+            AppleEventCode = KImP; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        }; 
+        SelectNetworkAtIndex = {
+            AppleEventCode = KSNI; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSNumber"; };
+        }; 
+        SelectNetworkWithBSSID = {
+            AppleEventCode = KSNB; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString"; };
+        };
+        NetworkCount = {
+            AppleEventCode = KNCn; 
+            CommandClass = NSScriptCommand; 
+        };
+        BruteforceNewsham = {
+            AppleEventCode = KCBN; 
+            CommandClass = NSScriptCommand;
+        };
+        Bruteforce40bitLow = {
+            AppleEventCode = KCBL; 
+            CommandClass = NSScriptCommand;
+        };
+        Bruteforce40bitAlpha = {
+            AppleEventCode = KCBa; 
+            CommandClass = NSScriptCommand;
+        };
+        Bruteforce40bitAll = {
+            AppleEventCode = KCBA; 
+            CommandClass = NSScriptCommand;
+        };
+        Busy = {
+            AppleEventCode = KBus; 
+            CommandClass = NSScriptCommand;
+        };
+    };
+    UsedFeatures = (UnnamedArguments);
+}

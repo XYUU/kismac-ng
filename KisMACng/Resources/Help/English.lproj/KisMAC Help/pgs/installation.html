@@ -1,0 +1,74 @@
+<HTML>
+
+<HEAD>
+<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+<TITLE>KisMAC Manual - Installation</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff">
+<DIV ALIGN="left">
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR HEIGHT="40">
+<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
+<TD WIDTH="6" HEIGHT="40"></TD>
+<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>KisMAC Manual - Installation</B></FONT></TD>
+</TR>
+</TABLE>
+<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">KisMAC uses its own, more powerful, installation
+program similar to the Apple supplied installer application. To begin the installation, double click 
+KisMACInstaller icon in the Finder and follow the prompts.</FONT>
+
+<P>
+<OL>
+    <LI>Clicking on the Go button will start the installation process<BR>
+        <IMG SRC="../gfx/installer.png" HEIGHT="281" WIDTH="350" BORDER="0" ALT="Installer"><BR>
+        <FONT SIZE="1" FACE="Lucida Grande,Geneva,Arial">
+            The KisMAC installer can be used to either install or remove KisMAC.<BR>
+            Removing KisMAC is covered in another chapter.
+        </FONT><BR><BR>
+    <LI>If you have previously installed the Sourceforge Wireless Driver for a third party wireless card, 
+        the KisMAC installer will now ask whether you want to install a patch for this driver.  If you do 
+        not have this driver installed, this dialog will be skipped and you can proceed with the next step.<BR>
+        <BR>
+        The Sourceforge Wireless Driver has a bug, which disallows KisMAC to unload and reload the driver 
+        at run-time.  If you choose to patch it, the Installer will also install a utility, which allows 
+        you to change the MAC address of your Prism II or Orinoco card.<BR>
+        <BR>
+        Installing a new driver is always a bit risky. If there should be problems, you can always boot
+        your system by holding the SHIFT key at startup and remove KisMAC.<BR>
+        <BR>
+        Please remember to reinstall KisMAC, if you install the Sourceforge Wireless Drivers later on.<BR><BR>
+    <LI>Next will be the General Public License agreement, after reading the license, click go again.<BR><BR>
+    <LI>The installer will now ask for your admin password.  You must be an admin user to install KisMAC.<BR>
+        <IMG SRC="../gfx/authenticator.png" HEIGHT="200" WIDTH="317" BORDER="0"><BR><BR>
+    <LI>Once you click okay in the password dialogue, the installer will immediately search for older versions
+        of KisMAC and remove any it finds before proceeding.  It will then place the KisMAC application in your
+        Applications folder along with the KisMAC Driver Tool.  The installer also places alternative wireless
+        card drivers used by KisMAC in the required place on your System drive.  (A complete list of files
+        installed can be found at the end of this chapter)<BR><BR>
+    <LI>You are now ready to begin using KisMAC.  Start by double clicking the KisMAC icon in the Finder. 
+        Note: Sometimes it takes a minute until the Finder refreshes the Application Folder.<BR><BR>
+</OL>
+
+<B>Files Installed by KisMAC:</B><BR><BR>
+	Basic Installation:
+<UL>
+        <LI>/Applications/KisMAC.app
+	<LI>/Applications/KisMAC Driver Tool.app
+</UL>
+	Sourceforge Wireless Patch:
+<UL>
+        <LI>/System/Library/Extensions/WirelessDriver.kext/bipatch
+        <LI>/System/Library/Extensions/WirelessDriver.kext/Contents/MacOS/WirelessDriver (old file is renamed to WirelessDriver.old)
+        <LI>/Applications/WirelessMAC.app
+</UL>
+<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR VALIGN="top">
+<TD ALIGN="left"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="index.html">back</A></FONT></TD>
+<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='installation' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+
+</HTML>
