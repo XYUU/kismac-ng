@@ -2,9 +2,9 @@
         
         File:			GPSController.h
         Program:		KisMAC
-	Author:			Michael Rossberg
+		Author:			Michael Rossberg, Robin Darroch
                                 mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Description:		KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -43,14 +43,20 @@ struct _position {
     int     _serialFD;
     int     _veldir;
     float   _velkt;
+	float   _maxvel;
+	float   _peakvel;
     int     _numsat;
     float   _hdop;
+	float   _sectordist;
+	float   _sectortime;
+	float   _totaldist;
     
     struct _position    _ns, _ew, _elev;
     NSDate*             _lastAdd;
     NSString*           _position;
     NSString*           _gpsDevice;
     NSDate*             _lastUpdate;
+    NSDate*				_sectorStart;
     NSLock*             _gpsLock;
     NSString*           _status;
 }

@@ -242,14 +242,18 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>003533C506A5DD8500AB4577</string>
+								<string>003533D206A5DD8500AB4577</string>
+								<string>003533D306A5DD8500AB4577</string>
+								<string>003533F906A5DD8500AB4577</string>
+								<string>29B97317FDCFA39411CA2CEA</string>
+								<string>0035332D06A5DD5700AB4577</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>28</integer>
-									<integer>8</integer>
+									<integer>22</integer>
+									<integer>18</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
@@ -288,7 +292,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ScanControllerMenus.m</string>
+								<string>GPSController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -296,15 +300,21 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ScanControllerMenus.m</string>
+										<string>GPSController.m</string>
 										<key>bookmark</key>
-										<string>00B056B2077315D300755A76</string>
+										<string>0046468E0789A8BC005B890E</string>
 										<key>history</key>
 										<array>
 											<string>006300060764D4FC003B81CC</string>
 											<string>006300200764DC82003B81CC</string>
 											<string>006302200764FCA8003B81CC</string>
-											<string>00B056AD077312F300755A76</string>
+											<string>0076657F07844A6400A30713</string>
+											<string>0076658007844A6400A30713</string>
+											<string>0076658107844A6400A30713</string>
+											<string>00766A38078450FA00A30713</string>
+											<string>0046467F0789A69D005B890E</string>
+											<string>004646880789A80A005B890E</string>
+											<string>0046467E0789A69D005B890E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -312,6 +322,14 @@
 											<string>0063000F0764D9CE003B81CC</string>
 											<string>006300210764DC82003B81CC</string>
 											<string>006302210764FCA8003B81CC</string>
+											<string>0076658407844A6400A30713</string>
+											<string>0076658507844A6400A30713</string>
+											<string>0076658C0784503B00A30713</string>
+											<string>00766A2C0784506900A30713</string>
+											<string>00766A3A078450FA00A30713</string>
+											<string>004646810789A69D005B890E</string>
+											<string>004646820789A69D005B890E</string>
+											<string>004646890789A80A005B890E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -369,9 +387,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>00B056AF077312F300755A76</string>
+				<string>0046467C0789A61A005B890E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>00B056B0077312F300755A76</string>
+				<string>0046467D0789A61A005B890E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -399,6 +417,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcode</string>
 	</array>
 	<key>WindowString</key>
@@ -924,9 +943,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>006300190764DC1E003B81CC</string>
+				<string>004646860789A79D005B890E</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>0063001A0764DC1E003B81CC</string>
+				<string>004646870789A79D005B890E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>

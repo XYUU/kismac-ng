@@ -2,9 +2,9 @@
         
         File:			GPSController.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-                                mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg, Robin Darroch
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
         
@@ -51,6 +51,7 @@ struct termios ttyset;
 #define MAX_GPSBUF_LEN 1024
 #define VELOCITY_UNIT "km/h"
 #define VELOCITY_CONVERSION 1.852
+#define DISTANCE_UNIT "km"
 
 @interface GPSController(PrivateExtension) 
     - (void)setStatus:(NSString*)status;
@@ -80,14 +81,19 @@ struct termios ttyset;
     _elev.coordinates = 0;
     _elev.dir = 'm';
     _velkt = 0;
+	_peakvel = 0;
     _veldir = -1;
     _numsat = -1;
     _hdop = 100;
+	_sectordist = 0;
+	_sectortime = 0;
+	_totaldist = 0;
 
     [self stop];
     
     [WaveHelper secureReplace:&_gpsDevice withObject:device];
     [WaveHelper secureRelease:&_lastUpdate];
+    [WaveHelper secureRelease:&_sectorStart];
     
     if ([_gpsDevice length]==0) {
         NSLog(@"GPS integration disabled");
@@ -125,13 +131,49 @@ struct termios ttyset;
 - (NSString*) ElevCoord {
     if (_elev.coordinates==0) return [NSString stringWithFormat:@"No Elevation Data"];
     //NSLog([NSString stringWithFormat:@"%f",_elev.coordinates]);
-    return [NSString stringWithFormat:@"%.1f%c",_elev.coordinates, _elev.dir]; //don't know if formatting stuff is correct
+    return [NSString stringWithFormat:@"%.1f %c/%.1f ft",_elev.coordinates, _elev.dir, (_elev.coordinates * 3.2808399)]; //don't know if formatting stuff is correct
 }
 
 - (NSString*) VelKt {
-	if (_velkt==0) return nil;
-	if (_veldir==-1) return [NSString stringWithFormat:@"%.1f %s",(_velkt * VELOCITY_CONVERSION),VELOCITY_UNIT];
-	return [NSString stringWithFormat:@"%.1f %s at %d T",(_velkt * VELOCITY_CONVERSION),VELOCITY_UNIT,_veldir];
+	float velconv,peakconv,maxconv;
+	velconv = _velkt * VELOCITY_CONVERSION;
+	peakconv = _peakvel * VELOCITY_CONVERSION;
+	maxconv = _maxvel * VELOCITY_CONVERSION;
+	if (_velkt==_maxvel) {
+		if (_veldir==-1) return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [MAX]",velconv,VELOCITY_UNIT,_velkt];
+		return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [MAX]\nTrack: %d T",velconv,VELOCITY_UNIT,_velkt,_veldir];
+	} else if (_velkt==_peakvel) {
+		if (_veldir==-1) return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [PEAK]",velconv,VELOCITY_UNIT,_velkt];
+		return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [PEAK]\nTrack: %d T",velconv,VELOCITY_UNIT,_velkt,_veldir];
+	} else {
+		if (_veldir==-1) return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [peak: %.1f, max: %.1f]",velconv,VELOCITY_UNIT,_velkt,peakconv,maxconv];
+		return [NSString stringWithFormat:@"%.1f %s (%.1f kt) [peak: %.1f, max: %.1f]\nTrack: %d T",velconv,VELOCITY_UNIT,_velkt,peakconv,maxconv,_veldir];
+	}
+}
+
+- (NSString*) DistStats {
+	int sectortime;
+	int sterror=0;
+	float timeinterval;
+	sectortime = (int)_sectortime;
+
+	if (_sectorStart && (sectortime > 0)) {
+		timeinterval = [[NSDate date] timeIntervalSinceDate:_sectorStart];
+		sterror = sectortime - (int)timeinterval;
+		// remove negative error that develops after stopping
+		if ((_velkt == 0) && (sterror < 0)) sterror = 0;
+	}
+	
+	if (sterror == 0) {
+		if (sectortime > 3600) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d:%02d (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/3600),(sectortime%3600/60),(sectortime%60),(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+		else if (sectortime > 60) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/60),(sectortime%60),(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+		else if (sectortime > 0) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d seconds (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,sectortime,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+		else return [NSString stringWithFormat:@"Total: %.1f %s (%.1f nm)",(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+	} else {
+		if (sectortime > 3600) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d:%02d [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/3600),(sectortime%3600/60),(sectortime%60),sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+		else if (sectortime > 60) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/60),(sectortime%60),sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+		else return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d seconds [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,sectortime,sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+	}
 }
 
 - (NSString*) QualData {
@@ -145,24 +187,28 @@ struct termios ttyset;
     
     if (_lastUpdate)
         if (_elev.coordinates) 
-            if (_velkt && _reliable) // only report velocity if we're sure
-                return [NSString stringWithFormat:@"%@: %@ %@, %@: %@, %@: %@ @ %@%@", 
+            if ((_velkt || _maxvel) && _reliable) // only report velocity if we're sure
+                return [NSString stringWithFormat:@"%@: %@ %@\n%@: %@\n%@: %@\n%@\n%@: %@%@", 
                         NSLocalizedString(@"Position", "GPS status string."), 
                         [self NSCoord],[self EWCoord],
                         NSLocalizedString(@"Elevation", "GPS status string."), 
                         [self ElevCoord],
                         NSLocalizedString(@"Velocity", "GPS status string."), 
-                        [self VelKt],[self lastUpdate],[self QualData]];
+                        [self VelKt],[self DistStats],
+						NSLocalizedString(@"Time", "GPS status string."), 
+						[self lastUpdate],[self QualData]];
             else
-                return [NSString stringWithFormat:@"%@: %@ %@, %@: %@ @ %@%@%@", 
+                return [NSString stringWithFormat:@"%@: %@ %@\n%@: %@\n%@: %@%@%@", 
                         NSLocalizedString(@"Position", "GPS status string."), 
                         [self NSCoord],[self EWCoord],
                         NSLocalizedString(@"Elevation", "GPS status string."), 
-                        [self ElevCoord],[self lastUpdate],
+                        [self ElevCoord],
+						NSLocalizedString(@"Time", "GPS status string."), 
+						[self lastUpdate],
                         _reliable ? @"" : NSLocalizedString(@" -- NO FIX", "GPS status string. Needs leading space"),
                         [self QualData]];
         else
-            return [NSString stringWithFormat:@"%@: %@ %@ @ %@%@", 
+            return [NSString stringWithFormat:@"%@: %@ %@\n%@%@", 
                 NSLocalizedString(@"Position", "GPS status string."), 
                 [self NSCoord],[self EWCoord],
                 [self lastUpdate],
@@ -170,7 +216,7 @@ struct termios ttyset;
 				[self QualData]];
 
     else if ([(NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"GPSDevice"] length]) {
-        if (_gpsThreadUp) return NSLocalizedString(@"GPS subsystem works, but there is no data.", "GPS status string");
+        if (_gpsThreadUp) return NSLocalizedString(@"GPS subsystem works, but there is no data.\nIf you are using gpsd, there may be no GPS connected.\nOtherwise, your GPS is probably connected but not yet reporting a position.", "GPS status string");
         else  return NSLocalizedString(@"GPS not working", "LONG GPS status string with informations howto debug");
             //@"GPS subsystem is not working. See log file for more details."
     } else return NSLocalizedString(@"GPS disabled", "LONG GPS status string with informations where to enable");
@@ -290,8 +336,11 @@ int ss(char* inp, char* outp) {
     int ewh, nsh;
 	int veldir,numsat;
 	float velkt,hdop;
+	float timeinterval=-1;
+	float displacement;
     struct _position ns, ew, elev;
     bool updated;
+    NSDate *date;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
 
     if (_debugEnabled) NSLog(@"GPS read data");
@@ -359,18 +408,21 @@ int ss(char* inp, char* outp) {
     memcpy(gpsin,gpsbuf,q);
     if (q>80) q=0;
     
-    if (updated) {
+	date = [[NSDate alloc] init];
+    
+	if (updated) {
         if (_reliable) {
             if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
                 waypoint w;
                 w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
                 w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
-                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
             }
         } else {
             [[WaveHelper trace] cut];
         }
-        [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+		timeinterval = [date timeIntervalSinceDate:_lastUpdate];
+        [WaveHelper secureReplace:&_lastUpdate withObject:date];
 
         if ((_reliable)||(_onNoFix==0)) {
             if (ns.dir != 'S') _ns.dir = 'N';
@@ -384,9 +436,23 @@ int ss(char* inp, char* outp) {
             if (elev.coordinates > -10000.00) _elev.coordinates = elev.coordinates;
 			
             if (velkt > -1.0) {
+				if ((velkt > 0) && (_velkt==0)) {
+					_peakvel = 0;
+					_sectordist = 0;
+					_sectortime = 0;
+					[WaveHelper secureReplace:&_sectorStart withObject:date];
+				} else if ((velkt > 0) || (_velkt > 0)) {
+					// update distances only if we're moving (or just stopped)
+					displacement = (velkt + _velkt)*timeinterval/7200;
+					_sectordist += displacement;
+					_sectortime += timeinterval;
+					_totaldist += displacement;
+				}
                 _velkt = velkt;
                 _veldir = veldir;
-            }
+				if (velkt > _peakvel) _peakvel = velkt;
+				if (velkt > _maxvel) _maxvel = velkt;
+			}
             
             if (numsat > -1) {
                 _numsat = numsat;
@@ -403,8 +469,9 @@ int ss(char* inp, char* outp) {
         }
     }
     
+    [date release];
     [subpool release];
-    
+	
     return YES;
 }
 
@@ -413,6 +480,9 @@ int ss(char* inp, char* outp) {
     char gpsbuf[MAX_GPSBUF_LEN];
     double ns, ew, elev;
 	float velkt,hdop,fveldir;
+	float timeinterval=-1;
+	float displacement;
+    NSDate *date;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
 
     if (_debugEnabled) NSLog(@"GPSd write command");
@@ -436,6 +506,8 @@ int ss(char* inp, char* outp) {
  	numsat = -1;
 	hdop = 100;
    
+	date = [[NSDate alloc] init];
+
 	if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d,V=%f,T=%f,Q=%d %*f %f",
         &ns, &ew, &elev, &valid, &velkt, &fveldir, &numsat, &hdop) >=6) {
                         
@@ -443,18 +515,19 @@ int ss(char* inp, char* outp) {
         else _reliable = NO;
         
         if (_debugEnabled) NSLog(@"GPSd data updated.");
-
-        if (_reliable) {
+		
+		if (_reliable) {
             if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
                 waypoint w;
                 w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
                 w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
-                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:date];
             }
         } else {
             [[WaveHelper trace] cut];
         }
-        [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+		timeinterval = [date timeIntervalSinceDate:_lastUpdate];
+        [WaveHelper secureReplace:&_lastUpdate withObject:date];
 
 
         if ((_reliable)||(_onNoFix==0)) {
@@ -467,9 +540,23 @@ int ss(char* inp, char* outp) {
             _ns.coordinates   = fabs(ns);
             _ew.coordinates   = fabs(ew);
             _elev.coordinates = elev;
+			if ((velkt > 0) && (_velkt==0)) {
+				_peakvel = 0;
+				_sectordist = 0;
+				_sectortime = 0;
+				[WaveHelper secureReplace:&_sectorStart withObject:date];
+			} else if ((velkt > 0) || (_velkt > 0)) {
+				// update distances only if we're moving (or just stopped)
+				displacement = (velkt + _velkt)*timeinterval/7200;
+				_sectordist += displacement;
+				_sectortime += timeinterval;
+				_totaldist += displacement;
+			}
 			_velkt = velkt;
 			veldir = (int)fveldir;
 			_veldir = veldir;
+			if (velkt > _peakvel) _peakvel = velkt;
+			if (velkt > _maxvel) _maxvel = velkt;
 
 			if (numsat > -1) {
 				_numsat = numsat;
@@ -488,8 +575,9 @@ int ss(char* inp, char* outp) {
         NSLog(@"GPSd parsing failure");
     }
     
+    [date release];
     [subpool release];
-    
+	
     return YES;
 }
 
@@ -538,6 +626,8 @@ int ss(char* inp, char* outp) {
         _gpsShallRun = YES;
         [_lastUpdate release];
         _lastUpdate = nil;
+        [_sectorStart release];
+        _sectorStart = nil;
         
         [self setStatus:NSLocalizedString(@"GPS subsystem starting up.", @"GPS status")];
 
@@ -630,6 +720,8 @@ int ss(char* inp, char* outp) {
         _gpsShallRun = YES;
         [_lastUpdate release];
         _lastUpdate = nil;
+        [_sectorStart release];
+        _sectorStart = nil;
         
         [self setStatus:NSLocalizedString(@"Starting GPS in GPSd mode.", @"GPS status")];
 
@@ -638,6 +730,7 @@ int ss(char* inp, char* outp) {
         sockd  = socket(AF_INET, SOCK_STREAM, 0);
         if (sockd == -1) {
             NSLog(@"Socket creation failed!");
+			[self setStatus:NSLocalizedString(@"Could not create GPSd socket.", @"GPS status")];
             goto err;
         }
         
@@ -649,6 +742,7 @@ int ss(char* inp, char* outp) {
             hp = gethostbyname(hostname);
             if (hp == NULL) {
                 NSLog(@"Could not resolve %s", hostname);
+				[self setStatus:NSLocalizedString(@"Could not resolve GPSd server.", @"GPS status")];
                 goto err;
             }
             ip = *(int *)hp->h_addr_list[0];
@@ -666,7 +760,8 @@ int ss(char* inp, char* outp) {
         
         if (status == -1) {
             NSLog(@"Could not connect to %s port %d", hostname, [sets integerForKey:@"GPSDaemonPort"]);
-            goto err;
+			[self setStatus:NSLocalizedString(@"Could not connect to GPSd.", @"GPS status")];
+			goto err;
         }
 
         NSLog(@"GPS started successfully in GPSd mode.\n");

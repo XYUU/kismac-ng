@@ -245,14 +245,14 @@
 								<string>089C167CFE841241C02AAC07</string>
 								<string>19C28FB6FE9D52B211CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
+								<string>00ECB4D50781D81D00E65193</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
-									<integer>1</integer>
-									<integer>0</integer>
+									<integer>14</integer>
+									<integer>13</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -287,7 +287,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AtherosWifi.cpp</string>
+								<string>Target: AtherosWifi</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -295,17 +295,17 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>AtherosWifi.cpp</string>
+										<string>Target: AtherosWifi</string>
 										<key>bookmark</key>
-										<string>003F2B0E06DA98D200DC4841</string>
+										<string>00ECB4DF0781E69800E65193</string>
 										<key>history</key>
 										<array>
 											<string>00FF588306C6268C006C7F1E</string>
 											<string>00FF588406C6268C006C7F1E</string>
 											<string>00FF5B9906C6768F006C7F1E</string>
-											<string>005DA63D06C8D83700ACF77D</string>
+											<string>00ECB4D60781D81D00E65193</string>
+											<string>00ECB4D70781D81D00E65193</string>
 											<string>005DAA7906C92F9E00ACF77D</string>
-											<string>003F2AA806DA90CC00DC4841</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -314,6 +314,8 @@
 											<string>00FF5B9B06C6768F006C7F1E</string>
 											<string>005DA64006C8D83700ACF77D</string>
 											<string>005DAA7B06C92F9E00ACF77D</string>
+											<string>00ECB4D80781D81D00E65193</string>
+											<string>00ECB4D90781D81D00E65193</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -325,14 +327,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1074, 683}}</string>
+								<string>{{0, 0}, {1074, 478}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 100 1280 732 0 0 1280 832 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>683pt</string>
+							<string>478pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -345,14 +347,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 690}, {1074, 0}}</string>
+								<string>{{0, 485}, {1074, 205}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 100 1280 732 0 0 1280 832 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>0pt</string>
+							<string>205pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -371,9 +373,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>003F2A9906DA8C9600DC4841</string>
+				<string>00ECB4DB0781D81D00E65193</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>003F2A9A06DA8C9600DC4841</string>
+				<string>00ECB4DC0781D81D00E65193</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -401,7 +403,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/mick/Development/WifiDriver/AtherosWifi/AtherosWifi.xcode</string>
+		<string>/Users/mick/openDev/KisMACng/Subprojects/AtherosDriver/AtherosWifi/AtherosWifi.xcode</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 100 1280 732 0 0 1280 832 </string>

@@ -32,7 +32,7 @@
 #import "Trace.h"
 
 #ifndef CRCFUNCTION
-    #define CRCFUNCTION(s) @"<not valid>"
+    #define CRCFUNCTION(s) @"00:00:00:00:00:00:00:00:00:00:00:00:00:00:FF"
 #endif
 
 #import "WaveHelper.h"
