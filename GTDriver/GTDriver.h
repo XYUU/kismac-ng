@@ -2,9 +2,9 @@
         
         File:			GTDriver.h
         Program:		GTDriver
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		GTDriver is a free driver for PrismGT based cards under OS X.
+		Author:			Michael Roßberg
+						mick@binaervarianz.de
+		Description:	GTDriver is a free driver for PrismGT based cards under OS X.
                 
         This file is part of GTDriver.
 

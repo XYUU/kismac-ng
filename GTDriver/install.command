@@ -24,7 +24,9 @@ sudo cp -r "$FROM/WiFiGUI.app" $DEST/Contents/Resources
 #sudo cp -r "$FROM/StartupParameters.plist" $SDEST
 #sudo cp -r "$FROM/GTDriver" $SDEST
 /usr/bin/osascript $FROM/removeLoginItem.scpt
-/usr/bin/osascript $FROM/addStartupItem.scpt
+cp $FROM/addStartupItem.scpt /tmp/addStartupItem.scpt
+/usr/bin/osascript /tmp/addStartupItem.scpt
+rm /tmp/addStartupItem.scpt
 
 echo "++++ Starting Configuration Program ++++"
 $DEST/Contents/Resources/WiFiGUI.app/Contents/MacOS/WiFiGUI&
