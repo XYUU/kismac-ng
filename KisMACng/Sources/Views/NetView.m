@@ -43,7 +43,7 @@
         _wp._long = 0;
 	_wp._elevation = 0;
         _network = network;
-        _registered = NO;
+        [[WaveHelper mapView] addNetView:self];
     }
     return self;
 }
@@ -111,14 +111,12 @@
     NSPoint p;
     p = [[WaveHelper mapView] pixelForCoordinate:_wp];
 
-    if (!_visible || (p.x == INVALIDPOINT.x && p.y == INVALIDPOINT.y)) {
-        if (_registered) [[WaveHelper mapView] removeNetView:self];
+    if (p.x == INVALIDPOINT.x && p.y == INVALIDPOINT.y) {
+        if (_visible) [self setVisible:NO];
         return;
     }
         
-    if (!_registered) {
-        [[WaveHelper mapView] addNetView:self];
-    }
+    if (!_visible) [self setVisible:YES];
     
     [self setLocation:p];
 }
@@ -171,7 +169,7 @@
 }
 
 - (void)dealloc {
-    if (_registered) [[WaveHelper mapView] removeNetView:self];
+    [[WaveHelper mapView] removeNetView:self];
     
     [[WaveHelper mapView] setNeedsDisplay:YES];
     [WaveHelper secureRelease:&_name];

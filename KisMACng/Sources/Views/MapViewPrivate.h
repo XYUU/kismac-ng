@@ -32,6 +32,7 @@
 - (void)_alignNetworks;
 - (void)_alignControlPanel;
 - (void)_alignCurrentPos;
+- (void)_alignWayPoint;
 - (void)_setStatus:(NSString*)status;
 - (void)_updateStatus;
 - (void)_setGPSStatus:(NSString*)status;

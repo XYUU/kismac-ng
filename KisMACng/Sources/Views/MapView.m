@@ -65,6 +65,7 @@
     [self addSubView:_statusView];
     
     _controlPanel = [[MapControlPanel alloc] init];
+    [_controlPanel setVisible:NO];
     [self _alignControlPanel];
     [self addSubView:_controlPanel];
     
@@ -171,6 +172,7 @@
     _center.y = [_mapImage size].height / 2;
     _zoomFact = 1.0;
     
+    [_controlPanel setVisible:YES];
     [self _updateStatus];
     [self _alignNetworks];
     [self setNeedsDisplay:YES];
@@ -186,12 +188,14 @@
     [self _alignNetworks];
     [self setNeedsDisplay:YES];
     
+    if (_selmode == which) [self _alignWayPoint];
     [[NSNotificationCenter defaultCenter] postNotificationName:KisMACAdvNetViewInvalid object:self];
 }
 
 - (void)setVisible:(BOOL)visible {
     _visible = visible;
-    [_pView setVisible:visible];
+    if (!_visible) [_pView setVisible:NO];
+    else [self _alignCurrentPos];
 }
 
 - (NSPoint)pixelForCoordinate:(waypoint)wp {
@@ -279,12 +283,6 @@
 
 #pragma mark -
 
-- (void)setShowNetworks:(BOOL)show {
-    [_netContainer setVisible:show];
-    [_showNetworks setState:(show ? NSOnState : NSOffState)];
-    [self setNeedsDisplay:YES];
-}
-
 #define ZOOMFACT 1.5
 - (IBAction)zoomIn:(id)sender {
     if (_zoomFact > 20) {
@@ -324,6 +322,76 @@
 - (IBAction)goDown:(id)sender {
     _center.y -= 40.0 / _zoomFact;
     [self _align];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableAll {
+    [_setWayPoint1 setState:NSOffState];
+    [_setWayPoint2 setState:NSOffState];
+    [_setCurrentPoint setState:NSOffState];
+    [_showCurrentPoint setState:NSOffState];
+    [_pView setVisible:NO];
+    _selmode = selInvalid;
+}
+
+- (IBAction)setWaypoint1:(id)sender {
+    if ([sender state] == NSOnState) {
+        [self disableAll];
+        return;
+    }
+
+    [self disableAll];
+    [_setWayPoint1 setState:NSOnState];
+    _selmode = selWaypoint1;
+    [_pView setWayPointMode:YES];
+    [self _alignWayPoint];
+    [self setNeedsDisplay:YES];
+}
+- (IBAction)setWaypoint2:(id)sender {
+    if ([sender state] == NSOnState) {
+        [self disableAll];
+        return;
+    }
+
+    [self disableAll];
+    [_setWayPoint2 setState:NSOnState];
+    _selmode = selWaypoint2;
+    [_pView setWayPointMode:YES];
+    [self _alignWayPoint];
+    [self setNeedsDisplay:YES];
+}
+- (IBAction)setCurrentPosition:(id)sender {
+    if ([sender state] == NSOnState) {
+        [self disableAll];
+        return;
+    }
+
+    [self disableAll];
+    [_setCurrentPoint setState:NSOnState];
+    _selmode = selCurPos;
+    [_pView setWayPointMode:NO];
+    [self _alignCurrentPos];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)setShowCurrentPosition:(id)sender {
+    if ([sender state] == NSOnState) {
+        [self disableAll];
+        return;
+    }
+
+    [self disableAll];
+    [_showCurrentPoint setState:NSOnState];
+    _selmode = selShowCurPos;
+    [_pView setWayPointMode:NO];
+    [self _alignCurrentPos];
+    [self setNeedsDisplay:YES];
+}
+
+
+- (void)setShowNetworks:(BOOL)show {
+    [_netContainer setVisible:show];
+    [_showNetworks setState:(show ? NSOnState : NSOffState)];
     [self setNeedsDisplay:YES];
 }
 

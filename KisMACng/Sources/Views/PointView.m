@@ -55,6 +55,62 @@
     }
 }
 
+- (void)setupViewForFrame {
+    float r1=1, r2=10, x1, y1;
+    NSAffineTransform *t;
+
+    [_way1 autorelease];
+    _way1=[NSBezierPath bezierPath];
+    
+    x1=cos(30.0/180.0*pi)*r1;
+    y1=sin(30.0/180.0*pi)*r1;
+    
+    [_way1 moveToPoint:NSMakePoint(x1,y1)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(60.0/180.0*pi)*r2,y1+sin(60.0/180.0*pi)*r2)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(0.0/180.0*pi)*r2 ,y1+sin(0.0/180.0*pi)*r2) ];
+    [_way1 closePath];
+    
+    x1=cos(150.0/180.0*pi)*r1;
+    y1=sin(150.0/180.0*pi)*r1;
+    
+    [_way1 moveToPoint:NSMakePoint(x1,y1)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(120.0/180.0*pi)*r2,y1+sin(120.0/180.0*pi)*r2)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(180.0/180.0*pi)*r2,y1+sin(180.0/180.0*pi)*r2) ];
+    [_way1 closePath];
+    
+    x1=cos(270.0/180.0*pi)*r1;
+    y1=sin(270.0/180.0*pi)*r1;
+    
+    [_way1 moveToPoint:NSMakePoint(x1,y1)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(240.0/180.0*pi)*r2,y1+sin(240.0/180.0*pi)*r2)];
+    [_way1 lineToPoint:NSMakePoint(x1+cos(300.0/180.0*pi)*r2,y1+sin(300.0/180.0*pi)*r2) ];
+    [_way1 closePath];
+    
+    t = [NSAffineTransform transform];
+    [t translateXBy:0.5*_frame.size.width yBy:0.5*_frame.size.height];
+    [_way1 transformUsingAffineTransform: t];
+
+    [_way1 retain];
+}
+
+- (void)_genWayCache {
+    [[WaveHelper intToColor:[[NSUserDefaults standardUserDefaults] objectForKey:@"WayPointColor"]] set];
+
+    NSAffineTransform *t4 = [NSAffineTransform transform];
+    [t4 translateXBy:-_frame.size.width*0.5 yBy:-_frame.size.height*0.5];
+    //[_way1 transformUsingAffineTransform: t4];
+    
+    t4 = [NSAffineTransform transform];
+    [t4 rotateByDegrees: 5];
+    [t4 translateXBy:-_frame.size.width*0.5 yBy:-_frame.size.height*0.5];
+    [_way1 transformUsingAffineTransform: t4];
+    
+    t4 = [NSAffineTransform transform];
+    [t4 translateXBy:_frame.size.width*0.5 yBy:_frame.size.height*0.5];
+    [_way1 transformUsingAffineTransform: t4];
+    
+    [_way1 fill];
+}
 
 - (id)init {
     int i;
@@ -68,10 +124,24 @@
         [self _genCacheForSize:i];
         [_currImg[i] unlockFocus];
     }
+    [self setupViewForFrame];
+    for (i = 0; i < 24; i++) {
+        _wayImg[i] = [[NSImage alloc] initWithSize:NSMakeSize(35, 35)];
+        [_wayImg[i] lockFocus];
+        [self _genWayCache];
+        [_wayImg[i] unlockFocus];
+    }
+    [_way1 release];
     _animLock = [[NSLock alloc] init];
     
     [self setImage:_currImg[35]];
     return self;
+}
+
+#pragma mark -
+
+- (void)setWayPointMode:(BOOL)wayPointMode {
+    _wayPointMode = wayPointMode;
 }
 
 #pragma mark -
@@ -87,23 +157,31 @@
     [super setLocation:loc];
 }
 
+#pragma mark -
 - (void)animationThread:(id)object {
     BOOL e = NO;
     int scale = 35;
+    int wp;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
     
     if([_animLock tryLock]) {
         [self retain];
         while(_visible) {
-            if (e) {
-                scale++;
-                if (scale>=25) e=NO;
+            if (_wayPointMode) {
+                wp++;
+                wp = wp % 24;
+                [self setImage:_wayImg[wp]];
             } else {
-                scale--;
-                if (scale<=10) e=YES;
+                if (e) {
+                    scale++;
+                    if (scale>=25) e=NO;
+                } else {
+                    scale--;
+                    if (scale<=10) e=YES;
+                }
+                
+                [self setImage:_currImg[scale]];
             }
-            
-            [self setImage:_currImg[scale]];
             [[WaveHelper mapView] setNeedsDisplayInMoveRect:_frame];
             [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         }
@@ -121,6 +199,7 @@
     
     [_animLock release];
     for (i = 0; i <= 35; i++) [_currImg[i] release];
+    for (i = 0; i < 24; i++)  [_wayImg[i] release];
     [super dealloc];
 }
 

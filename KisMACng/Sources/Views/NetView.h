@@ -37,7 +37,6 @@
     WaveNet         *_network;
     NSImage         *_netImg;
     NSColor         *_netColor;
-    BOOL            _registered;
 }
 
 - (id)initWithNetwork:(WaveNet*)network;

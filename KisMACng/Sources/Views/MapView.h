@@ -65,7 +65,11 @@ enum selmode {
     
     enum selmode        _selmode;
     
-   IBOutlet NSMenuItem  *_showNetworks;
+    IBOutlet NSMenuItem *_setWayPoint1;
+    IBOutlet NSMenuItem *_setWayPoint2;
+    IBOutlet NSMenuItem *_setCurrentPoint;
+    IBOutlet NSMenuItem *_showCurrentPoint;
+    IBOutlet NSMenuItem *_showNetworks;
 }
 
 - (BOOL)saveToFile:(NSString*)fileName;
@@ -88,5 +92,10 @@ enum selmode {
 - (IBAction)goRight:(id)sender;
 - (IBAction)goUp:(id)sender;
 - (IBAction)goDown:(id)sender;
+
+- (IBAction)setWaypoint1:(id)sender;
+- (IBAction)setWaypoint2:(id)sender;
+- (IBAction)setCurrentPosition:(id)sender;
+- (IBAction)setShowCurrentPosition:(id)sender;
 
 @end

@@ -39,10 +39,27 @@
             SUPERCLASS = NSObject; 
         }, 
         {
-            ACTIONS = {zoomIn = id; zoomOut = id; }; 
+            ACTIONS = {
+                goDown = id; 
+                goLeft = id; 
+                goRight = id; 
+                goUp = id; 
+                setCurrentPosition = id; 
+                setShowCurrentPosition = id; 
+                setWaypoint1 = id; 
+                setWaypoint2 = id; 
+                zoomIn = id; 
+                zoomOut = id; 
+            }; 
             CLASS = MapView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {"_showNetworks" = NSMenuItem; }; 
+            OUTLETS = {
+                "_setCurrentPoint" = NSMenuItem; 
+                "_setWayPoint1" = NSMenuItem; 
+                "_setWayPoint2" = NSMenuItem; 
+                "_showCurrentPoint" = NSMenuItem; 
+                "_showNetworks" = NSMenuItem; 
+            }; 
             SUPERCLASS = BIView; 
         }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 

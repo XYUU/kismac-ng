@@ -69,6 +69,7 @@
         if ([o isMemberOfClass:[NetView class]]) [(NetView*)o align];
     }
     [self _alignCurrentPos];
+    [self _alignWayPoint];
     [self _align];
 }
 
@@ -81,6 +82,16 @@
         [_pView setVisible:YES];
     } else {
         [_pView setVisible:NO];    
+    }
+}
+
+- (void)_alignWayPoint {
+    if (_selmode != selWaypoint1 && _selmode != selWaypoint2) return;
+    if (_wp[_selmode]._long != 0 || _wp[_selmode]._lat != 0) {
+        [_pView setLocation:NSMakePoint(_point[_selmode].x * _zoomFact, _point[_selmode].y * _zoomFact)];
+        [_pView setVisible:YES];
+    } else {
+        [_pView setVisible:NO];
     }
 }
 

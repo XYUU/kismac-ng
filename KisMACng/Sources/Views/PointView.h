@@ -27,8 +27,13 @@
 #import "BIImageView.h"
 
 @interface PointView : BIImageView {
-    NSImage     *_currImg[36];
-    NSLock      *_animLock;
+    NSImage         *_currImg[36];
+    NSImage         *_wayImg[24];
+    NSLock          *_animLock;
+    NSBezierPath    *_way1;
+    BOOL            _wayPointMode;
 }
+
+- (void)setWayPointMode:(BOOL)wayPointMode;
 
 @end
