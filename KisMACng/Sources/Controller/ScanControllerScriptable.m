@@ -192,7 +192,7 @@
         [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
 		
 		_refreshGUI = NO;
-		[WaveStorageController importFromFile:filename withContainer:_container andImportController:_importController];
+		ret = [WaveStorageController importFromFile:filename withContainer:_container andImportController:_importController];
 		_refreshGUI = YES;
 
 		[self updateNetworkTable:self complete:YES];
@@ -232,7 +232,7 @@
 		return NO;
 	}
 	
-    [_mappingView setMap: img];
+    ret = [_mappingView setMap: img];
     [img release];
     [self showMap];
 	[self busyDone];

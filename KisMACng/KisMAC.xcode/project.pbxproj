@@ -78,8 +78,8 @@
 			lastKnownFileType = wrapper.framework;
 			name = UnitKit.framework;
 			path = UnitTest/UnitKit.framework;
-			refType = 4;
-			sourceTree = "<group>";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		000D3A3907C731D200485FDD = {
 			fileRef = 000D3A3807C731D200485FDD;
@@ -3400,7 +3400,7 @@
 			buildRules = (
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "/Users/mick/openDev/KisMACng/Subprojects/files \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" /Users/mick/openDev/KisMACng/UnitTest";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" \"$(SRCROOT)/UnitTest\"";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
@@ -6008,7 +6008,7 @@
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" /Users/mick/openDev/KisMACng/UnitTest";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" \"$(SRCROOT)/UnitTest\" ";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;

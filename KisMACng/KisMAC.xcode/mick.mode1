@@ -244,22 +244,19 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>003533B206A5DD8500AB4577</string>
-								<string>003533C506A5DD8500AB4577</string>
-								<string>00D4228C07C7BA21000499F1</string>
+								<string>29B97323FDCFA39411CA2CEA</string>
+								<string>1058C7A0FEA54F0111CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>60</integer>
-									<integer>59</integer>
-									<integer>3</integer>
-									<integer>0</integer>
+									<integer>39</integer>
+									<integer>37</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 613}, {252, 696}}</string>
+							<string>{{0, 86}, {252, 696}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -292,7 +289,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>WaveNetTest.m</string>
+								<string>WaveNet.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -300,9 +297,9 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>WaveNetTest.m</string>
+										<string>WaveNet.h</string>
 										<key>bookmark</key>
-										<string>004E304007C7BECE00C6FF68</string>
+										<string>00EEBBE507C80F9C00B1C278</string>
 										<key>history</key>
 										<array>
 											<string>00D4227A07C7B63F000499F1</string>
@@ -313,9 +310,11 @@
 											<string>00D422A207C7BBEF000499F1</string>
 											<string>00D422A307C7BBEF000499F1</string>
 											<string>00D422A407C7BBEF000499F1</string>
-											<string>00D422A507C7BBEF000499F1</string>
 											<string>00D422A607C7BBEF000499F1</string>
-											<string>004E303E07C7BECD00C6FF68</string>
+											<string>00EEBBCC07C80E0600B1C278</string>
+											<string>00EEBBD207C80E2600B1C278</string>
+											<string>00EEBBD307C80E2600B1C278</string>
+											<string>00EEBBD407C80E2600B1C278</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -330,6 +329,9 @@
 											<string>00D422AF07C7BBEF000499F1</string>
 											<string>00D422B507C7BBEF000499F1</string>
 											<string>00D422BA07C7BBEF000499F1</string>
+											<string>00EEBBCE07C80E0600B1C278</string>
+											<string>00EEBBD507C80E2600B1C278</string>
+											<string>00EEBBD607C80E2600B1C278</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -387,9 +389,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>004E303807C7BEA800C6FF68</string>
+				<string>00EEBBD007C80E0600B1C278</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>004E303907C7BEA800C6FF68</string>
+				<string>00EEBBD107C80E0600B1C278</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -417,7 +419,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
+		<string>00A0149406C51049009AA021</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcode</string>
 	</array>
 	<key>WindowString</key>
@@ -440,7 +442,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>WavePacketTest.m</string>
+								<string>ScanControllerScriptable.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -448,46 +450,12 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CD052900623707200166675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>WavePacketTest.m</string>
+										<string>ScanControllerScriptable.m</string>
 										<key>bookmark</key>
-										<string>00D422CF07C7BE72000499F1</string>
+										<string>00EEBBE607C80F9C00B1C278</string>
 										<key>history</key>
 										<array>
-											<string>008ACCCF07C38CA100A76ADA</string>
-											<string>008ACCD007C38CA100A76ADA</string>
-											<string>008ACD4407C38D9600A76ADA</string>
-											<string>008ACD6707C38E4100A76ADA</string>
-											<string>008AD1EF07C3A78B00A76ADA</string>
-											<string>008AD29A07C40D3D00A76ADA</string>
-											<string>00868B5107C692A700864995</string>
-											<string>00868B5207C692A700864995</string>
-											<string>00868BC807C6A86600864995</string>
-											<string>000D3A1707C731BA00485FDD</string>
-											<string>000D3A4907C732A000485FDD</string>
-											<string>000D3A4A07C732A000485FDD</string>
-											<string>000D3A4B07C732A000485FDD</string>
-											<string>00D4227607C7B4C4000499F1</string>
-											<string>00D4229807C7BB7B000499F1</string>
-											<string>00D4229907C7BB7B000499F1</string>
-										</array>
-										<key>prevStack</key>
-										<array>
-											<string>008ACCB107C38B4600A76ADA</string>
-											<string>008ACCB307C38B4600A76ADA</string>
-											<string>008ACD4607C38D9600A76ADA</string>
-											<string>008ACD6C07C38E4100A76ADA</string>
-											<string>008AD1F107C3A78B00A76ADA</string>
-											<string>008AD29C07C40D3D00A76ADA</string>
-											<string>00868B5407C692A700864995</string>
-											<string>00868B5507C692A700864995</string>
-											<string>00868BCA07C6A86600864995</string>
-											<string>000D3A1907C731BA00485FDD</string>
-											<string>000D3A4E07C732A000485FDD</string>
-											<string>000D3A4F07C732A000485FDD</string>
-											<string>000D3A5007C732A000485FDD</string>
-											<string>000D3A5607C732A000485FDD</string>
-											<string>00D4227807C7B4C4000499F1</string>
-											<string>00D4229A07C7BB7B000499F1</string>
+											<string>00EEBBDA07C80ED100B1C278</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -550,7 +518,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>00A0149406C51049009AA021</string>
-				<string>00D4226007C75C1D000499F1</string>
+				<string>00EEBBCB07C80DF300B1C278</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
