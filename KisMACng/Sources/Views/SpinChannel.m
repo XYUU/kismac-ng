@@ -58,6 +58,8 @@
             date = [[NSDate alloc] initWithTimeIntervalSinceNow: 1.0/12.0];
             [NSThread sleepUntilDate:date];
             [date release];
+			[pool release];
+			pool = [[NSAutoreleasePool alloc] init];
         }
         [_animLock unlock];
     }

@@ -496,27 +496,33 @@ int ss(char* inp, char* outp) {
 - (void) continousParse:(int) fd {
     NSDate *date;
     unsigned int i = 0;
-    
+    NSAutoreleasePool* subpool;
+	
     while (_gpsShallRun && [self gps_parse:fd]) {
+		subpool = [[NSAutoreleasePool alloc] init];
         //actually once a sec should be enough, but sometimes we dont get any information. so do it more often.
         if ((i++ % 10 == 0) && (_status == Nil))
             [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:[self status]];
         date = [[NSDate alloc] initWithTimeIntervalSinceNow:0.1];
         [NSThread sleepUntilDate:date];
         [date release];
+		[subpool release];
     }
 }
 
 - (void) continousParseGPSd:(int) fd {
     NSDate *date;
     unsigned int i = 0;
-    
+	NSAutoreleasePool* subpool;
+
     while (_gpsShallRun && [self gpsd_parse:fd]) {
+		subpool = [[NSAutoreleasePool alloc] init];
         if ((i++ % 2 == 0) && (_status == Nil))
             [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:[self status]];
         date = [[NSDate alloc] initWithTimeIntervalSinceNow:0.5];
         [NSThread sleepUntilDate:date];
         [date release];
+		[subpool release];
     }
 }
 

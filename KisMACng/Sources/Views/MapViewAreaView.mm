@@ -184,6 +184,7 @@
     }
     
 exit:
+	[networks release];
     for(t=0; t<networkCount; t++) delete [] f[t];
     delete [] f;
     delete [] c;
