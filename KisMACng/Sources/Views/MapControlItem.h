@@ -1,6 +1,6 @@
 /*
         
-        File:			MapControlPanel.h
+        File:			MapControlItem.h
         Program:		KisMAC
 		Author:			Michael Roßberg
 						mick@binaervarianz.de
@@ -26,13 +26,30 @@
 #import <AppKit/AppKit.h>
 #import "BIImageView.h"
 
-@class MapControlItem;
+typedef struct {
+    float red;
+    float green;
+    float blue;
+    float alpha;
+} col;
 
-@interface MapControlPanel : BISubView {
-    MapControlItem  *_items[6];
+typedef struct {
+    col border;
+    col fill;
+} colState;
+
+@interface MapControlItem : BIImageView {
+    colState    _current;
+    colState    _delta;
+    colState    _target;
+    NSLock      *_zoomLock;
+    NSTimer     *_timeout;
+	int			_index;
+	NSPoint		_parentLocation;
 }
 
-- (void)mouseMovedToPoint:(NSPoint)p;
-- (void)mouseDownAtPoint:(NSPoint)p;
+- (id)initForID:(int)i;
+- (void)mouseEntered:(NSPoint)parentLocation;
+- (void)mouseClicked:(NSPoint)parentLocation;
 
 @end
