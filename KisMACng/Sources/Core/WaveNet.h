@@ -41,6 +41,7 @@ struct graphStruct {
 };
 
 @class NetView;
+@class WaveWeakContainer;
 
 @interface WaveNet : NSObject {
     int aNetID;			//network ID
@@ -81,13 +82,13 @@ struct graphStruct {
     NSString* aID;
     NSDate* aDate;		//current date
     NSDate* aFirstDate;
-    NSMutableDictionary* _ivData;   //dictionary of all weak packets
     NSMutableArray* aPacketsLog;    //array with a couple of packets to calculate checksum
     NSMutableArray* aARPLog;        //array with a couple of packets to do reinjection attack
     NSMutableArray* aACKLog;        //array with a couple of packets to do reinjection attack
     NSMutableDictionary* aClients;
     NSMutableArray* aClientKeys;
     NSMutableDictionary* _coordinates;
+    WaveWeakContainer *_ivData[4];       //one for each key id
     
     id _cracker;		//cracker for this net
  
@@ -144,7 +145,7 @@ struct graphStruct {
 - (NSString*)comment;
 - (void)setComment:(NSString*)comment;
 - (NSDictionary*)coordinates;
-- (NSDictionary*)ivData;
+- (WaveWeakContainer **)ivData;
 - (BOOL)passwordAvailable;
 
 - (NSString *)latitude;

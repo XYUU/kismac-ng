@@ -26,6 +26,7 @@
 #import "WaveNetWEPWeakCrack.h"
 #import "AirCrackWrapper.h"
 #import "KisMACNotifications.h"
+#import "WaveWeakContainer.h"
 #import <BIGeneric/BINSExtensions.h>
 
 #define RET { [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
@@ -34,8 +35,7 @@
 @implementation WaveNet(WEPWeakCrackExtension)
 
 - (void)performCrackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen {
-    int temp;
-    char keyID;
+    int temp, keyID;
     enum keyLen len;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
@@ -47,12 +47,19 @@
     NSParameterAssert(keyID <= 3 && keyID >= 0);
     len   = (temp >> 8) & 0xFF;
     NSParameterAssert(len == keyLen104bit || len == keyLen40bit);
-
+    
+    if (!_ivData[keyID]) RET;
+    if ([_ivData[keyID] count] < 8) RET; //need at least 8 IVs
+    
     AirCrackWrapper *a = [[AirCrackWrapper alloc] init];
     
     [a setKeyLen:len];
     [a setKeyID:keyID];
-    if (![a readIVs:_ivData]) { [a release]; RET; }
+    
+    @synchronized (_ivData[keyID]) {
+        [a setIVs:[_ivData[keyID] data]];
+    }
+    
     if ([a attack]) {
         NSData *d = [a key];
         const UInt8 *k = [d bytes];

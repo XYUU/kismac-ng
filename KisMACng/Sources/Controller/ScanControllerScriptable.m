@@ -405,7 +405,11 @@
 }
 
 - (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID {
-    WEPCHECKS;
+    if (_importOpen) return NO;
+    if (_curNet==Nil) return NO;
+    if ([_curNet passwordAvailable] != Nil) return YES;
+    if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO;
+    if ([_curNet uniqueIVs] < 8) return NO;
     if (keyLen != 13 && keyLen != 5) return NO;
     if (keyID < 0 || keyID > 3) return NO;
     

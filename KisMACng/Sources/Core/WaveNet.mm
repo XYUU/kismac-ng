@@ -36,6 +36,7 @@
 #import "KisMACNotifications.h"
 #import "GPSController.h"
 #import "NetView.h"
+#import "WaveWeakContainer.h"
 
 #define AMOD(x, y) ((x) % (y) < 0 ? ((x) % (y)) + (y) : (x) % (y))
 #define N 256
@@ -65,7 +66,6 @@ int lengthSort(id string1, id string2, void *context)
     
     aID = nil;
     
-    _ivData = [[NSMutableDictionary dictionary] retain];
     aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
     aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
     aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
@@ -104,102 +104,111 @@ int lengthSort(id string1, id string2, void *context)
 - (id)initWithCoder:(NSCoder *)coder {
     waypoint wp;
     int bssid[6];
-    
-    if ( [coder allowsKeyedCoding] ) {
-        if ([coder decodeObjectForKey:@"aFirstDate"] == Nil) {
-            NSLog(@"Invalid net, dropping!");
-            return Nil;
-        }
+    NSData *data;
         
-        self = [self init];
-        if (!self) return nil;
-    
-        _dataLock = [[NSRecursiveLock alloc] init];
-        [_dataLock lock];
-        aChannel = [coder decodeIntForKey:@"aChannel"];
-        _originalChannel = [coder decodeIntForKey:@"originalChannel"];
-        aNetID=[coder decodeIntForKey:@"aNetID"];
-        _packets=[coder decodeIntForKey:@"aPackets"];
-        aMaxSignal=[coder decodeIntForKey:@"aMaxSignal"];
-        aCurSignal=[coder decodeIntForKey:@"aCurSignal"];
-        _type=(networkType)[coder decodeIntForKey:@"aType"];
-        _isWep = (encryptionType)[coder decodeIntForKey:@"aIsWep"];
-        _dataPackets=[coder decodeIntForKey:@"aDataPackets"];
-        _liveCaptured=[coder decodeBoolForKey:@"_liveCaptured"];;
-        
-        for(int x=0; x<14; x++)
-            _packetsPerChannel[x]=[coder decodeIntForKey:[NSString stringWithFormat:@"_packetsPerChannel%i",x]];
-        
-        aBytes=[coder decodeDoubleForKey:@"aBytes"];
-        wp._lat =[coder decodeDoubleForKey:@"a_Lat"];
-        wp._long=[coder decodeDoubleForKey:@"a_Long"];
-	wp._elevation=[coder decodeDoubleForKey:@"a_Elev"];
-        
-        aLat = [[coder decodeObjectForKey:@"aLat"] retain];
-        aLong = [[coder decodeObjectForKey:@"aLong"] retain];
-	aElev = [[coder decodeObjectForKey:@"aElev"] retain];
-        
-        aID=[[coder decodeObjectForKey:@"aID"] retain];
-        if (aID!=Nil && sscanf([aID cString], "%2X%2X%2X%2X%2X%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) {
-            NSLog(@"Error could not decode ID %@!", aID);
-        }
-        
-        for (int x=0; x<6; x++)
-            aRawID[x] = bssid[x];
-        
-        _SSID=[[coder decodeObjectForKey:@"aSSID"] retain];
-        aBSSID=[[coder decodeObjectForKey:@"aBSSID"] retain];
-        if (![aBSSID isEqualToString:@"<no bssid>"]) {
-            if (aBSSID!=Nil && sscanf([aBSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
-                NSLog(@"Error could not decode BSSID %@!", aBSSID);
-            for (int x=0; x<6; x++)
-                aRawBSSID[x] = bssid[x];
-        } else {
-             for (int x=0; x<6; x++)
-                aRawBSSID[x] = bssid[0];
-        }
-        aDate=[[coder decodeObjectForKey:@"aDate"] retain];
-        aFirstDate=[[coder decodeObjectForKey:@"aFirstDate"] retain];
-        _ivData = [[coder decodeObjectForKey:@"ivData"] retain];
-        aPacketsLog=[[coder decodeObjectForKey:@"aPacketsLog"] retain];
-        aARPLog=[[coder decodeObjectForKey:@"aARPLog"] retain];
-        aACKLog=[[coder decodeObjectForKey:@"aACKLog"] retain];
-        _password=[[coder decodeObjectForKey:@"aPassword"] retain];
-        aComment=[[coder decodeObjectForKey:@"aComment"] retain];
-        _coordinates=[[coder decodeObjectForKey:@"_coordinates"] retain];
-        
-        aClients=[[coder decodeObjectForKey:@"aClients"] retain];
-        aClientKeys=[[coder decodeObjectForKey:@"aClientKeys"] retain];
-        
-        if (!_ivData) _ivData = [[NSMutableDictionary dictionary] retain];
-        if (!aPacketsLog) aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
-        if (!aARPLog) aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
-        if (!aACKLog) aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
-        if (!aClients) aClients=[[NSMutableDictionary dictionary] retain];
-        if (!aClientKeys) aClientKeys=[[NSMutableArray array] retain];
-        if (!aComment) aComment=[[NSString stringWithString:@""] retain];
-        if (!aLat) aLat = [[NSString stringWithString:@""] retain];
-        if (!aLong) aLong = [[NSString stringWithString:@""] retain];
-        if (!aElev) aElev = [[NSString stringWithString:@""] retain];
-        if (!_coordinates) _coordinates = [[NSMutableDictionary dictionary] retain];
-        
-        if (_originalChannel == 0) _originalChannel = aChannel;
-        _gotData = NO;
-        
-        _netView = [[NetView alloc] initWithNetwork:self];
-        [_netView setWep:_isWep];
-        [_netView setName:_SSID];
-        [_netView setCoord:wp];
-        
-        _firstPacket = NO;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSettings:) name:KisMACUserDefaultsChanged object:nil];
-        [self updateSettings:nil];
-        [_dataLock unlock];
-    } else {
+    if (![coder allowsKeyedCoding]) {
         NSLog(@"Cannot decode this way");
         return nil;
     }
+
+    if ([coder decodeObjectForKey:@"aFirstDate"] == Nil) {
+        NSLog(@"Invalid net, dropping!");
+        return Nil;
+    }
+    
+    self = [self init];
+    if (!self) return nil;
+
+    _dataLock = [[NSRecursiveLock alloc] init];
+    [_dataLock lock];
+    aChannel = [coder decodeIntForKey:@"aChannel"];
+    _originalChannel = [coder decodeIntForKey:@"originalChannel"];
+    aNetID=[coder decodeIntForKey:@"aNetID"];
+    _packets=[coder decodeIntForKey:@"aPackets"];
+    aMaxSignal=[coder decodeIntForKey:@"aMaxSignal"];
+    aCurSignal=[coder decodeIntForKey:@"aCurSignal"];
+    _type=(networkType)[coder decodeIntForKey:@"aType"];
+    _isWep = (encryptionType)[coder decodeIntForKey:@"aIsWep"];
+    _dataPackets=[coder decodeIntForKey:@"aDataPackets"];
+    _liveCaptured=[coder decodeBoolForKey:@"_liveCaptured"];;
+    
+    for(int x=0; x<14; x++)
+        _packetsPerChannel[x]=[coder decodeIntForKey:[NSString stringWithFormat:@"_packetsPerChannel%i",x]];
+    
+    aBytes=[coder decodeDoubleForKey:@"aBytes"];
+    wp._lat =[coder decodeDoubleForKey:@"a_Lat"];
+    wp._long=[coder decodeDoubleForKey:@"a_Long"];
+    wp._elevation=[coder decodeDoubleForKey:@"a_Elev"];
+    
+    aLat = [[coder decodeObjectForKey:@"aLat"] retain];
+    aLong = [[coder decodeObjectForKey:@"aLong"] retain];
+    aElev = [[coder decodeObjectForKey:@"aElev"] retain];
+    
+    aID=[[coder decodeObjectForKey:@"aID"] retain];
+    if (aID!=Nil && sscanf([aID cString], "%2X%2X%2X%2X%2X%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) {
+        NSLog(@"Error could not decode ID %@!", aID);
+    }
+    
+    for (int x=0; x<6; x++)
+        aRawID[x] = bssid[x];
+    
+    _SSID=[[coder decodeObjectForKey:@"aSSID"] retain];
+    aBSSID=[[coder decodeObjectForKey:@"aBSSID"] retain];
+    if (![aBSSID isEqualToString:@"<no bssid>"]) {
+        if (aBSSID!=Nil && sscanf([aBSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
+            NSLog(@"Error could not decode BSSID %@!", aBSSID);
+        for (int x=0; x<6; x++)
+            aRawBSSID[x] = bssid[x];
+    } else {
+         for (int x=0; x<6; x++)
+            aRawBSSID[x] = bssid[0];
+    }
+    aDate=[[coder decodeObjectForKey:@"aDate"] retain];
+    aFirstDate=[[coder decodeObjectForKey:@"aFirstDate"] retain];
+    
+    data = [coder decodeObjectForKey:@"ivData0"];
+    if (data) _ivData[0] = [[WaveWeakContainer alloc] initWithData:data];
+    data = [coder decodeObjectForKey:@"ivData1"];
+    if (data) _ivData[1] = [[WaveWeakContainer alloc] initWithData:data];
+    data = [coder decodeObjectForKey:@"ivData2"];
+    if (data) _ivData[2] = [[WaveWeakContainer alloc] initWithData:data];
+    data = [coder decodeObjectForKey:@"ivData3"];
+    if (data) _ivData[3] = [[WaveWeakContainer alloc] initWithData:data];
+    
+    aPacketsLog=[[coder decodeObjectForKey:@"aPacketsLog"] retain];
+    aARPLog=[[coder decodeObjectForKey:@"aARPLog"] retain];
+    aACKLog=[[coder decodeObjectForKey:@"aACKLog"] retain];
+    _password=[[coder decodeObjectForKey:@"aPassword"] retain];
+    aComment=[[coder decodeObjectForKey:@"aComment"] retain];
+    _coordinates=[[coder decodeObjectForKey:@"_coordinates"] retain];
+    
+    aClients=[[coder decodeObjectForKey:@"aClients"] retain];
+    aClientKeys=[[coder decodeObjectForKey:@"aClientKeys"] retain];
+    
+    if (!aPacketsLog) aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    if (!aARPLog) aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    if (!aACKLog) aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    if (!aClients) aClients=[[NSMutableDictionary dictionary] retain];
+    if (!aClientKeys) aClientKeys=[[NSMutableArray array] retain];
+    if (!aComment) aComment=[[NSString stringWithString:@""] retain];
+    if (!aLat) aLat = [[NSString stringWithString:@""] retain];
+    if (!aLong) aLong = [[NSString stringWithString:@""] retain];
+    if (!aElev) aElev = [[NSString stringWithString:@""] retain];
+    if (!_coordinates) _coordinates = [[NSMutableDictionary dictionary] retain];
+    
+    if (_originalChannel == 0) _originalChannel = aChannel;
+    _gotData = NO;
+    
+    _netView = [[NetView alloc] initWithNetwork:self];
+    [_netView setWep:_isWep];
+    [_netView setName:_SSID];
+    [_netView setCoord:wp];
+    
+    _firstPacket = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSettings:) name:KisMACUserDefaultsChanged object:nil];
+    [self updateSettings:nil];
+    [_dataLock unlock];
     return self;
 }
 
@@ -264,7 +273,6 @@ int lengthSort(id string1, id string2, void *context)
     [_netView setName:_SSID];
     [_netView setCoord:wp];
     
-    _ivData = [[NSMutableDictionary dictionary] retain];
     aPacketsLog = [[NSMutableArray arrayWithCapacity:20] retain];
     aARPLog  = [[NSMutableArray arrayWithCapacity:20] retain];
     aACKLog  = [[NSMutableArray arrayWithCapacity:20] retain];
@@ -328,7 +336,10 @@ int lengthSort(id string1, id string2, void *context)
             [coder encodeObject:aBSSID forKey:@"aBSSID"];
             [coder encodeObject:aDate forKey:@"aDate"];
             [coder encodeObject:aFirstDate forKey:@"aFirstDate"];
-            [coder encodeObject:_ivData forKey:@"ivData"];
+            [coder encodeObject:[_ivData[0] data] forKey:@"ivData0"];
+            [coder encodeObject:[_ivData[1] data] forKey:@"ivData1"];
+            [coder encodeObject:[_ivData[2] data] forKey:@"ivData2"];
+            [coder encodeObject:[_ivData[3] data] forKey:@"ivData3"];
             [coder encodeObject:aPacketsLog forKey:@"aPacketsLog"];
             [coder encodeObject:aARPLog forKey:@"aARPLog"];
             [coder encodeObject:aACKLog forKey:@"aACKLog"];
@@ -476,9 +487,6 @@ int lengthSort(id string1, id string2, void *context)
     networkType tempType;
     encryptionType encType;
     int* p;
-    id key;
-    NSDictionary *dict;
-    NSEnumerator *e;
     
     temp = [net maxSignal];
     if (aMaxSignal < temp) {
@@ -529,11 +537,15 @@ int lengthSort(id string1, id string2, void *context)
     [WaveHelper addDictionary:[net coordinates] toDictionary:_coordinates];
     
     //add all those unique ivs to the log file
-    dict = [net ivData];
-    e = [dict keyEnumerator];
-    while(key = [e nextObject]) {
-        [_ivData setObject:[dict objectForKey:key] forKey:key];
-    }
+    WaveWeakContainer **ivData = [net ivData];
+    if (_ivData[0]) [_ivData[0] addData:[ivData[0] data]];
+    else _ivData[0] = [[WaveWeakContainer alloc] initWithData:[ivData[0] data]];
+    if (_ivData[1]) [_ivData[1] addData:[ivData[1] data]];
+    else _ivData[1] = [[WaveWeakContainer alloc] initWithData:[ivData[1] data]];
+    if (_ivData[2]) [_ivData[2] addData:[ivData[2] data]];
+    else _ivData[2] = [[WaveWeakContainer alloc] initWithData:[ivData[2] data]];
+    if (_ivData[3]) [_ivData[3] addData:[ivData[3] data]];
+    else _ivData[3] = [[WaveWeakContainer alloc] initWithData:[ivData[3] data]];
     
     [aPacketsLog addObjectsFromArray:[net weakPacketsLog]];
     //sort them so that the smallest packet is in front of the array => faster cracking
@@ -618,17 +630,10 @@ int lengthSort(id string1, id string2, void *context)
                         [aACKLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
                     }
                     
-                    unsigned int tmp;
-                    NSNumber* num, *num2;
-
-                    //convert the iv to nextstep object
-                    tmp = body[3] << 24 | body[0] << 16 | body[1] << 8  | body[2];
-                    num = [NSNumber numberWithUnsignedInt: tmp];
-                    
-                    tmp = body[4] << 8 | body[5];
-                    num2 = [NSNumber numberWithUnsignedInt: tmp];
-                    
-                    [_ivData setObject:num2 forKey:num];
+                    if (body[3] <= 3) { //record the IV for a later weak key attack
+                        if (_ivData[body[3]] == nil) _ivData[body[3]] = [[WaveWeakContainer alloc] init];
+                        [_ivData[body[3]] setBytes:&body[4] forIV:&body[0]];
+                    }
                 }
             }
             break;
@@ -935,7 +940,7 @@ int lengthSort(id string1, id string2, void *context)
     return _packets;
 }
 - (int)uniqueIVs {
-    return [_ivData count];
+    return [_ivData[0] count] + [_ivData[1] count] + [_ivData[2] count] + [_ivData[3] count];
 }
 - (int)dataPackets {
     return _dataPackets;
@@ -971,7 +976,7 @@ int lengthSort(id string1, id string2, void *context)
 - (NSDictionary*)coordinates {
     return _coordinates;
 }
-- (NSDictionary*)ivData {
+- (WaveWeakContainer **)ivData {
     return _ivData;
 }
 - (BOOL)passwordAvailable {
@@ -1431,7 +1436,10 @@ typedef int (*SORTFUNC)(id, id, void *);
     [aPacketsLog release];
     [aARPLog release];
     [aACKLog release];
-    [_ivData release];
+    [_ivData[0] release];
+    [_ivData[1] release];
+    [_ivData[2] release];
+    [_ivData[3] release];
     [aClients release];
     [aClientKeys release];
     [aComment release];

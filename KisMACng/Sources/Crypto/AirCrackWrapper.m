@@ -26,6 +26,9 @@
 */
 
 #import "AirCrackWrapper.h"
+#import "WaveHelper.h"
+#import "ImportController.h"
+
 #import <unistd.h>
 int coeff_attacks[4][N_ATTACKS] =
 {
@@ -114,43 +117,12 @@ int safe_write( int fd, void *buf, size_t len )
     return key;
 }
 
-- (BOOL)readIVs:(NSDictionary*)ivs {
-    char *test_unique_ivs;          /* to avoid adding duplicates   */
-    int n, tmp, tmp2, keyID;
-    NSNumber *o;
-    NSEnumerator *e;
+- (void)setIVs:(NSData*)ivs {
+    NSParameterAssert(ivs);
+    NSParameterAssert([ivs length] % 5 == 0);
     
-    nb_ivs = 0;
-    
-    if( ! ( test_unique_ivs = (char *)malloc( 256 * 256 * 256 ) ) )  {
-        return NO;
-    }
-
-    memset( test_unique_ivs, 0, 256 * 256 * 256 );
-    
-    e = [ivs keyEnumerator];
-    while (o = [e nextObject]) {
-        tmp = [o intValue];
-        keyID =  ((tmp >> 24) & 0xFF);
-        if (keyid != keyID) continue;
-        
-        n = tmp & 0xFFFFFF; //extract the iv
-        if( test_unique_ivs[n] ) continue;
-        test_unique_ivs[n] = 1;
-
-        tmp2 = [[ivs objectForKey:o] intValue];
-        
-        /* add this IV and the first two encrypted bytes */
-        ivbuf[(nb_ivs * 5) + 0] = (tmp >> 16) & 0xFF;
-        ivbuf[(nb_ivs * 5) + 1] = (tmp >> 8)  & 0xFF;
-        ivbuf[(nb_ivs * 5) + 2] = tmp & 0xFF;
-        ivbuf[(nb_ivs * 5) + 3] = (tmp2 >> 8) & 0xFF;
-        ivbuf[(nb_ivs * 5) + 4] = tmp2 & 0xFF;
-        nb_ivs++;
-    }
-    
-    free(test_unique_ivs);
-    return nb_ivs > 8;
+    memcpy(ivbuf, [ivs bytes], [ivs length]);
+    nb_ivs = [ivs length] / 5;
 }
 
 
@@ -572,6 +544,10 @@ int cmp_votes( const void *bs1, const void *bs2 )
         if( B == weplen - 1 )
             tried++;
 
+        if (tried % 1000 == 0) {
+            if ([[WaveHelper importController] canceled]) return NO;
+            [[WaveHelper importController] setStatusField:[NSString stringWithFormat:NSLocalizedString(@"Checked %d,000 keys", "State for weak scheduling attack"), tried / 1000]];
+        }
         wepkey[B] = wpoll[B][depth[B]].index;
 
         if( B == 4 && weplen == 13 )
@@ -603,6 +579,8 @@ int cmp_votes( const void *bs1, const void *bs2 )
 
 - (BOOL)attack {
     int i;
+    
+    _im = [WaveHelper importController];
     
     NSParameterAssert(nb_ivs > 8);
     srand( time( NULL ) );

@@ -309,7 +309,8 @@
     
     _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
     [_importController setTitle:title];
-    
+    [WaveHelper setImportController:_importController];
+
     [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:@selector(crackDone:returnCode:contextInfo:) contextInfo:nil];
 }
 

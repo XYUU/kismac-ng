@@ -52,6 +52,8 @@ enum KoreK_attacks
     A_neg                       /* helps reject false positives */
 };
 
+@class ImportController;
+
 @interface AirCrackWrapper : NSObject {
     NSData *key;
     
@@ -76,6 +78,8 @@ enum KoreK_attacks
     int depth[13];                  /* how deep we are in the fudge */
     int _votes[13][N_ATTACKS][256];
 
+    ImportController *_im;
+    
     struct byte_stat
     {
         int index;
@@ -86,7 +90,7 @@ enum KoreK_attacks
 - (void)setKeyID:(int)keyID;
 - (void)setKeyLen:(int)keyLen;
 - (NSData*)key;
-- (BOOL)readIVs:(NSDictionary*)ivs;
+- (void)setIVs:(NSData*)ivs;
 - (BOOL)attack;
 
 @end
