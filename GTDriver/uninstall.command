@@ -15,7 +15,7 @@ sudo killall -HUP kextd
 
 echo "++++ Removing Startup Item ++++"
 SDEST=/Library/StartupItems/GTDriver
-$FROM/removeLoginItem.app
+/usr/bin/osascript $FROM/removeLoginItem.scpt
 sudo rm -rf $SDEST 
 
 echo
