@@ -99,9 +99,16 @@
     NSImageView *view = [[NSImageView alloc] init];
     [view setImage: _orgImage];
     [view setFrameSize: [_orgImage size]];
-        
+
+#if 0
     data = [view dataWithPDFInsideRect:[view frame]];
     [data writeToFile:[mapName stringByAppendingPathComponent:@"map.pdf"] atomically:NO];
+#else
+    data = [_orgImage TIFFRepresentation];
+	data = [[NSBitmapImageRep imageRepWithData:data] representationUsingType:NSPNGFileType properties:nil];
+    [data writeToFile:[mapName stringByAppendingPathComponent:@"map.png"] atomically:NO];
+#endif
+
     [view release];
     
     for (i=1;i<=2;i++) {
