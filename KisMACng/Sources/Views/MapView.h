@@ -43,6 +43,7 @@ enum selmode {
 @class BISubView;
 @class MapControlPanel;
 @class PointView;
+@class Trace;
 
 @interface MapView : BIView {
     NSString            *_status;
@@ -56,6 +57,7 @@ enum selmode {
     BOOL                _visible;
     NSImage             *_mapImage;
     NSImage             *_orgImage;
+    Trace               *_trace;
     
     waypoint            _wp[3];
     NSPoint             _old;
@@ -70,6 +72,7 @@ enum selmode {
     IBOutlet NSMenuItem *_setCurrentPoint;
     IBOutlet NSMenuItem *_showCurrentPoint;
     IBOutlet NSMenuItem *_showNetworks;
+    IBOutlet NSMenuItem *_showTrace;    
 }
 
 - (BOOL)saveToFile:(NSString*)fileName;
@@ -87,6 +90,7 @@ enum selmode {
 - (void)removeNetView:(NetView*)view;
 
 - (void)setShowNetworks:(BOOL)show;
+- (void)setShowTrace:(BOOL)show;
 
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;

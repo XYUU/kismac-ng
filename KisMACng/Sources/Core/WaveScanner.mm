@@ -29,6 +29,7 @@
 #import "Apple80211.h"
 #import "WaveDriver.h"
 #import "KisMACNotifications.h"
+#import "Trace.h"
 
 #ifndef CRCFUNCTION
     #define CRCFUNCTION(s) @"<not valid>"
@@ -72,6 +73,7 @@
     
     [d setObject:[info objectForKey:@"CFBundleVersion"] forKey:@"CreatorVersion"];
     [d setObject:[_container dataToSave] forKey:@"Networks"];
+    [d setObject:[[WaveHelper trace] trace] forKey:@"Trace"];
     
     return [NSKeyedArchiver archiveRootObject:d toFile:fileName];
 }
@@ -287,6 +289,7 @@
     d = data;
     
     if ([d objectForKey:@"Creator"]) { //could be a new file
+        [[WaveHelper trace] setTrace:[d objectForKey:@"Trace"]];
         return [_container loadData:[d objectForKey:@"Networks"]];
     } else {
         return [_container loadLegacyData:d]; //try to read legacy data
@@ -310,6 +313,7 @@
     d = data;
     
     if ([d objectForKey:@"Creator"]) { //could be a new file
+        [[WaveHelper trace] setTrace:[d objectForKey:@"Trace"]];
         return [_container importData:[d objectForKey:@"Networks"]];
     } else {
         return [_container importLegacyData:d]; //try to read legacy data

@@ -142,6 +142,11 @@
     return [NSNumber numberWithBool:YES];    
 }
 
+- (id)showTraceInMap:(NSScriptCommand*)command {
+    [[WaveHelper mapView] setShowTrace:[[command directParameter] boolValue]];
+    return [NSNumber numberWithBool:YES];    
+}
+
 - (id)setCurrentPosition:(NSScriptCommand*)command {
     NSDictionary *args = [command arguments];
     BOOL ret = [[WaveHelper mapView] setCurrentPostionToLatitude:[[args objectForKey:@"Latitude"] doubleValue] andLongitude:[[args objectForKey:@"Longitude"] doubleValue]];

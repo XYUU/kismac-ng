@@ -58,4 +58,5 @@
 - (IBAction)wordlist104bitMD5:(id)sender;
 
 - (IBAction)showNetworksInMap:(id)sender;
+- (IBAction)showTraceInMap:(id)sender;
 @end

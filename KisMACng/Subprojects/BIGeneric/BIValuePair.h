@@ -26,17 +26,20 @@
 #import <Foundation/Foundation.h>
 
 typedef struct _waypoint {
-    float _lat;
-    float _long;
-    float _elevation;
+    double _lat;
+    double _long;
+    double _elevation;
 } waypoint;
 
 @interface BIValuePair : NSObject <NSCopying> {
     double _x, _y;
 }
 
++ (id)valuePairFromWaypoint:(waypoint)w;
+
 - (double)getX;
 - (double)getY;
+- (waypoint)wayPoint;
 
 - (void)setPairX:(double)x Y:(double) y;
 - (void)setPairFromWaypoint:(waypoint)wp;

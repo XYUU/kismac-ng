@@ -28,6 +28,7 @@
                 "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
                 "KisMAC.Busy"                   = "busy:";
                 "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
+                "KisMAC.ShowTraceInMap"         = "showTraceInMap:";
                 "KisMAC.SetCurrentPosition"     = "setCurrentPosition:";
                 "KisMAC.SetWaypoint"            = "setWaypoint:";
                 "KisMAC.DownloadMap"            = "downloadMap:";
@@ -131,6 +132,11 @@
         };
         ShowNetworksInMap = {
             AppleEventCode = KMSN;
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSNumber<Bool>"; };
+        };
+        ShowTraceInMap = {
+            AppleEventCode = KMST;
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSNumber<Bool>"; };
         };

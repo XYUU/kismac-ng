@@ -51,6 +51,7 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 @class ImportController;
 @class GPSController;
 @class WaveDriver;
+@class Trace;
 
 @interface WaveHelper : NSObject {
 
@@ -85,6 +86,8 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 
 + (MapView*) mapView;
 + (void) setMapView:(MapView*)mv;
++ (Trace*) trace;
++ (void) setTrace:(Trace*)trace;
 
 + (NSColor*)intToColor:(NSNumber*)c;
 + (NSNumber*)colorToInt:(NSColor*)c;

@@ -28,6 +28,7 @@
 #import "GPSController.h"
 #import "WaveHelper.h"
 #import "KisMACNotifications.h"
+#import "Trace.h"
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -61,7 +62,6 @@ struct termios ttyset;
     _gpsShallRun    = NO;
     _debugEnabled   = NO;
     _lastAdd        = [[NSDate date] retain];
-    _trace          = [[NSMutableArray array] retain];
     _linesRead      = 0;
 
     [self setStatus:NSLocalizedString(@"GPS subsystem initialized but not running.", @"GPS status")];
@@ -191,11 +191,7 @@ struct termios ttyset;
 }
 
 - (void) resetTrace {
-    [_trace removeAllObjects];
-}
-
-- (void)setTraceArray:(NSArray*)trace {
-    [WaveHelper secureReplace:&_trace withObject:trace];
+    [[WaveHelper trace] setTrace:nil];
 }
 
 - (void)setTraceInterval:(int)interval {
@@ -206,6 +202,7 @@ struct termios ttyset;
 }
 
 - (void) setCurrentPointNS:(double)ns EW:(double)ew ELV:(double)elv{  //need to add elevation support here
+    waypoint w;
     _ns.dir = (ns<0 ? 'S' : 'N');
     _ew.dir = (ew<0 ? 'W' : 'E');
     
@@ -215,9 +212,10 @@ struct termios ttyset;
     [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
     [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
     
-    if (abs(ns)>=0 && abs(ns)<=90 && abs(ew)>=0 && abs(ew)<=180 && _reliable) {
-        [_trace addObject:[NSNumber numberWithDouble:ns]];
-        [_trace addObject:[NSNumber numberWithDouble:ew]];
+    if (abs(ns)>=0 && abs(ns)<=90 && abs(ew)>=0 && abs(ew)<=180) {
+        w._long = ew;
+        w._lat  = ns;
+        [[WaveHelper trace] addPoint:w];
     }
 }
 
@@ -227,10 +225,6 @@ struct termios ttyset;
 
 - (NSDate*) lastUpdate {
     return _lastUpdate;
-}
-
-- (NSArray*) traceArray {
-    return _trace;
 }
 
 #pragma mark -
@@ -286,7 +280,7 @@ int ss(char* inp, char* outp) {
 }
 
 - (bool)gps_parse:(int) fd {
-    int len, valid, x=0, y;
+    int len, valid, x=0;
     static int q = 0;
     char cvalid;
     static char gpsin[MAX_GPSBUF_LEN];
@@ -364,6 +358,18 @@ int ss(char* inp, char* outp) {
     if (q>80) q=0;
     
     if (updated) {
+        if (_reliable) {
+            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
+                waypoint w;
+                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
+                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
+            }
+        } else {
+            [[WaveHelper trace] cut];
+        }
+        [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+
         if ((_reliable)||(_onNoFix==0)) {
             if (ns.dir != 'S') _ns.dir = 'N';
             else _ns.dir = 'S';
@@ -375,26 +381,14 @@ int ss(char* inp, char* outp) {
             _ew.coordinates   = ewh + ew.coordinates / 60.0;
             if (elev.coordinates > -10000.00) _elev.coordinates = elev.coordinates;
 			
-			if (velkt > -1.0) {
-				_velkt = velkt;
-				_veldir = veldir;
-			}
-			
-			if (numsat > -1) {
-				_numsat = numsat;
-				_hdop = hdop;
-			}
+            if (velkt > -1.0) {
+                _velkt = velkt;
+                _veldir = veldir;
+            }
             
-            [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
-        
-            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
-                y = [_trace count];
-                if (y==0 || (fabs([[_trace objectAtIndex:y-2] doubleValue])!=_ns.coordinates) || (fabs([[_trace objectAtIndex:y-1] doubleValue])!=_ew.coordinates)) {
-                    [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
-        
-                    [_trace addObject:[NSNumber numberWithDouble:_ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0)]];
-                    [_trace addObject:[NSNumber numberWithDouble:_ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0)]];
-                }
+            if (numsat > -1) {
+                _numsat = numsat;
+                _hdop = hdop;
             }
         } else if(_onNoFix==2) {
             _ns.dir = 'N';
@@ -403,8 +397,7 @@ int ss(char* inp, char* outp) {
             _elev.coordinates = 0;
             _ns.coordinates = 0;
             _ew.coordinates = 0;
-            
-            [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+            _velkt = 0;
         }
     }
     
@@ -414,7 +407,7 @@ int ss(char* inp, char* outp) {
 }
 
 - (bool)gpsd_parse:(int) fd {
-    int len, valid, q;
+    int len, valid;
     char gpsbuf[MAX_GPSBUF_LEN];
     double ns, ew, elev;
 	float velkt;
@@ -447,6 +440,19 @@ int ss(char* inp, char* outp) {
         
         if (_debugEnabled) NSLog(@"GPSd data updated.");
 
+        if (_reliable) {
+            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
+                waypoint w;
+                w._lat  = _ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0);
+                w._long = _ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0);
+                if ([[WaveHelper trace] addPoint:w]) [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
+            }
+        } else {
+            [[WaveHelper trace] cut];
+        }
+        [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+
+
         if ((_reliable)||(_onNoFix==0)) {
             if (ns >= 0) _ns.dir = 'N';
             else _ns.dir = 'S';
@@ -457,19 +463,7 @@ int ss(char* inp, char* outp) {
             _ns.coordinates   = fabs(ns);
             _ew.coordinates   = fabs(ew);
             _elev.coordinates = elev;
-			_velkt = velkt;
-            
-            [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
-        
-            if (([_lastUpdate timeIntervalSinceDate:_lastAdd]>_traceInterval) && (_traceInterval != 100)) {
-                q = [_trace count];
-                if (q==0 || (fabs([[_trace objectAtIndex:q-2] doubleValue])!=_ns.coordinates) || (fabs([[_trace objectAtIndex:q-1] doubleValue])!=_ew.coordinates)) {
-                    [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
-        
-                    [_trace addObject:[NSNumber numberWithDouble:_ns.coordinates * ((_ns.dir=='N') ? 1.0 : -1.0)]];
-                    [_trace addObject:[NSNumber numberWithDouble:_ew.coordinates * ((_ew.dir=='E') ? 1.0 : -1.0)]];
-                }
-            }
+            _velkt = velkt;
         } else if(_onNoFix==2) {
             _ns.dir = 'N';
             _ew.dir = 'E';
@@ -477,9 +471,7 @@ int ss(char* inp, char* outp) {
             _elev.coordinates = 0;
             _ns.coordinates = 0;
             _ew.coordinates = 0;
-			_velkt = 0;
-            
-            [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
+            _velkt = 0;
         }
     } else {
         NSLog(@"GPSd parsing failure");
@@ -710,7 +702,7 @@ int ss(char* inp, char* outp) {
     [_gpsLock release];
     [_gpsDevice release];
     [_lastAdd release];
-    [_trace release];
+    [super dealloc];
 }
 
 @end

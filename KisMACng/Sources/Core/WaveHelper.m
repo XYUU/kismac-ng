@@ -72,6 +72,7 @@ static NSWindow* aMainWindow;
 static GPSController* aGPSController;
 static MapView *_mapView;
 static NSMutableDictionary *_probes = Nil;
+static Trace *_trace;
 static ImportController *_im;
 static ScanController *_scanController;
 
@@ -366,6 +367,14 @@ static ScanController *_scanController;
 
 + (void) setMapView:(MapView*)mv {
     _mapView = mv;
+}
+
++ (Trace*) trace {
+    return _trace;
+}
+
++ (void) setTrace:(Trace*)trace {
+    _trace = trace;
 }
 
 + (NSColor*)intToColor:(NSNumber*)c {

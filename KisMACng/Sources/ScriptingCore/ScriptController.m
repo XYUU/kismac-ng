@@ -267,6 +267,12 @@
     [ScriptingEngine selfSendEvent:'KMSN' withDefaultArg:[NSAppleEventDescriptor descriptorWithBoolean:show]];
 }
 
+- (IBAction)showTraceInMap:(id)sender {
+    BOOL show = ([sender state] == NSOffState);
+    
+    [ScriptingEngine selfSendEvent:'KMST' withDefaultArg:[NSAppleEventDescriptor descriptorWithBoolean:show]];
+}
+
 
 #pragma mark -
 

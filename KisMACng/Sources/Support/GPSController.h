@@ -47,7 +47,6 @@ struct _position {
     float   _hdop;
     
     struct _position    _ns, _ew, _elev;
-    NSMutableArray*     _trace;
     NSDate*             _lastAdd;
     NSString*           _position;
     NSString*           _gpsDevice;
@@ -60,8 +59,6 @@ struct _position {
 - (bool)reliable;
 - (void)resetTrace;
 - (bool)gpsRunning;
-- (NSArray*)traceArray;
-- (void)setTraceArray:(NSArray*)trace;
 - (void)setTraceInterval:(int)interval;
 - (void)setTripmateMode:(bool)mode;
 - (void)setOnNoFix:(int)onNoFix;

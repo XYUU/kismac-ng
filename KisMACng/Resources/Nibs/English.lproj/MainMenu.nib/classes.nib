@@ -212,6 +212,7 @@
                 showMap = id; 
                 showNetworks = id; 
                 showNetworksInMap = id; 
+                showTraceInMap = id; 
                 showTrafficView = id; 
                 toggleScan = id; 
                 wordlist104bitApple = id; 

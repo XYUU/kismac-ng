@@ -1,8 +1,8 @@
 /*
         
-        File:			CustomScrollView.h
+        File:			Trace.h
         Program:		KisMAC
-	Author:			Michael Ro§berg
+	Author:			Michael Rossberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -23,17 +23,26 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import <AppKit/AppKit.h>
-#import "GPSController.h"
+#import <Cocoa/Cocoa.h>
+#import <BIGeneric/BIValuePair.h>
+#import "BISubView.h"
 
-@interface CustomScrollView : NSScrollView {
-    IBOutlet NSView* _view;
-    IBOutlet NSView* _contView;
-    IBOutlet NSMenuItem* _smaller;
+enum traceState {
+    stateNoPointPresent,
+    stateFirstPointPresent,
+    stateMultiPointsPresent,
+};
 
-    GPSController* g;
+@interface Trace : BISubView {
+    NSMutableArray  *_trace;
+    enum traceState _state;
+    BIValuePair     *_lastPoint;
 }
 
-- (IBAction)bigger:(id)sender;
-- (IBAction)smaller:(id)sender;
+- (BOOL)addPoint:(waypoint)w;
+- (void)cut;
+
+- (BOOL)setTrace:(NSMutableArray*)trace;
+- (NSMutableArray*)trace;
+
 @end

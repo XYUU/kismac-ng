@@ -12,6 +12,7 @@ search box is working
 added Prism GT Support
 moved to subversion
 minor bugfixes in installer
+made trace saveable, trace is not continued if no fix recieved
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view

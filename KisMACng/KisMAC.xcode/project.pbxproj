@@ -2180,6 +2180,8 @@
 			children = (
 				00971F3B06E4FA52004307EA,
 				003533FF06A5DD8500AB4577,
+				00A622A706FEE4FB005D248A,
+				00A622A806FEE4FB005D248A,
 				00CBA33E06DB8FDE000ACD19,
 				00CBA33F06DB8FDE000ACD19,
 				00C5F13206DE0EAF001EC02F,
@@ -2204,11 +2206,7 @@
 		003533FF06A5DD8500AB4577 = {
 			children = (
 				0035340006A5DD8500AB4577,
-				0035340106A5DD8500AB4577,
-				0035340206A5DD8500AB4577,
-				0035340306A5DD8500AB4577,
 				0035340606A5DD8500AB4577,
-				0035340706A5DD8500AB4577,
 				0035340806A5DD8500AB4577,
 				0035340906A5DD8500AB4577,
 			);
@@ -2225,43 +2223,11 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		0035340106A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = AdvNetView.mm;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340206A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = CustomScrollView.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340306A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = CustomScrollView.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		0035340606A5DD8500AB4577 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			path = TraceView.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340706A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = TraceView.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3012,32 +2978,8 @@
 			settings = {
 			};
 		};
-		0035347A06A5DD8500AB4577 = {
-			fileRef = 0035340106A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0035347B06A5DD8500AB4577 = {
-			fileRef = 0035340206A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0035347C06A5DD8500AB4577 = {
-			fileRef = 0035340306A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		0035347F06A5DD8500AB4577 = {
 			fileRef = 0035340606A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0035348006A5DD8500AB4577 = {
-			fileRef = 0035340706A5DD8500AB4577;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -3445,6 +3387,34 @@
 		};
 		009B192406FC83A800E8883A = {
 			fileRef = 009B192206FC83A800E8883A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00A622A706FEE4FB005D248A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = Trace.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00A622A806FEE4FB005D248A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = Trace.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00A622A906FEE4FB005D248A = {
+			fileRef = 00A622A706FEE4FB005D248A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00A622AA06FEE4FB005D248A = {
+			fileRef = 00A622A806FEE4FB005D248A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -4658,7 +4628,6 @@
 				0035347506A5DD8500AB4577,
 				0035347706A5DD8500AB4577,
 				0035347906A5DD8500AB4577,
-				0035347B06A5DD8500AB4577,
 				0035347F06A5DD8500AB4577,
 				0035348106A5DD8500AB4577,
 				0035348506A5DD8500AB4577,
@@ -4693,6 +4662,7 @@
 				00E1426D06E62A44009DC179,
 				009B192306FC83A800E8883A,
 				005E817206FDCFF20016F5E7,
+				00A622A906FEE4FB005D248A,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4849,9 +4819,6 @@
 				0035347406A5DD8500AB4577,
 				0035347606A5DD8500AB4577,
 				0035347806A5DD8500AB4577,
-				0035347A06A5DD8500AB4577,
-				0035347C06A5DD8500AB4577,
-				0035348006A5DD8500AB4577,
 				0035348206A5DD8500AB4577,
 				0035348606A5DD8500AB4577,
 				0035348806A5DD8500AB4577,
@@ -4885,6 +4852,7 @@
 				00E1426E06E62A44009DC179,
 				009B192406FC83A800E8883A,
 				005E817306FDCFF20016F5E7,
+				00A622AA06FEE4FB005D248A,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,6 +35,7 @@
 #import "MapControlPanel.h"
 #import "PointView.h"
 #import "WayPoint.h"
+#import "Trace.h"
 
 @implementation MapView
 
@@ -55,6 +56,11 @@
     _pView = [[PointView alloc] init];
     [_pView setVisible:NO];
     [_moveContainer addSubView:_pView];
+    
+    _trace = [[Trace alloc] initWithSize:NSMakeSize(300000,300000)];
+    [_trace setVisible:NO];
+    [_moveContainer addSubView:_trace];
+    [WaveHelper setTrace:_trace];
     
     _gpsStatusView = [[BITextView alloc] init];
     [self _setGPSStatus:NSLocalizedString(@"No GPS device available.", "gps status")];
@@ -466,6 +472,12 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)setShowTrace:(BOOL)show {
+    [_trace setVisible:show];
+    [_showTrace setState:(show ? NSOnState : NSOffState)];
+    [self setNeedsDisplay:YES];
+}
+
 #pragma mark -
 
 - (void)dealloc {
@@ -481,6 +493,7 @@
     [_mapImage release];
     [_orgImage release];
     [_pView release];
+    [_trace release];
     
     [super dealloc];
 }

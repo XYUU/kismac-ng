@@ -47,6 +47,12 @@
     return;
 }
 
++ (id)valuePairFromWaypoint:(waypoint)w {
+    BIValuePair *vp = [[BIValuePair alloc] init];
+    [vp setPairFromWaypoint:w];
+    return [vp autorelease];
+}
+
 - (double)getX {
     return _x;
 }
@@ -63,6 +69,13 @@
 - (void)setPairFromWaypoint:(waypoint)wp {
     _x = wp._long;
     _y = wp._lat;
+}
+
+- (waypoint)wayPoint {
+    waypoint w;
+    w._long = _x;
+    w._lat  = _y;
+    return w;
 }
 
 - (id)copyWithZone:(NSZone *)zone {

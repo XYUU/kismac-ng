@@ -147,7 +147,7 @@ in Safari.");
     }
     close(sockd);
 
-    NSLog(@"Response from expedia %@",s);
+    //NSLog(@"Response from expedia %@",s);
     
     myMessage = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, FALSE);
     if (!CFHTTPMessageAppendBytes(myMessage, [s cString], [s length])) {
