@@ -1,6 +1,8 @@
 // !$*UTF8*$!
 {
 	00F0FE3506AC5D81006D4119 = {
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
 		};
@@ -11,9 +13,9 @@
 		isa = PBXCodeSenseManager;
 		usesDefaults = 0;
 		wantsCodeCompletion = 0;
-		wantsCodeCompletionAutoPopup = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
+		wantsCodeCompletionListAlways = 0;
 		wantsCodeCompletionOnlyMatchingItems = 1;
 		wantsCodeCompletionParametersIncluded = 1;
 		wantsCodeCompletionPlaceholdersInserted = 1;
@@ -26,26 +28,6 @@
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRect = "{{0, 0}, {791, 419}}";
 		};
-	};
-	00F0FE7906AC5F30006D4119 = {
-		fRef = 00F0FE4006AC5E79006D4119;
-		isa = PBXTextBookmark;
-		name = "AiroJackFrame.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1065;
-		vrLoc = 0;
-	};
-	00F0FE7A06AC5F30006D4119 = {
-		fRef = 00F0FE4006AC5E79006D4119;
-		isa = PBXTextBookmark;
-		name = "AiroJackFrame.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1065;
-		vrLoc = 0;
 	};
 	089C1669FE841209C02AAC07 = {
 		activeBuildStyle = 06AA1265FFB2107B11CA28AA;
@@ -60,9 +42,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					544,
+					242,
 					20,
-					99,
+					48,
 					43,
 					43,
 					20,
@@ -82,10 +64,10 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					463,
-					100,
+					210,
+					50,
 					20,
-					100,
+					50,
 					43,
 					43,
 				);
@@ -99,7 +81,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 111959424;
+			PBXPerProjectTemplateStateSaveDate = 123528929;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -262,6 +244,17 @@
 						recursive = 1;
 						regex = "?*\\.[mcMC]";
 						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					clz = XDDesignSmartGroup;
+					description = "Displays Xdesign models";
+					globalID = 2E4A936305E6979E00701470;
+					name = Design;
+					preferences = {
+						image = Design;
+						isLeaf = 0;
 					};
 				},
 			);
@@ -464,11 +457,7 @@
 				};
 				RubberWindowFrame = "50 239 1014 593 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 111959424;
-		};
-		perUserProjectItems = {
-			00F0FE7906AC5F30006D4119 = 00F0FE7906AC5F30006D4119;
-			00F0FE7A06AC5F30006D4119 = 00F0FE7A06AC5F30006D4119;
+			PBXWorkspaceStateSaveDate = 123528929;
 		};
 		sourceControlManager = 00F0FE3506AC5D81006D4119;
 		userBuildSettings = {

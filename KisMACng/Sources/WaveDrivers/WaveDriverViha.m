@@ -91,8 +91,18 @@ static bool explicitlyLoadedViha = NO;
         airportContext = Nil;
     }
     
-    if (![WaveHelper runScript:@"viha_prep.sh"]) return 2;
-    
+    if (![WaveHelper runScript:@"viha_prep.sh"]) {
+	   if ([WaveHelper isServiceAvailable:"AirPortDriver"] && WirelessIsAvailable()) {
+			if (WirelessAttach(&airportContext, 0) == 0) {
+				WirelessSetEnabled(airportContext, 1);
+				WirelessSetPower(airportContext, 1);
+				WirelessDetach(airportContext);
+			}
+			airportContext = Nil;
+		}
+ 		return 2;
+    }
+	
     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
     
     for(x = 0; x < 100; x++) {

@@ -206,6 +206,15 @@
     }
     
     [self showBusy:@selector(performExportToServer:) withArg:[NSNumber numberWithBool:YES]];
+
+	if (_asyncFailure) {
+        NSBeginCriticalAlertSheet(
+        NSLocalizedString(@"Export failed", "Export failure dialog title"),
+        OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
+        _lastError
+        );
+    
+	}
 }
 
 - (void)performExportToServer:(id)reportErrors {
@@ -263,14 +272,13 @@
         default:
             errorStr = NSLocalizedString(@"The Server answerd with an unknown error code! Please check for a new KisMAC version.", "For export Server.");
         }
-        
-        NSBeginCriticalAlertSheet(
-        NSLocalizedString(@"Export failed", "Export failure dialog title"),
-        OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
-        errorStr
-        );
-       
-    }
+		
+		_asyncFailure = YES;
+		[_lastError autorelease];
+		_lastError = [errorStr retain];
+	} else {
+		_asyncFailure = NO;
+	}
     [stream release];
 }
 

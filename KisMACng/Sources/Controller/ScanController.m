@@ -516,6 +516,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [aStatusItem release];
     [aStatusBar release];
     [_fileName release];
+	[_lastError release];
 
     [super dealloc];
 }

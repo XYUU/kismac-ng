@@ -80,6 +80,7 @@ typedef enum {
     int _crackType;				//weak or bruteforce, just to show the right error message
     SEL _busyFunction;
     bool _asyncFailure;
+	NSString *_lastError;
     NSString *_activeAttackNetID;
     
     IBOutlet WaveContainer      *_container;
