@@ -1,110 +1,8 @@
 // !$*UTF8*$!
 {
-	0014505D06B4F49100FC47B9 = {
-		fRef = 00F0FDB706AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackFrame.h: 15";
-		rLen = 0;
-		rLoc = 517;
-		rType = 0;
-		vrLen = 1255;
-		vrLoc = 0;
-	};
-	0014505E06B4F49100FC47B9 = {
-		fRef = 00F0FDB806AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "#include <IOKit/IODataQueue.h>\n";
-		rLen = 31;
-		rLoc = 1181;
-		rType = 0;
-		vrLen = 1428;
-		vrLoc = 312;
-	};
-	0014505F06B4F49100FC47B9 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1335;
-		vrLoc = 0;
-	};
-	0014506006B4F49100FC47B9 = {
-		fRef = 00F0FDB206AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackDriver.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1142;
-		vrLoc = 2405;
-	};
-	0014506106B4F49100FC47B9 = {
-		fRef = 00F0FDB506AC59A9006D4119;
-		isa = PBXBookmark;
-	};
-	0014506206B4F49100FC47B9 = {
-		fRef = 00F0FDB706AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackFrame.h: 15";
-		rLen = 0;
-		rLoc = 517;
-		rType = 0;
-		vrLen = 1255;
-		vrLoc = 0;
-	};
-	0014506306B4F49100FC47B9 = {
-		fRef = 00F0FDB206AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackDriver.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1142;
-		vrLoc = 2405;
-	};
-	0014506406B4F49100FC47B9 = {
-		fRef = 00F0FDB806AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "#include <IOKit/IODataQueue.h>\n";
-		rLen = 31;
-		rLoc = 1181;
-		rType = 0;
-		vrLen = 1428;
-		vrLoc = 312;
-	};
-	0014506506B4F49100FC47B9 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1335;
-		vrLoc = 0;
-	};
-	0014506606B4F49100FC47B9 = {
-		fRef = 00F0FDB206AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackDriver.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1142;
-		vrLoc = 2405;
-	};
-	0014506706B4F49100FC47B9 = {
-		fRef = 00F0FDB506AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackDriver.h: 51";
-		rLen = 0;
-		rLoc = 1577;
-		rType = 0;
-		vrLen = 1165;
-		vrLoc = 1011;
-	};
 	0073144706AC5956007FD51E = {
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
 		};
@@ -115,14 +13,45 @@
 		isa = PBXCodeSenseManager;
 		usesDefaults = 0;
 		wantsCodeCompletion = 0;
-		wantsCodeCompletionAutoPopup = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
+		wantsCodeCompletionListAlways = 0;
 		wantsCodeCompletionOnlyMatchingItems = 1;
 		wantsCodeCompletionParametersIncluded = 1;
 		wantsCodeCompletionPlaceholdersInserted = 1;
 		wantsCodeCompletionTabCompletes = 1;
 		wantsIndex = 0;
+	};
+	0088FA6307436BD000246805 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXBookmark;
+	};
+	0088FA6E07436C6600246805 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		rLen = 0;
+		rLoc = 797;
+		rType = 1;
+	};
+	0088FA7907438AD200246805 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackCard.cpp: 697";
+		rLen = 0;
+		rLoc = 19969;
+		rType = 0;
+		vrLen = 1343;
+		vrLoc = 19397;
+	};
+	0088FA7A07438AD200246805 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackCard.cpp: 798";
+		rLen = 0;
+		rLoc = 23038;
+		rType = 0;
+		vrLen = 400;
+		vrLoc = 22829;
 	};
 	00F0FDAF06AC59A9006D4119 = {
 		uiCtxt = {
@@ -134,9 +63,10 @@
 	};
 	00F0FDB106AC59A9006D4119 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 13943}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1057, 565}}";
+			sepNavIntBoundsRect = "{{0, 0}, {980, 13957}}";
+			sepNavSelRange = "{19969, 0}";
+			sepNavVisRect = "{{0, 9338}, {980, 693}}";
+			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
 	00F0FDB206AC59A9006D4119 = {
@@ -181,46 +111,6 @@
 			sepNavVisRect = "{{0, 163}, {1057, 565}}";
 		};
 	};
-	00F0FDC806AC5B0E006D4119 = {
-		fRef = 32D94FCF0562CBF700B6AF17;
-		isa = PBXTextBookmark;
-		name = "Info.plist: 45";
-		rLen = 0;
-		rLoc = 1392;
-		rType = 0;
-		vrLen = 1172;
-		vrLoc = 983;
-	};
-	00F0FDC906AC5B0E006D4119 = {
-		fRef = 089C167EFE841241C02AAC07;
-		isa = PBXTextBookmark;
-		name = "English: 7";
-		rLen = 0;
-		rLoc = 279;
-		rType = 0;
-		vrLen = 279;
-		vrLoc = 0;
-	};
-	00F0FDCB06AC5B0E006D4119 = {
-		fRef = 089C167EFE841241C02AAC07;
-		isa = PBXTextBookmark;
-		name = "English: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 139;
-		vrLoc = 0;
-	};
-	00F0FDCC06AC5B0E006D4119 = {
-		fRef = 32D94FCF0562CBF700B6AF17;
-		isa = PBXTextBookmark;
-		name = "Info.plist: 45";
-		rLen = 0;
-		rLoc = 1392;
-		rType = 0;
-		vrLen = 1172;
-		vrLoc = 983;
-	};
 	089C1669FE841209C02AAC07 = {
 		activeBuildStyle = 06AA1266FFB2107B11CA28AA;
 		activeTarget = 32D94FC30562CBF700B6AF17;
@@ -236,9 +126,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					772,
+					705,
 					20,
-					137,
+					125,
 					43,
 					43,
 					20,
@@ -291,7 +181,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 112453173;
+			PBXPerProjectTemplateStateSaveDate = 121858958;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -454,6 +344,17 @@
 						recursive = 1;
 						regex = "?*\\.[mcMC]";
 						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					clz = XDDesignSmartGroup;
+					description = "Displays Xdesign models";
+					globalID = 2E4A936305E6979E00701470;
+					name = Design;
+					preferences = {
+						image = Design;
+						isLeaf = 0;
 					};
 				},
 			);
@@ -687,24 +588,13 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 112453173;
+			PBXWorkspaceStateSaveDate = 121858958;
 		};
 		perUserProjectItems = {
-			0014505D06B4F49100FC47B9 = 0014505D06B4F49100FC47B9;
-			0014505E06B4F49100FC47B9 = 0014505E06B4F49100FC47B9;
-			0014505F06B4F49100FC47B9 = 0014505F06B4F49100FC47B9;
-			0014506006B4F49100FC47B9 = 0014506006B4F49100FC47B9;
-			0014506106B4F49100FC47B9 = 0014506106B4F49100FC47B9;
-			0014506206B4F49100FC47B9 = 0014506206B4F49100FC47B9;
-			0014506306B4F49100FC47B9 = 0014506306B4F49100FC47B9;
-			0014506406B4F49100FC47B9 = 0014506406B4F49100FC47B9;
-			0014506506B4F49100FC47B9 = 0014506506B4F49100FC47B9;
-			0014506606B4F49100FC47B9 = 0014506606B4F49100FC47B9;
-			0014506706B4F49100FC47B9 = 0014506706B4F49100FC47B9;
-			00F0FDC806AC5B0E006D4119 = 00F0FDC806AC5B0E006D4119;
-			00F0FDC906AC5B0E006D4119 = 00F0FDC906AC5B0E006D4119;
-			00F0FDCB06AC5B0E006D4119 = 00F0FDCB06AC5B0E006D4119;
-			00F0FDCC06AC5B0E006D4119 = 00F0FDCC06AC5B0E006D4119;
+			0088FA6307436BD000246805 = 0088FA6307436BD000246805;
+			0088FA6E07436C6600246805 = 0088FA6E07436C6600246805;
+			0088FA7907438AD200246805 = 0088FA7907438AD200246805;
+			0088FA7A07438AD200246805 = 0088FA7A07438AD200246805;
 		};
 		sourceControlManager = 0073144706AC5956007FD51E;
 		userBuildSettings = {

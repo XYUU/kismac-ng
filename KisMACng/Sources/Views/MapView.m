@@ -247,9 +247,11 @@
  
     [self _updateStatus];
     [self _alignNetworks];
-    [self setNeedsDisplay:YES];
+    [self _centerCurPos];
+	[self setNeedsDisplay:_visible];
     
     if (_selmode == which) [self _alignWayPoint];
+	
     [[NSNotificationCenter defaultCenter] postNotificationName:KisMACAdvNetViewInvalid object:self];
     
     return YES;
@@ -260,6 +262,7 @@
     
     [[WaveHelper gpsController] setCurrentPointNS:lat EW:lon ELV:0];
     [self _alignCurrentPos];
+	[self _centerCurPos];
     [self setNeedsDisplay:_visible];
     return YES;
 }

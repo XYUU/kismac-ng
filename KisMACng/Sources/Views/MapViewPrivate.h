@@ -35,6 +35,7 @@
 - (void)_alignWayPoint;
 - (void)_setStatus:(NSString*)status;
 - (void)_updateStatus;
+- (void)_centerCurPos;
 - (void)_setGPSStatus:(NSString*)status;
 
 @end

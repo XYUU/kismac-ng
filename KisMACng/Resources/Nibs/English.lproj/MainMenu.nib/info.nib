@@ -11,7 +11,7 @@
 		<key>1200</key>
 		<string>274 344 731 449 0 0 1280 832 </string>
 		<key>1201</key>
-		<string>274 353 731 429 0 0 1280 832 </string>
+		<string>205 -7 731 429 0 0 1280 832 </string>
 		<key>1202</key>
 		<string>256 327 767 484 0 0 1280 832 </string>
 		<key>1290</key>
@@ -39,6 +39,6 @@
 		<integer>21</integer>
 	</array>
 	<key>IBSystem Version</key>
-	<string>7M34</string>
+	<string>7R28</string>
 </dict>
 </plist>

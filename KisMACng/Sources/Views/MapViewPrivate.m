@@ -156,8 +156,26 @@
     if (_visible) [self setNeedsDisplay:YES];
 }
 
+- (void)_centerCurPos {
+	NSPoint p;
+	waypoint w;
+	
+	if (!_autoCenter) return;
+	
+	w = [[WaveHelper gpsController] currentPoint];
+	p = [self pixelForCoordinate:w];
+	
+	_center.x = (p.x / _zoomFact);
+    _center.y = (p.y / _zoomFact);
+    
+	[self _align];
+    [self setNeedsDisplay:_visible];
+}
+
 - (void)_updateGPSStatus:(NSNotification*)note {
     if ([(NSString*)[note object] compare:_gpsStatus] == NSOrderedSame) return;
+
+	[self _centerCurPos];
 
     [self _setGPSStatus:[note object]];
     [self _alignCurrentPos];
