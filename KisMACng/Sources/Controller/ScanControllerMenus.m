@@ -246,7 +246,7 @@
     data = [scanner webServiceData];
     
     // Create a new url based upon the user entered string
-    url = [NSURL URLWithString: @"http://binaervarianz.de/projekte/programmieren/kismac/.uploadnets.php"];
+    url = [NSURL URLWithString: @"http://kismac.binaervarianz.de/_uploadnets.php"];
     
     stream = [[HTTPStream alloc] initWithURL:url andPostVariables:[NSDictionary dictionaryWithObjectsAndKeys:
         account,    @"user",

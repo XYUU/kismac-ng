@@ -79,7 +79,7 @@ ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType type, void *c
     [_alwaysDeny setEnabled:NO];
     
     // Create a new url based upon the user entered string
-    url = [NSURL URLWithString: @"http://binaervarianz.de/projekte/programmieren/kismac/errortrans.php"];
+    url = [NSURL URLWithString: @"http://kismac.binaervarianz.de/_errortrans.php"];
     //url = [NSURL URLWithString: @"http://localhost/projekte/programmieren/kismac/errortrans.php"];
     	
     // Get data for POST body
@@ -87,7 +87,8 @@ ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType type, void *c
     [topost appendFormat:@"report=%@", [WaveHelper urlEncodeString:[_report string]]];
     [topost appendFormat:@"&comment=%@", [WaveHelper urlEncodeString:[_comment string]]];
     [topost appendFormat:@"&mail=%@", [WaveHelper urlEncodeString:[_mail stringValue]]];
-    [topost appendFormat:@"&version=%@", [WaveHelper urlEncodeString:[[WaveHelper mainWindow] title]]];
+    [topost appendFormat:@"&version=%@", [WaveHelper urlEncodeString:[[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]]];
+    [topost appendFormat:@"&date=%@", [WaveHelper urlEncodeString:[NSString stringWithFormat:@"%s %s", __DATE__, __TIME__]]];
     
     data = [topost dataUsingEncoding: NSUTF8StringEncoding];
     

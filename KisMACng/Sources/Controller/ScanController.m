@@ -160,9 +160,9 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopScanForced:)      name:KisMACStopScanForced       object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkAdded:)        name:KisMACNetworkAdded         object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePrefs:)         name:KisMACUserDefaultsChanged  object:nil];
-
-    NSLog(@"KiMAC startup done. Homedir is %s NSAppKitVersionNumber: %f",[[[NSBundle mainBundle] bundlePath] fileSystemRepresentation], NSAppKitVersionNumber);
-    [sets setObject:[[[NSBundle mainBundle] bundlePath] stringByAbbreviatingWithTildeInPath] forKey:@"KisMACHomeDir"];
+	
+	NSLog(@"KiMAC startup done. Build from %@. Homedir is %s. NSAppKitVersionNumber: %f", [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__], [[[NSBundle mainBundle] bundlePath] fileSystemRepresentation], NSAppKitVersionNumber);
+	[sets setObject:[[[NSBundle mainBundle] bundlePath] stringByAbbreviatingWithTildeInPath] forKey:@"KisMACHomeDir"];
 }
 
 #pragma mark -

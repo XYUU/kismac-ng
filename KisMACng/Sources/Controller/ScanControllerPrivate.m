@@ -445,7 +445,7 @@
 - (void)busyDone {
     if (--_importOpen > 0) return; //still retains
     
-    [NSApp endSheet:[_importController window]];
+    if (_importController) [NSApp endSheet:[_importController window]];
     [[_importController window] orderOut:self];
     [WaveHelper secureRelease:&_importController];   
 }
