@@ -2185,7 +2185,7 @@
 				00CBA33E06DB8FDE000ACD19,
 				00CBA33F06DB8FDE000ACD19,
 				00C5F13206DE0EAF001EC02F,
-				00C5F13306DE0EAF001EC02F,
+				009D64F206FF73BA00B0F1EC,
 				00C5F12A06DE0C98001EC02F,
 				00C5F12B06DE0C98001EC02F,
 				0090AC8306E5E3250096C5FC,
@@ -2206,9 +2206,6 @@
 		003533FF06A5DD8500AB4577 = {
 			children = (
 				0035340006A5DD8500AB4577,
-				0035340606A5DD8500AB4577,
-				0035340806A5DD8500AB4577,
-				0035340906A5DD8500AB4577,
 			);
 			isa = PBXGroup;
 			path = Legacy;
@@ -2220,30 +2217,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			path = AdvNetView.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340606A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = TraceView.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340806A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = WayPointView.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340906A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = WayPointView.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2978,24 +2951,6 @@
 			settings = {
 			};
 		};
-		0035347F06A5DD8500AB4577 = {
-			fileRef = 0035340606A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0035348106A5DD8500AB4577 = {
-			fileRef = 0035340806A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0035348206A5DD8500AB4577 = {
-			fileRef = 0035340906A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		0035348506A5DD8500AB4577 = {
 			fileRef = 0035340C06A5DD8500AB4577;
 			isa = PBXBuildFile;
@@ -3391,6 +3346,20 @@
 			settings = {
 			};
 		};
+		009D64F206FF73BA00B0F1EC = {
+			explicitFileType = sourcecode.cpp.objcpp;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = MapViewAreaView.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		009D64F306FF73BA00B0F1EC = {
+			fileRef = 009D64F206FF73BA00B0F1EC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00A622A706FEE4FB005D248A = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -3468,22 +3437,8 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		00C5F13306DE0EAF001EC02F = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = MapViewAreaView.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		00C5F13406DE0EAF001EC02F = {
 			fileRef = 00C5F13206DE0EAF001EC02F;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C5F13506DE0EAF001EC02F = {
-			fileRef = 00C5F13306DE0EAF001EC02F;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -4628,8 +4583,6 @@
 				0035347506A5DD8500AB4577,
 				0035347706A5DD8500AB4577,
 				0035347906A5DD8500AB4577,
-				0035347F06A5DD8500AB4577,
-				0035348106A5DD8500AB4577,
 				0035348506A5DD8500AB4577,
 				0035348706A5DD8500AB4577,
 				0035348906A5DD8500AB4577,
@@ -4819,7 +4772,6 @@
 				0035347406A5DD8500AB4577,
 				0035347606A5DD8500AB4577,
 				0035347806A5DD8500AB4577,
-				0035348206A5DD8500AB4577,
 				0035348606A5DD8500AB4577,
 				0035348806A5DD8500AB4577,
 				0035348A06A5DD8500AB4577,
@@ -4842,7 +4794,6 @@
 				00CBA25B06DB7D0A000ACD19,
 				00CBA34106DB8FDE000ACD19,
 				00C5F12D06DE0C98001EC02F,
-				00C5F13506DE0EAF001EC02F,
 				00ED80A906E32C9600455A05,
 				00971F3F06E4FA6F004307EA,
 				00971F5706E4FFBF004307EA,
@@ -4853,6 +4804,7 @@
 				009B192406FC83A800E8883A,
 				005E817306FDCFF20016F5E7,
 				00A622AA06FEE4FB005D248A,
+				009D64F306FF73BA00B0F1EC,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

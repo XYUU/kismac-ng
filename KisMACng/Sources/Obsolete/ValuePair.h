@@ -32,6 +32,7 @@
 
 - (double)getX;
 - (double)getY;
+- (waypoint)wayPoint;
 
 - (void)setPairX:(double)x Y:(double) y;
 - (void)setPairFromWaypoint:(waypoint)wp;

@@ -28,12 +28,14 @@
 #import "WaveHelper.h"
 #import "ImportController.h"
 #import "WaveNet.h"
+#import "KisMACNotifications.h"
 
 @implementation MapView(AreaView)
 
 - (void)clearAreaNet {
     if (_mapImage) {
-        [WaveHelper secureReplace:&_mapImage withObject:_orgImage];
+        [_mapImage autorelease];
+        _mapImage = [_orgImage copy];
         [self setNeedsDisplay:YES];
     }
 }
@@ -52,7 +54,7 @@
 } 
 
 - (void)makeCache:(NSArray*)networks {
-    double xx, yy, s, a, d, av, sens, maxd;
+    double xx, yy, s, a, r, g, b, d, av, sens, maxd;
     int *c, q, t, networkCount, i, x, y;
     double **f;
     NSPoint p;
@@ -70,6 +72,9 @@
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
     
     NSParameterAssert(networks);
+    NSParameterAssert(_mapImage);
+    NSParameterAssert([_mapImage size].width > 1 && [_mapImage size].height > 1);
+    
     [networks retain];
     networkCount = [networks count];
     if (networkCount==0) goto exitNoCleanUp;
@@ -81,8 +86,8 @@
     sens = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NetAreaSensitivity"] intValue];
     qual = (int)(101.0 - sqrt(([[[NSUserDefaults standardUserDefaults] objectForKey:@"NetAreaQuality"] floatValue])*1000.0));
     zoom = [self getPixelPerDegreeNoZoom];
-    imgSize = [_orgImage size];
-        
+    imgSize = [_mapImage size];
+    
     width = (unsigned int)(imgSize.width );
     width = (width - (width % qual)) / qual +1;
     height= (unsigned int)(imgSize.height);
@@ -153,7 +158,32 @@
         if ([im canceled]) goto exit;
     }
     
-    //TODO draw
+    NSRect rec;
+    rec.size=NSMakeSize(1, 1);
+    
+    if ([_mapImage lockFocus]) {
+        NS_DURING
+            for (x = 0; x< width; x++)
+                for (y = 0; y< height; y++) {
+                    i = cache[x][y];
+                    if (i==0) continue;
+                    
+                    a =  (i >> 24) & 0xFF;
+                    r =  (i >> 16) & 0xFF;
+                    g =  (i >> 8 ) & 0xFF;
+                    b =  (i      ) & 0xFF;
+        
+                    [[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0] set];
+                    rec.origin=NSMakePoint(x,y);
+                    [NSBezierPath fillRect:rec];
+                }
+        NS_HANDLER
+            //if an error occurs make this invalid...
+            [[NSNotificationCenter defaultCenter] postNotificationName:KisMACAdvNetViewInvalid object:self];
+        NS_ENDHANDLER
+        [_mapImage unlockFocus];
+        [self setNeedsDisplay:YES];
+    }
     
 exit:
     for(t=0; t<networkCount; t++) delete [] f[t];
@@ -171,10 +201,12 @@ exitNoCleanUp:
 }
 
 - (void)showAreaNet:(WaveNet*)net {
+    [self clearAreaNet];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:[NSArray arrayWithObject:net]];
 }
 
 - (void)showAreaNets:(NSArray*)nets {
+    [self clearAreaNet];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:nets];
 }
 

@@ -1,6 +1,5 @@
 check airport not coming back
 check the gps support!!!
-crosshair cursor for map
 
 inspect atheros
 athero jack 255 signal quality
@@ -33,11 +32,7 @@ User-Agent: CFNetwork/1.1
 Host: www.vicinity.com
 Connection: close
 
-http://www.multimap.com/map/browse.cgi?scale=4000000&lon=9.3666667&lat=48.0333333
-
-
 ----------------Low Priority-------------------------------------------------------------------------------
-display other information (velocity) in the bottom bar, along with latitude and longitude
 add pref for "database Mode"  Nets are auto saved and opened every time run, can be searched etc.
 Find nearby networks  (from saved list)
 Filter Networks by range  (show all nets within 10 miles of current location?)

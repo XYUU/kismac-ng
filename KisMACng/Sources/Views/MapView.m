@@ -171,7 +171,8 @@
 
 - (BOOL)setMap:(NSImage*)map {
     [WaveHelper secureReplace:&_orgImage withObject:map];
-    [WaveHelper secureReplace:&_mapImage withObject:map];
+    [_mapImage autorelease];
+    _mapImage = [map copy];
     _wp[0]._lat  = 0; _wp[0]._long = 0;
     _wp[1]._lat  = 0; _wp[1]._long = 0;
     _wp[2]._lat  = 0; _wp[2]._long = 0;
@@ -180,6 +181,8 @@
     _zoomFact = 1.0;
     
     [_controlPanel setVisible:YES];
+    [[WaveHelper mainWindow] invalidateCursorRectsForView:self];
+    
     [self _updateStatus];
     [self _alignNetworks];
     [self setNeedsDisplay:YES];
@@ -254,12 +257,21 @@
 - (void)drawRectSub:(NSRect)rect { 
     [_mapImage drawInRect:rect fromRect:NSMakeRect(_center.x + ((rect.origin.x - (_frame.size.width / 2)) / _zoomFact), _center.y + ((rect.origin.y - (_frame.size.height / 2)) / _zoomFact), rect.size.width / _zoomFact, rect.size.height / _zoomFact) operation:NSCompositeCopy fraction:1.0];
 }
+
+#pragma mark -
+
+- (void)resetCursorRects {
+    [self addCursorRect:[self visibleRect] cursor:[NSCursor crosshairCursor]];
+    if ([_controlPanel visible]) [self addCursorRect:NSIntersectionRect([self visibleRect], [_controlPanel frame]) cursor:[NSCursor arrowCursor]];
+}
+
 - (void)setFrameSize:(NSSize)newSize {
     [super setFrameSize:newSize];
     [self _align];
     [self _alignStatus];
     [self _alignControlPanel];
 }
+
 - (void)setFrame:(NSRect)frameRect {
     [super setFrame:frameRect];
     [self _align];

@@ -55,6 +55,13 @@
     return _y;
 }
 
+- (waypoint)wayPoint {
+    waypoint w;
+    w._long = _x;
+    w._lat  = _y;
+    return w;
+}
+
 - (void)setPairX:(double)x Y:(double) y {
     _x = x;
     _y = y;

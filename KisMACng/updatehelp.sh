@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-open -a /Developer/Documentation/Apple\ Help/Apple\ Help\ Indexing\ Tool.app Resources/Help/English.lproj/KisMAC\ Help
+open -a /Developer/Applications/Utilities/Apple\ Help\ Indexing\ Tool.app  Resources/Help/English.lproj/KisMAC\ Help
