@@ -2,9 +2,9 @@
         
         File:			80211b.h
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -103,15 +103,21 @@ typedef struct _frameLEAP {
 } __attribute__((packed)) frameLEAP;
 
 #define HDR_SIZE        16
-#define TCPACK_MIN_SIZE (40 + HDR_SIZE)
-#define TCPACK_MAX_SIZE (52 + HDR_SIZE)
-#define TCPRST_SIZE     (40 + HDR_SIZE)
-#define ARP_MIN_SIZE    (28 + HDR_SIZE)
-#define ARP_MAX_SIZE 	(28 + 32 + HDR_SIZE)
+#define LLC_SIZE		8
+#define WEP_SIZE		4
+#define ARPDATA_SIZE	28
+#define WEP_CRC_SIZE	4
+#define ETHERPADDING	18
+
+#define TCPACK_MIN_SIZE		(40 + HDR_SIZE)
+#define TCPACK_MAX_SIZE		(52 + HDR_SIZE)
+#define TCPRST_SIZE			(40 + HDR_SIZE)
+#define ARP_SIZE			(WEP_SIZE + LLC_SIZE + ARPDATA_SIZE + WEP_CRC_SIZE)
+#define ARP_SIZE_PADDING 	(ARP_SIZE + ETHERPADDING)
 
 //this is all for a big endian system...
 
-#define	IEEE80211_VERSION_MASK		0x0300
+#define	IEEE80211_VERSION_MASK	0x0300
 #define	IEEE80211_VERSION_0		0x0000
 
 #define	IEEE80211_TYPE_MASK		0x0c00

@@ -67,8 +67,8 @@ int lengthSort(id string1, id string2, void *context)
     aID = nil;
     
     aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
-    aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
-    aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    _ARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    _ACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
     aClients=[[NSMutableDictionary dictionary] retain];
     aClientKeys=[[NSMutableArray array] retain];
     aComment=[[NSString stringWithString:@""] retain];
@@ -176,8 +176,8 @@ int lengthSort(id string1, id string2, void *context)
     if (data) _ivData[3] = [[WaveWeakContainer alloc] initWithData:data];
     
     aPacketsLog=[[coder decodeObjectForKey:@"aPacketsLog"] retain];
-    aARPLog=[[coder decodeObjectForKey:@"aARPLog"] retain];
-    aACKLog=[[coder decodeObjectForKey:@"aACKLog"] retain];
+    _ARPLog=[[coder decodeObjectForKey:@"aARPLog"] retain];
+    _ACKLog=[[coder decodeObjectForKey:@"aACKLog"] retain];
     _password=[[coder decodeObjectForKey:@"aPassword"] retain];
     aComment=[[coder decodeObjectForKey:@"aComment"] retain];
     _coordinates=[[coder decodeObjectForKey:@"_coordinates"] retain];
@@ -186,8 +186,8 @@ int lengthSort(id string1, id string2, void *context)
     aClientKeys=[[coder decodeObjectForKey:@"aClientKeys"] retain];
     
     if (!aPacketsLog) aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
-    if (!aARPLog) aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
-    if (!aACKLog) aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    if (!_ARPLog) _ARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
+    if (!_ACKLog) _ACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
     if (!aClients) aClients=[[NSMutableDictionary dictionary] retain];
     if (!aClientKeys) aClientKeys=[[NSMutableArray array] retain];
     if (!aComment) aComment=[[NSString stringWithString:@""] retain];
@@ -274,8 +274,8 @@ int lengthSort(id string1, id string2, void *context)
     [_netView setCoord:wp];
     
     aPacketsLog = [[NSMutableArray arrayWithCapacity:20] retain];
-    aARPLog  = [[NSMutableArray arrayWithCapacity:20] retain];
-    aACKLog  = [[NSMutableArray arrayWithCapacity:20] retain];
+    _ARPLog  = [[NSMutableArray arrayWithCapacity:20] retain];
+    _ACKLog  = [[NSMutableArray arrayWithCapacity:20] retain];
     aClients = [[NSMutableDictionary dictionary] retain];
     aClientKeys = [[NSMutableArray array] retain];
     aComment = [[NSString stringWithString:@""] retain];
@@ -341,8 +341,8 @@ int lengthSort(id string1, id string2, void *context)
             [coder encodeObject:[_ivData[2] data] forKey:@"ivData2"];
             [coder encodeObject:[_ivData[3] data] forKey:@"ivData3"];
             [coder encodeObject:aPacketsLog forKey:@"aPacketsLog"];
-            [coder encodeObject:aARPLog forKey:@"aARPLog"];
-            [coder encodeObject:aACKLog forKey:@"aACKLog"];
+            [coder encodeObject:_ARPLog forKey:@"aARPLog"];
+            [coder encodeObject:_ACKLog forKey:@"aACKLog"];
             [coder encodeObject:_password forKey:@"aPassword"];
             [coder encodeObject:aComment forKey:@"aComment"];
             [coder encodeObject:_coordinates forKey:@"_coordinates"];
@@ -631,12 +631,14 @@ int lengthSort(id string1, id string2, void *context)
                     }
 
                     //log those packets for reinjection attack
-                    if (([aARPLog count]<20)&&((bodyLength>=ARP_MIN_SIZE)&&(bodyLength<=ARP_MAX_SIZE))) {
-                        if ([[w clientToID] isEqualToString:@"FF:FF:FF:FF:FF:FF"])
-                            [aARPLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
+                    if (bodyLength == ARP_SIZE_PADDING || bodyLength == ARP_SIZE) {
+                        if ([[w clientToID] isEqualToString:@"FF:FF:FF:FF:FF:FF"]) {
+                            [_ARPLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
+							if ([_ARPLog count] > 20) [_ARPLog removeObjectAtIndex:0];
+						}
                     }
-                    if (([aACKLog count]<20)&&((bodyLength>=TCPACK_MIN_SIZE)||(bodyLength<=TCPACK_MAX_SIZE))) {
-                        [aACKLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
+                    if (([_ACKLog count]<20)&&((bodyLength>=TCPACK_MIN_SIZE)||(bodyLength<=TCPACK_MAX_SIZE))) {
+                        [_ACKLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
                     }
                     
                     if (body[3] <= 3) { //record the IV for a later weak key attack
@@ -966,10 +968,10 @@ int lengthSort(id string1, id string2, void *context)
     return aPacketsLog;
 }
 - (NSMutableArray*)arpPacketsLog {
-    return aARPLog;
+    return _ARPLog;
 }
 - (NSMutableArray*)ackPacketsLog {
-    return aACKLog;
+    return _ACKLog;
 }
 - (NSString*)key {
     if ((_password==Nil)&&(_isWep > encryptionTypeNone)) return NSLocalizedString(@"<unresolved>", "Unresolved password");
@@ -1395,7 +1397,7 @@ typedef int (*SORTFUNC)(id, id, void *);
             break;
         }
         
-        [_im setStatusField:NSLocalizedString(@"Reinjecting packets", "For Reinjection")];
+        [_im setStatusField:NSLocalizedString(@"Test suitable reinjection packets", "For Reinjection")];
          
         error = [scanner tryToInject:self];
         if (!error) {
@@ -1412,14 +1414,15 @@ typedef int (*SORTFUNC)(id, id, void *);
         //lets cause some ARP stuff to go off
         [_im setStatusField:NSLocalizedString(@"Deauthenticating clients.", "For Reinjection")];
         [scanner deauthenticateNetwork:self atInterval:0];
-        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];
-        if ([aARPLog count] == [aACKLog count] == 0) {
+        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
+        if ([_ARPLog count] == [_ACKLog count] == 0) {
             _crackErrorString = [NSLocalizedString(@"The networks seems to be not reacting.", "Reinjection error") retain];
             [_im terminateWithCode:-1];
             break;
         }
     }
     
+	[scanner release];
     [[NSNotificationCenter defaultCenter] postNotificationName:KisMACCrackDone object:self];
     [pool release];
 }
@@ -1445,8 +1448,8 @@ typedef int (*SORTFUNC)(id, id, void *);
     [_cracker release];
     [_password release];
     [aPacketsLog release];
-    [aARPLog release];
-    [aACKLog release];
+    [_ARPLog release];
+    [_ACKLog release];
     [_ivData[0] release];
     [_ivData[1] release];
     [_ivData[2] release];

@@ -83,8 +83,8 @@ struct graphStruct {
     NSDate* aDate;		//current date
     NSDate* aFirstDate;
     NSMutableArray* aPacketsLog;    //array with a couple of packets to calculate checksum
-    NSMutableArray* aARPLog;        //array with a couple of packets to do reinjection attack
-    NSMutableArray* aACKLog;        //array with a couple of packets to do reinjection attack
+    NSMutableArray* _ARPLog;        //array with a couple of packets to do reinjection attack
+    NSMutableArray* _ACKLog;        //array with a couple of packets to do reinjection attack
     NSMutableDictionary* aClients;
     NSMutableArray* aClientKeys;
     NSMutableDictionary* _coordinates;

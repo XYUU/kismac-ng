@@ -44,6 +44,7 @@ enum _rowIndexes {
     indexPackets,
     indexDataPackets,
     indexWeakPackets,
+	indexInjPackets,
     indexBytes,
     indexKey,
     indexLastIV, 
@@ -182,6 +183,8 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
                  return (col) ? NSLocalizedString(@"Data Packets", "table description") : [NSString stringWithFormat:@"%i", [_n dataPackets]];
             case indexWeakPackets:
                  return (col) ? NSLocalizedString(@"Unique IVs", "table description") : [NSString stringWithFormat:@"%i", [_n uniqueIVs]];
+            case indexInjPackets:
+                 return (col) ? NSLocalizedString(@"Inj. Packets", "table description") : [NSString stringWithFormat:@"%i", [[_n arpPacketsLog] count]];
             case indexBytes:
                  return (col) ? NSLocalizedString(@"Bytes", "table description") : [_n data];
             case indexKey:

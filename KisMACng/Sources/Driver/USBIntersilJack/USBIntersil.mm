@@ -357,9 +357,9 @@ IOReturn USBIntersilJack::_reset() {
         _setValue(0xFC09, 0); //pm off!
         _setValue(0xFC84, 3); //default tx rate
         _setValue(0xFC85, 0); //promiscous mode
-        _setValue(0xFC2A,1); //auth type
-        _setValue(0xFC2D,1); //roaming by firmware
-        _setValue(0xFC28,0x00000080); //set wep ignore
+        _setValue(0xFC2A, 1); //auth type
+        _setValue(0xFC2D, 1); //roaming by firmware
+		_setValue(0xFC28, 0x90); //set wep ignore
     }
     
     if (i==wlTimeout) {
@@ -598,7 +598,7 @@ IOReturn USBIntersilJack::_writeWaitForResponse(UInt32 size) {
             else NSLog(@"USBIntersilJack::unable to write to USB Device(%08x)\n", kr);
             return kr;
         }
-        
+
         to.tv_sec  = time(0) + 5;
         error = pthread_cond_timedwait(&_wait_cond, &_wait_mutex, &to);
         if (error == ETIMEDOUT) NSLog(@"Timeout error.");

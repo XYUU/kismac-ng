@@ -5,17 +5,10 @@
 		isa = PBXTextBookmark;
 		name = UInt64;
 		rLen = 6;
-		rLoc = 23250;
+		rLoc = 23243;
 		rType = 0;
 		vrLen = 1389;
 		vrLoc = 22028;
-	};
-	005071C4074B42AC00DF5924 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		rLen = 1;
-		rLoc = 30;
-		rType = 1;
 	};
 	005071D8074B439400DF5924 = {
 		fRef = 00F0FDB006AC59A9006D4119;
@@ -37,16 +30,6 @@
 		vrLen = 1129;
 		vrLoc = 0;
 	};
-	005071DA074B439400DF5924 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 789";
-		rLen = 0;
-		rLoc = 22743;
-		rType = 0;
-		vrLen = 1074;
-		vrLoc = 22028;
-	};
 	005071DB074B439400DF5924 = {
 		fRef = 00F0FDB006AC59A9006D4119;
 		isa = PBXTextBookmark;
@@ -66,26 +49,6 @@
 		rType = 0;
 		vrLen = 1129;
 		vrLoc = 0;
-	};
-	005071E0074B43C500DF5924 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 786";
-		rLen = 0;
-		rLoc = 22669;
-		rType = 0;
-		vrLen = 1074;
-		vrLoc = 22028;
-	};
-	005071E1074B43C500DF5924 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 34";
-		rLen = 0;
-		rLoc = 1207;
-		rType = 0;
-		vrLen = 533;
-		vrLoc = 804;
 	};
 	0073144706AC5956007FD51E = {
 		fallbackIsa = XCSourceControlManager;
@@ -109,6 +72,26 @@
 		wantsCodeCompletionTabCompletes = 1;
 		wantsIndex = 0;
 	};
+	00D0F88C0798413E0018BE43 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = _TX_RETRYSTRAT_SET;
+		rLen = 0;
+		rLoc = 8050;
+		rType = 0;
+		vrLen = 1407;
+		vrLoc = 7425;
+	};
+	00D0FA5207999A100018BE43 = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackCard.cpp: 550";
+		rLen = 0;
+		rLoc = 15903;
+		rType = 0;
+		vrLen = 1140;
+		vrLoc = 15331;
+	};
 	00F0FDAF06AC59A9006D4119 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {980, 797}}";
@@ -126,9 +109,9 @@
 	};
 	00F0FDB106AC59A9006D4119 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {980, 14083}}";
-			sepNavSelRange = "{22669, 0}";
-			sepNavVisRect = "{{0, 10724}, {980, 480}}";
+			sepNavIntBoundsRect = "{{0, 0}, {980, 14139}}";
+			sepNavSelRange = "{15903, 0}";
+			sepNavVisRect = "{{0, 7495}, {980, 480}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
@@ -137,6 +120,13 @@
 			sepNavIntBoundsRect = "{{0, 0}, {1057, 5879}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRect = "{{0, 1090}, {1057, 565}}";
+		};
+	};
+	00F0FDB306AC59A9006D4119 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {980, 3080}}";
+			sepNavSelRange = "{1259, 0}";
+			sepNavVisRect = "{{0, 257}, {980, 480}}";
 		};
 	};
 	00F0FDB406AC59A9006D4119 = {
@@ -244,7 +234,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 122372064;
+			PBXPerProjectTemplateStateSaveDate = 127418320;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -651,18 +641,16 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 122372064;
+			PBXWorkspaceStateSaveDate = 127418320;
 		};
 		perUserProjectItems = {
 			005071BE074B428900DF5924 = 005071BE074B428900DF5924;
-			005071C4074B42AC00DF5924 = 005071C4074B42AC00DF5924;
 			005071D8074B439400DF5924 = 005071D8074B439400DF5924;
 			005071D9074B439400DF5924 = 005071D9074B439400DF5924;
-			005071DA074B439400DF5924 = 005071DA074B439400DF5924;
 			005071DB074B439400DF5924 = 005071DB074B439400DF5924;
 			005071DC074B439400DF5924 = 005071DC074B439400DF5924;
-			005071E0074B43C500DF5924 = 005071E0074B43C500DF5924;
-			005071E1074B43C500DF5924 = 005071E1074B43C500DF5924;
+			00D0F88C0798413E0018BE43 = 00D0F88C0798413E0018BE43;
+			00D0FA5207999A100018BE43 = 00D0FA5207999A100018BE43;
 		};
 		sourceControlManager = 0073144706AC5956007FD51E;
 		userBuildSettings = {

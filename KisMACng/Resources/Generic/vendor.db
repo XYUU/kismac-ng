@@ -2,6 +2,8 @@
 <!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
 <plist version="0.9">
 <dict>
+	<key>00:01:F4:EC</key>
+	<string>Enterasys Roam About 11MBit Card</string>
 	<key>00:02:2D:22</key>
 	<string>Lucent Technologies Orinoco Silver 11MBit</string>
 	<key>00:03:93:EB</key>
@@ -15,7 +17,9 @@
 	<key>00:0C:85:64</key>
 	<string>Cisco AIR-LMC352</string>
 	<key>00:0D:54:9F</key>
-	<string>3Com 3CRWE154G72</string>
+	<string>3Com 3CRWE154G72 54MbitCard</string>
+	<key>00:11:24:08</key>
+	<string>Apple Airport Express</string>
 	<key>00:20:A6:4D</key>
 	<string>Proxim Orinoco 11b/g</string>
 	<key>00:60:B3:6A</key>

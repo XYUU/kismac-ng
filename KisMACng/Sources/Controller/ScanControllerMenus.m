@@ -525,13 +525,22 @@
 - (IBAction)injectPackets:(id)sender {
     //NSRunAlertPanel(@"Warning", @"I am not quiet happy with this function. It currently needs two cards. One Airport Card (needs to be set as default) and one PrismII Card. Orinoco cards will not work!\n\n What does packet reinjection?\n In this version KisMAC will re-send ARP-packets into an WEP-enabled network. This will cause a response. Basically it generates a lot of traffic, which will enable us to break into not busy networks. Do a deauthentication before injection, in order to make sure that there have been a couple of arp-packets.\n\nIf this works for you please drop me a mail.",
     //NULL, NULL, NULL);
-    //return;    
+    //return;
+	if ([_curNet type] != networkTypeManaged) {
+		[_window showAlertMessage: NSLocalizedString(@"KisMAC can only attack managed networks!", "Error for packet reinjection") title: NSLocalizedString(@"Re-Injection failed", "Error for packet reinjection") button: NULL];
+		return;
+    }
+	if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) {
+		[_window showAlertMessage: NSLocalizedString(@"You can only reinject into WEP encrypted networks!", "Error for packet reinjection") title: NSLocalizedString(@"Re-Injection failed", "Error for packet reinjection") button: NULL];
+		return;
+    }
+	
     if ([aInjPacketsMenu state]==NSOffState && [self startActiveAttack]) {
         //either we are already active or we have to load the driver
         if (!_scanning) [self startScan];
         
         _crackType = 5;
-        [self startCrackDialogWithTitle:NSLocalizedString(@"Setting up packet reinjection...", "busy dialog")];
+        [self startCrackDialogWithTitle:NSLocalizedString(@"Setting up packet reinjection...", "busy dialog") stopScan:NO];
         [_curNet reinjectWithImportController:_importController andScanner:scanner];
     
     } else {

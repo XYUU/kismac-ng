@@ -76,8 +76,7 @@ struct __beaconFrame {
     NSTimeInterval scanInterval;	//refresh interval
     
     UInt8 _MACs[18];
-    bool aTODS;
-    int  aInjReplies;
+    int  _injReplies;
     int  aPacketType;
     bool aScanRange;
     bool aScanning;

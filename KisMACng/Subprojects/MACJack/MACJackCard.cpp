@@ -70,6 +70,7 @@ MACJackCard(void* ioBase, void* klBase, IOService* parent) : _ioBase(ioBase),
         return;
     }
 
+	WLLogCrit("MACJack version from %s %s\n",  __DATE__, __TIME__);
     WLLogCrit("MACJackCard: Firmware vendor %d, variant %d, version %d.%d\n",
                 ident.vendor, ident.variant, ident.major, ident.minor);
 
@@ -255,7 +256,7 @@ IOReturn MACJackCard::sendFrame(UInt8* data, UInt32 repeat) {
             return kIOReturnBadArgument;
     }
 
-    frameDescriptor->txControl=OSSwapHostToLittleInt16(0x08 | _TX_RETRYSTRAT_SET(3)| _TX_CFPOLL_SET(1) | _TX_TXEX_SET(1) | _TX_TXOK_SET(1) | _TX_MACPORT_SET(0));
+    frameDescriptor->txControl=OSSwapHostToLittleInt16(0x8);
     
     //frameDescriptor->txControl=OSSwapHostToLittleInt16(0x08);
     frameDescriptor->rate = 0x6e;	//11 MBit/s
@@ -546,11 +547,15 @@ _reset()
         setValue(0xFC09, 0); //pm off!
         setValue(0xFC84, 3); //default tx rate
         setValue(0xFC85, 0); //promiscous mode
-        setValue(0xFC2A,1); //auth type
-        setValue(0xFC2D,1); //roaming by firmware
+        setValue(0xFC2A, 1); //auth type
+        setValue(0xFC2D, 1); //roaming by firmware
         //setValue(0xFC81,1); //create ibss
-        setValue(0xFC28,0x00000080); //set wep ignore
+		
+		//UInt16 key[] = { 0,0,0 };
+		//setRecord(0xFC24, &key, 5);
+        setValue(0xFC28, 0x90); //set wep ignore
     }
+	
 //#endif
     
     if (i==wlTimeout) {
