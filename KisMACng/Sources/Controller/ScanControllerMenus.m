@@ -311,7 +311,7 @@
     
     NS_DURING
         //TODO
-        data = [_mappingView dataWithPDFInsideRect:[_mappingView frame]];
+        data = [_mappingView pdfData];
         [data writeToFile:[filename stringByExpandingTildeInPath] atomically:NO];
         _asyncFailure = NO;
     NS_HANDLER
@@ -337,7 +337,7 @@
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
     
     NS_DURING
-        img  = [[NSImage alloc] initWithData:[_mappingView dataWithPDFInsideRect:[_mappingView frame]]];
+        img  = [[NSImage alloc] initWithData:[_mappingView pdfData]];
         data = [img TIFFRepresentationUsingCompression:NSTIFFCompressionNone factor:0.0];
         data = [[NSBitmapImageRep imageRepWithData:data] representationUsingType:NSJPEGFileType properties:nil];
             

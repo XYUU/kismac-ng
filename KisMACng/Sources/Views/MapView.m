@@ -167,6 +167,38 @@
     return YES;
 }
 
+- (NSData*)pdfData {
+    NSRect frame;
+    NSData *data;
+    BIView *view;
+    NSImage *map;
+    BIImageView *imgView;
+    if (!_mapImage) return nil;
+    
+    frame.size = NSMakeSize([_mapImage size].width * _zoomFact, [_mapImage size].height * _zoomFact);
+    frame.origin = [_moveContainer location];
+
+    map = [[NSImage alloc] initWithSize:frame.size];
+    [map lockFocus];
+    [_mapImage drawInRect:NSMakeRect(0, 0, [_mapImage size].width * _zoomFact, [_mapImage size].height * _zoomFact) fromRect:NSMakeRect(0, 0, [_mapImage size].width, [_mapImage size].height) operation:NSCompositeCopy fraction:1.0];
+    [map unlockFocus];
+    
+    imgView = [[BIImageView alloc] initWithImage:map];
+    [imgView setLocation:frame.origin];
+    
+    view = [[BIView alloc] initWithFrame:frame];
+    [view addSubView:imgView];
+    [view addSubView:_moveContainer];
+
+    data = [view dataWithPDFInsideRect:frame];
+    
+    [view release];
+    [imgView release];
+    [map release];
+    
+    return data;
+}
+
 #pragma mark -
 
 - (BOOL)setMap:(NSImage*)map {

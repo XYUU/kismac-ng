@@ -77,6 +77,7 @@ enum selmode {
 
 - (BOOL)saveToFile:(NSString*)fileName;
 - (BOOL)loadFromFile:(NSString*)fileName;
+- (NSData*)pdfData;
 
 - (BOOL)setMap:(NSImage*)map;
 - (BOOL)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
