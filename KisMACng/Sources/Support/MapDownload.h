@@ -1,9 +1,9 @@
 /*
         
-        File:			ScanControllerScriptable.h
+        File:			MapDownload.h
         Program:		KisMAC
 	Author:			Michael Rossberg
-				mick@binaervarianz.de
+                                mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
@@ -22,43 +22,23 @@
     along with KisMAC; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-#import <Foundation/Foundation.h>
-#import "ScanController.h"
-#import <BIGeneric/BIGeneric.h>
 
-@interface ScanController(ScriptableAdditions)
+#import <Cocoa/Cocoa.h>
+#import <BIGeneric/BIValuePair.h>
 
-- (BOOL)isSaved;
-- (NSString*)filename;
-- (WaveNet*)selectedNetwork;
+@interface MapDownload : NSObject {
+    NSImage     *_img;
+    waypoint    _w1, _w2;
+    NSPoint     _p1, _p2;
+}
 
-- (BOOL)showNetworks;
-- (BOOL)showTrafficView;
-- (BOOL)showMap;
-- (BOOL)showDetails;
-
-- (BOOL)startScan;
-- (BOOL)stopScan;
-
-- (BOOL)new;
-- (BOOL)open:(NSString*)filename;
-- (BOOL)importPCAP:(NSString*)filename;
++ (MapDownload*)mapDownload;
 - (BOOL)downloadMapFrom:(NSString*)server forPoint:(waypoint)w resolution:(NSSize)size zoomLevel:(int)zoom;
-- (BOOL)save:(NSString*)filename;
 
-- (BOOL)selectNetworkWithBSSID:(NSString*)BSSID;
-- (BOOL)selectNetworkAtIndex:(NSNumber*)index;
-- (int) networkCount;
-
-- (BOOL)isBusy;
-
-- (BOOL)bruteforceNewsham;
-- (BOOL)bruteforce40bitLow;
-- (BOOL)bruteforce40bitAlpha;
-- (BOOL)bruteforce40bitAll;
-
-- (BOOL)wordlist40bitApple:(NSString*)wordlist;
-- (BOOL)wordlist104bitApple:(NSString*)wordlist;
-- (BOOL)wordlist104bitMD5:(NSString*)wordlist;
+- (NSPoint)waypoint1Pixel;
+- (waypoint)waypoint1;
+- (NSPoint)waypoint2Pixel;
+- (waypoint)waypoint2;
+- (NSImage*)map;
 
 @end

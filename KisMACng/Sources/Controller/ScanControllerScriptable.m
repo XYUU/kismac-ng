@@ -1,17 +1,34 @@
-//
-//  ScanControllerScriptable.m
-//  KisMAC
-//
-//  Created by mick on Tue Jul 13 2004.
-//  Copyright (c) 2004 __MyCompanyName__. All rights reserved.
-//
+/*
+        
+        File:			ScanControllerScriptable.m
+        Program:		KisMAC
+	Author:			Michael Rossberg
+				mick@binaervarianz.de
+	Description:		KisMAC is a wireless stumbler for MacOS X.
+                
+        This file is part of KisMAC.
+
+    KisMAC is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    KisMAC is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with KisMAC; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 #import "ScanControllerScriptable.h"
 #import "ScanControllerPrivate.h"
 #import "SpinChannel.h"
 #import "WaveNetWEPCrack.h"
 #import "MapView.h"
-#import <BIGeneric/BIGeneric.h>
+#import "MapDownload.h"
 
 @implementation ScanController(ScriptableAdditions)
 
@@ -181,6 +198,42 @@
     
     [self busyDone];
     return NO;
+}
+
+- (BOOL)downloadMapFrom:(NSString*)server forPoint:(waypoint)w resolution:(NSSize)size zoomLevel:(int)zoom {
+    NSImage *map;
+    MapDownload *md;
+    BOOL failure = YES;
+    [self showBusyWithText:NSLocalizedString(@"Importing from Server...", "Status for busy dialog")];
+    [self clearAreaMap];
+    
+    md = [MapDownload mapDownload];
+    NS_DURING
+        if ([md downloadMapFrom:server forPoint:w resolution:size zoomLevel:zoom]) {
+            map = [md map];
+            if (map) {
+                [_mappingView setMap:map];
+                [_mappingView setWaypoint:selWaypoint1 toPoint:[md waypoint1Pixel] atCoordinate:[md waypoint1]];
+                [_mappingView setWaypoint:selWaypoint2 toPoint:[md waypoint2Pixel] atCoordinate:[md waypoint2]];
+
+                failure = NO;
+            }
+        }
+    NS_HANDLER
+    NS_ENDHANDLER
+        
+    [self busyDone];
+        
+    if (failure) NSBeginCriticalAlertSheet(
+        NSLocalizedString(@"Import failed", "Import failure dialog title"),
+        OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
+        NSLocalizedString(@"Import failure description", "LONG description. Maybe no internet?")
+        //"KisMAC was unable to complete the import. Are you sure that you have a valid internet connection?"
+        );
+    else {
+        [self showMap];
+    }
+    return !failure;
 }
 
 - (BOOL)save:(NSString*)filename {

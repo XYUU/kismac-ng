@@ -67,6 +67,24 @@
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importPCAP:[command directParameter]]];
 }
 
+- (id)downloadMap:(NSScriptCommand*)command {
+    NSDictionary *args = [command arguments];
+    NSSize size;
+    waypoint w;
+    int zoom;
+    NSString *server;
+    
+    server = [command directParameter];
+    size.width = [[args objectForKey:@"Width"] doubleValue];
+    size.height = [[args objectForKey:@"Height"] doubleValue];
+    w._lat  = [[args objectForKey:@"Latitude"] doubleValue];
+    w._long = [[args objectForKey:@"Longitude"] doubleValue];
+    zoom = [[args objectForKey:@"Zoom"] intValue];
+    
+    BOOL ret = [(ScanController*)[NSApp delegate] downloadMapFrom:server forPoint:w resolution:size zoomLevel:zoom];
+    return [NSNumber numberWithBool:ret];
+}
+
 #pragma mark -
 
 - (id)selectNetworkWithBSSID:(NSScriptCommand *)command {

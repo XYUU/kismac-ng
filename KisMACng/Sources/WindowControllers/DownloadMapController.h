@@ -26,12 +26,6 @@
 #import "GPSController.h"
 
 @interface DownloadMapController : NSWindowController {
-    NSURL* _mapLocation;
-    waypoint _wp, _wp1, _wp2;
-    NSPoint _p1, _p2;
-    SEL _selector;
-    NSObject *_obj;
-    
     IBOutlet NSButton* _okButton;
     IBOutlet NSButton* _cancelButton;
     IBOutlet NSTextField* _width;
@@ -48,12 +42,5 @@
 - (IBAction)okAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 - (void)setCoordinates:(waypoint)wp;
-- (void)setCallback:(SEL)selector forObject:(NSObject*)obj;
-- (NSURL*)mapLocation;
-
-- (waypoint)waypoint1;
-- (NSPoint)waypoint1Pixel;
-- (waypoint)waypoint2;
-- (NSPoint)waypoint2Pixel;
 
 @end

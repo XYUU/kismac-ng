@@ -44,6 +44,18 @@
             Description = "imports a PCAP file, with 802.11 packets and without prism headers";
             UnnamedArgument = { Description = "The file to be imported."; };
         };
+        DownloadMap = {
+            Name = downloadMapFrom;
+            Description = "imports a map for a specific coordinate from some server";
+            Arguments = {
+                Latitude = { Name = "latitude"; Description = "Latitude on globe. Negatives for western hemisphere."; };
+                Longitude = { Name = "longitude"; Description = "Longitude on globe. Negatives for southern hemisphere."; };
+                Width = { Name = "width"; Description = "Width of the map. Defaults to 1000. Ignored for Map24 server."; };
+                Height = { Name = "height"; Description = "Height of the map. Defaults to 1000. Ignored for Map24 server."; };
+                Zoom = { Name = "zoom"; Description = "Zoom factor. Defaults to 3. Ignored for Map24 server."; };
+            };
+            UnnamedArgument = { Description = "The Name of the Server. Eg. Map24, TerraServer (Map), Expedia (Europe) etc."; };
+        };
         SelectNetworkAtIndex = {
             Name = selectNetworkAtIndex; 
             Description = "selects a network at a certain index number";

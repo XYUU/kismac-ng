@@ -30,6 +30,7 @@
                 "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
                 "KisMAC.SetCurrentPosition"     = "setCurrentPosition:";
                 "KisMAC.SetWaypoint"            = "setWaypoint:";
+                "KisMAC.DownloadMap"            = "downloadMap:";
             }; 
         };
     };
@@ -67,6 +68,18 @@
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
         }; 
+        DownloadMap = {
+            AppleEventCode = KDMp;
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString"; };
+            Arguments = {
+                Latitude = { AppleEventCode = KMLa; Optional = NO; Type = "NSNumber<Double>"; }; 
+                Longitude = { AppleEventCode = KMLo; Optional = NO; Type = "NSNumber<Double>"; }; 
+                Width = { AppleEventCode = KWid; Optional = YES; Type = "NSNumber<Double>"; }; 
+                Height = { AppleEventCode = KHig; Optional = YES; Type = "NSNumber<Double>"; }; 
+                Zoom = { AppleEventCode = KScl; Optional = YES; Type = "NSNumber<Int>"; };
+            };
+        };
         SelectNetworkAtIndex = {
             AppleEventCode = KSNI; 
             CommandClass = NSScriptCommand;

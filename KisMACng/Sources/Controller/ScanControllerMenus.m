@@ -89,44 +89,8 @@
     [[dmc window] setFrameAutosaveName:@"aKisMAC_DownloadMap"];
     
     [dmc setCoordinates:[[WaveHelper gpsController] currentPoint]];
-    [dmc setCallback:@selector(doImportMapFromServer:) forObject:self];
     [dmc showWindow:self];
     [[dmc window] makeKeyAndOrderFront:self];
-}
-
-- (IBAction)doImportMapFromServer:(id)sender {
-    DownloadMapController* dmc = sender;
-    NSImage *x;
-    
-    if ([dmc mapLocation]) {
-        [self clearAreaMap];
-        [self showBusyWithText:NSLocalizedString(@"Importing from Server...", "Status for busy dialog")];
-       
-        NS_DURING
-            x=[[NSImage alloc] initWithContentsOfURL:[dmc mapLocation]];
-            if (x) {
-                [_mappingView setMap:x];
-                [x release];
-                _asyncFailure = NO;
-            } else _asyncFailure = YES;
-        NS_HANDLER
-            _asyncFailure = YES;
-        NS_ENDHANDLER
-        
-        [self busyDone];
-        
-        if (_asyncFailure) NSBeginCriticalAlertSheet(
-            NSLocalizedString(@"Import failed", "Import failure dialog title"),
-            OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
-            NSLocalizedString(@"Import failure description", "LONG description. Maybe no internet?")
-            //"KisMAC was unable to complete the import. Are you sure that you have a valid internet connection?"
-            );
-        else {
-            [_mappingView setWaypoint:selWaypoint1 toPoint:[dmc waypoint1Pixel] atCoordinate:[dmc waypoint1]];
-            [_mappingView setWaypoint:selWaypoint2 toPoint:[dmc waypoint2Pixel] atCoordinate:[dmc waypoint2]];
-            [self showMap];
-        }
-    }
 }
 
 - (IBAction)importFile:(id)sender {

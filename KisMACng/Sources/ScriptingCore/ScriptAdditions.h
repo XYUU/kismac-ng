@@ -39,6 +39,7 @@
 - (id)new:(NSScriptCommand *)command;
 - (id)save:(NSScriptCommand *)command;
 - (id)importPCAP:(NSScriptCommand *)command;
+- (id)downloadMap:(NSScriptCommand*)command;
 
 - (id)selectNetworkAtIndex:(NSScriptCommand *)command;
 - (id)selectNetworkWithBSSID:(NSScriptCommand *)command;

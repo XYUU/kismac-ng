@@ -246,22 +246,18 @@
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>003533A406A5DD8500AB4577</string>
 								<string>003533F406A5DD8500AB4577</string>
-								<string>003533FE06A5DD8500AB4577</string>
-								<string>0035341F06A5DD8500AB4577</string>
+								<string>003533F906A5DD8500AB4577</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>0035332D06A5DD5700AB4577</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>35</integer>
-									<integer>31</integer>
-									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 399}, {253, 696}}</string>
+							<string>{{0, 0}, {253, 696}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -294,7 +290,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MapView.m</string>
+								<string>KisMAC.scriptTerminology</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -302,57 +298,12 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MapView.m</string>
+										<string>KisMAC.scriptTerminology</string>
 										<key>bookmark</key>
-										<string>005E816806FCEB2A0016F5E7</string>
+										<string>005E822406FE27FF0016F5E7</string>
 										<key>history</key>
 										<array>
-											<string>00F60D5806E67710002A09BE</string>
-											<string>00F60D8106E67B12002A09BE</string>
-											<string>00F60D8A06E67B84002A09BE</string>
-											<string>00F60DA206E73FA8002A09BE</string>
-											<string>005694E406F56EC700B9E41A</string>
-											<string>005694E506F56EC700B9E41A</string>
-											<string>00F343FB06F8DED100C87E21</string>
-											<string>00F343FC06F8DED100C87E21</string>
-											<string>00F3440406F8DF5A00C87E21</string>
-											<string>00F3448E06F9D04B00C87E21</string>
-											<string>009B18FA06FC813100E8883A</string>
-											<string>009B18FB06FC813100E8883A</string>
-											<string>009B192E06FC8C8B00E8883A</string>
-											<string>005E813E06FCE97B0016F5E7</string>
-											<string>005E813F06FCE97B0016F5E7</string>
-											<string>005E814006FCE97B0016F5E7</string>
-											<string>005E814106FCE97B0016F5E7</string>
-											<string>005E814206FCE97B0016F5E7</string>
-											<string>005E815606FCEA1E0016F5E7</string>
-											<string>005E815706FCEA1E0016F5E7</string>
-											<string>005E815806FCEA1E0016F5E7</string>
-										</array>
-										<key>prevStack</key>
-										<array>
-											<string>00F60D5C06E67710002A09BE</string>
-											<string>00F60D8306E67B12002A09BE</string>
-											<string>00F60D8F06E67B84002A09BE</string>
-											<string>00F60DA506E73FA9002A09BE</string>
-											<string>005694E706F56EC700B9E41A</string>
-											<string>005694E806F56EC700B9E41A</string>
-											<string>00F343FE06F8DED100C87E21</string>
-											<string>00F343FF06F8DED100C87E21</string>
-											<string>00F3440006F8DED100C87E21</string>
-											<string>00F3440806F8DF5A00C87E21</string>
-											<string>00F3441306F9B91B00C87E21</string>
-											<string>00F3449106F9D04B00C87E21</string>
-											<string>00F3449606F9DB9800C87E21</string>
-											<string>009B190306FC813100E8883A</string>
-											<string>005E814506FCE97B0016F5E7</string>
-											<string>005E814606FCE97B0016F5E7</string>
-											<string>005E814706FCE97B0016F5E7</string>
-											<string>005E814806FCE97B0016F5E7</string>
-											<string>005E814906FCE97B0016F5E7</string>
-											<string>005E814A06FCE97B0016F5E7</string>
-											<string>005E815906FCEA1E0016F5E7</string>
-											<string>005E815A06FCEA1E0016F5E7</string>
+											<string>005E822106FE27FE0016F5E7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -467,7 +418,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>WayPoint.m</string>
+								<string>MapView.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -475,27 +426,21 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CD052900623707200166675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>WayPoint.m</string>
+										<string>MapView.h</string>
 										<key>bookmark</key>
-										<string>005E816906FCEB2A0016F5E7</string>
+										<string>005E822506FE27FF0016F5E7</string>
 										<key>history</key>
 										<array>
-											<string>00F3443B06F9C04A00C87E21</string>
 											<string>00F3444506F9C0A600C87E21</string>
 											<string>00F3445206F9C18000C87E21</string>
 											<string>009B194A06FCB88F00E8883A</string>
-											<string>009B195506FCB91000E8883A</string>
-											<string>005E813806FCE9660016F5E7</string>
-											<string>005E813906FCE9660016F5E7</string>
+											<string>005E81F206FE250F0016F5E7</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>00F3443406F9BFFE00C87E21</string>
-											<string>00F3443D06F9C04A00C87E21</string>
-											<string>00F3443E06F9C04A00C87E21</string>
 											<string>00F3444106F9C04A00C87E21</string>
 											<string>009B194C06FCB88F00E8883A</string>
-											<string>005E813A06FCE9660016F5E7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -926,7 +871,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
