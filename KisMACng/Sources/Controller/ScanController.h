@@ -43,6 +43,7 @@ typedef enum {
 @class WaveContainer;
 @class SpinChannel;
 @class BIZoomView;
+@class BIToolbarView;
 @class AMRollOverButton;
 @class ColoredRowTableView;
 @class MapView;
@@ -93,7 +94,8 @@ typedef enum {
     IBOutlet NSView             *_detailsView;
     IBOutlet NSView             *_zoomView;
     IBOutlet BIZoomView         *_slideView;
-    
+    IBOutlet BIToolbarView		*_toolBar;
+	
     IBOutlet NSTextField        *_headerField;
     IBOutlet NSSearchField      *_searchField;
     

@@ -127,7 +127,8 @@ inline UInt32 hashForMAC(UInt8* val) {
     if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
         _sortedList[_sortedCount] = entry;
         _sortedCount++;
-    }
+		[_idList[entry].net setVisible: YES];
+    } else [_idList[entry].net setVisible: NO];
 }
 
 - (void) refreshView {
@@ -689,6 +690,7 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     
     _dropAll = YES;
     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
+    [net autorelease];
     
     for(i = 0; i < LOOKUPSIZE; i++) 
         _lookup[i] = LOOKUPSIZE;
@@ -745,7 +747,6 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     if (entry!=i) _idList[i+1].net = nil;
     else _idList[entry].net = nil;
     
-    [net release];
     
     for (i=0; i < _netCount; i++) {
         //add to hash table

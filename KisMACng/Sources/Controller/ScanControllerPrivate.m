@@ -220,6 +220,7 @@
     if (tab != tabNetworks) [self hideDetails];
  
     [_mainView setContentView:view];
+	[_toolBar setNeedsDisplay:YES];
     if (_importOpen == 0) [_window display];  //seems to be not possible if in modal mode
 }
 

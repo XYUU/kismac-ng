@@ -1,6 +1,8 @@
 // !$*UTF8*$!
 {
 	007312E606AC485D007FD51E = {
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
 		};
@@ -9,11 +11,11 @@
 	007312E706AC485D007FD51E = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 1;
+		usesDefaults = 0;
 		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoPopup = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
+		wantsCodeCompletionListAlways = 1;
 		wantsCodeCompletionOnlyMatchingItems = 1;
 		wantsCodeCompletionParametersIncluded = 1;
 		wantsCodeCompletionPlaceholdersInserted = 1;
@@ -26,40 +28,6 @@
 			sepNavSelRange = "{396, 0}";
 			sepNavVisRect = "{{0, 0}, {888, 546}}";
 		};
-	};
-	0073142306AC4B2B007FD51E = {
-		fRef = 32D94FCF0562CBF700B6AF17;
-		isa = PBXTextBookmark;
-		name = "Info.plist: 20";
-		rLen = 0;
-		rLoc = 735;
-		rType = 0;
-		vrLen = 1259;
-		vrLoc = 39;
-	};
-	0073142406AC4B2B007FD51E = {
-		fRef = 007313A606AC4A22007FD51E;
-		isa = PBXBookmark;
-	};
-	0073142506AC4B2B007FD51E = {
-		fRef = 32D94FCF0562CBF700B6AF17;
-		isa = PBXTextBookmark;
-		name = "Info.plist: 20";
-		rLen = 0;
-		rLoc = 735;
-		rType = 0;
-		vrLen = 1259;
-		vrLoc = 39;
-	};
-	0073142606AC4B2B007FD51E = {
-		fRef = 007313A606AC4A22007FD51E;
-		isa = PBXTextBookmark;
-		name = "WLCard.h: 11";
-		rLen = 0;
-		rLoc = 396;
-		rType = 0;
-		vrLen = 1288;
-		vrLoc = 0;
 	};
 	089C1669FE841209C02AAC07 = {
 		activeBuildStyle = 06AA1266FFB2107B11CA28AA;
@@ -74,9 +42,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					628,
+					242,
 					20,
-					112,
+					48,
 					43,
 					43,
 					20,
@@ -96,10 +64,10 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					532,
-					114,
+					210,
+					50,
 					20,
-					114,
+					50,
 					43,
 					43,
 				);
@@ -113,7 +81,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 111954411;
+			PBXPerProjectTemplateStateSaveDate = 127592410;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -276,6 +244,17 @@
 						recursive = 1;
 						regex = "?*\\.[mcMC]";
 						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					clz = XDDesignSmartGroup;
+					description = "Displays Xdesign models";
+					globalID = 2E4A936305E6979E00701470;
+					name = Design;
+					preferences = {
+						image = Design;
+						isLeaf = 0;
 					};
 				},
 			);
@@ -449,13 +428,7 @@
 				};
 				RubberWindowFrame = "50 227 1111 605 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 111954411;
-		};
-		perUserProjectItems = {
-			0073142306AC4B2B007FD51E = 0073142306AC4B2B007FD51E;
-			0073142406AC4B2B007FD51E = 0073142406AC4B2B007FD51E;
-			0073142506AC4B2B007FD51E = 0073142506AC4B2B007FD51E;
-			0073142606AC4B2B007FD51E = 0073142606AC4B2B007FD51E;
+			PBXWorkspaceStateSaveDate = 127592410;
 		};
 		sourceControlManager = 007312E606AC485D007FD51E;
 		userBuildSettings = {

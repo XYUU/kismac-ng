@@ -22,6 +22,7 @@ speak again if network found again after 2 minutes
 SSIDs are now interpreted as UTF8
 windows fade out
 applied robin darroches patches for gpscontroller
+reinjection is working again
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view

@@ -504,6 +504,8 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 - (IBAction)changeSearchValue:(id)sender {
     [_container setFilterString:[_searchField stringValue]];
     [_networkTable reloadData];
+	[(NSView*)_mappingView setNeedsDisplay:YES];
+	[self tableViewSelectionDidChange:nil];
 }
 
 #pragma mark -

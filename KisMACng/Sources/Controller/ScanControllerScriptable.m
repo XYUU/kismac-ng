@@ -95,6 +95,7 @@
 - (BOOL)stopScan {
     bool result;
     
+	[self stopActiveAttacks];
     result=[scanner stopScanning];
     [_channelProg stopAnimation:self];
     [_scanButton setTitle: NSLocalizedString(@" Start Scan ", "title of the scan button")];

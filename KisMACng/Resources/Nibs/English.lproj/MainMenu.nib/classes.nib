@@ -171,6 +171,7 @@
                 "_showNetworks" = NSMenuItem; 
                 "_showTraffic" = NSMenuItem; 
                 "_slideView" = BIZoomView; 
+                "_toolBar" = BIToolbarView; 
                 "_trafficButton" = NSButton; 
                 "_trafficController" = TrafficController; 
                 "_trafficModePopUp" = NSPopUpButton; 

@@ -411,11 +411,13 @@
         }
     } else if (frame->dataLen==ARP_SIZE || frame->dataLen == ARP_SIZE_PADDING) {
 		if (frame->frameControl & IEEE80211_DIR_TODS) {
-			if (memcmp(frame->address3, BROADCAST, 6)==0) return;
-			if (memcmp(frame->address1, _MACs, 6) != 0) return;
+			if (memcmp(frame->address1, _MACs,     6) != 0) return; //check BSSID
+			if (memcmp(frame->address3, BROADCAST, 6) == 0 || memcmp(frame->address2, BROADCAST, 6) == 0) return; //arp replies are no broadcasts
+			if (memcmp(frame->address3, &_MACs[6], 6) != 0 && memcmp(frame->address2, &_MACs[6], 6) != 0) return;
 		} else if (frame->frameControl & IEEE80211_DIR_FROMDS) {
-			if (memcmp(frame->address1, BROADCAST, 6)==0) return;
-			if (memcmp(frame->address2, _MACs, 6) != 0) return;
+			if (memcmp(frame->address2, _MACs,     6) != 0) return; //check BSSID
+			if (memcmp(frame->address1, BROADCAST, 6) == 0 || memcmp(frame->address3, BROADCAST, 6) == 0) return;
+			if (memcmp(frame->address1, &_MACs[6], 6) != 0 && memcmp(frame->address3, &_MACs[6], 6) != 0) return;
 		}
 		
 		goto got;
@@ -424,7 +426,6 @@
     return;
     
 got:
-    NSLog(@"\nGot Packet %u\n",_injReplies);
     _injReplies++;
 }
 
@@ -537,22 +538,24 @@ got:
             //continue;
         }
         
-        if ([w parseFrame:frame]!=NO) {	//parse packet (no if unknown type)
-            if ([_container addPacket:w liveCapture:YES]==NO) continue; // the packet shall be dropped
+		@try {
+			if ([w parseFrame:frame]!=NO) {	//parse packet (no if unknown type)
+				if ([_container addPacket:w liveCapture:YES]==NO) continue; // the packet shall be dropped
 
-            if ((dumpFilter==1)||((dumpFilter==2)&&([w type]==IEEE80211_TYPE_DATA))||((dumpFilter==3)&&([w isResolved]!=-1))) [w dump:f]; //dump if needed
-                        
-            if ((geiger!=Nil) && ((_packets % aGeigerInt)==0)) {
-                if (_soundBusy) aGeigerInt+=10;
-                else {
-                    _soundBusy=YES;
-                    [geiger play];
-                }
-            }
-            
-            _packets++;
-            aBytes+=[w length];
-        }
+				if ((dumpFilter==1)||((dumpFilter==2)&&([w type]==IEEE80211_TYPE_DATA))||((dumpFilter==3)&&([w isResolved]!=-1))) [w dump:f]; //dump if needed
+							
+				if ((geiger!=Nil) && ((_packets % aGeigerInt)==0)) {
+					if (_soundBusy) aGeigerInt+=10;
+					else {
+						_soundBusy=YES;
+						[geiger play];
+					}
+				}
+				
+				_packets++;
+				aBytes+=[w length];
+			}
+		} @finally {}
     }
 
 error:
@@ -979,15 +982,19 @@ error:
             memcpy(packet +  sizeof(WLFrame), y->address4, q);
             x->dataLen = q;
             x->status  = 0;
-            
+            			
             debug = (struct kj*)x;
             
 			_injReplies = 0;
             
             if (x->frameControl & IEEE80211_DIR_TODS) {
-				memcpy(_MACs, x->address1, 6);
+				memcpy(_MACs,     x->address1, 6); //this is the BSSID
+				memcpy(&_MACs[6], x->address2, 6); //this is the source
+				if (memcmp(x->address3, "\xff\xff\xff\xff\xff\xff", 6) != 0) continue;
 			} else {
-				memcpy(_MACs, x->address2, 6);
+				memcpy(_MACs,     x->address2, 6); //BSSID
+				memcpy(&_MACs[6], x->address3, 6); //source
+				if (memcmp(x->address1, "\xff\xff\xff\xff\xff\xff", 6) != 0) continue;
 			}
             
             x->frameControl |= IEEE80211_WEP;
@@ -999,8 +1006,10 @@ error:
                     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
                 [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
             }
-
-            if (_injReplies<5) {
+			
+			[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+            
+			if (_injReplies<20) {
                 [p removeLastObject];
             } else {
                 [wd sendFrame:packet withLength:2364 atInterval:5];

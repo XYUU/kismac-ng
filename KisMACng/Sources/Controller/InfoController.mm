@@ -76,7 +76,7 @@ enum _rowIndexes {
     if (_clientCount == [aClients count]) {
         for (i = 0; i < [aClients count]; i++) {
             if ([[aClients objectForKey:[aClientKeys objectAtIndex:i]] changed]) 
-                [aClientTable displayRect:[aTable rectOfRow:i]];
+                [aClientTable displayRect:[aClientTable rectOfRow:i]];
         }
     } else {
         [aClientTable noteNumberOfRowsChanged];

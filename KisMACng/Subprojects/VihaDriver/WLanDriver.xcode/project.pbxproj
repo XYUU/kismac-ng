@@ -164,8 +164,6 @@
 //063
 //064
 		06AA1265FFB2107B11CA28AA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -179,8 +177,6 @@
 			name = Development;
 		};
 		06AA1266FFB2107B11CA28AA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -422,7 +418,7 @@
 		};
 		32D94FCF0562CBF700B6AF17 = {
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
+			lastKnownFileType = text.xml;
 			path = Info.plist;
 			refType = 4;
 			sourceTree = "<group>";

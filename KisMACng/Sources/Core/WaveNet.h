@@ -125,6 +125,7 @@ struct graphStruct {
 - (NSDictionary*)getClients;
 - (NSArray*)getClientKeys;
 - (void)updatePassword;
+- (void)setVisible:(BOOL)visible;
 
 - (encryptionType)wep;
 - (NSString *)ID;

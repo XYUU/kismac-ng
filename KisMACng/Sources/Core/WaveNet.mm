@@ -325,11 +325,11 @@ int lengthSort(id string1, id string2, void *context)
             wp = [_netView coord];
             [coder encodeFloat:wp._lat forKey:@"a_Lat"];
             [coder encodeFloat:wp._long forKey:@"a_Long"];
-	    [coder encodeFloat:wp._elevation forKey:@"a_Elev"];
+			[coder encodeFloat:wp._elevation forKey:@"a_Elev"];
             
             [coder encodeObject:aLat forKey:@"aLat"];
             [coder encodeObject:aLong forKey:@"aLong"];
-	    [coder encodeObject:aElev forKey:@"aElev"];
+			[coder encodeObject:aElev forKey:@"aElev"];
             
             [coder encodeObject:aID forKey:@"aID"];
             [coder encodeObject:_SSID forKey:@"aSSID"];
@@ -378,50 +378,50 @@ int lengthSort(id string1, id string2, void *context)
     
     if (newSSID==Nil || [newSSID isEqualToString:_SSID]) return;
 
-    pc = [newSSID cString];
-    for (i = 0; i < [newSSID length]; i++) {
-        if (pc[i]) {
-            isHidden = NO;
-            break;
-        }
-    }
-    if ([newSSID length]==1 && pc[i]==32) isHidden = YES;
-    
-    if (!_SSID) updatedSSID = NO;
-    else updatedSSID = YES;
-    
-    if (isHidden) {
-        if (_SSID!=Nil) return; //we might have the real ssid already
-        [WaveHelper secureReplace:&_SSID withObject:@""];
-    } else {
-        [WaveHelper secureReplace:&_SSID withObject:newSSID];
-    }
-    
-    [_netView setName:_SSID];
-    if (!_firstPacket) [[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
+	pc = [newSSID lossyCString];
+	for (i = 0; i < [newSSID length]; i++) {
+		if (pc[i]) {
+			isHidden = NO;
+			break;
+		}
+	}
+	if ([newSSID length]==1 && pc[i]==32) isHidden = YES;
+	
+	if (!_SSID) updatedSSID = NO;
+	else updatedSSID = YES;
+	
+	if (isHidden) {
+		if (_SSID!=Nil) return; //we might have the real ssid already
+		[WaveHelper secureReplace:&_SSID withObject:@""];
+	} else {
+		[WaveHelper secureReplace:&_SSID withObject:newSSID];
+	}
+	
+	[_netView setName:_SSID];
+	if (!_firstPacket) [[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
 
-    if (updatedSSID) return;
-    
-    lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
-    if (lVoice) {
-        switch(_isWep) {
-            case encryptionTypeNone: 
-                    oc = NSLocalizedString(@"open", "for speech");
-                    break;
-            case encryptionTypeWEP:
-            case encryptionTypeWEP40:
-            case encryptionTypeWPA:
-                    oc = NSLocalizedString(@"closed", "for speech");
-                    break;
-            default: oc=@"";
-        }
-        lSentence=[NSString stringWithFormat: NSLocalizedString(@"found %@ network. SSID is %@", "this is for speech output"),
-            oc, isHidden ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
-        NS_DURING
-            [WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
-        NS_HANDLER
-        NS_ENDHANDLER
-    }
+	if (updatedSSID) return;
+	
+	lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
+	if (lVoice) {
+		switch(_isWep) {
+			case encryptionTypeNone: 
+					oc = NSLocalizedString(@"open", "for speech");
+					break;
+			case encryptionTypeWEP:
+			case encryptionTypeWEP40:
+			case encryptionTypeWPA:
+					oc = NSLocalizedString(@"closed", "for speech");
+					break;
+			default: oc=@"";
+		}
+		lSentence=[NSString stringWithFormat: NSLocalizedString(@"found %@ network. SSID is %@", "this is for speech output"),
+			oc, isHidden ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
+		NS_DURING
+			[WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
+		NS_HANDLER
+		NS_ENDHANDLER
+	}
 }
 
 - (void)generalEncounterStuff:(bool)onlineCapture {
@@ -631,10 +631,10 @@ int lengthSort(id string1, id string2, void *context)
                     }
 
                     //log those packets for reinjection attack
-                    if (bodyLength == ARP_SIZE_PADDING || bodyLength == ARP_SIZE) {
+                    if (bodyLength == ARP_SIZE || bodyLength == ARP_SIZE_PADDING) {
                         if ([[w clientToID] isEqualToString:@"FF:FF:FF:FF:FF:FF"]) {
                             [_ARPLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
-							if ([_ARPLog count] > 20) [_ARPLog removeObjectAtIndex:0];
+							if ([_ARPLog count] > 100) [_ARPLog removeObjectAtIndex:0];
 						}
                     }
                     if (([_ACKLog count]<20)&&((bodyLength>=TCPACK_MIN_SIZE)||(bodyLength<=TCPACK_MAX_SIZE))) {
@@ -817,9 +817,13 @@ int lengthSort(id string1, id string2, void *context)
 }
 
 - (void)updatePassword {
-    if ((_password==Nil)&&(_cracker!=Nil)) {
+    if ((_password==Nil) && (_cracker!=Nil)) {
         _password=[[_cracker key] retain];
     }
+}
+
+- (void)setVisible:(BOOL)visible {
+	[_netView setVisible: visible];
 }
 
 #pragma mark -
@@ -1387,16 +1391,12 @@ typedef int (*SORTFUNC)(id, id, void *);
 - (void)doReinjectWithScanner:(WaveScanner*)scanner {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSString *error;
-    
+    int i = 0;
+	
     [scanner retain];
     [WaveHelper secureRelease:&_crackErrorString];
     
     while (YES) {
-        if ([_im canceled]) {
-            [_im terminateWithCode:-2];
-            break;
-        }
-        
         [_im setStatusField:NSLocalizedString(@"Test suitable reinjection packets", "For Reinjection")];
          
         error = [scanner tryToInject:self];
@@ -1411,14 +1411,21 @@ typedef int (*SORTFUNC)(id, id, void *);
             break;
         }
         
-        //lets cause some ARP stuff to go off
-        [_im setStatusField:NSLocalizedString(@"Deauthenticating clients.", "For Reinjection")];
-        [scanner deauthenticateNetwork:self atInterval:0];
-        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
-        if ([_ARPLog count] == [_ACKLog count] == 0) {
-            _crackErrorString = [NSLocalizedString(@"The networks seems to be not reacting.", "Reinjection error") retain];
-            [_im terminateWithCode:-1];
+		if ([_im canceled]) {
+            [_im terminateWithCode:-2];
             break;
+        }
+        
+        if ([_ARPLog count] == [_ACKLog count] == 0) {
+            if (i > 20) {
+				_crackErrorString = [NSLocalizedString(@"The networks seems to be not reacting.", "Reinjection error") retain];
+				[_im terminateWithCode:-1];
+				break;
+			} else {
+				[_im setStatusField:NSLocalizedString(@"Waiting for interesting packets...", "For Reinjection")];
+				[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:20]];
+				i++;
+			}
         }
     }
     
