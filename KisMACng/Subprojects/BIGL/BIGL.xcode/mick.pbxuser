@@ -1,6 +1,8 @@
 // !$*UTF8*$!
 {
 	000238D906933015007C44ED = {
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
 		};
@@ -11,9 +13,9 @@
 		isa = PBXCodeSenseManager;
 		usesDefaults = 0;
 		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoPopup = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
+		wantsCodeCompletionListAlways = 0;
 		wantsCodeCompletionOnlyMatchingItems = 1;
 		wantsCodeCompletionParametersIncluded = 1;
 		wantsCodeCompletionPlaceholdersInserted = 1;
@@ -72,26 +74,6 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	002E7D3106A8694100C9D931 = {
-		fRef = 000238DC06933029007C44ED;
-		isa = PBXTextBookmark;
-		name = "BIGLView.m: 214";
-		rLen = 0;
-		rLoc = 6608;
-		rType = 0;
-		vrLen = 1449;
-		vrLoc = 5626;
-	};
-	002E7D3206A8694100C9D931 = {
-		fRef = 000238DC06933029007C44ED;
-		isa = PBXTextBookmark;
-		name = "BIGLView.m: 214";
-		rLen = 0;
-		rLoc = 6608;
-		rType = 0;
-		vrLen = 1449;
-		vrLoc = 5626;
-	};
 	005D98D4069D9AFE00A4BA7B = {
 		fileReference = 00F514C706944F0500F4D67C;
 		functionName = "-drawRect:";
@@ -120,35 +102,53 @@
 		lineNumber = 209;
 		state = 1;
 	};
-	005D9BB4069E8C6300A4BA7B = {
-		fRef = 00C134700694ACDB004F02A8;
-		isa = PBXTextBookmark;
-		name = "BIGLGraphView.m: 41";
-		rLen = 0;
-		rLoc = 1320;
-		rType = 0;
-		vrLen = 1610;
-		vrLoc = 2020;
+	007FF8CE06C6DEDB006B684A = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Cocoa.h;
+		path = /System/Library/Frameworks/Cocoa.framework/Versions/A/Headers/Cocoa.h;
+		refType = 0;
+		sourceTree = "<absolute>";
 	};
-	005D9BB6069E8C6300A4BA7B = {
-		fRef = 00C1346F0694ACDB004F02A8;
+	007FF98606C6E0E6006B684A = {
+		fRef = 007FF8CE06C6DEDB006B684A;
 		isa = PBXTextBookmark;
-		name = "BIGLGraphView.h: 27";
+		name = "Cocoa.h: 12";
 		rLen = 0;
-		rLoc = 1037;
+		rLoc = 401;
 		rType = 0;
-		vrLen = 1304;
+		vrLen = 438;
+		vrLoc = 12;
+	};
+	007FF98906C6E0E6006B684A = {
+		fRef = 007FF8CE06C6DEDB006B684A;
+		isa = PBXTextBookmark;
+		name = "Cocoa.h: 12";
+		rLen = 0;
+		rLoc = 401;
+		rType = 0;
+		vrLen = 438;
+		vrLoc = 12;
+	};
+	007FFB9C06C6E3AF006B684A = {
+		fRef = 32DBCF5E0370ADEE00C91783;
+		isa = PBXTextBookmark;
+		name = "BIGL_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 268;
 		vrLoc = 0;
 	};
-	005D9BB7069E8C6300A4BA7B = {
-		fRef = 00C134700694ACDB004F02A8;
+	007FFBA106C6E400006B684A = {
+		fRef = 32DBCF5E0370ADEE00C91783;
 		isa = PBXTextBookmark;
-		name = "BIGLGraphView.m: 41";
+		name = "BIGL_Prefix.pch: 3";
 		rLen = 0;
-		rLoc = 1320;
+		rLoc = 93;
 		rType = 0;
-		vrLen = 1610;
-		vrLoc = 2020;
+		vrLen = 268;
+		vrLoc = 0;
 	};
 	00A299F60693EC1500E39953 = {
 		uiCtxt = {
@@ -209,36 +209,6 @@
 			sepNavVisRect = "{{0, 669}, {1057, 689}}";
 		};
 	};
-	00F57A4D06A875E90035AE2F = {
-		fRef = 00C1346F0694ACDB004F02A8;
-		isa = PBXTextBookmark;
-		name = "BIGLGraphView.h: 27";
-		rLen = 0;
-		rLoc = 1037;
-		rType = 0;
-		vrLen = 841;
-		vrLoc = 0;
-	};
-	00F57A5006A875E90035AE2F = {
-		fRef = 000239B20693365E007C44ED;
-		isa = PBXTextBookmark;
-		name = "BIGL.h: 32";
-		rLen = 0;
-		rLoc = 1178;
-		rType = 0;
-		vrLen = 703;
-		vrLoc = 528;
-	};
-	00F57B1106A879C40035AE2F = {
-		fRef = 000239B20693365E007C44ED;
-		isa = PBXTextBookmark;
-		name = "BIGL.h: 18";
-		rLen = 0;
-		rLoc = 693;
-		rType = 0;
-		vrLen = 660;
-		vrLoc = 527;
-	};
 	0867D690FE84028FC02AAC07 = {
 		activeBuildStyle = 014CEA450018CDF011CA2923;
 		activeTarget = 8DC2EF4F0486A6940098B216;
@@ -280,9 +250,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					772,
+					383,
 					20,
-					137,
+					72,
 					43,
 					43,
 					20,
@@ -330,10 +300,10 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					653,
-					138,
+					329,
+					73,
 					20,
-					138,
+					73,
 					43,
 					43,
 				);
@@ -347,7 +317,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 111704507;
+			PBXPerProjectTemplateStateSaveDate = 113697651;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -510,6 +480,17 @@
 						recursive = 1;
 						regex = "?*\\.[mcMC]";
 						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					clz = XDDesignSmartGroup;
+					description = "Displays Xdesign models";
+					globalID = 2E4A936305E6979E00701470;
+					name = Design;
+					preferences = {
+						image = Design;
+						isLeaf = 0;
 					};
 				},
 			);
@@ -791,17 +772,13 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 111704507;
+			PBXWorkspaceStateSaveDate = 113697651;
 		};
 		perUserProjectItems = {
-			002E7D3106A8694100C9D931 = 002E7D3106A8694100C9D931;
-			002E7D3206A8694100C9D931 = 002E7D3206A8694100C9D931;
-			005D9BB4069E8C6300A4BA7B = 005D9BB4069E8C6300A4BA7B;
-			005D9BB6069E8C6300A4BA7B = 005D9BB6069E8C6300A4BA7B;
-			005D9BB7069E8C6300A4BA7B = 005D9BB7069E8C6300A4BA7B;
-			00F57A4D06A875E90035AE2F = 00F57A4D06A875E90035AE2F;
-			00F57A5006A875E90035AE2F = 00F57A5006A875E90035AE2F;
-			00F57B1106A879C40035AE2F = 00F57B1106A879C40035AE2F;
+			007FF98606C6E0E6006B684A = 007FF98606C6E0E6006B684A;
+			007FF98906C6E0E6006B684A = 007FF98906C6E0E6006B684A;
+			007FFB9C06C6E3AF006B684A = 007FFB9C06C6E3AF006B684A;
+			007FFBA106C6E400006B684A = 007FFBA106C6E400006B684A;
 		};
 		sourceControlManager = 000238D906933015007C44ED;
 		userBuildSettings = {
@@ -816,9 +793,9 @@
 	};
 	32DBCF5E0370ADEE00C91783 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 544}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1057, 544}}";
+			sepNavIntBoundsRect = "{{0, 0}, {605, 187}}";
+			sepNavSelRange = "{93, 0}";
+			sepNavVisRect = "{{0, 0}, {605, 187}}";
 			sepNavWindowFrame = "{{130, 164}, {750, 558}}";
 		};
 	};

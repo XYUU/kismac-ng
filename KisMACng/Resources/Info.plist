@@ -12,13 +12,15 @@
 				<string>kismac</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>devil.icns</string>
+			<string>devilDocument.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>kismac</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
+			<key>LSTypeIsPackage</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -26,7 +28,7 @@
 				<string>kismap</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>devil.icns</string>
+			<string>devilDocument.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>kismap</string>
 			<key>CFBundleTypeRole</key>
@@ -61,11 +63,11 @@
 	<string>BIKM</string>
 	<key>CFBundleVersion</key>
 	<string>0.2a</string>
-        <key>NSAppleScriptEnabled</key>
-        <string>YES</string>
-        <key>LSMinimumSystemVersion</key>
-        <string>10.3.0</string>
-   	<key>NSMainNibFile</key>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.3.0</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
+	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>

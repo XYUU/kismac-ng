@@ -178,8 +178,8 @@
 	003533B306A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {967, 2841}}";
-			sepNavSelRange = "{4301, 0}";
-			sepNavVisRect = "{{0, 1695}, {967, 461}}";
+			sepNavSelRange = "{3577, 0}";
+			sepNavVisRect = "{{0, 1694}, {967, 461}}";
 		};
 	};
 	003533B406A5DD8500AB4577 = {
@@ -226,23 +226,23 @@
 	};
 	003533BC06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1022, 8847}}";
-			sepNavSelRange = "{10688, 0}";
-			sepNavVisRect = "{{0, 4264}, {1022, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 8847}}";
+			sepNavSelRange = "{10514, 0}";
+			sepNavVisRect = "{{0, 4264}, {967, 461}}";
 		};
 	};
 	003533BD06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {996, 1525}}";
-			sepNavSelRange = "{2098, 0}";
-			sepNavVisRect = "{{0, 823}, {996, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 1567}}";
+			sepNavSelRange = "{1878, 65}";
+			sepNavVisRect = "{{0, 631}, {967, 461}}";
 		};
 	};
 	003533BE06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {959, 8455}}";
-			sepNavSelRange = "{8455, 0}";
-			sepNavVisRect = "{{0, 3590}, {959, 283}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 8651}}";
+			sepNavSelRange = "{14555, 975}";
+			sepNavVisRect = "{{0, 6329}, {967, 461}}";
 		};
 	};
 	003533BF06A5DD8500AB4577 = {
@@ -275,16 +275,16 @@
 	};
 	003533C306A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {996, 1847}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 1847}}";
 			sepNavSelRange = "{1026, 0}";
-			sepNavVisRect = "{{0, 0}, {996, 689}}";
+			sepNavVisRect = "{{0, 0}, {967, 461}}";
 		};
 	};
 	003533C406A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {967, 14825}}";
 			sepNavSelRange = "{24205, 1149}";
-			sepNavVisRect = "{{0, 10078}, {967, 461}}";
+			sepNavVisRect = "{{0, 10081}, {967, 461}}";
 		};
 	};
 	003533C806A5DD8500AB4577 = {
@@ -345,9 +345,9 @@
 	};
 	003533D906A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1022, 461}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1022, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {674, 350}}";
+			sepNavSelRange = "{122, 0}";
+			sepNavVisRect = "{{0, 0}, {674, 250}}";
 		};
 	};
 	003533F106A5DD8500AB4577 = {
@@ -459,15 +459,15 @@
 	0035341506A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {967, 587}}";
-			sepNavSelRange = "{272, 0}";
+			sepNavSelRange = "{317, 0}";
 			sepNavVisRect = "{{0, 0}, {967, 461}}";
 		};
 	};
 	0035341606A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {967, 5179}}";
-			sepNavSelRange = "{10396, 0}";
-			sepNavVisRect = "{{0, 4522}, {967, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 5067}}";
+			sepNavSelRange = "{8085, 0}";
+			sepNavVisRect = "{{0, 3403}, {967, 461}}";
 		};
 	};
 	0035341706A5DD8500AB4577 = {
@@ -554,6 +554,198 @@
 			sepNavVisRect = "{{0, 0}, {996, 689}}";
 		};
 	};
+	007F002206C6E474006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.m: 71";
+		rLen = 0;
+		rLoc = 2314;
+		rType = 0;
+		vrLen = 965;
+		vrLoc = 2219;
+	};
+	007F004506C6E495006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.m: 71";
+		rLen = 0;
+		rLoc = 2314;
+		rType = 0;
+		vrLen = 965;
+		vrLoc = 2219;
+	};
+	007F004606C6E495006B684A = {
+		fRef = 007F004706C6E495006B684A;
+		isa = PBXBookmark;
+	};
+	007F004706C6E495006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007F004906C6E49A006B684A = {
+		fRef = 007F004A06C6E49A006B684A;
+		isa = PBXBookmark;
+	};
+	007F004A06C6E49A006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007F004F06C6E4D3006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.m: 79";
+		rLen = 0;
+		rLoc = 2487;
+		rType = 0;
+		vrLen = 965;
+		vrLoc = 2219;
+	};
+	007F005006C6E4D3006B684A = {
+		fRef = 0035341506A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveDriverAtheros.h: 21";
+		rLen = 0;
+		rLoc = 744;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	007F005106C6E4D3006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.m: 79";
+		rLen = 0;
+		rLoc = 2487;
+		rType = 0;
+		vrLen = 965;
+		vrLoc = 2219;
+	};
+	007F005206C6E4D3006B684A = {
+		fRef = 0035341506A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveDriverAtheros.h: 12";
+		rLen = 0;
+		rLoc = 317;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	007F005306C6E4D3006B684A = {
+		fRef = 007F005406C6E4D3006B684A;
+		isa = PBXBookmark;
+	};
+	007F005406C6E4D3006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007F005506C6E4E0006B684A = {
+		fRef = 0035341506A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveDriverAtheros.h: 12";
+		rLen = 0;
+		rLoc = 317;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	007F005606C6E4E0006B684A = {
+		fRef = 007F005706C6E4E0006B684A;
+		isa = PBXBookmark;
+	};
+	007F005706C6E4E0006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007F005806C6E5A5006B684A = {
+		fRef = 0035341506A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveDriverAtheros.h: 12";
+		rLen = 0;
+		rLoc = 317;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	007F005906C6E5A5006B684A = {
+		fRef = 007F005A06C6E5A5006B684A;
+		isa = PBXBookmark;
+	};
+	007F005A06C6E5A5006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007F005B06C6E730006B684A = {
+		fRef = 0035341506A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveDriverAtheros.h: 12";
+		rLen = 0;
+		rLoc = 317;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	007F005C06C6E730006B684A = {
+		fRef = 007F005D06C6E730006B684A;
+		isa = PBXBookmark;
+	};
+	007F005D06C6E730006B684A = {
+		isa = PBXFileReference;
+		refType = 4;
+		sourceTree = "<group>";
+	};
+	007FF86606C6DC96006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = showAlertMessage;
+		rLen = 16;
+		rLoc = 2755;
+		rType = 0;
+		vrLen = 973;
+		vrLoc = 2219;
+	};
+	007FF88D06C6DDE1006B684A = {
+		fRef = 00A7F9D206C6D20A00A6BB8F;
+		isa = PBXBookmark;
+	};
+	007FF88F06C6DDE1006B684A = {
+		fRef = 00A7F9D206C6D20A00A6BB8F;
+		isa = PBXBookmark;
+	};
+	007FFBB906C6E450006B684A = {
+		fRef = 003533D906A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveSecret.h: 12";
+		rLen = 0;
+		rLoc = 316;
+		rType = 0;
+		vrLen = 417;
+		vrLoc = 0;
+	};
+	007FFBBB06C6E456006B684A = {
+		fRef = 00FF593D06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.m: 79";
+		rLen = 0;
+		rLoc = 2550;
+		rType = 0;
+		vrLen = 965;
+		vrLoc = 2219;
+	};
+	007FFBBC06C6E456006B684A = {
+		fRef = 003533D906A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveSecret.h: 12";
+		rLen = 0;
+		rLoc = 316;
+		rType = 0;
+		vrLen = 417;
+		vrLoc = 0;
+	};
 	009F5C5D06A5C8DF004BB18E = {
 		activeArgIndex = 2147483647;
 		activeArgIndices = (
@@ -603,6 +795,171 @@
 		wantsCodeCompletionTabCompletes = 1;
 		wantsIndex = 1;
 	};
+	00A7F97006C6C5EA00A6BB8F = {
+		fRef = 003533B306A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "80211b.h: 130";
+		rLen = 0;
+		rLoc = 3577;
+		rType = 0;
+		vrLen = 1210;
+		vrLoc = 3195;
+	};
+	00A7F97206C6C5EA00A6BB8F = {
+		fRef = 003533B306A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "80211b.h: 130";
+		rLen = 0;
+		rLoc = 3577;
+		rType = 0;
+		vrLen = 1210;
+		vrLoc = 3195;
+	};
+	00A7F97406C6C5FA00A6BB8F = {
+		fRef = 003533BC06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveCracker.mm: 326";
+		rLen = 0;
+		rLoc = 10514;
+		rType = 0;
+		vrLen = 1054;
+		vrLoc = 9799;
+	};
+	00A7F97606C6C5FA00A6BB8F = {
+		fRef = 003533BC06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveCracker.mm: 326";
+		rLen = 0;
+		rLoc = 10514;
+		rType = 0;
+		vrLen = 1054;
+		vrLoc = 9799;
+	};
+	00A7F9AC06C6CCC500A6BB8F = {
+		fRef = 003533C306A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveScanner.h: 31";
+		rLen = 0;
+		rLoc = 1026;
+		rType = 0;
+		vrLen = 1076;
+		vrLoc = 0;
+	};
+	00A7F9AD06C6CCC500A6BB8F = {
+		fRef = 003533BD06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "+ (int)chan2freq:(int)channel;\n+ (int)freq2chan:(int)frequency;\n\n";
+		rLen = 65;
+		rLoc = 1878;
+		rType = 0;
+		vrLen = 876;
+		vrLoc = 1287;
+	};
+	00A7F9AE06C6CCC500A6BB8F = {
+		fRef = 00FF593C06C630CC006C7F1E;
+		isa = PBXTextBookmark;
+		name = "WaveDriverPrismGT.h: 26";
+		rLen = 0;
+		rLoc = 970;
+		rType = 0;
+		vrLen = 1205;
+		vrLoc = 0;
+	};
+	00A7F9B106C6CCC500A6BB8F = {
+		fRef = 003533C306A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveScanner.h: 31";
+		rLen = 0;
+		rLoc = 1026;
+		rType = 0;
+		vrLen = 1076;
+		vrLoc = 0;
+	};
+	00A7F9B206C6CCC500A6BB8F = {
+		fRef = 003533BD06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "+ (int)chan2freq:(int)channel;\n+ (int)freq2chan:(int)frequency;\n\n";
+		rLen = 65;
+		rLoc = 1878;
+		rType = 0;
+		vrLen = 876;
+		vrLoc = 1287;
+	};
+	00A7FA1406C6D63400A6BB8F = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = BINSExtensions.h;
+		path = /Users/mick/Development/KisMACng/Subprojects/files/BIGeneric.framework/Headers/BINSExtensions.h;
+		refType = 0;
+		sourceTree = "<absolute>";
+	};
+	00A7FA1506C6D64D00A6BB8F = {
+		fRef = 003533C406A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "    aType=(aWF->frameControl & IEEE80211_TYPE_MASK);\n    aSubtype=(aWF->frameControl & IEEE80211_SUBTYPE_MASK);\n    aIsToDS=((aWF->frameControl & IEEE80211_DIR_TODS) ? YES : NO);\n    aIsFrDS=((aWF->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);\n\n    //depending on the frame we have to figure the length of the header\n    switch(aType) {\n        case IEEE80211_TYPE_DATA: //Data Frames\n            if (aIsToDS&&aIsFrDS) aHeaderLength=30; //WDS Frames are longer\n            else aHeaderLength=24;\n            break;\n        case IEEE80211_TYPE_CTL: //Control Frames\n            switch(aSubtype) {\n                case IEEE80211_SUBTYPE_PS_POLL:\n                case IEEE80211_SUBTYPE_RTS:\n                    aHeaderLength=16;\n                    break;\n                case IEEE80211_SUBTYPE_CTS:\n                case IEEE80211_SUBTYPE_ACK:\n                    aHeaderLength=10;\n                    break;\n                default:\n                    return NULL;\n            }\n            break;\n        case IEEE80211_TYPE_MGT: //Management Frame\n            aHeaderLength=24;\n            break;\n        default:\n            return NULL;\n    }";
+		rLen = 1149;
+		rLoc = 24205;
+		rType = 0;
+		vrLen = 862;
+		vrLoc = 23117;
+	};
+	00A7FA1606C6D64D00A6BB8F = {
+		fRef = 003533BE06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "    NSString *warning = [NSString stringWithFormat: NSLocalizedString(@\"Could not instanciate Driver description\", \"LONG description\"), driverName];\n    /*@\"KisMAC has been able to load the driver (%@). Reasons for this failure could be:\\n\\n\"\n        \"\\t1. You selecteted the wrong driver.\\n\"\n        \"\\t2. You did not insert your PCMCIA card (only if you selected such a driver).\\n\"\n        \"\\t3. Your kernel extensions screwed up. In this case simply reboot.\\n\"\n        \"\\t4. You are using a 3rd party card and you are having another driver for the card installed, which could not be unloaded by KisMAC.\"\n        \"If you have the sourceforge wireless driver, please install the patch, provided with KisMAC.\\n\"*/\n        \n    return NSRunCriticalAlertPanel(\n        NSLocalizedString(@\"Could not instaniciate Driver.\", \"Error title\"), \n        warning, \n        NSLocalizedString(@\"Retry\", \"Retry button\"),\n        NSLocalizedString(@\"Abort\", \"Abort button\"),\n        Nil);\n";
+		rLen = 975;
+		rLoc = 14555;
+		rType = 0;
+		vrLen = 1423;
+		vrLoc = 14110;
+	};
+	00A7FA1906C6D64D00A6BB8F = {
+		fRef = 003533C406A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "    aType=(aWF->frameControl & IEEE80211_TYPE_MASK);\n    aSubtype=(aWF->frameControl & IEEE80211_SUBTYPE_MASK);\n    aIsToDS=((aWF->frameControl & IEEE80211_DIR_TODS) ? YES : NO);\n    aIsFrDS=((aWF->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);\n\n    //depending on the frame we have to figure the length of the header\n    switch(aType) {\n        case IEEE80211_TYPE_DATA: //Data Frames\n            if (aIsToDS&&aIsFrDS) aHeaderLength=30; //WDS Frames are longer\n            else aHeaderLength=24;\n            break;\n        case IEEE80211_TYPE_CTL: //Control Frames\n            switch(aSubtype) {\n                case IEEE80211_SUBTYPE_PS_POLL:\n                case IEEE80211_SUBTYPE_RTS:\n                    aHeaderLength=16;\n                    break;\n                case IEEE80211_SUBTYPE_CTS:\n                case IEEE80211_SUBTYPE_ACK:\n                    aHeaderLength=10;\n                    break;\n                default:\n                    return NULL;\n            }\n            break;\n        case IEEE80211_TYPE_MGT: //Management Frame\n            aHeaderLength=24;\n            break;\n        default:\n            return NULL;\n    }";
+		rLen = 1149;
+		rLoc = 24205;
+		rType = 0;
+		vrLen = 862;
+		vrLoc = 23117;
+	};
+	00A7FA1A06C6D64D00A6BB8F = {
+		fRef = 003533BE06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "    NSString *warning = [NSString stringWithFormat: NSLocalizedString(@\"Could not instanciate Driver description\", \"LONG description\"), driverName];\n    /*@\"KisMAC has been able to load the driver (%@). Reasons for this failure could be:\\n\\n\"\n        \"\\t1. You selecteted the wrong driver.\\n\"\n        \"\\t2. You did not insert your PCMCIA card (only if you selected such a driver).\\n\"\n        \"\\t3. Your kernel extensions screwed up. In this case simply reboot.\\n\"\n        \"\\t4. You are using a 3rd party card and you are having another driver for the card installed, which could not be unloaded by KisMAC.\"\n        \"If you have the sourceforge wireless driver, please install the patch, provided with KisMAC.\\n\"*/\n        \n    return NSRunCriticalAlertPanel(\n        NSLocalizedString(@\"Could not instaniciate Driver.\", \"Error title\"), \n        warning, \n        NSLocalizedString(@\"Retry\", \"Retry button\"),\n        NSLocalizedString(@\"Abort\", \"Abort button\"),\n        Nil);\n";
+		rLen = 975;
+		rLoc = 14555;
+		rType = 0;
+		vrLen = 1423;
+		vrLoc = 14110;
+	};
+	00A7FA1F06C6D68900A6BB8F = {
+		fileReference = 00FF593D06C630CC006C7F1E;
+		functionName = "+initBackend";
+		isa = PBXFileBreakpoint;
+		lineNumber = 89;
+		state = 1;
+	};
+	00A7FA5706C6D74A00A6BB8F = {
+		fRef = 00A7FA1406C6D63400A6BB8F;
+		isa = PBXTextBookmark;
+		name = "- (int)showAlertMessage:(NSString *)msg title:(NSString *)title button:(NSString *)button;\n";
+		rLen = 91;
+		rLoc = 218;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 0;
+	};
+	00A7FA5B06C6D74A00A6BB8F = {
+		fRef = 00A7FA1406C6D63400A6BB8F;
+		isa = PBXTextBookmark;
+		name = "- (int)showAlertMessage:(NSString *)msg title:(NSString *)title button:(NSString *)button;\n";
+		rLen = 91;
+		rLoc = 218;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 0;
+	};
 	00F57C4B06A886630035AE2F = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {996, 689}}";
@@ -648,9 +1005,9 @@
 	};
 	00FF593D06C630CC006C7F1E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {967, 4871}}";
-			sepNavSelRange = "{9851, 0}";
-			sepNavVisRect = "{{0, 3746}, {967, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {967, 4997}}";
+			sepNavSelRange = "{2487, 0}";
+			sepNavVisRect = "{{0, 882}, {967, 461}}";
 		};
 	};
 	00FF598006C636BA006C7F1E = {
@@ -662,46 +1019,6 @@
 		rType = 0;
 		vrLen = 1193;
 		vrLoc = 552;
-	};
-	00FF598106C636BA006C7F1E = {
-		fRef = 0035341506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.h: 11";
-		rLen = 0;
-		rLoc = 272;
-		rType = 0;
-		vrLen = 1205;
-		vrLoc = 0;
-	};
-	00FF598906C63952006C7F1E = {
-		fRef = 29B97316FDCFA39411CA2CEA;
-		isa = PBXTextBookmark;
-		name = "main.m: 13";
-		rLen = 0;
-		rLoc = 195;
-		rType = 0;
-		vrLen = 239;
-		vrLoc = 0;
-	};
-	00FF598B06C63952006C7F1E = {
-		fRef = 29B97316FDCFA39411CA2CEA;
-		isa = PBXTextBookmark;
-		name = "main.m: 13";
-		rLen = 0;
-		rLoc = 195;
-		rType = 0;
-		vrLen = 239;
-		vrLoc = 0;
-	};
-	00FF598F06C639D8006C7F1E = {
-		fRef = 0035341506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.h: 11";
-		rLen = 0;
-		rLoc = 272;
-		rType = 0;
-		vrLen = 1205;
-		vrLoc = 0;
 	};
 	00FF599106C639D8006C7F1E = {
 		fRef = 0035341806A5DD8500AB4577;
@@ -723,26 +1040,6 @@
 		vrLen = 807;
 		vrLoc = 7553;
 	};
-	00FF599306C639D8006C7F1E = {
-		fRef = 00FF593C06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.h: 26";
-		rLen = 0;
-		rLoc = 970;
-		rType = 0;
-		vrLen = 1205;
-		vrLoc = 0;
-	};
-	00FF599706C639D8006C7F1E = {
-		fRef = 0035341506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.h: 11";
-		rLen = 0;
-		rLoc = 272;
-		rType = 0;
-		vrLen = 1205;
-		vrLoc = 0;
-	};
 	00FF599A06C639D8006C7F1E = {
 		fRef = 0035341806A5DD8500AB4577;
 		isa = PBXTextBookmark;
@@ -752,16 +1049,6 @@
 		rType = 0;
 		vrLen = 1112;
 		vrLoc = 0;
-	};
-	00FF599B06C639D8006C7F1E = {
-		fRef = 0035341A06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPCMCIA.m: kWLUserClientOpen";
-		rLen = 0;
-		rLoc = 1143;
-		rType = 0;
-		vrLen = 808;
-		vrLoc = 7553;
 	};
 	00FF599D06C639D8006C7F1E = {
 		fRef = 00FF593C06C630CC006C7F1E;
@@ -773,86 +1060,15 @@
 		vrLen = 1205;
 		vrLoc = 0;
 	};
-	00FF599E06C639D8006C7F1E = {
-		fRef = 0035341A06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "- (WLFrame*) nextFrame {\n    static UInt8  frame[2364];\n    UInt32 frameSize = 2364;\n    kern_return_t kernResult;\n\n    while (!IODataQueueDataAvailable(_packetQueue)) {\n        kernResult = IODataQueueWaitForAvailableData(_packetQueue,\n                                                     _packetQueuePort);\n        if (kernResult != KERN_SUCCESS) {\n            NSLog(@\"nextFrame: IODataQueueWaitForAvailableData: 0x%x\\n\", kernResult);\n            return NULL;\n        }\n    }\n\n    kernResult = IODataQueueDequeue(_packetQueue, frame, &frameSize);\n    if (kernResult != KERN_SUCCESS) {\n        NSLog(@\"nextFrame: IODataQueueDequeue: 0x%x\\n\", kernResult);\n        return NULL;\n    }\n    else {\n        _packets++;\n        return (WLFrame*)frame;\n    }\n}";
-		rLen = 753;
-		rLoc = 7589;
-		rType = 0;
-		vrLen = 807;
-		vrLoc = 7553;
-	};
-	00FF599F06C639D8006C7F1E = {
-		fRef = 00FF593C06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.h: 26";
-		rLen = 0;
-		rLoc = 970;
-		rType = 0;
-		vrLen = 1205;
-		vrLoc = 0;
-	};
-	00FF5D1106C69B5F006C7F1E = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "    aType=(aWF->frameControl & IEEE80211_TYPE_MASK);\n    aSubtype=(aWF->frameControl & IEEE80211_SUBTYPE_MASK);\n    aIsToDS=((aWF->frameControl & IEEE80211_DIR_TODS) ? YES : NO);\n    aIsFrDS=((aWF->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);\n\n    //depending on the frame we have to figure the length of the header\n    switch(aType) {\n        case IEEE80211_TYPE_DATA: //Data Frames\n            if (aIsToDS&&aIsFrDS) aHeaderLength=30; //WDS Frames are longer\n            else aHeaderLength=24;\n            break;\n        case IEEE80211_TYPE_CTL: //Control Frames\n            switch(aSubtype) {\n                case IEEE80211_SUBTYPE_PS_POLL:\n                case IEEE80211_SUBTYPE_RTS:\n                    aHeaderLength=16;\n                    break;\n                case IEEE80211_SUBTYPE_CTS:\n                case IEEE80211_SUBTYPE_ACK:\n                    aHeaderLength=10;\n                    break;\n                default:\n                    return NULL;\n            }\n            break;\n        case IEEE80211_TYPE_MGT: //Management Frame\n            aHeaderLength=24;\n            break;\n        default:\n            return NULL;\n    }";
-		rLen = 1149;
-		rLoc = 24205;
-		rType = 0;
-		vrLen = 886;
-		vrLoc = 23093;
-	};
-	00FF5D1806C69BDE006C7F1E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		rLen = 1;
-		rLoc = 288;
-		rType = 1;
-	};
-	00FF5D3206C69DAD006C7F1E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 317";
-		rLen = 0;
-		rLoc = 9851;
-		rType = 0;
-		vrLen = 1549;
-		vrLoc = 7771;
-	};
-	00FF5D3306C69DAD006C7F1E = {
-		fRef = 003533B306A5DD8500AB4577;
-		isa = PBXBookmark;
-	};
 	00FF5D3406C69DAD006C7F1E = {
 		fRef = 00FF593D06C630CC006C7F1E;
 		isa = PBXTextBookmark;
 		name = "WaveDriverPrismGT.m: 317";
 		rLen = 0;
-		rLoc = 9851;
+		rLoc = 10413;
 		rType = 0;
 		vrLen = 1549;
 		vrLoc = 7771;
-	};
-	00FF5D3E06C69FBB006C7F1E = {
-		fRef = 003533B306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "80211b.h: 151";
-		rLen = 0;
-		rLoc = 4301;
-		rType = 0;
-		vrLen = 1210;
-		vrLoc = 3195;
-	};
-	00FF5D3F06C69FBB006C7F1E = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 295";
-		rLen = 0;
-		rLoc = 9014;
-		rType = 0;
-		vrLen = 854;
-		vrLoc = 8246;
 	};
 	29B97313FDCFA39411CA2CEA = {
 		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
@@ -863,6 +1079,7 @@
 		);
 		breakpoints = (
 			00F57CBC06A99A8B0035AE2F,
+			00A7FA1F06C6D68900A6BB8F,
 		);
 		codeSenseManager = 009F5C6106A5C8FF004BB18E;
 		executables = (
@@ -917,6 +1134,30 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
+			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					687,
+					20,
+					106,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_SCM_ColumnID,
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
 			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
@@ -939,7 +1180,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 113650838;
+			PBXPerProjectTemplateStateSaveDate = 113697892;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -1370,30 +1611,51 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 113650838;
+			PBXWorkspaceStateSaveDate = 113697892;
 		};
 		perUserProjectItems = {
+			007F002206C6E474006B684A = 007F002206C6E474006B684A;
+			007F004506C6E495006B684A = 007F004506C6E495006B684A;
+			007F004606C6E495006B684A = 007F004606C6E495006B684A;
+			007F004906C6E49A006B684A = 007F004906C6E49A006B684A;
+			007F004F06C6E4D3006B684A = 007F004F06C6E4D3006B684A;
+			007F005006C6E4D3006B684A = 007F005006C6E4D3006B684A;
+			007F005106C6E4D3006B684A = 007F005106C6E4D3006B684A;
+			007F005206C6E4D3006B684A = 007F005206C6E4D3006B684A;
+			007F005306C6E4D3006B684A = 007F005306C6E4D3006B684A;
+			007F005506C6E4E0006B684A = 007F005506C6E4E0006B684A;
+			007F005606C6E4E0006B684A = 007F005606C6E4E0006B684A;
+			007F005806C6E5A5006B684A = 007F005806C6E5A5006B684A;
+			007F005906C6E5A5006B684A = 007F005906C6E5A5006B684A;
+			007F005B06C6E730006B684A = 007F005B06C6E730006B684A;
+			007F005C06C6E730006B684A = 007F005C06C6E730006B684A;
+			007FF86606C6DC96006B684A = 007FF86606C6DC96006B684A;
+			007FF88D06C6DDE1006B684A = 007FF88D06C6DDE1006B684A;
+			007FF88F06C6DDE1006B684A = 007FF88F06C6DDE1006B684A;
+			007FFBB906C6E450006B684A = 007FFBB906C6E450006B684A;
+			007FFBBB06C6E456006B684A = 007FFBBB06C6E456006B684A;
+			007FFBBC06C6E456006B684A = 007FFBBC06C6E456006B684A;
+			00A7F97006C6C5EA00A6BB8F = 00A7F97006C6C5EA00A6BB8F;
+			00A7F97206C6C5EA00A6BB8F = 00A7F97206C6C5EA00A6BB8F;
+			00A7F97406C6C5FA00A6BB8F = 00A7F97406C6C5FA00A6BB8F;
+			00A7F97606C6C5FA00A6BB8F = 00A7F97606C6C5FA00A6BB8F;
+			00A7F9AC06C6CCC500A6BB8F = 00A7F9AC06C6CCC500A6BB8F;
+			00A7F9AD06C6CCC500A6BB8F = 00A7F9AD06C6CCC500A6BB8F;
+			00A7F9AE06C6CCC500A6BB8F = 00A7F9AE06C6CCC500A6BB8F;
+			00A7F9B106C6CCC500A6BB8F = 00A7F9B106C6CCC500A6BB8F;
+			00A7F9B206C6CCC500A6BB8F = 00A7F9B206C6CCC500A6BB8F;
+			00A7FA1506C6D64D00A6BB8F = 00A7FA1506C6D64D00A6BB8F;
+			00A7FA1606C6D64D00A6BB8F = 00A7FA1606C6D64D00A6BB8F;
+			00A7FA1906C6D64D00A6BB8F = 00A7FA1906C6D64D00A6BB8F;
+			00A7FA1A06C6D64D00A6BB8F = 00A7FA1A06C6D64D00A6BB8F;
+			00A7FA5706C6D74A00A6BB8F = 00A7FA5706C6D74A00A6BB8F;
+			00A7FA5B06C6D74A00A6BB8F = 00A7FA5B06C6D74A00A6BB8F;
 			00FF598006C636BA006C7F1E = 00FF598006C636BA006C7F1E;
-			00FF598106C636BA006C7F1E = 00FF598106C636BA006C7F1E;
-			00FF598906C63952006C7F1E = 00FF598906C63952006C7F1E;
-			00FF598B06C63952006C7F1E = 00FF598B06C63952006C7F1E;
-			00FF598F06C639D8006C7F1E = 00FF598F06C639D8006C7F1E;
 			00FF599106C639D8006C7F1E = 00FF599106C639D8006C7F1E;
 			00FF599206C639D8006C7F1E = 00FF599206C639D8006C7F1E;
-			00FF599306C639D8006C7F1E = 00FF599306C639D8006C7F1E;
-			00FF599706C639D8006C7F1E = 00FF599706C639D8006C7F1E;
 			00FF599A06C639D8006C7F1E = 00FF599A06C639D8006C7F1E;
-			00FF599B06C639D8006C7F1E = 00FF599B06C639D8006C7F1E;
 			00FF599D06C639D8006C7F1E = 00FF599D06C639D8006C7F1E;
-			00FF599E06C639D8006C7F1E = 00FF599E06C639D8006C7F1E;
-			00FF599F06C639D8006C7F1E = 00FF599F06C639D8006C7F1E;
-			00FF5D1106C69B5F006C7F1E = 00FF5D1106C69B5F006C7F1E;
-			00FF5D1806C69BDE006C7F1E = 00FF5D1806C69BDE006C7F1E;
-			00FF5D3206C69DAD006C7F1E = 00FF5D3206C69DAD006C7F1E;
-			00FF5D3306C69DAD006C7F1E = 00FF5D3306C69DAD006C7F1E;
 			00FF5D3406C69DAD006C7F1E = 00FF5D3406C69DAD006C7F1E;
-			00FF5D3E06C69FBB006C7F1E = 00FF5D3E06C69FBB006C7F1E;
-			00FF5D3F06C69FBB006C7F1E = 00FF5D3F06C69FBB006C7F1E;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {

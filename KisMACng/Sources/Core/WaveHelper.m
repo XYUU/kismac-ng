@@ -152,6 +152,20 @@ static ScanController *_scanController;
 
 #pragma mark -
 
++ (int)chan2freq:(int)channel {
+    if (channel == 14) return 2484;
+    if (channel >= 1 && channel <= 13) return 2407 + channel * 5;
+    return 0;
+}
+
++ (int)freq2chan:(int)frequency {
+    if (frequency == 2484) return 14;
+    if (frequency < 2484 && frequency > 2411 && ((frequency - 2407) % 5 == 0)) return (frequency - 2407) / 5;
+    return 0;
+}
+
+#pragma mark -
+
 + (bool)isServiceAvailable:(char*)service {
     mach_port_t masterPort;
     io_iterator_t iterator;

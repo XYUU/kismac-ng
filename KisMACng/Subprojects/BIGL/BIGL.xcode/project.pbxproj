@@ -171,6 +171,20 @@
 			settings = {
 			};
 		};
+		007FF97D06C6E07A006B684A = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		007FF97E06C6E07A006B684A = {
+			fileRef = 007FF97D06C6E07A006B684A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00A299F60693EC1500E39953 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -374,8 +388,6 @@
 //013
 //014
 		014CEA440018CDF011CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
@@ -390,8 +402,6 @@
 			name = Development;
 		};
 		014CEA450018CDF011CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -469,8 +479,7 @@
 			sourceTree = "<group>";
 		};
 		0867D69BFE84028FC02AAC07 = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
@@ -478,8 +487,7 @@
 			sourceTree = "<absolute>";
 		};
 		0867D6A5FE840307C02AAC07 = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
@@ -551,22 +559,13 @@
 //104
 		1058C7B0FEA5585E11CA2CBB = {
 			children = (
+				007FF97D06C6E07A006B684A,
 				0002399706933380007C44ED,
-				1058C7B1FEA5585E11CA2CBB,
 			);
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
 			sourceTree = "<group>";
-		};
-		1058C7B1FEA5585E11CA2CBB = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
-			lastKnownFileType = wrapper.framework;
-			name = Cocoa.framework;
-			path = /System/Library/Frameworks/Cocoa.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		1058C7B2FEA5585E11CA2CBB = {
 			children = (
@@ -627,6 +626,7 @@
 			buildRules = (
 			);
 			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -643,12 +643,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				LIBRARY_STYLE = STATIC;
+				LIBRARY_STYLE = DYNAMIC;
 				OTHER_LDFLAGS = "-seg1addr 0x10000000";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = BIGL;
 				SECTORDER_FLAGS = "";
-				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = NO;
@@ -717,17 +716,11 @@
 		8DC2EF560486A6940098B216 = {
 			buildActionMask = 2147483647;
 			files = (
-				8DC2EF570486A6940098B216,
 				0002399806933380007C44ED,
+				007FF97E06C6E07A006B684A,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8DC2EF570486A6940098B216 = {
-			fileRef = 1058C7B1FEA5585E11CA2CBB;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		8DC2EF5A0486A6940098B216 = {
 			fileEncoding = 4;

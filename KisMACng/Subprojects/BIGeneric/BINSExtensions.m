@@ -13,9 +13,8 @@ static BOOL _alertDone;
 
 @implementation NSWindow(BIExtension) 
 
-- alertSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+- (void)alertSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
     _alertDone = YES;
-    NSLog (@"gone even more");
 }
 
 - (int)showAlertMessage:(NSString *)msg title:(NSString *)title button:(NSString *)button {
@@ -23,13 +22,8 @@ static BOOL _alertDone;
     
     alert = [NSAlert alertWithMessageText:title defaultButton:button alternateButton:nil otherButton:nil informativeTextWithFormat:msg];
     [alert setAlertStyle:NSCriticalAlertStyle];
-    NSLog (@"start");
     [alert beginSheetModalForWindow:self modalDelegate:self didEndSelector:@selector(alertSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
     
-    while (!_alertDone) {
-        RunCurrentEventLoop(0.1);
-    }
-    NSLog (@"gone");
     return 0;
 }
 

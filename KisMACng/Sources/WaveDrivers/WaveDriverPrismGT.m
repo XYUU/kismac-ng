@@ -25,6 +25,7 @@
 
 #import <IOKit/IOKitLib.h>
 #import <IOKit/IODataQueueClient.h>
+#import <BIGeneric/BINSExtensions.h>
 #import "WaveDriverPrismGT.h"
 #import "ImportController.h"
 #import "WaveHelper.h"
@@ -84,11 +85,12 @@ typedef enum {
 + (int) initBackend {
     if ([WaveHelper isServiceAvailable:driverName]) return 0;
         
-    return 1;
+    [[WaveHelper mainWindow] showAlertMessage:NSLocalizedString(@"This driver will not work with older Prism2 or USB devices.\nPlease make sure, that the network card is properly inserted and the GTDriver (gtdriver.binaervarianz.de) is installed and working.", "PrismGT Error") title:NSLocalizedString(@"Communication failure!", "PrismGT Error title") button:nil];
+    return 2;
 }
 
 + (bool) loadBackend {
-    return YES;
+    return ([WaveDriverPrismGT initBackend] == 0);
 }
 
 + (bool) unloadBackend {
@@ -201,22 +203,15 @@ typedef enum {
     
     channel = IOConnectMethodScalarIScalarO(_userClientPort,
                                                kWiFiUserClientGetFrequency, 0, 0);
-    if (channel == 2484) channel = 14;
-    else if (channel < 2484 && channel > 2411) channel = (channel - 2407) / 5;
-    else return 0;
 
-    return channel;
+    return [WaveHelper freq2chan:channel];
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
     kern_return_t kernResult;
-    UInt32 chan;
-    
-    if (newChannel == 14) chan = 2484;
-    else chan = 2407 + newChannel * 5;
     
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWiFiUserClientSetFrequency, 1, 0, chan);
+                                               kWiFiUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
     if (kernResult != KERN_SUCCESS) {
         //NSLog(@"setChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
@@ -243,17 +238,26 @@ typedef enum {
     kern_return_t kernResult;
 
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWiFiUserClientSetMode, 1, 0, modeClient);
-    if (kernResult != KERN_SUCCESS) {
-        NSLog(@"IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
-        return NO;
-    }
-
     while (IODataQueueDataAvailable(_packetQueue)) IODataQueueDequeue(_packetQueue, NULL, 0);
 
     return YES;
 }
 
 #pragma mark -
+
+typedef struct {
+	UInt16 unk0;		/* = 0x0000 */
+	UInt16 length;		/* = 0x1400 */
+	UInt32 clock;		/* 1MHz clock */
+	volatile UInt8 flags;
+	UInt8 unk1;
+	volatile UInt8 rate;
+	UInt8 unk2;
+	volatile UInt16 freq;
+	UInt16 unk3;
+	volatile UInt8 rssi;
+	UInt8 padding[3];
+} rfmonHeader __attribute__ ((packed));
 
 - (WLFrame*) nextFrame {
     static UInt8  frame[2300];
@@ -278,7 +282,7 @@ typedef enum {
         kernResult = IODataQueueDequeue(_packetQueue, tempframe, &frameSize);
 
         memset(frame, 0, sizeof(frame));
-        memcpy(frame + sizeof(WLPrismHeader), tempframe + 20, frameSize >= 50 ? 30 : frameSize - 20);
+        memcpy(frame + sizeof(WLPrismHeader), tempframe + sizeof(rfmonHeader), frameSize >= 50 ? 30 : frameSize - sizeof(rfmonHeader));
         f = (WLFrame*)frame;
         
         UInt16 type=(f->frameControl & IEEE80211_TYPE_MASK);
@@ -313,9 +317,12 @@ typedef enum {
                 continue;
         }
         
-        f->dataLen = f->length = frameSize - 20 - headerLength;
-        memcpy(f + 1, tempframe + 20 + headerLength, f->dataLen);
+        rfmonHeader *head = (rfmonHeader*)tempframe;
         
+        f->dataLen = f->length = frameSize - sizeof(rfmonHeader) - headerLength;
+        memcpy(f + 1, tempframe + sizeof(rfmonHeader) + headerLength, f->dataLen);
+        f->silence = head->rssi & 0x7F;
+        f->channel = [WaveHelper freq2chan:NSSwapLittleShortToHost(head->freq)];
         break;
     }
     

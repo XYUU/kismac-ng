@@ -65,6 +65,9 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 + (void)speakSentence:(const char*)cSentence withVoice:(int)voice;
 + (bool)isServiceAvailable:(char*)service;
 
++ (int)chan2freq:(int)channel;
++ (int)freq2chan:(int)frequency;
+
 + (bool)unloadAllDrivers;
 + (bool)loadDrivers;
 + (NSArray*) getWaveDrivers;

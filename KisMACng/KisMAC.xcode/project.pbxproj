@@ -601,6 +601,7 @@
 		};
 		0035333206A5DD5700AB4577 = {
 			children = (
+				00A7F9D206C6D20A00A6BB8F,
 				0035333306A5DD5700AB4577,
 				0035333406A5DD5700AB4577,
 				0035333506A5DD5700AB4577,
@@ -3290,6 +3291,19 @@
 			settings = {
 			};
 		};
+		00A7F9D206C6D20A00A6BB8F = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = devilDocument.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00A7F9D306C6D20A00A6BB8F = {
+			fileRef = 00A7F9D206C6D20A00A6BB8F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00F0FE2D06AC5B87006D4119 = {
 			isa = PBXFileReference;
 			lastKnownFileType = "wrapper.kernel-extension";
@@ -4407,6 +4421,7 @@
 				0073142E06AC4B66007FD51E,
 				00F0FE2E06AC5B87006D4119,
 				00F0FE8106AC5F72006D4119,
+				00A7F9D306C6D20A00A6BB8F,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

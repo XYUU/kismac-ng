@@ -249,22 +249,14 @@ enum _operationMode {
         return 0;
     }
     
-    if (channel == 2484) channel = 14;
-    else if (channel < 2484 && channel > 2411) channel = (channel - 2407) / 5;
-    else return 0;
-
-    return channel;
+    return [WaveHelper freq2chan:channel];
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
     kern_return_t kernResult;
-    UInt32 chan;
-    
-    if (newChannel == 14) chan = 2484;
-    else chan = 2407 + newChannel * 5;
-    
+ 
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWLUserClientSetFrequency, 1, 0, chan);
+                                               kWLUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
     if (kernResult != KERN_SUCCESS) {
         //NSLog(@"setChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
