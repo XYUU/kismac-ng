@@ -1,6 +1,6 @@
 /*
         
-        File:			WayPoint.h
+        File:			ScriptingEngine.h
         Program:		KisMAC
 	Author:			Michael Rossberg
 				mick@binaervarianz.de
@@ -23,35 +23,19 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import <AppKit/AppKit.h>
-#import "GPSController.h"
-#import "MapView.h"
+#import <Cocoa/Cocoa.h>
 
-@interface WayPoint : NSWindowController {
-    enum selmode    _mode;
-    waypoint        _w;
-    NSPoint         _p;
-    
-    IBOutlet NSWindow* aWindow;
-    IBOutlet NSTextField* aLat;
-    IBOutlet NSTextField* aLong;
-    IBOutlet NSTextField* aElev;
 
-    IBOutlet NSTextField* aNS;
-    IBOutlet NSTextField* aEW;
+@interface ScriptingEngine : NSObject {
 
-    IBOutlet NSStepper* aNSStep;
-    IBOutlet NSStepper* aEWStep;
 }
 
-- (void)setWaypoint:(waypoint)w;
-- (void)setMode:(enum selmode)mode;
-- (void)setPoint:(NSPoint)p;
-
-- (IBAction)NSStepClicked:(id)sender;
-- (IBAction)EWStepClicked:(id)sender;
-
-- (IBAction)OKClicked:(id)sender;
-- (IBAction)CancelClicked:(id)sender;
++ (BOOL)selfSendEvent:(AEEventID)event withClass:(AEEventClass)class andArgs:(NSDictionary*)args;
++ (BOOL)selfSendEvent:(AEEventID)event withArgs:(NSDictionary*)args;
++ (BOOL)selfSendEvent:(AEEventID)event withClass:(AEEventClass)class andDefaultArg:(NSAppleEventDescriptor*)arg;
++ (BOOL)selfSendEvent:(AEEventID)event withClass:(AEEventClass)class andDefaultArgString:(NSString*)arg;
++ (BOOL)selfSendEvent:(AEEventID)event withDefaultArgString:(NSString*)arg;
++ (BOOL)selfSendEvent:(AEEventID)event withDefaultArg:(NSAppleEventDescriptor*)arg;
++ (BOOL)selfSendEvent:(AEEventID)event;
 
 @end

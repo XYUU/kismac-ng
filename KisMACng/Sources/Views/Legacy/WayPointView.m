@@ -25,7 +25,6 @@
 
 #import "WayPointView.h"
 #import "WaveHelper.h"
-#import "ZoomPictureView.h"
 
 @implementation WayPointView
 

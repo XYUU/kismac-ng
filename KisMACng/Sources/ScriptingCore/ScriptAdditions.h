@@ -53,6 +53,8 @@
 - (id)wordlist104bitMD5:(NSScriptCommand *)command;
 
 - (id)showNetworksInMap:(NSScriptCommand*)command;
+- (id)setCurrentPosition:(NSScriptCommand*)command;
+- (id)setWaypoint:(NSScriptCommand*)command;
 
 - (id)busy:(NSScriptCommand *)command;
 

@@ -117,9 +117,33 @@
    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitMD5:[command directParameter]]];
 }
 
+#pragma mark -
+
 - (id)showNetworksInMap:(NSScriptCommand*)command {
     [[WaveHelper mapView] setShowNetworks:[[command directParameter] boolValue]];
     return [NSNumber numberWithBool:YES];    
+}
+
+- (id)setCurrentPosition:(NSScriptCommand*)command {
+    NSDictionary *args = [command arguments];
+    BOOL ret = [[WaveHelper mapView] setCurrentPostionToLatitude:[[args objectForKey:@"Latitude"] doubleValue] andLongitude:[[args objectForKey:@"Longitude"] doubleValue]];
+    return [NSNumber numberWithBool:ret];
+}
+
+- (id)setWaypoint:(NSScriptCommand*)command {
+    NSDictionary *args = [command arguments];
+    NSPoint p;
+    waypoint coord;
+    int which;
+    
+    which = [[command directParameter] intValue];
+    p.x = [[args objectForKey:@"X"] doubleValue];
+    p.y = [[args objectForKey:@"Y"] doubleValue];
+    coord._lat  = [[args objectForKey:@"Latitude"] doubleValue];
+    coord._long = [[args objectForKey:@"Longitude"] doubleValue];
+    
+    BOOL ret = [[WaveHelper mapView] setWaypoint:which toPoint:p atCoordinate:coord];
+    return [NSNumber numberWithBool:ret];
 }
 
 @end

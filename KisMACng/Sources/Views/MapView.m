@@ -34,6 +34,7 @@
 #import "BITextView.h"
 #import "MapControlPanel.h"
 #import "PointView.h"
+#import "WayPoint.h"
 
 @implementation MapView
 
@@ -180,7 +181,10 @@
     return YES;
 }
 
-- (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord {
+- (BOOL)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord {
+    if (which != selWaypoint1 && which != selWaypoint2) return NO;
+    if (coord._lat > 90 || coord._lat < -90 || coord._long > 180 || coord._long < -180) return NO;
+    
     _point[which] = point;
     _wp[which] = coord;
  
@@ -190,6 +194,17 @@
     
     if (_selmode == which) [self _alignWayPoint];
     [[NSNotificationCenter defaultCenter] postNotificationName:KisMACAdvNetViewInvalid object:self];
+    
+    return YES;
+}
+
+- (BOOL)setCurrentPostionToLatitude:(double)lat andLongitude:(double)lon {
+    if (lat > 90 || lat < -90 || lon > 180 || lon < -180) return NO;
+    
+    [[WaveHelper gpsController] setCurrentPointNS:lat EW:lon ELV:0];
+    [self _alignCurrentPos];
+    [self setNeedsDisplay:_visible];
+    return YES;
 }
 
 - (void)setVisible:(BOOL)visible {
@@ -276,9 +291,65 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
+    BOOL keepOn = YES;
     NSPoint p;
+    WayPoint *wayPoint;
+    waypoint w;
+    
     p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    if (NSPointInRect(p, [_controlPanel frame])) [_controlPanel mouseDownAtPoint:p];
+    if (NSPointInRect(p, [_controlPanel frame])) {
+        [_controlPanel mouseDownAtPoint:p];
+        return;
+    }
+    
+    if (_selmode >= selShowCurPos) return;
+    
+    _old = _point[_selmode];
+    
+    while (keepOn) {
+        theEvent = [[self window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+        p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        p.x -= [_moveContainer location].x;
+        p.y -= [_moveContainer location].y;
+        p.x /= _zoomFact;
+        p.y /= _zoomFact;
+        
+        switch ([theEvent type]) {
+        case NSLeftMouseUp:
+            keepOn = NO;
+            
+            wayPoint = [[WayPoint alloc] initWithWindowNibName:@"WayPointDialog"];
+            [[wayPoint window] setFrameUsingName:@"aKisMAC_WayPoint"];
+            [[wayPoint window] setFrameAutosaveName:@"aKisMAC_WayPoint"];
+            
+            if (_selmode == selCurPos) {
+                // calculate current point for setting the current position
+                NS_DURING
+                    w._long = _wp[1]._long - (_point[1].x - p.x) / (_point[1].x - _point[2].x) * (_wp[1]._long - _wp[2]._long);
+                    w._lat  = _wp[1]._lat  - (_point[1].y - p.y) / (_point[1].y - _point[2].y) * (_wp[1]._lat  - _wp[2]._lat);
+                NS_HANDLER
+                    w._long = 0.0;
+                    w._lat  = 0.0;
+                NS_ENDHANDLER
+                _point[selCurPos] = INVALIDPOINT;
+            } else {// set the waypoints with current coordinates
+                w=[[WaveHelper gpsController] currentPoint];
+            }
+                   
+            [wayPoint setWaypoint:w];
+            [wayPoint setMode:_selmode];
+            [wayPoint setPoint:p];
+            [wayPoint showWindow:self];
+            p = _old;
+        case NSLeftMouseDragged:
+            _point[_selmode] = p;
+            [self _alignWayPoint];
+            [self setNeedsDisplay:YES];
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 #pragma mark -

@@ -94,6 +94,25 @@
             Description = "set whether networks are shown in the map view";
             UnnamedArgument = { Description = "show or not ;)"; };        
         };
+        SetCurrentPosition = {
+            Name = setCurrentPosition;
+            Description = "sets KisMACs current GPS position";
+            Arguments = {
+                Latitude = { Name = "latitude"; Description = "Latitude on globe. Negatives for western hemisphere."; };
+                Longitude = { Name = "longitude"; Description = "Longitude on globe. Negatives for southern hemisphere."; };
+            };
+        };
+        SetWaypoint = {
+            Name = setWaypoint;
+            Description = "sets a waypoint in KisMAC";
+            Arguments = {
+                Latitude = { Name = "latitude"; Description = "Latitude on globe. Negatives for western hemisphere."; };
+                Longitude = { Name = "longitude"; Description = "Longitude on globe. Negatives for southern hemisphere."; };
+                X = { Name = "x"; Description = "X Position of the pixel on the unscaled map."; };
+                Y = { Name = "y"; Description = "Y Position of the pixel on the unscaled map."; };
+            };
+            UnnamedArgument = { Description = "The selected waypoint. Currently this must be 1 or 2."; };
+        };
         Busy = {
             Name = busy;
             Description = "Returns true if there is an asynchronous operation still taking place";

@@ -42,7 +42,7 @@ static int AirPortInstances = 0;
         return nil;
     }
 
-    if(WirelessIsAvailable() == 0) {  // check the API
+    if (WirelessIsAvailable() == 0) {  // check the API
         NSRunCriticalAlertPanel(
             NSLocalizedString(@"Could not load Airport Driver.", "Error dialog title"),
             NSLocalizedString(@"Could not load Airport Driver. Apple API gone mad", "LONG desc"),

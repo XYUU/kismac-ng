@@ -30,41 +30,9 @@
 #import "WaveHelper.h"
 #import "ScriptAdditions.h"
 #import "KisMACNotifications.h"
+#import "ScriptingEngine.h"
 
 @implementation ScriptController
-
-+ (BOOL)selfSendEvent:(AEEventID)event withClass:(AEEventClass)class andDefaultArg:(NSAppleEventDescriptor*)arg {
-    AppleEvent  reply;
-    ProcessSerialNumber	theCurrentProcess = { 0, kCurrentProcess };
-    NSAppleEventDescriptor *target =  [NSAppleEventDescriptor descriptorWithDescriptorType:typeProcessSerialNumber bytes:(void*)&theCurrentProcess length:sizeof(theCurrentProcess)];    
-
-    NSAppleEventDescriptor *e = [NSAppleEventDescriptor appleEventWithEventClass:class eventID:event targetDescriptor:target returnID:kAutoGenerateReturnID transactionID:kAnyTransactionID];
-    
-    if (arg) [e setDescriptor:arg forKeyword:keyDirectObject];
-
-    if(noErr != AESend([e aeDesc], &reply, kAEWaitReply, 0, kAEDefaultTimeout, NULL, NULL)) return NO;
-    
-    NSAppleEventDescriptor *replyDesc = [[[NSAppleEventDescriptor alloc] initWithAEDescNoCopy:&reply] autorelease];
-    NSAppleEventDescriptor *resultDesc = [replyDesc paramDescriptorForKeyword: keyDirectObject];
-    
-    if (resultDesc) return [resultDesc booleanValue];
-    return YES;
-}
-
-+ (BOOL)selfSendEvent:(AEEventID)event withClass:(AEEventClass)class andDefaultArgString:(NSString*)arg {
-    return [ScriptController selfSendEvent:event withClass:class andDefaultArg:[NSAppleEventDescriptor descriptorWithString:arg]];
-}
-+ (BOOL)selfSendEvent:(AEEventID)event withDefaultArgString:(NSString*)arg {
-    return [ScriptController selfSendEvent:event withClass:'BIKM' andDefaultArgString:arg];
-}
-+ (BOOL)selfSendEvent:(AEEventID)event withDefaultArg:(NSAppleEventDescriptor*)arg {
-    return [ScriptController selfSendEvent:event withClass:'BIKM' andDefaultArg:arg];
-}
-+ (BOOL)selfSendEvent:(AEEventID)event {
-    return [ScriptController selfSendEvent:event withDefaultArg:nil];
-}
-
-#pragma mark -
 
 - (id)init {
     self = [super init];
@@ -106,21 +74,21 @@
 #pragma mark -
 
 - (IBAction)showNetworks:(id)sender {
-    [ScriptController selfSendEvent:'KshN'];
+    [ScriptingEngine selfSendEvent:'KshN'];
 }
 - (IBAction)showTrafficView:(id)sender {
-    [ScriptController selfSendEvent:'KshT'];
+    [ScriptingEngine selfSendEvent:'KshT'];
 }
 - (IBAction)showMap:(id)sender {
-    [ScriptController selfSendEvent:'KshM'];
+    [ScriptingEngine selfSendEvent:'KshM'];
 }
 - (IBAction)showDetails:(id)sender {
-    [ScriptController selfSendEvent:'KshD'];
+    [ScriptingEngine selfSendEvent:'KshD'];
 }
 
 - (IBAction)toggleScan:(id)sender {
-    if ([sender state] == NSOnState) [ScriptController selfSendEvent:'KsoS'];
-    else  [ScriptController selfSendEvent:'KsaS'];
+    if ([sender state] == NSOnState) [ScriptingEngine selfSendEvent:'KsoS'];
+    else  [ScriptingEngine selfSendEvent:'KsaS'];
 }
 
 #pragma mark -
@@ -130,7 +98,7 @@
         [self showWantToSaveDialog:@selector(new:)];
         return;
     }
-   [ScriptController selfSendEvent:'KNew'];
+   [ScriptingEngine selfSendEvent:'KNew'];
 }
 
 #pragma mark -
@@ -148,7 +116,7 @@
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:[NSArray arrayWithObject:@"kismac"]]==NSOKButton) {
-        [ScriptController selfSendEvent:'odoc' withClass:'aevt' andDefaultArgString:[op filename]];
+        [ScriptingEngine selfSendEvent:'odoc' withClass:'aevt' andDefaultArgString:[op filename]];
     }
 }
 
@@ -160,7 +128,7 @@
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:[NSArray arrayWithObject:@"kismap"]]==NSOKButton) {
-        [ScriptController selfSendEvent:'odoc' withClass:'aevt' andDefaultArgString:[op filename]];
+        [ScriptingEngine selfSendEvent:'odoc' withClass:'aevt' andDefaultArgString:[op filename]];
     }
 }
 
@@ -176,7 +144,7 @@
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:nil]==NSOKButton) {
         for (i = 0; i < [[op filenames] count]; i++)
-            [ScriptController selfSendEvent:'KImP' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+            [ScriptingEngine selfSendEvent:'KImP' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
 
@@ -186,7 +154,7 @@
     NSString *filename = [[NSApp delegate] filename];
     if (!filename) [self saveKisMACFileAs:sender];
     
-    if (![ScriptController selfSendEvent:'save' withClass:'core' andDefaultArgString:filename]) 
+    if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:filename]) 
         [[NSApp delegate] showSavingFailureDialog];
 }
 
@@ -198,7 +166,7 @@
     [sp setCanSelectHiddenExtension:YES];
     [sp setTreatsFilePackagesAsDirectories:NO];
     if ([sp runModal]==NSFileHandlingPanelOKButton) {
-        if (![ScriptController selfSendEvent:'save' withClass:'core' andDefaultArgString:[sp filename]]) 
+        if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:[sp filename]]) 
             [[NSApp delegate] showSavingFailureDialog];    
     }
 }
@@ -211,7 +179,7 @@
     [sp setCanSelectHiddenExtension:YES];
     [sp setTreatsFilePackagesAsDirectories:NO];
     if ([sp runModal]==NSFileHandlingPanelOKButton) {
-        if (![ScriptController selfSendEvent:'save' withClass:'core' andDefaultArgString:[sp filename]]) 
+        if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:[sp filename]]) 
             [[NSApp delegate] showSavingFailureDialog];    
     }
 }
@@ -227,22 +195,22 @@
 
 - (IBAction)bruteforceNewsham:(id)sender {
     WEPCHECKS;
-    [ScriptController selfSendEvent:'KCBN'];
+    [ScriptingEngine selfSendEvent:'KCBN'];
 }
 
 - (IBAction)bruteforce40bitLow:(id)sender {
     WEPCHECKS;
-    [ScriptController selfSendEvent:'KCBL'];
+    [ScriptingEngine selfSendEvent:'KCBL'];
 }
 
 - (IBAction)bruteforce40bitAlpha:(id)sender {
     WEPCHECKS;
-    [ScriptController selfSendEvent:'KCBa'];
+    [ScriptingEngine selfSendEvent:'KCBa'];
 }
 
 - (IBAction)bruteforce40bitAll:(id)sender {
     WEPCHECKS;
-    [ScriptController selfSendEvent:'KCBA'];
+    [ScriptingEngine selfSendEvent:'KCBA'];
 }
 
 #pragma mark -
@@ -258,7 +226,7 @@
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:nil]==NSOKButton) {
         for (i = 0; i < [[op filenames] count]; i++)
-            [ScriptController selfSendEvent:'KCWa' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+            [ScriptingEngine selfSendEvent:'KCWa' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
 
@@ -273,7 +241,7 @@
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:nil]==NSOKButton) {
         for (i = 0; i < [[op filenames] count]; i++)
-            [ScriptController selfSendEvent:'KCWA' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+            [ScriptingEngine selfSendEvent:'KCWA' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
 
@@ -288,7 +256,7 @@
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:nil]==NSOKButton) {
         for (i = 0; i < [[op filenames] count]; i++)
-            [ScriptController selfSendEvent:'KCWM' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+            [ScriptingEngine selfSendEvent:'KCWM' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
 
@@ -296,7 +264,7 @@
 - (IBAction)showNetworksInMap:(id)sender {
     BOOL show = ([sender state] == NSOffState);
     
-    [ScriptController selfSendEvent:'KMSN' withDefaultArg:[NSAppleEventDescriptor descriptorWithBoolean:show]];
+    [ScriptingEngine selfSendEvent:'KMSN' withDefaultArg:[NSAppleEventDescriptor descriptorWithBoolean:show]];
 }
 
 

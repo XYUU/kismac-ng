@@ -76,8 +76,10 @@ enum selmode {
 - (BOOL)loadFromFile:(NSString*)fileName;
 
 - (BOOL)setMap:(NSImage*)map;
-- (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
+- (BOOL)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
 - (void)setVisible:(BOOL)visible;
+- (BOOL)setCurrentPostionToLatitude:(double)lat andLongitude:(double)lon;
+
 - (NSPoint)pixelForCoordinate:(waypoint)wp;
 - (void)setNeedsDisplayInMoveRect:(NSRect)invalidRect;
 

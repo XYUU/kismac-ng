@@ -28,7 +28,6 @@
 #import "InfoController.h"
 #import "ImportController.h"
 #import "ScanHierarch.h"
-#import "ZoomPictureView.h"
 #import "PrefsController.h"
 
 typedef enum {

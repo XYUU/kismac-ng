@@ -28,6 +28,8 @@
                 "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
                 "KisMAC.Busy"                   = "busy:";
                 "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
+                "KisMAC.SetCurrentPosition"     = "setCurrentPosition:";
+                "KisMAC.SetWaypoint"            = "setWaypoint:";
             }; 
         };
     };
@@ -118,6 +120,25 @@
             AppleEventCode = KMSN;
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSNumber<Bool>"; };
+        };
+        SetCurrentPosition = {
+            AppleEventCode = KMSP;
+            CommandClass = NSScriptCommand;
+            Arguments = {
+                Latitude = { AppleEventCode = KMLa; Optional = NO; Type = "NSNumber<Double>"; }; 
+                Longitude = { AppleEventCode = KMLo; Optional = NO; Type = "NSNumber<Double>"; }; 
+            };
+        };
+        SetWaypoint = {
+            AppleEventCode = KMSW;
+            CommandClass = NSScriptCommand;
+            Arguments = {
+                Latitude = { AppleEventCode = KMLa; Optional = NO; Type = "NSNumber<Double>"; }; 
+                Longitude = { AppleEventCode = KMLo; Optional = NO; Type = "NSNumber<Double>"; }; 
+                X = { AppleEventCode = KM_x; Optional = NO; Type = "NSNumber<Double>"; }; 
+                Y = { AppleEventCode = KM_y; Optional = NO; Type = "NSNumber<Double>"; }; 
+            };
+            UnnamedArgument = { Optional = NO; Type = "NSNumber<Int>"; };
         };
     };
     UsedFeatures = (UnnamedArguments);

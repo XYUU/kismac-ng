@@ -481,7 +481,6 @@ err:
 
 - (void)windowWillClose:(NSNotification *)aNotification {
     [_obj performSelectorOnMainThread:_selector withObject:self waitUntilDone:NO];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KisMACModalDone object:self];
 }
 
 - (void)dealloc {

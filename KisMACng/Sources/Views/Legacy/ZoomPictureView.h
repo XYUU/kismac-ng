@@ -24,7 +24,6 @@
 */
 
 #import <AppKit/AppKit.h>
-#import "Waypoint.h"
 #import "WaypointView.h"
 #import "TraceView.h"
 #import "AdvNetView.h"
@@ -52,14 +51,14 @@
     AdvNetView *_advNetView;
     TraceView *_trace;
     
-    waypoint _wp[3];
+    //waypoint _wp[3];
     NSPoint _old;
     NSPoint _point[3];
 
     int selmode;
     
-    waypointdlg aWPD;
-    WayPoint *aWayPoint;
+    //waypointdlg aWPD;
+    //WayPoint *aWayPoint;
     NSModalSession aMS;
 }
 
@@ -73,7 +72,7 @@
 - (void)alignPoint;
 - (void)calcPixelforNS:(double)ns EW:(double)ew forPoint:(NSPoint*)p;
 - (void)calcPixelNoZoomforNS:(double)ns EW:(double)ew forPoint:(NSPoint*)p;
-- (void)setCurrentPoint:(waypoint) wp;
+//- (void)setCurrentPoint:(waypoint)wp;
 - (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
 - (void)waitThread:(id)object;
 - (void)setVisible:(bool)visible;

@@ -24,6 +24,7 @@
 */
 
 #import "WayPoint.h"
+#import "ScriptingEngine.h"
 
 @implementation WayPoint
 
@@ -31,17 +32,24 @@
     [[self window] setDelegate:self];
 }
 
-- (void)setCallbackStruct:(waypointdlg*) wpd {
-    aWPD=wpd;
-    aWPD->canceled = YES;
-    [aLat  setFloatValue: ((aWPD->w._lat >= 0) ? aWPD->w._lat : -aWPD->w._lat) ];
-    [aLong setFloatValue: ((aWPD->w._long>= 0) ? aWPD->w._long: -aWPD->w._long)];
+- (void)setWaypoint:(waypoint)w {
+    [aLat  setFloatValue: ((w._lat >= 0) ? w._lat : -w._lat) ];
+    [aLong setFloatValue: ((w._long>= 0) ? w._long: -w._long)];
     
-    if (aWPD->w._lat>=0)  [aNS setStringValue:@"N"];
+    if (w._lat>=0)  [aNS setStringValue:@"N"];
     else  [aNS setStringValue:@"S"];
     
-    if (aWPD->w._long>=0) [aEW setStringValue:@"E"];
+    if (w._long>=0) [aEW setStringValue:@"E"];
     else  [aEW setStringValue:@"W"];
+}
+
+- (void)setMode:(enum selmode)mode {
+    NSParameterAssert(mode == selCurPos || mode == selWaypoint1 || mode == selWaypoint2);
+    _mode = mode;
+}
+
+- (void)setPoint:(NSPoint)p {
+    _p = p;
 }
 
 - (IBAction)NSStepClicked:(id)sender {
@@ -55,18 +63,37 @@
 }
 
 - (IBAction)OKClicked:(id)sender {
-    aWPD->canceled = NO;
-    aWPD->w._lat = [aLat  floatValue] * ([[aNS stringValue] isEqualToString:@"N"] ? 1.0 : -1.0);
-    aWPD->w._long = [aLong  floatValue] * ([[aEW stringValue] isEqualToString:@"E"] ? 1.0 : -1.0);
+    NSDictionary *args;
+    NSAppleEventDescriptor *lat, *lon, *x, *y;
+    double z;
+    
+    z = [aLat  doubleValue] * ([[aNS stringValue] isEqualToString:@"N"] ? 1.0 : -1.0);
+    lat = [NSAppleEventDescriptor descriptorWithDescriptorType:typeIEEE64BitFloatingPoint bytes:&z length:sizeof(double)];
+    z = [aLong doubleValue] * ([[aEW stringValue] isEqualToString:@"E"] ? 1.0 : -1.0);
+    lon = [NSAppleEventDescriptor descriptorWithDescriptorType:typeIEEE64BitFloatingPoint bytes:&z length:sizeof(double)];
+    z = _p.x;
+    x = [NSAppleEventDescriptor descriptorWithDescriptorType:typeIEEE64BitFloatingPoint bytes:&z length:sizeof(double)];
+    z = _p.y;
+    y = [NSAppleEventDescriptor descriptorWithDescriptorType:typeIEEE64BitFloatingPoint bytes:&z length:sizeof(double)];
+
+    switch(_mode) {
+    case selCurPos:
+        args = [NSDictionary dictionaryWithObjectsAndKeys:lat, [NSString stringWithFormat:@"%d", 'KMLa'],lon, [NSString stringWithFormat:@"%d", 'KMLo'], nil];
+        [ScriptingEngine selfSendEvent:'KMSP' withArgs:args];
+        break;
+    case selWaypoint1:
+    case selWaypoint2:
+        args = [NSDictionary dictionaryWithObjectsAndKeys:lat, [NSString stringWithFormat:@"%d", 'KMLa'],lon, [NSString stringWithFormat:@"%d", 'KMLo'], x, [NSString stringWithFormat:@"%d", 'KM_x'], y, [NSString stringWithFormat:@"%d", 'KM_y'], [NSAppleEventDescriptor descriptorWithInt32: (_mode == selWaypoint1) ? 1 : 2], [NSString stringWithFormat:@"%d", keyDirectObject], nil];
+        [ScriptingEngine selfSendEvent:'KMSW' withArgs:args];
+        break;        
+    default:
+        break;
+    }
     [self close];
 }
 
 - (IBAction)CancelClicked:(id)sender {
     [self close];
-}
-
-- (void)windowWillClose:(NSNotification *)aNotification {
-    aWPD->done = YES;
 }
 
 @end

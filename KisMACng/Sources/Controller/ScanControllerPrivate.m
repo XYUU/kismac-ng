@@ -23,6 +23,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#import <BIGeneric/BIGeneric.h>
 #import "ScanControllerPrivate.h"
 #import "ScanControllerScriptable.h"
 #import "WaveHelper.h"
@@ -30,8 +31,8 @@
 #import "SpinChannel.h"
 #import "../WaveDrivers/WaveDriver.h"
 #import "MapView.h"
-#import <BIGeneric/BIGeneric.h>
 #import "MapViewAreaView.h"
+#import "GPSController.h"
 
 @implementation ScanController(PrivateExtension) 
 
