@@ -1,15 +1,5 @@
 // !$*UTF8*$!
 {
-	002C360407017F1200D20ECA = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = install.sh;
-		rLen = 10;
-		rLoc = 4487;
-		rType = 0;
-		vrLen = 974;
-		vrLoc = 4000;
-	};
 	002F18D207006878004F5FEF = {
 		fRef = 00FC4EE40647F6C800F2220A;
 		isa = PBXTextBookmark;
@@ -30,15 +20,25 @@
 		vrLen = 127;
 		vrLoc = 0;
 	};
-	002F22C40700D94C004F5FEF = {
+	007B3FEC072D09E700678F0E = {
 		fRef = 00B9E6140647BA2E009FEF35;
 		isa = PBXTextBookmark;
-		name = install.sh;
-		rLen = 10;
-		rLoc = 4487;
+		name = "InstallController.m: 161";
+		rLen = 0;
+		rLoc = 4371;
 		rType = 0;
-		vrLen = 974;
-		vrLoc = 4000;
+		vrLen = 1000;
+		vrLoc = 3999;
+	};
+	007B4024072D0D4700678F0E = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = "InstallController.m: 389";
+		rLen = 0;
+		rLoc = 14365;
+		rType = 0;
+		vrLen = 1899;
+		vrLoc = 13336;
 	};
 	00B9E5E00647B7A9009FEF35 = {
 		activeArgIndex = 2147483647;
@@ -76,7 +76,7 @@
 	00B9E5EA0647B7BD009FEF35 = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 1;
+		usesDefaults = 0;
 		wantsCodeCompletion = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
@@ -96,9 +96,9 @@
 	};
 	00B9E6140647BA2E009FEF35 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {952, 3892}}";
-			sepNavSelRange = "{4487, 10}";
-			sepNavVisRect = "{{0, 2128}, {952, 342}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2108, 10429}}";
+			sepNavSelRange = "{14365, 0}";
+			sepNavVisRect = "{{0, 5043}, {952, 675}}";
 		};
 	};
 	00B9E97E0647F3B8009FEF35 = {
@@ -319,7 +319,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 117538571;
+			PBXPerProjectTemplateStateSaveDate = 120392003;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -798,13 +798,13 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 117538571;
+			PBXWorkspaceStateSaveDate = 120392003;
 		};
 		perUserProjectItems = {
-			002C360407017F1200D20ECA = 002C360407017F1200D20ECA;
 			002F18D207006878004F5FEF = 002F18D207006878004F5FEF;
 			002F18D407006878004F5FEF = 002F18D407006878004F5FEF;
-			002F22C40700D94C004F5FEF = 002F22C40700D94C004F5FEF;
+			007B3FEC072D09E700678F0E = 007B3FEC072D09E700678F0E;
+			007B4024072D0D4700678F0E = 007B4024072D0D4700678F0E;
 			00F9C62C06DA9EAE00E357F0 = 00F9C62C06DA9EAE00E357F0;
 			00F9C62D06DA9EAE00E357F0 = 00F9C62D06DA9EAE00E357F0;
 			00F9C62E06DA9EAE00E357F0 = 00F9C62E06DA9EAE00E357F0;

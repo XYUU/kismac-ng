@@ -89,11 +89,36 @@
     default:
         break;
     }
-    [self close];
+
+    [[self window] performClose:sender];
 }
 
 - (IBAction)CancelClicked:(id)sender {
-    [self close];
+    [[self window] performClose:sender];
 }
 
+#pragma mark Fade Out Code
+
+- (BOOL)windowShouldClose:(id)sender {
+    // Set up our timer to periodically call the fade: method.
+    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];
+    
+    return NO;
+}
+
+- (void)fade:(NSTimer *)timer {
+    if ([[self window] alphaValue] > 0.0) {
+        // If window is still partially opaque, reduce its opacity.
+        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];
+    } else {
+        // Otherwise, if window is completely transparent, destroy the timer and close the window.
+        [timer invalidate];
+        [timer release];
+        
+        [[self window] close];
+        
+        // Make the window fully opaque again for next time.
+        [[self window] setAlphaValue:1.0];
+    }
+}
 @end

@@ -348,6 +348,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         [_selectedDriver addItemWithTitle:@"Atheros Card, passive mode"];
         [[_selectedDriver lastItem] setTag: 6];
     }    
+   if ([self isServiceAvailable:"GTDriver"]) {
+        [_selectedDriver addItemWithTitle:@"PrismGT based card, passive mode"];
+        [[_selectedDriver lastItem] setTag: 7];
+    }    
 }
 
 - (void)writeDriverSetting {
@@ -383,6 +387,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     case 6:
         [md setObject:@"Atheros based Card" forKey:@"deviceName"];
         [md setObject:@"WaveDriverAtheros" forKey:@"driverID"];
+        break;
+    case 7:
+        [md setObject:@"PrismGT based Card" forKey:@"deviceName"];
+        [md setObject:@"WaveDriverPrismGT" forKey:@"driverID"];
         break;
     }    
     

@@ -53,6 +53,11 @@ unsigned long doFCS(unsigned char* buf, int len) {
 }
 
 @implementation DecryptController
+
+- (void)awakeFromNib {
+    [[self window] setDelegate:self];
+}
+
 - (IBAction)okAction:(id)sender {
     NSString *inFile, *outFile;
     NSMutableString *key;
@@ -270,11 +275,11 @@ error1:
 }
 
 - (void)closeWindow:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    [self close];
+    [[self window] performClose:self];
 }
 
 - (IBAction)cancelAction:(id)sender {
-    [self close];
+    [[self window] performClose:sender];
 }
 
 - (IBAction)otherFile:(id)sender {
@@ -295,6 +300,32 @@ error1:
         if ([SP runModal]==NSFileHandlingPanelOKButton) {
             [_outFile setStringValue:[SP filename]];
         }
+    }
+}
+
+
+#pragma mark Fade Out Code
+
+- (BOOL)windowShouldClose:(id)sender {
+    // Set up our timer to periodically call the fade: method.
+    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];
+    
+    return NO;
+}
+
+- (void)fade:(NSTimer *)timer {
+    if ([[self window] alphaValue] > 0.0) {
+        // If window is still partially opaque, reduce its opacity.
+        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];
+    } else {
+        // Otherwise, if window is completely transparent, destroy the timer and close the window.
+        [timer invalidate];
+        [timer release];
+        
+        [[self window] close];
+        
+        // Make the window fully opaque again for next time.
+        [[self window] setAlphaValue:1.0];
     }
 }
 

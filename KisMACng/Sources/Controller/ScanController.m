@@ -615,10 +615,10 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
             [self showWantToSaveDialog:@selector(reallyCloseDidEnd:returnCode:contextInfo:)];
             return NO;
         }
-    
-        [NSApp terminate:self];
-        return YES;
-    } else {
+
+		[[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];
+		return NO;
+	} else {
         [self new];
         return NO;
     }
@@ -632,8 +632,23 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     case NSAlertAlternateReturn:
     default:
         [_window setDocumentEdited:NO];
-        [NSApp terminate:self];
+		[[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];
     }
 }
 
+#pragma mark Fade Out Code
+
+- (void)fade:(NSTimer *)timer {
+    if ([_window alphaValue] > 0.0) {
+        // If window is still partially opaque, reduce its opacity.
+        [_window setAlphaValue:[_window alphaValue] - 0.2];
+    } else {
+        // Otherwise, if window is completely transparent, destroy the timer and close the window.
+        [timer invalidate];
+        [timer release];
+        
+        [_window close];
+		[NSApp terminate:self];
+    }
+}
 @end

@@ -107,6 +107,8 @@
     if ([_width  intValue] != 1000 && !map24) [d setObject:width  forKey:[NSString stringWithFormat:@"%d", 'KWid']];
     if ([_height intValue] != 1000 && !map24) [d setObject:height forKey:[NSString stringWithFormat:@"%d", 'KHig']];
     
+    [[self window] close];
+
     [ScriptingEngine selfSendEvent:'KDMp' withArgs:d];
 
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -119,11 +121,10 @@
     [def setObject:[_nsButton titleOfSelectedItem] forKey:@"DownloadMapNS"];
     [def setObject:[_ewButton titleOfSelectedItem] forKey:@"DownloadMapEW"];
 
-    [self close];
 }
 
 - (IBAction)cancelAction:(id)sender {
-    [self close];
+    [[self window] performClose:sender];
 }
 
 - (void)setCoordinates:(waypoint)wp {
@@ -139,4 +140,28 @@
     else  [_ewButton selectItemWithTitle:@"W"];
 }
 
+#pragma mark Fade Out Code
+
+- (BOOL)windowShouldClose:(id)sender {
+    // Set up our timer to periodically call the fade: method.
+    [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fade:) userInfo:nil repeats:YES] retain];
+    
+    return NO;
+}
+
+- (void)fade:(NSTimer *)timer {
+    if ([[self window] alphaValue] > 0.0) {
+        // If window is still partially opaque, reduce its opacity.
+        [[self window] setAlphaValue:[[self window] alphaValue] - 0.2];
+    } else {
+        // Otherwise, if window is completely transparent, destroy the timer and close the window.
+        [timer invalidate];
+        [timer release];
+        
+        [[self window] close];
+        
+        // Make the window fully opaque again for next time.
+        [[self window] setAlphaValue:1.0];
+    }
+}
 @end
