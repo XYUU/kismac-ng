@@ -36,7 +36,7 @@
 	00033F8C0664EE5500B06924 = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 1;
+		usesDefaults = 0;
 		wantsCodeCompletion = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
@@ -86,9 +86,9 @@
 	};
 	00C0B37106653F3100B1F653 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 2827}}";
-			sepNavSelRange = "{1853, 0}";
-			sepNavVisRect = "{{0, 441}, {1033, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1568, 2799}}";
+			sepNavSelRange = "{1968, 0}";
+			sepNavVisRect = "{{0, 434}, {1033, 446}}";
 		};
 	};
 	00C69403066E2ED800F134D2 = {
@@ -105,6 +105,26 @@
 			sepNavVisRect = "{{0, 0}, {1057, 689}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
+	};
+	00E1D83607239FCC00931A18 = {
+		fRef = 00C0B37106653F3100B1F653;
+		isa = PBXTextBookmark;
+		name = "WiFiDriverInterface.m: 51";
+		rLen = 0;
+		rLoc = 1853;
+		rType = 0;
+		vrLen = 934;
+		vrLoc = 1152;
+	};
+	00E1D8500723A0D900931A18 = {
+		fRef = 00C0B37106653F3100B1F653;
+		isa = PBXTextBookmark;
+		name = "WiFiDriverInterface.m: 55";
+		rLen = 0;
+		rLoc = 1968;
+		rType = 0;
+		vrLen = 934;
+		vrLoc = 1152;
 	};
 	00E652DC067E0E31009DC735 = {
 		fileReference = 00033F900664EEBF00B06924;
@@ -123,10 +143,6 @@
 		vrLen = 1021;
 		vrLoc = 1248;
 	};
-	00FF594D06C631AA006C7F1E = {
-		fRef = 00C0B37106653F3100B1F653;
-		isa = PBXBookmark;
-	};
 	00FF594E06C631AA006C7F1E = {
 		fRef = 00033F900664EEBF00B06924;
 		isa = PBXTextBookmark;
@@ -136,16 +152,6 @@
 		rType = 0;
 		vrLen = 1021;
 		vrLoc = 1248;
-	};
-	00FF594F06C631AA006C7F1E = {
-		fRef = 00C0B37106653F3100B1F653;
-		isa = PBXTextBookmark;
-		name = "WiFiDriverInterface.m: 51";
-		rLen = 0;
-		rLoc = 1853;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 1152;
 	};
 	089C165DFE840E0CC02AAC07 = {
 		uiCtxt = {
@@ -197,10 +203,10 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					653,
-					138,
+					635,
+					134,
 					20,
-					138,
+					134,
 					43,
 					43,
 				);
@@ -214,7 +220,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 113652088;
+			PBXPerProjectTemplateStateSaveDate = 119775172;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -648,13 +654,13 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 359 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 113652088;
+			PBXWorkspaceStateSaveDate = 119775172;
 		};
 		perUserProjectItems = {
+			00E1D83607239FCC00931A18 = 00E1D83607239FCC00931A18;
+			00E1D8500723A0D900931A18 = 00E1D8500723A0D900931A18;
 			00FF594C06C631AA006C7F1E = 00FF594C06C631AA006C7F1E;
-			00FF594D06C631AA006C7F1E = 00FF594D06C631AA006C7F1E;
 			00FF594E06C631AA006C7F1E = 00FF594E06C631AA006C7F1E;
-			00FF594F06C631AA006C7F1E = 00FF594F06C631AA006C7F1E;
 		};
 		sourceControlManager = 00033F8B0664EE5500B06924;
 		userBuildSettings = {

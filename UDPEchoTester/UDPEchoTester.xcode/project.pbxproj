@@ -5,276 +5,109 @@
 	};
 	objectVersion = 39;
 	objects = {
-		00033F8F0664EEBF00B06924 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = WiFiGUI.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00033F900664EEBF00B06924 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = WiFiGUI.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00033F910664EEBF00B06924 = {
-			fileRef = 00033F8F0664EEBF00B06924;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00033F920664EEBF00B06924 = {
-			fileRef = 00033F900664EEBF00B06924;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00033F9A0664FDCE00B06924 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = Status4.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00033F9B0664FDCE00B06924 = {
-			fileRef = 00033F9A0664FDCE00B06924;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		000A034D066D0BC600E4B701 = {
-			isa = PBXFileReference;
-			lastKnownFileType = "compiled.mach-o.dylib";
-			name = libcrypto.dylib;
-			path = /usr/lib/libcrypto.dylib;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		000A034E066D0BC600E4B701 = {
-			fileRef = 000A034D066D0BC600E4B701;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		000A034F066D0BE300E4B701 = {
+		0005CC32071D4DFC001037B7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
-			name = Apple80211.framework;
-			path = /System/Library/PrivateFrameworks/Apple80211.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		000A0350066D0BE300E4B701 = {
-			fileRef = 000A034F066D0BE300E4B701;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0040ED1F067F11DE00312441 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.icns;
-			name = GTDriver.icns;
-			path = ../GTDriver.icns;
+			name = BIGL.framework;
+			path = ../KisMACng/Subprojects/files/BIGL.framework;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
-		0040ED20067F11DE00312441 = {
-			fileRef = 0040ED1F067F11DE00312441;
+		0005CC33071D4DFC001037B7 = {
+			fileRef = 0005CC32071D4DFC001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		0045934A066CF7710028EF4B = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = WiFiPasswordEncrypt.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0045934B066CF7710028EF4B = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = WiFiPasswordEncrypt.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0045934C066CF7710028EF4B = {
-			fileRef = 0045934A066CF7710028EF4B;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0045934D066CF7710028EF4B = {
-			fileRef = 0045934B066CF7710028EF4B;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		005DA8CB0665D07B00154F70 = {
+		0005CC4B071D4E29001037B7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
-			name = IOKit.framework;
-			path = /System/Library/Frameworks/IOKit.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
+			name = BIGeneric.framework;
+			path = ../KisMACng/Subprojects/files/BIGeneric.framework;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
-		005DA8CC0665D07B00154F70 = {
-			fileRef = 005DA8CB0665D07B00154F70;
+		0005CC4C071D4E29001037B7 = {
+			fileRef = 0005CC4B071D4E29001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		0061530E066E22E3009CD624 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = Security.framework;
-			path = /System/Library/Frameworks/Security.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		0061530F066E22E3009CD624 = {
-			fileRef = 0061530E066E22E3009CD624;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2C106652D8F00B1F653 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = Status0.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00C0B2C206652D8F00B1F653 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = Status1.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00C0B2C306652D8F00B1F653 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = Status2.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00C0B2C406652D8F00B1F653 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = Status3.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00C0B2C506652D8F00B1F653 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
-			path = StatusDead.tif;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		00C0B2C606652D8F00B1F653 = {
-			fileRef = 00C0B2C106652D8F00B1F653;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2C706652D8F00B1F653 = {
-			fileRef = 00C0B2C206652D8F00B1F653;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2C806652D8F00B1F653 = {
-			fileRef = 00C0B2C306652D8F00B1F653;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2C906652D8F00B1F653 = {
-			fileRef = 00C0B2C406652D8F00B1F653;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2CA06652D8F00B1F653 = {
-			fileRef = 00C0B2C506652D8F00B1F653;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		00C0B2CB06652D9700B1F653 = {
-			children = (
-				00C0B2C106652D8F00B1F653,
-				00C0B2C206652D8F00B1F653,
-				00C0B2C306652D8F00B1F653,
-				00C0B2C406652D8F00B1F653,
-				00033F9A0664FDCE00B06924,
-				00C0B2C506652D8F00B1F653,
+		0005CC4E071D4E7F001037B7 = {
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0005CC6C071D4EB9001037B7,
+				0005CC6D071D4EB9001037B7,
 			);
-			isa = PBXGroup;
-			name = "Status Icons";
-			refType = 4;
-			sourceTree = "<group>";
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		00C0B37006653F3100B1F653 = {
-			fileEncoding = 4;
+		0005CC6C071D4EB9001037B7 = {
+			fileRef = 0005CC4B071D4E29001037B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0005CC6D071D4EB9001037B7 = {
+			fileRef = 0005CC32071D4DFC001037B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0005CFEC071D5661001037B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = WiFiDriverInterface.h;
+			path = Controller.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		00C0B37106653F3100B1F653 = {
-			fileEncoding = 4;
+		0005CFED071D5661001037B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
-			path = WiFiDriverInterface.m;
+			path = Controller.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		00C0B37206653F3100B1F653 = {
-			fileRef = 00C0B37006653F3100B1F653;
+		0005CFEE071D5661001037B7 = {
+			fileRef = 0005CFEC071D5661001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		00C0B37306653F3100B1F653 = {
-			fileRef = 00C0B37106653F3100B1F653;
+		0005CFEF071D5661001037B7 = {
+			fileRef = 0005CFED071D5661001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		00C69403066E2ED800F134D2 = {
-			fileEncoding = 4;
+		0005CFF0071D566C001037B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = HexNumberFormatter.h;
+			path = GraphView.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		00C69404066E2ED800F134D2 = {
-			fileEncoding = 4;
+		0005CFF1071D566C001037B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
-			path = HexNumberFormatter.m;
+			path = GraphView.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		00C69405066E2ED800F134D2 = {
-			fileRef = 00C69403066E2ED800F134D2;
+		0005CFF2071D566C001037B7 = {
+			fileRef = 0005CFF0071D566C001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		00C69406066E2ED800F134D2 = {
-			fileRef = 00C69404066E2ED800F134D2;
+		0005CFF3071D566C001037B7 = {
+			fileRef = 0005CFF1071D566C001037B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -291,14 +124,10 @@
 //084
 		080E96DDFE201D6D7F000001 = {
 			children = (
-				00033F8F0664EEBF00B06924,
-				00033F900664EEBF00B06924,
-				0045934A066CF7710028EF4B,
-				0045934B066CF7710028EF4B,
-				00C0B37006653F3100B1F653,
-				00C0B37106653F3100B1F653,
-				00C69403066E2ED800F134D2,
-				00C69404066E2ED800F134D2,
+				0005CFEC071D5661001037B7,
+				0005CFED071D5661001037B7,
+				0005CFF0071D566C001037B7,
+				0005CFF1071D566C001037B7,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -335,10 +164,8 @@
 //104
 		1058C7A0FEA54F0111CA2CBB = {
 			children = (
-				0061530E066E22E3009CD624,
-				000A034F066D0BE300E4B701,
-				000A034D066D0BC600E4B701,
-				005DA8CB0665D07B00154F70,
+				0005CC4B071D4E29001037B7,
+				0005CC32071D4DFC001037B7,
 				1058C7A1FEA54F0111CA2CBB,
 			);
 			isa = PBXGroup;
@@ -417,7 +244,7 @@
 				19C28FACFE9D520D11CA2CBB,
 			);
 			isa = PBXGroup;
-			name = WiFiGUI;
+			name = UDPEchoTester;
 			path = "";
 			refType = 4;
 			sourceTree = "<group>";
@@ -434,7 +261,7 @@
 			sourceTree = "<group>";
 		};
 		29B97316FDCFA39411CA2CEA = {
-			fileEncoding = 30;
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = main.m;
@@ -443,8 +270,6 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
-				00C0B2CB06652D9700B1F653,
-				0040ED1F067F11DE00312441,
 				8D1107310486CEB800E47090,
 				089C165CFE840E0CC02AAC07,
 				29B97318FDCFA39411CA2CEA,
@@ -514,7 +339,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = WiFiGUI_Prefix.pch;
+			path = UDPEchoTester_Prefix.pch;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -531,12 +356,10 @@
 		4A9504CCFFE6A4B311CA0CBA = {
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				OPTIMIZATION_CFLAGS = "-O0";
 				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
@@ -563,72 +386,39 @@
 //8D4
 		8D1107260486CEB800E47090 = {
 			buildPhases = (
-				8D1107270486CEB800E47090,
 				8D1107290486CEB800E47090,
 				8D11072C0486CEB800E47090,
 				8D11072E0486CEB800E47090,
+				0005CC4E071D4E7F001037B7,
 			);
 			buildRules = (
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
-				GCC_ENABLE_TRIGRAPHS = NO;
+				FRAMEWORK_SEARCH_PATHS = /Users/mick/openDev/KisMACng/Subprojects/files;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WiFiGUI_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				GCC_PREFIX_HEADER = UDPEchoTester_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "\"/usr/lib\"";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = WiFiGUI;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				PRODUCT_NAME = UDPEchoTester;
 				WRAPPER_EXTENSION = app;
 			};
 			dependencies = (
 			);
 			isa = PBXNativeTarget;
-			name = WiFiGUI;
+			name = UDPEchoTester;
 			productInstallPath = "$(HOME)/Applications";
-			productName = WiFiGUI;
+			productName = UDPEchoTester;
 			productReference = 8D1107320486CEB800E47090;
 			productType = "com.apple.product-type.application";
-		};
-		8D1107270486CEB800E47090 = {
-			buildActionMask = 2147483647;
-			files = (
-				8D1107280486CEB800E47090,
-				00033F910664EEBF00B06924,
-				00C0B37206653F3100B1F653,
-				0045934C066CF7710028EF4B,
-				00C69405066E2ED800F134D2,
-			);
-			isa = PBXHeadersBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8D1107280486CEB800E47090 = {
-			fileRef = 32CA4F630368D1EE00C91783;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		8D1107290486CEB800E47090 = {
 			buildActionMask = 2147483647;
 			files = (
 				8D11072A0486CEB800E47090,
 				8D11072B0486CEB800E47090,
-				00033F9B0664FDCE00B06924,
-				00C0B2C606652D8F00B1F653,
-				00C0B2C706652D8F00B1F653,
-				00C0B2C806652D8F00B1F653,
-				00C0B2C906652D8F00B1F653,
-				00C0B2CA06652D8F00B1F653,
-				0040ED20067F11DE00312441,
+				0005CFEE071D5661001037B7,
+				0005CFF2071D566C001037B7,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,10 +439,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090,
-				00033F920664EEBF00B06924,
-				00C0B37306653F3100B1F653,
-				0045934D066CF7710028EF4B,
-				00C69406066E2ED800F134D2,
+				0005CFEF071D5661001037B7,
+				0005CFF3071D566C001037B7,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,10 +457,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090,
-				005DA8CC0665D07B00154F70,
-				000A034E066D0BC600E4B701,
-				000A0350066D0BE300E4B701,
-				0061530F066E22E3009CD624,
+				0005CC33071D4DFC001037B7,
+				0005CC4C071D4E29001037B7,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,7 +481,7 @@
 			explicitFileType = wrapper.application;
 			includeInIndex = 0;
 			isa = PBXFileReference;
-			path = WiFiGUI.app;
+			path = UDPEchoTester.app;
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

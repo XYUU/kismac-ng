@@ -1,0 +1,28 @@
+{
+    IBClasses = (
+        {CLASS = BIGLView; LANGUAGE = ObjC; SUPERCLASS = NSOpenGLView; }, 
+        {
+            ACTIONS = {changeValue = id; flood = id; }; 
+            CLASS = Controller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_delay" = NSTextField; 
+                "_floodButton" = id; 
+                "_graph" = GraphView; 
+                "_packetCount" = NSTextField; 
+                "_packetSize" = NSTextField; 
+                "_server" = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {setCurrentMode = id; setTimeLength = id; }; 
+            CLASS = GraphView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"_intervalButton" = NSPopUpButton; "_modeButton" = NSPopUpButton; }; 
+            SUPERCLASS = BIGLView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

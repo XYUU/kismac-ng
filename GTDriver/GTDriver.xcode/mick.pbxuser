@@ -50,16 +50,6 @@
 		vrLen = 1431;
 		vrLoc = 4138;
 	};
-	008F87D706D90B8C005E3361 = {
-		fRef = 1A224C3EFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = "struct mbuf                 *_rxDataLow[CB_RX_QSIZE";
-		rLen = 51;
-		rLoc = 4434;
-		rType = 0;
-		vrLen = 1298;
-		vrLoc = 3568;
-	};
 	008F87D806D90B8C005E3361 = {
 		fRef = 00CE4839065FE84300225F0A;
 		isa = PBXTextBookmark;
@@ -69,56 +59,6 @@
 		rType = 0;
 		vrLen = 1403;
 		vrLoc = 1734;
-	};
-	008F87D906D90B8C005E3361 = {
-		fRef = 1A224C3FFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = "GTDriver.cpp: 176";
-		rLen = 0;
-		rLoc = 4798;
-		rType = 0;
-		vrLen = 1431;
-		vrLoc = 4138;
-	};
-	008F87DA06D90B8C005E3361 = {
-		fRef = 1A224C3EFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = ioBase;
-		rLen = 6;
-		rLoc = 3483;
-		rType = 0;
-		vrLen = 1420;
-		vrLoc = 2559;
-	};
-	00A6B06E06DB4ABD0059E82B = {
-		fRef = 1A224C3EFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = ioBase;
-		rLen = 6;
-		rLoc = 3483;
-		rType = 0;
-		vrLen = 1420;
-		vrLoc = 2559;
-	};
-	00A6B06F06DB4ABD0059E82B = {
-		fRef = 1A224C3EFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = "GTDriver.h: _transmitPIM";
-		rLen = 0;
-		rLoc = 3221;
-		rType = 0;
-		vrLen = 1420;
-		vrLoc = 2559;
-	};
-	00A6B07906DB4B030059E82B = {
-		fRef = 1A224C3EFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = "GTDriver.h: _transmitPIM";
-		rLen = 0;
-		rLoc = 3221;
-		rType = 0;
-		vrLen = 1420;
-		vrLoc = 2559;
 	};
 	00C0B3460665385200B1F653 = {
 		uiCtxt = {
@@ -154,7 +94,7 @@
 	00CE4837065FE80900225F0A = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 1;
+		usesDefaults = 0;
 		wantsCodeCompletion = 1;
 		wantsCodeCompletionAutoSuggestions = 1;
 		wantsCodeCompletionCaseSensitivity = 1;
@@ -219,6 +159,26 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
+	00E1D83207239FCC00931A18 = {
+		fRef = 1A224C3EFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "GTDriver.h: 84";
+		rLen = 0;
+		rLoc = 3221;
+		rType = 0;
+		vrLen = 1410;
+		vrLoc = 2559;
+	};
+	00E1D86C0723A10C00931A18 = {
+		fRef = 1A224C3EFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "GTDriver.h: _parsePIMFOR";
+		rLen = 0;
+		rLoc = 3294;
+		rType = 0;
+		vrLen = 1410;
+		vrLoc = 2559;
+	};
 	00E651B2067DC6E2009DC735 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 3723}}";
@@ -277,7 +237,7 @@
 		vrLoc = 1396;
 	};
 	089C1669FE841209C02AAC07 = {
-		activeBuildStyle = 06AA1265FFB2107B11CA28AA;
+		activeBuildStyle = 06AA1266FFB2107B11CA28AA;
 		activeTarget = 32D94FC30562CBF700B6AF17;
 		addToTargets = (
 			32D94FC30562CBF700B6AF17,
@@ -342,7 +302,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 115034702;
+			PBXPerProjectTemplateStateSaveDate = 119775145;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -837,7 +797,7 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 115034702;
+			PBXWorkspaceStateSaveDate = 119775145;
 		};
 		perUserProjectItems = {
 			008F87C906D90B65005E3361 = 008F87C906D90B65005E3361;
@@ -845,13 +805,9 @@
 			008F87CD06D90B65005E3361 = 008F87CD06D90B65005E3361;
 			008F87D506D90B8C005E3361 = 008F87D506D90B8C005E3361;
 			008F87D606D90B8C005E3361 = 008F87D606D90B8C005E3361;
-			008F87D706D90B8C005E3361 = 008F87D706D90B8C005E3361;
 			008F87D806D90B8C005E3361 = 008F87D806D90B8C005E3361;
-			008F87D906D90B8C005E3361 = 008F87D906D90B8C005E3361;
-			008F87DA06D90B8C005E3361 = 008F87DA06D90B8C005E3361;
-			00A6B06E06DB4ABD0059E82B = 00A6B06E06DB4ABD0059E82B;
-			00A6B06F06DB4ABD0059E82B = 00A6B06F06DB4ABD0059E82B;
-			00A6B07906DB4B030059E82B = 00A6B07906DB4B030059E82B;
+			00E1D83207239FCC00931A18 = 00E1D83207239FCC00931A18;
+			00E1D86C0723A10C00931A18 = 00E1D86C0723A10C00931A18;
 			00FF58D706C62C82006C7F1E = 00FF58D706C62C82006C7F1E;
 			00FF59FD06C63D43006C7F1E = 00FF59FD06C63D43006C7F1E;
 			00FF59FF06C63D43006C7F1E = 00FF59FF06C63D43006C7F1E;
@@ -872,8 +828,8 @@
 	1A224C3EFF42367911CA2CB7 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 1777}}";
-			sepNavSelRange = "{3221, 0}";
-			sepNavVisRect = "{{0, 1036}, {1033, 461}}";
+			sepNavSelRange = "{3294, 0}";
+			sepNavVisRect = "{{0, 1036}, {1033, 446}}";
 		};
 	};
 	1A224C3FFF42367911CA2CB7 = {
