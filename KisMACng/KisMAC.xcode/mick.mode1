@@ -205,8 +205,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -244,24 +242,12 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>003533A406A5DD8500AB4577</string>
-								<string>003533B206A5DD8500AB4577</string>
-								<string>003533D206A5DD8500AB4577</string>
-								<string>003533FE06A5DD8500AB4577</string>
-								<string>00971F3B06E4FA52004307EA</string>
-								<string>29B97317FDCFA39411CA2CEA</string>
-								<string>0035333206A5DD5700AB4577</string>
-								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
-							<array>
-								<array>
-									<integer>0</integer>
-								</array>
-							</array>
+							<array/>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 749}, {252, 696}}</string>
+							<string>{{0, 0}, {252, 696}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -294,7 +280,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TODO</string>
+								<string>CHANGES</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -302,7 +288,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TODO</string>
+										<string>CHANGES</string>
 									</dict>
 									<key>SplitCount</key>
 									<string>1</string>
@@ -392,8 +378,8 @@
 		<string>00A0149406C51049009AA021</string>
 		<string>00A014C606C53614009AA021</string>
 		<string>002F186C07003D3E004F5FEF</string>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcode</string>
 	</array>
 	<key>WindowString</key>
@@ -426,7 +412,7 @@
 										<key>PBXProjectModuleLabel</key>
 										<string>MapViewAreaView.mm</string>
 										<key>bookmark</key>
-										<string>002F219E0700A9EB004F5FEF</string>
+										<string>002F22B10700D27C004F5FEF</string>
 										<key>history</key>
 										<array>
 											<string>002F18B8070067B6004F5FEF</string>
@@ -458,8 +444,6 @@
 							<string>442pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -869,7 +853,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

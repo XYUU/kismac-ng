@@ -1,0 +1,64 @@
+<HTML>
+
+<HEAD>
+<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+<TITLE>What is the difference between &quot;active&quot; and &quot;passive&quot; sniffing?</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff">
+<DIV ALIGN="left">
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR HEIGHT="40">
+<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
+<TD WIDTH="6" HEIGHT="40"></TD>
+<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>What is the difference between &quot;active&quot; and &quot;passive&quot; sniffing?</B></FONT></TD>
+</TR>
+</TABLE>
+<P><TABLE BORDER="2" ALIGN="CENTER" CELLPADDING="0" CELLSPACING="0" WIDTH="80%">
+<TR><TH>actice Sniffing</TH><TH>passive Sniffing</TH></TR>
+<TR><TD>
+* in active mode the WiFi device sends out probe request and waits for answers. The data obtained from these answers is shown.
+</TD><TD>
+* When you use KisMAC passively the WiFi device is switched into "monitor mode". It waits silently for any valid packets and this data is used to derive the network structure.
+</TD></TR>
+<TR><TD>
+- probe request can be easily detected
+</TD><TD>
++ passive sniffers cannot be detected
+</TD></TR>
+<TR><TD>
+- the sniffer cannot see raw data, therefore PCAP? logging and cracking will not work
+</TD><TD>
++ only passive devices can perform WEP cracking and logging of data
+</TD></TR>
+<TR><TD>
+- the active component of KisMAC cannot detect WPA? networks (they are shown as WEPed?)
+</TD><TD>
++ WPA? and LEAP? detection is possible
+</TD></TR>
+<TR><TD>
+- active programs cannot see hidden networks (per definition)
+</TD><TD>
++ KisMAC can find and reveal cloaked networks if used in monitor mode
+</TD></TR>
+<TR><TD>
++ you will not loose your WiFi connectivity (it will only become slower because of all the probing)
+</TD><TD>
+- KisMAC will need to load a replacement for your normal driver in order to switch the device into monitor mode. Connectivity will be lost
+</TD></TR>
+<TR><TD>
++ Airport Extreme? is supported
+</TD><TD>
+- Airport Extreme? devices will not work in passive mode
+</TD></TR>
+</TABLE>
+<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+<TR VALIGN="top">
+<TD ALIGN="left"></TD>
+<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='passive' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+
+</HTML>
