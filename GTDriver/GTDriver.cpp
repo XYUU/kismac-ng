@@ -100,14 +100,13 @@ bool GTDriver::enableHardware() {
     WLEnter();
     
     //_setValue(OID_CONFIG, INL_CONFIG_MANUALRUN);
-    _setValue(OID_MODE, INL_MODE_PROMISCUOUS);
-    _setValue(OID_CONFIG, INL_CONFIG_RXANNEX);
+    _setValue(OID_MODE, INL_MODE_CLIENT);
     _setValue(OID_MAXFRAMEBURST, DOT11_MAXFRAMEBURST_MIXED_SAFE);
-    //_setValue(OID_AUTHENABLE, DOT11_AUTH_BOTH);
+    _setValue(OID_AUTHENABLE, DOT11_AUTH_BOTH);
     
     UInt8 data[4];
     memset(data, 0xFF, 2);
-    //_setStruc(OID_SCAN, &data, 2);
+    _setStruc(OID_SCAN, &data, 2);
     
     WLExit();
     
