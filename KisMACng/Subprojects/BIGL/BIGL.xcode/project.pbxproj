@@ -204,6 +204,7 @@
 			dstPath = ../../files;
 			dstSubfolderSpec = 16;
 			files = (
+				00C43BA3070728E30012D907,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +235,12 @@
 		};
 		00C134720694ACDB004F02A8 = {
 			fileRef = 00C134700694ACDB004F02A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00C43BA3070728E30012D907 = {
+			fileRef = 8DC2EF5B0486A6940098B216;
 			isa = PBXBuildFile;
 			settings = {
 			};
