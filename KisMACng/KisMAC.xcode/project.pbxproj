@@ -1670,6 +1670,8 @@
 				003533CF06A5DD8500AB4577,
 				003533D006A5DD8500AB4577,
 				003533D106A5DD8500AB4577,
+				00B6296607058E2B006FC563,
+				00B6296707058E2B006FC563,
 				002E7DFD06A86D7E00C9D931,
 				002E7DFE06A86D7E00C9D931,
 			);
@@ -3400,6 +3402,34 @@
 			settings = {
 			};
 		};
+		00B6296607058E2B006FC563 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = WaveNetWEPWeakCrack.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00B6296707058E2B006FC563 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = WaveNetWEPWeakCrack.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00B6296807058E2B006FC563 = {
+			fileRef = 00B6296607058E2B006FC563;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00B6296907058E2B006FC563 = {
+			fileRef = 00B6296707058E2B006FC563;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00C5F12A06DE0C98001EC02F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -4615,6 +4645,7 @@
 				009B192306FC83A800E8883A,
 				005E817206FDCFF20016F5E7,
 				00A622A906FEE4FB005D248A,
+				00B6296807058E2B006FC563,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4804,6 +4835,7 @@
 				005E817306FDCFF20016F5E7,
 				00A622AA06FEE4FB005D248A,
 				009D64F306FF73BA00B0F1EC,
+				00B6296907058E2B006FC563,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

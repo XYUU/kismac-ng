@@ -7,7 +7,6 @@ opengl everywhere(TM)
 apple script support
 
 icon for lately active network
-graph in menu bar?
 
 ---could be done with apple script---
 auto-save function          (done)
@@ -20,12 +19,12 @@ rework and extend help files
 add better WPA detection
 show 802.11g/a/b accesspoint
 show ip addresses traffic...
-Add IP Detection
 
 later
 more work on injection attacks
 wšrterbuch mit john the ripper
 XML im/export
+graph in menu bar?
 
 GET /gif?&CT=53.000000:13.000000:100000&IC=&W=640&H=512&FAM=myblast HTTP/1.0
 User-Agent: CFNetwork/1.1

@@ -2,7 +2,7 @@
         
         File:			WaveNetWPACrackAltivec.m
         Program:		KisMAC
-	Author:			Michael Roßberg
+	Author:			Michael Rossberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 

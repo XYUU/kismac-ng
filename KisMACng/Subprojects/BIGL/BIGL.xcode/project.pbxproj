@@ -199,6 +199,15 @@
 			settings = {
 			};
 		};
+		00AE3079070723FF00DEE83F = {
+			buildActionMask = 2147483647;
+			dstPath = ../../files;
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		00C1346F0694ACDB004F02A8 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -605,6 +614,7 @@
 				8DC2EF540486A6940098B216,
 				8DC2EF560486A6940098B216,
 				00F57A4306A875990035AE2F,
+				00AE3079070723FF00DEE83F,
 			);
 			buildRules = (
 			);

@@ -1,6 +1,6 @@
 /*
         
-        File:			WaveNetWPACrackAltivec.h
+        File:			WaveNetWeakWEPCrack.h
         Program:		KisMAC
 	Author:			Michael Rossberg
 				mick@binaervarianz.de
@@ -23,11 +23,17 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "WaveNet.h"
 
-@interface WaveNet(WPACrackAltivecExtension)
+enum keyLen {
+    keyLen40bit = 0,
+    keyLen104bit = 1,
+    keyLen40and104bit = 2,
+};
 
-- (BOOL)crackWPAWithWordlistAltivec:(NSString*)wordlist andImportController:(ImportController*)im;
+@interface WaveNet(WEPWeakCrackExtension)
+
+- (void)crackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen;
 
 @end
