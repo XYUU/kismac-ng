@@ -153,6 +153,7 @@ typedef enum _leapAuthCode {
 - (NSString*)IDString;	//gives a unique for each net, bssid is not useful
 - (bool)isEAPPacket;
 
+- (UInt8*) ipPacket;
 // IP handling by Dylan Neild
 - (NSString *)sourceIPAsString;
 - (NSString *)destinationIPAsString;

@@ -654,8 +654,8 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
             // frame apparently contains an detects IPv6 header.
             // we don't actually do anything for this, as we don't 
             // currently support IPv6.
-            
-            return -1;
+            // TODO add check for IPv6
+            return 6;
         }
         else
             return -1;
@@ -664,6 +664,17 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
         // frame doesn't contain usable data.
         return -1;
     }
+}
+
+- (UInt8*) ipPacket {
+    UInt8* body;
+    
+    if (_type != IEEE80211_TYPE_DATA) return nil;
+    if (_isWep != encryptionTypeNone) return nil; // TODO decrypt if key is known. For later dissection
+    
+    body = [self framebody];
+    if (isValidPacket(body, [self bodyLength]) != 4) return nil;
+    return body + 8;
 }
 
 // Methods for external use.
