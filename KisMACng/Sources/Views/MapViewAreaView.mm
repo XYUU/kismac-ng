@@ -75,12 +75,12 @@
     NSParameterAssert(_mapImage);
     NSParameterAssert([_mapImage size].width > 1 && [_mapImage size].height > 1);
     
+    im = [WaveHelper importController];
+
     [networks retain];
     networkCount = [networks count];
     if (networkCount==0) goto exitNoCleanUp;
-
-    im = [WaveHelper importController];
-
+ 
     good = [WaveHelper intToColor:[[NSUserDefaults standardUserDefaults] objectForKey:@"NetAreaColorGood"]];
     bad  = [WaveHelper intToColor:[[NSUserDefaults standardUserDefaults] objectForKey:@"NetAreaColorBad"]];
     sens = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NetAreaSensitivity"] intValue];

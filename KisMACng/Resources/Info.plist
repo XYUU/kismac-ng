@@ -44,7 +44,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>KisMAC version 0.2a</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>KisMAC Help</string>
+	<string>KisMACHelp</string>
 	<key>CFBundleHelpBookName</key>
 	<string>KisMAC Help</string>
 	<key>CFBundleIconFile</key>

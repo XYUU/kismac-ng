@@ -1,5 +1,239 @@
 // !$*UTF8*$!
 {
+	002F18CC0700685E004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = "InstallController.m: 55";
+		rLen = 0;
+		rLoc = 1774;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 2064;
+	};
+	002F18CD0700685E004F5FEF = {
+		fRef = 00FC4EE40647F6C800F2220A;
+		isa = PBXBookmark;
+	};
+	002F18CE0700685E004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = "InstallController.m: 55";
+		rLen = 0;
+		rLoc = 1774;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 2064;
+	};
+	002F18CF0700685E004F5FEF = {
+		fRef = 00FC4EE40647F6C800F2220A;
+		isa = PBXTextBookmark;
+		name = "install.sh: 9";
+		rLen = 0;
+		rLoc = 127;
+		rType = 0;
+		vrLen = 127;
+		vrLoc = 0;
+	};
+	002F18D207006878004F5FEF = {
+		fRef = 00FC4EE40647F6C800F2220A;
+		isa = PBXTextBookmark;
+		name = "install.sh: 9";
+		rLen = 0;
+		rLoc = 127;
+		rType = 0;
+		vrLen = 127;
+		vrLoc = 0;
+	};
+	002F18D307006878004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = "InstallController.m: init";
+		rLen = 0;
+		rLoc = 2268;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 2064;
+	};
+	002F18D407006878004F5FEF = {
+		fRef = 00FC4EE40647F6C800F2220A;
+		isa = PBXTextBookmark;
+		name = "install.sh: 9";
+		rLen = 0;
+		rLoc = 127;
+		rType = 0;
+		vrLen = 127;
+		vrLoc = 0;
+	};
+	002F18D507006878004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F18D80700689B004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F18DB070068A9004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F18DE07006920004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F18FA070070AC004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F1AED07007132004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F1DE007007147004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F1DE30700714C004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F2183070071FC004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F218607007225004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F218E07007237004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219107007261004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219407007270004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219707007274004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219A07007294004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219D0700729F004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
+	002F219F0700A9EC004F5FEF = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = install.sh;
+		rLen = 10;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 974;
+		vrLoc = 4000;
+	};
 	00B9E5E00647B7A9009FEF35 = {
 		activeArgIndex = 2147483647;
 		activeArgIndices = (
@@ -56,9 +290,9 @@
 	};
 	00B9E6140647BA2E009FEF35 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 10429}}";
-			sepNavSelRange = "{2023, 0}";
-			sepNavVisRect = "{{0, 408}, {1057, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {952, 10485}}";
+			sepNavSelRange = "{4487, 10}";
+			sepNavVisRect = "{{0, 2132}, {952, 342}}";
 		};
 	};
 	00B9E97E0647F3B8009FEF35 = {
@@ -182,11 +416,6 @@
 		path = "/Users/mick/openDev/KisMACng/Sources/3rd Party/FCS.h";
 		refType = 0;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {825, 280}}";
-			sepNavSelRange = "{185, 13}";
-			sepNavVisRect = "{{0, 0}, {825, 176}}";
-		};
 	};
 	00F9C6B106DB3E7000E357F0 = {
 		fRef = 00F9C6B206DB3E7000E357F0;
@@ -200,6 +429,7 @@
 	};
 	00F9C6B206DB3E7000E357F0 = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = FCS.h;
 		path = "/Users/mick/openDev/KisMACng/Sources/3rd Party/FCS.h";
 		refType = 0;
@@ -217,9 +447,9 @@
 	};
 	00FC4EE40647F6C800F2220A = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {952, 342}}";
 			sepNavSelRange = "{127, 0}";
-			sepNavVisRect = "{{0, 0}, {1057, 689}}";
+			sepNavVisRect = "{{0, 0}, {952, 342}}";
 		};
 	};
 	00FC4EE50647F6C800F2220A = {
@@ -336,7 +566,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 114990499;
+			PBXPerProjectTemplateStateSaveDate = 117467082;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -815,9 +1045,33 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 114990499;
+			PBXWorkspaceStateSaveDate = 117467082;
 		};
 		perUserProjectItems = {
+			002F18CC0700685E004F5FEF = 002F18CC0700685E004F5FEF;
+			002F18CD0700685E004F5FEF = 002F18CD0700685E004F5FEF;
+			002F18CE0700685E004F5FEF = 002F18CE0700685E004F5FEF;
+			002F18CF0700685E004F5FEF = 002F18CF0700685E004F5FEF;
+			002F18D207006878004F5FEF = 002F18D207006878004F5FEF;
+			002F18D307006878004F5FEF = 002F18D307006878004F5FEF;
+			002F18D407006878004F5FEF = 002F18D407006878004F5FEF;
+			002F18D507006878004F5FEF = 002F18D507006878004F5FEF;
+			002F18D80700689B004F5FEF = 002F18D80700689B004F5FEF;
+			002F18DB070068A9004F5FEF = 002F18DB070068A9004F5FEF;
+			002F18DE07006920004F5FEF = 002F18DE07006920004F5FEF;
+			002F18FA070070AC004F5FEF = 002F18FA070070AC004F5FEF;
+			002F1AED07007132004F5FEF = 002F1AED07007132004F5FEF;
+			002F1DE007007147004F5FEF = 002F1DE007007147004F5FEF;
+			002F1DE30700714C004F5FEF = 002F1DE30700714C004F5FEF;
+			002F2183070071FC004F5FEF = 002F2183070071FC004F5FEF;
+			002F218607007225004F5FEF = 002F218607007225004F5FEF;
+			002F218E07007237004F5FEF = 002F218E07007237004F5FEF;
+			002F219107007261004F5FEF = 002F219107007261004F5FEF;
+			002F219407007270004F5FEF = 002F219407007270004F5FEF;
+			002F219707007274004F5FEF = 002F219707007274004F5FEF;
+			002F219A07007294004F5FEF = 002F219A07007294004F5FEF;
+			002F219D0700729F004F5FEF = 002F219D0700729F004F5FEF;
+			002F219F0700A9EC004F5FEF = 002F219F0700A9EC004F5FEF;
 			00F9C62B06DA9EAE00E357F0 = 00F9C62B06DA9EAE00E357F0;
 			00F9C62C06DA9EAE00E357F0 = 00F9C62C06DA9EAE00E357F0;
 			00F9C62D06DA9EAE00E357F0 = 00F9C62D06DA9EAE00E357F0;

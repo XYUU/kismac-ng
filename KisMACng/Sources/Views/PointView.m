@@ -161,7 +161,7 @@
 - (void)animationThread:(id)object {
     BOOL e = NO;
     int scale = 35;
-    int wp;
+    int wp = 0;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
     
     if([_animLock tryLock]) {

@@ -73,30 +73,6 @@
 			settings = {
 			};
 		};
-		000D15BC06AB21F400935F7C = {
-			children = (
-				000D15BD06AB21F400935F7C,
-			);
-			isa = PBXVariantGroup;
-			name = "KisMAC Help";
-			path = Resources/Help;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		000D15BD06AB21F400935F7C = {
-			isa = PBXFileReference;
-			lastKnownFileType = folder;
-			name = English;
-			path = "English.lproj/KisMAC Help";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		000D164A06AB21F500935F7C = {
-			fileRef = 000D15BC06AB21F400935F7C;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		00122E9906B18A07007FA5FE = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -269,6 +245,29 @@
 		};
 		002E7E0006A86D7E00C9D931 = {
 			fileRef = 002E7DFE06A86D7E00C9D931;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		002F1DE4070071E5004F5FEF = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder;
+			name = English;
+			path = English.lproj/KisMACHelp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		002F1F16070071F4004F5FEF = {
+			children = (
+				002F1DE4070071E5004F5FEF,
+			);
+			isa = PBXVariantGroup;
+			name = KisMACHelp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		002F1F17070071F4004F5FEF = {
+			fileRef = 002F1F16070071F4004F5FEF;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -4127,7 +4126,7 @@
 		};
 		00F57C5106A886A30035AE2F = {
 			children = (
-				000D15BC06AB21F400935F7C,
+				002F1F16070071F4004F5FEF,
 			);
 			isa = PBXGroup;
 			name = Help;
@@ -4721,11 +4720,11 @@
 				00174DBA06B2AC8F003485E6,
 				00F57CAD06A8887F0035AE2F,
 				00F57CAE06A8887F0035AE2F,
-				000D164A06AB21F500935F7C,
 				0073142E06AC4B66007FD51E,
 				00F0FE2E06AC5B87006D4119,
 				00F0FE8106AC5F72006D4119,
 				00A7F9D306C6D20A00A6BB8F,
+				002F1F17070071F4004F5FEF,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
