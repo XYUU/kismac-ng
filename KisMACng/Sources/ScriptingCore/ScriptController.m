@@ -222,7 +222,7 @@
     WEPCHECKS;
     NSOpenPanel *op;
     int i;
-    
+
     op = [NSOpenPanel openPanel];
     [op setAllowsMultipleSelection:YES];
     [op setCanChooseFiles:YES];

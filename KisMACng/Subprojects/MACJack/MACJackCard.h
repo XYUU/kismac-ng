@@ -270,7 +270,7 @@ private:
     bool    _isEnabled;
     int     _firmwareType;
     bool    _isSending;
-    uint64_t  _lastSending;
+    UInt64  _lastSending;
     
     IODataQueue* _packetQueue;
     

@@ -28,6 +28,7 @@
 #include <IOKit/IOWorkLoop.h>
 #include <IOKit/IOLib.h>
 #include <libkern/OSByteOrder.h>
+#include <AvailabilityMacros.h>
 #include <kern/clock.h>
 #include "MACJackCard.h"
 #include "MACJackLog.h"
@@ -729,15 +730,19 @@ IOReturn MACJackCard::
 _sendFrame(UInt8* data, IOByteCount size)
 {
     int id;
-    uint64_t t;
-    
+	UInt64 t;
+
     if (size%2) {
         data[size]=0;
         size++;
     }
     
     //if (_isSending) {
+#ifndef MAC_OS_X_VERSION_10_4
     clock_get_uptime((AbsoluteTime*)&t);
+#else
+    clock_get_uptime((UInt64*)&t);
+#endif
     if ((t-100000)<_lastSending) {
         return kIOReturnBusy;
     }
@@ -796,7 +801,11 @@ again:
         return kIOReturnError;
     }
 
+#ifndef MAC_OS_X_VERSION_10_4
     clock_get_uptime((AbsoluteTime*)&_lastSending);
+#else
+    clock_get_uptime((UInt64*)&_lastSending);
+#endif
     //_isSending = true;
     return kIOReturnSuccess;
 }

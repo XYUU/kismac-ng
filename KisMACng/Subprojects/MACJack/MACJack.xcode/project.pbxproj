@@ -101,6 +101,7 @@
 			fileRef = 00F0FDB106AC59A9006D4119;
 			isa = PBXBuildFile;
 			settings = {
+				COMPILER_FLAGS = "-I /usr/include";
 			};
 		};
 		00F0FDBC06AC59A9006D4119 = {
