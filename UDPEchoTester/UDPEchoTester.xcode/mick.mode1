@@ -253,7 +253,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
+									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -290,7 +290,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GraphView.m</string>
+								<string>Controller.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -298,12 +298,17 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GraphView.m</string>
+										<string>Controller.m</string>
 										<key>bookmark</key>
-										<string>004069050728FC87007317FD</string>
+										<string>007B4796072E2FDB00678F0E</string>
 										<key>history</key>
 										<array>
-											<string>004068FC0728F099007317FD</string>
+											<string>007B478C072E2FAD00678F0E</string>
+											<string>007B478D072E2FAD00678F0E</string>
+										</array>
+										<key>prevStack</key>
+										<array>
+											<string>007B478E072E2FAD00678F0E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -361,9 +366,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>004068FE0728F099007317FD</string>
+				<string>007B4790072E2FAD00678F0E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>004068FF0728F099007317FD</string>
+				<string>007B4791072E2FAD00678F0E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -843,9 +848,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>004069000728F099007317FD</string>
+				<string>007B4792072E2FAD00678F0E</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>004069010728F099007317FD</string>
+				<string>007B4793072E2FAD00678F0E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>

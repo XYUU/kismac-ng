@@ -12,7 +12,8 @@
     double          _bytes, _respTime;
     double          _validDelay;
     int             _validPacketCount, _validPacketSize;
-    
+    int				_totalPackets;
+	
     IBOutlet NSTextField *_delay;
     IBOutlet id _floodButton;
     IBOutlet GraphView *_graph;

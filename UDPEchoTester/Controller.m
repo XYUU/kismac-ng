@@ -23,7 +23,7 @@
         if ((v = recvfrom(_socket, buffer, size, 0, (struct sockaddr *)&addr, &addr_len)) >= sizeof(rec)) {
             Microseconds(&cur);
             _bytes += v;
-            _recv++;
+            _recv++; _totalPackets++;
             rec = (UnsignedWide*)buffer;
             t = (cur.lo - rec->lo) / 1000.0;
             if (t < _minResp) _minResp = t;
@@ -113,7 +113,11 @@ err:
     
     if (!_flooding) {
         [timer invalidate];
-        NSBeginInformationalAlertSheet(@"UDP Flood beendet", nil, nil, nil, [NSApp mainWindow], self, nil, nil, nil, @"Statistik:\n\tminimale Antwortzeit: %3.0f ms\n\tmaximale Antwortzeit: %3.0f ms", _minResp, _maxResp);
+        if (_totalPackets) {
+			NSBeginInformationalAlertSheet(@"UDP Flood beendet", nil, nil, nil, [NSApp mainWindow], self, nil, nil, nil, @"Statistik:\n\tminimale Antwortzeit: %3.0f ms\n\tmaximale Antwortzeit: %3.0f ms\n\tEmpfangene Packete: %d", _minResp, _maxResp, _totalPackets);
+		} else {
+			NSBeginInformationalAlertSheet(@"UDP Flood beendet", nil, nil, nil, [NSApp mainWindow], self, nil, nil, nil, @"Es wurden keine Antworten empfangen.");
+		}
     }
 }
 
@@ -142,6 +146,7 @@ err:
             if (bind(_socket, (struct sockaddr *)&addr, sizeof(addr)) == -1) return;
             [NSThread detachNewThreadSelector:@selector(recv:)  toTarget:self withObject:nil];
         }
+		_totalPackets = 0;
         [NSThread detachNewThreadSelector:@selector(send:)  toTarget:self withObject:nil];
         [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(sweep:) userInfo:nil repeats:YES];
     }
@@ -152,7 +157,7 @@ err:
         if ([_packetSize intValue] > sizeof(UnsignedWide)) {
             if ([_packetSize intValue] < 60000) _validPacketSize = [_packetSize intValue];
             else [_packetSize setIntValue:60000];
-        } else [_packetSize setIntValue:8];
+        } else [_packetSize setIntValue:64];
     } else if (sender == _packetCount) {
         _validPacketCount = [_packetCount intValue];
     } else if (sender == _delay) {
