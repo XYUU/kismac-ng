@@ -34,6 +34,8 @@
 #import "../Crypto/WPA.h"
 #import "TrafficController.h"
 #import "../WaveDrivers/WaveDriver.h"
+#import "MapView.h"
+#import "MapViewAreaView.h"
 
 @implementation ScanController(MenuExtension)
 
@@ -75,7 +77,7 @@
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), filename]];  
   
     x=[[NSImage alloc] initWithContentsOfFile:filename];
-    [_mappingView setImage:x];
+    [_mappingView setMap:x];
     [x release];
     [self showMap];
 }
@@ -104,8 +106,8 @@
             //"KisMAC was unable to complete the import. Are you sure that you have a valid internet connection?"
             );
         else {
-            [[WaveHelper zoomPictureView] setWaypoint:1 toPoint:[dmc waypoint1Pixel] atCoordinate:[dmc waypoint1]];
-            [[WaveHelper zoomPictureView] setWaypoint:2 toPoint:[dmc waypoint2Pixel] atCoordinate:[dmc waypoint2]];
+            [_mappingView setWaypoint:selWaypoint1 toPoint:[dmc waypoint1Pixel] atCoordinate:[dmc waypoint1]];
+            [_mappingView setWaypoint:selWaypoint2 toPoint:[dmc waypoint2Pixel] atCoordinate:[dmc waypoint2]];
             [self showMap];
         }
     }
@@ -119,7 +121,7 @@
     NS_DURING
         x=[[NSImage alloc] initWithContentsOfURL:url];
         if (x) {
-            [_mappingView setImage:x];
+            [_mappingView setMap:x];
             [x release];
             _asyncFailure = NO;
         } else _asyncFailure = YES;
@@ -345,7 +347,8 @@
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
     
     NS_DURING
-        data = [[WaveHelper zoomPictureView] dataWithPDFInsideRect:[[WaveHelper zoomPictureView] frame]];
+        //TODO
+        data = [_mappingView dataWithPDFInsideRect:[_mappingView frame]];
         [data writeToFile:[filename stringByExpandingTildeInPath] atomically:NO];
         _asyncFailure = NO;
     NS_HANDLER
@@ -371,7 +374,7 @@
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
     
     NS_DURING
-        img  = [[NSImage alloc] initWithData:[[WaveHelper zoomPictureView] dataWithPDFInsideRect:[[WaveHelper zoomPictureView] frame]]];
+        img  = [[NSImage alloc] initWithData:[_mappingView dataWithPDFInsideRect:[_mappingView frame]]];
         data = [img TIFFRepresentationUsingCompression:NSTIFFCompressionNone factor:0.0];
         data = [[NSBitmapImageRep imageRepWithData:data] representationUsingType:NSJPEGFileType properties:nil];
             
@@ -654,7 +657,7 @@
         [WaveHelper setImportController:_importController];
         
         if ([_showAllNetsInMap state] == NSOnState) [self showAllNetArea:_showAllNetsInMap];
-        [[WaveHelper zoomPictureView] showAdvNet:_curNet];
+        [_mappingView showAreaNet:_curNet];
         
         [NSApp runModalForWindow:[_importController window]];
         
@@ -663,7 +666,7 @@
         [_importController stopAnimation];
         
         if ([_importController canceled]) {
-            [[WaveHelper zoomPictureView] showAdvNet:Nil];
+            [_mappingView showAreaNet:Nil];
             [sender setTitle:@"Show Net Area"];
             [sender setState: NSOffState];
         } else {
@@ -696,7 +699,7 @@
     
         a = [[NSMutableArray alloc] init];
         for (i=0; i<[_container count]; i++) [a addObject:[_container netAtIndex:i]];
-        [[WaveHelper zoomPictureView] showAdvNets:[NSArray arrayWithArray:a]];
+        [_mappingView showAreaNets:[NSArray arrayWithArray:a]];
         [a release];
 
         [NSApp runModalForWindow:[_importController window]];
@@ -706,7 +709,7 @@
         [_importController stopAnimation];
         
         if ([_importController canceled]) {
-            [[WaveHelper zoomPictureView] showAdvNet:Nil];
+            [_mappingView showAreaNet:Nil];
             [sender setState: NSOffState];
         } else [sender setState: NSOnState];
         
@@ -722,10 +725,10 @@
     
     lDevice=[[NSUserDefaults standardUserDefaults] objectForKey:@"GPSDevice"];
     if ((lDevice!=nil)&&(![lDevice isEqualToString:@""])) {
-        [aGPSStatus setStringValue:NSLocalizedString(@"Resetting GPS subsystem...", "GPS status string")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:NSLocalizedString(@"Resetting GPS subsystem...", "gps status")];
         [WaveHelper initGPSControllerWithDevice: lDevice];
     } else {
-        [aGPSStatus setStringValue:NSLocalizedString(@"GPS disabled", "LONG GPS status string with informations where to enable")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:NSLocalizedString(@"GPS disabled", "LONG GPS status string with informations where to enable")];
     }
 }
 

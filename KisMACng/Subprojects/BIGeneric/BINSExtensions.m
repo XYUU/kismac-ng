@@ -50,6 +50,13 @@ static BOOL _alertDone;
 
 @end
 
+@implementation NSObject(BIExtension) 
+
+- (void)unsubscribeNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+@end
 
 @implementation NSThread(BIExtension) 
 

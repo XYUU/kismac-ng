@@ -41,6 +41,10 @@ struct _position {
     bool    _debugEnabled;
     int     _linesRead;
     int     _serialFD;
+    int     _veldir;
+    float   _velkt;
+    int     _numsat;
+    float   _hdop;
     
     struct _position    _ns, _ew, _elev;
     NSMutableArray*     _trace;
@@ -66,7 +70,7 @@ struct _position {
 - (NSString*)EWCoord;
 - (NSString*)ElevCoord;
 - (NSString*)status;
-- (void) setCurrentPointNS:(double)ns EW:(double)ew ELV:(double)elv;
+- (void)setCurrentPointNS:(double)ns EW:(double)ew ELV:(double)elv;
 
 - (waypoint) currentPoint;
 - (void)stop;

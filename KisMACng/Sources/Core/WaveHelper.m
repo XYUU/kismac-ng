@@ -70,7 +70,7 @@ static NSMutableDictionary* _waveDrivers = Nil;   //interface to drivers
 
 static NSWindow* aMainWindow;
 static GPSController* aGPSController;
-static ZoomPictureView *aZoomPictureView;
+static MapView *_mapView;
 static NSMutableDictionary *_probes = Nil;
 static ImportController *_im;
 static ScanController *_scanController;
@@ -360,12 +360,12 @@ static ScanController *_scanController;
     [aGPSController startForDevice:device];
 }
 
-+ (ZoomPictureView*) zoomPictureView {
-    return aZoomPictureView;
++ (MapView*) mapView {
+    return _mapView;
 }
 
-+ (void) setZoomPictureView:(ZoomPictureView*)z {
-    aZoomPictureView = z;
++ (void) setMapView:(MapView*)mv {
+    _mapView = mv;
 }
 
 + (NSColor*)intToColor:(NSNumber*)c {

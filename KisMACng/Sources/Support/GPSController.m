@@ -27,6 +27,7 @@
 
 #import "GPSController.h"
 #import "WaveHelper.h"
+#import "KisMACNotifications.h"
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -69,7 +70,6 @@ struct termios ttyset;
 }
 
 - (bool)startForDevice:(NSString*) device {
-    
     _reliable = NO;
     _ns.dir = 'N';
     _ns.coordinates = 0;
@@ -77,6 +77,10 @@ struct termios ttyset;
     _ew.coordinates = 0;
     _elev.coordinates = 0;
     _elev.dir = 'm';
+    _velkt = 0;
+    _veldir = -1;
+    _numsat = -1;
+    _hdop = 100;
 
     [self stop];
     
@@ -119,7 +123,19 @@ struct termios ttyset;
 - (NSString*) ElevCoord {
     if (_elev.coordinates==0) return [NSString stringWithFormat:@"No Elevation Data"];
     //NSLog([NSString stringWithFormat:@"%f",_elev.coordinates]);
-    return [NSString stringWithFormat:@"%f%c",_elev.coordinates, _elev.dir]; //don't know if formatting stuff is correct
+    return [NSString stringWithFormat:@"%.1f%c",_elev.coordinates, _elev.dir]; //don't know if formatting stuff is correct
+}
+
+- (NSString*) VelKt {
+    if (_velkt==0) return nil;
+    if (_veldir==-1) return [NSString stringWithFormat:@"%.1f kt",_velkt];
+    return [NSString stringWithFormat:@"%.1f kt at %d T",_velkt,_veldir];
+}
+
+- (NSString*) QualData {
+    if (_numsat==-1) return nil;
+    if (_hdop>=50 || _hdop==0) return [NSString stringWithFormat:@" (%d sats)",_numsat];
+    return [NSString stringWithFormat:@" (%d sats, HDOP %.1f)",_numsat,_hdop];
 }
 
 - (NSString*)status {
@@ -127,18 +143,29 @@ struct termios ttyset;
     
     if (_lastUpdate)
         if (_elev.coordinates) 
-            return [NSString stringWithFormat:@"%@ %@, %@, %@: %@ @ %@%@", 
-                NSLocalizedString(@"Last Position", "GPS status string."), 
-                [self NSCoord],[self EWCoord],
-                NSLocalizedString(@"Elevation", "GPS status string."), 
-                [self ElevCoord],[self lastUpdate],
-                _reliable ? @"" : NSLocalizedString(@" Position is not reliable!", "GPS status string. Needs leading space")];
+            if (_velkt && _reliable) // only report velocity if we're sure
+                return [NSString stringWithFormat:@"%@: %@ %@, %@: %@, %@: %@ @ %@%@", 
+                        NSLocalizedString(@"Position", "GPS status string."), 
+                        [self NSCoord],[self EWCoord],
+                        NSLocalizedString(@"Elevation", "GPS status string."), 
+                        [self ElevCoord],
+                        NSLocalizedString(@"Velocity", "GPS status string."), 
+                        [self VelKt],[self lastUpdate],[self QualData]];
+            else
+                return [NSString stringWithFormat:@"%@: %@ %@, %@: %@ @ %@%@%@", 
+                        NSLocalizedString(@"Position", "GPS status string."), 
+                        [self NSCoord],[self EWCoord],
+                        NSLocalizedString(@"Elevation", "GPS status string."), 
+                        [self ElevCoord],[self lastUpdate],
+                        _reliable ? @"" : NSLocalizedString(@" -- NO FIX", "GPS status string. Needs leading space"),
+                        [self QualData]];
         else
-            return [NSString stringWithFormat:@"%@ %@, %@ @ %@%@", 
-                NSLocalizedString(@"Last Position", "GPS status string."), 
+            return [NSString stringWithFormat:@"%@: %@ %@ @ %@%@", 
+                NSLocalizedString(@"Position", "GPS status string."), 
                 [self NSCoord],[self EWCoord],
                 [self lastUpdate],
-                _reliable ? @"" : NSLocalizedString(@" Position is not reliable!", "GPS status string. Needs leading space")];
+                _reliable ? @"" : NSLocalizedString(@" -- NO FIX", "GPS status string. Needs leading space"),
+				[self QualData]];
 
     else if ([(NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"GPSDevice"] length]) {
         if (_gpsThreadUp) return NSLocalizedString(@"GPS subsystem works, but there is no data.", "GPS status string");
@@ -150,6 +177,7 @@ struct termios ttyset;
 
 - (void)setStatus:(NSString*)status {
     [WaveHelper secureReplace:&_status withObject:status];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:_status];
 }
 
 - (waypoint) currentPoint {
@@ -187,7 +215,7 @@ struct termios ttyset;
     [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
     [WaveHelper secureReplace:&_lastAdd withObject:[NSDate date]];
     
-    if (abs(ns)>0 && abs(ns)<90 && abs(ew)>0 && abs(ew)<180 && _reliable) {
+    if (abs(ns)>=0 && abs(ns)<=90 && abs(ew)>=0 && abs(ew)<=180 && _reliable) {
         [_trace addObject:[NSNumber numberWithDouble:ns]];
         [_trace addObject:[NSNumber numberWithDouble:ew]];
     }
@@ -264,6 +292,8 @@ int ss(char* inp, char* outp) {
     static char gpsin[MAX_GPSBUF_LEN];
     char gpsbuf[MAX_GPSBUF_LEN];
     int ewh, nsh;
+	int veldir,numsat;
+	float velkt,hdop;
     struct _position ns, ew, elev;
     bool updated;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
@@ -271,8 +301,7 @@ int ss(char* inp, char* outp) {
     if (_debugEnabled) NSLog(@"GPS read data");
     if (q>=1024) q = 0; //just in case something went wrong
     
-    if((len = read(fd, &gpsin[q], MAX_GPSBUF_LEN-q-1)) < 0) 
-        return NO;
+    if((len = read(fd, &gpsin[q], MAX_GPSBUF_LEN-q-1)) < 0) return NO;
     if (len == 0) return YES;
     
     if (_debugEnabled) NSLog(@"GPS read data returned.");
@@ -282,16 +311,19 @@ int ss(char* inp, char* outp) {
     gpsin[q+len]=0;
     updated = NO;
     elev.coordinates = -10000.0;
+	velkt = -1.0;
+	numsat = -1;
+	hdop = 100;
     
     while (ss(&gpsin[x],gpsbuf)>0) {
         if (_debugEnabled) NSLog(@"GPS record: %s", gpsbuf);//uncommented
         if(_tripmateMode && (!strncmp(gpsbuf, "ASTRAL", 6))) {
             write(fd, "ASTRAL\r", 7);
         } else if(strncmp(gpsbuf, "$GPGGA", 6) == 0) {  //gpsbuf contains GPS fixed data (almost everything poss)
-            if (sscanf(gpsbuf, "%*[^,],%*f,%2d%f,%c,%3d%f,%c,%d,%*d,%*f,%f",
+            if (sscanf(gpsbuf, "%*[^,],%*f,%2d%f,%c,%3d%f,%c,%d,%d,%f,%f",
 		&nsh, &ns.coordinates, &ns.dir,
                 &ewh, &ew.coordinates, &ew.dir,
-	        &valid, &elev.coordinates)>=7) { // this probably should be == 10 not >= 7  more testing
+	        &valid, &numsat, &hdop, &elev.coordinates)>=7) { // this probably should be == 10 not >= 7  more testing
                 		
                 if (valid) _reliable = YES;
                 else _reliable = NO;
@@ -300,9 +332,9 @@ int ss(char* inp, char* outp) {
                 updated = YES;
             }
         } else if(strncmp(gpsbuf, "$GPRMC", 6) == 0) {  //gpsbuf contains Recommended minimum specific GPS/TRANSIT data !!does not include elevation
-            if (sscanf(gpsbuf, "%*[^,],%*f,%c,%2d%f,%c,%3d%f,%c,",
+            if (sscanf(gpsbuf, "%*[^,],%*f,%c,%2d%f,%c,%3d%f,%c,%f,%d,",
                 &cvalid, &nsh, &ns.coordinates, &ns.dir,
-                &ewh, &ew.coordinates, &ew.dir)==7) {
+                &ewh, &ew.coordinates, &ew.dir, &velkt, &veldir)==9) {
             
                 if (cvalid == 'A') _reliable = YES;
                 else _reliable = NO;
@@ -342,6 +374,16 @@ int ss(char* inp, char* outp) {
             _ns.coordinates   = nsh + ns.coordinates / 60.0;
             _ew.coordinates   = ewh + ew.coordinates / 60.0;
             if (elev.coordinates > -10000.00) _elev.coordinates = elev.coordinates;
+			
+			if (velkt > -1.0) {
+				_velkt = velkt;
+				_veldir = veldir;
+			}
+			
+			if (numsat > -1) {
+				_numsat = numsat;
+				_hdop = hdop;
+			}
             
             [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
         
@@ -375,11 +417,12 @@ int ss(char* inp, char* outp) {
     int len, valid, q;
     char gpsbuf[MAX_GPSBUF_LEN];
     double ns, ew, elev;
+	float velkt;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
 
     if (_debugEnabled) NSLog(@"GPSd write command");
     
-    if (write(fd, "PAM\r\n", 5) < 5) {
+    if (write(fd, "PAMV\r\n", 5) < 5) {
         NSLog(@"GPSd write failed");
         return NO;
     }
@@ -396,8 +439,8 @@ int ss(char* inp, char* outp) {
     
     gpsbuf[0+len]=0;
     
-    if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d",
-        &ns, &ew, &elev, &valid) ==4) {
+    if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d,V=%f",
+        &ns, &ew, &elev, &valid, &velkt) ==5) {
                         
         if (valid >= 2) _reliable = YES;
         else _reliable = NO;
@@ -414,6 +457,7 @@ int ss(char* inp, char* outp) {
             _ns.coordinates   = fabs(ns);
             _ew.coordinates   = fabs(ew);
             _elev.coordinates = elev;
+			_velkt = velkt;
             
             [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
         
@@ -433,6 +477,7 @@ int ss(char* inp, char* outp) {
             _elev.coordinates = 0;
             _ns.coordinates = 0;
             _ew.coordinates = 0;
+			_velkt = 0;
             
             [WaveHelper secureReplace:&_lastUpdate withObject:[NSDate date]];
         }
@@ -447,9 +492,12 @@ int ss(char* inp, char* outp) {
 
 - (void) continousParse:(int) fd {
     NSDate *date;
+    unsigned int i = 0;
     
     while (_gpsShallRun && [self gps_parse:fd]) {
         //actually once a sec should be enough, but sometimes we dont get any information. so do it more often.
+        if ((i++ % 10 == 0) && (_status == Nil))
+            [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:[self status]];
         date = [[NSDate alloc] initWithTimeIntervalSinceNow:0.1];
         [NSThread sleepUntilDate:date];
         [date release];
@@ -458,8 +506,11 @@ int ss(char* inp, char* outp) {
 
 - (void) continousParseGPSd:(int) fd {
     NSDate *date;
+    unsigned int i = 0;
     
     while (_gpsShallRun && [self gpsd_parse:fd]) {
+        if ((i++ % 10 == 0) && (_status == Nil))
+            [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:[self status]];
         date = [[NSDate alloc] initWithTimeIntervalSinceNow:0.5];
         [NSThread sleepUntilDate:date];
         [date release];

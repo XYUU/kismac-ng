@@ -29,7 +29,9 @@
 #import "WaveNetWPACrack.h"
 #import "SpinChannel.h"
 #import "../WaveDrivers/WaveDriver.h"
+#import "MapView.h"
 #import <BIGeneric/BIGeneric.h>
+#import "MapViewAreaView.h"
 
 @implementation ScanController(PrivateExtension) 
 
@@ -198,14 +200,6 @@
     
     if(tab == tabNetworks) {
         [self updateNetworkTable:self complete:YES];
-    }
-
-    if(tab == tabMap) {
-        if (!_gpsTimer)
-            _gpsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(updateGPSData:) userInfo:nil repeats:YES] retain];
-    } else {
-        [_gpsTimer invalidate];
-        [WaveHelper secureRelease:&_gpsTimer];
     }
 
     [_showNetworks      setState: tab == tabNetworks ? NSOnState : NSOffState];
@@ -383,7 +377,7 @@
 #pragma mark -
 
 - (void)clearAreaMap {
-    [[WaveHelper zoomPictureView] clearAdvNet];
+    [_mappingView clearAreaNet];
     [_showNetInMap setTitle: NSLocalizedString(@"Show Net Area", "menu item. description must be the same as in MainMenu.nib!")];
     [_showNetInMap setState: NSOffState];
     [_showAllNetsInMap setState: NSOffState];

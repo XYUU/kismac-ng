@@ -26,6 +26,12 @@
 
 @end
 
+@interface NSObject(BIExtension) 
+
+- (void)unsubscribeNotifications;
+
+@end
+
 @interface NSThread(BIExtension) 
 
 + (void)sleep:(NSTimeInterval)seconds;

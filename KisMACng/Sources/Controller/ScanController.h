@@ -46,11 +46,10 @@ typedef enum {
 @class BIZoomView;
 @class AMRollOverButton;
 @class ColoredRowTableView;
+@class MapView;
 
 //This is the main class. it basically provides an interface between the base and the gui
-@interface ScanController : NSObject
-{
-    NSTimer             *_gpsTimer;             //timer for refreshing the gps data
+@interface ScanController : NSObject {
     NSString            *_fileName;             //filename for the currently open capture
     WaveNet             *_curNet;               //the currently selected network
     int                 _selectedRow;
@@ -103,8 +102,7 @@ typedef enum {
     IBOutlet NSButton           *_mapButton;
     IBOutlet NSButton           *_detailsButton;
     
-    IBOutlet ZoomPictureView    *_mappingView;
-    IBOutlet NSTextField        *aGPSStatus;
+    IBOutlet MapView            *_mappingView;
     IBOutlet NSWindow           *prefsWindow;
     IBOutlet PrefsController    *prefsController;
     IBOutlet NSView             *detailsView;

@@ -25,6 +25,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import <BIGL/BIGL.h>
+#import <BIGeneric/BIValuePair.h>
+
+enum selmode {
+    selCurPos = 0,
+    selWaypoint1 = 1,
+    selWaypoint2 = 2,
+};
 
 @interface MapView : BIGLView {
     NSString            *_status;
@@ -33,6 +40,26 @@
     BIGLImageView       *_map;
     BIGLImageView       *_statusView;
     BIGLTextView        *_gpsStatusView;
+    BOOL                _visible;
+    NSImage             *_mapImage;
+    NSImage             *_orgImage;
+    
+    waypoint            _wp[3];
+    NSPoint             _old;
+    NSPoint             _point[3];
+    NSPoint             _center;
+    NSPoint             _clipOffset;
+    float               _zoomFact;
+    
+    BOOL                _clipX, _clipY;
+    enum selmode        _selmode;
 }
+
+- (BOOL)setMap:(NSImage*)map;
+- (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
+- (void)setVisible:(BOOL)visible;
+
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
 
 @end

@@ -1,8 +1,8 @@
 /*
         
-        File:			KisMACNotifications.h
+        File:			MapViewAreaView.m
         Program:		KisMAC
-	Author:			Michael Rossberg
+	Author:			Michael Roßberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -23,15 +23,27 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <Carbon/Carbon.h>
+#import "MapViewAreaView.h"
+#import "MapViewPrivate.h"
+#import "WaveHelper.h"
 
-extern NSString *const KisMACViewItemChanged;
-extern NSString *const KisMACCrackDone;
-extern NSString *const KisMACAdvNetViewInvalid;
-extern NSString *const KisMACModalDone;
-extern NSString *const KisMACFiltersChanged;
-extern NSString *const KisMACStopScanForced;
-extern NSString *const KisMACNetworkAdded;
-extern NSString *const KisMACUserDefaultsChanged;
-extern NSString *const KisMACTryToSave;
-extern NSString *const KisMACGPSStatusChanged;
+@implementation MapView(AreaView)
+
+- (void)clearAreaNet {
+    if (_mapImage) {
+        [WaveHelper secureReplace:&_mapImage withObject:_orgImage];
+        [self _adjustZoom];
+        [self setNeedsDisplay:YES];
+    }
+    //TODO implement
+}
+
+- (void)showAreaNet:(WaveNet*)net {
+    //TODO implement
+}
+
+- (void)showAreaNets:(NSArray*)nets{
+    //TODO implement
+}
+
+@end

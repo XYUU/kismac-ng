@@ -45,7 +45,8 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
     glClearColor(0.0, 0.0, 0.0, 0.0);
-        
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     glDisable(GL_DEPTH_TEST); // ensure text is not remove by deoth buffer test.
     //glDisable (GL_LIGHTING);
     glEnable(GL_BLEND); // for text fading
@@ -140,7 +141,7 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
     if (!_initialized) return;
     if (![_lock tryLock]) return;
     
-    glClearColor(_color[0], _color[1], _color[2], _color[3]);
+    //glClearColor(_color[0], _color[1], _color[2], _color[3]);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
  

@@ -2177,6 +2177,10 @@
 				003533FF06A5DD8500AB4577,
 				00CBA33E06DB8FDE000ACD19,
 				00CBA33F06DB8FDE000ACD19,
+				00C5F13206DE0EAF001EC02F,
+				00C5F13306DE0EAF001EC02F,
+				00C5F12A06DE0C98001EC02F,
+				00C5F12B06DE0C98001EC02F,
 				0035340C06A5DD8500AB4577,
 				0035340D06A5DD8500AB4577,
 			);
@@ -3243,19 +3247,6 @@
 			settings = {
 			};
 		};
-		005191BF06C581370035ED59 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			isa = PBXShellScriptBuildPhase;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -e \"$SRCROOT/Sources/not public/WaveSecret.h\" ]; then\n\ttouch \"$SRCROOT/Sources/not public/WaveSecret.h\"\nfi";
-		};
 		0073142C06AC4B3C007FD51E = {
 			children = (
 				00F0FE8006AC5F72006D4119,
@@ -3304,6 +3295,62 @@
 		};
 		00A7F9D306C6D20A00A6BB8F = {
 			fileRef = 00A7F9D206C6D20A00A6BB8F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00C5F12A06DE0C98001EC02F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = MapViewPrivate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00C5F12B06DE0C98001EC02F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = MapViewPrivate.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00C5F12C06DE0C98001EC02F = {
+			fileRef = 00C5F12A06DE0C98001EC02F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00C5F12D06DE0C98001EC02F = {
+			fileRef = 00C5F12B06DE0C98001EC02F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00C5F13206DE0EAF001EC02F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = MapViewAreaView.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00C5F13306DE0EAF001EC02F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = MapViewAreaView.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00C5F13406DE0EAF001EC02F = {
+			fileRef = 00C5F13206DE0EAF001EC02F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00C5F13506DE0EAF001EC02F = {
+			fileRef = 00C5F13306DE0EAF001EC02F;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -4308,7 +4355,6 @@
 //8D4
 		8D1107260486CEB800E47090 = {
 			buildPhases = (
-				005191BF06C581370035ED59,
 				8D1107270486CEB800E47090,
 				8D1107290486CEB800E47090,
 				8D11072C0486CEB800E47090,
@@ -4419,6 +4465,8 @@
 				00FF593E06C630CC006C7F1E,
 				00CBA25A06DB7D0A000ACD19,
 				00CBA34006DB8FDE000ACD19,
+				00C5F12C06DE0C98001EC02F,
+				00C5F13406DE0EAF001EC02F,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4602,6 +4650,8 @@
 				00FF593F06C630CC006C7F1E,
 				00CBA25B06DB7D0A000ACD19,
 				00CBA34106DB8FDE000ACD19,
+				00C5F12D06DE0C98001EC02F,
+				00C5F13506DE0EAF001EC02F,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

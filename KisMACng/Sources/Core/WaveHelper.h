@@ -47,7 +47,7 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 #endif
 
 @class ScanController;
-@class ZoomPictureView;
+@class MapView;
 @class ImportController;
 @class GPSController;
 @class WaveDriver;
@@ -83,8 +83,8 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 + (GPSController*) gpsController;
 + (void) initGPSControllerWithDevice:(NSString*)device;
 
-+ (ZoomPictureView*) zoomPictureView;
-+ (void) setZoomPictureView:(ZoomPictureView*)z;
++ (MapView*) mapView;
++ (void) setMapView:(MapView*)mv;
 
 + (NSColor*)intToColor:(NSNumber*)c;
 + (NSNumber*)colorToInt:(NSColor*)c;

@@ -144,9 +144,9 @@
     bounds.size   = _texSize;
   
     if (_texName) {
-        glBlendFunc (GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // ditto
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // ditto
         glEnable (GL_TEXTURE_RECTANGLE_EXT);
-        glColor4f(1,1,1,0);
+        glColor4f(1,1,1,1);
         glBindTexture(GL_TEXTURE_RECTANGLE_EXT, _texName);
         glBegin(GL_QUADS);
             glTexCoord2f(0, _texSize.height); // draw upper left in world coordinates

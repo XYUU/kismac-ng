@@ -68,7 +68,7 @@
     
     if ([_polygon count] < 6) return;
     
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // ditto
+    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE); // ditto
     glBegin(GL_POLYGON);
     glEnable(GL_POLYGON_SMOOTH);
     glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);

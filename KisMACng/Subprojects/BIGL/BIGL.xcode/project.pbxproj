@@ -65,16 +65,6 @@
 				);
 			};
 		};
-		00023A0406933DB2007C44ED = {
-			buildActionMask = 2147483647;
-			dstPath = ../../files;
-			dstSubfolderSpec = 16;
-			files = (
-				002E7D2C06A868A500C9D931,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		00023ACA069347CC007C44ED = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -131,12 +121,6 @@
 		};
 		00023AD706934F9B007C44ED = {
 			fileRef = 00023AD506934F9B007C44ED;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		002E7D2C06A868A500C9D931 = {
-			fileRef = 8DC2EF5B0486A6940098B216;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -621,7 +605,6 @@
 				8DC2EF540486A6940098B216,
 				8DC2EF560486A6940098B216,
 				00F57A4306A875990035AE2F,
-				00023A0406933DB2007C44ED,
 			);
 			buildRules = (
 			);

@@ -38,5 +38,6 @@
 - (id)initWithImage:(NSImage*)img;
 
 - (void)setImage:(NSImage*)img;
+- (NSImage*)image;
 
 @end

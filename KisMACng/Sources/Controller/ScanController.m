@@ -47,6 +47,7 @@ NSString *const KisMACStopScanForced        = @"KisMACStopScanForced";
 NSString *const KisMACNetworkAdded          = @"KisMACNetworkAdded";
 NSString *const KisMACUserDefaultsChanged   = @"KisMACUserDefaultsChanged";
 NSString *const KisMACTryToSave             = @"KisMACTryToSave";
+NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 
 @implementation ScanController
 + (void)initialize {
@@ -128,7 +129,7 @@ NSString *const KisMACTryToSave             = @"KisMACTryToSave";
     
     [ScanHierarch setContainer:_container];
     [WaveHelper setMainWindow:_window];
-    [WaveHelper setZoomPictureView:_mappingView];
+    [WaveHelper setMapView:_mappingView];
     _visibleTab = tabInvalid;
     [self showNetworks];
     
@@ -299,15 +300,6 @@ NSString *const KisMACTryToSave             = @"KisMACTryToSave";
 
 - (void)stopScanForced:(NSNotification*)note {
     [self stopScan];
-}
-
--(void)updateGPSData:(NSTimer*)timer {
-    GPSController *gps;
-    
-    gps = [WaveHelper gpsController];
-    [aGPSStatus setStringValue:[[WaveHelper gpsController] status]];
-    
-    [_mappingView setCurrentPoint:[[WaveHelper gpsController] currentPoint]];
 }
 
 #pragma mark -
@@ -516,8 +508,7 @@ NSString *const KisMACTryToSave             = @"KisMACTryToSave";
 
 #pragma mark -
 
--(void) dealloc
-{
+-(void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [_importController stopAnimation];

@@ -37,7 +37,12 @@
             }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = MapView; LANGUAGE = ObjC; SUPERCLASS = BIGLView; }, 
+        {
+            ACTIONS = {zoomIn = id; zoomOut = id; }; 
+            CLASS = MapView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = BIGLView; 
+        }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {
             ACTIONS = {
@@ -126,7 +131,7 @@
                 "_mainView" = NSBox; 
                 "_mapButton" = NSButton; 
                 "_mapView" = NSView; 
-                "_mappingView" = ZoomPictureView; 
+                "_mappingView" = MapView; 
                 "_netHierarchDrawer" = NSDrawer; 
                 "_networkTable" = ColoredRowTableView; 
                 "_networkView" = NSView; 
@@ -153,7 +158,6 @@
                 aCrackMenu = NSMenu; 
                 aDeauthMenu = NSMenuItem; 
                 aDetailsTable = ColoredRowTableView; 
-                aGPSStatus = NSTextField; 
                 aInfoController = InfoController; 
                 aInjPacketsMenu = NSMenuItem; 
                 aNetworkMenu = NSMenu; 

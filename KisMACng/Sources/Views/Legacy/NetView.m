@@ -43,8 +43,9 @@
 	_wp._elevation = 0;
         _visible = YES;
         _network = nil;
-        [[WaveHelper zoomPictureView] addSubview:self];
-        [[WaveHelper zoomPictureView] alignPoint];
+        //TODO
+        //[[WaveHelper mapView] addSubview:self];
+        //[[WaveHelper mapView] alignPoint];
     }
     return self;
 }
@@ -100,7 +101,7 @@
 
 -(void) setCoord:(waypoint)wp {
     _wp = wp;
-    [[WaveHelper zoomPictureView] alignPoint];
+    //[[WaveHelper mapView] alignPoint];
 }
 
 -(waypoint) coord {
@@ -173,7 +174,7 @@
 }
 
 -(void) dealloc {
-    [[WaveHelper zoomPictureView] setNeedsDisplay:YES];
+    [[WaveHelper mapView] setNeedsDisplay:YES];
     [WaveHelper secureRelease:&_name];
     [WaveHelper secureRelease:&_network];
     [WaveHelper secureRelease:&_img];

@@ -25,80 +25,69 @@
 
 #import "MapView.h"
 #import "WaveHelper.h"
-
-@interface MapView(Private)
-- (void)_align;
-- (void)_setStatus:(NSString*)status;
-- (void)_setGPSStatus:(NSString*)status;
-@end
-
-@implementation MapView(Private)
-- (void)_align {
-    NSPoint loc;
-
-    loc.x = (_frame.size.width - [_statusImg size].width)  / 2;
-    loc.y = (_frame.size.height- [_statusImg size].height) / 2;
-    [_statusView setLocation:loc];
-}
-- (void)_setStatus:(NSString*)status {
-    NSMutableDictionary* attrs = [[[NSMutableDictionary alloc] init] autorelease];
-    NSFont* textFont = [NSFont fontWithName:@"Monaco" size:12];
-    NSSize size;
-    NSColor *red = [NSColor colorWithCalibratedRed:.8 green:0 blue:0 alpha:1];
-    
-    [WaveHelper secureReplace:&_status withObject:status];
-    
-    [attrs setObject:textFont forKey:NSFontAttributeName];
-    [attrs setObject:red forKey:NSForegroundColorAttributeName];
-    
-    size = [_status sizeWithAttributes:attrs];
-    size.width += 20;
-    size.height += 10;
-    
-    [WaveHelper secureReplace:&_statusImg withObject:[[[NSImage alloc] initWithSize:size] autorelease]];
-    [_statusImg lockFocus];
-    [[red colorWithAlphaComponent:0.1] set];
-    [[NSBezierPath bezierPathWithRect:NSMakeRect(0,0,size.width,size.height)] fill];
-    [red set];
-    [[NSBezierPath bezierPathWithRect:NSMakeRect(1,1,size.width-2,size.height-2)] stroke];
-    [_status drawAtPoint:NSMakePoint(10,5) withAttributes:attrs];
-    [_statusImg unlockFocus];
-    
-    [_statusView setImage:_statusImg];
-    [self _align];
-}
-- (void)_setGPSStatus:(NSString*)status {
-    NSMutableDictionary* attrs = [[[NSMutableDictionary alloc] init] autorelease];
-    NSFont* textFont = [NSFont fontWithName:@"Monaco" size:12];
-    NSColor *grey = [NSColor lightGrayColor];
-    
-    [WaveHelper secureReplace:&_gpsStatus withObject:status];
-    
-    [attrs setObject:textFont forKey:NSFontAttributeName];
-    [attrs setObject:grey forKey:NSForegroundColorAttributeName];
-    
-    NSAttributedString *a = [[[NSAttributedString alloc] initWithString:_gpsStatus attributes:attrs] autorelease];
-    [_gpsStatusView setString:a];
-    [_gpsStatusView setBorderColor:grey];
-    [_gpsStatusView setBackgroundColor:[grey colorWithAlphaComponent:0.1]];
-}
-@end
+#import "KisMACNotifications.h"
+#import "MapViewPrivate.h"
+#import <BIGeneric/BIGeneric.h>
 
 @implementation MapView
 
 - (void)awakeFromNib {
-    [self setBackgroundColor:[NSColor blackColor]];
+    _mapImage = nil;
+    _wp[0]._lat  = 0; _wp[0]._long = 0;
+    _wp[1]._lat  = 0; _wp[1]._long = 0;
+    _wp[2]._lat  = 0; _wp[2]._long = 0;
+    _zoomFact = 1.0;
     
-    _statusView = [[BIGLImageView alloc] init];
-    [self _setStatus:NSLocalizedString(@"No map loaded! Please import or load one first.", "map view status")];
-    [self addSubView:_statusView];
+    [self setBackgroundColor:[NSColor blackColor]];
+        
+    _map = [[BIGLImageView alloc] init];
+    [_map setVisible:NO];
+    [self addSubView:_map];
     
     _gpsStatusView = [[BIGLTextView alloc] init];
     [self _setGPSStatus:NSLocalizedString(@"No GPS device available.", "gps status")];
     [self addSubView:_gpsStatusView];
+    [_gpsStatusView setLocation:NSMakePoint(-1,-1)];
+
+    _statusView = [[BIGLImageView alloc] init];
+    [self _updateStatus];
+    [self addSubView:_statusView];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateGPSStatus:) name:KisMACGPSStatusChanged object:nil];
 }
 
 #pragma mark -
+
+- (BOOL)setMap:(NSImage*)map {
+    [WaveHelper secureReplace:&_orgImage withObject:map];
+    [WaveHelper secureReplace:&_mapImage withObject:map];
+    [_map setImage:_mapImage];
+    [_map setVisible:YES];
+    _wp[0]._lat  = 0; _wp[0]._long = 0;
+    _wp[1]._lat  = 0; _wp[1]._long = 0;
+    _wp[2]._lat  = 0; _wp[2]._long = 0;
+    _center.x = [_mapImage size].width  / 2;
+    _center.y = [_mapImage size].height / 2;
+    _zoomFact = 1.0;
+    
+    [self _updateStatus];
+    [self _adjustZoom];
+    [self _align];
+    
+    return YES;
+}
+
+- (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord {
+    _point[which] = point;
+    _wp[which] = coord;
+    [self _updateStatus];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:KisMACAdvNetViewInvalid object:self];
+}
+
+- (void)setVisible:(BOOL)visible {
+    _visible = visible;
+}
 
 - (void)setFrameSize:(NSSize)newSize {
     [super setFrameSize:newSize];
@@ -109,15 +98,78 @@
     [self _align];
 }
 
+- (void)keyDown:(NSEvent *)theEvent {
+    switch ([theEvent keyCode]) {
+    case 123:
+        _center.x += 40.0;
+        [self _adjustZoom];
+        [self _align];
+        [self setNeedsDisplay:YES];
+        break;
+    case 124:
+        _center.x -= 40.0;
+        [self _adjustZoom];
+        [self _align];
+        [self setNeedsDisplay:YES];
+        break;
+    case 125:
+        _center.y += 40.0;
+        [self _adjustZoom];
+        [self _align];
+        [self setNeedsDisplay:YES];
+        break;
+    case 126:
+        _center.y -= 40.0;
+        [self _adjustZoom];
+        [self _align];
+        [self setNeedsDisplay:YES];
+        break;
+    case 44: //minus key
+        [self zoomOut:self];
+        break;
+    case 30: //plus key
+        [self zoomIn:self];
+        break;
+    }
+}
+#pragma mark -
+
+#define ZOOMFACT 1.5
+- (IBAction)zoomIn:(id)sender {
+    if (_zoomFact > 20) {
+        NSBeep();
+        return;
+    }
+    _zoomFact *= ZOOMFACT;
+    [self _adjustZoom];
+    [self _align];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)zoomOut:(id)sender {
+    if (_zoomFact < 0.1) {
+        NSBeep();
+        return;
+    }    
+    _zoomFact /= ZOOMFACT;
+    [self _adjustZoom];
+    [self _align];
+    [self setNeedsDisplay:YES];
+}
+
 #pragma mark -
 
 - (void)dealloc {
+    [self unsubscribeNotifications];
+    
     [_status release];
     [_statusImg release];
     [_statusView release];
     [_gpsStatus release];
     [_gpsStatusView release];
     [_map release];
+    [_mapImage release];
+    [_orgImage release];
     
     [super dealloc];
 }

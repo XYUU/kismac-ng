@@ -10,6 +10,7 @@
 #import "ScanControllerPrivate.h"
 #import "SpinChannel.h"
 #import "WaveNetWEPCrack.h"
+#import "MapView.h"
 #import <BIGeneric/BIGeneric.h>
 
 @implementation ScanController(ScriptableAdditions)
@@ -40,6 +41,7 @@
 }
 - (BOOL)showMap {
     [self changedViewTo:tabMap contentView:_mapView];
+    [_window makeFirstResponder:_mappingView]; 
     return YES;
 }
 - (BOOL)showDetails {
@@ -143,7 +145,7 @@
         
         [self clearAreaMap];
         
-        ret = [[WaveHelper zoomPictureView] loadFromFile:filename];
+        ret = [_mappingView loadFromFile:filename];
         [self showMap];
         
         [self busyDone];
@@ -208,7 +210,7 @@
         [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Saving to %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];  
 
         NS_DURING
-            [[WaveHelper zoomPictureView] saveToFile:filename];
+            [_mappingView saveToFile:filename];
             
             [self busyDone];
             NS_VALUERETURN(YES, BOOL);

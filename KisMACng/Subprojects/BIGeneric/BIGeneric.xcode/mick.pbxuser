@@ -49,38 +49,18 @@
 			sepNavVisRect = "{{0, 0}, {1020, 689}}";
 		};
 	};
-	007F00D006C77BDD006B684A = {
-		fRef = 008E0F2106A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.m: 26";
-		rLen = 0;
-		rLoc = 847;
-		rType = 0;
-		vrLen = 644;
-		vrLoc = 227;
-	};
-	007F00F106C77C23006B684A = {
-		fRef = 008E0F2106A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.m: 26";
-		rLen = 0;
-		rLoc = 847;
-		rType = 0;
-		vrLen = 593;
-		vrLoc = 227;
-	};
 	008E0F2006A441E60064AB5C = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 689}}";
-			sepNavSelRange = "{557, 0}";
-			sepNavVisRect = "{{0, 0}, {1020, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {946, 586}}";
+			sepNavSelRange = "{536, 24}";
+			sepNavVisRect = "{{0, 0}, {946, 586}}";
 		};
 	};
 	008E0F2106A441E60064AB5C = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {440, 966}}";
-			sepNavSelRange = "{847, 0}";
-			sepNavVisRect = "{{0, 182}, {440, 227}}";
+			sepNavIntBoundsRect = "{{0, 0}, {946, 938}}";
+			sepNavSelRange = "{1441, 24}";
+			sepNavVisRect = "{{0, 246}, {946, 586}}";
 		};
 	};
 	00C135630695B3B6004F02A8 = {
@@ -155,6 +135,46 @@
 			sepNavVisRect = "{{0, 1047}, {1020, 689}}";
 		};
 	};
+	00C5EE5706DDDA64001EC02F = {
+		fRef = 008E0F2106A441E60064AB5C;
+		isa = PBXTextBookmark;
+		name = "BINSExtensions.m: 26";
+		rLen = 0;
+		rLoc = 847;
+		rType = 0;
+		vrLen = 593;
+		vrLoc = 227;
+	};
+	00C5EE5906DDDA64001EC02F = {
+		fRef = 008E0F2106A441E60064AB5C;
+		isa = PBXTextBookmark;
+		name = "BINSExtensions.m: 46";
+		rLen = 0;
+		rLoc = 1235;
+		rType = 0;
+		vrLen = 304;
+		vrLoc = 1129;
+	};
+	00C5EE8C06DDDDA0001EC02F = {
+		fRef = 008E0F2106A441E60064AB5C;
+		isa = PBXTextBookmark;
+		name = unsubscribeNotifications;
+		rLen = 24;
+		rLoc = 1441;
+		rType = 0;
+		vrLen = 1146;
+		vrLoc = 395;
+	};
+	00C5EE8D06DDDDA0001EC02F = {
+		fRef = 008E0F2106A441E60064AB5C;
+		isa = PBXTextBookmark;
+		name = unsubscribeNotifications;
+		rLen = 24;
+		rLoc = 1441;
+		rType = 0;
+		vrLen = 1148;
+		vrLoc = 393;
+	};
 	00F0FF6906AD499B006D4119 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1020, 689}}";
@@ -213,9 +233,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					226,
+					668,
 					20,
-					40,
+					104,
 					43,
 					43,
 					20,
@@ -230,6 +250,22 @@
 					PBXFileDataSource_Warnings_ColumnID,
 					PBXFileDataSource_Target_ColumnID,
 					PBXFileDataSource_SCM_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXSymbolsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					16,
+					132.8008,
+					161.0356,
+					138.2085,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXSymbolsDataSource_SymbolTypeIconID,
+					PBXSymbolsDataSource_SymbolNameID,
+					PBXSymbolsDataSource_SymbolTypeID,
+					PBXSymbolsDataSource_ReferenceNameID,
 				);
 			};
 			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
@@ -254,7 +290,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 113736659;
+			PBXPerProjectTemplateStateSaveDate = 115201787;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -691,11 +727,13 @@
 				Frame = "{{0, 0}, {745, 422}}";
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 113736659;
+			PBXWorkspaceStateSaveDate = 115201787;
 		};
 		perUserProjectItems = {
-			007F00D006C77BDD006B684A = 007F00D006C77BDD006B684A;
-			007F00F106C77C23006B684A = 007F00F106C77C23006B684A;
+			00C5EE5706DDDA64001EC02F = 00C5EE5706DDDA64001EC02F;
+			00C5EE5906DDDA64001EC02F = 00C5EE5906DDDA64001EC02F;
+			00C5EE8C06DDDDA0001EC02F = 00C5EE8C06DDDDA0001EC02F;
+			00C5EE8D06DDDDA0001EC02F = 00C5EE8D06DDDDA0001EC02F;
 		};
 		sourceControlManager = 00C1356F0695B3D7004F02A8;
 		userBuildSettings = {

@@ -1,8 +1,8 @@
 /*
         
-        File:			KisMACNotifications.h
+        File:			MapViewPrivate.h
         Program:		KisMAC
-	Author:			Michael Rossberg
+	Author:			Michael Roßberg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
@@ -23,15 +23,14 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <Carbon/Carbon.h>
+#import "MapView.h"
 
-extern NSString *const KisMACViewItemChanged;
-extern NSString *const KisMACCrackDone;
-extern NSString *const KisMACAdvNetViewInvalid;
-extern NSString *const KisMACModalDone;
-extern NSString *const KisMACFiltersChanged;
-extern NSString *const KisMACStopScanForced;
-extern NSString *const KisMACNetworkAdded;
-extern NSString *const KisMACUserDefaultsChanged;
-extern NSString *const KisMACTryToSave;
-extern NSString *const KisMACGPSStatusChanged;
+@interface MapView(Private)
+
+- (void)_align;
+- (void)_adjustZoom;
+- (void)_setStatus:(NSString*)status;
+- (void)_updateStatus;
+- (void)_setGPSStatus:(NSString*)status;
+
+@end
