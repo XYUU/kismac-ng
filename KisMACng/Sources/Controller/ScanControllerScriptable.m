@@ -29,6 +29,7 @@
 #import "WaveNetWEPCrack.h"
 #import "MapView.h"
 #import "MapDownload.h"
+#import "KisMACNotifications.h"
 
 @implementation ScanController(ScriptableAdditions)
 
@@ -172,6 +173,37 @@
         return ret;
     } 
     
+    NSLog(@"Warning unknow file format!");
+    NSBeep();
+    return NO;
+}
+
+- (BOOL)importKisMAC:(NSString*)filename {
+   BOOL ret;
+    
+    NSParameterAssert(filename);
+    
+    filename = [filename standardPath];
+    
+    if ([[[filename pathExtension] lowercaseString] isEqualToString:@"kismac"]) {
+        [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Opening %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
+		
+		_refreshGUI = NO;
+		[scanner importFromFile:filename];
+		_refreshGUI = YES;
+
+		[self updateNetworkTable:self complete:YES];
+		[self refreshScanHierarch];
+		[_window setDocumentEdited:YES];
+
+		[self busyDone];
+        [self showNetworks];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
+
+ 		return ret;
+	}
+
     NSLog(@"Warning unknow file format!");
     NSBeep();
     return NO;
@@ -328,7 +360,7 @@
 #define WEPCHECKS {\
     if (_importOpen) return NO; \
     if (_curNet==Nil) return NO; \
-    if ([_curNet passwordAvailable] != Nil) return YES; \
+    if ([_curNet passwordAvailable]) return YES; \
     if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO; \
     if ([[_curNet weakPacketsLog] count] < 8) return NO; \
     }
@@ -411,11 +443,42 @@
     
     return YES;
 }
+- (BOOL)wordlistWPA:(NSString*)wordlist {
+    if (_importOpen) return NO;
+    if (_curNet==Nil) return NO;
+    if ([_curNet passwordAvailable]) return YES;
+    if ([_curNet wep] != encryptionTypeWPA) return NO;
+	if ([_curNet SSID] == Nil) return NO;
+	if ([[_curNet SSID] length] > 32) return NO;
+	if ([_curNet capturedEAPOLKeys] == 0) return NO;
+
+    _crackType = 3;
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WPA-PSK...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performWordlistWPA:) toTarget:_curNet withObject:[wordlist standardPath]];
+    
+    return YES;
+}
+
+- (BOOL)wordlistLEAP:(NSString*)wordlist {
+    if (_importOpen) return NO;
+    if (_curNet==Nil) return NO;
+    if ([_curNet passwordAvailable]) return YES;
+    if ([_curNet wep] != encryptionTypeLEAP) return NO;
+	if ([_curNet capturedLEAPKeys] == 0) return NO;
+
+    _crackType = 4;
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against LEAP...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performWordlistLEAP:) toTarget:_curNet withObject:[wordlist standardPath]];
+    
+    return YES;
+}
 
 - (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID {
     if (_importOpen) return NO;
     if (_curNet==Nil) return NO;
-    if ([_curNet passwordAvailable] != Nil) return YES;
+    if ([_curNet passwordAvailable]) return YES;
     if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO;
     if ([_curNet uniqueIVs] < 8) return NO;
     if (keyLen != 13 && keyLen != 5) return NO;

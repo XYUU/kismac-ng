@@ -1241,141 +1241,24 @@ typedef int (*SORTFUNC)(id, id, void *);
 #pragma mark WPA/LEAP cracking
 #pragma mark -
 
-- (void)doCrackWPAWithWordlists:(NSArray*)wordlists {
-    unsigned int i;
-    NSString *file;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    for (i = 0; i < [wordlists count]; i++) {
-        file = [wordlists objectAtIndex: i];
-        if ([WaveHelper isAltiVecAvailable]) {
-            if ([self crackWPAWithWordlistAltivec:[file stringByExpandingTildeInPath] andImportController:_im]) break;
-        } else {
-            if ([self crackWPAWithWordlist:[file stringByExpandingTildeInPath] andImportController:_im]) break;
-        }
-    }
-    
-    [_im terminateWithCode: (i == [wordlists count]) ? -1 : 0];
-    [pool release];
-}
-
-- (BOOL)crackWPAWithImportController:(ImportController*) im {
-    int keys;
-    unsigned int i;
-    NSOpenPanel *aOP;
-    
-    [WaveHelper secureRelease:&_crackErrorString];
-    
-    if (_isWep != encryptionTypeWPA) {
-        _crackErrorString = [NSLocalizedString(@"The network is not WPA protected.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    if (!_SSID) {
-        _crackErrorString = [NSLocalizedString(@"You need to reveal the SSID first!", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    if ([_SSID length] > 32) {
-        _crackErrorString = [NSLocalizedString(@"The SSID is too long. This means it does not conform to WPA!", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-
-    keys = 0;
+- (int)capturedEAPOLKeys {
+	int keys = 0;
+	unsigned int i;
+	
     for (i = 0; i < [aClientKeys count]; i++) {
         if ([[aClients objectForKey:[aClientKeys objectAtIndex:i]] eapolDataAvailable]) keys++;
     }
-    
-    if (keys == 0) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did not capture any authentication data.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    
-    if (_password) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did already reveal the password.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    
-    aOP=[NSOpenPanel openPanel];
-    [aOP setAllowsMultipleSelection:YES];
-    [aOP setCanChooseFiles:YES];
-    [aOP setCanChooseDirectories:NO];
-    if ([aOP runModalForTypes:nil]==NSOKButton) {
-        _im = im;
-        [[aOP filenames] retain];
-        [NSThread detachNewThreadSelector:@selector(doCrackWPAWithWordlists:) toTarget:self withObject:[aOP filenames]];
-        return YES;
-    }
-    
-    [im terminateWithCode:-2];
-    return NO;
+	return keys;
 }
 
-- (void)doCrackLEAPWithWordlists:(NSArray*)wordlists {
+- (int)capturedLEAPKeys {
+    int keys = 0;
     unsigned int i;
-    NSString *file;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    for (i = 0; i < [wordlists count]; i++) {
-        file = [wordlists objectAtIndex: i];
-        if ([self crackLEAPWithWordlist:[file stringByExpandingTildeInPath] andImportController:_im]) break;
-    }
-
-    [_im terminateWithCode: (i == [wordlists count]) ? -1 : 0];
-    [pool release];
-}
-
-- (BOOL)crackLEAPWithImportController:(ImportController*) im {
-    int keys;
-    unsigned int i;
-    NSOpenPanel *aOP;
-    
-    [WaveHelper secureRelease:&_crackErrorString];
-    
-    if (_isWep != encryptionTypeLEAP) {
-        _crackErrorString = [NSLocalizedString(@"The network is not LEAP protected.", @"Error description for LEAP crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    keys = 0;
-    for (i = 0; i < [aClientKeys count]; i++) {
+	
+	for (i = 0; i < [aClientKeys count]; i++) {
         if ([[aClients objectForKey:[aClientKeys objectAtIndex:i]] leapDataAvailable]) keys++;
     }
-    
-    if (keys == 0) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did not capture any authentication data.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    if (_password) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did already reveal the password.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-    
-    
-    aOP=[NSOpenPanel openPanel];
-    [aOP setAllowsMultipleSelection:YES];
-    [aOP setCanChooseFiles:YES];
-    [aOP setCanChooseDirectories:NO];
-    if ([aOP runModalForTypes:nil]==NSOKButton) {
-        _im = im;
-        [[aOP filenames] retain];
-        [NSThread detachNewThreadSelector:@selector(doCrackLEAPWithWordlists:) toTarget:self withObject:[aOP filenames]];
-        return YES;
-    }
-    
-    [im terminateWithCode: 1];
-    return NO;
+	return keys;
 }
 
 #pragma mark -

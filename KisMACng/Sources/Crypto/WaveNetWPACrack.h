@@ -2,9 +2,9 @@
         
         File:			WaveNetWPACrack.h
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -28,6 +28,7 @@
 
 @interface WaveNet(WPACrackExtension)
 
+- (void)performWordlistWPA:(NSString*)wordlist;
 - (BOOL)crackWPAWithWordlist:(NSString*)wordlist andImportController:(ImportController*)im;
 
 @end

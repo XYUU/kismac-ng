@@ -93,32 +93,6 @@
     [[dmc window] makeKeyAndOrderFront:self];
 }
 
-- (IBAction)importFile:(id)sender {
-    aOP=[NSOpenPanel openPanel];
-    [aOP setAllowsMultipleSelection:NO];
-    [aOP setCanChooseFiles:YES];
-    [aOP setCanChooseDirectories:NO];
-    if ([aOP runModalForTypes:[NSArray arrayWithObject:@"kismac"]]==NSOKButton) {
-        [self stopActiveAttacks];
-        [self stopScan];
-
-        [self showBusy:@selector(performImportFile:) withArg:[aOP filename]];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
-    }
-}
-- (void)performImportFile:(NSString*)filename {
-    [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), filename]];  
-
-    _refreshGUI = NO;
-    [scanner importFromFile:filename];
-    _refreshGUI = YES;
- 
-    [self updateNetworkTable:self complete:YES];
-    [self refreshScanHierarch];
-    [_window setDocumentEdited:YES];
-}
-
 - (IBAction)importNetstumbler:(id)sender {
     aOP=[NSOpenPanel openPanel];
     [aOP setAllowsMultipleSelection:NO];
@@ -562,26 +536,6 @@
     } else {
         [self stopActiveAttacks];
     }
-}
-
-#pragma mark -
-#pragma mark CRACK MENU
-#pragma mark -
-
-- (IBAction)wordCrackWPA:(id)sender {
-    if (_curNet==Nil) return;
-    
-    _crackType = 3;
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WPA...", "busy dialog")];
-    [_curNet crackWPAWithImportController: _importController];
-}
-
-- (IBAction)wordCrackLEAP:(id)sender {
-    if (_curNet==Nil) return;
-    
-    _crackType = 4;
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against LEAP...", "busy dialog")];
-    [_curNet crackLEAPWithImportController: _importController];
 }
 
 #pragma mark -

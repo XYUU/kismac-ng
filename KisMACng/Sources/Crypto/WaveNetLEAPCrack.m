@@ -26,6 +26,7 @@
 #import "WaveNetLEAPCrack.h"
 #import "LEAP.h"
 #import "WaveClient.h"
+#import "WaveHelper.h"
 #import <openssl/md4.h>
 
 struct leapClientData {
@@ -37,6 +38,24 @@ struct leapClientData {
 };
 
 @implementation WaveNet(LEAPCrackExtension)
+
+- (void)performWordlistLEAP:(NSString*)wordlist {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    BOOL successful = NO;
+	
+	NSParameterAssert(_isWep == encryptionTypeLEAP);    
+	NSParameterAssert([self capturedLEAPKeys] > 0);
+	NSParameterAssert(_password == nil);
+	NSParameterAssert(wordlist);
+	
+	[wordlist retain];
+	
+	if ([self crackLEAPWithWordlist:[wordlist stringByExpandingTildeInPath] andImportController:[WaveHelper importController]]) successful = YES;
+	
+    [[WaveHelper importController] terminateWithCode: (successful) ? 1 : -1];
+    [wordlist release];
+	[pool release];
+}
 
 - (BOOL)crackLEAPWithWordlist:(NSString*)wordlist andImportController:(ImportController*)im {
     char wrd[100];

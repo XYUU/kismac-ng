@@ -176,8 +176,8 @@ struct graphStruct {
 
 - (void)sortByColumn:(NSString*)ident order:(bool)ascend;
 
-- (BOOL)crackWPAWithImportController:(ImportController*)im;
-- (BOOL)crackLEAPWithImportController:(ImportController*)im;
+- (int)capturedEAPOLKeys;
+- (int)capturedLEAPKeys;
 - (void)reinjectWithImportController:(ImportController*)im andScanner:(id)scanner;
 
 - (NSString*)crackError;

@@ -2,9 +2,9 @@
         
         File:			WaveNetWPACrack.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -24,6 +24,7 @@
 */
 
 #import "WaveNetWPACrack.h"
+#import "WaveNetWPACrackAltivec.h"
 #import "WaveHelper.h"
 #import "WaveClient.h"
 #import "WPA.h"
@@ -334,6 +335,29 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
     return NO;
 }
 
+- (void)performWordlistWPA:(NSString*)wordlist {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    BOOL successful = NO;
+	
+	NSParameterAssert(_isWep == encryptionTypeWPA);    
+    NSParameterAssert(_SSID);
+	NSParameterAssert([_SSID length] <= 32);
+	NSParameterAssert([self capturedEAPOLKeys] > 0);
+	NSParameterAssert(_password == nil);
+	NSParameterAssert(wordlist);
+	
+	[wordlist retain];
+	
+	if ([WaveHelper isAltiVecAvailable]) {
+		if ([self crackWPAWithWordlistAltivec:[wordlist stringByExpandingTildeInPath] andImportController:[WaveHelper importController]]) successful = YES;
+	} else {
+		if ([self crackWPAWithWordlist:[wordlist stringByExpandingTildeInPath] andImportController:[WaveHelper importController]]) successful = YES;
+	}
+    
+    [[WaveHelper importController] terminateWithCode: (successful) ? 1 : -1];
+    [wordlist release];
+	[pool release];
+}
 
 
 @end

@@ -151,7 +151,6 @@ typedef enum {
 @interface ScanController(MenuExtension) 
 - (IBAction)showPrefs:(id)sender;
 
-- (IBAction)importFile:(id)sender;
 - (IBAction)importNetstumbler:(id)sender;
 - (IBAction)importImage:(id)sender;
 - (IBAction)importMapFromServer:(id)sender;
@@ -175,9 +174,6 @@ typedef enum {
 - (IBAction)deautheticateNetwork:(id)sender;
 - (IBAction)authFloodNetwork:(id)sender;
 - (IBAction)injectPackets:(id)sender;
-
-- (IBAction)wordCrackWPA:(id)sender;
-- (IBAction)wordCrackLEAP:(id)sender;
 
 - (IBAction)restartGPS:(id)sender;
 - (IBAction)showCurNetArea:(id)sender;

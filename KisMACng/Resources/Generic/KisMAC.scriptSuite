@@ -14,6 +14,7 @@
                 "KisMAC.startScan"              = "startScan:";
                 "KisMAC.stopScan"               = "stopScan:";
                 "KisMAC.New"                    = "new:";
+                "KisMAC.ImportKisMAC"           = "importKisMAC:";
                 "KisMAC.ImportPCAP"             = "importPCAP:";
                 "NSCoreSuite.Save"              = "save:";
                 "KisMAC.SelectNetworkAtIndex"   = "selectNetworkAtIndex:";
@@ -26,6 +27,8 @@
                 "KisMAC.Wordlist40bitApple"     = "wordlist40bitApple:";
                 "KisMAC.Wordlist104bitApple"    = "wordlist104bitApple:";
                 "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
+                "KisMAC.WordlistWPA"			= "wordlistWPA:";
+				"KisMAC.WordlistLEAP"			= "wordlistLEAP:";
                 "KisMAC.WeakSchedulingAttack"   = "weakSchedulingAttack:";
                 "KisMAC.Busy"                   = "busy:";
                 "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
@@ -65,7 +68,12 @@
             AppleEventCode = KNew; 
             CommandClass = NSScriptCommand; 
         }; 
-        ImportPCAP = {
+        ImportKisMAC = {
+            AppleEventCode = KImK; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        }; 
+		ImportPCAP = {
             AppleEventCode = KImP; 
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
@@ -124,6 +132,16 @@
         };
         Wordlist104bitMD5 = {
             AppleEventCode = KCWM; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        };
+        WordlistWPA = {
+            AppleEventCode = KCWW; 
+            CommandClass = NSScriptCommand;
+            UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        };
+        WordlistLEAP = {
+            AppleEventCode = KCWL; 
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
         };

@@ -63,6 +63,9 @@
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] save:[command directParameter]]];
 }
 
+- (id)importKisMAC:(NSScriptCommand *)command {
+    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importKisMAC:[command directParameter]]];
+}
 - (id)importPCAP:(NSScriptCommand *)command {
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importPCAP:[command directParameter]]];
 }
@@ -133,6 +136,14 @@
 
 - (id)wordlist104bitMD5:(NSScriptCommand *)command {
    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitMD5:[command directParameter]]];
+}
+
+- (id)wordlistWPA:(NSScriptCommand *)command {
+   return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlistWPA:[command directParameter]]];
+}
+
+- (id)wordlistLEAP:(NSScriptCommand *)command {
+   return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlistLEAP:[command directParameter]]];
 }
 
 - (id)weakSchedulingAttack:(NSScriptCommand *)command {

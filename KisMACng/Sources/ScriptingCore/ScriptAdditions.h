@@ -38,6 +38,7 @@
 
 - (id)new:(NSScriptCommand *)command;
 - (id)save:(NSScriptCommand *)command;
+- (id)importKisMAC:(NSScriptCommand *)command;
 - (id)importPCAP:(NSScriptCommand *)command;
 - (id)downloadMap:(NSScriptCommand*)command;
 
@@ -52,6 +53,9 @@
 - (id)wordlist40bitApple:(NSScriptCommand *)command;
 - (id)wordlist104bitApple:(NSScriptCommand *)command;
 - (id)wordlist104bitMD5:(NSScriptCommand *)command;
+
+- (id)wordlistWPA:(NSScriptCommand *)command;
+- (id)wordlistLEAP:(NSScriptCommand *)command;
 
 - (id)weakSchedulingAttack:(NSScriptCommand *)command;
 

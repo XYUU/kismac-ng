@@ -61,5 +61,6 @@
 - (void)showWrongEncryptionType;
 - (void)showNeedMorePacketsDialog;
 - (void)showNeedMoreWeakPacketsDialog;
+- (void)showNeedToRevealSSID;
 
 @end

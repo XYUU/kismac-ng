@@ -537,10 +537,17 @@
 }
 
 - (void)showNeedMoreWeakPacketsDialog {
-    NSBeginAlertSheet(NSLocalizedString(@"Cracking unsuccessful", "Error box title for WEP attacks"),
+    NSBeginAlertSheet(ERROR_TITLE,
         OK, NULL, NULL, [WaveHelper mainWindow], self, NULL, NULL, NULL,
         NSLocalizedString(@"Need more weak packets description", "LONG dialog text. The user needs more weak packets. explain")
         //@"KisMAC cannot recover your WEP key, using this method. The weak scheduling attack requires a lot of weak keys. Please see the help file for more details."
+        );
+}
+
+- (void)showNeedToRevealSSID {
+    NSBeginAlertSheet(ERROR_TITLE, 
+        OK, NULL, NULL, [WaveHelper mainWindow], self, NULL, NULL, NULL,
+        NSLocalizedString(@"You will need to reveal a valid SSID before you are able to attack this network. The SSID is a vital part of the WPA encryption process", "Explain")
         );
 }
         

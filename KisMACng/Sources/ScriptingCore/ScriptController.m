@@ -134,6 +134,22 @@
 
 #pragma mark -
 
+- (IBAction)importKisMACFile:(id)sender {
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:[NSArray arrayWithObject:@"kismac"]]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++) {
+            NSString *file = [[op filenames] objectAtIndex:i];
+            [ScriptingEngine selfSendEvent:'KImK' withDefaultArgString:file];
+        }
+    }
+}
+
 - (IBAction)importPCPFile:(id)sender {
     NSOpenPanel *op;
     int i;
@@ -260,6 +276,45 @@
     if ([op runModalForTypes:nil]==NSOKButton) {
         for (i = 0; i < [[op filenames] count]; i++)
             [ScriptingEngine selfSendEvent:'KCWM' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+    }
+}
+
+- (IBAction)wordlistWPA:(id)sender {
+    if (![[NSApp delegate] selectedNetwork]) { NSBeep(); return; }
+    if ([[[NSApp delegate] selectedNetwork] passwordAvailable]) { [[NSApp delegate] showAlreadyCrackedDialog]; return; }
+    if ([[[NSApp delegate] selectedNetwork] wep] != encryptionTypeWPA) { [[NSApp delegate] showWrongEncryptionType]; return; }
+	if ([[[NSApp delegate] selectedNetwork] SSID] == Nil) { [[NSApp delegate] showNeedToRevealSSID]; return; }
+	if ([[[[NSApp delegate] selectedNetwork] SSID] length] > 32) { [[NSApp delegate] showNeedToRevealSSID]; return; }
+	if ([[[NSApp delegate] selectedNetwork] capturedEAPOLKeys] == 0) { [[NSApp delegate] showNeedMorePacketsDialog]; return; }
+
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:nil]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++)
+            [ScriptingEngine selfSendEvent:'KCWW' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+    }
+}
+
+- (IBAction)wordlistLEAP:(id)sender {
+    if (![[NSApp delegate] selectedNetwork]) { NSBeep(); return; }
+    if ([[[NSApp delegate] selectedNetwork] passwordAvailable]) { [[NSApp delegate] showAlreadyCrackedDialog]; return; }
+    if ([[[NSApp delegate] selectedNetwork] wep] != encryptionTypeLEAP) { [[NSApp delegate] showWrongEncryptionType]; return; }
+	if ([[[NSApp delegate] selectedNetwork] capturedLEAPKeys] == 0) { [[NSApp delegate] showNeedMorePacketsDialog]; return; }
+    NSOpenPanel *op;
+    int i;
+    
+    op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:YES];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    if ([op runModalForTypes:nil]==NSOKButton) {
+        for (i = 0; i < [[op filenames] count]; i++)
+            [ScriptingEngine selfSendEvent:'KCWL' withDefaultArgString:[[op filenames] objectAtIndex:i]];
     }
 }
 

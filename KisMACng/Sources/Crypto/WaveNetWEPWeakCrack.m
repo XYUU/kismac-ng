@@ -2,9 +2,9 @@
         
         File:			WaveNetWeakWEPCrack.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -27,9 +27,11 @@
 #import "AirCrackWrapper.h"
 #import "KisMACNotifications.h"
 #import "WaveWeakContainer.h"
+#import "WaveHelper.h"
 #import <BIGeneric/BINSExtensions.h>
 
-#define RET { [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
+#define SRET { [[WaveHelper importController] terminateWithCode: 1]; [pool release]; return; }
+#define RET { [[WaveHelper importController] terminateWithCode: -1]; [pool release]; return; }
 #define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; }
 
 @implementation WaveNet(WEPWeakCrackExtension)
@@ -68,6 +70,9 @@
         _password = [[NSMutableString stringWithFormat:@"%.2x", k[0]] retain];
         for (i=1; i<len;i++)
             [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", k[i]]];
+		
+		[a release];
+		SRET;
     }
     
     [a release];

@@ -39,7 +39,12 @@
             Name = new;
             Description = "clears all networks and gives a fresh start";
         };
-        ImportPCAP = {
+        ImportKisMAC = {
+            Name = importKisMAC;
+            Description = "imports a KisMAC file";
+            UnnamedArgument = { Description = "The file to be imported."; };
+        };
+		ImportPCAP = {
             Name = importPCAP;
             Description = "imports a PCAP file, with 802.11 packets and without prism headers";
             UnnamedArgument = { Description = "The file to be imported."; };
@@ -99,6 +104,16 @@
         Wordlist104bitMD5 = {
             Name = wordlist104bitMD5;
             Description = "start a wordlist attack against a 104-bit generic network";
+            UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
+        };
+        WordlistWPA = {
+            Name = wordlistWPA;
+            Description = "start a wordlist attack against a WPA-PSK protected network";
+            UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
+        };
+        WordlistLEAP = {
+            Name = wordlistLEAP;
+            Description = "start a wordlist attack against a Cisco LEAP protected network";
             UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
         };
         WeakSchedulingAttack = {

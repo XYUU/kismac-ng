@@ -69,9 +69,10 @@ static struct identStruct devices[] = {
     { 0x0772, 0x5731}, //28 MacSense WUA-700
     { 0x124a, 0x4017}, //29 AirVast WN-220?
     { 0x9016, 0x182d}, //30 Sitecom WL-022 - new version
+	{ 0x0707, 0xee04}, //31 SMC WUSB32
 };
 
-#define dDeviceCount 30
+#define dDeviceCount 31
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );
 

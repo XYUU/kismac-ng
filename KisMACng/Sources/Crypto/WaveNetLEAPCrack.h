@@ -28,6 +28,7 @@
 
 @interface WaveNet(LEAPCrackExtension)
 
+- (void)performWordlistLEAP:(NSString*)wordlist;
 - (BOOL)crackLEAPWithWordlist:(NSString*)wordlist andImportController:(ImportController*)im;
 
 @end

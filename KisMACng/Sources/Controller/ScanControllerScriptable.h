@@ -42,6 +42,7 @@
 
 - (BOOL)new;
 - (BOOL)open:(NSString*)filename;
+- (BOOL)importKisMAC:(NSString*)filename;
 - (BOOL)importPCAP:(NSString*)filename;
 - (BOOL)downloadMapFrom:(NSString*)server forPoint:(waypoint)w resolution:(NSSize)size zoomLevel:(int)zoom;
 - (BOOL)save:(NSString*)filename;
@@ -60,6 +61,8 @@
 - (BOOL)wordlist40bitApple:(NSString*)wordlist;
 - (BOOL)wordlist104bitApple:(NSString*)wordlist;
 - (BOOL)wordlist104bitMD5:(NSString*)wordlist;
+- (BOOL)wordlistWPA:(NSString*)wordlist;
+- (BOOL)wordlistLEAP:(NSString*)wordlist;
 
 - (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID;
 @end

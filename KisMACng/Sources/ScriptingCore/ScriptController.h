@@ -42,6 +42,7 @@
 - (IBAction)openKisMACFile:(id)sender;
 - (IBAction)openKisMAPFile:(id)sender;
 
+- (IBAction)importKisMACFile:(id)sender;
 - (IBAction)importPCPFile:(id)sender;
 
 - (IBAction)saveKisMACFile:(id)sender;
@@ -56,6 +57,9 @@
 - (IBAction)wordlist40bitApple:(id)sender;
 - (IBAction)wordlist104bitApple:(id)sender;
 - (IBAction)wordlist104bitMD5:(id)sender;
+
+- (IBAction)wordlistWPA:(id)sender;
+- (IBAction)wordlistLEAP:(id)sender;
 
 - (IBAction)weakSchedulingAttack40And104bit:(id)sender;
 - (IBAction)weakSchedulingAttack40bit:(id)sender;
