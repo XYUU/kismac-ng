@@ -88,7 +88,6 @@
     NSData *data;
     NSMutableDictionary *wp[3];
     NSString *error = nil;
-    NSBitmapImageRep *img;
     int i;
     
     if (!_orgImage) return NO;
@@ -96,11 +95,14 @@
     mapName = [fileName stringByExpandingTildeInPath];
     fMgr = [NSFileManager defaultManager];
     [fMgr createDirectoryAtPath:mapName attributes:nil];
+
+    NSImageView *view = [[NSImageView alloc] init];
+    [view setImage: _orgImage];
+    [view setFrameSize: [_orgImage size]];
         
-    data = [_orgImage TIFFRepresentationUsingCompression:NSTIFFCompressionNone factor:0.0];
-    img = [NSBitmapImageRep imageRepWithData:data];
-    data = [img representationUsingType:NSPNGFileType properties:nil];
-    [data writeToFile:[mapName stringByAppendingPathComponent:@"map.png"] atomically:NO];
+    data = [view dataWithPDFInsideRect:[view frame]];
+    [data writeToFile:[mapName stringByAppendingPathComponent:@"map.pdf"] atomically:NO];
+    [view release];
     
     for (i=1;i<=2;i++) {
         wp[i] = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -132,7 +134,15 @@
     waypoint wpoint;
     
     NS_DURING
-        img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.png"]];
+        img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.pdf"]];
+        if (!img) {
+            //fall back
+            img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.png"]];
+            if (!img) {
+                NSLog(@"Invalid KisMAP file");
+                NS_VALUERETURN(NO, BOOL);
+            }
+        }
         [self setMap:img];
         [img release];
     NS_HANDLER

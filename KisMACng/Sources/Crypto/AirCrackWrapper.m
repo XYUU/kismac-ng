@@ -544,7 +544,7 @@ int cmp_votes( const void *bs1, const void *bs2 )
         if( B == weplen - 1 )
             tried++;
 
-        if (tried % 1000 == 0) {
+        if (tried % 1000 == 0 && tried != 0) {
             if ([[WaveHelper importController] canceled]) return NO;
             [[WaveHelper importController] setStatusField:[NSString stringWithFormat:NSLocalizedString(@"Checked %d,000 keys", "State for weak scheduling attack"), tried / 1000]];
         }

@@ -154,10 +154,11 @@
 
 - (IBAction)saveKisMACFile:(id)sender {
     NSString *filename = [[NSApp delegate] filename];
-    if (!filename) [self saveKisMACFileAs:sender];
-    
-    if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:filename]) 
-        [[NSApp delegate] showSavingFailureDialog];
+    if (!filename) {
+        [self saveKisMACFileAs:sender];
+    } else if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:filename]) {
+            [[NSApp delegate] showSavingFailureDialog];
+    }
 }
 
 - (IBAction)saveKisMACFileAs:(id)sender {

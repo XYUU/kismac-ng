@@ -415,7 +415,7 @@
     
     int arg = (keyLen << 8) | keyID;
     
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Weak scheduling attack...", "busy dialog")];
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Weak scheduling attack...", "busy dialog") stopScan:NO];
     
     [NSThread detachNewThreadSelector:@selector(performCrackWEPWeakforKeyIDAndLen:) toTarget:_curNet withObject:[NSNumber numberWithInt:arg]];
     

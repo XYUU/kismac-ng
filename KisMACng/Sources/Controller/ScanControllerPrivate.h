@@ -39,6 +39,7 @@
 - (void)hideDetails;
 
 - (void)startCrackDialog;
+- (void)startCrackDialogWithTitle:(NSString*)title stopScan:(BOOL)stopScan;
 - (void)startCrackDialogWithTitle:(NSString*)title;
 - (bool)startActiveAttack;
 - (void)stopActiveAttacks;

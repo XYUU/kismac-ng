@@ -50,19 +50,19 @@
 
 - (void)setBytes:(const UInt8*)bytes forIV:(const UInt8*)iv {
     UInt8 *d;
-    if (_data[iv[0]] == nil) {
-        _data[iv[0]] = malloc(sizeof(_data));
-        NSAssert(_data[iv[0]], @"malloc failed");
-        memset(_data[iv[0]], 0, sizeof(_data));
+    if (_data[iv[2]] == nil) {
+        _data[iv[2]] = malloc(sizeof(_data));
+        NSAssert(_data[iv[2]], @"malloc failed");
+        memset(_data[iv[2]], 0, sizeof(_data));
     }
     
-    if ((_data[iv[0]])[iv[1]] == nil) {
-        (_data[iv[0]])[iv[1]] = malloc(256 * 3);
-        NSAssert(_data[iv[0]], @"malloc failed");
-        memset((_data[iv[0]])[iv[1]], 0, 256 * 3);
+    if ((_data[iv[2]])[iv[1]] == nil) {
+        (_data[iv[2]])[iv[1]] = malloc(256 * 3);
+        NSAssert(_data[iv[2]], @"malloc failed");
+        memset((_data[iv[2]])[iv[1]], 0, 256 * 3);
     }
     
-    d = &((_data[iv[0]])[iv[1]])[iv[2] * 3];
+    d = &((_data[iv[2]])[iv[1]])[iv[0] * 3];
     memcpy(d + 1, bytes, 2);
     
     if (d[0] == 0) {
@@ -100,9 +100,9 @@
                 if ((_data[x])[y] != nil) {
                     for (z = 0; z < (256 * 3); z+=3) {
                         if (((_data[x])[y])[z] != 0) {
-                            m[0] = x & 0xFF;
+                            m[0] = (z / 3) & 0xFF;
                             m[1] = y & 0xFF;
-                            m[2] = (z / 3) & 0xFF;
+                            m[2] = x & 0xFF;
                             m[3] = (((_data[x])[y])[z+1]) & 0xFF;
                             m[4] = (((_data[x])[y])[z+2]) & 0xFF;
                             m += 5;

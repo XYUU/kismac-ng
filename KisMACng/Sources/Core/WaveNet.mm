@@ -391,7 +391,7 @@ int lengthSort(id string1, id string2, void *context)
     else updatedSSID = YES;
     
     if (isHidden) {
-        if (_SSID!=Nil) return; //we might have the real bssid already
+        if (_SSID!=Nil) return; //we might have the real ssid already
         [WaveHelper secureReplace:&_SSID withObject:@""];
     } else {
         [WaveHelper secureReplace:&_SSID withObject:newSSID];
@@ -443,10 +443,19 @@ int lengthSort(id string1, id string2, void *context)
             if (_isWep >= encryptionTypeWEP) [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
             else [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"noWEPSound"]] play];
         }
+    } else if (onlineCapture && _SSID != nil && ([aDate timeIntervalSinceNow] < -120.0)) {
+        int lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
+        if (lVoice) {
+            NSString * lSentence = [NSString stringWithFormat: NSLocalizedString(@"Reencountered network. SSID is %@", "this is for speech output"),
+                [_SSID length] == 0 ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
+            NS_DURING
+                [WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
+            NS_HANDLER
+            NS_ENDHANDLER
+        }
     }
     
-    [aDate release];
-    aDate = [[NSDate date] retain];
+    [WaveHelper secureReplace:&aDate withObject:[NSDate date]];
     if (!aFirstDate)
         aFirstDate = [[NSDate date] retain];
 
@@ -632,7 +641,9 @@ int lengthSort(id string1, id string2, void *context)
                     
                     if (body[3] <= 3) { //record the IV for a later weak key attack
                         if (_ivData[body[3]] == nil) _ivData[body[3]] = [[WaveWeakContainer alloc] init];
-                        [_ivData[body[3]] setBytes:&body[4] forIV:&body[0]];
+                        @synchronized (_ivData[body[3]]) {
+                            [_ivData[body[3]] setBytes:&body[4] forIV:&body[0]];
+                        }
                     }
                 }
             }

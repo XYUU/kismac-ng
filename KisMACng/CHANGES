@@ -16,6 +16,9 @@ made trace saveable, trace is not continued if no fix recieved
 crosshair cursor for map
 display other information (velocity) in the bottom bar, along with latitude and longitude
 using aircrack code for weak scheduling attacks now
+kismap files use pdf internally to not screw up vector formats
+weak scheduling attack works while scanning
+speak again if network found again after 2 minutes
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view
