@@ -97,8 +97,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
 				
 				while (count) {
 					if ((len -= 6) < 0) break;
-					if (*((UInt32*)ssidl) != 0x00000000) break; //dont know really what this is for. probably version or so
-					if (*(ssidl + 4)      != 0x10) break;
+					//if (*((UInt32*)ssidl) != 0x00000000) break; //dont know really what this is for. probably version or so
+					//if (*(ssidl + 4)      != 0x10) break; //strange flag might have something todo with QOS?
 					slen = (*(ssidl + 5));
 					ssidl += 6;
 					

@@ -21,6 +21,46 @@
 		lineNumber = 397;
 		state = 1;
 	};
+	000A0E6D07CE276F000C941E = {
+		fRef = 003533C906A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "md5.m: 82";
+		rLen = 0;
+		rLoc = 2110;
+		rType = 0;
+		vrLen = 828;
+		vrLoc = 1754;
+	};
+	000A0E7007CE276F000C941E = {
+		fRef = 003533C906A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "md5.m: 82";
+		rLen = 0;
+		rLoc = 2110;
+		rType = 0;
+		vrLen = 828;
+		vrLoc = 1754;
+	};
+	000A12A407CE7259000C941E = {
+		fRef = 003533AA06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "ScanController.m: 159";
+		rLen = 0;
+		rLoc = 6732;
+		rType = 0;
+		vrLen = 2391;
+		vrLoc = 6020;
+	};
+	000A12A607CE7259000C941E = {
+		fRef = 003533AA06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "ScanController.m: 159";
+		rLen = 0;
+		rLoc = 6732;
+		rType = 0;
+		vrLen = 2391;
+		vrLoc = 6020;
+	};
 	000D15A906AB0D7C00935F7C = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 1539}}";
@@ -236,8 +276,8 @@
 	003533AA06A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 8049}}";
-			sepNavSelRange = "{7630, 0}";
-			sepNavVisRect = "{{0, 2198}, {964, 295}}";
+			sepNavSelRange = "{6732, 0}";
+			sepNavVisRect = "{{0, 2058}, {964, 564}}";
 		};
 	};
 	003533AB06A5DD8500AB4577 = {
@@ -294,7 +334,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 2967}}";
 			sepNavSelRange = "{5579, 0}";
-			sepNavVisRect = "{{0, 2293}, {964, 674}}";
+			sepNavVisRect = "{{0, 2371}, {964, 564}}";
 		};
 	};
 	003533B406A5DD8500AB4577 = {
@@ -370,8 +410,8 @@
 	003533C206A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 12571}}";
-			sepNavSelRange = "{0, 941}";
-			sepNavVisRect = "{{0, 0}, {964, 564}}";
+			sepNavSelRange = "{3046, 0}";
+			sepNavVisRect = "{{0, 1078}, {964, 564}}";
 		};
 	};
 	003533C306A5DD8500AB4577 = {
@@ -412,9 +452,9 @@
 	};
 	003533C906A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1239, 3640}}";
-			sepNavSelRange = "{760, 0}";
-			sepNavVisRect = "{{0, 221}, {1239, 241}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 3640}}";
+			sepNavSelRange = "{2110, 0}";
+			sepNavVisRect = "{{0, 952}, {964, 564}}";
 		};
 	};
 	003533CA06A5DD8500AB4577 = {
@@ -468,9 +508,9 @@
 	};
 	003533D106A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1239, 5445}}";
-			sepNavSelRange = "{11341, 0}";
-			sepNavVisRect = "{{0, 4031}, {1239, 241}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 5445}}";
+			sepNavSelRange = "{4122, 0}";
+			sepNavVisRect = "{{0, 1405}, {964, 564}}";
 		};
 	};
 	003533D406A5DD8500AB4577 = {
@@ -902,6 +942,46 @@
 			sepNavVisRect = "{{0, 1102}, {964, 689}}";
 		};
 	};
+	005737F007CB3385002AB684 = {
+		fRef = 003533BF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNet.h: 33";
+		rLen = 0;
+		rLoc = 1089;
+		rType = 0;
+		vrLen = 1267;
+		vrLoc = 0;
+	};
+	005737F107CB3385002AB684 = {
+		fRef = 003533D106A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNetWPACrackAltivec.m: 117";
+		rLen = 0;
+		rLoc = 4122;
+		rType = 0;
+		vrLen = 2137;
+		vrLoc = 3468;
+	};
+	005737F307CB3385002AB684 = {
+		fRef = 003533BF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNet.h: 33";
+		rLen = 0;
+		rLoc = 1089;
+		rType = 0;
+		vrLen = 1267;
+		vrLoc = 0;
+	};
+	005737F407CB3385002AB684 = {
+		fRef = 003533D106A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNetWPACrackAltivec.m: 117";
+		rLen = 0;
+		rLoc = 4122;
+		rType = 0;
+		vrLen = 2137;
+		vrLoc = 3468;
+	};
 	005B12660730051A00906C36 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 825}}";
@@ -1162,6 +1242,26 @@
 			sepNavVisRect = "{{0, 598}, {964, 564}}";
 		};
 	};
+	00BB392E07CE9174001A6135 = {
+		fRef = 003533C206A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WavePacket.mm: 100";
+		rLen = 0;
+		rLoc = 3046;
+		rType = 0;
+		vrLen = 1311;
+		vrLoc = 2332;
+	};
+	00BB393207CE9175001A6135 = {
+		fRef = 003533C206A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WavePacket.mm: 100";
+		rLen = 0;
+		rLoc = 3046;
+		rType = 0;
+		vrLen = 1311;
+		vrLoc = 2332;
+	};
 	00C5F12A06DE0C98001EC02F = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 689}}";
@@ -1278,16 +1378,6 @@
 		vrLen = 1388;
 		vrLoc = 22230;
 	};
-	00D4228207C7B63F000499F1 = {
-		fRef = 003533C206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WavePacket.mm: 897";
-		rLen = 0;
-		rLoc = 27224;
-		rType = 0;
-		vrLen = 1713;
-		vrLoc = 27070;
-	};
 	00D4228307C7B63F000499F1 = {
 		fRef = 00B6296707058E2B006FC563;
 		isa = PBXTextBookmark;
@@ -1338,16 +1428,6 @@
 			sepNavSelRange = "{625, 0}";
 			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
-	};
-	00D422A007C7BBEF000499F1 = {
-		fRef = 003533C206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "/*\n        \n        File:\t\t\tWavePacket.mm\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Rossberg\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/";
-		rLen = 941;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1371;
-		vrLoc = 0;
 	};
 	00D422A107C7BBEF000499F1 = {
 		fRef = 00D4228D07C7BA61000499F1;
@@ -1478,16 +1558,6 @@
 		vrLen = 1340;
 		vrLoc = 0;
 	};
-	00EEBBCE07C80E0600B1C278 = {
-		fRef = 00D4229E07C7BB8F000499F1;
-		isa = PBXTextBookmark;
-		name = "WaveNetTest.m: 18";
-		rLen = 0;
-		rLoc = 625;
-		rType = 0;
-		vrLen = 1340;
-		vrLoc = 0;
-	};
 	00EEBBD207C80E2600B1C278 = {
 		fRef = 00D135D10707EA3A00D85D30;
 		isa = PBXTextBookmark;
@@ -1508,16 +1578,6 @@
 		vrLen = 855;
 		vrLoc = 54106;
 	};
-	00EEBBD407C80E2600B1C278 = {
-		fRef = 003533BF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNet.h: _liveCaptured";
-		rLen = 0;
-		rLoc = 2265;
-		rType = 0;
-		vrLen = 1320;
-		vrLoc = 1355;
-	};
 	00EEBBD507C80E2600B1C278 = {
 		fRef = 00D135D10707EA3A00D85D30;
 		isa = PBXTextBookmark;
@@ -1527,46 +1587,6 @@
 		rType = 0;
 		vrLen = 1420;
 		vrLoc = 0;
-	};
-	00EEBBD607C80E2600B1C278 = {
-		fRef = 003533C006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNet.mm: 1638";
-		rLen = 0;
-		rLoc = 54880;
-		rType = 0;
-		vrLen = 855;
-		vrLoc = 54106;
-	};
-	00EEBBDA07C80ED100B1C278 = {
-		fRef = 003533AF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = setMap;
-		rLen = 6;
-		rLoc = 6729;
-		rType = 0;
-		vrLen = 469;
-		vrLoc = 6347;
-	};
-	00EEBBE507C80F9C00B1C278 = {
-		fRef = 003533BF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNet.h: trafficData";
-		rLen = 0;
-		rLoc = 1089;
-		rType = 0;
-		vrLen = 1267;
-		vrLoc = 0;
-	};
-	00EEBBE607C80F9C00B1C278 = {
-		fRef = 003533AF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "ScanControllerScriptable.m: 235";
-		rLen = 0;
-		rLoc = 6715;
-		rType = 0;
-		vrLen = 470;
-		vrLoc = 6352;
 	};
 	00F57C4B06A886630035AE2F = {
 		uiCtxt = {
@@ -1628,7 +1648,7 @@
 	29B97313FDCFA39411CA2CEA = {
 		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
 		activeExecutable = 009F5C5D06A5C8DF004BB18E;
-		activeTarget = 008AC9BF07C3889400A76ADA;
+		activeTarget = 8D1107260486CEB800E47090;
 		addToTargets = (
 			008AC9BF07C3889400A76ADA,
 		);
@@ -1776,7 +1796,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 130551073;
+			PBXPerProjectTemplateStateSaveDate = 130978153;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -2207,20 +2227,28 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 130551073;
+			PBXWorkspaceStateSaveDate = 130978153;
 		};
 		perUserProjectItems = {
+			000A0E6D07CE276F000C941E = 000A0E6D07CE276F000C941E;
+			000A0E7007CE276F000C941E = 000A0E7007CE276F000C941E;
+			000A12A407CE7259000C941E = 000A12A407CE7259000C941E;
+			000A12A607CE7259000C941E = 000A12A607CE7259000C941E;
+			005737F007CB3385002AB684 = 005737F007CB3385002AB684;
+			005737F107CB3385002AB684 = 005737F107CB3385002AB684;
+			005737F307CB3385002AB684 = 005737F307CB3385002AB684;
+			005737F407CB3385002AB684 = 005737F407CB3385002AB684;
 			00868BC407C6A7AF00864995 = 00868BC407C6A7AF00864995;
+			00BB392E07CE9174001A6135 = 00BB392E07CE9174001A6135;
+			00BB393207CE9175001A6135 = 00BB393207CE9175001A6135;
 			00D4227A07C7B63F000499F1 = 00D4227A07C7B63F000499F1;
 			00D4227D07C7B63F000499F1 = 00D4227D07C7B63F000499F1;
 			00D4227E07C7B63F000499F1 = 00D4227E07C7B63F000499F1;
 			00D4228007C7B63F000499F1 = 00D4228007C7B63F000499F1;
 			00D4228107C7B63F000499F1 = 00D4228107C7B63F000499F1;
-			00D4228207C7B63F000499F1 = 00D4228207C7B63F000499F1;
 			00D4228307C7B63F000499F1 = 00D4228307C7B63F000499F1;
 			00D4228407C7B63F000499F1 = 00D4228407C7B63F000499F1;
 			00D4228507C7B63F000499F1 = 00D4228507C7B63F000499F1;
-			00D422A007C7BBEF000499F1 = 00D422A007C7BBEF000499F1;
 			00D422A107C7BBEF000499F1 = 00D422A107C7BBEF000499F1;
 			00D422A207C7BBEF000499F1 = 00D422A207C7BBEF000499F1;
 			00D422A307C7BBEF000499F1 = 00D422A307C7BBEF000499F1;
@@ -2231,15 +2259,9 @@
 			00D422B507C7BBEF000499F1 = 00D422B507C7BBEF000499F1;
 			00D422BA07C7BBEF000499F1 = 00D422BA07C7BBEF000499F1;
 			00EEBBCC07C80E0600B1C278 = 00EEBBCC07C80E0600B1C278;
-			00EEBBCE07C80E0600B1C278 = 00EEBBCE07C80E0600B1C278;
 			00EEBBD207C80E2600B1C278 = 00EEBBD207C80E2600B1C278;
 			00EEBBD307C80E2600B1C278 = 00EEBBD307C80E2600B1C278;
-			00EEBBD407C80E2600B1C278 = 00EEBBD407C80E2600B1C278;
 			00EEBBD507C80E2600B1C278 = 00EEBBD507C80E2600B1C278;
-			00EEBBD607C80E2600B1C278 = 00EEBBD607C80E2600B1C278;
-			00EEBBDA07C80ED100B1C278 = 00EEBBDA07C80ED100B1C278;
-			00EEBBE507C80F9C00B1C278 = 00EEBBE507C80F9C00B1C278;
-			00EEBBE607C80F9C00B1C278 = 00EEBBE607C80F9C00B1C278;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {
