@@ -92,7 +92,7 @@ int lengthSort(id string1, id string2, void *context)
     curPackets = 0;
     _curSignal = 0;
     _channel = 0;
-    _originalChannel = 0;
+    _primaryChannel = 0;
     curTrafficData = 0;
     curPacketData = 0;
     
@@ -130,7 +130,7 @@ int lengthSort(id string1, id string2, void *context)
 
 	graphData = &zeroGraphData;
     _channel = [coder decodeIntForKey:@"aChannel"];
-    _originalChannel = [coder decodeIntForKey:@"originalChannel"];
+    _primaryChannel = [coder decodeIntForKey:@"originalChannel"];
     _netID=[coder decodeIntForKey:@"aNetID"];
     _packets=[coder decodeIntForKey:@"aPackets"];
     _maxSignal=[coder decodeIntForKey:@"aMaxSignal"];
@@ -161,10 +161,10 @@ int lengthSort(id string1, id string2, void *context)
         aRawID[x] = bssid[x];
     
     _SSID=[[coder decodeObjectForKey:@"aSSID"] retain];
-    aBSSID=[[coder decodeObjectForKey:@"aBSSID"] retain];
-    if (![aBSSID isEqualToString:@"<no bssid>"]) {
-        if (aBSSID!=Nil && sscanf([aBSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
-            NSLog(@"Error could not decode BSSID %@!", aBSSID);
+    _BSSID=[[coder decodeObjectForKey:@"aBSSID"] retain];
+    if (![_BSSID isEqualToString:@"<no bssid>"]) {
+        if (_BSSID!=Nil && sscanf([_BSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
+            NSLog(@"Error could not decode BSSID %@!", _BSSID);
         for (int x=0; x<6; x++)
             aRawBSSID[x] = bssid[x];
     } else {
@@ -204,7 +204,7 @@ int lengthSort(id string1, id string2, void *context)
     if (!aElev) aElev = [[NSString stringWithString:@""] retain];
     if (!_coordinates) _coordinates = [[NSMutableDictionary dictionary] retain];
     
-    if (_originalChannel == 0) _originalChannel = _channel;
+    if (_primaryChannel == 0) _primaryChannel = _channel;
     _gotData = NO;
     
     _netView = [[NetView alloc] initWithNetwork:self];
@@ -270,7 +270,7 @@ int lengthSort(id string1, id string2, void *context)
     _SSID = [[NSString stringWithCString: ssid] retain];
 
     _ID = [[NSString stringWithFormat:@"%2X%2X%2X%2X%2X%2X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]] retain];
-    aBSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]] retain];
+    _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]] retain];
     for (int x=0; x<6; x++)
         aRawID[x] = bssid[x];
     
@@ -330,7 +330,7 @@ int lengthSort(id string1, id string2, void *context)
 	graphData = &zeroGraphData;
 	
     _channel = [[dict objectForKey:@"channel"] intValue];
-    _originalChannel = [[dict objectForKey:@"originalChannel"] intValue];
+    _primaryChannel = [[dict objectForKey:@"originalChannel"] intValue];
     _netID = [[dict objectForKey:@"netID"] intValue];
     _packets = [[dict objectForKey:@"packets"] intValue];
     _maxSignal = [[dict objectForKey:@"maxSignal"] intValue];
@@ -356,11 +356,12 @@ int lengthSort(id string1, id string2, void *context)
     for (int x=0; x<6; x++)
         aRawID[x] = bssid[x];
     
-    _SSID=[[dict objectForKey:@"SSID"] retain];
-    aBSSID=[[dict objectForKey:@"BSSID"] retain];
-    if (![aBSSID isEqualToString:@"<no bssid>"]) {
-        if (aBSSID!=Nil && sscanf([aBSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
-            NSLog(@"Error could not decode BSSID %@!", aBSSID);
+    _SSID  = [[dict objectForKey:@"SSID"] retain];
+    _SSIDs = [[dict objectForKey:@"SSIDs"] retain];
+    _BSSID=[[dict objectForKey:@"BSSID"] retain];
+    if (![_BSSID isEqualToString:@"<no bssid>"]) {
+        if (_BSSID!=Nil && sscanf([_BSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
+            NSLog(@"Error could not decode BSSID %@!", _BSSID);
         for (int x=0; x<6; x++)
             aRawBSSID[x] = bssid[x];
     } else {
@@ -432,7 +433,7 @@ int lengthSort(id string1, id string2, void *context)
 		}
 	}
 
-    if (_originalChannel == 0) _originalChannel = _channel;
+    if (_primaryChannel == 0) _primaryChannel = _channel;
     _gotData = NO;
     
     _netView = [[NetView alloc] initWithNetwork:self];
@@ -502,7 +503,7 @@ int lengthSort(id string1, id string2, void *context)
 	if (_packets > 0)  [dict setObject:[NSNumber numberWithInt:_packets] forKey:@"packets"];
 	if (_dataPackets > 0)  [dict setObject:[NSNumber numberWithInt:_dataPackets] forKey:@"dataPackets"];
 	[dict setObject:[NSNumber numberWithInt:_channel] forKey:@"channel"];
-	[dict setObject:[NSNumber numberWithInt:_originalChannel] forKey:@"originalChannel"];
+	[dict setObject:[NSNumber numberWithInt:_primaryChannel] forKey:@"originalChannel"];
 	[dict setObject:[NSNumber numberWithInt:_netID] forKey:@"netID"];
 	
 	[dict setObject:[NSNumber numberWithBool:_liveCaptured] forKey:@"liveCaptured"];
@@ -519,7 +520,8 @@ int lengthSort(id string1, id string2, void *context)
 	if (_ID) [dict setObject:_ID forKey:@"ID"];
 	if (aFirstDate) [dict setObject:aFirstDate forKey:@"firstDate"];
 	if (_SSID)  [dict setObject:_SSID forKey:@"SSID"];
-	if (aBSSID) [dict setObject:aBSSID forKey:@"BSSID"];
+	if (_SSIDs) [dict setObject:_SSIDs forKey:@"SSIDs"];
+	if (_BSSID) [dict setObject:_BSSID forKey:@"BSSID"];
 	if (_date)  [dict setObject:_date forKey:@"date"];
 	if (_ivData[0])  [dict setObject:[_ivData[0] data] forKey:@"ivData0"];
 	if (_ivData[1])  [dict setObject:[_ivData[1] data] forKey:@"ivData1"];
@@ -614,11 +616,7 @@ int lengthSort(id string1, id string2, void *context)
     
     //after the first packet we should play some sound 
     if (_date == Nil) {
-        if (_SSID==Nil) [_netView setName:aBSSID]; //draw BSSID into the map
-        
-        //lucent plays an extra role
-        //if ([aBSSID isEqualToString:@"00:00:00:00:00:00"]&&(_SSID==Nil))
-        //    [self updateSSID:[NSString stringWithString:NSLocalizedString(@"<lucent tunnel>", "ssid for lucent tunnels")] withSound:onlineCapture];
+        if (_SSID==Nil) [_netView setName:_BSSID]; //draw BSSID into the map
         
         if (onlineCapture) { //sound?
             if (_isWep >= encryptionTypeWEP) [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
@@ -687,7 +685,7 @@ int lengthSort(id string1, id string2, void *context)
         _curSignal = [net curSignal];
         
         if ([net channel]) _channel = [net channel];
-        _originalChannel = [net originalChannel];
+        _primaryChannel = [net originalChannel];
         
         tempType = [net type];
         if (tempType != networkTypeUnknown) _type = tempType;
@@ -699,6 +697,8 @@ int lengthSort(id string1, id string2, void *context)
         if (temp) _channel = temp;
         
         if ([net rawSSID]) [self updateSSID:[net rawSSID] withSound:NO];
+        if ([net SSIDs]) [WaveHelper secureReplace:&_SSIDs withObject:[net SSIDs]];
+		
         [WaveHelper secureReplace:&_date withObject:[net lastSeenDate]];
         if (![[net comment] isEqualToString:@""]) [WaveHelper secureReplace:&aComment withObject:[net comment]];
     }
@@ -778,8 +778,8 @@ int lengthSort(id string1, id string2, void *context)
         curTrafficData += [w length];
     }
     
-    if (aBSSID==Nil) {
-        aBSSID=[[NSString stringWithString:[w BSSIDString]] retain];
+    if (_BSSID==Nil) {
+        _BSSID=[[NSString stringWithString:[w BSSIDString]] retain];
         [w BSSID:aRawBSSID];
     }
     
@@ -835,8 +835,9 @@ int lengthSort(id string1, id string2, void *context)
             }
             break;
         case IEEE80211_TYPE_MGT:        //this is a management packet
-            [self updateSSID:[w ssid] withSound:sound]; //might contain SSID infos
-            if ([w originalChannel]) _originalChannel = [w originalChannel];
+			if ([w SSIDs]) [WaveHelper secureReplace:&_SSIDs withObject:[w SSIDs]];
+			[self updateSSID:[w SSID] withSound:sound]; //might contain SSID infos
+            if ([w primaryChannel]) _primaryChannel = [w primaryChannel];
     }
 
     //update the clients to out client array
@@ -889,7 +890,7 @@ int lengthSort(id string1, id string2, void *context)
     if (_curSignal<0) _curSignal = 0;
     
     _channel = info->channel;
-    _originalChannel = _channel;
+    _primaryChannel = _channel;
     if (_packetsPerChannel[_channel]==0) {
         if (!_firstPacket) [[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
         _packetsPerChannel[_channel] = 1;
@@ -900,8 +901,8 @@ int lengthSort(id string1, id string2, void *context)
     curSignalData += _curSignal;
     curPacketData++;
     
-    if (aBSSID==Nil) {
-        aBSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
+    if (_BSSID==Nil) {
+        _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
                 info->macAddress[3], info->macAddress[4], info->macAddress[5]] retain];
         memcpy(aRawBSSID, info->macAddress, sizeof(info->macAddress));
     }
@@ -1032,32 +1033,44 @@ int lengthSort(id string1, id string2, void *context)
     return _ID;
 }
 - (NSString *)BSSID {
-    if (aBSSID==Nil) return NSLocalizedString(@"<no bssid>", "for tunnels");
-    return aBSSID;
+    if (_BSSID==Nil) return NSLocalizedString(@"<no bssid>", "for tunnels");
+    return _BSSID;
 }
 - (NSString *)SSID {
+	NSString *ssid;
     if (_SSID==Nil) {
         switch (_type) {
         case networkTypeTunnel:
-            return NSLocalizedString(@"<tunnel>", "the ssid for tunnels");
-        case networkTypeLucentTunnel:
-            return NSLocalizedString(@"<lucent tunnel>", "ssid for lucent tunnels");
-        case networkTypeProbe:
-            return NSLocalizedString(@"<any ssid>", "the any ssid for probe nets");
+            ssid = NSLocalizedString(@"<tunnel>", "the ssid for tunnels");
+			break;
+		case networkTypeLucentTunnel:
+            ssid = NSLocalizedString(@"<lucent tunnel>", "ssid for lucent tunnels");
+			break;
+		case networkTypeProbe:
+            ssid = NSLocalizedString(@"<any ssid>", "the any ssid for probe nets");
+			break;
         default:
-            return @"<no ssid>";
+            ssid = @"<no ssid>";
         }
-    }
-    if ([_SSID isEqualToString:@""]) 
-        return (_type == networkTypeProbe ? 
+    } else if ([_SSID isEqualToString:@""]) {
+        ssid = (_type == networkTypeProbe ? 
             NSLocalizedString(@"<any ssid>", "the any ssid for probe nets") : 
             NSLocalizedString(@"<hidden ssid>", "hidden ssid")
         );
-
-    return _SSID;
+	} else {
+		ssid = _SSID;
+	}
+	if ([_SSIDs count]) {
+		return [NSString stringWithFormat:@"%@ (%@)", ssid, [_SSIDs componentsJoinedByString:@", "]];
+	} else {
+		return ssid;
+	}
 }
 - (NSString *)rawSSID {
     return [_SSID isEqualToString:@""] ? nil : _SSID;
+}
+- (NSArray *)SSIDs {
+	return _SSIDs;
 }
 - (NSString *)date {
     return [NSString stringWithFormat:@"%@", _date]; //return [_date descriptionWithCalendarFormat:@"%H:%M %d-%m-%y" timeZone:nil locale:nil];
@@ -1078,9 +1091,9 @@ int lengthSort(id string1, id string2, void *context)
     return _bytes;
 }
 - (NSString *)getVendor {
-    if (aVendor) return aVendor;
-    aVendor=[[WaveHelper vendorForMAC:aBSSID] retain];
-    return aVendor;
+    if (_vendor) return _vendor;
+    _vendor=[[WaveHelper vendorForMAC:_BSSID] retain];
+    return _vendor;
 }
 - (NSString*)comment {
     return aComment;
@@ -1130,7 +1143,7 @@ int lengthSort(id string1, id string2, void *context)
     return _channel;
 }
 - (int)originalChannel {
-    return _originalChannel;
+    return _primaryChannel;
 }
 - (networkType)type {
     return _type;
@@ -1594,10 +1607,11 @@ typedef int (*SORTFUNC)(id, id, void *);
     [_dataLock lock];
     [_ID release];
     [_SSID release];
-    [aBSSID release];
+	[_SSIDs release];
+    [_BSSID release];
     [_date release];
     [aFirstDate release];
-    [aVendor release];
+    [_vendor release];
     [_password release];
     [_packetsLog release];
     [_ARPLog release];

@@ -2,9 +2,9 @@
         
         File:			WavePacket.mm
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -32,8 +32,6 @@
 #define AMOD(x, y) ((x) % (y) < 0 ? ((x) % (y)) + (y) : (x) % (y))
 #define N 256
 
-#define WPA_HEADER "\x00\x50\xf2\x01"
-
 bool inline is8021xPacket(const UInt8* fileData) {
     if (fileData[0] == 0xAA &&
         fileData[1] == 0xAA &&
@@ -54,22 +52,24 @@ bool inline is8021xPacket(const UInt8* fileData) {
 //scans through variable length fields for ssid
 -(void) parseTaggedData:(unsigned char*) packet length:(int) length {
     int len;
+	UInt32 *vendorID;
     char ssid[33];
 	
-    _originalChannel = 0;
+    _primaryChannel = 0;
     
     [WaveHelper secureRelease:&_SSID];
+	[WaveHelper secureRelease:&_SSIDs];
     while(length>2) {
         switch (*packet) {
         case IEEE80211_ELEMID_SSID:
             len=(*(packet+1));
             if ((length >= len+2) && (_SSID == Nil) && (len <= 32)) {
-				memcpy(ssid, packet+2, len);
-				ssid[len]=0;
 				@try  {
+					memcpy(ssid, packet+2, len);
+					ssid[len]=0;
 					_SSID = [[NSString stringWithUTF8String:ssid] retain];
 				}
-				@catch (NSException *exception) {
+				@catch (NSException *exception) { //fallback if not UTF-8 encoded
 					_SSID = [[NSString stringWithCString:(char*)(packet+2) length:len] retain];
 				}
 			}
@@ -77,14 +77,46 @@ bool inline is8021xPacket(const UInt8* fileData) {
         case IEEE80211_ELEMID_DSPARMS:
             len=(*(packet+1));
             if (len == 1 && length >= 3)
-                _originalChannel = (UInt8)(*(packet+2));
+                _primaryChannel = (UInt8)(*(packet+2));
             break;
-        case IEEE80211_ELEMID_WPA:
+        case IEEE80211_ELEMID_VENDOR:
             len=(*(packet+1));
-            if (len > 4 && length >= len+2) {
-                if(memcmp((packet+2), WPA_HEADER, 4) == 0)
-                    _isWep = encryptionTypeWPA;
-            }
+            if (len <= 4 || length < len+2) break;
+			
+			vendorID = (UInt32*)(packet+2);
+			if ((*vendorID) == VENDOR_WPA_HEADER) {
+				_isWep = encryptionTypeWPA;
+			} else if ((*vendorID) == VENDOR_CISCO_HEADER) {
+				if ((len -= 6) < 0) break;
+				//if (*(packet + 6) != 0x2) break; //SSIDL Parsing
+				
+				UInt8 count = (*(packet+7));
+				UInt8 *ssidl = (packet+8);
+				UInt8 slen;
+				_SSIDs = [[NSMutableArray array] retain];
+				
+				while (count) {
+					if ((len -= 6) < 0) break;
+					if (*((UInt32*)ssidl) != 0x00000000) break; //dont know really what this is for. probably version or so
+					if (*(ssidl + 4)      != 0x10) break;
+					slen = (*(ssidl + 5));
+					ssidl += 6;
+					
+					if ((len -= slen) < 0) break;
+					
+					@try  {
+						memcpy(ssid, ssidl, slen);
+						ssid[slen]=0;
+						[_SSIDs addObject:[NSString stringWithUTF8String:ssid]];
+					}
+					@catch (NSException *exception) {
+						[_SSIDs addObject:[NSString stringWithCString:(char*)(ssidl) length:slen]];
+					}
+
+					ssidl += slen;
+					count--;
+				}
+			}
             break;
         }
         
@@ -121,10 +153,10 @@ bool inline is8021xPacket(const UInt8* fileData) {
 
     //the viha driver actually switches these fields
     //and macjack doesn't, so now it is the silence field
-    aSignal=f->silence-f->signal;
-    if (aSignal<0) aSignal=0;	
+    _signal=f->silence-f->signal;
+    if (_signal<0) _signal=0;	
 
-    aChannel=(f->channel>14 || f->channel<1 ? 1 : f->channel);
+    _channel=(f->channel>14 || f->channel<1 ? 1 : f->channel);
         
     //depending on the frame we have to figure the length of the header
     switch(_type) {
@@ -226,7 +258,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
     for (i=0;i<6 ;i++) _MACAddress[18+i] = f->address4[i] & 0xFF;
     
     //important for pcap
-    gettimeofday(&aCreationTime,NULL);
+    gettimeofday(&_creationTime,NULL);
     
     return YES;        
 }
@@ -417,7 +449,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
     if (!f) return; //this happens when dumping was switched on while scanning
     pcap_pkthdr h;
 
-    memcpy(&h.ts,&aCreationTime,sizeof(struct timeval));
+    memcpy(&h.ts,&_creationTime,sizeof(struct timeval));
     h.caplen = _length+_headerLength;
     h.len    = h.caplen;
 
@@ -444,13 +476,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
 }
 
 -(int)signal {
-    return aSignal;
-}
--(int)status {
-    return aStatus;
-}
--(int)silence {
-    return aSilence;
+    return _signal;
 }
 - (int)length {
     return _length+_headerLength;
@@ -459,7 +485,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
     return _length;
 }
 - (int)channel {
-    return aChannel;
+    return _channel;
 }
 - (int)type {
     return _type;
@@ -476,14 +502,17 @@ bool inline is8021xPacket(const UInt8* fileData) {
 - (encryptionType)wep {
     return _isWep;
 }
-- (int)originalChannel {
-    return _originalChannel;
+- (int)primaryChannel {
+    return _primaryChannel;
 }
 - (networkType)netType {
     return _netType;
 }
-- (NSString*)ssid {
+- (NSString*)SSID {
     return _SSID;
+}
+- (NSArray*)SSIDs {
+    return _SSIDs;
 }
 - (UInt8*) framebody {
     return _rawFrame + sizeof(WLFrame);
@@ -861,4 +890,61 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     return _response;
 }
 
+#pragma mark -
+#pragma mark Test Cases
+#pragma mark -
+
+- (void) testProbeRequest {
+	WLFrame *f;
+	UInt8 frame[] = "\x40\x00\x00\x00\xff\xff\xff\xff\xff\xff\x00\x0d\x93\x86\x5f\xaa\xff\xff\xff\xff\xff\xff\x00\x8b\x00\x00\x01\x08\x02\x04\x0b\x16\x24\x30\x48\x6c\x32\x04\x0c\x12\x18\x60";
+	f = [WaveHelper dataToWLFrame:frame length:sizeof(frame)-1];
+	[self parseFrame: f];
+	
+	UKIntsEqual(0, [self type]);
+	UKFalse([self toDS]);
+	UKFalse([self fromDS]);
+	UKIntsEqual(18, [self bodyLength]);
+	UKIntsEqual(IEEE80211_SUBTYPE_PROBE_REQ, [self subType]);
+	UKStringsEqual(@"<no bssid>", [self BSSIDString]);
+	UKStringsEqual(@"00:0D:93:86:5F:AA", [self clientFromID]);
+	UKStringsEqual(@"FF:FF:FF:FF:FF:FF", [self clientToID]);
+}
+
+- (void) testBeaconFrame {
+	WLFrame *f;
+	UInt8 frame[] = "\x80\x00\x00\x00\xff\xff\xff\xff\xff\xff\x00\x0f\xf7\xb6\x58\xb0\x00\x0f\xf7\xb6\x58\xb0\x80\x37\x0e\x63\x6c\x60\x00\x00\x00\x00\x64\x00\x01\x04\x00\x0b\x44\x46\x4e\x5f\x52\x6f\x61\x6d\x69\x6e\x67\x01\x08\x82\x84\x8b\x0c\x12\x96\x18\x24\x03\x01\x09\x05\x04\x00\x02\x00\x00\x2a\x01\x02\x32\x04\x30\x48\x60\x6c\x85\x1e\x00\x00\x84\x00\x0f\x00\xff\x03\x01\x00\x61\x70\x32\x33\x2d\x61\x68\x7a\x66\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x25\xdd\x18\x00\x50\xf2\x02\x01\x01\x0c\x00\x03\xa4\x00\x00\x27\xa4\x00\x00\x42\x43\x5e\x00\x62\x32\x2f\x00\xdd\x16\x00\x40\x96\x04\x00\x0c\x07\xa4\x00\x00\x23\xa4\x00\x00\x42\x43\x00\x00\x62\x32\x00\x00\xdd\x05\x00\x40\x96\x03\x02\xdd\x13\x00\x50\xf2\x05\x00\x01\x00\x00\x00\x00\x10\x07\x56\x50\x4e\x2f\x57\x45\x42";
+	f = [WaveHelper dataToWLFrame:frame length:sizeof(frame)-1];
+	[self parseFrame: f];
+	
+	UKIntsEqual(0, [self type]);
+	UKFalse([self toDS]);
+	UKFalse([self fromDS]);
+	UKIntsEqual(163, [self bodyLength]);
+	UKIntsEqual(IEEE80211_SUBTYPE_BEACON, [self subType]);
+	UKStringsEqual(@"00:0F:F7:B6:58:B0", [self BSSIDString]);
+	UKStringsEqual(@"00:0F:F7:B6:58:B0", [self clientFromID]);
+	UKStringsEqual(@"FF:FF:FF:FF:FF:FF", [self clientToID]);
+	UKStringsEqual(@"DFN_Roaming", [self SSID]);
+	
+}
+
+- (void) testSSIDList {
+	WLFrame *f;
+	UInt8 frame[] = "\x80\x00\x00\x00\xff\xff\xff\xff\xff\xff\x00\x12\xda\x9e\x85\xd0\x00\x12\xda\x9e\x85\xd0\xa0\x77\x8f\x91\xc9\x00\x00\x00\x00\x00\x64\x00\x21\x04\x00\x07\x61\x68\x7a\x66\x6e\x65\x74\x01\x08\x82\x84\x8b\x0c\x12\x96\x18\x24\x03\x01\x0d\x05\x04\x01\x02\x00\x00\x2a\x01\x02\x32\x04\x30\x48\x60\x6c\x85\x1e\x00\x00\x84\x00\x0f\x00\xff\x03\x01\x00\x61\x70\x33\x2d\x6b\x68\x62\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x25\xdd\x18\x00\x50\xf2\x02\x01\x01\x08\x00\x03\xa4\x00\x00\x27\xa4\x00\x00\x42\x43\x5e\x00\x62\x32\x2f\x00\xdd\x16\x00\x40\x96\x04\x00\x08\x07\xa4\x00\x00\x23\xa4\x00\x00\x42\x43\x00\x00\x62\x32\x00\x00\xdd\x05\x00\x40\x96\x03\x02\xdd\x29\x00\x50\xf2\x05\x02\x02\x00\x00\x00\x00\x10\x0d\x62\x69\x6e\x61\x65\x72\x76\x61\x72\x69\x61\x6e\x7a\x00\x00\x00\x00\x10\x0a\x74\x75\x69\x6c\x61\x6e\x64\x6f\x77\x6e";
+	f = [WaveHelper dataToWLFrame:frame length:sizeof(frame)-1];
+	[self parseFrame: f];
+	
+	UKIntsEqual(0, [self type]);
+	UKFalse([self toDS]);
+	UKFalse([self fromDS]);
+	UKIntsEqual(IEEE80211_SUBTYPE_BEACON, [self subType]);
+	UKIntsEqual(181, [self bodyLength]);
+	UKIntsEqual(2, [[self SSIDs] count]);
+	UKStringsEqual(@"binaervarianz", [[self SSIDs] objectAtIndex:0]);
+	UKStringsEqual(@"00:12:DA:9E:85:D0", [self BSSIDString]);
+	UKStringsEqual(@"00:12:DA:9E:85:D0", [self clientFromID]);
+	UKStringsEqual(@"FF:FF:FF:FF:FF:FF", [self clientToID]);
+	UKStringsEqual(@"ahzfnet", [self SSID]);
+	
+}
 @end

@@ -63,10 +63,9 @@ inline void WirelessCryptMD5(char const *str, unsigned char *key) {
 
 @implementation WaveHelper
 
-static NSDictionary *aVendors = nil;	//Dictionary
+static NSDictionary *_vendors = nil;	//Dictionary
 static BISpeechController *_speechController = nil;
 
-//static bool aOurDrivers[DRIVER_COUNT+1]= { NO, NO, NO, NO, NO };
 static NSMutableDictionary* _waveDrivers = Nil;   //interface to drivers
 
 static NSWindow* aMainWindow;
@@ -121,23 +120,41 @@ static ScanController *_scanController;
     
     return outstring;
 }
++ (NSString*) hexEncode:(UInt8*)data length:(int)len {
+    NSParameterAssert(len > 0);
+	NSParameterAssert(data);
+	int i, j;
+	
+	NSMutableString *ms = [NSMutableString stringWithFormat:@"%.2X", data[0]];
+    
+	for (i = 1; i < len; i++) {
+        j = data[i];
+        [ms appendFormat:@":%.2X", j];
+    }
+	return ms;
+}
 
 //returns the vendor for a specific MAC-Address
 + (NSString *)vendorForMAC:(NSString*)MAC {
     NSString *aVendor;
     
-    if (aVendors==Nil) //the dictionary is cached for speed, but it needs to be loaded the first time
-        aVendors = [[NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/vendor.db"]] retain];
-    
+    if (_vendors==Nil) { //the dictionary is cached for speed, but it needs to be loaded the first time
+        _vendors = [[NSDictionary dictionaryWithContentsOfFile:[[[NSBundle bundleForClass:[WaveHelper class]] resourcePath] stringByAppendingString:@"/vendor.db"]] retain];
+		if (!_vendors) {
+			NSLog(@"No vendors Database found!");
+			return @"error";
+		}
+    }
+	
     //do we have a valid MAC?
     if ((MAC==nil)||([MAC length]<11)) return @"";
     
     //see if we can find a most matching dictionary entry
-    aVendor = [aVendors objectForKey:MAC];
+    aVendor = [_vendors objectForKey:MAC];
     if (aVendor == nil) {
-        aVendor = [aVendors objectForKey:[MAC substringToIndex:11]];
+        aVendor = [_vendors objectForKey:[MAC substringToIndex:11]];
         if (aVendor == nil) {
-            aVendor = [aVendors objectForKey:[MAC substringToIndex:8]];
+            aVendor = [_vendors objectForKey:[MAC substringToIndex:8]];
             if (aVendor == nil) return @"unknown";
         }
     }
@@ -332,6 +349,71 @@ static ScanController *_scanController;
 
 + (WaveDriver*) driverWithName:(NSString*) s {
     return [_waveDrivers objectForKey:s];
+}
+
+#pragma mark -
+
++ (WLFrame*)dataToWLFrame:(UInt8*)data length:(int)len {
+    UInt16 *p;
+    unsigned int headerLength;
+	static WLFrame wf;
+	
+#ifndef USE_RAW_FRAMES
+    int type, subtype;
+    bool isToDS;
+    bool isFrDS;
+#endif
+    
+#ifdef USE_RAW_FRAMES
+    p = (UInt16*)&wf;						//p points to 802.11 header in our WLFrame	    
+    memcpy(p, data, ((len<60) ? len : 60));		//copy the whole frame into our WLFrame (or just the header)
+    
+    wf.channel = 0;
+    headerLength = sizeof(WLFrame);
+    if (len < headerLength) return NULL;	//corrupted frame
+    wf.dataLen = wf.length;	
+#else
+    p=(UInt16*)(((char*)&wf)+sizeof(struct sAirportFrame));	//p points to 802.11 header in our WLFrame	    
+    memcpy(p, data, ((len<30) ? len : 30));		//copy the whole frame into our WLFrame (or just the header)
+
+    type = (wf.frameControl & IEEE80211_TYPE_MASK);
+    subtype = (wf.frameControl & IEEE80211_SUBTYPE_MASK);
+    isToDS = ((wf.frameControl & IEEE80211_DIR_TODS) ? YES : NO);
+    isFrDS = ((wf.frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
+
+    //depending on the frame we have to figure the length of the header
+    switch(type) {
+        case IEEE80211_TYPE_DATA: //Data Frames
+            if (isToDS && isFrDS) headerLength = 30; //WDS Frames are longer
+            else headerLength = 24;
+            break;
+        case IEEE80211_TYPE_CTL: //Control Frames
+            switch(subtype) {
+                case IEEE80211_SUBTYPE_PS_POLL:
+                case IEEE80211_SUBTYPE_RTS:
+                    headerLength = 16;
+                    break;
+                case IEEE80211_SUBTYPE_CTS:
+                case IEEE80211_SUBTYPE_ACK:
+                    headerLength = 10;
+                    break;
+                default:
+                    return NULL;
+            }
+            break;
+        case IEEE80211_TYPE_MGT: //Management Frame
+            headerLength = 24;
+            break;
+        default:
+            return NULL;
+    }
+    if (len < headerLength) return NULL;	//corrupted frame
+    wf.dataLen = len - headerLength;	
+#endif
+
+    memcpy(((char*)&wf)+sizeof(WLFrame), data + headerLength, wf.dataLen);	//copy framebody into WLFrame
+
+    return &wf;   
 }
 
 #pragma mark -
@@ -624,4 +706,28 @@ static ScanController *_scanController;
     return hasAltiVec;
 }
 
+#pragma mark -
+#pragma mark Test Cases
+#pragma mark -
+
+- (void) testVendorNames {
+	UKStringContains([WaveHelper vendorForMAC:@"00:30:65:1B:F0:01"], @"Apple");
+	UKStringsEqual(@"Broadcast", [WaveHelper vendorForMAC:@"FF:FF:FF:FF:FF:FF"]);
+	UKStringContains([WaveHelper vendorForMAC:@"02:60:8C:00:00:00"], @"3Com");
+}
+- (void) testURLEncode {
+	UKStringsEqual(@"abcd+123", [WaveHelper urlEncodeString:@"abcd 123"]);
+	UKStringsEqual(@"http%3a%2f%2fkismac.binaervarianz.de%2f", [WaveHelper urlEncodeString:@"http://kismac.binaervarianz.de/"]);
+}
+- (void) testMD5Crypt {
+	UInt8 key[16];
+	WirelessCryptMD5("testkey", key);
+	UKStringsEqual(@"5C:C8:16:BD:32:71:FB:0D:05:E8:3A:B9:DE", [WaveHelper hexEncode:key length:13]);
+	WirelessCryptMD5("\x12\x12\x12\x12\x12\x12\x12\x12", key);
+	UKStringsEqual(@"F5:E0:12:E6:3C:18:78:56:97:77:27:2D:42", [WaveHelper hexEncode:key length:13]);
+}
+- (void) testHexEncode {
+	UKStringsEqual(@"AA",    [WaveHelper hexEncode:"\xaa" length:1]);
+	UKStringsEqual(@"11:22", [WaveHelper hexEncode:"\x11\x22" length:2]);
+}
 @end

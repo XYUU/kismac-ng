@@ -6,6 +6,8 @@
 	<string>Enterasys Roam About 11MBit Card</string>
 	<key>00:02:2D:22</key>
 	<string>Lucent Technologies Orinoco Silver 11MBit</string>
+	<key>00:02:72:45</key>
+	<string>Acer Access Point</string>
 	<key>00:03:93:EB</key>
 	<string>Apple Airport Extreme</string>
 	<key>00:05:8B:D0</key>
@@ -20,8 +22,16 @@
 	<string>3Com 3CRWE154G72 54MbitCard</string>
 	<key>00:11:24:08</key>
 	<string>Apple Airport Express</string>
+	<key>00:12:DA:9E</key>
+	<string>Cisco AP-1200</string>
+	<key>00:12:D9:B3</key>
+	<string>Cisco AP-1200</string>
+	<key>00:12:DA:A7</key>
+	<string>Cisco AP-1200</string>
 	<key>00:20:A6:4D</key>
 	<string>Proxim Orinoco 11b/g</string>
+	<key>00:30:65:1B</key>
+	<string>Apple Airport Card</string>
 	<key>00:60:B3:6A</key>
 	<string>Sitecom WL-500</string>
 	<key>00:E0:7D:B2</key>

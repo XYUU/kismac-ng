@@ -183,7 +183,10 @@ typedef struct _frameLEAP {
 #define	IEEE80211_ELEMID_IBSSPARMS		6
 #define	IEEE80211_ELEMID_CHALLENGE		16
 
-#define	IEEE80211_ELEMID_WPA			0xDD
+#define	IEEE80211_ELEMID_VENDOR			0xDD
+
+#define VENDOR_WPA_HEADER				0x0050f201
+#define VENDOR_CISCO_HEADER				0x0050f205
 
 #define WPA_FLAG_REQUEST                0x0800
 #define WPA_FLAG_ERROR                  0x0400

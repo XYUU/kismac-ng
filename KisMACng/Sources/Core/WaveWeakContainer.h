@@ -2,9 +2,9 @@
         
         File:			WaveWeakContainer.h
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Roßberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 

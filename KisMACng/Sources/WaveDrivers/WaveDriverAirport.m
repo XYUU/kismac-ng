@@ -61,7 +61,7 @@ static int AirPortInstances = 0;
     }
     
     AirPortInstances++;
-    
+    _hop = NO;
     WirelessSetEnabled(_context, 1); //just make sure we can actually scan
     WirelessSetPower(_context, 1);
     
@@ -121,6 +121,12 @@ static int AirPortInstances = 0;
     }
     
     return (NSArray*)netsp;
+}
+
+#pragma mark - 
+
+- (void) hopToNextChannel {
+	return;
 }
 
 #pragma mark -

@@ -36,7 +36,8 @@ static bool explicitlyLoadedAiroJack = false;
     _userClientNotify = 0xbeefc0de;
     _userClientMap = 0xdeadc0de;
     _driverName = driverName;
-
+	_hop = NO; 
+		
     self = [super init];
     return self;
 }
@@ -61,6 +62,12 @@ static bool explicitlyLoadedAiroJack = false;
 
 + (NSString*) deviceName {
     return NSLocalizedString(@"Aironet Card", "short driver description");
+}
+
+#pragma mark - 
+
+- (void) hopToNextChannel {
+	return;
 }
 
 #pragma mark -

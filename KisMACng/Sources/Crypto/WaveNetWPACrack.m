@@ -257,7 +257,7 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
     for (i = 0; i < [aClientKeys count]; i++) {
         wc = [aClients objectForKey:[aClientKeys objectAtIndex:i]];
         if ([wc eapolDataAvailable]) {
-            if ([[wc ID] isEqualToString:aBSSID]) {
+            if ([[wc ID] isEqualToString: _BSSID]) {
                 keys--;
             } else {
                 if (memcmp(aRawBSSID, [[wc rawID] bytes], 6)>0) {
@@ -359,5 +359,28 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
 	[pool release];
 }
 
+- (void) testWPAFunctions {
+    UInt8 output[40];
+    int i, j;
+    NSMutableString *ms;
+    
+    wpaPasswordHash("password", "IEEE", 4, output);
+    ms = [NSMutableString string];
+    for (i=0; i < WPA_PMK_LENGTH; i++) {
+        j = output[i];
+        [ms appendFormat:@"%.2x", j];
+    }
+	UKStringsEqual(ms, @"f42c6fc52df0ebef9ebb4b90b38a5f902e83fe1b135a70e23aed762e9710a12e");
+	 
+    wpaPasswordHash("ThisIsAPassword", "ThisIsASSID", 11, output);
+    ms = [NSMutableString string];
+    for (i=0; i < WPA_PMK_LENGTH; i++) {
+        j = output[i];
+        [ms appendFormat:@"%.2x", j];
+    }
+    UKStringsEqual(ms, @"0dc0d6eb90555ed6419756b9a15ec3e3209b63df707dd508d14581f8982721af");
+	    
+    UKTrue(wpaTestPasswordHash());
+}
 
 @end

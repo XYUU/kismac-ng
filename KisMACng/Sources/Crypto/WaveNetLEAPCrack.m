@@ -82,7 +82,7 @@ struct leapClientData {
     for (i = 0; i < [aClientKeys count]; i++) {
         wc = [aClients objectForKey:[aClientKeys objectAtIndex:i]];
         if ([wc leapDataAvailable]) {
-            if ([[wc ID] isEqualToString:aBSSID]) {
+            if ([[wc ID] isEqualToString:_BSSID]) {
                 keys--;
             } else {
                 c[curKey].username  = [wc leapUsername];

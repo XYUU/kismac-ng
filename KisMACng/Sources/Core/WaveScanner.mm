@@ -154,7 +154,7 @@ got:
     NSString* path;
     char err[PCAP_ERRBUF_SIZE];
     NSSound* geiger;
-    
+    NSAutoreleasePool *pool;
     int i;
     
     int dumpFilter;
@@ -198,7 +198,8 @@ got:
     }
     
     w = [[WavePacket alloc] init];
-
+	pool = [NSAutoreleasePool new];
+	
     if (_geigerSound!=Nil) {
         geiger=[NSSound soundNamed:_geigerSound];
         if (geiger!=Nil) [geiger setDelegate:self];
@@ -234,6 +235,10 @@ got:
 				}
 				
 				_packets++;
+				if (_packets % 10000 == 0) {
+					[pool release];
+					pool = [NSAutoreleasePool new];
+				}
 				_bytes+=[w length];
 			}
 		} @finally {}
@@ -241,7 +246,8 @@ got:
 
 error:
     [w release];
-
+	[pool release];
+	
     if (f) pcap_dump_close(f);
     if (p) pcap_close(p);
 }

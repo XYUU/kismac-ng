@@ -7,7 +7,6 @@
 //
 
 #import "BINSExtensions.h"
-#import <Carbon/Carbon.h>
 
 static BOOL _alertDone;
 

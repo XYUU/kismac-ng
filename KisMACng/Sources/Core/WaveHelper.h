@@ -2,9 +2,9 @@
         
         File:			WaveHelper.h
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -24,7 +24,9 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import <UnitKit/UnitKit.h>
 #import "Apple80211.h"
+#import "80211b.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,7 +55,7 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 @class WaveDriver;
 @class Trace;
 
-@interface WaveHelper : NSObject {
+@interface WaveHelper : NSObject <UKTest> {
 
 }
 
@@ -63,11 +65,15 @@ void WirelessCryptMD5(char const *str, unsigned char *key);
 + (NSString*) bytesToString:(float) bytes;
 + (NSString*) urlEncodeString:(NSString*)string;
 + (NSString*) vendorForMAC:(NSString*)MAC;
++ (NSString*) hexEncode:(UInt8*)data length:(int)len;
+
 + (void)speakSentence:(const char*)cSentence withVoice:(int)voice;
 + (bool)isServiceAvailable:(char*)service;
 
 + (int)chan2freq:(int)channel;
 + (int)freq2chan:(int)frequency;
+
++ (WLFrame*)dataToWLFrame:(UInt8*)data length:(int)len;
 
 + (bool)unloadAllDrivers;
 + (bool)loadDrivers;

@@ -24,6 +24,7 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import <UnitKit/UnitKit.h>
 #import "WavePacket.h"
 #import "ImportController.h"
 #import "Apple80211.h"
@@ -43,12 +44,12 @@ struct graphStruct {
 @class NetView;
 @class WaveWeakContainer;
 
-@interface WaveNet : NSObject {
+@interface WaveNet : NSObject <UKTest> {
     int _netID;					//network ID
     int _maxSignal;				//biggest signal ever
     int _curSignal;				//current signal
     int _channel;				//last channel
-    int _originalChannel;       //channel which is brodacsted by AP
+    int _primaryChannel;       //channel which is brodacsted by AP
     networkType _type;          //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel 4=probe 5=lucent tunnel
     int _packets;				//# of packets
     int _packetsPerChannel[16];	//how many packets on each channel
@@ -77,9 +78,10 @@ struct graphStruct {
     NSString* aElev;
     NSString *_crackErrorString;
 
-    NSString* _SSID;
-    NSString* aBSSID;
-    NSString* aVendor;
+    NSString *_SSID;
+	NSArray  *_SSIDs;
+    NSString* _BSSID;
+    NSString* _vendor;
     NSString* _password;
     NSString* aComment;
     NSString* _ID;
@@ -133,6 +135,7 @@ struct graphStruct {
 - (NSString *)ID;
 - (NSString *)BSSID;
 - (NSString *)SSID;
+- (NSArray *)SSIDs;
 - (NSString *)rawSSID;
 - (NSString *)date;
 - (NSDate*)lastSeenDate;

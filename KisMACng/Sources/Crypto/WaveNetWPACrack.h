@@ -31,4 +31,5 @@
 - (void)performWordlistWPA:(NSString*)wordlist;
 - (BOOL)crackWPAWithWordlist:(NSString*)wordlist andImportController:(ImportController*)im;
 
+- (void) testWPAFunctions;
 @end

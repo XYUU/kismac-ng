@@ -2,9 +2,9 @@
         
         File:			WaveNetWPACrackAltivec.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -293,7 +293,7 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
     for (i = 0; i < [aClientKeys count]; i++) {
         wc = [aClients objectForKey:[aClientKeys objectAtIndex:i]];
         if ([wc eapolDataAvailable]) {
-            if ([[wc ID] isEqualToString:aBSSID]) {
+            if ([[wc ID] isEqualToString: _BSSID]) {
                 keys--;
             } else {
                 if (memcmp(aRawBSSID, [[wc rawID] bytes], 6)>0) {

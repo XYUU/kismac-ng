@@ -136,7 +136,7 @@
 #endif
     
     [[NSColor darkGrayColor] set];
-    a=[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(ratio*size.width, ratio*size.height, (1-2*ratio)*size.width, (1-2*ratio)*size.height)];
+    a = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(ratio*size.width, ratio*size.height, (1-2*ratio)*size.width, (1-2*ratio)*size.height)];
     [a fill];
     
     textFont =  [NSFont fontWithName:@"Monaco" size:(size.height>size.width ? size.width*0.8 : size.height*0.8)];

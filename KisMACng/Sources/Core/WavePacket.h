@@ -24,6 +24,7 @@
 */
 
 #import <Foundation/Foundation.h>
+#import <UnitKit/UnitKit.h>
 #import "80211b.h"
 #import "WavePacket.h"
 #import <sys/time.h>
@@ -85,39 +86,39 @@ typedef enum _leapAuthCode {
 } leapAuthCode;
 
 //this represents a packet
-@interface WavePacket : NSObject {
-    int aSignal;		//current signal strength
-    int aChannel;		//well the channel
+@interface WavePacket : NSObject <UKTest> {
+    int _signal;		//current signal strength
+    int _channel;		//well the channel
     int _type;			//type 0=management 1=control 2=data
-    int _subtype;		//deprending on type
+    int _subtype;		//deprending on type, WARNING might be little endian
     
     networkType    _netType;    //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel
     encryptionType _isWep;      //0=unknown, 1=disabled, 2=enabled
     leapAuthCode   _leapCode;
     
-    int  _originalChannel;       
+    int  _primaryChannel;       
     bool _isToDS;		//to access point?
     bool _isFrDS;		//from access point?
     bool _isEAP;
 
     NSString *_SSID;
-    NSString *_username;
+    NSMutableArray *_SSIDs;
+	
+	NSString *_username;
     NSData   *_challenge;
     NSData   *_response;
     
-    struct timeval aCreationTime; //time for cap
+    struct timeval _creationTime; //time for cap
     
     UInt8* _frame;
-    UInt8* _rawFrame;		//pointer to the raw frame
+    UInt8* _rawFrame;			//pointer to the raw frame
 
     int _revelsKeyByte;         //-2 = no idea
-    int aStatus;		//?
-    int aSilence;		//TODO implement noise ratio
-    
-    int _length;		//length of body
-    int _headerLength;		//length of real header
+	    
+    int _length;				//length of body
+    int _headerLength;			//length of real header
 
-    UInt8 _MACAddress[30];	//the mac addresses
+    UInt8 _MACAddress[30];		//the mac addresses
     
     //WPA stuff
     int _wpaCipher;
@@ -128,15 +129,13 @@ typedef enum _leapAuthCode {
 - (bool)parseFrame:(WLFrame*) f;
 
 - (void)dump:(void*)f;	//dumps packet to pcaphandle f
-- (int)status;
-- (int)silence;
 - (int)length;
 - (int)bodyLength;
 - (int)signal;
 - (int)channel;
 - (int)type;
 - (int)subType;
-- (int)originalChannel;
+- (int)primaryChannel;
 - (bool)fromDS;
 - (bool)toDS;
 - (encryptionType)wep;
@@ -144,7 +143,8 @@ typedef enum _leapAuthCode {
 - (UInt8*)framebody;
 - (UInt8*)frame;
 - (int)isResolved;	//for wep cracking 
-- (NSString*)ssid;
+- (NSString*)SSID;
+- (NSArray*)SSIDs;
 
 - (UInt8*)rawSenderID;
 - (NSString*)clientFromID;

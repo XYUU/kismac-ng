@@ -258,7 +258,7 @@ enum _operationMode {
 }
 
 - (bool) startCapture:(unsigned short)newChannel {
-    kern_return_t kernResult;
+    //kern_return_t kernResult;
 
     /*[self setChannel: newChannel];
      
@@ -272,7 +272,7 @@ enum _operationMode {
 }
 
 -(bool) stopCapture {
-    kern_return_t kernResult;
+    //kern_return_t kernResult;
 
     /*kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientDisable, 0, 0);
     if (kernResult != KERN_SUCCESS) {
