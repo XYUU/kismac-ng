@@ -33,6 +33,8 @@ enum selmode {
     selCurPos = 0,
     selWaypoint1 = 1,
     selWaypoint2 = 2,
+    selShowCurPos = 3,
+    selInvalid = 4,
 };
 
 @class NetView;
@@ -47,6 +49,7 @@ enum selmode {
     NSString            *_gpsStatus;
     BITextView          *_statusView;
     BISubView           *_netContainer;
+    BISubView           *_moveContainer;
     BITextView          *_gpsStatusView;
     MapControlPanel     *_controlPanel;
     PointView           *_pView;
@@ -72,6 +75,8 @@ enum selmode {
 - (void)setWaypoint:(int)which toPoint:(NSPoint)point atCoordinate:(waypoint)coord;
 - (void)setVisible:(BOOL)visible;
 - (NSPoint)pixelForCoordinate:(waypoint)wp;
+- (void)setNeedsDisplayInMoveRect:(NSRect)invalidRect;
+
 - (void)addNetView:(NetView*)view;
 - (void)removeNetView:(NetView*)view;
 

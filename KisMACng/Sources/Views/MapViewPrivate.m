@@ -29,6 +29,8 @@
 #import "NetView.h"
 #import "BITextView.h"
 #import "MapControlPanel.h"
+#import "GPSController.h"
+#import "PointView.h"
 
 @implementation MapView(Private)
 
@@ -38,7 +40,7 @@
     loc.x = -_center.x * _zoomFact + (_frame.size.width / 2);
     loc.y = -_center.y * _zoomFact + (_frame.size.height / 2);
     
-    [_netContainer setLocation:loc];
+    [_moveContainer setLocation:loc];
 }
 
 - (void)_alignStatus {
@@ -66,7 +68,20 @@
         NSObject *o = [subviews objectAtIndex:i];
         if ([o isMemberOfClass:[NetView class]]) [(NetView*)o align];
     }
+    [self _alignCurrentPos];
     [self _align];
+}
+
+- (void)_alignCurrentPos {
+    NSPoint wp;
+    if (_selmode != selCurPos && _selmode != selShowCurPos) return;
+    wp = [self pixelForCoordinate:[[WaveHelper gpsController] currentPoint]];
+    if (wp.x != INVALIDPOINT.x || wp.y != INVALIDPOINT.y) {
+        [_pView setLocation:wp];
+        [_pView setVisible:YES];
+    } else {
+        [_pView setVisible:NO];    
+    }
 }
 
 - (void)_setStatus:(NSString*)status {
@@ -133,6 +148,7 @@
 - (void)_updateGPSStatus:(NSNotification*)note {
     if ([(NSString*)[note object] compare:_gpsStatus] == NSOrderedSame) return;
     [self _setGPSStatus:[note object]];
+    [self _alignCurrentPos];
 }
 
 @end

@@ -44,12 +44,16 @@
     _wp[2]._lat  = 0; _wp[2]._long = 0;
     _zoomFact = 1.0;
     
-    _netContainer = [[BISubView alloc] initWithSize:NSMakeSize(30000,30000)];
-    [self addSubView:_netContainer];
+    _moveContainer = [[BISubView alloc] initWithSize:NSMakeSize(300000,300000)];
+    [self addSubView:_moveContainer];
 
+    _netContainer = [[BISubView alloc] initWithSize:NSMakeSize(300000,300000)];
+    [_moveContainer addSubView:_netContainer];
+
+    _selmode = selShowCurPos;
     _pView = [[PointView alloc] init];
     [_pView setVisible:NO];
-    [self addSubView:_pView];
+    [_moveContainer addSubView:_pView];
     
     _gpsStatusView = [[BITextView alloc] init];
     [self _setGPSStatus:NSLocalizedString(@"No GPS device available.", "gps status")];
@@ -193,6 +197,7 @@
 - (NSPoint)pixelForCoordinate:(waypoint)wp {
     NSPoint p;
     if ([_statusView visible]) return INVALIDPOINT;
+    if (wp._long == 0 && wp._lat == 0) return INVALIDPOINT;
     
     NS_DURING
         p.x = ((_point[1].x - (_wp[1]._long- wp._long) / (_wp[1]._long-_wp[2]._long) * (_point[1].x-_point[2].x)) * _zoomFact);
@@ -202,6 +207,13 @@
     NS_ENDHANDLER
 
     return p;
+}
+
+- (void)setNeedsDisplayInMoveRect:(NSRect)invalidRect {
+    invalidRect.origin.x += [_moveContainer frame].origin.x;
+    invalidRect.origin.y += [_moveContainer frame].origin.y;
+    
+    [self setNeedsDisplayInRect:invalidRect];
 }
 
 - (void)addNetView:(NetView*)view {
@@ -322,6 +334,7 @@
     
     [_controlPanel release];
     [_netContainer release];
+    [_moveContainer release];
     [_status release];
     [_statusView release];
     [_gpsStatus release];

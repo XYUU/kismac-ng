@@ -1,6 +1,6 @@
 /*
         
-        File:			MapViewPrivate.h
+        File:			PointView.h
         Program:		KisMAC
 	Author:			Michael Roßberg
 				mick@binaervarianz.de
@@ -23,17 +23,12 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import "MapView.h"
+#import <Cocoa/Cocoa.h>
+#import "BIImageView.h"
 
-@interface MapView(Private)
-
-- (void)_align;
-- (void)_alignStatus;
-- (void)_alignNetworks;
-- (void)_alignControlPanel;
-- (void)_alignCurrentPos;
-- (void)_setStatus:(NSString*)status;
-- (void)_updateStatus;
-- (void)_setGPSStatus:(NSString*)status;
+@interface PointView : BIImageView {
+    NSImage     *_currImg[36];
+    NSLock      *_animLock;
+}
 
 @end
