@@ -187,7 +187,7 @@
         for(i=0; i<[aPacketsLog count]; i++) {
 
             if (!isInit) {	
-                [(NSString*)[aPacketsLog objectAtIndex:i] getCString:(char*)data];
+                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
                 length=[(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
                 
                 memcpy(key, data, 3);
@@ -318,7 +318,7 @@
         for(i=0; i<[aPacketsLog count]; i++) {
 
             if (!isInit) {	
-                [(NSString*)[aPacketsLog objectAtIndex:i] getCString:(char*)data];
+                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
                 length=[(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
                 
                 memcpy(key, data, 3);

@@ -242,8 +242,7 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>003533D206A5DD8500AB4577</string>
-								<string>003533D306A5DD8500AB4577</string>
+								<string>003533C506A5DD8500AB4577</string>
 								<string>003533F906A5DD8500AB4577</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>0035332D06A5DD5700AB4577</string>
@@ -252,8 +251,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>22</integer>
 									<integer>18</integer>
+									<integer>8</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
@@ -292,7 +291,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GPSController.m</string>
+								<string>WaveNetWEPCrack.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -300,9 +299,9 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GPSController.m</string>
+										<string>WaveNetWEPCrack.m</string>
 										<key>bookmark</key>
-										<string>0046468E0789A8BC005B890E</string>
+										<string>004646C40789AD63005B890E</string>
 										<key>history</key>
 										<array>
 											<string>006300060764D4FC003B81CC</string>
@@ -314,7 +313,11 @@
 											<string>00766A38078450FA00A30713</string>
 											<string>0046467F0789A69D005B890E</string>
 											<string>004646880789A80A005B890E</string>
-											<string>0046467E0789A69D005B890E</string>
+											<string>0046469E0789A9D4005B890E</string>
+											<string>004646B30789ABE6005B890E</string>
+											<string>004646B40789ABE6005B890E</string>
+											<string>004646B50789ABE6005B890E</string>
+											<string>004646B60789ABE6005B890E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -330,6 +333,14 @@
 											<string>004646810789A69D005B890E</string>
 											<string>004646820789A69D005B890E</string>
 											<string>004646890789A80A005B890E</string>
+											<string>004646A00789A9D4005B890E</string>
+											<string>004646B70789ABE6005B890E</string>
+											<string>004646B80789ABE6005B890E</string>
+											<string>004646B90789ABE6005B890E</string>
+											<string>004646BA0789ABE6005B890E</string>
+											<string>004646BB0789ABE6005B890E</string>
+											<string>004646BC0789ABE6005B890E</string>
+											<string>004646BD0789ABE6005B890E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -417,6 +428,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>00A014C606C53614009AA021</string>
+		<string>004646920789A949005B890E</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcode</string>
 	</array>
@@ -554,8 +568,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {289, 371}}</string>
-											<string>{{289, 0}, {710, 371}}</string>
+											<string>{{0, 0}, {279, 371}}</string>
+											<string>{{279, 0}, {720, 371}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -618,9 +632,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>0063FFD60764D2E9003B81CC</string>
+				<string>004646910789A949005B890E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>0063FFD70764D2E9003B81CC</string>
+				<string>004646920789A949005B890E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debug</string>
@@ -629,7 +643,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -850,7 +864,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>00A014C606C53614009AA021</string>
-				<string>0063FFD80764D2E9003B81CC</string>
+				<string>004646930789A949005B890E</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>WindowString</key>
@@ -954,7 +968,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
