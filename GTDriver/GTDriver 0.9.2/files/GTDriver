@@ -1,4 +1,0 @@
-#!/bin/sh
-. /etc/rc.common
-
-/Library/StartupItems/GTDriver/WiFiGUI.app/Contents/MacOS/WiFiGUI&
