@@ -418,7 +418,7 @@ wait_for_master:
     for( i = 0; i < 256; i++ )
         R[i] = i;
 
-    for( n = 0; n < 8; n++ )
+    for( n = 0; n < 16; n++ )
     {
         xv = 5 * ( rand() % nb_ivs );
 
@@ -442,7 +442,7 @@ wait_for_master:
             match++;
     }
 
-    if( match >= 4 )
+    if( match >= 8 )
         return YES;
 
     return NO;

@@ -2,7 +2,7 @@
         
         File:			Insomnia.h
         Program:		KisMAC
-	Author:			Michael Ro√überg
+	Author:			Michael Ro√É≈∏berg
 				mick@binaervarianz.de
 	Description:		KisMAC is a wireless stumbler for MacOS X.
                 
