@@ -49,6 +49,8 @@
 struct termios ttyset;
 
 #define MAX_GPSBUF_LEN 1024
+#define VELOCITY_UNIT "km/h"
+#define VELOCITY_CONVERSION 1.852
 
 @interface GPSController(PrivateExtension) 
     - (void)setStatus:(NSString*)status;
@@ -127,15 +129,15 @@ struct termios ttyset;
 }
 
 - (NSString*) VelKt {
-    if (_velkt==0) return nil;
-    if (_veldir==-1) return [NSString stringWithFormat:@"%.1f kt",_velkt];
-    return [NSString stringWithFormat:@"%.1f kt at %d T",_velkt,_veldir];
+	if (_velkt==0) return nil;
+	if (_veldir==-1) return [NSString stringWithFormat:@"%.1f %s",(_velkt * VELOCITY_CONVERSION),VELOCITY_UNIT];
+	return [NSString stringWithFormat:@"%.1f %s at %d T",(_velkt * VELOCITY_CONVERSION),VELOCITY_UNIT,_veldir];
 }
 
 - (NSString*) QualData {
-    if (_numsat==-1) return nil;
-    if (_hdop>=50 || _hdop==0) return [NSString stringWithFormat:@" (%d sats)",_numsat];
-    return [NSString stringWithFormat:@" (%d sats, HDOP %.1f)",_numsat,_hdop];
+	if (_numsat==-1) return [NSString stringWithFormat:@""];
+	if (_hdop>=50 || _hdop==0) return [NSString stringWithFormat:@" (%d sats)",_numsat];
+	return [NSString stringWithFormat:@" (%d sats, HDOP %.1f)",_numsat,_hdop];
 }
 
 - (NSString*)status {
@@ -407,15 +409,15 @@ int ss(char* inp, char* outp) {
 }
 
 - (bool)gpsd_parse:(int) fd {
-    int len, valid;
+    int len, valid, numsat, veldir;
     char gpsbuf[MAX_GPSBUF_LEN];
     double ns, ew, elev;
-	float velkt;
+	float velkt,hdop,fveldir;
     NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];
 
     if (_debugEnabled) NSLog(@"GPSd write command");
     
-    if (write(fd, "PAMV\r\n", 5) < 5) {
+    if (write(fd, "PAMVTQ\r\n", 8) < 8) {
         NSLog(@"GPSd write failed");
         return NO;
     }
@@ -431,9 +433,11 @@ int ss(char* inp, char* outp) {
     _linesRead++;
     
     gpsbuf[0+len]=0;
-    
-    if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d,V=%f",
-        &ns, &ew, &elev, &valid, &velkt) ==5) {
+ 	numsat = -1;
+	hdop = 100;
+   
+	if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d,V=%f,T=%f,Q=%d %*f %f",
+        &ns, &ew, &elev, &valid, &velkt, &fveldir, &numsat, &hdop) >=6) {
                         
         if (valid >= 2) _reliable = YES;
         else _reliable = NO;
@@ -463,8 +467,15 @@ int ss(char* inp, char* outp) {
             _ns.coordinates   = fabs(ns);
             _ew.coordinates   = fabs(ew);
             _elev.coordinates = elev;
-            _velkt = velkt;
-        } else if(_onNoFix==2) {
+			_velkt = velkt;
+			veldir = (int)fveldir;
+			_veldir = veldir;
+
+			if (numsat > -1) {
+				_numsat = numsat;
+				_hdop = hdop;
+			}
+		} else if(_onNoFix==2) {
             _ns.dir = 'N';
             _ew.dir = 'E';
             

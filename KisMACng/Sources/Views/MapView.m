@@ -323,16 +323,20 @@
 
 - (void)keyDown:(NSEvent *)theEvent {
     switch ([theEvent keyCode]) {
-    case 123:
+    case 115: //home
+	case 123: //left
         [self goLeft:self];
         break;
-    case 124:
+	case 119: //end
+    case 124: //right
         [self goRight:self];
         break;
-    case 125:
+	case 121: //pg dw
+    case 125: //down
         [self goDown:self];
         break;
-    case 126:
+	case 116: //pg up
+    case 126: //up
         [self goUp:self];
         break;
     case 44: //minus key

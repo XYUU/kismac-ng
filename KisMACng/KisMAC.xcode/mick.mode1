@@ -243,21 +243,21 @@
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>003533B206A5DD8500AB4577</string>
-								<string>0035341F06A5DD8500AB4577</string>
-								<string>29B97315FDCFA39411CA2CEA</string>
-								<string>29B97317FDCFA39411CA2CEA</string>
+								<string>003533FE06A5DD8500AB4577</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>38</integer>
+									<integer>32</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 147}, {252, 696}}</string>
+							<string>{{0, 0}, {252, 696}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -290,7 +290,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TODO</string>
+								<string>MapView.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -298,18 +298,22 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TODO</string>
+										<string>MapView.m</string>
 										<key>bookmark</key>
-										<string>0084D522072E79E800F48720</string>
+										<string>0094D7D7072ED2BF0040C22B</string>
 										<key>history</key>
 										<array>
-											<string>0084D51E072E79E800F48720</string>
-											<string>0084D51F072E79E800F48720</string>
+											<string>0084D532072E8CF700F48720</string>
+											<string>0084D549072E8F9000F48720</string>
+											<string>0094D7BB072ED1320040C22B</string>
+											<string>0094D7BC072ED1320040C22B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>0084D520072E79E800F48720</string>
 											<string>0084D521072E79E800F48720</string>
+											<string>0084D54D072E8F9000F48720</string>
+											<string>0094D7BD072ED1320040C22B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -367,9 +371,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0084D523072E79E800F48720</string>
+				<string>0094D7B7072ED0F20040C22B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0084D524072E79E800F48720</string>
+				<string>0094D7B8072ED0F20040C22B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -397,6 +401,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>00A014C606C53614009AA021</string>
+		<string>0094D7C1072ED15C0040C22B</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcode</string>
 	</array>
 	<key>WindowString</key>
@@ -419,7 +426,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>DownloadMapController.m</string>
+								<string>GPSController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -427,7 +434,13 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CD052900623707200166675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>DownloadMapController.m</string>
+										<string>GPSController.m</string>
+										<key>bookmark</key>
+										<string>0084D56E072E94B700F48720</string>
+										<key>history</key>
+										<array>
+											<string>0084D543072E8F3500F48720</string>
+										</array>
 									</dict>
 									<key>SplitCount</key>
 									<string>1</string>
@@ -487,7 +500,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>00A0149406C51049009AA021</string>
-				<string>007B444C072D0D7000678F0E</string>
+				<string>0084D545072E8F3500F48720</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -498,7 +511,7 @@
 			<key>WindowToolGUID</key>
 			<string>00A0149406C51049009AA021</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -527,8 +540,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {389, 371}}</string>
-											<string>{{389, 0}, {610, 371}}</string>
+											<string>{{0, 0}, {379, 371}}</string>
+											<string>{{379, 0}, {620, 371}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -591,9 +604,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>007B448E072D57BC00678F0E</string>
+				<string>0094D7C0072ED15C0040C22B</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>007B448F072D57BC00678F0E</string>
+				<string>0094D7C1072ED15C0040C22B</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debug</string>
@@ -753,7 +766,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>00A014C606C53614009AA021</string>
-				<string>007B4490072D57BC00678F0E</string>
+				<string>0094D7C2072ED15C0040C22B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>WindowString</key>
