@@ -404,4 +404,17 @@
     return YES;
 }
 
+- (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID {
+    WEPCHECKS;
+    if (keyLen != 13 && keyLen != 5) return NO;
+    if (keyID < 0 || keyID > 3) return NO;
+    
+    int arg = (keyLen << 8) | keyID;
+    
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Weak scheduling attack...", "busy dialog")];
+    
+    [NSThread detachNewThreadSelector:@selector(performCrackWEPWeakforKeyIDAndLen:) toTarget:_curNet withObject:[NSNumber numberWithInt:arg]];
+    
+    return YES;
+}
 @end

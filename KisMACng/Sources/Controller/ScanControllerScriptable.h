@@ -61,4 +61,5 @@
 - (BOOL)wordlist104bitApple:(NSString*)wordlist;
 - (BOOL)wordlist104bitMD5:(NSString*)wordlist;
 
+- (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID;
 @end

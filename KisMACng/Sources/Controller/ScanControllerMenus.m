@@ -551,45 +551,6 @@
 #pragma mark CRACK MENU
 #pragma mark -
 
-- (IBAction)weakCrackGeneric:(id)sender {
-    if (([_curNet wep]==encryptionTypeWEP || [_curNet wep]==encryptionTypeWEP40)&&([_curNet weakPackets]<5)) {
-        [self showNeedMoreWeakPacketsDialog];
-    } else {
-        if (_curNet==Nil) return;
-        
-        _crackType = 1;
-        
-        [self startCrackDialogWithTitle:NSLocalizedString(@"Weak key attack against WEP-40 & WEP-104...", "busy dialog")];
-        [_importController setMax:32];
-        [_curNet crackWithKeyByteLength:5 breath:4 import:_importController];
-        [_curNet crackWithKeyByteLength:13 breath:2 import:_importController];
-    }
-}
-- (IBAction)weakCrack40bit:(id)sender {
-    if (([_curNet wep]==encryptionTypeWEP || [_curNet wep]==encryptionTypeWEP40)&&([_curNet weakPackets]<5)) {
-        [self showNeedMoreWeakPacketsDialog];
-    } else {
-        if (_curNet==Nil) return;
-        
-        _crackType = 1;
-        [self startCrackDialogWithTitle:NSLocalizedString(@"Weak key attack against WEP-40...", "busy dialog")];
-        [_importController setMax:16];
-        [_curNet crackWithKeyByteLength:5 breath:4 import:_importController];
-    }
-}
-- (IBAction)weakCrack104bit:(id)sender {
-    if (([_curNet wep]==encryptionTypeWEP || [_curNet wep]==encryptionTypeWEP40)&&([_curNet weakPackets]<5)) {
-        [self showNeedMoreWeakPacketsDialog];
-    } else {
-        if (_curNet==Nil) return;
-        
-        _crackType = 1;
-        [self startCrackDialogWithTitle:NSLocalizedString(@"Weak key attack against WEP-104...", "busy dialog")];
-        [_importController setMax:17];
-        [_curNet crackWithKeyByteLength:13 breath:2 import:_importController];
-    }
-}
-
 - (IBAction)wordCrackWPA:(id)sender {
     if (_curNet==Nil) return;
     

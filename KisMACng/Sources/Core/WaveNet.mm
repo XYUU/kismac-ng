@@ -26,7 +26,6 @@
 #import <AppKit/NSSound.h>
 #import <BIGeneric/BIGeneric.h>
 #import "WaveNet.h"
-#import "WaveCracker.h"
 #import "WaveClient.h"
 #import "WaveHelper.h"
 #import "80211b.h"
@@ -66,7 +65,7 @@ int lengthSort(id string1, id string2, void *context)
     
     aID = nil;
     
-    aWeak=[[NSMutableDictionary dictionaryWithCapacity:13] retain];
+    _ivData = [[NSMutableDictionary dictionary] retain];
     aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
     aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
     aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
@@ -125,7 +124,6 @@ int lengthSort(id string1, id string2, void *context)
         aCurSignal=[coder decodeIntForKey:@"aCurSignal"];
         _type=(networkType)[coder decodeIntForKey:@"aType"];
         _isWep = (encryptionType)[coder decodeIntForKey:@"aIsWep"];
-        _weakPackets=[coder decodeIntForKey:@"aWeakPackets"];
         _dataPackets=[coder decodeIntForKey:@"aDataPackets"];
         _liveCaptured=[coder decodeBoolForKey:@"_liveCaptured"];;
         
@@ -162,7 +160,7 @@ int lengthSort(id string1, id string2, void *context)
         }
         aDate=[[coder decodeObjectForKey:@"aDate"] retain];
         aFirstDate=[[coder decodeObjectForKey:@"aFirstDate"] retain];
-        aWeak=[[coder decodeObjectForKey:@"aWeak"] retain];
+        _ivData = [[coder decodeObjectForKey:@"ivData"] retain];
         aPacketsLog=[[coder decodeObjectForKey:@"aPacketsLog"] retain];
         aARPLog=[[coder decodeObjectForKey:@"aARPLog"] retain];
         aACKLog=[[coder decodeObjectForKey:@"aACKLog"] retain];
@@ -173,7 +171,7 @@ int lengthSort(id string1, id string2, void *context)
         aClients=[[coder decodeObjectForKey:@"aClients"] retain];
         aClientKeys=[[coder decodeObjectForKey:@"aClientKeys"] retain];
         
-        if (!aWeak) aWeak=[[NSMutableDictionary dictionaryWithCapacity:13] retain];
+        if (!_ivData) _ivData = [[NSMutableDictionary dictionary] retain];
         if (!aPacketsLog) aPacketsLog=[[NSMutableArray arrayWithCapacity:20] retain];
         if (!aARPLog) aARPLog=[[NSMutableArray arrayWithCapacity:20] retain];
         if (!aACKLog) aACKLog=[[NSMutableArray arrayWithCapacity:20] retain];
@@ -266,7 +264,7 @@ int lengthSort(id string1, id string2, void *context)
     [_netView setName:_SSID];
     [_netView setCoord:wp];
     
-    aWeak = [[NSMutableDictionary dictionaryWithCapacity:13] retain];
+    _ivData = [[NSMutableDictionary dictionary] retain];
     aPacketsLog = [[NSMutableArray arrayWithCapacity:20] retain];
     aARPLog  = [[NSMutableArray arrayWithCapacity:20] retain];
     aACKLog  = [[NSMutableArray arrayWithCapacity:20] retain];
@@ -305,7 +303,6 @@ int lengthSort(id string1, id string2, void *context)
             [coder encodeInt:_type forKey:@"aType"];
             [coder encodeInt:_isWep forKey:@"aIsWep"];
             [coder encodeInt:_packets forKey:@"aPackets"];
-            [coder encodeInt:_weakPackets forKey:@"aWeakPackets"];
             [coder encodeInt:_dataPackets forKey:@"aDataPackets"];
             [coder encodeInt:aChannel forKey:@"aChannel"];
             [coder encodeInt:_originalChannel forKey:@"originalChannel"];
@@ -331,7 +328,7 @@ int lengthSort(id string1, id string2, void *context)
             [coder encodeObject:aBSSID forKey:@"aBSSID"];
             [coder encodeObject:aDate forKey:@"aDate"];
             [coder encodeObject:aFirstDate forKey:@"aFirstDate"];
-            [coder encodeObject:aWeak forKey:@"aWeak"];
+            [coder encodeObject:_ivData forKey:@"ivData"];
             [coder encodeObject:aPacketsLog forKey:@"aPacketsLog"];
             [coder encodeObject:aARPLog forKey:@"aARPLog"];
             [coder encodeObject:aACKLog forKey:@"aACKLog"];
@@ -481,7 +478,6 @@ int lengthSort(id string1, id string2, void *context)
     int* p;
     id key;
     NSDictionary *dict;
-    NSMutableDictionary *mdict;
     NSEnumerator *e;
     
     temp = [net maxSignal];
@@ -515,7 +511,6 @@ int lengthSort(id string1, id string2, void *context)
     if ([aFirstDate compare:[net firstSeenDate]] == NSOrderedAscending)  [WaveHelper secureReplace:&aFirstDate withObject:[net firstSeenDate]];
         
     _packets +=     [net packets];
-    _weakPackets += [net weakPackets];
     _dataPackets += [net dataPackets];
     
     if (!_liveCaptured) _liveCaptured = [net liveCaptured];
@@ -533,13 +528,11 @@ int lengthSort(id string1, id string2, void *context)
     
     [WaveHelper addDictionary:[net coordinates] toDictionary:_coordinates];
     
-    //add all those weak packets to the log file
-    dict = [net weakPacketsDict];
+    //add all those unique ivs to the log file
+    dict = [net ivData];
     e = [dict keyEnumerator];
     while(key = [e nextObject]) {
-        mdict = [aWeak objectForKey:key];
-        if (mdict)  [WaveHelper addDictionary:[dict objectForKey:key] toDictionary:mdict];
-        else        [aWeak setObject:[dict objectForKey:key] forKey:key];
+        [_ivData setObject:[dict objectForKey:key] forKey:key];
     }
     
     [aPacketsLog addObjectsFromArray:[net weakPacketsLog]];
@@ -552,15 +545,9 @@ int lengthSort(id string1, id string2, void *context)
 - (void)parsePacket:(WavePacket*) w withSound:(bool)sound {
     NSString *clientid;
     WaveClient *lWCl;
-    int lResolvType;
-    unsigned int iv;
-    NSNumber* num, *num2;
-    NSMutableDictionary* x;
     encryptionType wep;
     unsigned int bodyLength;
-    
-    //int a, b;
-    //UInt8 B;
+    UInt8 *body;
     
     _packets++;
         
@@ -606,13 +593,14 @@ int lengthSort(id string1, id string2, void *context)
     switch ([w type]) {
         case IEEE80211_TYPE_DATA: //Data frame                        
             _dataPackets++;
-            //is it WEP?
-            if (_isWep > encryptionTypeNone) memcpy(aIV,[w framebody],3);	//sets the last IV thingy
+            body = [w framebody];
+            bodyLength = [w bodyLength];
+            
+            if (_isWep > encryptionTypeNone && bodyLength > 3) memcpy(aIV, body, 3);	//sets the last IV thingy
             
             if (_isWep==encryptionTypeWEP || _isWep==encryptionTypeWEP40) {
-                bodyLength = [w bodyLength];
                 
-                if (bodyLength>8) { //needs to have a fcs and an iv at least
+                if (bodyLength>10) { //needs to have a fcs, an iv and two bytes of data at least
                     
                     //this packet might be interesting for password checking, use the packet if we do not have enough, or f it is smaller than our smallest
                     if ([aPacketsLog count]<20 || [(NSString*)[aPacketsLog objectAtIndex:0] length] > bodyLength) {
@@ -629,43 +617,18 @@ int lengthSort(id string1, id string2, void *context)
                     if (([aACKLog count]<20)&&((bodyLength>=TCPACK_MIN_SIZE)||(bodyLength<=TCPACK_MAX_SIZE))) {
                         [aACKLog addObject:[NSString stringWithCString:(const char*)[w frame] length:[w length]]];
                     }
+                    
+                    unsigned int tmp;
+                    NSNumber* num, *num2;
 
-                    lResolvType = [w isResolved];	//check whether the packet is weak
-                    if (lResolvType>-1) {
-                        UInt8 *p = [w framebody];
-                        int a = (p[0] + p[1]) % N;
-                        int b = AMOD((p[0] + p[1]) - p[2], N);
-
-                        for(UInt8 B = 0; B < 13; B++) {
-                          if((((0 <= a && a < B) ||
-                             (a == B && b == (B + 1) * 2)) &&
-                             (B % 2 ? a != (B + 1) / 2 : 1)) ||
-                             (a == B + 1 && (B == 0 ? b == (B + 1) * 2 : 1)) ||
-                             (p[0] == B + 3 && p[1] == N - 1) ||
-                             (B != 0 && !(B % 2) ? (p[0] == 1 && p[1] == (B / 2) + 1) ||
-                             (p[0] == (B / 2) + 2 && p[1] == (N - 1) - p[0]) : 0)) {
-                                lResolvType = B;
-                                
-                                //if we dont have this type of packet make an array
-                                num=[NSNumber numberWithInt:lResolvType];
-                                x=[aWeak objectForKey:num];
-                                if (x==Nil) {
-                                    x=[[NSMutableDictionary dictionary] retain];
-                                    [aWeak setObject:x forKey:num];
-                                }
-                                
-                                //convert the iv to nextstep object
-                                iv=aIV[0]*0x10000+aIV[1]*0x100+aIV[2];
-                                num=[NSNumber numberWithUnsignedInt:iv];
-                                num2=[x objectForKey:num];
-                                if (num2==Nil) {
-                                    //we dont have the iv => log it
-                                    [x setObject:[NSNumber numberWithUnsignedChar:([w framebody][4] ^ 0xAA)] forKey:num];
-                                    _weakPackets++;
-                                }
-                            }
-                        }
-                    }
+                    //convert the iv to nextstep object
+                    tmp = body[3] << 24 | body[0] << 16 | body[1] << 8  | body[2];
+                    num = [NSNumber numberWithUnsignedInt: tmp];
+                    
+                    tmp = body[4] << 8 | body[5];
+                    num2 = [NSNumber numberWithUnsignedInt: tmp];
+                    
+                    [_ivData setObject:num2 forKey:num];
                 }
             }
             break;
@@ -971,8 +934,8 @@ int lengthSort(id string1, id string2, void *context)
 - (int)packets {
     return _packets;
 }
-- (int)weakPackets {
-    return _weakPackets;
+- (int)uniqueIVs {
+    return [_ivData count];
 }
 - (int)dataPackets {
     return _dataPackets;
@@ -982,9 +945,6 @@ int lengthSort(id string1, id string2, void *context)
 }
 - (bool)liveCaptured {
     return _liveCaptured;
-}
-- (NSDictionary*)weakPacketsDict {
-    return aWeak;
 }
 - (NSArray*)weakPacketsLog {
     return aPacketsLog;
@@ -1010,6 +970,9 @@ int lengthSort(id string1, id string2, void *context)
 }
 - (NSDictionary*)coordinates {
     return _coordinates;
+}
+- (NSDictionary*)ivData {
+    return _ivData;
 }
 - (BOOL)passwordAvailable {
     return _password != nil;
@@ -1398,29 +1361,6 @@ typedef int (*SORTFUNC)(id, id, void *);
     [im terminateWithCode: 1];
     return NO;
 }
-#pragma mark -
-#pragma mark WEP attack
-#pragma mark -
-
-- (BOOL)crackWithKeyByteLength:(unsigned int)a breath:(unsigned int)b import:(ImportController*)im {
-    if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) {
-        _crackErrorString = [NSLocalizedString(@"The selected network is not WEP encrypted", @"Error description for cracking.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-
-    if (_password) {
-        _crackErrorString = [NSLocalizedString(@"KisMAC did already reveal the password.", @"Error description for WPA crack.") retain];
-        [im terminateWithCode:-1];
-        return NO;
-    }
-
-    if (_cracker==Nil) _cracker=[[WaveCracker alloc] init];
-    _crackErrorString = [NSLocalizedString(@"The probabilistic attack was unsuccessful.", @"Error description for weak WEP crack.") retain];
-    [_cracker crackWithKeyByteLength:a net:self breath:b import:im];
-    
-    return YES;
-}
 
 #pragma mark -
 #pragma mark Reinjection stuff
@@ -1491,7 +1431,7 @@ typedef int (*SORTFUNC)(id, id, void *);
     [aPacketsLog release];
     [aARPLog release];
     [aACKLog release];
-    [aWeak release];
+    [_ivData release];
     [aClients release];
     [aClientKeys release];
     [aComment release];

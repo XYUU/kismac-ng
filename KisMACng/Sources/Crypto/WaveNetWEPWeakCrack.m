@@ -24,18 +24,48 @@
 */
 
 #import "WaveNetWEPWeakCrack.h"
+#import "AirCrackWrapper.h"
+#import "KisMACNotifications.h"
+#import <BIGeneric/BINSExtensions.h>
 
+#define RET { [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
+#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; }
 
 @implementation WaveNet(WEPWeakCrackExtension)
 
-- (void)crackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen {
-    char option[4];
+- (void)performCrackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen {
     int temp;
+    char keyID;
+    enum keyLen len;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    CHECK;
     
     temp = [keyidAndLen intValue];
-    memcpy(&option, &temp, 4);
     
+    keyID = temp & 0xFF;
+    NSParameterAssert(keyID <= 3 && keyID >= 0);
+    len   = (temp >> 8) & 0xFF;
+    NSParameterAssert(len == keyLen104bit || len == keyLen40bit);
+
+    AirCrackWrapper *a = [[AirCrackWrapper alloc] init];
     
+    [a setKeyLen:len];
+    [a setKeyID:keyID];
+    if (![a readIVs:_ivData]) { [a release]; RET; }
+    if ([a attack]) {
+        NSData *d = [a key];
+        const UInt8 *k = [d bytes];
+        int i;
+        
+        _password = [[NSMutableString stringWithFormat:@"%.2x", k[0]] retain];
+        for (i=1; i<len;i++)
+            [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", k[i]]];
+    }
+    
+    [a release];
+
+    RET;
 }
 
 @end

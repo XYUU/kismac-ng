@@ -51,7 +51,6 @@ struct graphStruct {
     networkType _type;          //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel 4=probe 5=lucent tunnel
     int _packets;		//# of packets
     int _packetsPerChannel[16];	//how many packets on each channel
-    int _weakPackets;		//# of weak packets
     int _dataPackets;		//# of data packets
     double aBytes;		//bytes, float because of size
     int graphLength;
@@ -82,10 +81,10 @@ struct graphStruct {
     NSString* aID;
     NSDate* aDate;		//current date
     NSDate* aFirstDate;
-    NSMutableDictionary* aWeak;	//dictionary of all weak packets
-    NSMutableArray* aPacketsLog;//array with a couple of packets to calculate checksum
-    NSMutableArray* aARPLog;	//array with a couple of packets to do reinjection attack
-    NSMutableArray* aACKLog;	//array with a couple of packets to do reinjection attack
+    NSMutableDictionary* _ivData;   //dictionary of all weak packets
+    NSMutableArray* aPacketsLog;    //array with a couple of packets to calculate checksum
+    NSMutableArray* aARPLog;        //array with a couple of packets to do reinjection attack
+    NSMutableArray* aACKLog;        //array with a couple of packets to do reinjection attack
     NSMutableDictionary* aClients;
     NSMutableArray* aClientKeys;
     NSMutableDictionary* _coordinates;
@@ -137,7 +136,6 @@ struct graphStruct {
 - (NSDate *)firstSeenDate;
 - (NSString*)data;
 - (NSString*)getVendor;
-- (NSDictionary*)weakPacketsDict;	//all weak packets that we have
 - (NSArray*)weakPacketsLog;             //a couple of encrypted packets
 - (NSMutableArray*)arpPacketsLog;	//a couple of reinject packets
 - (NSMutableArray*)ackPacketsLog;	//a couple of reinject packets
@@ -146,6 +144,7 @@ struct graphStruct {
 - (NSString*)comment;
 - (void)setComment:(NSString*)comment;
 - (NSDictionary*)coordinates;
+- (NSDictionary*)ivData;
 - (BOOL)passwordAvailable;
 
 - (NSString *)latitude;
@@ -162,7 +161,7 @@ struct graphStruct {
 - (int)originalChannel;
 - (networkType)type;
 - (int)packets;
-- (int)weakPackets;			//number of weak Packets
+- (int)uniqueIVs;
 - (int)dataPackets;
 - (int*)packetsPerChannel;
 - (void)setNetID:(int)netID;
@@ -180,7 +179,6 @@ struct graphStruct {
 
 - (BOOL)crackWPAWithImportController:(ImportController*)im;
 - (BOOL)crackLEAPWithImportController:(ImportController*)im;
-- (BOOL)crackWithKeyByteLength:(unsigned int)a breath:(unsigned int)b import:(ImportController*)im;
 - (void)reinjectWithImportController:(ImportController*)im andScanner:(id)scanner;
 
 - (NSString*)crackError;

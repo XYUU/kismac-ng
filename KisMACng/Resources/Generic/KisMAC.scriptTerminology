@@ -101,6 +101,14 @@
             Description = "start a wordlist attack against a 104-bit generic network";
             UnnamedArgument = { Description = "The Wordlist to use. Words separated by newlines."; };
         };
+        WeakSchedulingAttack = {
+            Name = weakSchedulingAttack;
+            Description = "Performs a weak scheduling attack. Requires a lot of data packets to succeed.";
+            Arguments = {
+                KeyID = { Name = "keyID"; Description = "Selects the key ID to attack. Defaults to 0."; };
+                KeyLen = { Name = "keyLen"; Description = "Length of the WEP key in bytes. Must be 5 for 40-bit or 13 for 104-bit attack. Defaults to 13."; };
+            };
+        };
         ShowNetworksInMap = {
             Name = showNetworksInMap;
             Description = "set whether networks are shown in the map view";

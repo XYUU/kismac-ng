@@ -27,13 +27,12 @@
 #import "WaveNet.h"
 
 enum keyLen {
-    keyLen40bit = 0,
-    keyLen104bit = 1,
-    keyLen40and104bit = 2,
+    keyLen40bit = 5,
+    keyLen104bit = 13,
 };
 
 @interface WaveNet(WEPWeakCrackExtension)
 
-- (void)crackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen;
+- (void)performCrackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen;
 
 @end

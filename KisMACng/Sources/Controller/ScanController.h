@@ -173,9 +173,6 @@ typedef enum {
 - (IBAction)authFloodNetwork:(id)sender;
 - (IBAction)injectPackets:(id)sender;
 
-- (IBAction)weakCrackGeneric:(id)sender;
-- (IBAction)weakCrack40bit:(id)sender;
-- (IBAction)weakCrack104bit:(id)sender;
 - (IBAction)wordCrackWPA:(id)sender;
 - (IBAction)wordCrackLEAP:(id)sender;
 

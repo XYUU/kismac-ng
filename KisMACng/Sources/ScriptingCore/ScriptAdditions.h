@@ -53,6 +53,8 @@
 - (id)wordlist104bitApple:(NSScriptCommand *)command;
 - (id)wordlist104bitMD5:(NSScriptCommand *)command;
 
+- (id)weakSchedulingAttack:(NSScriptCommand *)command;
+
 - (id)showNetworksInMap:(NSScriptCommand*)command;
 - (id)showTraceInMap:(NSScriptCommand*)command;
 - (id)setCurrentPosition:(NSScriptCommand*)command;

@@ -27,7 +27,6 @@
 #import <CoreFoundation/CFString.h>
 #import "80211b.h"
 #import "RC4.h"
-#import "WaveCracker.h"
 #import <pcap.h>
 #import "WaveHelper.h"
 #import "FCS.h"

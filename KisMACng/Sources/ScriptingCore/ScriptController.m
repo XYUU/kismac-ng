@@ -143,8 +143,10 @@
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:NO];
     if ([op runModalForTypes:nil]==NSOKButton) {
-        for (i = 0; i < [[op filenames] count]; i++)
-            [ScriptingEngine selfSendEvent:'KImP' withDefaultArgString:[[op filenames] objectAtIndex:i]];
+        for (i = 0; i < [[op filenames] count]; i++) {
+            NSString *file = [[op filenames] objectAtIndex:i];
+            [ScriptingEngine selfSendEvent:'KImP' withDefaultArgString:file];
+        }
     }
 }
 
@@ -260,6 +262,31 @@
     }
 }
 
+#pragma mark -
+
+- (IBAction)weakSchedulingAttack40bit:(id)sender {
+    WEPCHECKS;
+    NSAppleEventDescriptor *keyLen = [NSAppleEventDescriptor descriptorWithInt32:5];
+    
+    NSDictionary *args = [NSDictionary dictionaryWithObject:keyLen forKey:[NSString stringWithFormat:@"%d", 'KCKl']];
+    [ScriptingEngine selfSendEvent:'KCSc' withArgs:args];
+}
+
+- (IBAction)weakSchedulingAttack104bit:(id)sender {
+    WEPCHECKS;
+    [ScriptingEngine selfSendEvent:'KCSc'];
+}
+
+- (IBAction)weakSchedulingAttack40And104bit:(id)sender {
+    WEPCHECKS;
+    NSAppleEventDescriptor *keyLen = [NSAppleEventDescriptor descriptorWithInt32:5];
+    
+    NSDictionary *args = [NSDictionary dictionaryWithObject:keyLen forKey:[NSString stringWithFormat:@"%d", 'KCKl']];
+    [ScriptingEngine selfSendEvent:'KCSc' withArgs:args];
+    [ScriptingEngine selfSendEvent:'KCSc'];
+}
+
+#pragma mark -
 
 - (IBAction)showNetworksInMap:(id)sender {
     BOOL show = ([sender state] == NSOffState);

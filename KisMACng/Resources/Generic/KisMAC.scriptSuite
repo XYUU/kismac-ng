@@ -26,6 +26,7 @@
                 "KisMAC.Wordlist40bitApple"     = "wordlist40bitApple:";
                 "KisMAC.Wordlist104bitApple"    = "wordlist104bitApple:";
                 "KisMAC.Wordlist104bitMD5"      = "wordlist104bitMD5:";
+                "KisMAC.WeakSchedulingAttack"   = "weakSchedulingAttack:";
                 "KisMAC.Busy"                   = "busy:";
                 "KisMAC.ShowNetworksInMap"      = "showNetworksInMap:";
                 "KisMAC.ShowTraceInMap"         = "showTraceInMap:";
@@ -125,6 +126,14 @@
             AppleEventCode = KCWM; 
             CommandClass = NSScriptCommand;
             UnnamedArgument = { Optional = NO; Type = "NSString<FilePath>"; };
+        };
+        WeakSchedulingAttack = {
+            AppleEventCode = KCSc; 
+            CommandClass = NSScriptCommand;
+            Arguments = {
+                KeyID = { AppleEventCode = KCKi; Optional = YES; Type = "NSNumber<Int>"; }; 
+                KeyLen = { AppleEventCode = KCKl; Optional = YES; Type = "NSNumber<Int>"; }; 
+            };
         };
         Busy = {
             AppleEventCode = KBus; 

@@ -181,7 +181,7 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
             case indexDataPackets:
                  return (col) ? NSLocalizedString(@"Data Packets", "table description") : [NSString stringWithFormat:@"%i", [_n dataPackets]];
             case indexWeakPackets:
-                 return (col) ? NSLocalizedString(@"Weak IVs", "table description") : [NSString stringWithFormat:@"%i", [_n weakPackets]];
+                 return (col) ? NSLocalizedString(@"Unique IVs", "table description") : [NSString stringWithFormat:@"%i", [_n uniqueIVs]];
             case indexBytes:
                  return (col) ? NSLocalizedString(@"Bytes", "table description") : [_n data];
             case indexKey:
@@ -220,7 +220,7 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
             case 2:
                  return @"";
             case 3:
-                 return (col) ? NSLocalizedString(@"Weak Packets", "table description") : [NSString stringWithFormat:@"%i", [_n weakPackets]];
+                 return (col) ? NSLocalizedString(@"Unique IVs", "table description") : [NSString stringWithFormat:@"%i", [_n uniqueIVs]];
             case 4:
                  return (col) ? NSLocalizedString(@"Data Packets", "table description") : [NSString stringWithFormat:@"%i", [_n dataPackets]];
             case 5:

@@ -137,9 +137,6 @@
                 showInfo = id; 
                 showNetHierarch = id; 
                 showPrefs = id; 
-                weakCrack104bit = id; 
-                weakCrack40bit = id; 
-                weakCrackGeneric = id; 
                 wordCrackLEAP = id; 
                 wordCrackWPA = id; 
             }; 
@@ -215,6 +212,9 @@
                 showTraceInMap = id; 
                 showTrafficView = id; 
                 toggleScan = id; 
+                weakSchedulingAttack104bit = id; 
+                weakSchedulingAttack40And104bit = id; 
+                weakSchedulingAttack40bit = id; 
                 wordlist104bitApple = id; 
                 wordlist104bitMD5 = id; 
                 wordlist40bitApple = id; 

@@ -34,9 +34,14 @@ static BOOL _alertDone;
 - (NSString*)standardPath {
     NSMutableString *path;
     
-    path = [NSMutableString stringWithString:self];
-    [path replaceOccurrencesOfString:@":" withString:@"/" options:0 range:NSMakeRange(0, [path length])];
-    return [path stringByStandardizingPath];
+    if ([self length] > 2 && [[self substringToIndex:2] isEqualToString:@"/:"]) {
+        path = [NSMutableString stringWithString:[self substringFromIndex:1]];
+        [path replaceOccurrencesOfString:@"/" withString:@">" options:0 range:NSMakeRange(0, [path length])];
+        [path replaceOccurrencesOfString:@":" withString:@"/" options:0 range:NSMakeRange(0, [path length])];
+        [path replaceOccurrencesOfString:@">" withString:@":" options:0 range:NSMakeRange(0, [path length])];
+        
+        return path;
+    } else return [self stringByStandardizingPath];
 }
 
 @end

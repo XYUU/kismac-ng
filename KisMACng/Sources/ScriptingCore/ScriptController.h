@@ -57,6 +57,10 @@
 - (IBAction)wordlist104bitApple:(id)sender;
 - (IBAction)wordlist104bitMD5:(id)sender;
 
+- (IBAction)weakSchedulingAttack40And104bit:(id)sender;
+- (IBAction)weakSchedulingAttack40bit:(id)sender;
+- (IBAction)weakSchedulingAttack104bit:(id)sender;
+
 - (IBAction)showNetworksInMap:(id)sender;
 - (IBAction)showTraceInMap:(id)sender;
 @end

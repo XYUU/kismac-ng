@@ -135,6 +135,17 @@
    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] wordlist104bitMD5:[command directParameter]]];
 }
 
+- (id)weakSchedulingAttack:(NSScriptCommand *)command {
+    NSDictionary *args = [command arguments];
+    int keyID, keyLen;
+    
+    keyID = [[args objectForKey:@"KeyID"] intValue];
+    keyLen = [[args objectForKey:@"KeyLen"] intValue];
+    if (keyLen == 0) keyLen = 13;
+    
+    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] weakSchedulingAttackForKeyLen:keyLen andKeyID:keyID]];
+}
+
 #pragma mark -
 
 - (id)showNetworksInMap:(NSScriptCommand*)command {
