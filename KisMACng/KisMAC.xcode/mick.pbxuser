@@ -164,16 +164,16 @@
 	};
 	003533AA06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1358, 9169}}";
-			sepNavSelRange = "{25106, 0}";
-			sepNavVisRect = "{{0, 8694}, {964, 463}}";
+			sepNavIntBoundsRect = "{{0, 0}, {862, 9337}}";
+			sepNavSelRange = "{5304, 6}";
+			sepNavVisRect = "{{0, 1676}, {862, 330}}";
 		};
 	};
 	003533AB06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {3602, 10891}}";
-			sepNavSelRange = "{26280, 0}";
-			sepNavVisRect = "{{0, 10290}, {964, 463}}";
+			sepNavIntBoundsRect = "{{0, 0}, {862, 11059}}";
+			sepNavSelRange = "{2622, 6}";
+			sepNavVisRect = "{{0, 948}, {862, 330}}";
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
@@ -200,9 +200,9 @@
 	};
 	003533AF06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 6033}}";
-			sepNavSelRange = "{12783, 0}";
-			sepNavVisRect = "{{0, 5542}, {964, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {862, 6061}}";
+			sepNavSelRange = "{6272, 6}";
+			sepNavVisRect = "{{0, 2908}, {862, 330}}";
 		};
 	};
 	003533B006A5DD8500AB4577 = {
@@ -419,9 +419,9 @@
 	};
 	003533FB06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1239, 10079}}";
-			sepNavSelRange = "{13109, 0}";
-			sepNavVisRect = "{{0, 5549}, {1239, 425}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 10079}}";
+			sepNavSelRange = "{16164, 0}";
+			sepNavVisRect = "{{0, 6886}, {964, 478}}";
 		};
 	};
 	003533FC06A5DD8500AB4577 = {
@@ -585,6 +585,1101 @@
 			sepNavVisRect = "{{0, 0}, {964, 463}}";
 		};
 	};
+	005B1202072FFDF400906C36 = {
+		fRef = 003533FB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "GPSController.m: 515";
+		rLen = 0;
+		rLoc = 16164;
+		rType = 0;
+		vrLen = 1169;
+		vrLoc = 15434;
+	};
+	005B1203072FFDF400906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 213;
+		rType = 1;
+	};
+	005B1204072FFDF400906C36 = {
+		fRef = 003533FB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "GPSController.m: 515";
+		rLen = 0;
+		rLoc = 16164;
+		rType = 0;
+		vrLen = 1169;
+		vrLoc = 15434;
+	};
+	005B1205072FFDF400906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B1208072FFE0400906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B1209072FFE3700906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B120A072FFE4300906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B122D072FFE8B00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 7462;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B1230072FFE9000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 7462;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B1231072FFEE400906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 231";
+		rLen = 0;
+		rLoc = 8032;
+		rType = 0;
+		vrLen = 1152;
+		vrLoc = 7454;
+	};
+	005B1232072FFEE400906C36 = {
+		fRef = 003533AA06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5304;
+		rType = 0;
+		vrLen = 956;
+		vrLoc = 4939;
+	};
+	005B1233072FFEE400906C36 = {
+		fRef = 003533AB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 2622;
+		rType = 0;
+		vrLen = 976;
+		vrLoc = 2075;
+	};
+	005B1234072FFEE400906C36 = {
+		fRef = 003533AF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 6272;
+		rType = 0;
+		vrLen = 930;
+		vrLoc = 5752;
+	};
+	005B1235072FFEE400906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+	};
+	005B1236072FFEE400906C36 = {
+		fRef = 003533AA06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5304;
+		rType = 0;
+		vrLen = 956;
+		vrLoc = 4939;
+	};
+	005B1237072FFEE400906C36 = {
+		fRef = 003533AB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 2622;
+		rType = 0;
+		vrLen = 976;
+		vrLoc = 2075;
+	};
+	005B1238072FFEE400906C36 = {
+		fRef = 003533AF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 6272;
+		rType = 0;
+		vrLen = 930;
+		vrLoc = 5752;
+	};
+	005B1239072FFEE500906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B123A072FFF2000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B123B072FFF2000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B123C072FFF4A00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 216";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 897;
+		vrLoc = 7135;
+	};
+	005B123D072FFF4A00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B123E072FFF6F00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = _mapImage;
+		rLen = 9;
+		rLoc = 6569;
+		rType = 0;
+		vrLen = 1347;
+		vrLoc = 5952;
+	};
+	005B123F072FFF6F00906C36 = {
+		fRef = 00C5F12B06DE0C98001EC02F;
+		isa = PBXTextBookmark;
+		name = _mapImage;
+		rLen = 9;
+		rLoc = 3728;
+		rType = 0;
+		vrLen = 1378;
+		vrLoc = 2840;
+	};
+	005B1240072FFF6F00906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 37";
+		rLen = 0;
+		rLoc = 1119;
+		rType = 0;
+		vrLen = 863;
+		vrLoc = 550;
+	};
+	005B1241072FFF6F00906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 277";
+		rLen = 0;
+		rLoc = 8854;
+		rType = 0;
+		vrLen = 1326;
+		vrLoc = 7940;
+	};
+	005B1242072FFF6F00906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = "MapViewAreaView.mm: 76";
+		rLen = 0;
+		rLoc = 2237;
+		rType = 0;
+		vrLen = 1330;
+		vrLoc = 1873;
+	};
+	005B1243072FFF6F00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = _mapImage;
+		rLen = 9;
+		rLoc = 6569;
+		rType = 0;
+		vrLen = 1347;
+		vrLoc = 5952;
+	};
+	005B1244072FFF6F00906C36 = {
+		fRef = 00C5F12B06DE0C98001EC02F;
+		isa = PBXTextBookmark;
+		name = _mapImage;
+		rLen = 9;
+		rLoc = 3728;
+		rType = 0;
+		vrLen = 1378;
+		vrLoc = 2840;
+	};
+	005B1245072FFF6F00906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 37";
+		rLen = 0;
+		rLoc = 1119;
+		rType = 0;
+		vrLen = 863;
+		vrLoc = 550;
+	};
+	005B1246072FFF6F00906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 277";
+		rLen = 0;
+		rLoc = 8854;
+		rType = 0;
+		vrLen = 1326;
+		vrLoc = 7940;
+	};
+	005B1247072FFF6F00906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = _mapImage;
+		rLen = 0;
+		rLoc = 1162;
+		rType = 0;
+		vrLen = 1036;
+		vrLoc = 684;
+	};
+	005B1248072FFF6F00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B12490730000500906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = "MapViewAreaView.mm: 210";
+		rLen = 0;
+		rLoc = 6926;
+		rType = 0;
+		vrLen = 953;
+		vrLoc = 6076;
+	};
+	005B124A0730000500906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B124B0730001C00906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = "MapViewAreaView.mm: 202";
+		rLen = 0;
+		rLoc = 6681;
+		rType = 0;
+		vrLen = 945;
+		vrLoc = 6076;
+	};
+	005B124C0730001C00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B124D0730009100906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = "MapViewAreaView.mm: 202";
+		rLen = 0;
+		rLoc = 6681;
+		rType = 0;
+		vrLen = 945;
+		vrLoc = 6076;
+	};
+	005B124E0730009100906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 184";
+		rLen = 0;
+		rLoc = 6533;
+		rType = 0;
+		vrLen = 1355;
+		vrLoc = 5943;
+	};
+	005B124F0730009100906C36 = {
+		fRef = 009D64F206FF73BA00B0F1EC;
+		isa = PBXTextBookmark;
+		name = "MapViewAreaView.mm: 202";
+		rLen = 0;
+		rLoc = 6681;
+		rType = 0;
+		vrLen = 945;
+		vrLoc = 6076;
+	};
+	005B12500730009100906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 217";
+		rLen = 0;
+		rLoc = 7601;
+		rType = 0;
+		vrLen = 872;
+		vrLoc = 7180;
+	};
+	005B12510730009100906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B1252073000C000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 218";
+		rLen = 0;
+		rLoc = 7680;
+		rType = 0;
+		vrLen = 872;
+		vrLoc = 7180;
+	};
+	005B1253073000C000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B12560730028200906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 218";
+		rLen = 0;
+		rLoc = 7680;
+		rType = 0;
+		vrLen = 872;
+		vrLoc = 7180;
+	};
+	005B12570730028200906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 277";
+		rLen = 0;
+		rLoc = 8854;
+		rType = 0;
+		vrLen = 1326;
+		vrLoc = 7940;
+	};
+	005B12580730028200906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 218";
+		rLen = 0;
+		rLoc = 7680;
+		rType = 0;
+		vrLen = 872;
+		vrLoc = 7180;
+	};
+	005B12590730028200906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "- (void)zoomThread:(id)object ";
+		rLen = 30;
+		rLoc = 8588;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 237;
+	};
+	005B125A0730028200906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B125B0730036900906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 264";
+		rLen = 0;
+		rLoc = 8208;
+		rType = 0;
+		vrLen = 1256;
+		vrLoc = 8011;
+	};
+	005B125C0730036900906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B125D0730043200906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 264";
+		rLen = 0;
+		rLoc = 8208;
+		rType = 0;
+		vrLen = 706;
+		vrLoc = 8779;
+	};
+	005B125E0730043200906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 37";
+		rLen = 0;
+		rLoc = 1119;
+		rType = 0;
+		vrLen = 863;
+		vrLoc = 550;
+	};
+	005B125F0730043200906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.m: 264";
+		rLen = 0;
+		rLoc = 8208;
+		rType = 0;
+		vrLen = 706;
+		vrLoc = 8779;
+	};
+	005B12600730043200906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 31";
+		rLen = 0;
+		rLoc = 1043;
+		rType = 0;
+		vrLen = 796;
+		vrLoc = 617;
+	};
+	005B12610730043200906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B12620730048B00906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 6";
+		rLen = 0;
+		rLoc = 105;
+		rType = 0;
+		vrLen = 1086;
+		vrLoc = 0;
+	};
+	005B12630730048B00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B12660730051A00906C36 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 741}}";
+			sepNavSelRange = "{1329, 12}";
+			sepNavVisRect = "{{0, 250}, {964, 478}}";
+		};
+	};
+	005B12670730051A00906C36 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 3583}}";
+			sepNavSelRange = "{7047, 0}";
+			sepNavVisRect = "{{0, 2862}, {964, 478}}";
+		};
+	};
+	005B126A0730056000906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tMapControlPanel.h\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Roßberg\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n\n#import <AppKit/AppKit.h>\n#import \"BIImageView.h\"\n\ntypedef struct {\n    float red;\n    float green;\n    float blue;\n    float alpha;\n} col;\n\ntypedef struct {\n    col border;\n    col fill;\n} colState;\n\n@interface MapControlPanel : BIImageView {\n    colState    _current[6];\n    colState    _delta[6];\n    colState    _target[6];\n    NSLock      *_zoomLock;\n    NSTimer     *_timeouts[6];\n}\n\n- (void)mouseMovedToPoint:(NSPoint)p;\n- (void)mouseDownAtPoint:(NSPoint)p;\n\n@end\n";
+		rLen = 1417;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 797;
+		vrLoc = 620;
+	};
+	005B126B0730056000906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tMapControlPanel.m\n        Program:\t\tKisMAC\n\tAuthor:\t\t\tMichael Roßberg\n\t\t\t\tmick@binaervarianz.de\n\tDescription:\t\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n\n#import \"MapControlPanel.h\"\n#import \"WaveHelper.h\"\n#import \"MapView.h\"\n\n#define CONTROLSIZE 30.0\n#define CURVERAD 5.0\n#define BORDER 1.0\n#define OFFSET (CURVERAD + BORDER)\n#define TRIANGLESIZE 15.0\n\ninline col fillColor() {\n    col c;\n    c.red = 35.0/255.0;\n    c.green = 45.33333/255.0;\n    c.blue = 58.666/255.0;\n    c.alpha = .5;\n    return c;\n}\n\ninline col borderColor() {\n    col c;\n    c.red = 105.0/255.0;\n    c.green = 136.0/255.0;\n    c.blue = 175.0/255.0;\n    c.alpha = 1.0;\n    return c;\n}\n\ninline col highBorderColor() {\n    col c;\n    c.red = 1;\n    c.green = 1;\n    c.blue = 1;\n    c.alpha = 1;\n    return c;\n}\n\ninline col highFillColor() {\n    col c;\n    c.red = .333333;\n    c.green = .333333;\n    c.blue = .333333;\n    c.alpha = .5;\n    return c;\n}\n\ninline col clickBorderColor() {\n    return fillColor();\n}\n\ninline col clickFillColor() {\n    return borderColor();\n}\n\ninline NSColor* col2NSColor(col c) {\n    return [NSColor colorWithDeviceRed:c.red green:c.green blue:c.blue alpha:c.alpha];\n}\n\ninline col delta(col c1, col c2, int speed) {\n    col c;\n    c.red   = (c1.red   - c2.red)   / speed;\n    c.green = (c1.green - c2.green) / speed;\n    c.blue  = (c1.blue  - c2.blue)  / speed;\n    c.alpha = (c1.alpha - c2.alpha) / speed;\n    return c;\n}\n\n@implementation MapControlPanel\n\n- (void)_drawFrameAtPoint:(NSPoint)p index:(int)index {\n    NSBezierPath *b = [NSBezierPath bezierPath];\n    \n    [b moveToPoint:NSMakePoint(p.x+OFFSET, p.y+BORDER)];\n    \n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + CONTROLSIZE - OFFSET, p.y + OFFSET) radius:CURVERAD\n\t\t\t       startAngle:270\n\t\t\t\t endAngle:0];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + CONTROLSIZE - OFFSET, p.y + CONTROLSIZE - OFFSET) radius:CURVERAD\n\t\t\t       startAngle:0\n\t\t\t\t endAngle:90];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + OFFSET, p.y + CONTROLSIZE - OFFSET) radius:CURVERAD\n\t\t\t       startAngle:90\n\t\t\t\t endAngle:180];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + OFFSET, p.y + OFFSET) radius:CURVERAD\n\t\t\t       startAngle:180\n\t\t\t\t endAngle:270];\n    [b closePath];\n    \n    [col2NSColor(_current[index].fill) set];\n    [b fill];\n    \n    [col2NSColor(_current[index].border) set];\n    [b stroke];\n    \n    b = [NSBezierPath bezierPath];\n    switch (index) {\n    case 0:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 + TRIANGLESIZE/2 - BORDER, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(0, TRIANGLESIZE)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE, -TRIANGLESIZE/2)];\n        break;\n    case 1:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 + TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, 0)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE/2, -TRIANGLESIZE)];\n        break;\n    case 2:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2 - BORDER, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(0, TRIANGLESIZE)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, -TRIANGLESIZE/2)];\n        break;\n    case 3:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2, p.y + CONTROLSIZE/2)];\n        [b appendBezierPathWithRect:NSMakeRect(p.x + CONTROLSIZE/2 - TRIANGLESIZE/8, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2, TRIANGLESIZE/4, TRIANGLESIZE)];\n    case 5:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2, p.y + CONTROLSIZE/2)];\n        [b appendBezierPathWithRect:NSMakeRect(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 - TRIANGLESIZE/8, TRIANGLESIZE, TRIANGLESIZE/4)];\n        break;\n    case 4:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, 0)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE/2, TRIANGLESIZE)];\n        break;\n    }\n    [b closePath];\n    [b fill];\n}\n\n- (void)_generateCache {\n    int x, y;\n    \n    NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(CONTROLSIZE*3, CONTROLSIZE*2)];\n    [img lockFocus];\n    for (x=0; x<3; x++) \n        for (y=0; y<2; y++)\n            [self _drawFrameAtPoint:NSMakePoint(x*CONTROLSIZE, y*CONTROLSIZE) index:(x + (y * 3))];\n    [img unlockFocus];\n    [self setImage:img];\n    [img release];\n}\n\n- (id)init {\n    int i;\n    self = [super init];\n    if (!self) return nil;\n    \n    _zoomLock = [[NSLock alloc] init];\n    for (i = 0; i < 6; i++) {\n        _current[i].fill    = fillColor();\n        _current[i].border  = borderColor();\n    }\n    [self _generateCache];\n    \n    return self;\n}\n\n- (void)mouseMovedToPoint:(NSPoint)p {\n    int x, y, i;\n    p.x -= _frame.origin.x;\n    p.y -= _frame.origin.y;\n        \n    x = p.x / CONTROLSIZE;\n    y = p.y / CONTROLSIZE;\n    if (x > 2 || y > 1) {\n        NSLog(@\"MapControlPanel: Mouse out of bounds %f %f\", p.x, p.y);\n        return;\n    }\n    \n    i = x + (y * 3);\n    _target[i].fill    = highFillColor();\n    _target[i].border  = highBorderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 5);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 5);\n    \n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n\n    if (_timeouts[i]) {\n        [_timeouts[i] invalidate];\n    }\n    _timeouts[i] = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeout:) userInfo:[NSNumber numberWithInt:i] repeats:NO];\n}\n\n- (void)mouseDownAtPoint:(NSPoint)p {\n    int x, y, i;\n    p.x -= _frame.origin.x;\n    p.y -= _frame.origin.y;\n        \n    x = p.x / CONTROLSIZE;\n    y = p.y / CONTROLSIZE;\n    if (x > 2 || y > 1) {\n        NSLog(@\"MapControlPanel: Mouse out of bounds %f %f\", p.x, p.y);\n        return;\n    }\n    \n    i = x + (y * 3);\n    _target[i].fill    = clickFillColor();\n    _target[i].border  = clickBorderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 1);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 1);\n    \n    switch(i) {\n    case 0:\n        [[WaveHelper mapView] goLeft:self];\n        break;\n    case 1:\n        [[WaveHelper mapView] goDown:self];\n        break;\n    case 2:\n        [[WaveHelper mapView] goRight:self];\n        break;\n    case 3:\n        [[WaveHelper mapView] zoomIn:self];\n        break;\n    case 4:\n        [[WaveHelper mapView] goUp:self];\n        break;\n    case 5:\n        [[WaveHelper mapView] zoomOut:self];\n        break;\n    }\n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n\n    if (_timeouts[i]) {\n        [_timeouts[i] invalidate];\n    }\n    _timeouts[i] = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timeout:) userInfo:[NSNumber numberWithInt:i] repeats:NO];\n}\n\n- (void)timeout:(NSTimer*)timer {\n    int i = [[timer userInfo] intValue];\n    _target[i].fill    = fillColor();\n    _target[i].border  = borderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 20);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 20);\n    \n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n    _timeouts[i] = NULL;\n}\n\n#define ADJUSTCOMP(INDEX, COMP) if (_delta[INDEX].COMP != 0 && (_delta[INDEX].COMP > 0 ? _target[INDEX].COMP > _current[INDEX].COMP : _target[INDEX].COMP < _current[INDEX].COMP)) { _current[INDEX].COMP += _delta[INDEX].COMP; didSomething = YES;  }\n#define ADJUSTX(INDEX,X) ADJUSTCOMP(INDEX, X.red) ADJUSTCOMP(INDEX, X.green) ADJUSTCOMP(INDEX, X.blue) ADJUSTCOMP(INDEX, X.alpha)\n\n- (void)zoomThread:(id)object {\n    NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];\n    BOOL didSomething;\n    int i;\n    \n    if([_zoomLock tryLock]) {\n        [self retain];\n        while(YES) {\n            didSomething = NO;\n            for (i = 0; i < 6; i++) {\n                ADJUSTX(i, fill);\n                ADJUSTX(i, border);\n            }\n            if (!didSomething) break;\n            [self _generateCache];\n            [[WaveHelper mapView] setNeedsDisplayInRect:_frame];\n            [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];\n        }\n        [self release];\n        [_zoomLock unlock];\n    }\n\n    [subpool release];\n}\n\n\n#pragma mark -\n\n- (void)dealloc {\n    int i;\n    for (i = 0; i < 6; i++) {\n        if (_timeouts[i]) {\n            [_timeouts[i] invalidate];\n        }\n    }\n    \n    [_zoomLock release];\n    [super dealloc];\n}\n\n@end\n";
+		rLen = 9485;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 729;
+		vrLoc = 8756;
+	};
+	005B126C0730056000906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 41";
+		rLen = 0;
+		rLoc = 1274;
+		rType = 0;
+		vrLen = 936;
+		vrLoc = 446;
+	};
+	005B126D0730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: 41";
+		rLen = 0;
+		rLoc = 1187;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B126E0730056000906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 13";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 731;
+		vrLoc = 686;
+	};
+	005B126F0730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 210;
+		vrLoc = 0;
+	};
+	005B12700730056000906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "MapControlPanel.h: 13";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 797;
+		vrLoc = 620;
+	};
+	005B12710730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 210;
+		vrLoc = 0;
+	};
+	005B12720730056000906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tMapControlPanel.h\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Roßberg\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n\n#import <AppKit/AppKit.h>\n#import \"BIImageView.h\"\n\ntypedef struct {\n    float red;\n    float green;\n    float blue;\n    float alpha;\n} col;\n\ntypedef struct {\n    col border;\n    col fill;\n} colState;\n\n@interface MapControlPanel : BIImageView {\n    colState    _current[6];\n    colState    _delta[6];\n    colState    _target[6];\n    NSLock      *_zoomLock;\n    NSTimer     *_timeouts[6];\n}\n\n- (void)mouseMovedToPoint:(NSPoint)p;\n- (void)mouseDownAtPoint:(NSPoint)p;\n\n@end\n";
+		rLen = 1417;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 797;
+		vrLoc = 620;
+	};
+	005B12730730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: 53";
+		rLen = 0;
+		rLoc = 1371;
+		rType = 0;
+		vrLen = 685;
+		vrLoc = 686;
+	};
+	005B12740730056000906C36 = {
+		fRef = 0090AC8306E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tMapControlPanel.h\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Roßberg\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n\n#import <AppKit/AppKit.h>\n#import \"BIImageView.h\"\n\ntypedef struct {\n    float red;\n    float green;\n    float blue;\n    float alpha;\n} col;\n\ntypedef struct {\n    col border;\n    col fill;\n} colState;\n\n@interface MapControlPanel : BIImageView {\n    colState    _current[6];\n    colState    _delta[6];\n    colState    _target[6];\n    NSLock      *_zoomLock;\n    NSTimer     *_timeouts[6];\n}\n\n- (void)mouseMovedToPoint:(NSPoint)p;\n- (void)mouseDownAtPoint:(NSPoint)p;\n\n@end\n";
+		rLen = 1417;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 797;
+		vrLoc = 620;
+	};
+	005B12750730056000906C36 = {
+		fRef = 0090AC8406E5E3250096C5FC;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tMapControlPanel.m\n        Program:\t\tKisMAC\n\tAuthor:\t\t\tMichael Roßberg\n\t\t\t\tmick@binaervarianz.de\n\tDescription:\t\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n\n#import \"MapControlPanel.h\"\n#import \"WaveHelper.h\"\n#import \"MapView.h\"\n\n#define CONTROLSIZE 30.0\n#define CURVERAD 5.0\n#define BORDER 1.0\n#define OFFSET (CURVERAD + BORDER)\n#define TRIANGLESIZE 15.0\n\ninline col fillColor() {\n    col c;\n    c.red = 35.0/255.0;\n    c.green = 45.33333/255.0;\n    c.blue = 58.666/255.0;\n    c.alpha = .5;\n    return c;\n}\n\ninline col borderColor() {\n    col c;\n    c.red = 105.0/255.0;\n    c.green = 136.0/255.0;\n    c.blue = 175.0/255.0;\n    c.alpha = 1.0;\n    return c;\n}\n\ninline col highBorderColor() {\n    col c;\n    c.red = 1;\n    c.green = 1;\n    c.blue = 1;\n    c.alpha = 1;\n    return c;\n}\n\ninline col highFillColor() {\n    col c;\n    c.red = .333333;\n    c.green = .333333;\n    c.blue = .333333;\n    c.alpha = .5;\n    return c;\n}\n\ninline col clickBorderColor() {\n    return fillColor();\n}\n\ninline col clickFillColor() {\n    return borderColor();\n}\n\ninline NSColor* col2NSColor(col c) {\n    return [NSColor colorWithDeviceRed:c.red green:c.green blue:c.blue alpha:c.alpha];\n}\n\ninline col delta(col c1, col c2, int speed) {\n    col c;\n    c.red   = (c1.red   - c2.red)   / speed;\n    c.green = (c1.green - c2.green) / speed;\n    c.blue  = (c1.blue  - c2.blue)  / speed;\n    c.alpha = (c1.alpha - c2.alpha) / speed;\n    return c;\n}\n\n@implementation MapControlPanel\n\n- (void)_drawFrameAtPoint:(NSPoint)p index:(int)index {\n    NSBezierPath *b = [NSBezierPath bezierPath];\n    \n    [b moveToPoint:NSMakePoint(p.x+OFFSET, p.y+BORDER)];\n    \n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + CONTROLSIZE - OFFSET, p.y + OFFSET) radius:CURVERAD\n\t\t\t       startAngle:270\n\t\t\t\t endAngle:0];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + CONTROLSIZE - OFFSET, p.y + CONTROLSIZE - OFFSET) radius:CURVERAD\n\t\t\t       startAngle:0\n\t\t\t\t endAngle:90];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + OFFSET, p.y + CONTROLSIZE - OFFSET) radius:CURVERAD\n\t\t\t       startAngle:90\n\t\t\t\t endAngle:180];\n    [b appendBezierPathWithArcWithCenter:NSMakePoint(p.x + OFFSET, p.y + OFFSET) radius:CURVERAD\n\t\t\t       startAngle:180\n\t\t\t\t endAngle:270];\n    [b closePath];\n    \n    [col2NSColor(_current[index].fill) set];\n    [b fill];\n    \n    [col2NSColor(_current[index].border) set];\n    [b stroke];\n    \n    b = [NSBezierPath bezierPath];\n    switch (index) {\n    case 0:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 + TRIANGLESIZE/2 - BORDER, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(0, TRIANGLESIZE)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE, -TRIANGLESIZE/2)];\n        break;\n    case 1:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 + TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, 0)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE/2, -TRIANGLESIZE)];\n        break;\n    case 2:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2 - BORDER, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(0, TRIANGLESIZE)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, -TRIANGLESIZE/2)];\n        break;\n    case 3:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2, p.y + CONTROLSIZE/2)];\n        [b appendBezierPathWithRect:NSMakeRect(p.x + CONTROLSIZE/2 - TRIANGLESIZE/8, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2, TRIANGLESIZE/4, TRIANGLESIZE)];\n    case 5:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2, p.y + CONTROLSIZE/2)];\n        [b appendBezierPathWithRect:NSMakeRect(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 - TRIANGLESIZE/8, TRIANGLESIZE, TRIANGLESIZE/4)];\n        break;\n    case 4:\n        [b moveToPoint:NSMakePoint(p.x + CONTROLSIZE/2 - TRIANGLESIZE/2, p.y + CONTROLSIZE/2 - TRIANGLESIZE/2)];\n        [b relativeLineToPoint:NSMakePoint(TRIANGLESIZE, 0)];\n        [b relativeLineToPoint:NSMakePoint(-TRIANGLESIZE/2, TRIANGLESIZE)];\n        break;\n    }\n    [b closePath];\n    [b fill];\n}\n\n- (void)_generateCache {\n    int x, y;\n    \n    NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(CONTROLSIZE*3, CONTROLSIZE*2)];\n    [img lockFocus];\n    for (x=0; x<3; x++) \n        for (y=0; y<2; y++)\n            [self _drawFrameAtPoint:NSMakePoint(x*CONTROLSIZE, y*CONTROLSIZE) index:(x + (y * 3))];\n    [img unlockFocus];\n    [self setImage:img];\n    [img release];\n}\n\n- (id)init {\n    int i;\n    self = [super init];\n    if (!self) return nil;\n    \n    _zoomLock = [[NSLock alloc] init];\n    for (i = 0; i < 6; i++) {\n        _current[i].fill    = fillColor();\n        _current[i].border  = borderColor();\n    }\n    [self _generateCache];\n    \n    return self;\n}\n\n- (void)mouseMovedToPoint:(NSPoint)p {\n    int x, y, i;\n    p.x -= _frame.origin.x;\n    p.y -= _frame.origin.y;\n        \n    x = p.x / CONTROLSIZE;\n    y = p.y / CONTROLSIZE;\n    if (x > 2 || y > 1) {\n        NSLog(@\"MapControlPanel: Mouse out of bounds %f %f\", p.x, p.y);\n        return;\n    }\n    \n    i = x + (y * 3);\n    _target[i].fill    = highFillColor();\n    _target[i].border  = highBorderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 5);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 5);\n    \n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n\n    if (_timeouts[i]) {\n        [_timeouts[i] invalidate];\n    }\n    _timeouts[i] = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeout:) userInfo:[NSNumber numberWithInt:i] repeats:NO];\n}\n\n- (void)mouseDownAtPoint:(NSPoint)p {\n    int x, y, i;\n    p.x -= _frame.origin.x;\n    p.y -= _frame.origin.y;\n        \n    x = p.x / CONTROLSIZE;\n    y = p.y / CONTROLSIZE;\n    if (x > 2 || y > 1) {\n        NSLog(@\"MapControlPanel: Mouse out of bounds %f %f\", p.x, p.y);\n        return;\n    }\n    \n    i = x + (y * 3);\n    _target[i].fill    = clickFillColor();\n    _target[i].border  = clickBorderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 1);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 1);\n    \n    switch(i) {\n    case 0:\n        [[WaveHelper mapView] goLeft:self];\n        break;\n    case 1:\n        [[WaveHelper mapView] goDown:self];\n        break;\n    case 2:\n        [[WaveHelper mapView] goRight:self];\n        break;\n    case 3:\n        [[WaveHelper mapView] zoomIn:self];\n        break;\n    case 4:\n        [[WaveHelper mapView] goUp:self];\n        break;\n    case 5:\n        [[WaveHelper mapView] zoomOut:self];\n        break;\n    }\n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n\n    if (_timeouts[i]) {\n        [_timeouts[i] invalidate];\n    }\n    _timeouts[i] = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timeout:) userInfo:[NSNumber numberWithInt:i] repeats:NO];\n}\n\n- (void)timeout:(NSTimer*)timer {\n    int i = [[timer userInfo] intValue];\n    _target[i].fill    = fillColor();\n    _target[i].border  = borderColor();\n    _delta[i].fill   = delta(_target[i].fill  , _current[i].fill, 20);\n    _delta[i].border = delta(_target[i].border, _current[i].border, 20);\n    \n    [NSThread detachNewThreadSelector:@selector(zoomThread:) toTarget:self withObject:nil];\n    _timeouts[i] = NULL;\n}\n\n#define ADJUSTCOMP(INDEX, COMP) if (_delta[INDEX].COMP != 0 && (_delta[INDEX].COMP > 0 ? _target[INDEX].COMP > _current[INDEX].COMP : _target[INDEX].COMP < _current[INDEX].COMP)) { _current[INDEX].COMP += _delta[INDEX].COMP; didSomething = YES;  }\n#define ADJUSTX(INDEX,X) ADJUSTCOMP(INDEX, X.red) ADJUSTCOMP(INDEX, X.green) ADJUSTCOMP(INDEX, X.blue) ADJUSTCOMP(INDEX, X.alpha)\n\n- (void)zoomThread:(id)object {\n    NSAutoreleasePool* subpool = [[NSAutoreleasePool alloc] init];\n    BOOL didSomething;\n    int i;\n    \n    if([_zoomLock tryLock]) {\n        [self retain];\n        while(YES) {\n            didSomething = NO;\n            for (i = 0; i < 6; i++) {\n                ADJUSTX(i, fill);\n                ADJUSTX(i, border);\n            }\n            if (!didSomething) break;\n            [self _generateCache];\n            [[WaveHelper mapView] setNeedsDisplayInRect:_frame];\n            [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];\n        }\n        [self release];\n        [_zoomLock unlock];\n    }\n\n    [subpool release];\n}\n\n\n#pragma mark -\n\n- (void)dealloc {\n    int i;\n    for (i = 0; i < 6; i++) {\n        if (_timeouts[i]) {\n            [_timeouts[i] invalidate];\n        }\n    }\n    \n    [_zoomLock release];\n    [super dealloc];\n}\n\n@end\n";
+		rLen = 9485;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 729;
+		vrLoc = 8756;
+	};
+	005B12760730056000906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 309";
+		rLen = 0;
+		rLoc = 7933;
+		rType = 0;
+		vrLen = 706;
+		vrLoc = 8779;
+	};
+	005B12770730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: 41";
+		rLen = 0;
+		rLoc = 1171;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B12780730056000906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 41";
+		rLen = 0;
+		rLoc = 1274;
+		rType = 0;
+		vrLen = 936;
+		vrLoc = 446;
+	};
+	005B12790730056000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: _zoomLock";
+		rLen = 0;
+		rLoc = 1286;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B127A0730056000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B127B0730059000906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: mouseMovedToPoint:";
+		rLen = 0;
+		rLoc = 1342;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B127C0730059000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B127D073005BD00906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.h: mouseEntered";
+		rLen = 0;
+		rLoc = 1342;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B127E073005BD00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B127F0730078500906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = MapControlItem;
+		rLen = 14;
+		rLoc = 1157;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B12800730078500906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 41";
+		rLen = 0;
+		rLoc = 1274;
+		rType = 0;
+		vrLen = 936;
+		vrLoc = 446;
+	};
+	005B12810730078500906C36 = {
+		fRef = 005B12660730051A00906C36;
+		isa = PBXTextBookmark;
+		name = MapControlItem;
+		rLen = 14;
+		rLoc = 1157;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 619;
+	};
+	005B12820730078500906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 37";
+		rLen = 0;
+		rLoc = 1175;
+		rType = 0;
+		vrLen = 1272;
+		vrLoc = 1827;
+	};
+	005B12830730078500906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B1284073007A600906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 37";
+		rLen = 0;
+		rLoc = 1175;
+		rType = 0;
+		vrLen = 1272;
+		vrLoc = 1827;
+	};
+	005B1285073007A600906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B12860730082000906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 274";
+		rLen = 0;
+		rLoc = 7453;
+		rType = 0;
+		vrLen = 1129;
+		vrLoc = 8017;
+	};
+	005B12870730082000906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B1288073008AD00906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 48";
+		rLen = 0;
+		rLoc = 1381;
+		rType = 0;
+		vrLen = 1153;
+		vrLoc = 2101;
+	};
+	005B1289073008AD00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B128A07300AC700906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 182";
+		rLen = 0;
+		rLoc = 5555;
+		rType = 0;
+		vrLen = 933;
+		vrLoc = 5302;
+	};
+	005B128B07300AC700906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 217";
+		rLen = 0;
+		rLoc = 7084;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6572;
+	};
+	005B128C07300AC800906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B128D07300B3C00906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: ADJUSTCOMP";
+		rLen = 0;
+		rLoc = 7084;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6572;
+	};
+	005B128E07300B3C00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B128F07300B4200906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: ADJUSTCOMP";
+		rLen = 0;
+		rLoc = 7084;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6572;
+	};
+	005B129007300B4200906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B129107300B9900906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: ADJUSTCOMP";
+		rLen = 0;
+		rLoc = 7047;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6535;
+	};
+	005B129207300B9900906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 189;
+		rType = 1;
+	};
+	005B129307300B9900906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 190";
+		rLen = 0;
+		rLoc = 6012;
+		rType = 0;
+		vrLen = 1044;
+		vrLoc = 5493;
+	};
+	005B129507300B9900906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B129607300BBB00906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 190";
+		rLen = 0;
+		rLoc = 6012;
+		rType = 0;
+		vrLen = 1044;
+		vrLoc = 5493;
+	};
+	005B129707300BBB00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B129807300BBE00906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: ADJUSTCOMP";
+		rLen = 0;
+		rLoc = 7047;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6535;
+	};
+	005B129907300BBE00906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 190";
+		rLen = 0;
+		rLoc = 6012;
+		rType = 0;
+		vrLen = 1044;
+		vrLoc = 5493;
+	};
+	005B129A07300BBE00906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
+	005B129B07300BF700906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: ADJUSTCOMP";
+		rLen = 0;
+		rLoc = 7047;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 6535;
+	};
+	005B129C07300BF700906C36 = {
+		fRef = 005B12670730051A00906C36;
+		isa = PBXTextBookmark;
+		name = "MapControlItem.m: 190";
+		rLen = 0;
+		rLoc = 6012;
+		rType = 0;
+		vrLen = 1044;
+		vrLoc = 5493;
+	};
+	005B129D07300BF700906C36 = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = setMap;
+		rLen = 6;
+		rLoc = 5183;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 4728;
+	};
 	005E817006FDCFF20016F5E7 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {963, 690}}";
@@ -629,33 +1724,6 @@
 		vrLen = 1036;
 		vrLoc = 0;
 	};
-	0084D534072E8CF700F48720 = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1036;
-		vrLoc = 0;
-	};
-	0084D543072E8F3500F48720 = {
-		fRef = 003533FB06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		rLen = 1;
-		rLoc = 411;
-		rType = 1;
-	};
-	0084D549072E8F9000F48720 = {
-		fRef = 003533FB06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "GPSController.m: 278";
-		rLen = 0;
-		rLoc = 8560;
-		rType = 0;
-		vrLen = 808;
-		vrLoc = 8338;
-	};
 	0084D54D072E8F9000F48720 = {
 		fRef = 003533FB06A5DD8500AB4577;
 		isa = PBXTextBookmark;
@@ -665,36 +1733,6 @@
 		rType = 0;
 		vrLen = 808;
 		vrLoc = 8338;
-	};
-	0084D54E072E8F9000F48720 = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 24";
-		rLen = 0;
-		rLoc = 835;
-		rType = 0;
-		vrLen = 1251;
-		vrLoc = 0;
-	};
-	0084D56D072E94B700F48720 = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 8";
-		rLen = 0;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 1251;
-		vrLoc = 0;
-	};
-	0084D56E072E94B700F48720 = {
-		fRef = 003533FB06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "GPSController.m: 412";
-		rLen = 0;
-		rLoc = 13109;
-		rType = 0;
-		vrLen = 733;
-		vrLoc = 12826;
 	};
 	00875D190708ADB300CACFCB = {
 		uiCtxt = {
@@ -733,227 +1771,17 @@
 	};
 	0090AC8306E5E3250096C5FC = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {968, 727}}";
-			sepNavSelRange = "{1116, 0}";
-			sepNavVisRect = "{{0, 234}, {968, 484}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 741}}";
+			sepNavSelRange = "{0, 1417}";
+			sepNavVisRect = "{{0, 238}, {964, 478}}";
 		};
 	};
 	0090AC8406E5E3250096C5FC = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {968, 4339}}";
-			sepNavSelRange = "{8588, 678}";
-			sepNavVisRect = "{{0, 3604}, {968, 484}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 4339}}";
+			sepNavSelRange = "{0, 9485}";
+			sepNavVisRect = "{{0, 3848}, {964, 478}}";
 		};
-	};
-	0094D7B6072ED0F20040C22B = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 8";
-		rLen = 0;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 1251;
-		vrLoc = 0;
-	};
-	0094D7BB072ED1320040C22B = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 8";
-		rLen = 0;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 1251;
-		vrLoc = 0;
-	};
-	0094D7BC072ED1320040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 111";
-		rLen = 0;
-		rLoc = 3647;
-		rType = 0;
-		vrLen = 1416;
-		vrLoc = 2700;
-	};
-	0094D7BD072ED1320040C22B = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 8";
-		rLen = 0;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 1251;
-		vrLoc = 0;
-	};
-	0094D7BE072ED1320040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 797;
-		vrLoc = 10789;
-	};
-	0094D7BF072ED15C0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 797;
-		vrLoc = 10789;
-	};
-	0094D7C7072ED1960040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 722;
-		vrLoc = 10598;
-	};
-	0094D7C9072ED1D70040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 723;
-		vrLoc = 10598;
-	};
-	0094D7CA072ED1E90040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 723;
-		vrLoc = 10598;
-	};
-	0094D7CB072ED1EE0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 723;
-		vrLoc = 10598;
-	};
-	0094D7CC072ED1FB0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 723;
-		vrLoc = 10598;
-	};
-	0094D7CD072ED2030040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 723;
-		vrLoc = 10598;
-	};
-	0094D7CE072ED21A0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 733;
-		vrLoc = 10598;
-	};
-	0094D7CF072ED2280040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 733;
-		vrLoc = 10598;
-	};
-	0094D7D0072ED2350040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 733;
-		vrLoc = 10598;
-	};
-	0094D7D1072ED2560040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 730;
-		vrLoc = 10598;
-	};
-	0094D7D3072ED2750040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10965;
-		rType = 0;
-		vrLen = 729;
-		vrLoc = 10598;
-	};
-	0094D7D4072ED28D0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10937;
-		rType = 0;
-		vrLen = 729;
-		vrLoc = 10598;
-	};
-	0094D7D5072ED2A90040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10937;
-		rType = 0;
-		vrLen = 729;
-		vrLoc = 10598;
-	};
-	0094D7D6072ED2BB0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10937;
-		rType = 0;
-		vrLen = 725;
-		vrLoc = 10598;
-	};
-	0094D7D7072ED2BF0040C22B = {
-		fRef = 00CBA33F06DB8FDE000ACD19;
-		isa = PBXTextBookmark;
-		name = "MapView.m: 325";
-		rLen = 0;
-		rLoc = 10937;
-		rType = 0;
-		vrLen = 725;
-		vrLoc = 10598;
 	};
 	00971F3C06E4FA6F004307EA = {
 		uiCtxt = {
@@ -1029,8 +1857,8 @@
 	009D64F206FF73BA00B0F1EC = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 2995}}";
-			sepNavSelRange = "{2283, 0}";
-			sepNavVisRect = "{{0, 826}, {964, 478}}";
+			sepNavSelRange = "{6681, 0}";
+			sepNavVisRect = "{{0, 2489}, {964, 478}}";
 		};
 	};
 	009F5C5D06A5C8DF004BB18E = {
@@ -1121,8 +1949,8 @@
 	00C5F12B06DE0C98001EC02F = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 2337}}";
-			sepNavSelRange = "{3461, 0}";
-			sepNavVisRect = "{{0, 1414}, {964, 478}}";
+			sepNavSelRange = "{3728, 9}";
+			sepNavVisRect = "{{0, 1300}, {964, 478}}";
 		};
 	};
 	00C5F13206DE0EAF001EC02F = {
@@ -1155,9 +1983,9 @@
 	};
 	00CBA33F06DB8FDE000ACD19 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 7881}}";
-			sepNavSelRange = "{10937, 0}";
-			sepNavVisRect = "{{0, 4346}, {964, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {862, 7923}}";
+			sepNavSelRange = "{5183, 6}";
+			sepNavVisRect = "{{0, 1886}, {862, 330}}";
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
@@ -1204,6 +2032,66 @@
 			sepNavSelRange = "{2068, 0}";
 			sepNavVisRect = "{{0, 2083}, {964, 478}}";
 		};
+	};
+	00F4F6F7072FC4EA0008494B = {
+		fRef = 00F57CAB06A8887F0035AE2F;
+		isa = PBXTextBookmark;
+		name = "CHANGES: 8";
+		rLen = 0;
+		rLoc = 193;
+		rType = 0;
+		vrLen = 1251;
+		vrLoc = 0;
+	};
+	00F4F6F8072FC4EA0008494B = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 325";
+		rLen = 0;
+		rLoc = 10938;
+		rType = 0;
+		vrLen = 725;
+		vrLoc = 10598;
+	};
+	00F4F6F9072FC4EA0008494B = {
+		fRef = 003533FB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "GPSController.m: 278";
+		rLen = 0;
+		rLoc = 8560;
+		rType = 0;
+		vrLen = 808;
+		vrLoc = 8338;
+	};
+	00F4F6FA072FC4EA0008494B = {
+		fRef = 00F57CAB06A8887F0035AE2F;
+		isa = PBXTextBookmark;
+		name = "CHANGES: 8";
+		rLen = 0;
+		rLoc = 193;
+		rType = 0;
+		vrLen = 1251;
+		vrLoc = 0;
+	};
+	00F4F6FB072FC4EA0008494B = {
+		fRef = 00CBA33F06DB8FDE000ACD19;
+		isa = PBXTextBookmark;
+		name = "MapView.m: 325";
+		rLen = 0;
+		rLoc = 10938;
+		rType = 0;
+		vrLen = 725;
+		vrLoc = 10598;
+	};
+	00F4F700072FCDAD0008494B = {
+		fRef = 003533FB06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "GPSController.m: 515";
+		rLen = 0;
+		rLoc = 16164;
+		rType = 0;
+		vrLen = 1165;
+		vrLoc = 15439;
 	};
 	00F57C4B06A886630035AE2F = {
 		uiCtxt = {
@@ -1408,7 +2296,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 120508646;
+			PBXPerProjectTemplateStateSaveDate = 120585595;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -1839,40 +2727,128 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 120508646;
+			PBXWorkspaceStateSaveDate = 120585595;
 		};
 		perUserProjectItems = {
+			005B1202072FFDF400906C36 = 005B1202072FFDF400906C36;
+			005B1203072FFDF400906C36 = 005B1203072FFDF400906C36;
+			005B1204072FFDF400906C36 = 005B1204072FFDF400906C36;
+			005B1205072FFDF400906C36 = 005B1205072FFDF400906C36;
+			005B1208072FFE0400906C36 = 005B1208072FFE0400906C36;
+			005B1209072FFE3700906C36 = 005B1209072FFE3700906C36;
+			005B120A072FFE4300906C36 = 005B120A072FFE4300906C36;
+			005B122D072FFE8B00906C36 = 005B122D072FFE8B00906C36;
+			005B1230072FFE9000906C36 = 005B1230072FFE9000906C36;
+			005B1231072FFEE400906C36 = 005B1231072FFEE400906C36;
+			005B1232072FFEE400906C36 = 005B1232072FFEE400906C36;
+			005B1233072FFEE400906C36 = 005B1233072FFEE400906C36;
+			005B1234072FFEE400906C36 = 005B1234072FFEE400906C36;
+			005B1235072FFEE400906C36 = 005B1235072FFEE400906C36;
+			005B1236072FFEE400906C36 = 005B1236072FFEE400906C36;
+			005B1237072FFEE400906C36 = 005B1237072FFEE400906C36;
+			005B1238072FFEE400906C36 = 005B1238072FFEE400906C36;
+			005B1239072FFEE500906C36 = 005B1239072FFEE500906C36;
+			005B123A072FFF2000906C36 = 005B123A072FFF2000906C36;
+			005B123B072FFF2000906C36 = 005B123B072FFF2000906C36;
+			005B123C072FFF4A00906C36 = 005B123C072FFF4A00906C36;
+			005B123D072FFF4A00906C36 = 005B123D072FFF4A00906C36;
+			005B123E072FFF6F00906C36 = 005B123E072FFF6F00906C36;
+			005B123F072FFF6F00906C36 = 005B123F072FFF6F00906C36;
+			005B1240072FFF6F00906C36 = 005B1240072FFF6F00906C36;
+			005B1241072FFF6F00906C36 = 005B1241072FFF6F00906C36;
+			005B1242072FFF6F00906C36 = 005B1242072FFF6F00906C36;
+			005B1243072FFF6F00906C36 = 005B1243072FFF6F00906C36;
+			005B1244072FFF6F00906C36 = 005B1244072FFF6F00906C36;
+			005B1245072FFF6F00906C36 = 005B1245072FFF6F00906C36;
+			005B1246072FFF6F00906C36 = 005B1246072FFF6F00906C36;
+			005B1247072FFF6F00906C36 = 005B1247072FFF6F00906C36;
+			005B1248072FFF6F00906C36 = 005B1248072FFF6F00906C36;
+			005B12490730000500906C36 = 005B12490730000500906C36;
+			005B124A0730000500906C36 = 005B124A0730000500906C36;
+			005B124B0730001C00906C36 = 005B124B0730001C00906C36;
+			005B124C0730001C00906C36 = 005B124C0730001C00906C36;
+			005B124D0730009100906C36 = 005B124D0730009100906C36;
+			005B124E0730009100906C36 = 005B124E0730009100906C36;
+			005B124F0730009100906C36 = 005B124F0730009100906C36;
+			005B12500730009100906C36 = 005B12500730009100906C36;
+			005B12510730009100906C36 = 005B12510730009100906C36;
+			005B1252073000C000906C36 = 005B1252073000C000906C36;
+			005B1253073000C000906C36 = 005B1253073000C000906C36;
+			005B12560730028200906C36 = 005B12560730028200906C36;
+			005B12570730028200906C36 = 005B12570730028200906C36;
+			005B12580730028200906C36 = 005B12580730028200906C36;
+			005B12590730028200906C36 = 005B12590730028200906C36;
+			005B125A0730028200906C36 = 005B125A0730028200906C36;
+			005B125B0730036900906C36 = 005B125B0730036900906C36;
+			005B125C0730036900906C36 = 005B125C0730036900906C36;
+			005B125D0730043200906C36 = 005B125D0730043200906C36;
+			005B125E0730043200906C36 = 005B125E0730043200906C36;
+			005B125F0730043200906C36 = 005B125F0730043200906C36;
+			005B12600730043200906C36 = 005B12600730043200906C36;
+			005B12610730043200906C36 = 005B12610730043200906C36;
+			005B12620730048B00906C36 = 005B12620730048B00906C36;
+			005B12630730048B00906C36 = 005B12630730048B00906C36;
+			005B126A0730056000906C36 = 005B126A0730056000906C36;
+			005B126B0730056000906C36 = 005B126B0730056000906C36;
+			005B126C0730056000906C36 = 005B126C0730056000906C36;
+			005B126D0730056000906C36 = 005B126D0730056000906C36;
+			005B126E0730056000906C36 = 005B126E0730056000906C36;
+			005B126F0730056000906C36 = 005B126F0730056000906C36;
+			005B12700730056000906C36 = 005B12700730056000906C36;
+			005B12710730056000906C36 = 005B12710730056000906C36;
+			005B12720730056000906C36 = 005B12720730056000906C36;
+			005B12730730056000906C36 = 005B12730730056000906C36;
+			005B12740730056000906C36 = 005B12740730056000906C36;
+			005B12750730056000906C36 = 005B12750730056000906C36;
+			005B12760730056000906C36 = 005B12760730056000906C36;
+			005B12770730056000906C36 = 005B12770730056000906C36;
+			005B12780730056000906C36 = 005B12780730056000906C36;
+			005B12790730056000906C36 = 005B12790730056000906C36;
+			005B127A0730056000906C36 = 005B127A0730056000906C36;
+			005B127B0730059000906C36 = 005B127B0730059000906C36;
+			005B127C0730059000906C36 = 005B127C0730059000906C36;
+			005B127D073005BD00906C36 = 005B127D073005BD00906C36;
+			005B127E073005BD00906C36 = 005B127E073005BD00906C36;
+			005B127F0730078500906C36 = 005B127F0730078500906C36;
+			005B12800730078500906C36 = 005B12800730078500906C36;
+			005B12810730078500906C36 = 005B12810730078500906C36;
+			005B12820730078500906C36 = 005B12820730078500906C36;
+			005B12830730078500906C36 = 005B12830730078500906C36;
+			005B1284073007A600906C36 = 005B1284073007A600906C36;
+			005B1285073007A600906C36 = 005B1285073007A600906C36;
+			005B12860730082000906C36 = 005B12860730082000906C36;
+			005B12870730082000906C36 = 005B12870730082000906C36;
+			005B1288073008AD00906C36 = 005B1288073008AD00906C36;
+			005B1289073008AD00906C36 = 005B1289073008AD00906C36;
+			005B128A07300AC700906C36 = 005B128A07300AC700906C36;
+			005B128B07300AC700906C36 = 005B128B07300AC700906C36;
+			005B128C07300AC800906C36 = 005B128C07300AC800906C36;
+			005B128D07300B3C00906C36 = 005B128D07300B3C00906C36;
+			005B128E07300B3C00906C36 = 005B128E07300B3C00906C36;
+			005B128F07300B4200906C36 = 005B128F07300B4200906C36;
+			005B129007300B4200906C36 = 005B129007300B4200906C36;
+			005B129107300B9900906C36 = 005B129107300B9900906C36;
+			005B129207300B9900906C36 = 005B129207300B9900906C36;
+			005B129307300B9900906C36 = 005B129307300B9900906C36;
+			005B129507300B9900906C36 = 005B129507300B9900906C36;
+			005B129607300BBB00906C36 = 005B129607300BBB00906C36;
+			005B129707300BBB00906C36 = 005B129707300BBB00906C36;
+			005B129807300BBE00906C36 = 005B129807300BBE00906C36;
+			005B129907300BBE00906C36 = 005B129907300BBE00906C36;
+			005B129A07300BBE00906C36 = 005B129A07300BBE00906C36;
+			005B129B07300BF700906C36 = 005B129B07300BF700906C36;
+			005B129C07300BF700906C36 = 005B129C07300BF700906C36;
+			005B129D07300BF700906C36 = 005B129D07300BF700906C36;
 			0084D520072E79E800F48720 = 0084D520072E79E800F48720;
 			0084D521072E79E800F48720 = 0084D521072E79E800F48720;
 			0084D532072E8CF700F48720 = 0084D532072E8CF700F48720;
-			0084D534072E8CF700F48720 = 0084D534072E8CF700F48720;
-			0084D543072E8F3500F48720 = 0084D543072E8F3500F48720;
-			0084D549072E8F9000F48720 = 0084D549072E8F9000F48720;
 			0084D54D072E8F9000F48720 = 0084D54D072E8F9000F48720;
-			0084D54E072E8F9000F48720 = 0084D54E072E8F9000F48720;
-			0084D56D072E94B700F48720 = 0084D56D072E94B700F48720;
-			0084D56E072E94B700F48720 = 0084D56E072E94B700F48720;
-			0094D7B6072ED0F20040C22B = 0094D7B6072ED0F20040C22B;
-			0094D7BB072ED1320040C22B = 0094D7BB072ED1320040C22B;
-			0094D7BC072ED1320040C22B = 0094D7BC072ED1320040C22B;
-			0094D7BD072ED1320040C22B = 0094D7BD072ED1320040C22B;
-			0094D7BE072ED1320040C22B = 0094D7BE072ED1320040C22B;
-			0094D7BF072ED15C0040C22B = 0094D7BF072ED15C0040C22B;
-			0094D7C7072ED1960040C22B = 0094D7C7072ED1960040C22B;
-			0094D7C9072ED1D70040C22B = 0094D7C9072ED1D70040C22B;
-			0094D7CA072ED1E90040C22B = 0094D7CA072ED1E90040C22B;
-			0094D7CB072ED1EE0040C22B = 0094D7CB072ED1EE0040C22B;
-			0094D7CC072ED1FB0040C22B = 0094D7CC072ED1FB0040C22B;
-			0094D7CD072ED2030040C22B = 0094D7CD072ED2030040C22B;
-			0094D7CE072ED21A0040C22B = 0094D7CE072ED21A0040C22B;
-			0094D7CF072ED2280040C22B = 0094D7CF072ED2280040C22B;
-			0094D7D0072ED2350040C22B = 0094D7D0072ED2350040C22B;
-			0094D7D1072ED2560040C22B = 0094D7D1072ED2560040C22B;
-			0094D7D3072ED2750040C22B = 0094D7D3072ED2750040C22B;
-			0094D7D4072ED28D0040C22B = 0094D7D4072ED28D0040C22B;
-			0094D7D5072ED2A90040C22B = 0094D7D5072ED2A90040C22B;
-			0094D7D6072ED2BB0040C22B = 0094D7D6072ED2BB0040C22B;
-			0094D7D7072ED2BF0040C22B = 0094D7D7072ED2BF0040C22B;
+			00F4F6F7072FC4EA0008494B = 00F4F6F7072FC4EA0008494B;
+			00F4F6F8072FC4EA0008494B = 00F4F6F8072FC4EA0008494B;
+			00F4F6F9072FC4EA0008494B = 00F4F6F9072FC4EA0008494B;
+			00F4F6FA072FC4EA0008494B = 00F4F6FA072FC4EA0008494B;
+			00F4F6FB072FC4EA0008494B = 00F4F6FB072FC4EA0008494B;
+			00F4F700072FCDAD0008494B = 00F4F700072FCDAD0008494B;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {

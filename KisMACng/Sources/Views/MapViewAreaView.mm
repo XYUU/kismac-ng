@@ -33,11 +33,9 @@
 @implementation MapView(AreaView)
 
 - (void)clearAreaNet {
-    if (_mapImage) {
-        [_mapImage autorelease];
-        _mapImage = [_orgImage copy];
-        [self setNeedsDisplay:YES];
-    }
+	[_mapImage autorelease];
+	_mapImage = [_orgImage retain];
+	[self setNeedsDisplay:YES];
 }
 
 - (double)getPixelPerDegreeNoZoom {
@@ -201,12 +199,14 @@ exitNoCleanUp:
 }
 
 - (void)showAreaNet:(WaveNet*)net {
-    [self clearAreaNet];
+	[_mapImage release];
+	_mapImage = [_orgImage copy];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:[NSArray arrayWithObject:net]];
 }
 
 - (void)showAreaNets:(NSArray*)nets {
-    [self clearAreaNet];
+	[_mapImage release];
+	_mapImage = [_orgImage copy];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:nets];
 }
 

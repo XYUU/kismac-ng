@@ -512,7 +512,7 @@ int ss(char* inp, char* outp) {
     unsigned int i = 0;
     
     while (_gpsShallRun && [self gpsd_parse:fd]) {
-        if ((i++ % 10 == 0) && (_status == Nil))
+        if ((i++ % 2 == 0) && (_status == Nil))
             [[NSNotificationCenter defaultCenter] postNotificationName:KisMACGPSStatusChanged object:[self status]];
         date = [[NSDate alloc] initWithTimeIntervalSinceNow:0.5];
         [NSThread sleepUntilDate:date];

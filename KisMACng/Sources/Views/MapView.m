@@ -213,8 +213,7 @@
 
 - (BOOL)setMap:(NSImage*)map {
     [WaveHelper secureReplace:&_orgImage withObject:map];
-    [_mapImage autorelease];
-    _mapImage = [map copy];
+    [WaveHelper secureReplace:&_mapImage withObject:map];
     _wp[0]._lat  = 0; _wp[0]._long = 0;
     _wp[1]._lat  = 0; _wp[1]._long = 0;
     _wp[2]._lat  = 0; _wp[2]._long = 0;
