@@ -2,9 +2,9 @@
         
         File:			WaveHelper.m
         Program:		KisMAC
-	Author:			Michael Ro§berg, Michael Thole
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg, Michael Thole
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -36,6 +36,7 @@
 #import <Security/Security.h>
 #import <CoreServices/CoreServices.h>
 
+#import "WaveContainer.h"
 #import "GPSController.h"
 #import "ImportController.h"
 

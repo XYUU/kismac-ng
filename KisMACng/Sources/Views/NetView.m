@@ -2,7 +2,7 @@
 
         File:			NetView.m
         Program:		KisMAC
-		Author:			Michael Ro§berg
+		Author:			Michael Rossberg
 						mick@binaervarianz.de
 		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
@@ -30,13 +30,29 @@
 
 #define USE_FAST_IMAGE_VIEWS
 
+static NSImage* _networkUnkEnc;
+static NSImage* _networkNoEnc;
+static NSImage* _networkWEP;
+static NSImage* _networkWPA;
+static NSImage* _networkLEAP;
+static NSImage* _networkStrange;
+
 @implementation NetView
 
 - (id)initWithNetwork:(WaveNet*)network {
     self = [super init];
     if (self) {
-        _name = [[NSString stringWithString:@"<no ssid>"] retain];
-        _netImg = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
+        
+		if (!_networkUnkEnc) _networkUnkEnc = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
+		if (!_networkNoEnc)  _networkNoEnc  = [[NSImage imageNamed:@"NetworkNoEnc.tif"]  retain];
+		if (!_networkWEP)    _networkWEP    = [[NSImage imageNamed:@"NetworkWEP.tif"]    retain];
+		if (!_networkWPA)    _networkWPA    = [[NSImage imageNamed:@"NetworkWPA.tif"]    retain];
+		if (!_networkLEAP)   _networkLEAP   = [[NSImage imageNamed:@"NetworkLEAP.tif"]   retain];
+		if (!_networkStrange)_networkStrange= [[NSImage imageNamed:@"NetworkStrange.tif"]retain];
+		
+		_name = [[NSString stringWithString:@"<no ssid>"] retain];
+        
+		_netImg = [_networkUnkEnc retain];
         _netColor = [[NSColor yellowColor] retain];
         _wep = 0;
         _wp._lat = 0;
@@ -63,28 +79,28 @@
     
     switch (_wep) {
     case encryptionTypeUnknown:
-        _netImg = [[NSImage imageNamed:@"NetworkUnkEnc.tif"] retain];
+        _netImg = [_networkUnkEnc retain];
         _netColor = [[NSColor yellowColor] retain];
         break;
     case encryptionTypeNone:
-        _netImg = [[NSImage imageNamed:@"NetworkNoEnc.tif"] retain];
+        _netImg = [_networkNoEnc retain];
         _netColor = [[NSColor greenColor] retain];
         break;
     case encryptionTypeWEP:
     case encryptionTypeWEP40:
-        _netImg = [[NSImage imageNamed:@"NetworkWEP.tif"] retain];
+        _netImg = [_networkWEP retain];
         _netColor = [[NSColor redColor] retain];
         break;
     case encryptionTypeWPA:
-        _netImg = [[NSImage imageNamed:@"NetworkWPA.tif"] retain];
+        _netImg = [_networkWPA retain];
         _netColor = [[NSColor blueColor] retain];
         break;
     case encryptionTypeLEAP:
-        _netImg = [[NSImage imageNamed:@"NetworkLEAP.tif"] retain];
+        _netImg = [_networkLEAP retain];
         _netColor = [[NSColor cyanColor] retain];
         break;
     default:
-        _netImg = [[NSImage imageNamed:@"NetworkStrange.tif"] retain];
+        _netImg = [_networkStrange retain];
         _netColor = [[NSColor magentaColor] retain];
     }
     

@@ -179,6 +179,8 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 1;
 			files = (
+				0090B75807B2A06D005FEEB1,
+				0090B52707B289E7005FEEB1,
 				00F0FF6D06AD4CFE006D4119,
 				00F57B8206A87BBD0035AE2F,
 				002E7E5106A874FB00C9D931,
@@ -341,6 +343,34 @@
 			settings = {
 			};
 		};
+		0057F2F907A428BD00D2EF91 = {
+			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.dylib";
+			name = libz.dylib;
+			path = /usr/lib/libz.dylib;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		0057F2FA07A428BD00D2EF91 = {
+			fileRef = 0057F2F907A428BD00D2EF91;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0057F2FB07A428CD00D2EF91 = {
+			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.dylib";
+			name = libcrypto.dylib;
+			path = /usr/lib/libcrypto.dylib;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		0057F2FC07A428CD00D2EF91 = {
+			fileRef = 0057F2FB07A428CD00D2EF91;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		005D9B14069DB00100A4BA7B = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -381,6 +411,74 @@
 		};
 		008E0F2306A441E60064AB5C = {
 			fileRef = 008E0F2106A441E60064AB5C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B52507B289E7005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = BICompressor.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B52607B289E7005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = BICompressor.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B52707B289E7005FEEB1 = {
+			fileRef = 0090B52507B289E7005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B52807B289E7005FEEB1 = {
+			fileRef = 0090B52607B289E7005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B6D407B29140005FEEB1 = {
+			fileRef = 0090B52507B289E7005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B74A07B29DE7005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = BIDecompressor.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B74B07B29DE7005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = BIDecompressor.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B74C07B29DE7005FEEB1 = {
+			fileRef = 0090B74A07B29DE7005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B74D07B29DE7005FEEB1 = {
+			fileRef = 0090B74B07B29DE7005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B75807B2A06D005FEEB1 = {
+			fileRef = 0090B74A07B29DE7005FEEB1;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -778,6 +876,10 @@
 		08FB77AEFE84172EC02AAC07 = {
 			children = (
 				002E7A7206A8626200C9D931,
+				0090B52507B289E7005FEEB1,
+				0090B52607B289E7005FEEB1,
+				0090B74A07B29DE7005FEEB1,
+				0090B74B07B29DE7005FEEB1,
 				008E0F2006A441E60064AB5C,
 				008E0F2106A441E60064AB5C,
 				00C135750695B632004F02A8,
@@ -811,6 +913,8 @@
 //104
 		1058C7B0FEA5585E11CA2CBB = {
 			children = (
+				0057F2FB07A428CD00D2EF91,
+				0057F2F907A428BD00D2EF91,
 				00F57CBF06A99EBA0035AE2F,
 				002E7A8106A865D500C9D931,
 				005D9B14069DB00100A4BA7B,
@@ -923,6 +1027,7 @@
 		8DC2EF500486A6940098B216 = {
 			buildActionMask = 2147483647;
 			files = (
+				0090B6D407B29140005FEEB1,
 				8DC2EF510486A6940098B216,
 				00C135650695B3B6004F02A8,
 				00C135760695B632004F02A8,
@@ -939,6 +1044,7 @@
 				002E7A7006A8625700C9D931,
 				00F57B1A06A87A0C0035AE2F,
 				00F0FF6B06AD499B006D4119,
+				0090B74C07B29DE7005FEEB1,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -980,6 +1086,8 @@
 				002E7A7106A8625700C9D931,
 				00F57B1B06A87A0C0035AE2F,
 				00F0FF6C06AD499B006D4119,
+				0090B52807B289E7005FEEB1,
+				0090B74D07B29DE7005FEEB1,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -991,6 +1099,8 @@
 				005D9B15069DB00100A4BA7B,
 				002E7A8206A865D500C9D931,
 				00F57CC006A99EBA0035AE2F,
+				0057F2FA07A428BD00D2EF91,
+				0057F2FC07A428CD00D2EF91,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

@@ -50,7 +50,7 @@
 -(void)increment {
     [aProgressBar incrementBy:1.0];
     //[aProgressBar animate:nil];
-    //[aProgressBar displayIfNeeded];
+    [aProgressBar displayIfNeeded];
 }
 
 -(void)animate {

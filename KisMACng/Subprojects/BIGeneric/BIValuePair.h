@@ -37,6 +37,9 @@ typedef struct _waypoint {
 
 + (id)valuePairFromWaypoint:(waypoint)w;
 
+- (id)initWithDataDictionary:(NSDictionary*)dict;
+- (NSDictionary*)dataDictionary;
+
 - (double)getX;
 - (double)getY;
 - (waypoint)wayPoint;

@@ -27,6 +27,10 @@
 #import "WaveHelper.h"
 #import "MapView.h"
 
+struct pointCoords {
+	double x, y;
+} __attribute__((packed));
+
 @implementation Trace
 
 - (id)init {
@@ -69,24 +73,74 @@
 }
 
 - (BOOL)addTrace:(NSMutableArray*)trace {
-	int i;
+	int i, j;
+	id obj;
+	BIValuePair *vp;
+	const struct pointCoords *pL;
+	NSMutableArray *a;
+	
 	for (i = 0; i < [trace count]; i++) {
-		[_trace insertObject:[trace objectAtIndex:i] atIndex:0];
+		obj = [trace objectAtIndex:i];
+		if ([obj isKindOfClass:[NSMutableArray class]]) {
+			[_trace insertObject:obj atIndex:0];
+		} else if ([obj isKindOfClass:[NSData class]]) {
+			NSParameterAssert([(NSData*)obj length] % sizeof(struct pointCoords) == 0);
+			
+			a = [NSMutableArray arrayWithCapacity:[(NSData*)obj length] / sizeof(struct pointCoords)];
+			pL = (const struct pointCoords *)[obj bytes];
+		
+			for (j = 0; i < ([(NSData*)obj length] / sizeof(struct pointCoords)); i++) {
+				vp = [BIValuePair new];
+				[vp setPairX:pL->x Y:pL->y];
+				[a addObject:[vp autorelease]];
+				pL++;
+			}
+			[_trace insertObject:a atIndex:0];
+		}
 	}
     return YES;
 }
 
 - (BOOL)setTrace:(NSMutableArray*)trace {
     [_trace autorelease];
-    if (!trace) _trace = [NSMutableArray array];
-    else _trace = trace;
-    [_trace retain];
+    
+	_trace = [NSMutableArray array];
+    [self addTrace: trace];
+	[_trace retain];
     [self cut];
+
     return YES;
 }
 
 - (NSMutableArray*)trace {
-    return _trace;
+	BIValuePair *vp;
+	struct pointCoords *pL;
+	NSArray *subtrace;
+	NSMutableArray *a;
+	int i, j;
+	NSMutableData *coord;
+	unsigned int c = [_trace count];
+	
+	if (c == 0) return nil;
+	
+	a = [NSMutableArray arrayWithCapacity:c];
+	for (i = 0; i < c; i++) {
+		subtrace = [_trace objectAtIndex:i];
+		
+		coord = [NSMutableData dataWithLength:[subtrace count] * sizeof(struct pointCoords)];
+		pL = (struct pointCoords *)[coord mutableBytes];
+		
+		for (j = 0; j < [subtrace count]; j++) {
+			vp = [subtrace objectAtIndex:j];
+			pL->x = [vp getX];
+			pL->y = [vp getY];
+			pL++;
+		}
+		
+		[a addObject:coord];
+	}
+
+    return a;
 }
 
 #pragma mark -

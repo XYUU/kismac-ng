@@ -44,28 +44,31 @@ struct graphStruct {
 @class WaveWeakContainer;
 
 @interface WaveNet : NSObject {
-    int aNetID;			//network ID
-    int aMaxSignal;		//biggest signal ever
-    int aCurSignal;		//current signal
-    int aChannel;		//last channel
+    int _netID;					//network ID
+    int _maxSignal;				//biggest signal ever
+    int _curSignal;				//current signal
+    int _channel;				//last channel
     int _originalChannel;       //channel which is brodacsted by AP
     networkType _type;          //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel 4=probe 5=lucent tunnel
-    int _packets;		//# of packets
+    int _packets;				//# of packets
     int _packetsPerChannel[16];	//how many packets on each channel
-    int _dataPackets;		//# of data packets
-    double aBytes;		//bytes, float because of size
+    int _dataPackets;			//# of data packets
+    double _bytes;				//bytes, float because of size
     int graphLength;
-    struct graphStruct graphData;
+    struct graphStruct *graphData;
     encryptionType _isWep;      //0=unknown, 1=disabled, 2=enabled 3=40-bit 4-WPA
-    UInt8 aIV[3]; 		//last iv
-    UInt8 aRawID[6];		//our id
-    UInt8 aRawBSSID[6];		//our bssid
-    UInt8 aPoint1[6];		//tunnel partner 1
-    UInt8 aPoint2[6];		//tunnel partner 2
+    UInt8 aIV[3];				//last iv
+    UInt8 aRawID[6];			//our id
+    UInt8 aRawBSSID[6];			//our bssid
+    UInt8 aPoint1[6];			//tunnel partner 1
+    UInt8 aPoint2[6];			//tunnel partner 2
     bool _gotData;
     bool _firstPacket;
     bool _liveCaptured;
-    
+	bool _graphInit;
+	NSDictionary *_cache;
+    bool _cacheValid;
+
     NSRecursiveLock *_dataLock;
     
     NetView*  _netView;
@@ -79,10 +82,10 @@ struct graphStruct {
     NSString* aVendor;
     NSString* _password;
     NSString* aComment;
-    NSString* aID;
-    NSDate* aDate;		//current date
+    NSString* _ID;
+    NSDate* _date;		//current date
     NSDate* aFirstDate;
-    NSMutableArray* aPacketsLog;    //array with a couple of packets to calculate checksum
+    NSMutableArray* _packetsLog;    //array with a couple of packets to calculate checksum
     NSMutableArray* _ARPLog;        //array with a couple of packets to do reinjection attack
     NSMutableArray* _ACKLog;        //array with a couple of packets to do reinjection attack
     NSMutableDictionary* aClients;
@@ -104,6 +107,10 @@ struct graphStruct {
     ImportController *_im;
 }
 
+- (id)initWithID:(int)netID;
+- (id)initWithNetstumbler:(const char*)buf andDate:(NSString*)date;
+- (id)initWithDataDictionary:(NSDictionary*)dict;
+- (void)mergeWithNet:(WaveNet*)net;
 
 - (void)updateSettings:(NSNotification*)note;
 
@@ -115,9 +122,7 @@ struct graphStruct {
 - (NSComparisonResult)compareTrafficTo:(id)net;
 - (NSComparisonResult)compareRecentTrafficTo:(id)aNet;
 
-- (id)initWithID:(int)netID;
-- (id)initWithNetstumbler:(const char*)buf andDate:(NSString*)date;
-- (void)mergeWithNet:(WaveNet*)net;
+- (NSDictionary*)dataDictionary;
 
 - (struct graphStruct)graphData;
 - (NSDictionary*)getClients;
@@ -135,7 +140,7 @@ struct graphStruct {
 - (NSDate *)firstSeenDate;
 - (NSString*)data;
 - (NSString*)getVendor;
-- (NSArray*)weakPacketsLog;             //a couple of encrypted packets
+- (NSArray*)cryptedPacketsLog;      //a couple of encrypted packets
 - (NSMutableArray*)arpPacketsLog;	//a couple of reinject packets
 - (NSMutableArray*)ackPacketsLog;	//a couple of reinject packets
 - (NSString*)key;
@@ -145,6 +150,8 @@ struct graphStruct {
 - (NSDictionary*)coordinates;
 - (WaveWeakContainer **)ivData;
 - (BOOL)passwordAvailable;
+
+- (NSDictionary*)cache;
 
 - (NSString *)latitude;
 - (NSString *)longitude;

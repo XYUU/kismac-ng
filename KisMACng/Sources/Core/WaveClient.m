@@ -2,7 +2,7 @@
         
         File:			WaveClient.m
         Program:		KisMAC
-		Author:			Michael Ro§berg
+		Author:			Michael Rossberg
 						mick@binaervarianz.de
 		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
@@ -32,13 +32,13 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [self init];
     if ( [coder allowsKeyedCoding] ) {
-        aCurSignal=[coder decodeIntForKey:@"aCurSignal"];
+        _curSignal=[coder decodeIntForKey:@"aCurSignal"];
 
-        aRecievedBytes=[coder decodeDoubleForKey:@"aRecievedBytes"];
-        aSentBytes=[coder decodeDoubleForKey:@"aSentBytes"];
+        _recievedBytes=[coder decodeDoubleForKey:@"aRecievedBytes"];
+        _sentBytes=[coder decodeDoubleForKey:@"aSentBytes"];
         
-        aID     = [[coder decodeObjectForKey:@"aID"] retain];
-        aDate   = [[coder decodeObjectForKey:@"aDate"] retain];
+        _ID     = [[coder decodeObjectForKey:@"aID"] retain];
+        _date   = [[coder decodeObjectForKey:@"aDate"] retain];
         
         //WPA stuff
         _sNonce = [[coder decodeObjectForKey:@"sNonce"] retain];
@@ -58,30 +58,54 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder {
-    if ([coder allowsKeyedCoding]) {
-        [coder encodeInt:aCurSignal forKey:@"aCurSignal"];
-        
-        [coder encodeDouble:aRecievedBytes forKey:@"aRecievedBytes"];
-        [coder encodeDouble:aSentBytes forKey:@"aSentBytes"];
+- (id)initWithDataDictionary:(NSDictionary*)dict {
+    self = [self init];
+	if (!self) return nil;
+	
+	_curSignal = [[dict objectForKey:@"curSignal"] intValue];
 
-        [coder encodeObject:aID forKey:@"aID"];
-        [coder encodeObject:aDate forKey:@"aDate"];
-    
-        //WPA stuff
-        [coder encodeObject:_sNonce forKey:@"sNonce"];
-        [coder encodeObject:_aNonce forKey:@"aNonce"];
-        [coder encodeObject:_packet forKey:@"packet"];
-        [coder encodeObject:_MIC    forKey:@"MIC"];
+	_recievedBytes = [[dict objectForKey:@"recievedBytes"] doubleValue];
+	_sentBytes = [[dict objectForKey:@"sentBytes"] doubleValue];
+	
+	_ID     = [[dict objectForKey:@"ID"] retain];
+	_date   = [[dict objectForKey:@"date"] retain];
+	
+	//WPA stuff
+	_sNonce = [[dict objectForKey:@"wpaSNonce"] retain];
+	_aNonce = [[dict objectForKey:@"wpaANonce"] retain];
+	_packet = [[dict objectForKey:@"wpaPacket"] retain];
+	_MIC    = [[dict objectForKey:@"wpaMIC"] retain];
 
-        //LEAP stuff
-        [coder encodeObject:_leapUsername   forKey:@"leapUsername"];
-        [coder encodeObject:_leapChallenge  forKey:@"leapChallenge"];
-        [coder encodeObject:_leapResponse   forKey:@"leapResponse"];
-    } else {
-        NSLog(@"Cannot encode this way");
-    }
-    return;
+	//LEAP stuff
+	_leapUsername   = [[dict objectForKey:@"leapUsername"] retain];
+	_leapChallenge  = [[dict objectForKey:@"leapChallenge"] retain];
+	_leapResponse   = [[dict objectForKey:@"leapResponse"] retain];
+	
+	_changed = YES;
+
+    return self;
+}
+
+- (NSDictionary*)dataDictionary {
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	[dict setObject:[NSNumber numberWithInt:_curSignal] forKey:@"curSignal"];
+	[dict setObject:[NSNumber numberWithDouble:_recievedBytes] forKey:@"recievedBytes"];
+	[dict setObject:[NSNumber numberWithDouble:_sentBytes] forKey:@"sentBytes"];
+	
+	[dict setObject:_ID forKey:@"ID"];
+	if (_date) [dict setObject:_date forKey:@"date"];
+	
+	if (_sNonce) [dict setObject:_sNonce forKey:@"wpaSNonce"];
+	if (_aNonce) [dict setObject:_aNonce forKey:@"wpaANonce"];
+	if (_packet) [dict setObject:_packet forKey:@"wpaPacket"];
+	if (_MIC)    [dict setObject:_MIC forKey:@"wpaMIC"];
+		
+	if (_leapUsername)  [dict setObject:_leapUsername forKey:@"leapUsername"];
+	if (_leapChallenge) [dict setObject:_leapChallenge forKey:@"leapChallenge"];
+	if (_leapResponse)  [dict setObject:_leapResponse forKey:@"leapResponse"];
+
+	return dict;
 }
 
 #pragma mark -
@@ -95,11 +119,11 @@
     if ([w isWPAKeyPacket]) {
         switch ([w wpaCopyNonce:nonce]) {
             case wpaNonceANonce:
-                NSLog(@"Detected WPA challenge for %@!", aID);
+                NSLog(@"Detected WPA challenge for %@!", _ID);
                 [WaveHelper secureReplace:&_aNonce withObject:[NSData dataWithBytes:nonce length:WPA_NONCE_LENGTH]];
                 break;
             case wpaNonceSNonce:
-                NSLog(@"Detected WPA response for %@!", aID);
+                NSLog(@"Detected WPA response for %@!", _ID);
                 [WaveHelper secureReplace:&_sNonce withObject:[NSData dataWithBytes:nonce length:WPA_NONCE_LENGTH]];
                 break;
             case wpaNonceNone:
@@ -120,7 +144,7 @@
             if (!_leapResponse) [WaveHelper secureReplace:&_leapResponse  withObject:[w response]];
             break;
         case leapAuthCodeFailure:
-            NSLog(@"Detected LEAP authentication failure for client %@! Username: %@. Deleting all collected auth data!", aID, _leapUsername);
+            NSLog(@"Detected LEAP authentication failure for client %@! Username: %@. Deleting all collected auth data!", _ID, _leapUsername);
             [WaveHelper secureRelease:&_leapUsername];
             [WaveHelper secureRelease:&_leapChallenge];
             [WaveHelper secureRelease:&_leapResponse];
@@ -132,23 +156,23 @@
 }
 
 -(void) parseFrameAsIncoming:(WavePacket*)w {
-    if (!aID)
-        aID=[[w clientToID] retain];
+    if (!_ID)
+        _ID=[[w clientToID] retain];
 
-    aRecievedBytes+=[w length];
+    _recievedBytes+=[w length];
     _changed = YES;
     
     if (![w toDS]) [self wpaHandler:w]; //dont store it in the AP client
 }
 
 -(void) parseFrameAsOutgoing:(WavePacket*)w {
-    if (!aID)
-        aID=[[w clientFromID] retain];
+    if (!_ID)
+        _ID=[[w clientFromID] retain];
     
-    [WaveHelper secureReplace:&aDate withObject:[NSDate date]];
+    [WaveHelper secureReplace:&_date withObject:[NSDate date]];
     
-    aCurSignal=[w signal];
-    aSentBytes+=[w length];    
+    _curSignal=[w signal];
+    _sentBytes+=[w length];    
     _changed = YES;
     
     if (![w fromDS]) [self wpaHandler:w]; //dont store it in the AP client
@@ -157,46 +181,46 @@
 #pragma mark -
 
 - (NSString *)ID {
-    if (!aID) return NSLocalizedString(@"<unknown>", "unknown client ID");
-    return aID;
+    if (!_ID) return NSLocalizedString(@"<unknown>", "unknown client ID");
+    return _ID;
 }
 
 - (NSString *)recieved {
-    return [WaveHelper bytesToString: aRecievedBytes];
+    return [WaveHelper bytesToString: _recievedBytes];
 }
 
 - (NSString *)sent {
-    return [WaveHelper bytesToString: aSentBytes];
+    return [WaveHelper bytesToString: _sentBytes];
 }
 
 - (NSString *)vendor {
     if (_vendor) return _vendor;
-    _vendor=[[WaveHelper vendorForMAC:aID] retain];
+    _vendor=[[WaveHelper vendorForMAC:_ID] retain];
     return _vendor;
 }
 
 - (NSString *)date {
-    if (aDate==Nil) return @"";
-    else return [NSString stringWithFormat:@"%@", aDate]; //return [aDate descriptionWithCalendarFormat:@"%H:%M %d-%m-%y" timeZone:nil locale:nil];
+    if (_date==Nil) return @"";
+    else return [NSString stringWithFormat:@"%@", _date]; //return [_date descriptionWithCalendarFormat:@"%H:%M %d-%m-%y" timeZone:nil locale:nil];
 }
 
 #pragma mark -
 
 - (float)recievedBytes {
-    return aRecievedBytes;
+    return _recievedBytes;
 }
 
 - (float)sentBytes {
-    return aSentBytes;
+    return _sentBytes;
 }
 
 - (int)curSignal {
-    if ([aDate compare:[NSDate dateWithTimeIntervalSinceNow:0.5]]==NSOrderedDescending) aCurSignal=0;
-    return aCurSignal;
+    if ([_date compare:[NSDate dateWithTimeIntervalSinceNow:0.5]]==NSOrderedDescending) _curSignal=0;
+    return _curSignal;
 }
 
 - (NSDate *)rawDate {
-    return aDate;
+    return _date;
 }
 
 #pragma mark -
@@ -224,9 +248,9 @@
     int     ID32[6];
     int i;
     
-    if (!aID) return Nil;
+    if (!_ID) return Nil;
     
-    if (sscanf([aID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &ID32[0], &ID32[1], &ID32[2], &ID32[3], &ID32[4], &ID32[5]) != 6) return Nil;
+    if (sscanf([_ID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &ID32[0], &ID32[1], &ID32[2], &ID32[3], &ID32[4], &ID32[5]) != 6) return Nil;
     for (i = 0; i < 6; i++)
         ID8[i] = ID32[i];
     
@@ -271,8 +295,8 @@
 #pragma mark -
 
 -(void) dealloc {
-    [aDate release];
-    [aID release];
+    [_date release];
+    [_ID release];
     [_vendor release];
 
     //WPA

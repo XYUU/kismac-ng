@@ -167,9 +167,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 
 #pragma mark -
 
-//#define USEPASTEOUT
 - (IBAction)updateNetworkTable:(id)sender complete:(bool)complete {
-#ifndef USEPASTEOUT    
     int row;
     int i;
 
@@ -229,56 +227,6 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
             }
         }
     }
-#else
-    NSPasteboard *board;
-    NSMutableString *outString;
-    NSString *lineString;
-    WaveNet *n;
-    WaveClient *cl;
-    unsigned int i, d;
-    NSString *type;
-    NSString *wep;
-    NSDictionary *c;
-    NSArray *k;
-    
-    board = [NSPasteboard pasteboardWithName:NSGeneralPboard];
-    outString = [NSMutableString string];
-
-    for(i=0; i<[nets count]; i++) {
-        n = [aNets objectForKey:[nets objectAtIndex:i]];
-        switch ([n isWep]) {
-            case 4: wep = @"WPA";
-            case 2: wep = @"YES";
-            case 1: wep = @"NO";
-            case 0: wep = @"NA";
-        }
-        switch ([n type]) {
-            case 0: type =@"NA";
-            case 1: type = @"ad-hoc";
-            case 2: type = @"managed";
-            case 3: type = @"tunnel";
-            case 4: type = @"probe";
-            case 5: type = @"lucent tunnel";
-            default:
-                NSAssert(NO, @"Network type invalid");
-            }
-    
-        lineString = [NSString stringWithFormat:@"ap %i %@ %@ %@ %@ %@ %i %i %i %@ %@\n",[n channel],[n BSSID],[n SSID], type, wep, [n getVendor], [n curSignal],[n maxSignal], [n packets], [n data], [[n date] description]];
-        [outString appendString:lineString];
-        
-        k = [n getClientKeys];
-        c = [n getClients];
-        for(d=0;d<[k count];d++) {
-            wep = [k objectAtIndex:d];
-            cl = [c objectForKey:wep];
-            lineString = [NSString stringWithFormat:@"client %@ %@ %@ %@ %i %@\n", wep, [cl vendor], [cl sent], [cl recieved], [cl curSignal], [[cl date] description] ];
-            [outString appendString:lineString];
-        }
-    }
-    lineString = [board stringForType:NSStringPboardType];
-    [board declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
-    [board setString:outString forType:NSStringPboardType];
-#endif    
 }
 
 - (void)updateViewItems:(NSNotification*)note {
@@ -306,43 +254,8 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 
 - (id) tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *) aTableColumn row:(int) rowIndex {
     WaveNet *net = [_container netAtIndex:rowIndex];
-    NSString *s = [aTableColumn identifier];
     
-    if ([s isEqualToString:@"id"]) return [NSString stringWithFormat:@"%i", [net netID]];
-    if ([s isEqualToString:@"ssid"]) return [net SSID];
-    if ([s isEqualToString:@"bssid"]) return [net BSSID];
-    if ([s isEqualToString:@"lastseen"]) return [net date];
-    if ([s isEqualToString:@"signal"]) return [NSString stringWithFormat:@"%i", [net curSignal]];
-    if ([s isEqualToString:@"avgsignal"]) return [NSString stringWithFormat:@"%i", [net avgSignal]];
-    if ([s isEqualToString:@"maxsignal"]) return [NSString stringWithFormat:@"%i", [net maxSignal]];
-    if ([s isEqualToString:@"channel"]) return [NSString stringWithFormat:@"%i", [net channel]];
-    if ([s isEqualToString:@"packets"]) return [NSString stringWithFormat:@"%i", [net packets]];
-    if ([s isEqualToString:@"data"]) return [net data];
-    if ([s isEqualToString:@"wep"]) {
-        switch ([net wep]) {
-            case encryptionTypeLEAP:    return NSLocalizedString(@"LEAP", "table description");
-            case encryptionTypeWPA:     return NSLocalizedString(@"WPA", "table description");
-            case encryptionTypeWEP40:   return NSLocalizedString(@"WEP-40", "table description");
-            case encryptionTypeWEP:     return NSLocalizedString(@"WEP", "table description");
-            case encryptionTypeNone:    return NSLocalizedString(@"NO", "table description");
-            case encryptionTypeUnknown: return @"";
-            default:
-                NSAssert(NO, @"Encryption type invalid");
-        }
-    }
-    if ([s isEqualToString:@"type"]) {
-        switch ([net type]) {
-            case 0: return @"";
-            case 1: return NSLocalizedString(@"ad-hoc", "table description");
-            case 2: return NSLocalizedString(@"managed", "table description");
-            case 3: return NSLocalizedString(@"tunnel", "table description");
-            case 4: return NSLocalizedString(@"probe", "table description");
-            case 5: return NSLocalizedString(@"lucent tunnel", "table description");
-            default:
-                NSAssert(NO, @"Network type invalid");
-        }
-    }
-    return @"unknown row";
+	return [[net cache] objectForKey: [aTableColumn identifier]];
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
@@ -382,8 +295,10 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
         [tableView setIndicatorImage:[NSImage imageNamed:@"NSAscendingSortIndicator"] inTableColumn:tableColumn];
     else 
         [tableView setIndicatorImage:[NSImage imageNamed:@"NSDescendingSortIndicator"] inTableColumn:tableColumn];
-    [tableView setHighlightedTableColumn:tableColumn];
     
+	//speedy sort (quick sort is faster than shaker sort, but not stable)
+	[_container sortByColumn:_lastSorted order:_ascending];
+	[tableView setHighlightedTableColumn:tableColumn];
     [self updateNetworkTable:self complete:YES];
 }
 

@@ -31,7 +31,7 @@
 
 #define SRET { [wordlist release];  [[WaveHelper importController] terminateWithCode: 1]; [pool release]; return; }
 #define RET { [wordlist release]; [[WaveHelper importController] terminateWithCode: -1]; [pool release]; return; }
-#define CHECK { [wordlist retain]; if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 8) RET; }
+#define CHECK { [wordlist retain]; if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([_packetsLog count] < 8) RET; }
 
 @implementation WaveNet(WEPWorlistCrackExtension)
 
@@ -71,11 +71,10 @@
         
         WirelessEncrypt((CFStringRef)[NSString stringWithCString:wrd length:i],(WirelessKey*)(key+3),0);
 
-        for(i=0;i<[aPacketsLog count];i++) {
-
+        for(i=0;i<[_packetsLog count];i++) {
             if (!isInit) {	
-                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length=[(NSData*)[_packetsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
@@ -172,15 +171,14 @@
         
         WirelessEncrypt((CFStringRef)[NSString stringWithCString:wrd length:i],(WirelessKey*)(key+3),1);
 
-        for(i=0;i<[aPacketsLog count];i++) {
-
+        for(i=0; i<[_packetsLog count]; i++) {
             if (!isInit) {	
-                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length=[(NSData*)[_packetsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
-                if (i==0) isInit=YES;
+                if (i==0) isInit = YES;
             }
             
             memcpy(currentStateArray, skeletonStateArray, 256);
@@ -273,14 +271,14 @@
         
         WirelessCryptMD5(wrd, key+3);
 
-        for(i=0;i<[aPacketsLog count];i++) {
-            if (!isInit) {
-                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
-                
+        for(i=0; i<[_packetsLog count]; i++) {
+            if (!isInit) {	
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length=[(NSData*)[_packetsLog objectAtIndex:i] length];
+               
                 memcpy(key, data, 3);
                 
-                if (i==0) isInit=YES;
+                if (i==0) isInit = YES;
             }
             
             memcpy(currentStateArray, skeletonStateArray, 256);

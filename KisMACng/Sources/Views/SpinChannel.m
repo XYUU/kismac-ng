@@ -2,9 +2,9 @@
         
         File:			SpinChannel.mm
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -54,12 +54,16 @@
     
     if([_animLock tryLock]) {
         while(_shallAnimate) {
-            [self setNeedsDisplay:YES];
-            date = [[NSDate alloc] initWithTimeIntervalSinceNow: 1.0/12.0];
-            [NSThread sleepUntilDate:date];
-            [date release];
-			[pool release];
-			pool = [[NSAutoreleasePool alloc] init];
+			@try {
+				[self setNeedsDisplay:YES];
+				date = [[NSDate alloc] initWithTimeIntervalSinceNow: 1.0/12.0];
+				[NSThread sleepUntilDate:date];
+				[date release];
+			}
+			@finally {
+				[pool release];
+				pool = [[NSAutoreleasePool alloc] init];
+			}
         }
         [_animLock unlock];
     }

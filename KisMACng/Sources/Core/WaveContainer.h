@@ -92,6 +92,7 @@ typedef struct WaveNetEntry {
 //for adding data
 - (bool) addPacket:(WavePacket*)p liveCapture:(bool)live;
 - (bool) addAppleAPIData:(WirelessNetworkInfo*)i;
+- (bool) addNetwork:(WaveNet*)net;
 
 - (unsigned int) count;
 - (WaveNet*) netAtIndex:(unsigned int)index;

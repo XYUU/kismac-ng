@@ -30,6 +30,8 @@
 #import "MapView.h"
 #import "MapDownload.h"
 #import "KisMACNotifications.h"
+#import "WaveStorageController.h"
+#import "Trace.h"
 
 @implementation ScanController(ScriptableAdditions)
 
@@ -120,7 +122,8 @@
     [self showNetworks];
     [_networkTable deselectAll:self];
 
-    [scanner clearAllNetworks];
+	[[WaveHelper trace] setTrace:nil];
+    [_container clearAllEntries];
     
     [_window setDocumentEdited:NO];
     _curNet = Nil;
@@ -147,7 +150,7 @@
         [WaveHelper secureReplace:&_fileName withObject:filename];
         
         NS_DURING
-            ret = [scanner loadFromFile:filename];
+            ret = [WaveStorageController loadFromFile:filename withContainer:_container andImportController:_importController];
         NS_HANDLER
             ret = NO;
         NS_ENDHANDLER
@@ -173,7 +176,7 @@
         return ret;
     } 
     
-    NSLog(@"Warning unknow file format!");
+    NSLog(@"Warning unknown file format!");
     NSBeep();
     return NO;
 }
@@ -186,10 +189,10 @@
     filename = [filename standardPath];
     
     if ([[[filename pathExtension] lowercaseString] isEqualToString:@"kismac"]) {
-        [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Opening %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
+        [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];
 		
 		_refreshGUI = NO;
-		[scanner importFromFile:filename];
+		[WaveStorageController importFromFile:filename withContainer:_container andImportController:_importController];
 		_refreshGUI = YES;
 
 		[self updateNetworkTable:self complete:YES];
@@ -204,7 +207,7 @@
  		return ret;
 	}
 
-    NSLog(@"Warning unknow file format!");
+    NSLog(@"Warning unknown file format!");
     NSBeep();
     return NO;
 }
@@ -223,7 +226,7 @@
 
 	img = [[NSImage alloc] initWithContentsOfFile:filename];
 	if (!img) {
-		NSLog(@"Warning unknow file format!");
+		NSLog(@"Warning unknown file format!");
 		NSBeep();
 		[self busyDone];
 		return NO;
@@ -310,7 +313,7 @@
         NS_DURING
             [self stopActiveAttacks];
             [self stopScan];
-            ret = [scanner saveToFile:filename];
+            ret = [WaveStorageController saveToFile:filename withContainer:_container andImportController:_importController];
             [WaveHelper secureReplace:&_fileName withObject:filename];
             if (!ret) [self showSavingFailureDialog];
             else [_window setDocumentEdited: _scanning];
@@ -320,8 +323,7 @@
         NS_HANDLER
             NSLog(@"Saving failed, because of an internal error!");
         NS_ENDHANDLER
-
-        [self busyDone];
+		[self busyDone];
     } else if ([[[filename pathExtension] lowercaseString] isEqualToString:@"kismap"]) {
         [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Saving to %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];  
 
@@ -338,7 +340,7 @@
         [self busyDone];
     } 
     
-    NSLog(@"Warning unknow file format!");
+    NSLog(@"Warning unknown file format or internal error!");
     NSBeep();
     return NO;
 }
@@ -391,7 +393,7 @@
     if (_curNet==Nil) return NO; \
     if ([_curNet passwordAvailable]) return YES; \
     if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO; \
-    if ([[_curNet weakPacketsLog] count] < 8) return NO; \
+    if ([[_curNet cryptedPacketsLog] count] < 8) return NO; \
     }
 
 - (BOOL)bruteforceNewsham {

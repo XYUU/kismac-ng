@@ -36,6 +36,7 @@
 #import "../WaveDrivers/WaveDriver.h"
 #import "MapView.h"
 #import "MapViewAreaView.h"
+#import "WaveStorageController.h"
 
 @implementation ScanController(MenuExtension)
 
@@ -91,7 +92,7 @@
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Importing %@...", "Status for busy dialog"), filename]];  
     
     _refreshGUI = NO;
-    [scanner importFromNetstumbler:filename];
+    [WaveStorageController importFromNetstumbler:filename withContainer:_container andImportController:_importController];
     _refreshGUI = YES;
 
     [self updateNetworkTable:self complete:YES];
@@ -115,7 +116,7 @@
 - (void)performExportNS:(id)filename {
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
-    if (![scanner exportNSToFile:filename]) _asyncFailure = YES;
+    if (![WaveStorageController exportNSToFile:filename withContainer:_container andImportController:_importController]) _asyncFailure = YES;
     else _asyncFailure = NO;
 }
 
@@ -134,7 +135,7 @@
 - (void)performExportWarD:(id)filename {
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
-    _asyncFailure = ! [[scanner webServiceData] writeToFile:[filename stringByExpandingTildeInPath] atomically:YES];
+    _asyncFailure = ! [[WaveStorageController webServiceDataOfContainer:_container andImportController:_importController] writeToFile:[filename stringByExpandingTildeInPath] atomically:YES];
 }
 
 - (IBAction)exportToServer:(id)sender {
@@ -197,7 +198,7 @@
         return;
     }
 
-    data = [scanner webServiceData];
+    data = [WaveStorageController webServiceDataOfContainer:_container andImportController:_importController];
     
     // Create a new url based upon the user entered string
     url = [NSURL URLWithString: @"http://kismac.binaervarianz.de/_uploadnets.php"];
@@ -251,7 +252,7 @@
 - (void)performExportMacStumbler:(id)filename {
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
-    if (![scanner exportMacStumblerToFile:filename]) _asyncFailure = YES;
+    if (![WaveStorageController exportMacStumblerToFile:filename withContainer:_container andImportController:_importController]) _asyncFailure = YES;
     else _asyncFailure = NO;
 }
 
@@ -436,7 +437,7 @@
     
     if (net) {
         if ([[net ID] isEqualToString:_activeAttackNetID]) [self stopActiveAttacks];
-        [scanner clearNetwork:net];
+		[_container clearEntry:net];
     }
     _curNet = Nil;
     

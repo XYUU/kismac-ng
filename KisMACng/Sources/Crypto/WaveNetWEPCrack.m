@@ -33,7 +33,7 @@
 
 #define SRET { [[WaveHelper importController] terminateWithCode: 1]; [pool release]; return; }
 #define RET { [[WaveHelper importController] terminateWithCode: -1]; [pool release]; return; }
-#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 8) RET; }
+#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([_packetsLog count] < 8) RET; }
 
 - (void)performBruteforce40bitLow:(NSObject*)obj {
     unsigned int i, foundCRC, counter, length = 0;
@@ -56,11 +56,11 @@
         skeletonStateArray[counter] = counter;
     
     while(YES) {
-        for(i=0;i<[aPacketsLog count];i++) {
+        for(i=0;i<[_packetsLog count];i++) {
 
             if (!isInit) {	
-                data = [[aPacketsLog objectAtIndex:i] cString];
-                length = [(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length = [(NSData*)[_packetsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
@@ -185,15 +185,15 @@
         skeletonStateArray[counter] = counter;
     
     while(YES) {
-        for(i=0; i<[aPacketsLog count]; i++) {
+        for(i=0;i<[_packetsLog count];i++) {
 
             if (!isInit) {	
-                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length = [(NSData*)[_packetsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
-                if (i==0) isInit=YES;
+                if (i==0) isInit = YES;
             }
             
             memcpy(currentStateArray, skeletonStateArray, 256);
@@ -316,15 +316,15 @@
         skeletonStateArray[counter] = counter;
     
     while(YES) {
-        for(i=0; i<[aPacketsLog count]; i++) {
+        for(i=0;i<[_packetsLog count];i++) {
 
             if (!isInit) {	
-                data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length = [(NSData*)[_packetsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
-                if (i==0) isInit=YES;
+                if (i==0) isInit = YES;
             }
             
             memcpy(currentStateArray, skeletonStateArray, 256);
@@ -416,7 +416,7 @@
     
     if (_password != Nil) RET;
     if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET;
-    if ([aPacketsLog count] < 8) RET;
+    if ([_packetsLog count] < 8) RET;
 
     controller = [WaveHelper importController];
   
@@ -443,11 +443,11 @@
         skeletonStateArray[counter] = counter;
     
     while(true) {
-        for(i=0;i<[aPacketsLog count];i++) {
+        for(i=0;i<[_packetsLog count];i++) {
 
             if (!isInit) {
-                data = [[aPacketsLog objectAtIndex:i] cString];
-                length = [(NSString*)[aPacketsLog objectAtIndex:i] length];
+                data = [[_packetsLog objectAtIndex:i] bytes];
+                length = [(NSData*)[_packetsLog objectAtIndex:i] length];
               
                 selKey = data[3] & 0x03;
                 memcpy(&key[selKey][0], data, 3);

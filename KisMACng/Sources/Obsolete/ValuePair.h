@@ -2,9 +2,9 @@
         
         File:			ValuePair.h
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -29,6 +29,9 @@
 @interface ValuePair : NSObject <NSCopying> {
     double _x, _y;
 }
+
+- (id)initWithDataDictionary:(NSDictionary*)dict;
+- (NSDictionary*)dataDictionary;
 
 - (double)getX;
 - (double)getY;

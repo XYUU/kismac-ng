@@ -120,7 +120,7 @@ reinjection is working again
 
 03-05-04 mick   added debug mode for GPSs
                 need to enable via debug menu
-                "defaults write org.binaervarianz.kismac DebugMode 1"
+                "defaults write de.binaervarianz.kismac DebugMode 1"
 
 03-04-04 mick   did some stuff to make atheros support more stable
 

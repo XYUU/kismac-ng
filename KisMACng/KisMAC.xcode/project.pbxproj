@@ -1497,6 +1497,8 @@
 				003533C206A5DD8500AB4577,
 				003533C306A5DD8500AB4577,
 				003533C406A5DD8500AB4577,
+				0090B7C907B2A43D005FEEB1,
+				0090B7CA07B2A43D005FEEB1,
 				00875D190708ADB300CACFCB,
 				00875D1A0708ADB300CACFCB,
 				00875DA807097D8D00CACFCB,
@@ -2150,7 +2152,6 @@
 		003533FE06A5DD8500AB4577 = {
 			children = (
 				00971F3B06E4FA52004307EA,
-				003533FF06A5DD8500AB4577,
 				00A622A706FEE4FB005D248A,
 				00A622A806FEE4FB005D248A,
 				00CBA33E06DB8FDE000ACD19,
@@ -2173,23 +2174,6 @@
 			isa = PBXGroup;
 			name = Views;
 			path = Sources/Views;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		003533FF06A5DD8500AB4577 = {
-			children = (
-				0035340006A5DD8500AB4577,
-			);
-			isa = PBXGroup;
-			path = Legacy;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		0035340006A5DD8500AB4577 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = AdvNetView.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2894,12 +2878,6 @@
 			settings = {
 			};
 		};
-		0035347906A5DD8500AB4577 = {
-			fileRef = 0035340006A5DD8500AB4577;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		0035348506A5DD8500AB4577 = {
 			fileRef = 0035340C06A5DD8500AB4577;
 			isa = PBXBuildFile;
@@ -3205,6 +3183,34 @@
 		};
 		0090AC8606E5E3250096C5FC = {
 			fileRef = 0090AC8406E5E3250096C5FC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B7C907B2A43D005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = WaveStorageController.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B7CA07B2A43D005FEEB1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = WaveStorageController.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0090B7CB07B2A43D005FEEB1 = {
+			fileRef = 0090B7C907B2A43D005FEEB1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0090B7CC07B2A43D005FEEB1 = {
+			fileRef = 0090B7CA07B2A43D005FEEB1;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -4569,7 +4575,7 @@
 		};
 		4A9504CDFFE6A4B311CA0CBA = {
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				ZERO_LINK = NO;
 			};
@@ -4597,10 +4603,11 @@
 			buildRules = (
 			);
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = KisMAC_Prefix.pch;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
@@ -4670,7 +4677,6 @@
 				0035347306A5DD8500AB4577,
 				0035347506A5DD8500AB4577,
 				0035347706A5DD8500AB4577,
-				0035347906A5DD8500AB4577,
 				0035348506A5DD8500AB4577,
 				0035348706A5DD8500AB4577,
 				0035348906A5DD8500AB4577,
@@ -4709,6 +4715,7 @@
 				00875D1B0708ADB300CACFCB,
 				00875DAA07097D8D00CACFCB,
 				005B12680730051A00906C36,
+				0090B7CB07B2A43D005FEEB1,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4901,6 +4908,7 @@
 				00875D1C0708ADB300CACFCB,
 				00875DAB07097D8D00CACFCB,
 				005B12690730051A00906C36,
+				0090B7CC07B2A43D005FEEB1,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,9 +2,9 @@
         
         File:			WaveClient.h
         Program:		KisMAC
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -28,11 +28,11 @@
 #import "WavePacket.h"
 
 @interface WaveClient : NSObject {
-    NSString *aID, *_vendor;
-    NSDate *aDate;
-    int aCurSignal;
-    float aRecievedBytes;
-    float aSentBytes;
+    NSString *_ID, *_vendor;
+    NSDate *_date;
+    int _curSignal;
+    float _recievedBytes;
+    float _sentBytes;
     bool _changed;
     
     //WPA
@@ -42,6 +42,9 @@
     NSData *_leapChallenge, *_leapResponse;
     NSString *_leapUsername;
 }
+
+- (id)initWithDataDictionary:(NSDictionary*)dict;
+- (NSDictionary*)dataDictionary;
 
 - (void)parseFrameAsIncoming:(WavePacket*)w;
 - (void)parseFrameAsOutgoing:(WavePacket*)w;

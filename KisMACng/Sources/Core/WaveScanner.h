@@ -2,7 +2,7 @@
         
         File:			WaveScanner.h
         Program:		KisMAC
-		Author:			Michael Ro§berg
+		Author:			Michael Rossberg
 						mick@binaervarianz.de
 		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
@@ -40,9 +40,9 @@ struct __authFrame {
 
 struct __beaconFrame {
     WLFrame     hdr;
-    UInt64	wi_timestamp;
-    UInt16	wi_interval;
-    UInt16	wi_capinfo;
+    UInt64		wi_timestamp;
+    UInt16		wi_interval;
+    UInt16		wi_capinfo;
     UInt8       wi_tag_ssid;
     UInt8       wi_ssid_len;
     UInt32      wi_ssid; //normally variable
@@ -95,15 +95,6 @@ struct __beaconFrame {
     IBOutlet WaveContainer* _container;
 }
 
-//funtions for loading/saving
-- (bool)saveToFile:(NSString*)fileName;
-- (bool)exportNSToFile:(NSString*)fileName;
-- (bool)exportMacStumblerToFile:(NSString*)fileName;
-- (bool)loadFromFile:(NSString*)fileName;
-- (bool)importFromFile:(NSString*)fileName;
-- (bool)importFromNetstumbler:(NSString*)fileName;
-- (NSString*)webServiceData;
-
 - (void)readPCAPDump:(NSString*)dumpFile;
 - (WLFrame*) nextFrame:(bool*)corrupted;	//internal usage only
 
@@ -115,8 +106,6 @@ struct __beaconFrame {
 - (bool) startScanning;
 - (bool) stopScanning;
 - (void) setGeigerInterval:(int)newGeigerInt sound:(NSString*) newSound;
-- (void) clearAllNetworks;
-- (void) clearNetwork:(WaveNet*)net;
 - (NSTimeInterval) scanInterval;
 
 //active attacks

@@ -47,6 +47,23 @@
     return;
 }
 
+- (id)initWithDataDictionary:(NSDictionary*)dict {
+    self = [self init];
+	
+	_x = [[dict objectForKey:@"x"] doubleValue];
+	_y = [[dict objectForKey:@"y"] doubleValue];
+    
+	return self;
+}
+
+- (NSDictionary*)dataDictionary {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+		[NSNumber numberWithDouble:_x], @"x",
+		[NSNumber numberWithDouble:_y], @"y", 
+		nil
+	];
+}
+
 - (double)getX {
     return _x;
 }

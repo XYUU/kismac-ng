@@ -2,9 +2,9 @@
         
         File:			WaveContainer.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -172,6 +172,8 @@ inline UInt32 hashForMAC(UInt8* val) {
 - (bool) addNetwork:(WaveNet*)net {
     unsigned int entry, l;
     
+	NSParameterAssert(net);
+	
     if (_netCount >= MAXNETS) return NO;
     
     _netCount++;
@@ -225,8 +227,12 @@ inline UInt32 hashForMAC(UInt8* val) {
     for (i=0; i<[data count]; i++) {
         n = [data objectAtIndex:i];
         if (![n isMemberOfClass:[WaveNet class]]) {
-            NSLog(@"Could not load data, because it is bad!");
-            return NO;
+			if (![n isKindOfClass:[NSDictionary class]]) {
+				NSLog(@"Could not load data, because it is bad!");
+				return NO;
+			}
+			n = [[[WaveNet alloc] initWithDataDictionary:n] autorelease];
+			if (!n) continue;
         }
         
         if (_netCount == MAXNETS) {
@@ -285,8 +291,11 @@ inline UInt32 hashForMAC(UInt8* val) {
     for (i=0; i<[data count]; i++) {
         n = [data objectAtIndex:i];
         if (![n isMemberOfClass:[WaveNet class]]) {
-            NSLog(@"Could not load data, because it is bad!");
-            return NO;
+			if (![n isMemberOfClass:[NSDictionary class]]) {
+				NSLog(@"Could not load data, because it is bad!");
+				return NO;
+			}
+			n = [[[WaveNet alloc] initWithDataDictionary:n] autorelease];
         }
         
         [n setNetID:0];
@@ -313,7 +322,7 @@ inline UInt32 hashForMAC(UInt8* val) {
     
     a = [NSMutableArray arrayWithCapacity:_netCount];
     for (i=0; i<_netCount; i++)
-        [a addObject:_idList[i].net];
+        [a addObject:[_idList[i].net dataDictionary]];
 
     return a;
 }
