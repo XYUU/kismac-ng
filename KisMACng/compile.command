@@ -2,6 +2,12 @@
 
 cd `dirname "$0"`
 
+mkdir "./build/KisMACUnitTest.bundle/Contents/Frameworks" 2>/dev/null
+cd UnitTest
+ln -s "../build/KisMACUnitTest.bundle/Contents/Frameworks" . 2>/dev/null
+tar xjf UnitKit.tbz 2>/dev/null
+cd ..
+
 touch "./Sources/not public/WaveSecret.h"
 touch "./Sources/WindowControllers/CrashReportController.m"
 mkdir "./Subprojects/files" 2>/dev/null
@@ -20,4 +26,4 @@ xcodebuild -buildstyle Deployment
 cd ../BIGeneric
 xcodebuild -buildstyle Deployment
 cd ../..
-xcodebuild -buildstyle Deployment
+xcodebuild -target KisMAC -buildstyle Deployment

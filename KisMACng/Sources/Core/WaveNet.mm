@@ -1229,6 +1229,7 @@ int lengthSort(id string1, id string2, void *context)
 			enc = @"";
 			break;
 		default:
+			enc = @"";
 			NSAssert(NO, @"Encryption type invalid");
 	}
    
@@ -1252,6 +1253,7 @@ int lengthSort(id string1, id string2, void *context)
 			type = NSLocalizedString(@"lucent tunnel", "table description");
 			break;
 		default:
+			type = @"";
 			NSAssert(NO, @"Network type invalid");
 	}
 	

@@ -355,9 +355,9 @@
 	};
 	003533C006A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 23029}}";
-			sepNavSelRange = "{30168, 0}";
-			sepNavVisRect = "{{0, 10727}, {964, 675}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 23057}}";
+			sepNavSelRange = "{54880, 0}";
+			sepNavVisRect = "{{0, 22493}, {964, 564}}";
 		};
 	};
 	003533C106A5DD8500AB4577 = {
@@ -369,9 +369,9 @@
 	};
 	003533C206A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 13565}}";
-			sepNavSelRange = "{30224, 0}";
-			sepNavVisRect = "{{0, 12890}, {964, 675}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 12571}}";
+			sepNavSelRange = "{0, 941}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
 	};
 	003533C306A5DD8500AB4577 = {
@@ -385,8 +385,8 @@
 	003533C406A5DD8500AB4577 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 10821}}";
-			sepNavSelRange = "{7947, 0}";
-			sepNavVisRect = "{{0, 3072}, {964, 675}}";
+			sepNavSelRange = "{22731, 0}";
+			sepNavVisRect = "{{0, 10246}, {964, 564}}";
 		};
 	};
 	003533C606A5DD8500AB4577 = {
@@ -405,16 +405,16 @@
 	};
 	003533C806A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 690}}";
-			sepNavSelRange = "{582, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 476}}";
+			sepNavSelRange = "{115, 0}";
+			sepNavVisRect = "{{0, 0}, {1239, 241}}";
 		};
 	};
 	003533C906A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 3640}}";
-			sepNavSelRange = "{780, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 3640}}";
+			sepNavSelRange = "{760, 0}";
+			sepNavVisRect = "{{0, 221}, {1239, 241}}";
 		};
 	};
 	003533CA06A5DD8500AB4577 = {
@@ -447,16 +447,16 @@
 	};
 	003533CE06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 503}}";
-			sepNavSelRange = "{1013, 7}";
-			sepNavVisRect = "{{0, 182}, {964, 295}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 564}}";
+			sepNavSelRange = "{1182, 0}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
 	};
 	003533CF06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1239, 5417}}";
-			sepNavSelRange = "{8942, 0}";
-			sepNavVisRect = "{{0, 3513}, {1239, 241}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 5081}}";
+			sepNavSelRange = "{947, 28}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
 	};
 	003533D006A5DD8500AB4577 = {
@@ -902,6 +902,26 @@
 			sepNavVisRect = "{{0, 1102}, {964, 689}}";
 		};
 	};
+	004E303E07C7BECD00C6FF68 = {
+		fRef = 00D4229E07C7BB8F000499F1;
+		isa = PBXTextBookmark;
+		name = "WaveNetTest.m: testWPAFunctions";
+		rLen = 0;
+		rLoc = 1078;
+		rType = 0;
+		vrLen = 1340;
+		vrLoc = 0;
+	};
+	004E304007C7BECE00C6FF68 = {
+		fRef = 00D4229E07C7BB8F000499F1;
+		isa = PBXTextBookmark;
+		name = "WaveNetTest.m: testWPAFunctions";
+		rLen = 0;
+		rLoc = 1078;
+		rType = 0;
+		vrLen = 1340;
+		vrLoc = 0;
+	};
 	005B12660730051A00906C36 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 825}}";
@@ -930,63 +950,6 @@
 			sepNavVisRect = "{{0, 1693}, {964, 689}}";
 		};
 	};
-	00868B5107C692A700864995 = {
-		fRef = 003533CD06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetLEAPCrack.m: 85";
-		rLen = 0;
-		rLoc = 2712;
-		rType = 0;
-		vrLen = 766;
-		vrLoc = 2291;
-	};
-	00868B5207C692A700864995 = {
-		fRef = 003533CF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetWPACrack.m: 260";
-		rLen = 0;
-		rLoc = 8942;
-		rType = 0;
-		vrLen = 774;
-		vrLoc = 8617;
-	};
-	00868B5407C692A700864995 = {
-		fRef = 003533CD06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetLEAPCrack.m: 85";
-		rLen = 0;
-		rLoc = 2712;
-		rType = 0;
-		vrLen = 766;
-		vrLoc = 2291;
-	};
-	00868B5507C692A700864995 = {
-		fRef = 003533CF06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetWPACrack.m: 260";
-		rLen = 0;
-		rLoc = 8942;
-		rType = 0;
-		vrLen = 774;
-		vrLoc = 8617;
-	};
-	00868BC207C6A7AF00864995 = {
-		fRef = 003533C006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNet.mm: 806";
-		rLen = 0;
-		rLoc = 30168;
-		rType = 0;
-		vrLen = 2144;
-		vrLoc = 28748;
-	};
-	00868BC307C6A7AF00864995 = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		rLen = 1;
-		rLoc = 148;
-		rType = 1;
-	};
 	00868BC407C6A7AF00864995 = {
 		fRef = 003533C006A5DD8500AB4577;
 		isa = PBXTextBookmark;
@@ -997,53 +960,6 @@
 		vrLen = 2144;
 		vrLoc = 28748;
 	};
-	00868BC807C6A86600864995 = {
-		fRef = 003533D106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetWPACrackAltivec.m: 296";
-		rLen = 0;
-		rLoc = 11341;
-		rType = 0;
-		vrLen = 774;
-		vrLoc = 11015;
-	};
-	00868BC907C6A86600864995 = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		rLen = 1;
-		rLoc = 200;
-		rType = 1;
-	};
-	00868BCA07C6A86600864995 = {
-		fRef = 003533D106A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveNetWPACrackAltivec.m: 296";
-		rLen = 0;
-		rLoc = 11341;
-		rType = 0;
-		vrLen = 774;
-		vrLoc = 11015;
-	};
-	00868BD407C6AE4100864995 = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveScanner.mm: 242";
-		rLen = 0;
-		rLoc = 7947;
-		rType = 0;
-		vrLen = 1362;
-		vrLoc = 7198;
-	};
-	00868BD507C6AE4100864995 = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveScanner.mm: 201";
-		rLen = 0;
-		rLoc = 6688;
-		rType = 0;
-		vrLen = 754;
-		vrLoc = 6279;
-	};
 	00875D190708ADB300CACFCB = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1239, 1693}}";
@@ -1053,9 +969,9 @@
 	};
 	00875D1A0708ADB300CACFCB = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 10289}}";
-			sepNavSelRange = "{16812, 0}";
-			sepNavVisRect = "{{0, 7263}, {964, 675}}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 9953}}";
+			sepNavSelRange = "{0, 956}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
 	};
 	00875DA807097D8D00CACFCB = {
@@ -1074,158 +990,6 @@
 	};
 	008AC9BF07C3889400A76ADA = {
 		activeExec = 0;
-	};
-	008ACCB107C38B4600A76ADA = {
-		fRef = 008ACCB207C38B4600A76ADA;
-		isa = PBXTextBookmark;
-		name = "@class NSString;\n";
-		rLen = 17;
-		rLoc = 1344;
-		rType = 0;
-		vrLen = 1081;
-		vrLoc = 943;
-	};
-	008ACCB207C38B4600A76ADA = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = NSObjCRuntime.h;
-		path = /System/Library/Frameworks/Foundation.framework/Versions/C/Headers/NSObjCRuntime.h;
-		refType = 0;
-		sourceTree = "<absolute>";
-	};
-	008ACCB307C38B4600A76ADA = {
-		fRef = 008ACCB407C38B4600A76ADA;
-		isa = PBXTextBookmark;
-		name = "#import <Foundation/NSObjCRuntime.h>\n";
-		rLen = 37;
-		rLoc = 146;
-		rType = 0;
-		vrLen = 992;
-		vrLoc = 0;
-	};
-	008ACCB407C38B4600A76ADA = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = Foundation.h;
-		path = /System/Library/Frameworks/Foundation.framework/Versions/C/Headers/Foundation.h;
-		refType = 0;
-		sourceTree = "<absolute>";
-	};
-	008ACCCF07C38CA100A76ADA = {
-		fRef = 008ACCB207C38B4600A76ADA;
-		isa = PBXTextBookmark;
-		name = "@class NSString;\n";
-		rLen = 17;
-		rLoc = 1344;
-		rType = 0;
-		vrLen = 1081;
-		vrLoc = 943;
-	};
-	008ACCD007C38CA100A76ADA = {
-		fRef = 008ACCB407C38B4600A76ADA;
-		isa = PBXTextBookmark;
-		name = "#import <Foundation/NSObjCRuntime.h>\n";
-		rLen = 37;
-		rLoc = 146;
-		rType = 0;
-		vrLen = 992;
-		vrLoc = 0;
-	};
-	008ACCD207C38CA100A76ADA = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = NSArray.h;
-		path = /System/Library/Frameworks/Foundation.framework/Headers/NSArray.h;
-		refType = 0;
-		sourceTree = "<absolute>";
-	};
-	008ACD4407C38D9600A76ADA = {
-		fRef = 008ACCD207C38CA100A76ADA;
-		isa = PBXTextBookmark;
-		name = "#import <Foundation/NSRange.h>\n";
-		rLen = 31;
-		rLoc = 108;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 0;
-	};
-	008ACD4607C38D9600A76ADA = {
-		fRef = 008ACCD207C38CA100A76ADA;
-		isa = PBXTextBookmark;
-		name = "#import <Foundation/NSRange.h>\n";
-		rLen = 31;
-		rLoc = 108;
-		rType = 0;
-		vrLen = 998;
-		vrLoc = 0;
-	};
-	008ACD6707C38E4100A76ADA = {
-		fRef = 003533FA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#import <BIGeneric/BIValuePair.h>\n";
-		rLen = 34;
-		rLoc = 994;
-		rType = 0;
-		vrLen = 1085;
-		vrLoc = 0;
-	};
-	008ACD6C07C38E4100A76ADA = {
-		fRef = 003533FA06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "#import <BIGeneric/BIValuePair.h>\n";
-		rLen = 34;
-		rLoc = 994;
-		rType = 0;
-		vrLen = 1085;
-		vrLoc = 0;
-	};
-	008ACD8F07C3902900A76ADA = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = BINSExtensions.h;
-		path = /Users/mick/openDev/KisMACng/Subprojects/files/BIGeneric.framework/Headers/BINSExtensions.h;
-		refType = 0;
-		sourceTree = "<absolute>";
-	};
-	008AD1EF07C3A78B00A76ADA = {
-		fRef = 008ACD8F07C3902900A76ADA;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.h: 40";
-		rLen = 0;
-		rLoc = 639;
-		rType = 0;
-		vrLen = 341;
-		vrLoc = 0;
-	};
-	008AD1F107C3A78B00A76ADA = {
-		fRef = 008ACD8F07C3902900A76ADA;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.h: 40";
-		rLen = 0;
-		rLoc = 639;
-		rType = 0;
-		vrLen = 341;
-		vrLoc = 0;
-	};
-	008AD29A07C40D3D00A76ADA = {
-		fRef = 00875D190708ADB300CACFCB;
-		isa = PBXTextBookmark;
-		name = WLFrame;
-		rLen = 7;
-		rLoc = 2067;
-		rType = 0;
-		vrLen = 508;
-		vrLoc = 1833;
-	};
-	008AD29C07C40D3D00A76ADA = {
-		fRef = 00875D190708ADB300CACFCB;
-		isa = PBXTextBookmark;
-		name = WLFrame;
-		rLen = 7;
-		rLoc = 2067;
-		rType = 0;
-		vrLen = 508;
-		vrLoc = 1833;
 	};
 	00909C5406DB52A0002FB6AB = {
 		fileReference = 0035341606A5DD8500AB4577;
@@ -1415,7 +1179,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 1175}}";
 			sepNavSelRange = "{2201, 0}";
-			sepNavVisRect = "{{0, 486}, {964, 689}}";
+			sepNavVisRect = "{{0, 598}, {964, 564}}";
 		};
 	};
 	00C5F12A06DE0C98001EC02F = {
@@ -1451,7 +1215,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 4773}}";
 			sepNavSelRange = "{8967, 0}";
-			sepNavVisRect = "{{0, 3415}, {964, 689}}";
+			sepNavVisRect = "{{0, 3477}, {964, 564}}";
 		};
 	};
 	00CBA33E06DB8FDE000ACD19 = {
@@ -1483,6 +1247,227 @@
 			sepNavSelRange = "{142, 0}";
 			sepNavVisRect = "{{0, 0}, {964, 268}}";
 		};
+	};
+	00D4227A07C7B63F000499F1 = {
+		fRef = 003533C406A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveScanner.mm: 741";
+		rLen = 0;
+		rLoc = 22731;
+		rType = 0;
+		vrLen = 689;
+		vrLoc = 22604;
+	};
+	00D4227D07C7B63F000499F1 = {
+		fRef = 00B6296707058E2B006FC563;
+		isa = PBXTextBookmark;
+		name = "WaveNetWEPWeakCrack.m: 64";
+		rLen = 0;
+		rLoc = 2201;
+		rType = 0;
+		vrLen = 930;
+		vrLoc = 1662;
+	};
+	00D4227E07C7B63F000499F1 = {
+		fRef = 00CBA25906DB7D0A000ACD19;
+		isa = PBXTextBookmark;
+		name = "WaveNetWEPWordlist.m: 268";
+		rLen = 0;
+		rLoc = 8967;
+		rType = 0;
+		vrLen = 1174;
+		vrLoc = 8436;
+	};
+	00D4228007C7B63F000499F1 = {
+		fRef = 003533C406A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveScanner.mm: 741";
+		rLen = 0;
+		rLoc = 22731;
+		rType = 0;
+		vrLen = 689;
+		vrLoc = 22604;
+	};
+	00D4228107C7B63F000499F1 = {
+		fRef = 00875D1A0708ADB300CACFCB;
+		isa = PBXTextBookmark;
+		name = "WaveHelper.m: 733";
+		rLen = 0;
+		rLoc = 23612;
+		rType = 0;
+		vrLen = 1388;
+		vrLoc = 22230;
+	};
+	00D4228207C7B63F000499F1 = {
+		fRef = 003533C206A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WavePacket.mm: 897";
+		rLen = 0;
+		rLoc = 27224;
+		rType = 0;
+		vrLen = 1713;
+		vrLoc = 27070;
+	};
+	00D4228307C7B63F000499F1 = {
+		fRef = 00B6296707058E2B006FC563;
+		isa = PBXTextBookmark;
+		name = "WaveNetWEPWeakCrack.m: 64";
+		rLen = 0;
+		rLoc = 2201;
+		rType = 0;
+		vrLen = 930;
+		vrLoc = 1662;
+	};
+	00D4228407C7B63F000499F1 = {
+		fRef = 003533CF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNetWPACrack.m: 260";
+		rLen = 0;
+		rLoc = 8942;
+		rType = 0;
+		vrLen = 1730;
+		vrLoc = 8277;
+	};
+	00D4228507C7B63F000499F1 = {
+		fRef = 00CBA25906DB7D0A000ACD19;
+		isa = PBXTextBookmark;
+		name = "WaveNetWEPWordlist.m: 268";
+		rLen = 0;
+		rLoc = 8967;
+		rType = 0;
+		vrLen = 1174;
+		vrLoc = 8436;
+	};
+	00D4228D07C7BA61000499F1 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 1315}}";
+			sepNavSelRange = "{990, 0}";
+			sepNavVisRect = "{{0, 335}, {1239, 241}}";
+		};
+	};
+	00D4229607C7BB1C000499F1 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 741}}";
+			sepNavSelRange = "{945, 0}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
+		};
+	};
+	00D4229E07C7BB8F000499F1 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 783}}";
+			sepNavSelRange = "{1078, 0}";
+			sepNavVisRect = "{{0, 0}, {964, 564}}";
+		};
+	};
+	00D422A007C7BBEF000499F1 = {
+		fRef = 003533C206A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tWavePacket.mm\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Rossberg\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/";
+		rLen = 941;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1371;
+		vrLoc = 0;
+	};
+	00D422A107C7BBEF000499F1 = {
+		fRef = 00D4228D07C7BA61000499F1;
+		isa = PBXTextBookmark;
+		name = "WavePacketTest.m: 3";
+		rLen = 0;
+		rLoc = 44;
+		rType = 0;
+		vrLen = 1450;
+		vrLoc = 0;
+	};
+	00D422A207C7BBEF000499F1 = {
+		fRef = 00875D1A0708ADB300CACFCB;
+		isa = PBXTextBookmark;
+		name = "/*\n        \n        File:\t\t\tWaveHelper.m\n        Program:\t\tKisMAC\n\t\tAuthor:\t\t\tMichael Rossberg, Michael Thole\n\t\t\t\t\t\tmick@binaervarianz.de\n\t\tDescription:\tKisMAC is a wireless stumbler for MacOS X.\n                \n        This file is part of KisMAC.\n\n    KisMAC is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    KisMAC is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with KisMAC; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n*/\n";
+		rLen = 956;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1402;
+		vrLoc = 0;
+	};
+	00D422A307C7BBEF000499F1 = {
+		fRef = 003533CE06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNetWPACrack.h: 34";
+		rLen = 0;
+		rLoc = 1182;
+		rType = 0;
+		vrLen = 1187;
+		vrLoc = 0;
+	};
+	00D422A407C7BBEF000499F1 = {
+		fRef = 003533CF06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "#import \"WaveNetWPACrack.h\"\n";
+		rLen = 28;
+		rLoc = 947;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 0;
+	};
+	00D422A507C7BBEF000499F1 = {
+		fRef = 003533C006A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNet.mm: 1638";
+		rLen = 0;
+		rLoc = 54880;
+		rType = 0;
+		vrLen = 854;
+		vrLoc = 54107;
+	};
+	00D422A607C7BBEF000499F1 = {
+		fRef = 00D4229607C7BB1C000499F1;
+		isa = PBXTextBookmark;
+		name = "WaveHelperTest.m: 25";
+		rLen = 0;
+		rLoc = 945;
+		rType = 0;
+		vrLen = 1544;
+		vrLoc = 0;
+	};
+	00D422A807C7BBEF000499F1 = {
+		fRef = 00D4228D07C7BA61000499F1;
+		isa = PBXTextBookmark;
+		name = "WavePacketTest.m: 13";
+		rLen = 0;
+		rLoc = 207;
+		rType = 0;
+		vrLen = 214;
+		vrLoc = 0;
+	};
+	00D422AF07C7BBEF000499F1 = {
+		fRef = 00D4229607C7BB1C000499F1;
+		isa = PBXTextBookmark;
+		name = "WaveHelperTest.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 202;
+		vrLoc = 0;
+	};
+	00D422B507C7BBEF000499F1 = {
+		fRef = 00D4229E07C7BB8F000499F1;
+		isa = PBXTextBookmark;
+		name = "WaveNetTest.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 193;
+		vrLoc = 0;
+	};
+	00D422BA07C7BBEF000499F1 = {
+		fRef = 003533CE06A5DD8500AB4577;
+		isa = PBXTextBookmark;
+		name = "WaveNetWPACrack.h: 34";
+		rLen = 0;
+		rLoc = 1182;
+		rType = 0;
+		vrLen = 1187;
+		vrLoc = 0;
 	};
 	00E1426B06E62A44009DC179 = {
 		uiCtxt = {
@@ -1571,7 +1556,7 @@
 		};
 	};
 	29B97313FDCFA39411CA2CEA = {
-		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
+		activeBuildStyle = 4A9504CDFFE6A4B311CA0CBA;
 		activeExecutable = 009F5C5D06A5C8DF004BB18E;
 		activeTarget = 8D1107260486CEB800E47090;
 		addToTargets = (
@@ -1721,7 +1706,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 130449386;
+			PBXPerProjectTemplateStateSaveDate = 130530967;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -2152,33 +2137,32 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 130449386;
+			PBXWorkspaceStateSaveDate = 130530967;
 		};
 		perUserProjectItems = {
-			00868B5107C692A700864995 = 00868B5107C692A700864995;
-			00868B5207C692A700864995 = 00868B5207C692A700864995;
-			00868B5407C692A700864995 = 00868B5407C692A700864995;
-			00868B5507C692A700864995 = 00868B5507C692A700864995;
-			00868BC207C6A7AF00864995 = 00868BC207C6A7AF00864995;
-			00868BC307C6A7AF00864995 = 00868BC307C6A7AF00864995;
+			004E303E07C7BECD00C6FF68 = 004E303E07C7BECD00C6FF68;
+			004E304007C7BECE00C6FF68 = 004E304007C7BECE00C6FF68;
 			00868BC407C6A7AF00864995 = 00868BC407C6A7AF00864995;
-			00868BC807C6A86600864995 = 00868BC807C6A86600864995;
-			00868BC907C6A86600864995 = 00868BC907C6A86600864995;
-			00868BCA07C6A86600864995 = 00868BCA07C6A86600864995;
-			00868BD407C6AE4100864995 = 00868BD407C6AE4100864995;
-			00868BD507C6AE4100864995 = 00868BD507C6AE4100864995;
-			008ACCB107C38B4600A76ADA = 008ACCB107C38B4600A76ADA;
-			008ACCB307C38B4600A76ADA = 008ACCB307C38B4600A76ADA;
-			008ACCCF07C38CA100A76ADA = 008ACCCF07C38CA100A76ADA;
-			008ACCD007C38CA100A76ADA = 008ACCD007C38CA100A76ADA;
-			008ACD4407C38D9600A76ADA = 008ACD4407C38D9600A76ADA;
-			008ACD4607C38D9600A76ADA = 008ACD4607C38D9600A76ADA;
-			008ACD6707C38E4100A76ADA = 008ACD6707C38E4100A76ADA;
-			008ACD6C07C38E4100A76ADA = 008ACD6C07C38E4100A76ADA;
-			008AD1EF07C3A78B00A76ADA = 008AD1EF07C3A78B00A76ADA;
-			008AD1F107C3A78B00A76ADA = 008AD1F107C3A78B00A76ADA;
-			008AD29A07C40D3D00A76ADA = 008AD29A07C40D3D00A76ADA;
-			008AD29C07C40D3D00A76ADA = 008AD29C07C40D3D00A76ADA;
+			00D4227A07C7B63F000499F1 = 00D4227A07C7B63F000499F1;
+			00D4227D07C7B63F000499F1 = 00D4227D07C7B63F000499F1;
+			00D4227E07C7B63F000499F1 = 00D4227E07C7B63F000499F1;
+			00D4228007C7B63F000499F1 = 00D4228007C7B63F000499F1;
+			00D4228107C7B63F000499F1 = 00D4228107C7B63F000499F1;
+			00D4228207C7B63F000499F1 = 00D4228207C7B63F000499F1;
+			00D4228307C7B63F000499F1 = 00D4228307C7B63F000499F1;
+			00D4228407C7B63F000499F1 = 00D4228407C7B63F000499F1;
+			00D4228507C7B63F000499F1 = 00D4228507C7B63F000499F1;
+			00D422A007C7BBEF000499F1 = 00D422A007C7BBEF000499F1;
+			00D422A107C7BBEF000499F1 = 00D422A107C7BBEF000499F1;
+			00D422A207C7BBEF000499F1 = 00D422A207C7BBEF000499F1;
+			00D422A307C7BBEF000499F1 = 00D422A307C7BBEF000499F1;
+			00D422A407C7BBEF000499F1 = 00D422A407C7BBEF000499F1;
+			00D422A507C7BBEF000499F1 = 00D422A507C7BBEF000499F1;
+			00D422A607C7BBEF000499F1 = 00D422A607C7BBEF000499F1;
+			00D422A807C7BBEF000499F1 = 00D422A807C7BBEF000499F1;
+			00D422AF07C7BBEF000499F1 = 00D422AF07C7BBEF000499F1;
+			00D422B507C7BBEF000499F1 = 00D422B507C7BBEF000499F1;
+			00D422BA07C7BBEF000499F1 = 00D422BA07C7BBEF000499F1;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {
@@ -2193,9 +2177,9 @@
 	};
 	32CA4F630368D1EE00C91783 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 295}}";
-			sepNavSelRange = "{194, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 295}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 241}}";
+			sepNavSelRange = "{304, 29}";
+			sepNavVisRect = "{{0, 0}, {1239, 241}}";
 		};
 	};
 	8D1107260486CEB800E47090 = {

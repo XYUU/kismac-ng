@@ -6,7 +6,9 @@ extern "C" {
 #ifndef MD5_H
 #define MD5_H
 
-typedef UInt32 uint32;
+#ifndef uint32 
+#define uint32 UInt32
+#endif
 
 struct MD5Context {
 	uint32 buf[4];

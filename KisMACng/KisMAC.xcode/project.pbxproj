@@ -73,6 +73,20 @@
 			settings = {
 			};
 		};
+		000D3A3807C731D200485FDD = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = UnitKit.framework;
+			path = UnitTest/UnitKit.framework;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		000D3A3907C731D200485FDD = {
+			fileRef = 000D3A3807C731D200485FDD;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00122E9906B18A07007FA5FE = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -3336,6 +3350,9 @@
 				008ACFC707C393D600A76ADA,
 				008ACFD207C3970F00A76ADA,
 				008ACFD807C3976800A76ADA,
+				00D4228E07C7BA61000499F1,
+				00D4229707C7BB1C000499F1,
+				00D4229F07C7BB8F000499F1,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3353,7 +3370,7 @@
 				008ACDB707C3923D00A76ADA,
 				008ACD6407C38DA800A76ADA,
 				008ACD6507C38DA800A76ADA,
-				008AC9CA07C388CE00A76ADA,
+				000D3A3907C731D200485FDD,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3383,7 +3400,7 @@
 			buildRules = (
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "/Users/mick/openDev/KisMACng/Subprojects/files \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
+				FRAMEWORK_SEARCH_PATHS = "/Users/mick/openDev/KisMACng/Subprojects/files \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" /Users/mick/openDev/KisMACng/UnitTest";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
@@ -3448,20 +3465,6 @@
 			path = "/Users/mick/openDev/KisMACng/KisMACUnitTest-Info.plist";
 			refType = 0;
 			sourceTree = "<absolute>";
-		};
-		008AC9C907C388CE00A76ADA = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UnitKit.framework;
-			path = /Library/Frameworks/UnitKit.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		008AC9CA07C388CE00A76ADA = {
-			fileRef = 008AC9C907C388CE00A76ADA;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		008ACA7607C3899200A76ADA = {
 			fileRef = 003533A106A5DD8500AB4577;
@@ -4936,6 +4939,60 @@
 			settings = {
 			};
 		};
+		00D4228C07C7BA21000499F1 = {
+			children = (
+				00D4229E07C7BB8F000499F1,
+				00D4229607C7BB1C000499F1,
+				00D4228D07C7BA61000499F1,
+			);
+			isa = PBXGroup;
+			name = Tests;
+			path = Sources/Tests;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		00D4228D07C7BA61000499F1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = WavePacketTest.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00D4228E07C7BA61000499F1 = {
+			fileRef = 00D4228D07C7BA61000499F1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00D4229607C7BB1C000499F1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = WaveHelperTest.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00D4229707C7BB1C000499F1 = {
+			fileRef = 00D4229607C7BB1C000499F1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00D4229E07C7BB8F000499F1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = WaveNetTest.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00D4229F07C7BB8F000499F1 = {
+			fileRef = 00D4229E07C7BB8F000499F1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		00E1426B06E62A44009DC179 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -5695,6 +5752,7 @@
 				003533FE06A5DD8500AB4577,
 				0035340E06A5DD8500AB4577,
 				0035341F06A5DD8500AB4577,
+				00D4228C07C7BA21000499F1,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -5713,6 +5771,7 @@
 //104
 		1058C7A0FEA54F0111CA2CBB = {
 			children = (
+				000D3A3807C731D200485FDD,
 				00F9C64E06DB37E200E357F0,
 				00F9C64F06DB37E200E357F0,
 				00F9C63F06DB378F00E357F0,
@@ -5740,7 +5799,6 @@
 		};
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
-				008AC9C907C388CE00A76ADA,
 				29B97325FDCFA39411CA2CEA,
 				29B97324FDCFA39411CA2CEA,
 			);
@@ -5950,7 +6008,7 @@
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Subprojects/files\" \"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\" /Users/mick/openDev/KisMACng/UnitTest";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
