@@ -246,9 +246,10 @@
 #pragma mark -
 
 - (void)crackDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    [_curNet updatePassword];
-
-    [aInfoController reloadData];
+    _importOpen--;
+	NSParameterAssert(_importOpen == 0);
+	
+	[aInfoController reloadData];
     
     [[_importController window] close];
     [_importController stopAnimation];
@@ -286,7 +287,7 @@
         case 5:
             NSBeginAlertSheet(NSLocalizedString(@"Reinjection unsuccessful", "Error dialog title"),
                 OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
-                NSLocalizedString(@"KisMAC was unable to start a reinjection attack, because: %@", "ext about what might have gone wrong with the injection"),
+                NSLocalizedString(@"KisMAC was unable to start a reinjection attack, because: %@", "text about what might have gone wrong with the injection"),
                 [_curNet crackError]
                 );
             [self stopActiveAttacks];
@@ -294,18 +295,28 @@
         default:
             break;
         }
-    } else if (returnCode==0) {
+    } else if (returnCode==1) {
         if (_crackType == 5) {
             [aInjPacketsMenu setState:NSOnState];
             [aInjPacketsMenu setTitle:[NSLocalizedString(@"Reinjecting into ", "menu item") stringByAppendingString:[_curNet BSSID]]];
-        }
-    } 
+        } else {
+			NSBeginAlertSheet(NSLocalizedString(@"Cracking successful", "Crack dialog title"),
+                OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
+                NSLocalizedString(@"KisMAC was able to recover the key of the selected network. It is: %@", "crack dialog"),
+                [_curNet key]
+                );
+		}
+    }
 
     [_importController release];
     _importController=Nil;
 }
 
 - (void)startCrackDialogWithTitle:(NSString*)title stopScan:(BOOL)stopScan {
+    NSParameterAssert(title);
+    NSParameterAssert(_importOpen == 0); //we are already busy
+	_importOpen++;
+	
     if (stopScan) [self stopScan];
     
     _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
@@ -419,22 +430,6 @@
     _importController = [[ImportController alloc] initWithWindowNibName:@"Import"];
     if (!_importController) {
         NSLog(@"Error could not open Import.nib!");
-        return;
-    }
-
-    [WaveHelper setImportController:_importController];
-    [_importController setTitle:title];
-    [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
-}
-
-- (void)showCrackBusyWithText:(NSString*)title {
-    NSParameterAssert(title);
-    
-    if (_importOpen++ > 0) return; //we are already busy
-    
-    _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
-    if (!_importController) {
-        NSLog(@"Error could not open Crack.nib!");
         return;
     }
 

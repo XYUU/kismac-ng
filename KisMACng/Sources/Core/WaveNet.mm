@@ -816,12 +816,6 @@ int lengthSort(id string1, id string2, void *context)
     return ret;
 }
 
-- (void)updatePassword {
-    if ((_password==Nil) && (_cracker!=Nil)) {
-        _password=[[_cracker key] retain];
-    }
-}
-
 - (void)setVisible:(BOOL)visible {
 	[_netView setVisible: visible];
 }
@@ -1401,7 +1395,7 @@ typedef int (*SORTFUNC)(id, id, void *);
          
         error = [scanner tryToInject:self];
         if (!error) {
-            [_im terminateWithCode:0];
+            [_im terminateWithCode:1];
             break; //we are injecting
         }
         
@@ -1412,7 +1406,7 @@ typedef int (*SORTFUNC)(id, id, void *);
         }
         
 		if ([_im canceled]) {
-            [_im terminateWithCode:-2];
+            [_im terminateWithCode:0];
             break;
         }
         
@@ -1452,7 +1446,6 @@ typedef int (*SORTFUNC)(id, id, void *);
     [aDate release];
     [aFirstDate release];
     [aVendor release];
-    [_cracker release];
     [_password release];
     [aPacketsLog release];
     [_ARPLog release];

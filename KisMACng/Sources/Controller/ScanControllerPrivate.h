@@ -50,7 +50,6 @@
 - (void)refreshScanHierarch;
 
 - (void)showBusyWithText:(NSString*)title;
-- (void)showCrackBusyWithText:(NSString*)title;
 - (void)busyDone;
 - (void)modalDone:(NSNotification*)note;
 - (void)showBusy:(SEL)function withArg:(id)obj;

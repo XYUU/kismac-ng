@@ -330,13 +330,14 @@
     if (_curNet==Nil) return NO; \
     if ([_curNet passwordAvailable] != Nil) return YES; \
     if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO; \
-    if ([[_curNet weakPacketsLog] count] < 10) return NO; \
+    if ([[_curNet weakPacketsLog] count] < 8) return NO; \
     }
 
 - (BOOL)bruteforceNewsham {
     WEPCHECKS;
     
-    [self showCrackBusyWithText:NSLocalizedString(@"Performing Newsham attack...", "busy dialog")];
+	_crackType = 2;
+    [self startCrackDialogWithTitle:NSLocalizedString(@"Performing Newsham attack...", "busy dialog")];
     [_importController setMax:127];
     
     [NSThread detachNewThreadSelector:@selector(performBruteforceNewsham:) toTarget:_curNet withObject:nil];
@@ -347,6 +348,7 @@
 - (BOOL)bruteforce40bitLow {
     WEPCHECKS;
     
+	_crackType = 2;
     [self startCrackDialogWithTitle:NSLocalizedString(@"Bruteforce attack against WEP-40 lowercase...", "busy dialog")];
     [_importController setMax:26];
     
@@ -358,6 +360,7 @@
 - (BOOL)bruteforce40bitAlpha {
     WEPCHECKS;
     
+	_crackType = 2;
     [self startCrackDialogWithTitle:NSLocalizedString(@"Bruteforce attack against WEP-40 alphanumerical...", "busy dialog")];
     [_importController setMax:62];
     
@@ -369,6 +372,7 @@
 - (BOOL)bruteforce40bitAll {
     WEPCHECKS;
     
+	_crackType = 2;
     [self startCrackDialogWithTitle:NSLocalizedString(@"Bruteforce attack against WEP-40...", "busy dialog")];
     [_importController setMax:256];
     
@@ -380,7 +384,8 @@
 - (BOOL)wordlist40bitApple:(NSString*)wordlist {
     WEPCHECKS;
     
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple40...", "busy dialog")];
+    _crackType = 2;
+	[self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple40...", "busy dialog")];
     
     [NSThread detachNewThreadSelector:@selector(performWordlist40bitApple:) toTarget:_curNet withObject:[wordlist standardPath]];
     
@@ -389,7 +394,8 @@
 - (BOOL)wordlist104bitApple:(NSString*)wordlist {
     WEPCHECKS;
     
-    [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple104...", "busy dialog")];
+    _crackType = 2;
+	[self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-Apple104...", "busy dialog")];
     
     [NSThread detachNewThreadSelector:@selector(performWordlist104bitApple:) toTarget:_curNet withObject:[wordlist standardPath]];
     
@@ -398,6 +404,7 @@
 - (BOOL)wordlist104bitMD5:(NSString*)wordlist {
     WEPCHECKS;
     
+	_crackType = 2;
     [self startCrackDialogWithTitle:NSLocalizedString(@"Wordlist attack against WEP-MD5...", "busy dialog")];
     
     [NSThread detachNewThreadSelector:@selector(performWordlist104bitMD5:) toTarget:_curNet withObject:[wordlist standardPath]];
@@ -416,6 +423,7 @@
     
     int arg = (keyLen << 8) | keyID;
     
+	_crackType = 1;
     [self startCrackDialogWithTitle:NSLocalizedString(@"Weak scheduling attack...", "busy dialog") stopScan:NO];
     
     [NSThread detachNewThreadSelector:@selector(performCrackWEPWeakforKeyIDAndLen:) toTarget:_curNet withObject:[NSNumber numberWithInt:arg]];

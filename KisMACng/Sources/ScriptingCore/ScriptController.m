@@ -193,7 +193,7 @@
     if (![[NSApp delegate] selectedNetwork]) { NSBeep(); return; }\
     if ([[[NSApp delegate] selectedNetwork] passwordAvailable]) { [[NSApp delegate] showAlreadyCrackedDialog]; return; } \
     if ([[[NSApp delegate] selectedNetwork] wep] != encryptionTypeWEP && [[[NSApp delegate] selectedNetwork] wep] != encryptionTypeWEP40) { [[NSApp delegate] showWrongEncryptionType]; return; } \
-    if ([[[[NSApp delegate] selectedNetwork] weakPacketsLog] count] < 10) { [[NSApp delegate] showNeedMorePacketsDialog]; return; } \
+    if ([[[[NSApp delegate] selectedNetwork] weakPacketsLog] count] < 8) { [[NSApp delegate] showNeedMorePacketsDialog]; return; } \
     }
 
 - (IBAction)bruteforceNewsham:(id)sender {

@@ -2,9 +2,9 @@
         
         File:			WaveNetWEPWordlist.h
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -29,8 +29,9 @@
 #import "KisMACNotifications.h"
 #import <BIGeneric/BINSExtensions.h>
 
-#define RET { [wordlist release]; [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
-#define CHECK { [wordlist retain]; if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 10) RET; }
+#define SRET { [wordlist release];  [[WaveHelper importController] terminateWithCode: 1]; [pool release]; return; }
+#define RET { [wordlist release]; [[WaveHelper importController] terminateWithCode: -1]; [pool release]; return; }
+#define CHECK { [wordlist retain]; if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 8) RET; }
 
 @implementation WaveNet(WEPWorlistCrackExtension)
 
@@ -118,13 +119,13 @@
                 break;
         }
 
-        if (i >= 10) {
+        if (i >= 8) {
             _password=[[NSMutableString stringWithFormat:@"%.2X", currentGuess[3]] retain];
             for (i=4;i<(8);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
             fclose(fptr);
             NSLog(@"Cracking was successful. Password is <%s>", wrd);
-            RET;
+            SRET;
         }
         if (words % 10000 == 0) {
             [controller setStatusField:[NSString stringWithFormat:@"%d words tested", words]];
@@ -219,13 +220,13 @@
                 break;
         }
 
-        if (i >= 10) {
+        if (i >= 8) {
             _password=[[NSMutableString stringWithFormat:@"%.2X", currentGuess[3]] retain];
             for (i=4;i<(16);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
             fclose(fptr);
             NSLog(@"Cracking was successful. Password is <%s>", wrd);
-            RET;
+            SRET;
         }
         if (words % 10000 == 0) {
             [controller setStatusField:[NSString stringWithFormat:@"%d words tested", words]];
@@ -319,13 +320,13 @@
                 break;
         }
 
-        if (i >= 10) {
+        if (i >= 8) {
             _password=[[NSMutableString stringWithFormat:@"%.2X", currentGuess[3]] retain];
             for (i=4;i<(16);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
             fclose(fptr);
             NSLog(@"Cracking was successful. Password is <%s>", wrd);
-            RET;
+            SRET;
         }
         
         if (words % 10000 == 0) {

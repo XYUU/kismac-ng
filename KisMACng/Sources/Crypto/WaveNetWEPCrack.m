@@ -31,8 +31,9 @@
 
 @implementation WaveNet(WEPBruteforceCrackExtension) 
 
-#define RET { [NSNotificationCenter postNotification:KisMACCrackDone]; [pool release]; return; }
-#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 10) RET; }
+#define SRET { [[WaveHelper importController] terminateWithCode: 1]; [pool release]; return; }
+#define RET { [[WaveHelper importController] terminateWithCode: -1]; [pool release]; return; }
+#define CHECK { if (_password != Nil) RET; if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET; if ([aPacketsLog count] < 8) RET; }
 
 - (void)performBruteforce40bitLow:(NSObject*)obj {
     unsigned int i, foundCRC, counter, length = 0;
@@ -59,7 +60,7 @@
 
             if (!isInit) {	
                 data = [[aPacketsLog objectAtIndex:i] cString];
-                length = [(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
+                length = [(NSString*)[aPacketsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
@@ -103,7 +104,7 @@
                 break;
         }
 
-        if (i < 10) {
+        if (i < 8) {
             if (key[3]==32) key[3]=48;
             else if (key[3]==57) key[3]=65;
             else if (key[3]==90) key[3]=97;
@@ -158,7 +159,7 @@
             for (i=4;i<(8);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
 
-            RET;
+            SRET;
         }
     }
 }
@@ -188,7 +189,7 @@
 
             if (!isInit) {	
                 data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
+                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
@@ -232,7 +233,7 @@
                 break;
         }
 
-        if (i < 10) {
+        if (i < 8) {
             
             if (key[3]==32) key[3]=48;
             else if (key[3]==57) key[3]=65;
@@ -287,7 +288,7 @@
             for (i=4;i<(8);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
 
-            RET;
+            SRET;
         }
     }
     
@@ -319,7 +320,7 @@
 
             if (!isInit) {	
                 data = [(NSString*)[aPacketsLog objectAtIndex:i] cString];
-                length=[(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
+                length=[(NSString*)[aPacketsLog objectAtIndex:i] length];
                 
                 memcpy(key, data, 3);
                 
@@ -363,7 +364,7 @@
                 break;
         }
 
-        if (i < 10) {
+        if (i < 8) {
             key[3]++;
 
             if (key[3]==0) {
@@ -394,7 +395,7 @@
             for (i=4;i<(8);i++)
                 [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", currentGuess[i]]];
 
-            RET;
+            SRET;
         }
     }
     
@@ -415,7 +416,7 @@
     
     if (_password != Nil) RET;
     if (_isWep != encryptionTypeWEP && _isWep != encryptionTypeWEP40) RET;
-    if ([aPacketsLog count] < 10) RET;
+    if ([aPacketsLog count] < 8) RET;
 
     controller = [WaveHelper importController];
   
@@ -446,7 +447,7 @@
 
             if (!isInit) {
                 data = [[aPacketsLog objectAtIndex:i] cString];
-                length = [(NSString*)[aPacketsLog objectAtIndex:i] cStringLength];
+                length = [(NSString*)[aPacketsLog objectAtIndex:i] length];
               
                 selKey = data[3] & 0x03;
                 memcpy(&key[selKey][0], data, 3);
@@ -491,7 +492,7 @@
                 break;
         }
 
-        if (i < 5) {
+        if (i < 8) {
             while (++w & 0x80808080);
             if (w>0x1000000) RET;
 
@@ -526,7 +527,7 @@
             
             [(NSMutableString*)_password appendString:[NSString stringWithFormat:@" for Key %d", selKey]];
 
-            RET;
+            SRET;
         }
     }
     

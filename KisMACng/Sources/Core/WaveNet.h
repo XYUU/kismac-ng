@@ -89,8 +89,6 @@ struct graphStruct {
     NSMutableArray* aClientKeys;
     NSMutableDictionary* _coordinates;
     WaveWeakContainer *_ivData[4];       //one for each key id
-    
-    id _cracker;		//cracker for this net
  
     NSColor* _graphColor;	// display color in TrafficView
     int recentTraffic;
@@ -124,7 +122,6 @@ struct graphStruct {
 - (struct graphStruct)graphData;
 - (NSDictionary*)getClients;
 - (NSArray*)getClientKeys;
-- (void)updatePassword;
 - (void)setVisible:(BOOL)visible;
 
 - (encryptionType)wep;
