@@ -1,0 +1,2411 @@
+// !$*UTF8*$!
+{
+	003F2A9806DA8C9600DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1140";
+		rLen = 0;
+		rLoc = 33497;
+		rType = 0;
+		vrLen = 2057;
+		vrLoc = 32459;
+	};
+	003F2AA806DA90CC00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = WLFrame;
+		rLen = 7;
+		rLoc = 33226;
+		rType = 0;
+		vrLen = 2085;
+		vrLoc = 32365;
+	};
+	003F2AA906DA90CC00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AAC06DA911300DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AAF06DA914F00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AB206DA915300DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AB506DA919F00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AB906DA91EF00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2ABF06DA921300DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AC206DA922900DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AC506DA928E00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2ACB06DA939100DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2ACE06DA93E800DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AD406DA942000DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AD806DA945F00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2ADB06DA946000DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AE306DA948700DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AE606DA949900DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AEA06DA94DE00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AED06DA950700DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AF006DA956800DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AF606DA959D00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2AFC06DA960000DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2B0206DA966900DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "if (!_packetQueue->enqueue(packet, f->dataLen))\n                //    IOLog(\"AtherosWifi:: packet queue overflow\\n\");";
+		rLen = 117;
+		rLoc = 33729;
+		rType = 0;
+		vrLen = 2077;
+		vrLoc = 32365;
+	};
+	003F2B0706DA98AB00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::setcurmode";
+		rLen = 33;
+		rLoc = 44726;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 44148;
+	};
+	003F2B0B06DA98AF00DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::setcurmode";
+		rLen = 33;
+		rLoc = 44726;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 44148;
+	};
+	003F2B0E06DA98D200DC4841 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::setcurmode";
+		rLen = 33;
+		rLoc = 44726;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 44148;
+	};
+	005DA63D06C8D83700ACF77D = {
+		fRef = 089C167EFE841241C02AAC07;
+		isa = PBXTextBookmark;
+		name = "English: 7";
+		rLen = 0;
+		rLoc = 245;
+		rType = 0;
+		vrLen = 245;
+		vrLoc = 0;
+	};
+	005DA64006C8D83700ACF77D = {
+		fRef = 089C167EFE841241C02AAC07;
+		isa = PBXTextBookmark;
+		name = "English: 7";
+		rLen = 0;
+		rLoc = 245;
+		rType = 0;
+		vrLen = 245;
+		vrLoc = 0;
+	};
+	005DAA7906C92F9E00ACF77D = {
+		isa = PBXTargetBookmark;
+		trg = 089C1673FE841209C02AAC07;
+	};
+	005DAA7B06C92F9E00ACF77D = {
+		isa = PBXTargetBookmark;
+		trg = 089C1673FE841209C02AAC07;
+	};
+	006FACBF05A4B5680081694D = {
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		isa = PBXSourceControlManager;
+		scmConfiguration = {
+		};
+		scmType = scm.cvs;
+	};
+	006FACC005A4B5680081694D = {
+		indexTemplatePath = "";
+		isa = PBXCodeSenseManager;
+		usesDefaults = 1;
+		wantsCodeCompletion = 1;
+		wantsCodeCompletionAutoSuggestions = 1;
+		wantsCodeCompletionCaseSensitivity = 1;
+		wantsCodeCompletionListAlways = 1;
+		wantsCodeCompletionOnlyMatchingItems = 1;
+		wantsCodeCompletionParametersIncluded = 1;
+		wantsCodeCompletionPlaceholdersInserted = 1;
+		wantsCodeCompletionTabCompletes = 1;
+		wantsIndex = 1;
+	};
+	00756F5705ADD780001CAF74 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 839}}";
+			sepNavSelRange = "{1340, 0}";
+			sepNavVisRect = "{{0, 0}, {1033, 666}}";
+		};
+	};
+	00756F5805ADD780001CAF74 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 4549}}";
+			sepNavSelRange = "{4472, 0}";
+			sepNavVisRect = "{{0, 2450}, {1033, 461}}";
+		};
+	};
+	008D9F5806D908B7007FD27E = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 450;
+		rType = 1;
+	};
+	008D9F6206D90924007FD27E = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1504;
+		vrLoc = 47091;
+	};
+	008F87DF06D90BD2005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87E006D90BD2005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87E806D90BE8005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87EB06D90C39005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87F106D90C43005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87F406D90C48005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87F706D90C4C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87FA06D90C59005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F87FD06D90C5E005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F880006D90C8C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F880806D90CB6005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F880B06D90CCB005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F880E06D90D1D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F881106D90D5C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F881406D90D82005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F881706D90E64005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F881A06D9335E005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F881D06D93380005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1699";
+		rLen = 0;
+		rLoc = 48118;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F882006D9357D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1697";
+		rLen = 0;
+		rLoc = 48039;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 47091;
+	};
+	008F882406D935E6005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1988";
+		rLen = 0;
+		rLoc = 55773;
+		rType = 0;
+		vrLen = 1438;
+		vrLoc = 47916;
+	};
+	008F882706D93615005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1578";
+		rLen = 0;
+		rLoc = 44972;
+		rType = 0;
+		vrLen = 1265;
+		vrLoc = 44375;
+	};
+	008F882A06D936FA005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::enable";
+		rLen = 29;
+		rLoc = 26340;
+		rType = 0;
+		vrLen = 921;
+		vrLoc = 25949;
+	};
+	008F882D06D937F7005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 1337;
+		rType = 1;
+	};
+	008F882E06D937F7005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F883206D93849005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F883506D938D7005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F883806D939C0005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F883B06D93A06005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F883E06D93A64005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F884406D93ACA005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F884706D93B19005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F886306D93B71005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F886606D93C44005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F887606D93CAB005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F887A06D93CC4005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1410";
+		rLen = 0;
+		rLoc = 41295;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F887D06D93D49005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1416";
+		rLen = 0;
+		rLoc = 41473;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F888206D93D4F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1416";
+		rLen = 0;
+		rLoc = 41473;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F888506D93D56005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1416";
+		rLen = 0;
+		rLoc = 41473;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 40416;
+	};
+	008F888806D93ED9005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 1352;
+		rType = 1;
+	};
+	008F888906D93ED9005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1376";
+		rLen = 0;
+		rLoc = 40081;
+		rType = 0;
+		vrLen = 1561;
+		vrLoc = 40054;
+	};
+	008F888C06D93EEA005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1422";
+		rLen = 0;
+		rLoc = 41597;
+		rType = 0;
+		vrLen = 1561;
+		vrLoc = 40054;
+	};
+	008F888F06D93F0D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F889206D93F3B005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F889506D9411E005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F889806D94135005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F889B06D94635005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F889E06D94643005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88A106D9464D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88A506D94651005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88A806D9465D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88AB06D9C589005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88AE06D9C599005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88B106D9CA4F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88B406D9CAB6005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = reset;
+		rLen = 5;
+		rLoc = 47306;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 46642;
+	};
+	008F88B906D9CDAE005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88BF06D9CE3D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88C406D9CE9C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88C806D9CEF8005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88CB06D9CF44005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88CF06D9CF83005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88D306D9D01C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88D706D9D036005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88DA06D9D054005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "IOReturn AtherosWIFIController::getFrequency(UInt32* freq) {\n    *freq = chans[_activeChannelIndex].channel;\n    return kIOReturnSuccess;\n}\n\nIOReturn AtherosWIFIController::setFrequency(UInt32 freq) {\n    unsigned int i;\n    UInt32 flags;\n    \n    switch(_activeIEEEMode) {\n        case _modulationMode80211a:\n            flags = CHANNEL_A;\n            break;\n        case _modulationMode80211b:\n            flags = CHANNEL_B;\n            break;\n        case _modulationMode80211g:\n            flags = CHANNEL_G;\n            break;\n        case _modulationModeAtherosT:\n            flags = CHANNEL_T;\n            break;\n        default:\n            IOLog(\"Warning: Unknown IEEE mode! Defaulting to 802.11b\\n\");\n            flags = CHANNEL_B;\n            break;\n    }\n    \n    for (i = 0; i < nchans; i++) {\n        if (chans[i].channel == freq && (chans[i].channelFlags & flags) == flags) break;\n    }\n    if (i == nchans) return kIOReturnUnsupportedMode;\n    \n    _activeChannelIndex = i;\n    \n    if (_enabled) reset();\n    return kIOReturnSuccess;\n}\n";
+		rLen = 1053;
+		rLoc = 48612;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88DE06D9D101005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1759";
+		rLen = 0;
+		rLoc = 49801;
+		rType = 0;
+		vrLen = 1370;
+		vrLoc = 48673;
+	};
+	008F88E206D9D1D1005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::ath_rate_ctl_reset";
+		rLen = 41;
+		rLoc = 56262;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 51658;
+	};
+	008F88E606D9D1D4005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::ath_rate_ctl_reset";
+		rLen = 41;
+		rLoc = 56262;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 51658;
+	};
+	008F88E906D9D1DD005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWIFIController::ath_rate_ctl_reset";
+		rLen = 41;
+		rLoc = 56262;
+		rType = 0;
+		vrLen = 1471;
+		vrLoc = 51658;
+	};
+	008F88ED06D9D798005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = HAL_EINPROGRESS;
+		rLen = 15;
+		rLoc = 30772;
+		rType = 0;
+		vrLen = 1575;
+		vrLoc = 29412;
+	};
+	008F88EE06D9D798005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1179";
+		rLen = 0;
+		rLoc = 34882;
+		rType = 0;
+		vrLen = 1530;
+		vrLoc = 33577;
+	};
+	008F88F406D9D7A1005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1179";
+		rLen = 0;
+		rLoc = 34882;
+		rType = 0;
+		vrLen = 1530;
+		vrLoc = 33577;
+	};
+	008F88FE06D9DB87005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = ah_procRxDesc;
+		rLen = 13;
+		rLoc = 30558;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F88FF06D9DB87005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F890806D9DB8A005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F890B06D9DBC7005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F890F06D9DBEC005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F891206D9DC0D005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F891806D9DC25005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = getPhysicalAddress;
+		rLen = 18;
+		rLoc = 30604;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F891B06D9DC32005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F891E06D9DC5C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F892106D9DC63005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F892406D9DC92005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F892706D9DD4C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F892B06D9DD72005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F893106D9DDD3005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F893406D9DE5C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F893706D9DEA3005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F893D06D9DF02005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F894006D9DF53005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F894306D9DF71005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F894906D9DF98005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F894C06D9DFD1005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F894F06D9E034005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F895306D9E086005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F895606D9E172005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F895A06D9E237005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F895D06D9E338005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F896106D9E34A005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F896406D9E3DC005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F896A06D9E406005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F896D06D9E4AD005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F897106D9E4CC005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F897406D9E500005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F897706D9E50F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F897A06D9E516005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F898006D9E54C005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F898306D9E559005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F898606D9E563005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F898906D9E5A0005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F898D06D9E5AB005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F899506D9E615005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F899D06D9E618005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89A106D9E61B005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89A506D9E636005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89A806D9E6B5005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89AD06D9E70F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89B306D9E721005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89B706D9E7AC005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89BE06D9E7B1005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89C106D9E85A005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89C706D9E863005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89CA06D9E8EF005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89CD06D9E90F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89D006D9E93F005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89D406D9E957005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89D706D9E9B0005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1082";
+		rLen = 0;
+		rLoc = 31287;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 30162;
+	};
+	008F89DB06D9F3A6005E3361 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtherosWifi.cpp: 1140";
+		rLen = 0;
+		rLoc = 33497;
+		rType = 0;
+		vrLen = 2137;
+		vrLoc = 32459;
+	};
+	00AC719A05B1CEB00066AB78 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 937}}";
+			sepNavSelRange = "{1105, 785}";
+			sepNavVisRect = "{{0, 271}, {1033, 666}}";
+			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
+		};
+	};
+	00FF588306C6268C006C7F1E = {
+		fRef = BAA14C7805EADD6300381749;
+		isa = PBXTextBookmark;
+		name = "AtherosWifiInterface.h: 12";
+		rLen = 0;
+		rLoc = 405;
+		rType = 0;
+		vrLen = 1460;
+		vrLoc = 660;
+	};
+	00FF588406C6268C006C7F1E = {
+		fRef = BAA14C7D05EADD9D00381749;
+		isa = PBXTextBookmark;
+		name = "AtherosWifiInterface.cpp: intf_node_copy";
+		rLen = 0;
+		rLoc = 823;
+		rType = 0;
+		vrLen = 1057;
+		vrLoc = 3390;
+	};
+	00FF588806C6268C006C7F1E = {
+		fRef = BAA14C7805EADD6300381749;
+		isa = PBXTextBookmark;
+		name = "AtherosWifiInterface.h: 11";
+		rLen = 0;
+		rLoc = 370;
+		rType = 0;
+		vrLen = 1538;
+		vrLoc = 0;
+	};
+	00FF588906C6268C006C7F1E = {
+		fRef = BAA14C7D05EADD9D00381749;
+		isa = PBXTextBookmark;
+		name = "AtherosWifiInterface.cpp: 12";
+		rLen = 0;
+		rLoc = 310;
+		rType = 0;
+		vrLen = 1107;
+		vrLoc = 0;
+	};
+	00FF5B9906C6768F006C7F1E = {
+		fRef = 00756F5805ADD780001CAF74;
+		isa = PBXTextBookmark;
+		name = "AtherosUserClient.cpp: close";
+		rLen = 0;
+		rLoc = 4472;
+		rType = 0;
+		vrLen = 794;
+		vrLoc = 4260;
+	};
+	00FF5B9B06C6768F006C7F1E = {
+		fRef = 00756F5805ADD780001CAF74;
+		isa = PBXTextBookmark;
+		name = "AtherosUserClient.cpp: close";
+		rLen = 0;
+		rLoc = 4472;
+		rType = 0;
+		vrLen = 794;
+		vrLoc = 4260;
+	};
+	089C1669FE841209C02AAC07 = {
+		activeBuildStyle = 06AA1265FFB2107B11CA28AA;
+		activeTarget = 089C1673FE841209C02AAC07;
+		addToTargets = (
+			089C1673FE841209C02AAC07,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = 006FACC005A4B5680081694D;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXErrorsWarningsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXErrorsWarningsDataSource_LocationID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					685.8799,
+					365.2085,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXErrorsWarningsDataSource_TypeID,
+					PBXErrorsWarningsDataSource_MessageID,
+					PBXErrorsWarningsDataSource_LocationID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					1000,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					750,
+					20,
+					133,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXSymbolsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					16,
+					329.8008,
+					359.0356,
+					336.2085,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXSymbolsDataSource_SymbolTypeIconID,
+					PBXSymbolsDataSource_SymbolNameID,
+					PBXSymbolsDataSource_SymbolTypeID,
+					PBXSymbolsDataSource_ReferenceNameID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					635,
+					134,
+					20,
+					134,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 114986130;
+			PBXPrepackagedSmartGroups_v2 = (
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					activationKey = OldTargetSmartGroup;
+					clz = PBXTargetSmartGroup;
+					description = "Displays all targets of the project.";
+					globalID = 1C37FABC04509CD000000102;
+					name = Targets;
+					preferences = {
+						image = Targets;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXTargetSmartGroup2;
+					description = "Displays all targets of the project as well as nested build phases.";
+					globalID = 1C37FBAC04509CD000000102;
+					name = Targets;
+					preferences = {
+						image = Targets;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXExecutablesSmartGroup;
+					description = "Displays all executables of the project.";
+					globalID = 1C37FAAC04509CD000000102;
+					name = Executables;
+					preferences = {
+						image = Executable;
+					};
+				},
+				{
+					" PBXTransientLocationAtTop " = bottom;
+					absolutePathToBundle = "";
+					clz = PBXErrorsWarningsSmartGroup;
+					description = "Displays files with errors or warnings.";
+					globalID = 1C08E77C0454961000C914BD;
+					name = "Errors and Warnings";
+					preferences = {
+						fnmatch = "";
+						image = WarningsErrors;
+						recursive = 1;
+						regex = "";
+						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXFilenameSmartGroup;
+					description = "Filters items in a given group (potentially recursively) based on matching the name with the regular expression of the filter.";
+					globalID = 1CC0EA4004350EF90044410B;
+					name = "Implementation Files";
+					preferences = {
+						canSave = 1;
+						fnmatch = "";
+						image = SmartFolder;
+						isLeaf = 0;
+						recursive = 1;
+						regex = "?*\\.[mcMC]";
+						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXFilenameSmartGroup;
+					description = "This group displays Interface Builder NIB Files.";
+					globalID = 1CC0EA4004350EF90041110B;
+					name = "NIB Files";
+					preferences = {
+						canSave = 1;
+						fnmatch = "*.nib";
+						image = SmartFolder;
+						isLeaf = 0;
+						recursive = 1;
+						regex = "";
+						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = no;
+					absolutePathToBundle = "";
+					clz = PBXFindSmartGroup;
+					description = "Displays Find Results.";
+					globalID = 1C37FABC05509CD000000102;
+					name = "Find Results";
+					preferences = {
+						image = spyglass;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = no;
+					absolutePathToBundle = "";
+					clz = PBXBookmarksSmartGroup;
+					description = "Displays Project Bookmarks.";
+					globalID = 1C37FABC05539CD112110102;
+					name = Bookmarks;
+					preferences = {
+						image = Bookmarks;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = XCSCMSmartGroup;
+					description = "Displays files with interesting SCM status.";
+					globalID = E2644B35053B69B200211256;
+					name = SCM;
+					preferences = {
+						image = PBXRepository;
+						isLeaf = 0;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXSymbolsSmartGroup;
+					description = "Displays all symbols for the project.";
+					globalID = 1C37FABC04509CD000100104;
+					name = "Project Symbols";
+					preferences = {
+						image = ProjectSymbols;
+						isLeaf = 1;
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXFilenameSmartGroup;
+					description = "Filters items in a given group (potentially recursively) based on matching the name with the regular expression of the filter.";
+					globalID = PBXTemplateMarker;
+					name = "Simple Filter SmartGroup";
+					preferences = {
+						canSave = 1;
+						fnmatch = "*.nib";
+						image = SmartFolder;
+						isLeaf = 0;
+						recursive = 1;
+						regex = "";
+						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					absolutePathToBundle = "";
+					clz = PBXFilenameSmartGroup;
+					description = "Filters items in a given group (potentially recursively) based on matching the name with the regular expression of the filter.";
+					globalID = PBXTemplateMarker;
+					name = "Simple Regular Expression SmartGroup";
+					preferences = {
+						canSave = 1;
+						fnmatch = "";
+						image = SmartFolder;
+						isLeaf = 0;
+						recursive = 1;
+						regex = "?*\\.[mcMC]";
+						root = "<PROJECT>";
+					};
+				},
+				{
+					PBXTransientLocationAtTop = bottom;
+					clz = XDDesignSmartGroup;
+					description = "Displays Xdesign models";
+					globalID = 2E4A936305E6979E00701470;
+					name = Design;
+					preferences = {
+						image = Design;
+						isLeaf = 0;
+					};
+				},
+			);
+			PBXWorkspaceContents = (
+				{
+					PBXProjectWorkspaceModule_StateKey_Rev39 = {
+						PBXProjectWorkspaceModule_DEGV_Geometry = {
+							_collapsingFrameDimension = 0;
+							_indexOfCollapsedView = 0;
+							_percentageOfCollapsedView = 0;
+							isCollapsed = yes;
+							sizes = (
+								"{{0, 0}, {1098, 148}}",
+								"{{0, 148}, {1098, 558}}",
+							);
+						};
+						PBXProjectWorkspaceModule_DataSourceSelectionKey_Rev6 = {
+							BoundsStr = "{{0, 0}, {1083, 131}}";
+							Rows = (
+							);
+							VisibleRectStr = "{{0, 0}, {1083, 131}}";
+						};
+						PBXProjectWorkspaceModule_EditorOpen = true;
+						PBXProjectWorkspaceModule_EmbeddedNavigatorGroup = {
+							PBXSplitModuleInNavigatorKey = {
+								Split0 = {
+									bookmark = 00DF91B30610919700D0DFA2;
+									history = (
+										00A42D6B05B35350001E398A,
+										004B3F2E05B43427008869E4,
+										00DF91B20610919700D0DFA2,
+									);
+									prevStack = (
+										00A42D6F05B35350001E398A,
+										00A42D7005B35350001E398A,
+									);
+								};
+								SplitCount = 1;
+							};
+						};
+						PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
+							PBXProjectWorkspaceModule_SGTM_Geometry = {
+								_collapsingFrameDimension = 0;
+								_indexOfCollapsedView = 0;
+								_percentageOfCollapsedView = 0;
+								sizes = (
+									"{{0, 0}, {182, 706}}",
+									"{{182, 0}, {1098, 706}}",
+								);
+							};
+						};
+						PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1098, 148}}";
+						PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 148}, {1098, 558}}";
+						PBXProjectWorkspaceModule_OldSuperviewFrame = "{{182, 0}, {1098, 706}}";
+						PBXProjectWorkspaceModule_SGTM = {
+							PBXBottomSmartGroupGIDs = (
+								1C37FBAC04509CD000000102,
+								1C37FAAC04509CD000000102,
+								1C08E77C0454961000C914BD,
+								1CC0EA4004350EF90044410B,
+								1CC0EA4004350EF90041110B,
+								1C37FABC05509CD000000102,
+								1C37FABC05539CD112110102,
+								E2644B35053B69B200211256,
+								1C37FABC04509CD000100104,
+							);
+							PBXSmartGroupTreeModuleColumnData = {
+								PBXSmartGroupTreeModuleColumnWidthsKey = (
+									165,
+								);
+								PBXSmartGroupTreeModuleColumnsKey_v4 = (
+									MainColumn,
+								);
+							};
+							PBXSmartGroupTreeModuleOutlineStateKey_v7 = {
+								PBXSmartGroupTreeModuleOutlineStateExpansionKey = (
+									089C166AFE841209C02AAC07,
+									247142CAFF3F8F9811CA285C,
+									089C167CFE841241C02AAC07,
+									1C37FBAC04509CD000000102,
+								);
+								PBXSmartGroupTreeModuleOutlineStateSelectionKey = (
+									(
+										3,
+										1,
+										0,
+									),
+								);
+								PBXSmartGroupTreeModuleOutlineStateVisibleRectKey = "{{0, 0}, {165, 688}}";
+							};
+							PBXTopSmartGroupGIDs = (
+							);
+						};
+					};
+				},
+			);
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXBuildResultsModule" = {
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXCVSModule" = {
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXDebugCLIModule" = {
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXDebugSessionModule" = {
+				Debugger = {
+					HorizontalSplitView = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {283, 209}}",
+							"{{283, 0}, {462, 209}}",
+						);
+					};
+					VerticalSplitView = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {745, 209}}",
+							"{{0, 209}, {745, 213}}",
+						);
+					};
+				};
+				LauncherConfigVersion = 8;
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
+				PBXSplitModuleInNavigatorKey = {
+					SplitCount = 1;
+				};
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXProjectFindModule" = {
+			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
+				PBXProjectWorkspaceModule_StateKey_Rev39 = {
+					PBXProjectWorkspaceModule_DEGV_Geometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {1098, 115}}",
+							"{{0, 115}, {1098, 591}}",
+						);
+					};
+					PBXProjectWorkspaceModule_DataSourceSelectionKey_Rev6 = {
+						BoundsStr = "{{0, 0}, {1083, 98}}";
+						Rows = (
+							0,
+						);
+						VisibleRectStr = "{{0, 0}, {1083, 98}}";
+					};
+					PBXProjectWorkspaceModule_EditorOpen = true;
+					PBXProjectWorkspaceModule_EmbeddedNavigatorGroup = {
+						PBXSplitModuleInNavigatorKey = {
+							Split0 = {
+								bookmark = 006FACBE05A4B54A0081694D;
+								history = (
+									006FACBD05A4B54A0081694D,
+								);
+							};
+							SplitCount = 1;
+						};
+					};
+					PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
+						PBXProjectWorkspaceModule_SGTM_Geometry = {
+							_collapsingFrameDimension = 0;
+							_indexOfCollapsedView = 0;
+							_percentageOfCollapsedView = 0;
+							sizes = (
+								"{{0, 0}, {182, 706}}",
+								"{{182, 0}, {1098, 706}}",
+							);
+						};
+					};
+					PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1098, 115}}";
+					PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 115}, {1098, 591}}";
+					PBXProjectWorkspaceModule_OldSuperviewFrame = "{{182, 0}, {1098, 706}}";
+					PBXProjectWorkspaceModule_SGTM = {
+						PBXBottomSmartGroupGIDs = (
+							1C37FBAC04509CD000000102,
+							1C37FAAC04509CD000000102,
+							1C08E77C0454961000C914BD,
+							1CC0EA4004350EF90044410B,
+							1CC0EA4004350EF90041110B,
+							1C37FABC05509CD000000102,
+							1C37FABC05539CD112110102,
+							E2644B35053B69B200211256,
+							1C37FABC04509CD000100104,
+						);
+						PBXSmartGroupTreeModuleColumnData = {
+							PBXSmartGroupTreeModuleColumnWidthsKey = (
+								165,
+							);
+							PBXSmartGroupTreeModuleColumnsKey_v4 = (
+								MainColumn,
+							);
+						};
+						PBXSmartGroupTreeModuleOutlineStateKey_v7 = {
+							PBXSmartGroupTreeModuleOutlineStateExpansionKey = (
+							);
+							PBXSmartGroupTreeModuleOutlineStateSelectionKey = (
+								(
+									0,
+								),
+							);
+							PBXSmartGroupTreeModuleOutlineStateVisibleRectKey = "{{0, 0}, {165, 688}}";
+						};
+						PBXTopSmartGroupGIDs = (
+						);
+					};
+				};
+			};
+			PBXWorkspaceGeometries = (
+				{
+					Frame = "{{0, 0}, {1280, 706}}";
+					PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
+					};
+					RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
+				},
+			);
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXBuildResultsModule" = {
+				Frame = "{{0, 0}, {880, 253}}";
+				PBXModuleWindowStatusBarHidden = YES;
+				RubberWindowFrame = "400 442 880 274 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXCVSModule" = {
+				Frame = "{{0, 0}, {482, 276}}";
+				RubberWindowFrame = "390 300 482 318 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXDebugCLIModule" = {
+				Frame = "{{0, 0}, {400, 201}}";
+				PBXModuleWindowStatusBarHidden = YES;
+				RubberWindowFrame = "50 804 400 222 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXDebugSessionModule" = {
+				DebugConsoleDrawerSize = "{100, 120}";
+				DebugConsoleVisible = None;
+				DebugConsoleWindowFrame = "{{200, 200}, {500, 300}}";
+				DebugSTDIOWindowFrame = "{{200, 200}, {500, 300}}";
+				Frame = "{{0, 0}, {745, 422}}";
+				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
+				Frame = "{{0, 0}, {750, 481}}";
+				PBXModuleWindowStatusBarHidden = YES;
+				RubberWindowFrame = "15 325 750 502 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectFindModule" = {
+				Frame = "{{0, 0}, {614, 121}}";
+				PBXModuleWindowStatusBarHidden = YES;
+				RubberWindowFrame = "333 606 614 142 0 0 1280 832 ";
+			};
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
+				Frame = "{{0, 0}, {1280, 706}}";
+				PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
+				};
+				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
+			};
+			PBXWorkspaceStateSaveDate = 114986130;
+		};
+		perUserProjectItems = {
+			003F2A9806DA8C9600DC4841 = 003F2A9806DA8C9600DC4841;
+			003F2AA806DA90CC00DC4841 = 003F2AA806DA90CC00DC4841;
+			003F2AA906DA90CC00DC4841 = 003F2AA906DA90CC00DC4841;
+			003F2AAC06DA911300DC4841 = 003F2AAC06DA911300DC4841;
+			003F2AAF06DA914F00DC4841 = 003F2AAF06DA914F00DC4841;
+			003F2AB206DA915300DC4841 = 003F2AB206DA915300DC4841;
+			003F2AB506DA919F00DC4841 = 003F2AB506DA919F00DC4841;
+			003F2AB906DA91EF00DC4841 = 003F2AB906DA91EF00DC4841;
+			003F2ABF06DA921300DC4841 = 003F2ABF06DA921300DC4841;
+			003F2AC206DA922900DC4841 = 003F2AC206DA922900DC4841;
+			003F2AC506DA928E00DC4841 = 003F2AC506DA928E00DC4841;
+			003F2ACB06DA939100DC4841 = 003F2ACB06DA939100DC4841;
+			003F2ACE06DA93E800DC4841 = 003F2ACE06DA93E800DC4841;
+			003F2AD406DA942000DC4841 = 003F2AD406DA942000DC4841;
+			003F2AD806DA945F00DC4841 = 003F2AD806DA945F00DC4841;
+			003F2ADB06DA946000DC4841 = 003F2ADB06DA946000DC4841;
+			003F2AE306DA948700DC4841 = 003F2AE306DA948700DC4841;
+			003F2AE606DA949900DC4841 = 003F2AE606DA949900DC4841;
+			003F2AEA06DA94DE00DC4841 = 003F2AEA06DA94DE00DC4841;
+			003F2AED06DA950700DC4841 = 003F2AED06DA950700DC4841;
+			003F2AF006DA956800DC4841 = 003F2AF006DA956800DC4841;
+			003F2AF606DA959D00DC4841 = 003F2AF606DA959D00DC4841;
+			003F2AFC06DA960000DC4841 = 003F2AFC06DA960000DC4841;
+			003F2B0206DA966900DC4841 = 003F2B0206DA966900DC4841;
+			003F2B0706DA98AB00DC4841 = 003F2B0706DA98AB00DC4841;
+			003F2B0B06DA98AF00DC4841 = 003F2B0B06DA98AF00DC4841;
+			003F2B0E06DA98D200DC4841 = 003F2B0E06DA98D200DC4841;
+			005DA63D06C8D83700ACF77D = 005DA63D06C8D83700ACF77D;
+			005DA64006C8D83700ACF77D = 005DA64006C8D83700ACF77D;
+			005DAA7906C92F9E00ACF77D = 005DAA7906C92F9E00ACF77D;
+			005DAA7B06C92F9E00ACF77D = 005DAA7B06C92F9E00ACF77D;
+			008D9F5806D908B7007FD27E = 008D9F5806D908B7007FD27E;
+			008D9F6206D90924007FD27E = 008D9F6206D90924007FD27E;
+			008F87DF06D90BD2005E3361 = 008F87DF06D90BD2005E3361;
+			008F87E006D90BD2005E3361 = 008F87E006D90BD2005E3361;
+			008F87E806D90BE8005E3361 = 008F87E806D90BE8005E3361;
+			008F87EB06D90C39005E3361 = 008F87EB06D90C39005E3361;
+			008F87F106D90C43005E3361 = 008F87F106D90C43005E3361;
+			008F87F406D90C48005E3361 = 008F87F406D90C48005E3361;
+			008F87F706D90C4C005E3361 = 008F87F706D90C4C005E3361;
+			008F87FA06D90C59005E3361 = 008F87FA06D90C59005E3361;
+			008F87FD06D90C5E005E3361 = 008F87FD06D90C5E005E3361;
+			008F880006D90C8C005E3361 = 008F880006D90C8C005E3361;
+			008F880806D90CB6005E3361 = 008F880806D90CB6005E3361;
+			008F880B06D90CCB005E3361 = 008F880B06D90CCB005E3361;
+			008F880E06D90D1D005E3361 = 008F880E06D90D1D005E3361;
+			008F881106D90D5C005E3361 = 008F881106D90D5C005E3361;
+			008F881406D90D82005E3361 = 008F881406D90D82005E3361;
+			008F881706D90E64005E3361 = 008F881706D90E64005E3361;
+			008F881A06D9335E005E3361 = 008F881A06D9335E005E3361;
+			008F881D06D93380005E3361 = 008F881D06D93380005E3361;
+			008F882006D9357D005E3361 = 008F882006D9357D005E3361;
+			008F882406D935E6005E3361 = 008F882406D935E6005E3361;
+			008F882706D93615005E3361 = 008F882706D93615005E3361;
+			008F882A06D936FA005E3361 = 008F882A06D936FA005E3361;
+			008F882D06D937F7005E3361 = 008F882D06D937F7005E3361;
+			008F882E06D937F7005E3361 = 008F882E06D937F7005E3361;
+			008F883206D93849005E3361 = 008F883206D93849005E3361;
+			008F883506D938D7005E3361 = 008F883506D938D7005E3361;
+			008F883806D939C0005E3361 = 008F883806D939C0005E3361;
+			008F883B06D93A06005E3361 = 008F883B06D93A06005E3361;
+			008F883E06D93A64005E3361 = 008F883E06D93A64005E3361;
+			008F884406D93ACA005E3361 = 008F884406D93ACA005E3361;
+			008F884706D93B19005E3361 = 008F884706D93B19005E3361;
+			008F886306D93B71005E3361 = 008F886306D93B71005E3361;
+			008F886606D93C44005E3361 = 008F886606D93C44005E3361;
+			008F887606D93CAB005E3361 = 008F887606D93CAB005E3361;
+			008F887A06D93CC4005E3361 = 008F887A06D93CC4005E3361;
+			008F887D06D93D49005E3361 = 008F887D06D93D49005E3361;
+			008F888206D93D4F005E3361 = 008F888206D93D4F005E3361;
+			008F888506D93D56005E3361 = 008F888506D93D56005E3361;
+			008F888806D93ED9005E3361 = 008F888806D93ED9005E3361;
+			008F888906D93ED9005E3361 = 008F888906D93ED9005E3361;
+			008F888C06D93EEA005E3361 = 008F888C06D93EEA005E3361;
+			008F888F06D93F0D005E3361 = 008F888F06D93F0D005E3361;
+			008F889206D93F3B005E3361 = 008F889206D93F3B005E3361;
+			008F889506D9411E005E3361 = 008F889506D9411E005E3361;
+			008F889806D94135005E3361 = 008F889806D94135005E3361;
+			008F889B06D94635005E3361 = 008F889B06D94635005E3361;
+			008F889E06D94643005E3361 = 008F889E06D94643005E3361;
+			008F88A106D9464D005E3361 = 008F88A106D9464D005E3361;
+			008F88A506D94651005E3361 = 008F88A506D94651005E3361;
+			008F88A806D9465D005E3361 = 008F88A806D9465D005E3361;
+			008F88AB06D9C589005E3361 = 008F88AB06D9C589005E3361;
+			008F88AE06D9C599005E3361 = 008F88AE06D9C599005E3361;
+			008F88B106D9CA4F005E3361 = 008F88B106D9CA4F005E3361;
+			008F88B406D9CAB6005E3361 = 008F88B406D9CAB6005E3361;
+			008F88B906D9CDAE005E3361 = 008F88B906D9CDAE005E3361;
+			008F88BF06D9CE3D005E3361 = 008F88BF06D9CE3D005E3361;
+			008F88C406D9CE9C005E3361 = 008F88C406D9CE9C005E3361;
+			008F88C806D9CEF8005E3361 = 008F88C806D9CEF8005E3361;
+			008F88CB06D9CF44005E3361 = 008F88CB06D9CF44005E3361;
+			008F88CF06D9CF83005E3361 = 008F88CF06D9CF83005E3361;
+			008F88D306D9D01C005E3361 = 008F88D306D9D01C005E3361;
+			008F88D706D9D036005E3361 = 008F88D706D9D036005E3361;
+			008F88DA06D9D054005E3361 = 008F88DA06D9D054005E3361;
+			008F88DE06D9D101005E3361 = 008F88DE06D9D101005E3361;
+			008F88E206D9D1D1005E3361 = 008F88E206D9D1D1005E3361;
+			008F88E606D9D1D4005E3361 = 008F88E606D9D1D4005E3361;
+			008F88E906D9D1DD005E3361 = 008F88E906D9D1DD005E3361;
+			008F88ED06D9D798005E3361 = 008F88ED06D9D798005E3361;
+			008F88EE06D9D798005E3361 = 008F88EE06D9D798005E3361;
+			008F88F406D9D7A1005E3361 = 008F88F406D9D7A1005E3361;
+			008F88FE06D9DB87005E3361 = 008F88FE06D9DB87005E3361;
+			008F88FF06D9DB87005E3361 = 008F88FF06D9DB87005E3361;
+			008F890806D9DB8A005E3361 = 008F890806D9DB8A005E3361;
+			008F890B06D9DBC7005E3361 = 008F890B06D9DBC7005E3361;
+			008F890F06D9DBEC005E3361 = 008F890F06D9DBEC005E3361;
+			008F891206D9DC0D005E3361 = 008F891206D9DC0D005E3361;
+			008F891806D9DC25005E3361 = 008F891806D9DC25005E3361;
+			008F891B06D9DC32005E3361 = 008F891B06D9DC32005E3361;
+			008F891E06D9DC5C005E3361 = 008F891E06D9DC5C005E3361;
+			008F892106D9DC63005E3361 = 008F892106D9DC63005E3361;
+			008F892406D9DC92005E3361 = 008F892406D9DC92005E3361;
+			008F892706D9DD4C005E3361 = 008F892706D9DD4C005E3361;
+			008F892B06D9DD72005E3361 = 008F892B06D9DD72005E3361;
+			008F893106D9DDD3005E3361 = 008F893106D9DDD3005E3361;
+			008F893406D9DE5C005E3361 = 008F893406D9DE5C005E3361;
+			008F893706D9DEA3005E3361 = 008F893706D9DEA3005E3361;
+			008F893D06D9DF02005E3361 = 008F893D06D9DF02005E3361;
+			008F894006D9DF53005E3361 = 008F894006D9DF53005E3361;
+			008F894306D9DF71005E3361 = 008F894306D9DF71005E3361;
+			008F894906D9DF98005E3361 = 008F894906D9DF98005E3361;
+			008F894C06D9DFD1005E3361 = 008F894C06D9DFD1005E3361;
+			008F894F06D9E034005E3361 = 008F894F06D9E034005E3361;
+			008F895306D9E086005E3361 = 008F895306D9E086005E3361;
+			008F895606D9E172005E3361 = 008F895606D9E172005E3361;
+			008F895A06D9E237005E3361 = 008F895A06D9E237005E3361;
+			008F895D06D9E338005E3361 = 008F895D06D9E338005E3361;
+			008F896106D9E34A005E3361 = 008F896106D9E34A005E3361;
+			008F896406D9E3DC005E3361 = 008F896406D9E3DC005E3361;
+			008F896A06D9E406005E3361 = 008F896A06D9E406005E3361;
+			008F896D06D9E4AD005E3361 = 008F896D06D9E4AD005E3361;
+			008F897106D9E4CC005E3361 = 008F897106D9E4CC005E3361;
+			008F897406D9E500005E3361 = 008F897406D9E500005E3361;
+			008F897706D9E50F005E3361 = 008F897706D9E50F005E3361;
+			008F897A06D9E516005E3361 = 008F897A06D9E516005E3361;
+			008F898006D9E54C005E3361 = 008F898006D9E54C005E3361;
+			008F898306D9E559005E3361 = 008F898306D9E559005E3361;
+			008F898606D9E563005E3361 = 008F898606D9E563005E3361;
+			008F898906D9E5A0005E3361 = 008F898906D9E5A0005E3361;
+			008F898D06D9E5AB005E3361 = 008F898D06D9E5AB005E3361;
+			008F899506D9E615005E3361 = 008F899506D9E615005E3361;
+			008F899D06D9E618005E3361 = 008F899D06D9E618005E3361;
+			008F89A106D9E61B005E3361 = 008F89A106D9E61B005E3361;
+			008F89A506D9E636005E3361 = 008F89A506D9E636005E3361;
+			008F89A806D9E6B5005E3361 = 008F89A806D9E6B5005E3361;
+			008F89AD06D9E70F005E3361 = 008F89AD06D9E70F005E3361;
+			008F89B306D9E721005E3361 = 008F89B306D9E721005E3361;
+			008F89B706D9E7AC005E3361 = 008F89B706D9E7AC005E3361;
+			008F89BE06D9E7B1005E3361 = 008F89BE06D9E7B1005E3361;
+			008F89C106D9E85A005E3361 = 008F89C106D9E85A005E3361;
+			008F89C706D9E863005E3361 = 008F89C706D9E863005E3361;
+			008F89CA06D9E8EF005E3361 = 008F89CA06D9E8EF005E3361;
+			008F89CD06D9E90F005E3361 = 008F89CD06D9E90F005E3361;
+			008F89D006D9E93F005E3361 = 008F89D006D9E93F005E3361;
+			008F89D406D9E957005E3361 = 008F89D406D9E957005E3361;
+			008F89D706D9E9B0005E3361 = 008F89D706D9E9B0005E3361;
+			008F89DB06D9F3A6005E3361 = 008F89DB06D9F3A6005E3361;
+			00FF588306C6268C006C7F1E = 00FF588306C6268C006C7F1E;
+			00FF588406C6268C006C7F1E = 00FF588406C6268C006C7F1E;
+			00FF588806C6268C006C7F1E = 00FF588806C6268C006C7F1E;
+			00FF588906C6268C006C7F1E = 00FF588906C6268C006C7F1E;
+			00FF5B9906C6768F006C7F1E = 00FF5B9906C6768F006C7F1E;
+			00FF5B9B06C6768F006C7F1E = 00FF5B9B06C6768F006C7F1E;
+		};
+		sourceControlManager = 006FACBF05A4B5680081694D;
+		userBuildSettings = {
+		};
+	};
+	089C1673FE841209C02AAC07 = {
+		activeExec = 0;
+	};
+	1A224C3EFF42367911CA2CB7 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 2940}}";
+			sepNavSelRange = "{3581, 0}";
+			sepNavVisRect = "{{0, 1116}, {1033, 666}}";
+			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
+		};
+	};
+	1A224C3FFF42367911CA2CB7 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 28265}}";
+			sepNavSelRange = "{44726, 33}";
+			sepNavVisRect = "{{0, 21654}, {1033, 666}}";
+		};
+	};
+	BAA14C7805EADD6300381749 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 938}}";
+			sepNavSelRange = "{405, 0}";
+			sepNavVisRect = "{{0, 272}, {1033, 666}}";
+		};
+	};
+	BAA14C7D05EADD9D00381749 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 2562}}";
+			sepNavSelRange = "{823, 0}";
+			sepNavVisRect = "{{0, 1896}, {1033, 666}}";
+		};
+	};
+}
