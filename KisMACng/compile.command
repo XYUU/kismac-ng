@@ -19,6 +19,8 @@ cd MACJack
 xcodebuild -buildstyle Deployment
 cd ../VihaDriver
 xcodebuild -buildstyle Deployment
+cd ../AtheroJack
+xcodebuild -buildstyle Deployment
 cd ../AiroJack
 xcodebuild -buildstyle Deployment
 cd ../BIGL

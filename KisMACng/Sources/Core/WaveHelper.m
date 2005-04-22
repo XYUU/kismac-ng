@@ -513,11 +513,11 @@ static ScanController *_scanController;
 }
 
 + (bool)runScript:(NSString*)script withArguments:(NSArray*)args {
-    int perm;
+    //int perm;
     bool ret;
-    NSTask *t;
+    //NSTask *t;
     NSString* s = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], script];
-    
+    /*
     perm = [[[[NSFileManager defaultManager] fileAttributesAtPath:s traverseLink:NO] objectForKey:NSFilePosixPermissions] intValue];
     if (perm & 04000) {
         t = [NSTask launchedTaskWithLaunchPath:s arguments:args ? args : [NSArray array]];
@@ -530,11 +530,11 @@ static ScanController *_scanController;
             return NO;
         }
         return YES;
-    } else {
+    } else { */
         ret = [[BLAuthentication sharedInstance] executeCommand:s withArgs:args];
         if (!ret) NSLog(@"WARNING!!! User canceled password dialog for: %@", s);
         return ret;
-    }
+    //}
 }
 
 + (void)secureRelease:(id*)object {

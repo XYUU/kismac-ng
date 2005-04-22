@@ -230,23 +230,18 @@ enum _operationMode {
 
 - (unsigned short) getChannelUnCached {
     UInt32 channel = 0;
-    kern_return_t kernResult;
-
+  
     if (![self allowsChannelHopping]) return 0;
     
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
-                                               kWiFiUserClientGetFrequency, 0, 1, &channel);
-    if (kernResult != KERN_SUCCESS) {
-        NSLog(@"getChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
-        return 0;
-    }
-    
+    channel = IOConnectMethodScalarIScalarO(_userClientPort,
+                                               kWiFiUserClientGetFrequency, 0, 0);
+
     return [WaveHelper freq2chan:channel];
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
     kern_return_t kernResult;
- 
+    
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
                                                kWiFiUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
     if (kernResult != KERN_SUCCESS) {

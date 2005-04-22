@@ -259,7 +259,7 @@ void addToolbarItem(NSMutableDictionary *theDict,NSString *identifier,NSString *
 
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar {
-    return [NSArray arrayWithObjects:@"Scanning", @"Filter", @"Sounds", @"Driver", @"Sleep", @"GPS", @"Map", @"Traffic", @"WebService", nil];
+    return [NSArray arrayWithObjects:@"Scanning", @"Filter", @"Sounds", @"Driver", @"GPS", @"Map", @"Traffic", @"WebService", nil];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar {

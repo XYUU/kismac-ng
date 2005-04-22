@@ -107,7 +107,7 @@ got:
 }
 
 #pragma mark -
--(void)performScan:(NSTimer)timer {
+-(void)performScan:(NSTimer*)timer {
     [_container scanUpdate:_graphLength];
     
     if(_graphLength < MAX_YIELD_SIZE)
@@ -305,7 +305,7 @@ error:
     return YES;
 }
 
-- (void)doChannelHop:(NSTimer)timer {
+- (void)doChannelHop:(NSTimer*)timer {
     unsigned int i;
     
     for (i = 0; i < [_drivers count]; i++) {

@@ -926,7 +926,7 @@ void USBIntersilJack::_addDevice(void *refCon, io_iterator_t iterator) {
         
         //find the correct device
         for (i=0; i< dDeviceCount; i++) {
-            if ((vendor == devices[i].vendor) || (product == devices[i].device)) break;
+            if ((vendor == devices[i].vendor) && (product == devices[i].device)) break;
         }
         
         if (i == dDeviceCount) {

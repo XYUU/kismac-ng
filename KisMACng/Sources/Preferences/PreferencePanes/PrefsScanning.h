@@ -14,7 +14,6 @@
 {
     IBOutlet NSButton* _dontAskToSave;
     IBOutlet NSButton* _terminateIfClosed;
-    IBOutlet NSButton* _makeSUID;
 }
 
 @end

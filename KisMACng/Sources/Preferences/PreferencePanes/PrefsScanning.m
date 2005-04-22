@@ -31,13 +31,6 @@
 
 
 -(void)updateUI {
-    NSString *s = [NSString stringWithFormat:@"%@/viha_prep.sh", [[NSBundle mainBundle] resourcePath]];
-
-    if ([[[[NSFileManager defaultManager] fileAttributesAtPath:s traverseLink:NO] objectForKey:NSFilePosixPermissions] intValue] & 04000)
-        [_makeSUID setState:NSOnState];
-    else
-        [_makeSUID setState:NSOffState];
-
     [_dontAskToSave setState:[[controller objectForKey:@"dontAskToSave"] boolValue]];    
     [_terminateIfClosed setState:[[controller objectForKey:@"terminateIfClosed"] boolValue]];    
 }
@@ -47,10 +40,6 @@
         [controller setObject:[NSNumber numberWithBool:[_dontAskToSave state]] forKey:@"dontAskToSave"];    
     } else if(sender == _terminateIfClosed) {
         [controller setObject:[NSNumber numberWithBool:[_terminateIfClosed state]] forKey:@"terminateIfClosed"];    
-    } else if (sender == _makeSUID) {
-        if ([sender state]==NSOnState) {
-            if (![WaveHelper runScript:@"suid_enable.sh"]) [sender setState:NSOffState];
-        } else [WaveHelper runScript:@"suid_disable.sh"];
     } else {
         NSLog(@"Error: Invalid sender(%@) in setValueForSender:",sender);
     }
