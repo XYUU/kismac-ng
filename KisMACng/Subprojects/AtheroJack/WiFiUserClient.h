@@ -54,13 +54,15 @@ private:
     UInt32                  _getLinkSpeed();
     UInt32                  _getConnectionState(); 
     UInt32                  _getFrequency(); 
-    IOReturn                _setFrequency(UInt32 frequency);
+    IOReturn                __setFrequency(UInt32 frequency);
     IOReturn                _setMode(UInt32 mode);
     IOReturn                _setSSID(const char *buffer, UInt32 size);
     IOReturn                _setWEPKey(const char *buffer, UInt32 size);
     IOReturn                _setFirmware(const char *buffer, UInt32 size);
     IOReturn                _getScan(const char *buffer, UInt32 size);
-    
+    IOReturn				_startCapture(UInt32 frequency);
+	IOReturn				_stopCapture();
+	
     task_t                  _owningTask;
     void                    *_securityToken;
     UInt32                  _securityType;
@@ -68,4 +70,6 @@ private:
     
     IOCommandGate           *_userCommandGate;
     static IODataQueue      *_packetQueue;
+
+	static IOReturn			_setFrequency(OSObject*, UInt32);
 };

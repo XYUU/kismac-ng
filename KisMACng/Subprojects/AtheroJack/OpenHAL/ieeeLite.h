@@ -1,4 +1,9 @@
 
+#include <sys/types.h>
+
+#ifndef IEEELITE
+#define IEEELITE
+
 #define	IEEE80211_WEP_KEYLEN			5	/* 40bit */
 #define	IEEE80211_WEP_NKID			4	/* number of key ids */
 
@@ -927,3 +932,6 @@ struct ieee80211_regchannel {
 	{ 5220, DMN_WORLD, IEEE80211_CHAN_OFDM },			\
 	{ 5240, DMN_WORLD, IEEE80211_CHAN_OFDM },			\
 }
+
+
+#endif

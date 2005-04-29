@@ -2,9 +2,9 @@
         
         File:			WaveDriverAtheros.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -44,7 +44,11 @@ typedef enum WLUCMethods {
     kWiFiUserClientSetWEPKey,           // kIOUCScalarIStructI, 0, 1
     kWiFiUserClientGetScan,             // kIOUCScalarIStructO, 0, 1
     kWiFiUserClientSetMode,             // kIOUCScalarIScalarO, 1, 0
+    kWiFiUserClientSetFirmware,         // kIOUCScalarIStructI, 0, 1
+    kWiFiUserClientStartCapture,		// kIOUCScalarIScalarO, 1, 0
+    kWiFiUserClientStopCapture,			// kIOUCScalarIScalarO, 0, 0
     kWiFiUserClientLastMethod,
+
 } WLUCMethod;
 
 enum _operationMode {
@@ -244,8 +248,8 @@ enum _operationMode {
     
     kernResult = IOConnectMethodScalarIScalarO(_userClientPort,
                                                kWiFiUserClientSetFrequency, 1, 0, [WaveHelper chan2freq: newChannel]);
-    if (kernResult != KERN_SUCCESS) {
-        //NSLog(@"setChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
+    if (kernResult != true) {
+    //    NSLog(@"setChannel: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
     }
     
@@ -253,30 +257,30 @@ enum _operationMode {
 }
 
 - (bool) startCapture:(unsigned short)newChannel {
-    //kern_return_t kernResult;
+    kern_return_t kernResult;
 
-    /*[self setChannel: newChannel];
+    [self setChannel: newChannel];
      
-    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientEnable, 0, 0);
+    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWiFiUserClientStartCapture, 1, 0, [WaveHelper chan2freq: newChannel]);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"startCapture: IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
-    }*/
+    }
     
     return YES;
 }
 
 -(bool) stopCapture {
-    //kern_return_t kernResult;
+    kern_return_t kernResult;
 
-    /*kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWLUserClientDisable, 0, 0);
+    kernResult = IOConnectMethodScalarIScalarO(_userClientPort, kWiFiUserClientStopCapture, 0, 0);
     if (kernResult != KERN_SUCCESS) {
         NSLog(@"IOConnectMethodScalarIScalarO: 0x%x\n", kernResult);
         return NO;
     }
 
     while (IODataQueueDataAvailable(_packetQueue)) IODataQueueDequeue(_packetQueue, NULL, 0);
-*/
+
     return YES;
 }
 
@@ -313,15 +317,8 @@ struct _Prism_HEADER {
                 return NULL;
             }
         }
-        
+
         kernResult = IODataQueueDequeue(_packetQueue, tempframe, &frameSize);
-        if (kernResult != KERN_SUCCESS) {
-            NSLog(@"nextFrame: IODataQueueDequeue: 0x%x\n", kernResult);
-            return NULL;
-        }
-        
-        
-        memset(frame, 0, sizeof(frame));
         memcpy(frame, tempframe, frameSize >= sizeof(WLPrismHeader) + 30 ? sizeof(WLPrismHeader) + 30 : frameSize);
         f = (WLFrame*)frame;
             

@@ -2,9 +2,9 @@
         
         File:			AtheroJack.cpp
         Program:		AtheroJack
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		AtheroJack is a free driver monitor mode driver for Atheros cards.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	AtheroJack is a free driver monitor mode driver for Atheros cards.
                 
         This file is part of AtheroJack.
 
@@ -41,8 +41,8 @@ const OSString* AtheroJack::newModelString() const {
 #define ROUNDUP(x, inc) ( (x) + (inc) - ((x)%(inc)) )
 
 AtheroJack::opmodeSettings AtheroJack::_opmodeSettings[] = {
-    { _operationModeStation, HAL_M_STA,     (HAL_RX_FILTER)(HAL_RX_FILTER_UCAST | HAL_RX_FILTER_BCAST | HAL_RX_FILTER_BEACON) },
-    { _operationModeMonitor, HAL_M_MONITOR, (HAL_RX_FILTER)(HAL_RX_FILTER_UCAST | HAL_RX_FILTER_BCAST | HAL_RX_FILTER_MCAST | HAL_RX_FILTER_PROM | HAL_RX_FILTER_PROBEREQ) },
+    { _operationModeStation, HAL_M_STA,     (HAL_RX_FILTER)(HAL_RX_FILTER_UCAST | HAL_RX_FILTER_BCAST | HAL_RX_FILTER_BEACON | HAL_RX_FILTER_PHYERR) },
+    { _operationModeMonitor, HAL_M_MONITOR,	(HAL_RX_FILTER)(HAL_RX_FILTER_UCAST | HAL_RX_FILTER_BCAST | HAL_RX_FILTER_MCAST | HAL_RX_FILTER_PROM | HAL_RX_FILTER_PROBEREQ ) },
     { _operationModeInvalid, HAL_M_STA,     (HAL_RX_FILTER)(0) }
 };
 
@@ -65,11 +65,11 @@ bool AtheroJack::startHardware() {
     WLEnter();
   
     _activeOpMode = 1;
-    _rxBufferSize = 2048;//ROUNDUP(IEEE80211_MAX_LEN, CACHE_ALIGNMENT);
+    _rxBufferSize = MAX_FRAGMENT_SIZE;//ROUNDUP(IEEE80211_MAX_LEN, CACHE_ALIGNMENT);
 	WLLogDebug("Buffer size is: %d", _rxBufferSize);
-    _rxListTail = NULL;
-    _activeChannelIndex = 0;
+    _rxListHead = _rxListTail = NULL;
     _headRx = _tailRx = 0;
+    _activeChannelIndex = 0;
     _intrMask = (HAL_INT)0;
     _hal = new OpenHAL5212;
 	
@@ -86,12 +86,12 @@ bool AtheroJack::startHardware() {
 }
 
 bool AtheroJack::initHardware() {
-    HAL_STATUS status;
+    HAL_STATUS status = HAL_OK;
     int att_cnt = 0;
     bool ret;
 	WLEnter();
     
-    do {
+	do {
         ret = _hal->ath_hal_attach(_nub->configRead16(kIOPCIConfigDeviceID),
                                  NULL, 0, (void*)_ioBase,
                                  &status);
@@ -102,12 +102,7 @@ bool AtheroJack::initHardware() {
         WLLogCrit("Unable to attach to _hal: status %u", status);
         WLReturn(false);
     }
-        
-    if (_hal->ah_abi != HAL_ABI_VERSION) {
-        WLLogCrit("_hal ABI mismatch; driver version 0x%X, _hal version 0x%X", HAL_ABI_VERSION, _hal->ah_abi);
-        WLReturn(false);
-    }
-    
+	
     _setLedState(HAL_LED_INIT);
     _updateMACAddress();
     
@@ -136,30 +131,24 @@ bool AtheroJack::initHardware() {
         WLReturn(false);
     }
 
-    _hal->nic_resetKeyCacheEntry(0);
-    _hal->nic_resetKeyCacheEntry(1);
-    _hal->nic_resetKeyCacheEntry(2);
-    _hal->nic_resetKeyCacheEntry(3);
-    
-    //_chans[_activeChannelIndex].channelFlags = CHANNEL_G;
-    setFrequency(2412);
+	setFrequency(2412);
 	//setFrequency(5240);
 	
-
 	WLLogDebug("Current radio freq %d modulation type: 0x%x", _chans[_activeChannelIndex].channel, _chans[_activeChannelIndex].channelFlags);
     WLLogDebug("Supported Modulations: 11a %s, 11b %s, 11g %s, TURBO %s", hasA ? "YES" : "NO",  hasB ? "YES" : "NO", hasG ? "YES" : "NO", hasT ? "YES" : "NO");
 	
     WLExit();
+	
     return true;
 };
 
 bool AtheroJack::freeHardware() {
     WLEnter();
 
-    if (!_disableRx()) WLReturn(false);
-    IOSleep(100);
-    
     if (_hal) {
+		if (_enabledForNetif && !_disableRx()) WLReturn(false);
+		IOSleep(100);
+		
 		(_hal->nic_detach)();
 		_hal->release();
 		_hal = NULL;
@@ -172,28 +161,37 @@ bool AtheroJack::freeHardware() {
 bool AtheroJack::enableHardware() {
     WLEnter();
     
-    _enabledForNetif = true;
+	_enabledForNetif = true;
     if (!_reset()) WLReturn(false);
     _setLedState(HAL_LED_RUN);
     
-    WLExit();
-    return true;
+    WLReturn(true);
 }
 
 bool AtheroJack::disableHardware() {
     //disable the card
     WLEnter();
-    
-    if (!_disableRx()) WLReturn(false);
+    	
+	if (!_disableRx()) WLReturn(false);
     _setLedState(HAL_LED_INIT);
     
-    WLExit();
-    return true;
+    WLReturn(true);
 }
 
 bool AtheroJack::getReadyForSleep() {
     WLEnter();
     
+	_disableRx();
+	
+    WLExit();
+    return true;
+}
+
+bool AtheroJack::wakeUp() {
+    WLEnter();
+    
+	_reset();
+	
     WLExit();
     return true;
 }
@@ -209,11 +207,14 @@ bool AtheroJack::handleInterrupt() {
         return false;
     }
     
-	WLLogErr("Interrupt 0x%x", ints);
+	//WLLogErr("Interrupt 0x%x", ints);
     
     if (ints & HAL_INT_FATAL) {
         WLLogCrit("Recieved Fatal interrupt! Resetting");
         _reset();
+	} else if (ints & HAL_INT_RXORN) {
+		WLLogCrit("Recieved FIFI overrun interrupt! Resetting");
+        //_reset();
     } else if (ints & HAL_INT_RX) {
         HAL_STATUS status;
         UInt32 index;
@@ -221,8 +222,9 @@ bool AtheroJack::handleInterrupt() {
         WLFrame *f = (WLFrame*)packet;
             
         while(true) {
-            WLLogCrit("Packet!!!!");
             index = _headRx % ATH_NUM_RX_DESCS;
+			UInt8 *p = mtod(_rxData[index], UInt8*);
+
             if ((_tailRx % ATH_NUM_RX_DESCS) == index) {
                 WLLogCrit("RX overrun!!!!");
                 break;
@@ -232,18 +234,22 @@ bool AtheroJack::handleInterrupt() {
                 break;
             }
             
-            status = (_hal->nic_procRxDesc)((ath_desc*)&_controlBlock.p->d[index], _rxDataAddress[index],
+            status = (_hal->nic_procRxDesc)((ath_desc*)&_controlBlock.p->d[index], (_controlBlock.dmaAddress + (index * sizeof(ath_desc))),
                                     (ath_desc*)&_controlBlock.p->d[(_headRx + 1) % ATH_NUM_RX_DESCS]);
             if (status != HAL_OK) {
 				break;
             }
 			
+			//WLLogCrit("Packet!!!!");
+            //WLLogCrit("Packet 0x%.2x%.2x%.2x%.2x 0x%.2x%.2x%.2x%.2x 0x%.2x%.2x%.2x%.2x 0x%.2x%.2x%.2x%.2x", p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12], p[13], p[14], p[15]);
+			
 			if (_rxListHead->ds_rxstat.rs_status != 0) {
                 //WLLogDebug("RX Error! status:0x%x phy_error:%d datalen:%d", _rxListHead->ds_rxstat.rs_status, _rxListHead->ds_rxstat.rs_phyerr, _rxListHead->ds_rxstat.rs_datalen);
-				WLLogCrit("Phyerror!!!!");
+				//WLLogCrit("Phyerror!!!!");
                 goto next_packet;
             }
             
+			bzero(f, sizeof(WLFrame));
             f->ph.status  = _rxListHead->ds_rxstat.rs_status;
             f->ph.channel = _hal->ieee80211_mhz2ieee(_chans[_activeChannelIndex].channel, _chans[_activeChannelIndex].channelFlags);
             f->ph.signal  = _rxListHead->ds_rxstat.rs_rssi;
@@ -251,19 +257,19 @@ bool AtheroJack::handleInterrupt() {
             f->ph.len     = _rxListHead->ds_rxstat.rs_datalen;
 
             if (f->ph.len > IEEE80211_MAX_LEN) {
-                WLLogCrit("Received an oversized frame!");
+                WLLogCrit("Received an oversized frame! size: %u", f->ph.len);
                 goto next_packet;
             }
             
-            memcpy(&f->ieee, mtod(_rxData[index], void*), f->ph.len);
-
+            memcpy(packet + sizeof(_Prism_HEADER), p, f->ph.len);
+			
             if (!_packetQueue) {
                 WLLogCrit("No packet queue present!");
                 break;
             }
             _packetQueue->enqueue(packet, f->ph.len + sizeof(_Prism_HEADER));
             
-            WLLogDebug("Got a frame size: %d", f->ph.len);
+            //WLLogDebug("Got a frame size: %d", f->ph.len);
             
 next_packet:
             _fillFragment(index);
@@ -293,7 +299,8 @@ UInt32 AtheroJack::getFrequency() {
 bool AtheroJack::setFrequency(UInt32 freq) {
     unsigned int i;
     UInt32 flags;
-    
+    HAL_STATUS status;
+	
     switch(_activeIEEEMode) {
         case _modulationMode80211a:
             flags = CHANNEL_A;
@@ -320,8 +327,11 @@ bool AtheroJack::setFrequency(UInt32 freq) {
     
     _activeChannelIndex = i;
     
-    if (_enabledForNetif) _reset();
-    return true;
+	WLLogDebug("Current radio freq %d modulation type: 0x%x", _chans[_activeChannelIndex].channel, _chans[_activeChannelIndex].channelFlags);
+
+    if (_enabledForNetif) { return _quickReset(); }
+	
+	return true;
 }
 
 bool AtheroJack::setFirmware(UInt32 length, UInt8* firmware)  {
@@ -385,7 +395,8 @@ bool AtheroJack::_fillFragment(int index) {
         return false;
     }
     
-    count = _mbufCursor->getPhysicalSegmentsWithCoalesce(_rxData[index], &vector);
+	bzero(mtod(_rxData[index], void*), _rxBufferSize);
+	count = _mbufCursor->getPhysicalSegmentsWithCoalesce(_rxData[index], &vector, 1);
     if (count == 0) {
         WLLogEmerg("Could not allocated a nice mbuf!");
         return false;
@@ -471,15 +482,44 @@ bool AtheroJack::_reset() {
     if (!_allocQueues()) WLReturn(false);
     
     (_hal->nic_setInterrupts)((HAL_INT)_intrMask);
+	
     if (!(_hal->nic_reset)(_opmodeSettings[_activeOpMode].halmode, &_chans[_activeChannelIndex], AH_TRUE, &status)) {
         WLLogEmerg("Reset failed status %d", status);
         WLReturn(false);
     }
 
+    _hal->nic_resetKeyCacheEntry(0);
+    _hal->nic_resetKeyCacheEntry(1);
+    _hal->nic_resetKeyCacheEntry(2);
+    _hal->nic_resetKeyCacheEntry(3);
+
     if (_enabledForNetif) {
         _enableRx();
     }
     
+    WLReturn(true);
+}
+
+bool AtheroJack::_quickReset() {
+    HAL_STATUS status;
+    WLEnter();
+
+	_hal->nic_setInterrupts(0);
+	_hal->nic_setRxFilter(0);
+	_hal->nic_stopPcuReceive();
+	_hal->nic_stopDmaReceive();
+	IODelay(3000);    
+
+	if (!_hal->nic_reset(_opmodeSettings[_activeOpMode].halmode, &_chans[_activeChannelIndex], AH_TRUE, &status)) {
+		WLLogEmerg("Reset failed status %d", status);
+		WLReturn(false);
+	}
+	
+	if (!_enableRx()) {
+		WLLogEmerg("Could not reenable RX");
+		WLReturn(false);
+	}
+
     WLReturn(true);
 }
 
@@ -502,7 +542,7 @@ bool AtheroJack::_recalibration() {
          * to load new gain values.
          */
         WLLogEmerg("Need to change rfGain");
-        _reset();
+        _quickReset();
     }
     if (!(_hal->nic_perCalibration)(&_chans[_activeChannelIndex])) {
         WLLogAlert("calibration of channel %u failed", _chans[_activeChannelIndex].channel);
@@ -542,7 +582,7 @@ bool AtheroJack::_enableRx() {
     (_hal->nic_setInterrupts)(_intrMask);
     
     // Enable the RX process
-    (_hal->nic_setRxDP)(_controlBlock.dmaAddress + (_headRx * sizeof(ath_desc)));
+    (_hal->nic_setRxDP)(_controlBlock.dmaAddress + ((_headRx % ATH_NUM_RX_DESCS) * sizeof(ath_desc)));
     (_hal->nic_enableReceive)();
     (_hal->nic_setRxFilter)(_opmodeSettings[_activeOpMode].filter);
     (_hal->nic_startPcuReceive)();

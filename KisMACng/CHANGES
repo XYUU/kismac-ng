@@ -23,6 +23,10 @@ SSIDs are now interpreted as UTF8
 windows fade out
 applied robin darroches patches for gpscontroller
 reinjection is working again
+usbprism does not need password if not needed for unloading
+suid option removed
+insomnia removed
+atheros support updated
 
 06-29-04 mick   speeded up SpinChannelView by using cached bitmaps (very cool!)
                 speeded up network view

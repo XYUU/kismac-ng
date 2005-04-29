@@ -1,5 +1,65 @@
 // !$*UTF8*$!
 {
+	002311340822BCC50026DA9A = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackCard.cpp: 550";
+		rLen = 0;
+		rLoc = 15903;
+		rType = 0;
+		vrLen = 1234;
+		vrLoc = 15236;
+	};
+	002311360822BCC50026DA9A = {
+		fRef = 00F0FDB106AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackCard.cpp: 550";
+		rLen = 0;
+		rLoc = 15903;
+		rType = 0;
+		vrLen = 1234;
+		vrLoc = 15236;
+	};
+	002311490822BD930026DA9A = {
+		fRef = 00F0FDB606AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackDriverInterface.h: 31";
+		rLen = 0;
+		rLoc = 1122;
+		rType = 0;
+		vrLen = 1332;
+		vrLoc = 698;
+	};
+	0023114B0822BD930026DA9A = {
+		fRef = 00F0FDB606AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "MACJackDriverInterface.h: 31";
+		rLen = 0;
+		rLoc = 1122;
+		rType = 0;
+		vrLen = 1332;
+		vrLoc = 698;
+	};
+	002311620822C2270026DA9A = {
+		fRef = 00F0FDB406AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "IOReturn MACJackUserClient::setChannel(OSObject* o, UInt16 channel) {\n    WLLogInfo(\"MACJackUserClient::setChannel()\\n\");\n    return ((MACJackUserClient*)o)->_wlCard->setChannel(channel);\n}\n";
+		rLen = 190;
+		rLoc = 7796;
+		rType = 0;
+		vrLen = 1294;
+		vrLoc = 6858;
+	};
+	002311630822C2270026DA9A = {
+		fRef = 00F0FDB406AC59A9006D4119;
+		isa = PBXTextBookmark;
+		name = "IOReturn MACJackUserClient::startCapture(OSObject* o, UInt16 channel) {\n    WLLogInfo(\"MACJackUserClient::startCapture(%d)\\n\", channel);\n    ((MACJackUserClient*)o)->_provider->getWorkLoop()->enableAllInterrupts();\n    return ((MACJackUserClient*)o)->_wlCard->startCapture(_packetQueue, channel);\n}\n";
+		rLen = 299;
+		rLoc = 8192;
+		rType = 0;
+		vrLen = 1284;
+		vrLoc = 7360;
+	};
 	005071BE074B428900DF5924 = {
 		fRef = 00F0FDB106AC59A9006D4119;
 		isa = PBXTextBookmark;
@@ -72,26 +132,6 @@
 		wantsCodeCompletionTabCompletes = 1;
 		wantsIndex = 0;
 	};
-	00D0F88C0798413E0018BE43 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = _TX_RETRYSTRAT_SET;
-		rLen = 0;
-		rLoc = 8050;
-		rType = 0;
-		vrLen = 1407;
-		vrLoc = 7425;
-	};
-	00D0FA5207999A100018BE43 = {
-		fRef = 00F0FDB106AC59A9006D4119;
-		isa = PBXTextBookmark;
-		name = "MACJackCard.cpp: 550";
-		rLen = 0;
-		rLoc = 15903;
-		rType = 0;
-		vrLen = 1140;
-		vrLoc = 15331;
-	};
 	00F0FDAF06AC59A9006D4119 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {980, 797}}";
@@ -111,7 +151,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {980, 14139}}";
 			sepNavSelRange = "{15903, 0}";
-			sepNavVisRect = "{{0, 7495}, {980, 480}}";
+			sepNavVisRect = "{{0, 7476}, {980, 480}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
@@ -125,15 +165,15 @@
 	00F0FDB306AC59A9006D4119 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {980, 3080}}";
-			sepNavSelRange = "{1259, 0}";
-			sepNavVisRect = "{{0, 257}, {980, 480}}";
+			sepNavSelRange = "{142, 0}";
+			sepNavVisRect = "{{0, 0}, {980, 480}}";
 		};
 	};
 	00F0FDB406AC59A9006D4119 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 4563}}";
-			sepNavSelRange = "{2297, 0}";
-			sepNavVisRect = "{{0, 663}, {1057, 565}}";
+			sepNavIntBoundsRect = "{{0, 0}, {980, 4563}}";
+			sepNavSelRange = "{8192, 299}";
+			sepNavVisRect = "{{0, 3803}, {980, 480}}";
 		};
 	};
 	00F0FDB506AC59A9006D4119 = {
@@ -145,9 +185,9 @@
 	};
 	00F0FDB606AC59A9006D4119 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 769}}";
-			sepNavSelRange = "{1284, 0}";
-			sepNavVisRect = "{{0, 204}, {1057, 565}}";
+			sepNavIntBoundsRect = "{{0, 0}, {980, 769}}";
+			sepNavSelRange = "{1122, 0}";
+			sepNavVisRect = "{{0, 278}, {980, 480}}";
 		};
 	};
 	00F0FDB706AC59A9006D4119 = {
@@ -159,9 +199,9 @@
 	};
 	00F0FDB806AC59A9006D4119 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 1273}}";
-			sepNavSelRange = "{1181, 31}";
-			sepNavVisRect = "{{0, 163}, {1057, 565}}";
+			sepNavIntBoundsRect = "{{0, 0}, {980, 1273}}";
+			sepNavSelRange = "{2349, 51}";
+			sepNavVisRect = "{{0, 793}, {980, 480}}";
 		};
 	};
 	089C1669FE841209C02AAC07 = {
@@ -234,7 +274,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 127418320;
+			PBXPerProjectTemplateStateSaveDate = 136494234;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -641,16 +681,20 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 127418320;
+			PBXWorkspaceStateSaveDate = 136494234;
 		};
 		perUserProjectItems = {
+			002311340822BCC50026DA9A = 002311340822BCC50026DA9A;
+			002311360822BCC50026DA9A = 002311360822BCC50026DA9A;
+			002311490822BD930026DA9A = 002311490822BD930026DA9A;
+			0023114B0822BD930026DA9A = 0023114B0822BD930026DA9A;
+			002311620822C2270026DA9A = 002311620822C2270026DA9A;
+			002311630822C2270026DA9A = 002311630822C2270026DA9A;
 			005071BE074B428900DF5924 = 005071BE074B428900DF5924;
 			005071D8074B439400DF5924 = 005071D8074B439400DF5924;
 			005071D9074B439400DF5924 = 005071D9074B439400DF5924;
 			005071DB074B439400DF5924 = 005071DB074B439400DF5924;
 			005071DC074B439400DF5924 = 005071DC074B439400DF5924;
-			00D0F88C0798413E0018BE43 = 00D0F88C0798413E0018BE43;
-			00D0FA5207999A100018BE43 = 00D0FA5207999A100018BE43;
 		};
 		sourceControlManager = 0073144706AC5956007FD51E;
 		userBuildSettings = {

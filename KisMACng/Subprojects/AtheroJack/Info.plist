@@ -28,9 +28,6 @@
                 <array>
                         <string>pci168c,ff13</string>
                         <string>pci168c,13</string>
-                        <string>pci168c,12</string>
-                        <string>pci168c,11</string>
-                        <string>pci168c,10</string>
                 </array>
                 <key>IOProviderClass</key>
                 <string>IOPCIDevice</string>

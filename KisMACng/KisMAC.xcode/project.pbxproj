@@ -173,6 +173,26 @@
 			settings = {
 			};
 		};
+		00230AC8081FDBC30026DA9A = {
+			isa = PBXFileReference;
+			lastKnownFileType = "wrapper.kernel-extension";
+			name = AtheroJack.kext;
+			path = Subprojects/files/AtheroJack.kext;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00230AC9081FDBC30026DA9A = {
+			fileRef = 00230AC8081FDBC30026DA9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0023118D0822CC5C0026DA9A = {
+			fileRef = 00230AC8081FDBC30026DA9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		002E7DF506A86C6F00C9D931 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -3065,6 +3085,7 @@
 		};
 		0073142C06AC4B3C007FD51E = {
 			children = (
+				00230AC8081FDBC30026DA9A,
 				00F0FE8006AC5F72006D4119,
 				00F0FE2D06AC5B87006D4119,
 				0073142D06AC4B66007FD51E,
@@ -4458,6 +4479,7 @@
 			files = (
 				008ACFE207C397D800A76ADA,
 				008ACFE307C397D800A76ADA,
+				00230AC9081FDBC30026DA9A,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6103,6 +6125,7 @@
 		8D1107290486CEB800E47090 = {
 			buildActionMask = 2147483647;
 			files = (
+				0023118D0822CC5C0026DA9A,
 				0035335606A5DD5700AB4577,
 				0035335706A5DD5700AB4577,
 				0035335806A5DD5700AB4577,

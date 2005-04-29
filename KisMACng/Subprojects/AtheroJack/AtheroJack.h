@@ -2,9 +2,9 @@
         
         File:			AtheroJack.h
         Program:		AtheroJack
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		AtheroJack is a free driver monitor mode driver for Atheros cards.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	AtheroJack is a free driver monitor mode driver for Atheros cards.
                 
         This file is part of AtheroJack.
 
@@ -26,8 +26,8 @@
 #include "OpenHAL/OpenHAL5212.h"
 
 #define IEEE80211_CHAN_MAX      255
-#define ATH_NUM_RX_DESCS 40
-#define ATH_NUM_TX_DESCS 60
+#define ATH_NUM_RX_DESCS 32
+#define ATH_NUM_TX_DESCS 32
 #define recalibrationTimeout 30000 //in milli seconds
 #define scanTimeout 250 //in milli seconds
 #define watchdogTimeout 1 //in milli seconds
@@ -56,6 +56,7 @@ public:
     virtual bool disableHardware();
     virtual bool handleEjectionHardware();
     virtual bool getReadyForSleep();
+    virtual bool wakeUp();
 
     virtual bool handleInterrupt();
     virtual bool handleTimer();
@@ -66,6 +67,7 @@ public:
 	
 protected:
     virtual bool _reset();
+    virtual bool _quickReset();
     
     virtual bool _fillFragment(int index);
     virtual bool _allocPacketForRxDesc(int index);

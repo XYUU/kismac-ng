@@ -355,15 +355,10 @@ IOReturn WiFiController::enable(IONetworkInterface * /*netif*/) {
 // A request from our interface client to disable the adapter.
 
 IOReturn WiFiController::disable(IONetworkInterface * netif) {
+    if (!_enabledForNetif) return kIOReturnSuccess;
     WLEnter();
     
     _enabledForNetif = false;
-
-    if (netif != _netif) {
-        WLLogErr("Wrong network interface!");
-        return kIOReturnInvalid;
-    }
-    
     disableAdapter();
 
     WLExit();
@@ -577,6 +572,7 @@ bool WiFiController::freeHardware() { return false; }
 bool WiFiController::enableHardware() { return false; }
 bool WiFiController::disableHardware() { return false; }
 bool WiFiController::getReadyForSleep() { return false; }
+bool WiFiController::wakeUp() { return false; }
 bool WiFiController::handleEjectionHardware() { return false; }
 bool WiFiController::setMediumHardware(mediumType_t medium) { return medium == MEDIUM_TYPE_AUTO; }
 

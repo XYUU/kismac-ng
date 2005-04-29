@@ -250,7 +250,7 @@ void WiFiController::setPowerStateOn() {
 
     IOSleep(2);
     _cardGone = false;
-    initHardware();
+    wakeUp();
     
     // Since the driver returned a non-acknowledgement when called at
     // setPowerState(), it sends an ACK to the policy-maker here to

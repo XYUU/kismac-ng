@@ -9,8 +9,6 @@
 
 #define BYTE_ORDER BIG_ENDIAN
 
-#include "ah_osdep.h"
-#include "ieeeLite.h"
 #include "OpenHALDefinitions.h"
 #include <IOKit/IOService.h>
 #include <IOKit/IOLib.h>
@@ -18,10 +16,17 @@
 #define AR5K_MAX_GPIO		10
 #define AR5K_MAX_RF_BANKS	8
 
+typedef void* HAL_SOFTC;
+typedef int HAL_BUS_TAG;
+typedef void* HAL_BUS_HANDLE;
+typedef u_int32_t HAL_BUS_ADDR;			/* XXX architecture dependent */
+
 class OpenHAL : public OSObject {
 	OSDeclareDefaultStructors(OpenHAL);
 	
 public:
+    virtual bool init();
+
 	virtual bool ath_hal_attach(u_int16_t device, void *sc, HAL_BUS_TAG st, HAL_BUS_HANDLE sh, HAL_STATUS *status);
 	virtual u_int16_t ath_hal_computetxtime(const HAL_RATE_TABLE *rates, u_int32_t frame_length, u_int16_t rate_index, HAL_BOOL short_preamble);
 	virtual HAL_BOOL ath_hal_init_channels(HAL_CHANNEL *channels, u_int max_channels, u_int *channels_size, HAL_CTRY_CODE country, u_int16_t mode, HAL_BOOL outdoor, HAL_BOOL extended);

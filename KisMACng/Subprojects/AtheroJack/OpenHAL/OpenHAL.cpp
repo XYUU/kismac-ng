@@ -37,6 +37,11 @@ static const struct ieee80211_regdomainmap ieee80211_r_map[] = IEEE80211_REGDOMA
 
 #pragma mark -
 
+bool OpenHAL::init() {
+	ah_rf_banks = NULL;
+	return true;
+}
+
 //implementation
 bool OpenHAL::ath_hal_attach(u_int16_t device, void *sc, HAL_BUS_TAG st, HAL_BUS_HANDLE sh, HAL_STATUS *status)
 {
@@ -464,10 +469,10 @@ int OpenHAL::ar5k_check_eeprom() {
         if (addr >= AR5K_EEPROM_INFO_BASE) chksum ^= data[addr];
     }
 
-    for (addr = 0; addr < AR5K_EEPROM_INFO_BASE + AR5K_EEPROM_INFO_MAX; addr+=16) {
+    /*for (addr = 0; addr < AR5K_EEPROM_INFO_BASE + AR5K_EEPROM_INFO_MAX; addr+=16) {
         IOLog("0x%04x %04x%04x%04x%04x %04x%04x%04x%04x %04x%04x%04x%04x %04x%04x%04x%04x\n", addr, data[addr], data[addr + 1], data[addr + 2], data[addr + 3], data[addr + 4], data[addr + 5], data[addr + 6], data[addr + 7], data[addr + 8], data[addr + 9], data[addr + 10], data[addr + 11], data[addr + 12], data[addr + 13], data[addr + 14], data[addr + 15]);
 		IOSleep(100);
-    }
+    }*/
 
 
     if (chksum != 0xffff) {

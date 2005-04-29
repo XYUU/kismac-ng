@@ -46,7 +46,7 @@ bool WiFiControllerPCI::pciConfigInit(IOPCIDevice * provider) {
 
     reg16 &= ~kIOPCICommandIOSpace;  // disable I/O space
 
-    provider->configWrite16(kIOPCIConfigCommand, reg16);
+    //provider->configWrite16(kIOPCIConfigCommand, reg16);
 
     // To allow the device to use the PCI Memory Write and Invalidate
     // command, it must know the correct cache line size. The only
@@ -56,8 +56,6 @@ bool WiFiControllerPCI::pciConfigInit(IOPCIDevice * provider) {
     // to the platform's firmware.
     // provider->configWrite8( kIOPCIConfigCacheLineSize, 8 );
 
-	WLLogDebug("Cache line size: %u", provider->configRead8( kIOPCIConfigCacheLineSize ));
-	
     // Locate the PM register block of this device in its PCI config space.
 
     /*provider->findPCICapability(kIOPCIPowerManagementCapability,
@@ -111,7 +109,7 @@ bool WiFiControllerPCI::startProvider(IOService *provider) {
         // Setup our PCI config space.
         if (pciConfigInit(_nub) == false) break;
 
-    	_mbufCursor = IOMbufNaturalMemoryCursor::withSpecification(2688, 1);
+    	_mbufCursor = IOMbufNaturalMemoryCursor::withSpecification(MAX_FRAGMENT_SIZE, 1);
         if (!_mbufCursor) break;
         
         ret = true;

@@ -70,6 +70,7 @@ public:
     virtual bool disableHardware();
     virtual bool handleEjectionHardware();
     virtual bool getReadyForSleep();
+    virtual bool wakeUp();
     virtual bool handleInterrupt();
     virtual bool handleTimer();
     virtual bool setMediumHardware(mediumType_t medium);

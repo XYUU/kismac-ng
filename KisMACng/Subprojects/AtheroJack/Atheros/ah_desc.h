@@ -154,8 +154,6 @@ struct ath_desc {
 		struct ath_tx_status tx;/* xmit status */
 		struct ath_rx_status rx;/* recv status */
 	} ds_us;
-        
-	char _alignment[21];
 } __attribute__((__packed__));
 
 #define	ds_txstat	ds_us.tx

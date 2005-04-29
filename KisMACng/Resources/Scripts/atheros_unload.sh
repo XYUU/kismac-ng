@@ -4,11 +4,7 @@ LOCPATH=`/usr/bin/dirname "$0"`
 
 /bin/sleep 2
 
-"/sbin/kextunload" "$LOCPATH/AtherosWifi.kext"
-/bin/sleep 2
-"/sbin/kextunload" "$LOCPATH/IO80211Family.kext"
-/bin/sleep 2
-"/sbin/kextunload" "$LOCPATH/AtherosHAL.kext"
+"/sbin/kextunload" "$LOCPATH/AtheroJack.kext"
 
 if [ -e "/System/Library/Extensions/OMI_80211g.kext" ]; then
     /bin/sleep 2

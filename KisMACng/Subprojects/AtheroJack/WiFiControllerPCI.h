@@ -27,7 +27,7 @@
 #include <IOKit/pci/IOPCIDevice.h>
 
 #define CACHE_ALIGNMENT				32
-#define MAX_FRAGMENT_SIZE	                2400
+#define MAX_FRAGMENT_SIZE	        1600
 
 /*
  * Type: pageBlock_t

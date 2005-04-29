@@ -1,12 +1,72 @@
 // !$*UTF8*$!
 {
+	0023117C0822CA1B0026DA9A = {
+		fRef = 006E2A4707FB1C36008BA14E;
+		isa = PBXTextBookmark;
+		name = "ieeeLite.h: 3";
+		rLen = 0;
+		rLoc = 24;
+		rType = 0;
+		vrLen = 469;
+		vrLoc = 0;
+	};
+	0023119A0822CCF30026DA9A = {
+		fRef = 005DA62206C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiUserInterface.h: 25";
+		rLen = 0;
+		rLoc = 992;
+		rType = 0;
+		vrLen = 2112;
+		vrLoc = 0;
+	};
+	0023119B0822CCF30026DA9A = {
+		fRef = 005DA61E06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiLogger.h: DEBUG";
+		rLen = 0;
+		rLoc = 1109;
+		rType = 0;
+		vrLen = 1383;
+		vrLoc = 1082;
+	};
+	0023119C0822CCF30026DA9A = {
+		fRef = 005DA62206C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiUserInterface.h: 25";
+		rLen = 0;
+		rLoc = 992;
+		rType = 0;
+		vrLen = 2112;
+		vrLoc = 0;
+	};
+	0023119D0822CCF30026DA9A = {
+		fRef = 005DA61E06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiLogger.h: 35";
+		rLen = 0;
+		rLoc = 1109;
+		rType = 0;
+		vrLen = 1385;
+		vrLoc = 1082;
+	};
+	0023119E0822CCF30026DA9A = {
+		fRef = 006E2A4707FB1C36008BA14E;
+		isa = PBXTextBookmark;
+		name = "ieeeLite.h: 3";
+		rLen = 0;
+		rLoc = 24;
+		rType = 0;
+		vrLen = 469;
+		vrLoc = 0;
+	};
 	005DA60206C8D56900ACF77D = {
 		fallbackIsa = XCSourceControlManager;
-		isSCMEnabled = 0;
+		isSCMEnabled = 1;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
 		};
-		scmType = "";
+		scmType = scm.subversion;
 	};
 	005DA60306C8D56900ACF77D = {
 		indexTemplatePath = "";
@@ -24,136 +84,101 @@
 	};
 	005DA61A06C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 8637}}";
-			sepNavSelRange = "{18469, 84}";
-			sepNavVisRect = "{{0, 7933}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 8581}}";
+			sepNavSelRange = "{10912, 0}";
+			sepNavVisRect = "{{0, 4648}, {1001, 686}}";
 		};
 	};
 	005DA61B06C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 2337}}";
-			sepNavSelRange = "{4023, 73}";
-			sepNavVisRect = "{{0, 1204}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 2351}}";
+			sepNavSelRange = "{2426, 0}";
+			sepNavVisRect = "{{0, 658}, {1001, 686}}";
 		};
 	};
 	005DA61C06C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 3513}}";
-			sepNavSelRange = "{2367, 0}";
-			sepNavVisRect = "{{0, 458}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 3485}}";
+			sepNavSelRange = "{3859, 0}";
+			sepNavVisRect = "{{0, 1232}, {1001, 686}}";
 		};
 	};
 	005DA61D06C8D7BF00ACF77D = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1001, 979}}";
-			sepNavSelRange = "{1869, 0}";
-			sepNavVisRect = "{{0, 276}, {1001, 690}}";
+			sepNavSelRange = "{1122, 0}";
+			sepNavVisRect = "{{0, 280}, {1001, 686}}";
 		};
 	};
 	005DA61E06C8D7BF00ACF77D = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1001, 1217}}";
-			sepNavSelRange = "{2059, 10}";
-			sepNavVisRect = "{{0, 446}, {1001, 690}}";
+			sepNavSelRange = "{1217, 0}";
+			sepNavVisRect = "{{0, 448}, {1001, 686}}";
 		};
 	};
 	005DA61F06C8D7BF00ACF77D = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1001, 3723}}";
-			sepNavSelRange = "{392, 0}";
-			sepNavVisRect = "{{0, 0}, {1001, 690}}";
+			sepNavSelRange = "{8796, 9}";
+			sepNavVisRect = "{{0, 3010}, {1001, 686}}";
 		};
 	};
 	005DA62006C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 4577}}";
-			sepNavSelRange = "{5305, 0}";
-			sepNavVisRect = "{{0, 2674}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1116, 4983}}";
+			sepNavSelRange = "{8959, 73}";
+			sepNavVisRect = "{{0, 4691}, {1116, 237}}";
 		};
 	};
 	005DA62106C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 1007}}";
-			sepNavSelRange = "{1847, 0}";
-			sepNavVisRect = "{{0, 280}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 1063}}";
+			sepNavSelRange = "{2185, 0}";
+			sepNavVisRect = "{{0, 364}, {1001, 686}}";
 		};
 	};
 	005DA62206C8D7BF00ACF77D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 1819}}";
-			sepNavSelRange = "{2735, 0}";
-			sepNavVisRect = "{{0, 682}, {1001, 690}}";
-		};
-	};
-	005DA68506C8DC8F00ACF77D = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 2449}}";
-			sepNavSelRange = "{6602, 22}";
-			sepNavVisRect = "{{0, 1652}, {1001, 690}}";
-		};
-	};
-	005DA68906C8DC8F00ACF77D = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 1050}}";
-			sepNavSelRange = "{1364, 13}";
-			sepNavVisRect = "{{0, 360}, {1001, 690}}";
-		};
-	};
-	005DA68B06C8DC8F00ACF77D = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 2281}}";
-			sepNavSelRange = "{2673, 0}";
-			sepNavVisRect = "{{0, 640}, {1001, 690}}";
-		};
-	};
-	005DA68C06C8DC8F00ACF77D = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 690}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1001, 690}}";
-		};
-	};
-	005DA68D06C8DC8F00ACF77D = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 7601}}";
-			sepNavSelRange = "{2764, 12}";
-			sepNavVisRect = "{{0, 530}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 1847}}";
+			sepNavSelRange = "{992, 0}";
+			sepNavVisRect = "{{0, 0}, {1001, 686}}";
 		};
 	};
 	00658D4C07FC1F320045E387 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1001, 1274}}";
-			sepNavSelRange = "{1732, 0}";
-			sepNavVisRect = "{{0, 570}, {1001, 690}}";
+			sepNavSelRange = "{542, 38}";
+			sepNavVisRect = "{{0, 0}, {1001, 686}}";
 		};
 	};
 	006E29B907FB152F008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 2604}}";
-			sepNavSelRange = "{2788, 0}";
-			sepNavVisRect = "{{0, 560}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 2674}}";
+			sepNavSelRange = "{6308, 0}";
+			sepNavVisRect = "{{0, 1876}, {1001, 686}}";
 		};
 	};
 	006E29BA07FB152F008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 19655}}";
-			sepNavSelRange = "{18554, 16}";
-			sepNavVisRect = "{{0, 6628}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 5670}}";
+			sepNavSelRange = "{2028, 18}";
+			sepNavVisRect = "{{0, 672}, {1001, 686}}";
 			sepNavWindowFrame = "{{0, 41}, {1280, 791}}";
 		};
 	};
 	006E2A4707FB1C36008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 13019}}";
-			sepNavSelRange = "{1156, 58}";
-			sepNavVisRect = "{{0, 0}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1116, 13118}}";
+			sepNavSelRange = "{24, 0}";
+			sepNavVisRect = "{{0, 0}, {1116, 237}}";
 		};
 	};
 	006E2A6307FB1D34008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 20831}}";
-			sepNavSelRange = "{26703, 41}";
-			sepNavVisRect = "{{0, 12864}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 20999}}";
+			sepNavSelRange = "{13705, 34}";
+			sepNavVisRect = "{{0, 6160}, {1001, 686}}";
 		};
 	};
 	006E2B4207FB286D008BA14E = {
@@ -165,96 +190,333 @@
 	};
 	006E2B4307FB286D008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 24878}}";
-			sepNavSelRange = "{43956, 0}";
-			sepNavVisRect = "{{0, 18826}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 25956}}";
+			sepNavSelRange = "{40449, 0}";
+			sepNavVisRect = "{{0, 13244}, {1001, 686}}";
 			sepNavWindowFrame = "{{153, 143}, {750, 558}}";
 		};
 	};
 	006E2CB807FB5660008BA14E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 11101}}";
-			sepNavSelRange = "{2385, 0}";
-			sepNavVisRect = "{{0, 530}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 11087}}";
+			sepNavSelRange = "{1332, 0}";
+			sepNavVisRect = "{{0, 0}, {1001, 686}}";
 		};
 	};
 	006E2CB907FB5660008BA14E = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1001, 17121}}";
-			sepNavSelRange = "{20269, 39}";
-			sepNavVisRect = "{{0, 8874}, {1001, 690}}";
+			sepNavSelRange = "{23714, 3}";
+			sepNavVisRect = "{{0, 10822}, {1001, 686}}";
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
-	00B15E3E0816D45C00E49C06 = {
-		fRef = 1A224C3FFF42367911CA2CB7;
-		isa = PBXTextBookmark;
-		name = "AtheroJack.cpp: 145";
-		rLen = 0;
-		rLoc = 4713;
-		rType = 0;
-		vrLen = 1563;
-		vrLoc = 3754;
+	008552DE081BFA2100F274CC = {
+		children = (
+			00855521081C12CF00F274CC,
+		);
+		isa = PBXBookmarkGroup;
+		name = Root;
 	};
-	00B15E490816DE4600E49C06 = {
-		fRef = 1A224C3FFF42367911CA2CB7;
+	00855521081C12CF00F274CC = {
+		fRef = 006E2B4307FB286D008BA14E;
 		isa = PBXTextBookmark;
-		name = "AtheroJack.cpp: 146";
-		rLen = 0;
-		rLoc = 4734;
+		name = phys_addr;
+		rLen = 9;
+		rLoc = 40861;
 		rType = 0;
-		vrLen = 1563;
-		vrLoc = 3754;
+		vrLen = 1538;
+		vrLoc = 31888;
 	};
-	00CBDAD7080D183100CAA764 = {
-		fRef = 006E29BA07FB152F008BA14E;
+	00DC7D050822CFA200D570F9 = {
+		fRef = 005DA62206C8D7BF00ACF77D;
 		isa = PBXTextBookmark;
-		name = "OpenHAL.cpp: 78";
+		name = "WiFiUserInterface.h: 25";
 		rLen = 0;
-		rLoc = 2063;
+		rLoc = 992;
 		rType = 0;
-		vrLen = 1359;
-		vrLoc = 1590;
+		vrLen = 2112;
+		vrLoc = 0;
 	};
-	00CBDEA4080D195C00CAA764 = {
+	00DC7D060822CFA200D570F9 = {
+		fRef = 005DA61F06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = _cardGone;
+		rLen = 9;
+		rLoc = 8796;
+		rType = 0;
+		vrLen = 1956;
+		vrLoc = 8203;
+	};
+	00DC7D070822CFA200D570F9 = {
+		fRef = 005DA61C06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiControllerPCI.cpp: 108";
+		rLen = 0;
+		rLoc = 3859;
+		rType = 0;
+		vrLen = 1545;
+		vrLoc = 2968;
+	};
+	00DC7D080822CFA200D570F9 = {
+		fRef = 1A224C3EFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = handleEjectionHardware;
+		rLen = 22;
+		rLoc = 1848;
+		rType = 0;
+		vrLen = 1445;
+		vrLoc = 1598;
+	};
+	00DC7D090822CFA200D570F9 = {
 		fRef = 005DA61A06C8D7BF00ACF77D;
 		isa = PBXTextBookmark;
-		name = "bool WiFiController::setFirmware(UInt32 length, UInt8* firmware)  { return false; }\n";
-		rLen = 84;
-		rLoc = 18469;
+		name = "bool WiFiController::handleEjectionHardware() { return false; }\n";
+		rLen = 64;
+		rLoc = 17666;
 		rType = 0;
-		vrLen = 2207;
-		vrLoc = 17065;
+		vrLen = 2157;
+		vrLoc = 16776;
 	};
-	00CBDEA8080D195C00CAA764 = {
-		fRef = 005DA61A06C8D7BF00ACF77D;
-		isa = PBXTextBookmark;
-		name = "bool WiFiController::setFirmware(UInt32 length, UInt8* firmware)  { return false; }\n";
-		rLen = 84;
-		rLoc = 18469;
-		rType = 0;
-		vrLen = 2207;
-		vrLoc = 17065;
-	};
-	00CBDEA9080D195C00CAA764 = {
+	00DC7D0A0822CFA200D570F9 = {
 		fRef = 1A224C3FFF42367911CA2CB7;
 		isa = PBXTextBookmark;
-		name = setFir;
-		rLen = 6;
-		rLoc = 9790;
+		name = _cardGone;
+		rLen = 9;
+		rLoc = 5608;
 		rType = 0;
-		vrLen = 1227;
-		vrLoc = 9107;
+		vrLen = 1069;
+		vrLoc = 5239;
 	};
-	00E4A17B08167D6000D4C4D8 = {
-		fRef = 006E29BA07FB152F008BA14E;
+	00DC7D0B0822CFA200D570F9 = {
+		fRef = 005DA62206C8D7BF00ACF77D;
 		isa = PBXTextBookmark;
-		name = nic_eeprom_write;
-		rLen = 16;
-		rLoc = 18554;
+		name = "WiFiUserInterface.h: 25";
+		rLen = 0;
+		rLoc = 992;
 		rType = 0;
-		vrLen = 1332;
-		vrLoc = 12755;
+		vrLen = 2112;
+		vrLoc = 0;
+	};
+	00DC7D0C0822CFA200D570F9 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = _cardGone;
+		rLen = 9;
+		rLoc = 5608;
+		rType = 0;
+		vrLen = 1069;
+		vrLoc = 5239;
+	};
+	00DC7D0D0822CFA200D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController::disable";
+		rLen = 23;
+		rLoc = 10757;
+		rType = 0;
+		vrLen = 1392;
+		vrLoc = 10051;
+	};
+	00DC7D0E0822CFA200D570F9 = {
+		fRef = 005DA61F06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = _cardGone;
+		rLen = 9;
+		rLoc = 8796;
+		rType = 0;
+		vrLen = 1956;
+		vrLoc = 8203;
+	};
+	00DC7D0F0822CFA200D570F9 = {
+		fRef = 005DA61C06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiControllerPCI.cpp: 108";
+		rLen = 0;
+		rLoc = 3859;
+		rType = 0;
+		vrLen = 1545;
+		vrLoc = 2968;
+	};
+	00DC7D100822CFA200D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = handleEjectionHardware;
+		rLen = 22;
+		rLoc = 11334;
+		rType = 0;
+		vrLen = 1628;
+		vrLoc = 10811;
+	};
+	00DC7D110822CFA200D570F9 = {
+		fRef = 1A224C3EFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = handleEjectionHardware;
+		rLen = 22;
+		rLoc = 1848;
+		rType = 0;
+		vrLen = 1445;
+		vrLoc = 1598;
+	};
+	00DC7D120822CFA200D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "bool WiFiController::handleEjectionHardware() { return false; }\n";
+		rLen = 64;
+		rLoc = 17666;
+		rType = 0;
+		vrLen = 2157;
+		vrLoc = 16776;
+	};
+	00DC7D130822CFA200D570F9 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtheroJack.cpp: 231";
+		rLen = 0;
+		rLoc = 6561;
+		rType = 0;
+		vrLen = 1684;
+		vrLoc = 7326;
+	};
+	00DC7D1B0822CFB900D570F9 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtheroJack.cpp: 231";
+		rLen = 0;
+		rLoc = 6561;
+		rType = 0;
+		vrLen = 1684;
+		vrLoc = 7326;
+	};
+	00DC7D1D0822D03800D570F9 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtheroJack.cpp: 231";
+		rLen = 0;
+		rLoc = 6561;
+		rType = 0;
+		vrLen = 1683;
+		vrLoc = 7326;
+	};
+	00DC7D1E0822D03800D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "bool WiFiController::handleEjectionHardware() { return false; }\n";
+		rLen = 64;
+		rLoc = 17666;
+		rType = 0;
+		vrLen = 2157;
+		vrLoc = 16776;
+	};
+	00DC7D1F0822D03800D570F9 = {
+		fRef = 1A224C3FFF42367911CA2CB7;
+		isa = PBXTextBookmark;
+		name = "AtheroJack.cpp: 231";
+		rLen = 0;
+		rLoc = 6561;
+		rType = 0;
+		vrLen = 1683;
+		vrLoc = 7326;
+	};
+	00DC7D200822D03800D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D230822D0C300D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D250822D10200D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D270822D13100D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D290822D13400D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D2B0822D14200D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D2D0822D14900D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D2F0822D15400D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D310822D15A00D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
+	};
+	00DC7D330822D16300D570F9 = {
+		fRef = 005DA61A06C8D7BF00ACF77D;
+		isa = PBXTextBookmark;
+		name = "WiFiController.cpp: 361";
+		rLen = 0;
+		rLoc = 10912;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 10051;
 	};
 	089C1669FE841209C02AAC07 = {
 		activeBuildStyle = 06AA1265FFB2107B11CA28AA;
@@ -310,7 +572,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 135713857;
+			PBXPerProjectTemplateStateSaveDate = 136498860;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -487,18 +749,47 @@
 					};
 				},
 			);
-			PBXWorkspaceStateSaveDate = 135713857;
+			PBXWorkspaceStateSaveDate = 136498860;
 		};
 		perUserProjectItems = {
-			00B15E3E0816D45C00E49C06 = 00B15E3E0816D45C00E49C06;
-			00B15E490816DE4600E49C06 = 00B15E490816DE4600E49C06;
-			00CBDAD7080D183100CAA764 = 00CBDAD7080D183100CAA764;
-			00CBDEA4080D195C00CAA764 = 00CBDEA4080D195C00CAA764;
-			00CBDEA8080D195C00CAA764 = 00CBDEA8080D195C00CAA764;
-			00CBDEA9080D195C00CAA764 = 00CBDEA9080D195C00CAA764;
-			00E4A17B08167D6000D4C4D8 = 00E4A17B08167D6000D4C4D8;
+			0023117C0822CA1B0026DA9A = 0023117C0822CA1B0026DA9A;
+			0023119A0822CCF30026DA9A = 0023119A0822CCF30026DA9A;
+			0023119B0822CCF30026DA9A = 0023119B0822CCF30026DA9A;
+			0023119C0822CCF30026DA9A = 0023119C0822CCF30026DA9A;
+			0023119D0822CCF30026DA9A = 0023119D0822CCF30026DA9A;
+			0023119E0822CCF30026DA9A = 0023119E0822CCF30026DA9A;
+			00DC7D050822CFA200D570F9 = 00DC7D050822CFA200D570F9;
+			00DC7D060822CFA200D570F9 = 00DC7D060822CFA200D570F9;
+			00DC7D070822CFA200D570F9 = 00DC7D070822CFA200D570F9;
+			00DC7D080822CFA200D570F9 = 00DC7D080822CFA200D570F9;
+			00DC7D090822CFA200D570F9 = 00DC7D090822CFA200D570F9;
+			00DC7D0A0822CFA200D570F9 = 00DC7D0A0822CFA200D570F9;
+			00DC7D0B0822CFA200D570F9 = 00DC7D0B0822CFA200D570F9;
+			00DC7D0C0822CFA200D570F9 = 00DC7D0C0822CFA200D570F9;
+			00DC7D0D0822CFA200D570F9 = 00DC7D0D0822CFA200D570F9;
+			00DC7D0E0822CFA200D570F9 = 00DC7D0E0822CFA200D570F9;
+			00DC7D0F0822CFA200D570F9 = 00DC7D0F0822CFA200D570F9;
+			00DC7D100822CFA200D570F9 = 00DC7D100822CFA200D570F9;
+			00DC7D110822CFA200D570F9 = 00DC7D110822CFA200D570F9;
+			00DC7D120822CFA200D570F9 = 00DC7D120822CFA200D570F9;
+			00DC7D130822CFA200D570F9 = 00DC7D130822CFA200D570F9;
+			00DC7D1B0822CFB900D570F9 = 00DC7D1B0822CFB900D570F9;
+			00DC7D1D0822D03800D570F9 = 00DC7D1D0822D03800D570F9;
+			00DC7D1E0822D03800D570F9 = 00DC7D1E0822D03800D570F9;
+			00DC7D1F0822D03800D570F9 = 00DC7D1F0822D03800D570F9;
+			00DC7D200822D03800D570F9 = 00DC7D200822D03800D570F9;
+			00DC7D230822D0C300D570F9 = 00DC7D230822D0C300D570F9;
+			00DC7D250822D10200D570F9 = 00DC7D250822D10200D570F9;
+			00DC7D270822D13100D570F9 = 00DC7D270822D13100D570F9;
+			00DC7D290822D13400D570F9 = 00DC7D290822D13400D570F9;
+			00DC7D2B0822D14200D570F9 = 00DC7D2B0822D14200D570F9;
+			00DC7D2D0822D14900D570F9 = 00DC7D2D0822D14900D570F9;
+			00DC7D2F0822D15400D570F9 = 00DC7D2F0822D15400D570F9;
+			00DC7D310822D15A00D570F9 = 00DC7D310822D15A00D570F9;
+			00DC7D330822D16300D570F9 = 00DC7D330822D16300D570F9;
 		};
 		sourceControlManager = 005DA60206C8D56900ACF77D;
+		userBookmarkGroup = 008552DE081BFA2100F274CC;
 		userBuildSettings = {
 		};
 	};
@@ -511,17 +802,17 @@
 	};
 	1A224C3EFF42367911CA2CB7 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 1483}}";
-			sepNavSelRange = "{2120, 0}";
-			sepNavVisRect = "{{0, 670}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 1511}}";
+			sepNavSelRange = "{1848, 22}";
+			sepNavVisRect = "{{0, 672}, {1001, 686}}";
 		};
 	};
 	1A224C3FFF42367911CA2CB7 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 8063}}";
-			sepNavSelRange = "{4734, 0}";
-			sepNavVisRect = "{{0, 1694}, {1001, 690}}";
-			sepNavWindowFrame = "{{84, 206}, {750, 558}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 8637}}";
+			sepNavSelRange = "{6561, 0}";
+			sepNavVisRect = "{{0, 3458}, {1001, 686}}";
+			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
 	32D94FC30562CBF700B6AF17 = {
@@ -529,9 +820,9 @@
 	};
 	32D94FCF0562CBF700B6AF17 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1001, 811}}";
-			sepNavSelRange = "{952, 0}";
-			sepNavVisRect = "{{0, 84}, {1001, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1001, 769}}";
+			sepNavSelRange = "{1016, 0}";
+			sepNavVisRect = "{{0, 14}, {1001, 686}}";
 		};
 	};
 }

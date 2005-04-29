@@ -1,4 +1,9 @@
 
+#include "ieeeLite.h"
+
+#ifndef OPENHALDEF
+#define OPENHALDEF
+
 enum ar5k_version {
 	AR5K_AR5210	= 0,
 	AR5K_AR5211	= 1,
@@ -16,8 +21,8 @@ enum ar5k_radio {
  */
 
 typedef enum {
-	AH_FALSE = 0,
-	AH_TRUE,
+	AH_FALSE = 0,		/* NB: lots of code assumes false is zero */
+	AH_TRUE  = 1,
 } HAL_BOOL;
 
 typedef enum {
@@ -32,17 +37,17 @@ typedef enum {
 } HAL_MODE;
 
 typedef enum {
-	HAL_ANT_VARIABLE = 0,
-	HAL_ANT_FIXED_A = 1,
-	HAL_ANT_FIXED_B	= 2,
+	HAL_ANT_VARIABLE = 0,			/* variable by programming */
+	HAL_ANT_FIXED_A	 = 1,			/* fixed to 11a frequencies */
+	HAL_ANT_FIXED_B	 = 2,			/* fixed to 11b frequencies */
 	HAL_ANT_MAX = 3,
 } HAL_ANT_SETTING;
 
 typedef enum {
-	HAL_M_STA = 1,
-	HAL_M_IBSS = 0,
-	HAL_M_HOSTAP = 6,
-	HAL_M_MONITOR = 8,
+	HAL_M_STA	= 1,			/* infrastructure station */
+	HAL_M_IBSS	= 0,			/* IBSS (adhoc) station */
+	HAL_M_HOSTAP	= 6,			/* Software Access Point */
+	HAL_M_MONITOR	= 8			/* Monitor mode */
 } HAL_OPMODE;
 
 typedef enum {
@@ -68,12 +73,18 @@ typedef enum {
  * TX queues
  */
 
+
+/*
+ * Transmit queue types/numbers.  These are used to tag
+ * each transmit queue in the hardware and to identify a set
+ * of transmit queues for operations such as start/stop dma.
+ */
 typedef enum {
-	HAL_TX_QUEUE_INACTIVE = 0,
-	HAL_TX_QUEUE_DATA,
-	HAL_TX_QUEUE_BEACON,
-	HAL_TX_QUEUE_CAB,
-	HAL_TX_QUEUE_PSPOLL,
+	HAL_TX_QUEUE_INACTIVE	= 0,		/* queue is inactive/unused */
+	HAL_TX_QUEUE_DATA	= 1,		/* data xmit q's */
+	HAL_TX_QUEUE_BEACON	= 2,		/* beacon xmit q */
+	HAL_TX_QUEUE_CAB	= 3,		/* "crap after beacon" xmit q */
+	HAL_TX_QUEUE_PSPOLL	= 4,		/* power-save poll xmit q */
 } HAL_TX_QUEUE;
 
 #define HAL_NUM_TX_QUEUES	10
@@ -243,11 +254,11 @@ typedef struct {
  */
 
 typedef enum {
-	HAL_PM_UNDEFINED = 0,
-	HAL_PM_AUTO,
-	HAL_PM_AWAKE,
-	HAL_PM_FULL_SLEEP,
-	HAL_PM_NETWORK_SLEEP,
+	HAL_PM_UNDEFINED	= 0,
+	HAL_PM_AUTO		= 1,
+	HAL_PM_AWAKE		= 2,
+	HAL_PM_FULL_SLEEP	= 3,
+	HAL_PM_NETWORK_SLEEP	= 4
 } HAL_POWER_MODE;
 
 /*
@@ -255,9 +266,9 @@ typedef enum {
  */
 
 typedef enum {
-	HAL_CIPHER_WEP = 0,
-	HAL_CIPHER_AES_CCM,
-	HAL_CIPHER_CKIP,
+	HAL_CIPHER_WEP		= 0,
+	HAL_CIPHER_AES_CCM	= 1,
+	HAL_CIPHER_CKIP		= 2
 } HAL_CIPHER;
 
 #define AR5K_MAX_KEYS	16
@@ -384,8 +395,8 @@ typedef struct {
 
 typedef enum {
 	HAL_RFGAIN_INACTIVE = 0,
-	HAL_RFGAIN_READ_REQUESTED,
-	HAL_RFGAIN_NEED_CHANGE,
+	HAL_RFGAIN_READ_REQUESTED	= 1,
+	HAL_RFGAIN_NEED_CHANGE		= 2
 } HAL_RFGAIN;
 
 typedef struct {
@@ -844,11 +855,11 @@ struct ath_rx_status {
 #define HAL_PHYERR_CCK_RESTART		0x1f
 
 struct ath_desc {
-	u_int32_t	ds_link;
-	u_int32_t	ds_data;
-	u_int32_t	ds_ctl0;
-	u_int32_t	ds_ctl1;
-	u_int32_t	ds_hw[4];
+	volatile u_int32_t	ds_link;
+	volatile u_int32_t	ds_data;
+	volatile u_int32_t	ds_ctl0;
+	volatile u_int32_t	ds_ctl1;
+	volatile u_int32_t	ds_hw[4];
 
 	union {
 		struct ath_rx_status rx;
@@ -857,8 +868,6 @@ struct ath_desc {
 
 #define ds_rxstat ds_us.rx
 #define ds_txstat ds_us.tx
-	char _alignment[20];
-
 } __attribute__((__packed__));
 
 #define HAL_RXDESC_INTREQ	0x0020
@@ -899,7 +908,7 @@ struct ath_desc {
  * Misc defines
  */
 
-#define HAL_ABI_VERSION		0x04090901 /* YYMMDDnn */
+#define HAL_ABI_VERSION		0x03112500 /* YYMMDDnn */
 
 #define AR5K_PRINTF(fmt, ...)	IOLog("%s: " fmt, __func__, ##__VA_ARGS__)
 #define AR5K_PRINT(fmt)		IOLog("%s: " fmt, __func__)
@@ -952,7 +961,7 @@ typedef HAL_BOOL (ar5k_rfgain_t)
  */
 
 #define AR5K_INIT_MODE				(			\
-	IEEE80211_CHAN_5GHZ | IEEE80211_CHAN_OFDM			\
+	IEEE80211_CHAN_2GHZ | IEEE80211_CHAN_DYN			\
 )
 #define AR5K_INIT_TX_LATENCY			502
 #define AR5K_INIT_USEC				39
@@ -1021,6 +1030,7 @@ __bswap32(u_int32_t _x)
 #define OS_REG_WRITE_RED(_reg, _val) do {				    \
 		*((volatile u_int32_t *)((char*)ah_sh + (_reg))) =	    \
 			__bswap32((_val));				    \
+		OSSynchronizeIO(); \
 } while (0)
 
 #define OS_REG_READ_RED(_reg) \
@@ -1484,4 +1494,6 @@ struct ar5k_ini_rfgain {
 	{ 0x9afc, {								\
 		{ 0x000000c6, 0x000000fd }, { 0x000000fc, 0x000000fc } } },	\
 }
+
+#endif
 

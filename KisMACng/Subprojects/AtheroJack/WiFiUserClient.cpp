@@ -158,7 +158,7 @@ getTargetAndMethodForIndex(IOService** target, UInt32 index) {
         {
             // kWiFiUserClientSetFrequency
             NULL,
-            (IOMethod)&WiFiUserClient::_setFrequency,
+            (IOMethod)&WiFiUserClient::__setFrequency,
             kIOUCScalarIScalarO,
             1,
             0
@@ -202,6 +202,22 @@ getTargetAndMethodForIndex(IOService** target, UInt32 index) {
             kIOUCScalarIStructI,
             0,
             0xFFFFFFFF
+        },
+        {
+            // kWiFiUserClientStartCapture
+            NULL,
+            (IOMethod)&WiFiUserClient::_startCapture,
+            kIOUCScalarIScalarO,
+            1,
+            0
+        },
+        {
+            // kWiFiUserClientStopCapture
+            NULL,
+            (IOMethod)&WiFiUserClient::_stopCapture,
+            kIOUCScalarIScalarO,
+            0,
+            0
         },
 
     };
@@ -313,8 +329,12 @@ IOReturn WiFiUserClient::_getScan(const char *buffer, UInt32 size) {
     return (_provider->getBSSNodesInRange(s, ((UInt8*)buffer) + 4) ? kIOReturnSuccess : kIOReturnError);
 }
 
-IOReturn WiFiUserClient::_setFrequency(UInt32 frequency) {
-    return _provider->setFrequency(frequency);
+IOReturn WiFiUserClient::__setFrequency(UInt32 frequency) {
+    return _userCommandGate->runAction( (IOCommandGate::Action)&WiFiUserClient::_setFrequency, (void*)frequency );
+}
+
+IOReturn WiFiUserClient::_setFrequency(OSObject* o, UInt32 frequency) {
+    return ((WiFiUserClient*)o)->_provider->setFrequency(frequency);
 }
 
 IOReturn WiFiUserClient::_setMode(UInt32 mode) {
@@ -323,4 +343,13 @@ IOReturn WiFiUserClient::_setMode(UInt32 mode) {
 
 IOReturn WiFiUserClient::_setFirmware(const char *buffer, UInt32 size) {
     return (_provider->setFirmware(size, (UInt8*)buffer) ? kIOReturnSuccess : kIOReturnError);
+}
+
+IOReturn WiFiUserClient::_startCapture(UInt32 frequency) {
+	_provider->setFrequency(frequency);
+    return _provider->enable(NULL);
+}
+
+IOReturn WiFiUserClient::_stopCapture() {
+    return _provider->disable(NULL);
 }

@@ -32,7 +32,7 @@
 #ifndef WiFiDriverLOG_H
 #define WiFiDriverLOG_H
 
-#define DEBUG
+//#define DEBUG
 
 #if defined(DEBUG)
   #define logLevel 7

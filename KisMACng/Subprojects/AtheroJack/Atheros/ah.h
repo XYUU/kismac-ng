@@ -47,160 +47,7 @@
  * reference as the first parameter.
  */
 #include "ah_osdep.h"
-
-/*
- * Status codes that may be returned by the HAL.  Note that
- * interfaces that return a status code set it only when an
- * error occurs--i.e. you cannot check it for success.
- */
-typedef enum {
-	HAL_OK		= 0,	/* No error */
-	HAL_ENXIO	= 1,	/* No hardware present */
-	HAL_ENOMEM	= 2,	/* Memory allocation failed */
-	HAL_EIO		= 3,	/* Hardware didn't respond as expected */
-	HAL_EEMAGIC	= 4,	/* EEPROM magic number invalid */
-	HAL_EEVERSION	= 5,	/* EEPROM version invalid */
-	HAL_EELOCKED	= 6,	/* EEPROM unreadable */
-	HAL_EEBADSUM	= 7,	/* EEPROM checksum invalid */
-	HAL_EEREAD	= 8,	/* EEPROM read problem */
-	HAL_EEBADMAC	= 9,	/* EEPROM mac address invalid */
-	HAL_EESIZE	= 10,	/* EEPROM size not supported */
-	HAL_EEWRITE	= 11,	/* Attempt to change write-locked EEPROM */
-	HAL_EINVAL	= 12,	/* Invalid parameter to function */
-	HAL_ENOTSUPP	= 13,	/* Hardware revision not supported */
-	HAL_ESELFTEST	= 14,	/* Hardware self-test failed */
-	HAL_EINPROGRESS	= 15,	/* Operation incomplete */
-} HAL_STATUS;
-
-typedef enum {
-	AH_FALSE = 0,		/* NB: lots of code assumes false is zero */
-	AH_TRUE  = 1,
-} HAL_BOOL;
-
-/* 
- * "States" for setting the LED.  These correspond to
- * the possible 802.11 operational states and there may
- * be a many-to-one mapping between these states and the
- * actual hardware states for the LED's (i.e. the hardware
- * may have fewer states).
- */
-typedef enum {
-	HAL_LED_INIT	= 0,
-	HAL_LED_SCAN	= 1,
-	HAL_LED_AUTH	= 2,
-	HAL_LED_ASSOC	= 3,
-	HAL_LED_RUN	= 4
-} HAL_LED_STATE;
-
-/*
- * Transmit queue types/numbers.  These are used to tag
- * each transmit queue in the hardware and to identify a set
- * of transmit queues for operations such as start/stop dma.
- */
-typedef enum {
-	HAL_TX_QUEUE_INACTIVE	= 0,		/* queue is inactive/unused */
-	HAL_TX_QUEUE_DATA	= 1,		/* data xmit q's */
-	HAL_TX_QUEUE_BEACON	= 2,		/* beacon xmit q */
-	HAL_TX_QUEUE_CAB	= 3,		/* "crap after beacon" xmit q */
-	HAL_TX_QUEUE_PSPOLL	= 4,		/* power-save poll xmit q */
-} HAL_TX_QUEUE;
-
-#define	HAL_NUM_TX_QUEUES	10		/* max possible # of queues */
-
-/*
- * Transmit packet types.  This belongs in ah_desc.h, but
- * is here so we can give a proper type to various parameters
- * (and not require everyone include the file).
- *
- * NB: These values are intentionally assigned for
- *     direct use when setting up h/w descriptors.
- */
-typedef enum {
-	HAL_PKT_TYPE_NORMAL	= 0,
-	HAL_PKT_TYPE_ATIM	= 1,
-	HAL_PKT_TYPE_PSPOLL	= 2,
-	HAL_PKT_TYPE_BEACON	= 3,
-	HAL_PKT_TYPE_PROBE_RESP	= 4,
-} HAL_PKT_TYPE;
-
-/* Rx Filter Frame Types */
-typedef enum {
-	HAL_RX_FILTER_UCAST	= 0x00000001,	/* Allow unicast frames */
-	HAL_RX_FILTER_MCAST	= 0x00000002,	/* Allow multicast frames */
-	HAL_RX_FILTER_BCAST	= 0x00000004,	/* Allow broadcast frames */
-	HAL_RX_FILTER_CONTROL	= 0x00000008,	/* Allow control frames */
-	HAL_RX_FILTER_BEACON	= 0x00000010,	/* Allow beacon frames */
-	HAL_RX_FILTER_PROM	= 0x00000020,	/* Promiscuous mode */
-	HAL_RX_FILTER_PROBEREQ	= 0x00000080,	/* Allow probe request frames */
-	HAL_RX_FILTER_PHYERR	= 0x00000100,	/* Allow phy errors */
-	HAL_RX_FILTER_PHYRADAR	= 0x00000200,	/* Allow phy radar errors*/
-} HAL_RX_FILTER;
-
-typedef enum {
-	HAL_PM_UNDEFINED	= 0,
-	HAL_PM_AUTO		= 1,
-	HAL_PM_AWAKE		= 2,
-	HAL_PM_FULL_SLEEP	= 3,
-	HAL_PM_NETWORK_SLEEP	= 4
-} HAL_POWER_MODE;
-
-/*
- * NOTE WELL:
- * These are mapped to take advantage of the common locations for many of
- * the bits on all of the currently supported MAC chips. This is to make
- * the ISR as efficient as possible, while still abstracting HW differences.
- * When new hardware breaks this commonality this enumerated type, as well
- * as the HAL functions using it, must be modified. All values are directly
- * mapped unless commented otherwise.
- */
-typedef enum {
-	HAL_INT_RX	= 0x00000001,	/* Non-common mapping */
-	HAL_INT_RXDESC	= 0x00000002,
-	HAL_INT_RXNOFRM	= 0x00000008,
-	HAL_INT_RXEOL	= 0x00000010,
-	HAL_INT_RXORN	= 0x00000020,
-	HAL_INT_TX	= 0x00000040,	/* Non-common mapping */
-	HAL_INT_TXDESC	= 0x00000080,
-	HAL_INT_TXURN	= 0x00000800,
-	HAL_INT_MIB	= 0x00001000,
-	HAL_INT_RXPHY	= 0x00004000,
-	HAL_INT_RXKCM	= 0x00008000,
-	HAL_INT_SWBA	= 0x00010000,
-	HAL_INT_BMISS	= 0x00040000,
-	HAL_INT_BNR	= 0x00100000,	/* Non-common mapping */
-	HAL_INT_GPIO	= 0x01000000,
-	HAL_INT_FATAL	= 0x40000000,	/* Non-common mapping */
-	HAL_INT_GLOBAL	= 0x80000000,	/* Set/clear IER */
-
-	/* Interrupt bits that map directly to ISR/IMR bits */
-	HAL_INT_COMMON  = HAL_INT_RXNOFRM
-			| HAL_INT_RXDESC
-			| HAL_INT_RXEOL
-			| HAL_INT_RXORN
-			| HAL_INT_TXURN
-			| HAL_INT_TXDESC
-			| HAL_INT_MIB
-			| HAL_INT_RXPHY
-			| HAL_INT_RXKCM
-			| HAL_INT_SWBA
-			| HAL_INT_BMISS
-			| HAL_INT_GPIO,
-	HAL_INT_NOCARD	= 0xffffffff	/* To signal the card was removed */
-} HAL_INT;
-
-typedef enum {
-	HAL_RFGAIN_INACTIVE		= 0,
-	HAL_RFGAIN_READ_REQUESTED	= 1,
-	HAL_RFGAIN_NEED_CHANGE		= 2
-} HAL_RFGAIN;
-
-/*
- * Channels are specified by frequency.
- */
-typedef struct {
-	u_int16_t	channel;	/* setting in Mhz */
-	u_int16_t	channelFlags;	/* see below */
-} HAL_CHANNEL;
+#include "OpenHAL/OpenHALDefinitions.h"
 
 #define	CHANNEL_RAD_INT	0x0001	/* Radar interference detected on channel */
 #define	CHANNEL_CW_INT	0x0002	/* CW interference detected on channel */
@@ -213,42 +60,10 @@ typedef struct {
 #define	CHANNEL_PASSIVE	0x0200	/* Only passive scan allowed in the channel */
 #define	CHANNEL_DYN		0x0400	/* dynamic CCK-OFDM channel */
 
-#define	CHANNEL_A	(CHANNEL_5GHZ|CHANNEL_OFDM)
-#define	CHANNEL_B	(CHANNEL_2GHZ|CHANNEL_CCK)
-#define	CHANNEL_PUREG	(CHANNEL_2GHZ|CHANNEL_OFDM)
-#ifdef notdef
-#define	CHANNEL_G	(CHANNEL_2GHZ|CHANNEL_DYN)
-#else
-#define	CHANNEL_G	(CHANNEL_2GHZ|CHANNEL_OFDM)
-#endif
-#define	CHANNEL_T	(CHANNEL_5GHZ|CHANNEL_OFDM|CHANNEL_TURBO)
-#define	CHANNEL_ALL \
-	(CHANNEL_OFDM|CHANNEL_CCK|CHANNEL_5GHZ|CHANNEL_2GHZ|CHANNEL_TURBO)
-#define	CHANNEL_ALL_NOTURBO 	(CHANNEL_ALL &~ CHANNEL_TURBO)
-
-typedef struct {
-	u_int32_t	ackrcv_bad;
-	u_int32_t	rts_bad;
-	u_int32_t	rts_good;
-	u_int32_t	fcs_bad;
-	u_int32_t	beacons;
-} HAL_MIB_STATS;
-
-typedef u_int16_t HAL_CTRY_CODE;		/* country code */
+//typedef u_int16_t HAL_CTRY_CODE;		/* country code */
 typedef u_int16_t HAL_REG_DOMAIN;		/* regulatory domain code */
 
-enum {
-	HAL_MODE_11A	= 0x001,
-	HAL_MODE_TURBO	= 0x002,
-	HAL_MODE_11B	= 0x004,
-	HAL_MODE_PUREG	= 0x008,
-#ifdef notdef
-	HAL_MODE_11G	= 0x010,
-#else
-	HAL_MODE_11G	= 0x008,
-#endif
-	HAL_MODE_ALL	= 0xfff
-};
+#if 0
 
 typedef struct {
 	u_int16_t	rateCount;
@@ -267,40 +82,14 @@ typedef struct {
 	} info[32];
 } HAL_RATE_TABLE;
 
+#endif 
+
 typedef struct {
 	u_int		rs_count;		/* number of valid entries */
 	u_int8_t	rs_rates[32];		/* rates */
 } HAL_RATE_SET;
 
-typedef enum {
-	HAL_ANT_VARIABLE = 0,			/* variable by programming */
-	HAL_ANT_FIXED_A	 = 1,			/* fixed to 11a frequencies */
-	HAL_ANT_FIXED_B	 = 2,			/* fixed to 11b frequencies */
-} HAL_ANT_SETTING;
-
-typedef enum {
-	HAL_M_STA	= 1,			/* infrastructure station */
-	HAL_M_IBSS	= 0,			/* IBSS (adhoc) station */
-	HAL_M_HOSTAP	= 6,			/* Software Access Point */
-	HAL_M_MONITOR	= 8			/* Monitor mode */
-} HAL_OPMODE;
-
-typedef struct {
-	int		wk_len;
-	u_int8_t	wk_key[16];		/* XXX big enough for WEP */
-} HAL_KEYVAL;
-
-typedef enum {
-	HAL_CIPHER_WEP		= 0,
-	HAL_CIPHER_AES_CCM	= 1,
-	HAL_CIPHER_CKIP		= 2
-} HAL_CIPHER;
-
-enum {
-	HAL_SLOT_TIME_9	 = 9,
-	HAL_SLOT_TIME_20 = 20,
-};
-
+#if 0
 /*
  * Per-station beacon timer state.
  */
@@ -316,6 +105,7 @@ typedef struct {
 	u_int16_t	bs_sleepduration;	/* max sleep duration */
 	u_int16_t	bs_bmissthreshold;	/* beacon miss threshold */
 } HAL_BEACON_STATE;
+#endif
 
 struct ath_desc;
 
@@ -479,6 +269,7 @@ struct ath_hal {
  */
 extern	const char *ath_hal_probe(u_int16_t vendorid, u_int16_t devid);
 
+extern "C" {
 /*
  * Attach the HAL for use with the specified device.  The device is
  * defined by the PCI device ID.  The caller provides an opaque pointer
@@ -509,6 +300,8 @@ extern	struct ath_hal *ath_hal_attach(u_int16_t devid, HAL_SOFTC,
 extern	HAL_BOOL ath_hal_init_channels(struct ath_hal *,
 		HAL_CHANNEL *chans, u_int maxchans, u_int *nchans,
 		HAL_CTRY_CODE cc, u_int16_t modeSelect, int enableOutdoor);
+
+}
 
 /*
  * Return bit mask of wireless modes supported by the hardware.

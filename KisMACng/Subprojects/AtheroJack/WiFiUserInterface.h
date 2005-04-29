@@ -2,9 +2,9 @@
         
         File:			WiFiUserInterface.h
         Program:		AtheroJack
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		AtheroJack is a free driver monitor mode driver for Atheros cards.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	AtheroJack is a free driver monitor mode driver for Atheros cards.
                 
         This file is part of AtheroJack.
 
@@ -40,7 +40,9 @@ typedef enum WLUCMethods {
     kWiFiUserClientSetWEPKey,           // kIOUCScalarIStructI, 0, 1
     kWiFiUserClientGetScan,             // kIOUCScalarIStructO, 0, 1
     kWiFiUserClientSetMode,             // kIOUCScalarIScalarO, 1, 0
-    kWiFiUserClientSetFirmware,           // kIOUCScalarIStructI, 0, 1
+    kWiFiUserClientSetFirmware,         // kIOUCScalarIStructI, 0, 1
+    kWiFiUserClientStartCapture,		// kIOUCScalarIScalarO, 1, 0
+    kWiFiUserClientStopCapture,			// kIOUCScalarIScalarO, 0, 0
     kWiFiUserClientLastMethod,
 } WLUCMethod;
 

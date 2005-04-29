@@ -147,106 +147,6 @@
 			settings = {
 			};
 		};
-		005DA66E06C8DC4500ACF77D = {
-			children = (
-				005DA68506C8DC8F00ACF77D,
-				005DA68606C8DC8F00ACF77D,
-				005DA68706C8DC8F00ACF77D,
-				005DA68906C8DC8F00ACF77D,
-				005DA68B06C8DC8F00ACF77D,
-				005DA68C06C8DC8F00ACF77D,
-				005DA68D06C8DC8F00ACF77D,
-			);
-			isa = PBXGroup;
-			name = HAL;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68506C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = ah_desc.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68606C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = ah_devid.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68706C8DC8F00ACF77D = {
-			isa = PBXFileReference;
-			lastKnownFileType = "compiled.mach-o.objfile";
-			path = "hal-release.o";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68906C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			path = AtherosHAL.cpp;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68B06C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = ah_osdep.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68C06C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = version.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68D06C8DC8F00ACF77D = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = ah.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		005DA68E06C8DC8F00ACF77D = {
-			fileRef = 005DA68506C8DC8F00ACF77D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		005DA68F06C8DC8F00ACF77D = {
-			fileRef = 005DA68606C8DC8F00ACF77D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		005DA69406C8DC8F00ACF77D = {
-			fileRef = 005DA68B06C8DC8F00ACF77D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		005DA69506C8DC8F00ACF77D = {
-			fileRef = 005DA68C06C8DC8F00ACF77D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		005DA69606C8DC8F00ACF77D = {
-			fileRef = 005DA68D06C8DC8F00ACF77D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		00658D4C07FC1F320045E387 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -561,7 +461,6 @@
 		247142CAFF3F8F9811CA285C = {
 			children = (
 				006E29B807FB150D008BA14E,
-				005DA66E06C8DC4500ACF77D,
 				005DA61A06C8D7BF00ACF77D,
 				005DA61B06C8D7BF00ACF77D,
 				005DA61C06C8D7BF00ACF77D,
@@ -627,11 +526,6 @@
 				005DA62706C8D7BF00ACF77D,
 				005DA62A06C8D7BF00ACF77D,
 				005DA62B06C8D7BF00ACF77D,
-				005DA68E06C8DC8F00ACF77D,
-				005DA68F06C8DC8F00ACF77D,
-				005DA69406C8DC8F00ACF77D,
-				005DA69506C8DC8F00ACF77D,
-				005DA69606C8DC8F00ACF77D,
 				006E29BB07FB152F008BA14E,
 				006E2A4807FB1C36008BA14E,
 				006E2A6407FB1D34008BA14E,

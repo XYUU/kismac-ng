@@ -174,12 +174,14 @@ static ScanController *_scanController;
 + (int)chan2freq:(int)channel {
     if (channel == 14) return 2484;
     if (channel >= 1 && channel <= 13) return 2407 + channel * 5;
+	if (channel < 200) return 5000 + channel * 5;
     return 0;
 }
 
 + (int)freq2chan:(int)frequency {
     if (frequency == 2484) return 14;
     if (frequency < 2484 && frequency > 2411 && ((frequency - 2407) % 5 == 0)) return (frequency - 2407) / 5;
+	if (frequency >= 5000 && frequency < 5900 && (frequency % 5) == 0) return (frequency - 5000) / 5;
     return 0;
 }
 

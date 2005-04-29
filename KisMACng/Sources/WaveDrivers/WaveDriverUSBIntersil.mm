@@ -25,6 +25,8 @@
 #import "WaveDriverUSBIntersil.h"
 #import "WaveHelper.h"
 
+static bool explicitlyLoadedUSBIntersil = NO;
+
 @implementation WaveDriverUSBIntersil
 
 - (id)init {
@@ -66,29 +68,31 @@
 #pragma mark -
 
 + (bool) loadBackend {
-    bool putBackIn = NO;
     
     if ([WaveHelper isServiceAvailable:"com_intersil_prism2USB"]) {
         NSRunCriticalAlertPanel(
             NSLocalizedString(@"WARNING! Please unplug your USB device now.", "Warning dialog title"),
             NSLocalizedString(@"Due a bug in Intersils Prism USB driver you must unplug your device now temporarily, otherwise you will not be able to use it any more. KisMAC will prompt you again to put it back in after loading is completed.", "USB driver bug warning."),
             OK, Nil, Nil);
-        putBackIn = YES;
-    }
+        
+		if (![WaveHelper runScript:@"usbprism2_prep.sh"]) return NO;
     
-    if (![WaveHelper runScript:@"usbprism2_prep.sh"]) return NO;
-    
-    if (putBackIn) {
         NSRunInformationalAlertPanel(
             NSLocalizedString(@"Connect your device again!", "dialog title"),
             NSLocalizedString(@"KisMAC completed the unload process. Please plug your device back in before you continue.", "USB driver bug warning."),
             OK, Nil, Nil);
-    }
-    
+		explicitlyLoadedUSBIntersil = YES;
+    } else  if ([WaveHelper isServiceAvailable:"AeroPad"]) {
+		if (![WaveHelper runScript:@"usbprism2_prep.sh"]) return NO;
+		explicitlyLoadedUSBIntersil = YES;
+	}
+	
     return YES;
 }
 
 + (bool) unloadBackend {
+	if (!explicitlyLoadedUSBIntersil) return YES;
+	
     NSLog(@"Restarting the USB drivers");
     return [WaveHelper runScript:@"usbprism2_unprep.sh"];
 }
