@@ -96,7 +96,7 @@ protected:
     int                     _activeOpMode;
     enum _modulationMode    _activeIEEEMode;
     static opmodeSettings   _opmodeSettings[];
-    struct mbuf             *_rxData[ATH_NUM_RX_DESCS];
+    mbuf_t					_rxData[ATH_NUM_RX_DESCS];
     IOPhysicalAddress       _rxDataAddress[ATH_NUM_RX_DESCS];
     volatile struct ath_desc    *_rxListHead, *_rxListTail;
     

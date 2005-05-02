@@ -158,6 +158,7 @@
     
     for(i = 0; i < 12; i++) {
         [_stateImg[i] release];
-    } 
+    }
+	[super dealloc];
 }
 @end

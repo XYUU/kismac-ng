@@ -1,6 +1,5 @@
 #!/bin/sh
 
-LOCPATH=`/usr/bin/dirname "$0"`
-
-/sbin/ifconfig en1 down
-"$LOCPATH/AirPortMenu" stop
+if [ -e "/System/Library/Extensions/AppleAirPort.kext" ]; then
+	/sbin/kextunload -b com.apple.driver.AppleAirPort
+fi

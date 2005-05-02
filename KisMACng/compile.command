@@ -27,5 +27,7 @@ cd ../BIGL
 xcodebuild -buildstyle Deployment
 cd ../BIGeneric
 xcodebuild -buildstyle Deployment
+cd ../AirPortMenu
+xcodebuild -buildstyle Deployment
 cd ../..
 xcodebuild -target KisMAC -buildstyle Deployment

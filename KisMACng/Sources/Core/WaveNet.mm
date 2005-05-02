@@ -647,11 +647,7 @@ int lengthSort(id string1, id string2, void *context)
                 [_coordinates setObject:[NSNumber numberWithInt:_curSignal] forKey:pV];
             [pV release];
         }
-    }
-    
-    if(_curSignal>=_maxSignal) {
-        _maxSignal=_curSignal;
-        if (onlineCapture) {
+		if(_curSignal>=_maxSignal) {
             gpsc = [WaveHelper gpsController];
             s = [gpsc NSCoord];
             if (s) [WaveHelper secureReplace:&aLat withObject:s];
@@ -659,9 +655,11 @@ int lengthSort(id string1, id string2, void *context)
             if (s) [WaveHelper secureReplace:&aLong withObject:s];
             s = [gpsc ElevCoord];
             if (s) [WaveHelper secureReplace:&aElev withObject:s];
-            if (cp._lat!=0 && cp._long!=0) [_netView setCoord:cp];
-        }
+            if (cp._lat!=0 && cp._long!=0) [_netView setCoord:cp];		
+		}
     }
+    
+    if(_curSignal>=_maxSignal) _maxSignal=_curSignal;
     
     if (!_liveCaptured) _liveCaptured = onlineCapture;
     _gotData = onlineCapture;

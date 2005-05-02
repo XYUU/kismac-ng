@@ -1551,7 +1551,7 @@ HAL_BOOL OpenHAL5212::nic_channel(HAL_CHANNEL *channel) {
 
 HAL_BOOL OpenHAL5212::ar5k_ar5212_nic_reset(u_int32_t val) {
 	HAL_BOOL ret = AH_FALSE;
-	u_int32_t mask = val ? val : ~0;
+	u_int32_t mask = val ? val : 0xFFFFFFFF;
 
 	/* Read-and-clear */
 	AR5K_REG_READ(AR5K_AR5212_RXDP);

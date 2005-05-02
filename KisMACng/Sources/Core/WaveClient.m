@@ -309,5 +309,7 @@
     [_leapUsername  release];
     [_leapChallenge release];
     [_leapResponse  release];
+	
+	[super dealloc];
 }
 @end

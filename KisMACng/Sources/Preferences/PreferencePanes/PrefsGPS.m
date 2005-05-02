@@ -90,7 +90,7 @@
     [aGPSSel removeAllItems];
     [_tripmateMode setState: [[controller objectForKey:@"GPSTripmate"] boolValue] ? NSOnState : NSOffState];
     
-    kernResult = IOMasterPort (NULL, &masterPort);
+    kernResult = IOMasterPort(0, &masterPort);
     if (KERN_SUCCESS != kernResult)
     {
         goto err; // REV/FIX: throw.

@@ -2,9 +2,9 @@
         
         File:			quicksort.h
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -25,5 +25,5 @@
 
 typedef int		 cmp_t(void *, const void *, const void *);
 
-void qsort_r(void *a, size_t n, size_t es, void *thunk, cmp_t *cmp);
+void qsort_kismac(void *a, size_t n, size_t es, void *thunk, cmp_t *cmp);
 

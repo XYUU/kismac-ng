@@ -264,7 +264,9 @@ IOReturn WiFiUserClient::close(void) {
 IOReturn WiFiUserClient::
 clientMemoryForType(UInt32 type, IOOptionBits* optionBits,
                     IOMemoryDescriptor** memoryDescriptor) {
-    if (type == kWiFiUserClientMap) {
+    WLEnter();
+	
+	if (type == kWiFiUserClientMap) {
         /* Set memoryDescriptor to DataQueue memory descriptor */
         
         if (!_packetQueue) {

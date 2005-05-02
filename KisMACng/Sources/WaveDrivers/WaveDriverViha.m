@@ -104,18 +104,18 @@ static bool explicitlyLoadedViha = NO;
     }
 	
     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
+
     
     for(x = 0; x < 100; x++) {
-        if (![WaveHelper isServiceAvailable:"AirPortUserClient"]) break;
+        if (![WaveHelper isServiceAvailable:"AirPortDriver"]) break;
         [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
 
     if (x==100)  {
-        NSLog(@"KisMAC could not load the Viha Driver, because there was an active instance of AirPortUserClient! "
-        "This means there is a program accessing the airport. It is save to ignore this message on 10.3"); 
+        NSLog(@"KisMAC could not load the Apple Airport driver. Most likely you will expirience problems!"); 
         
         //this warining is ok for MacOS X 10.2 but for 10.3 we have to force the driver to quit....
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"supressAirPortActiveWarning"]==0 && NSAppKitVersionNumber<743.14) {
+        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"supressAirPortActiveWarning"]==0) {
             x = NSRunCriticalAlertPanel(
             NSLocalizedString(@"WARNING! Do you really want to load the Viha driver?.", "warning dialog title"),
             NSLocalizedString(@"Really want to load Viha warning", "LONG description"),
@@ -137,7 +137,7 @@ static bool explicitlyLoadedViha = NO;
     
     
     //under OS X 10.3 we have to make a blood bath to get rid of the driver <eg>
-    if (floor(NSAppKitVersionNumber) == 743) {
+    /*if (floor(NSAppKitVersionNumber) == 743) {
         if (![WaveHelper runScript:@"viha_kill.sh"]) return 2;
         
         [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
@@ -146,9 +146,9 @@ static bool explicitlyLoadedViha = NO;
             [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
             if (x % 10 == 9) if (![WaveHelper runScript:@"viha_kill.sh"]) return 1;
         }
-    }
+    }*/
 
-    if (![WaveHelper runScript:@"viha_driver.sh" withArguments:[NSArray arrayWithObject:@"start"]]) return 1;
+    if (![WaveHelper runScript:@"viha_load.sh"]) return 1;
     explicitlyLoadedViha = YES;
     
     for(x = 0; x < 70; x++) {

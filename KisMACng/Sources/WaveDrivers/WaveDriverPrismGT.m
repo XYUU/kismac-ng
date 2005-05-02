@@ -129,7 +129,7 @@ typedef enum {
 
     serviceObject = IOIteratorNext(iterator);
     IOObjectRelease(iterator);
-    if (serviceObject != NULL) {
+    if (serviceObject) {
         kernResult = IOServiceOpen(serviceObject, mach_task_self(), 0,
                                    &_userClientPort);
 
@@ -257,7 +257,7 @@ typedef struct {
 	UInt16 unk3;
 	volatile UInt8 rssi;
 	UInt8 padding[3];
-} rfmonHeader __attribute__ ((packed));
+} rfmonHeader;
 
 - (WLFrame*) nextFrame {
     static UInt8  frame[2300];

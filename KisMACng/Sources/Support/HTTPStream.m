@@ -175,5 +175,6 @@ error:
 - (void)dealloc {
     [WaveHelper secureRelease:&_url];
     [WaveHelper secureRelease:&_postVariables];
+	[super dealloc];
 }
 @end

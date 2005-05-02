@@ -2,9 +2,9 @@
         
         File:			main.c
         Program:		AirPortMenu
-	Author:			Michael Ro§berg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -23,7 +23,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <CoreServices/CoreServices.h>
-#include "Apple80211.h"
+#include "../../Sources/3rd Party/Apple80211.h"
 
 int CoreMenuExtraGetMenuExtra( CFStringRef identifier, CFTypeRef menuExtra );
 int CoreMenuExtraAddMenuExtra( CFURLRef path, int position, int whoCares, int whoCares2, int whoCares3, int whoCares4 );
@@ -37,7 +37,7 @@ int main (int argc, const char * argv[]) {
    
     if (argc==1) return -1;
     if (strcmp(argv[1],"start")==0) {
-            url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault,c,strlen(c),true);
+            url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault,c,strlen((char*)c),true);
             CoreMenuExtraAddMenuExtra(url, 1, 0, 0, 0, 0);
             CFRelease(url);
             
@@ -50,6 +50,15 @@ int main (int argc, const char * argv[]) {
                 }
                 airportContext = NULL;
             }
+	} else if (strcmp(argv[1],"enable")==0) {
+		if (WirelessIsAvailable()) {
+			if (WirelessAttach(&airportContext, 0) == 0) {
+				WirelessSetEnabled(airportContext, 1);
+				WirelessSetPower(airportContext, 1);
+				WirelessDetach(airportContext);
+			}
+			airportContext = NULL;
+		}
     } else {
         CoreMenuExtraGetMenuExtra(CFSTR("com.apple.menuextra.airport"),&g);
         CoreMenuExtraRemoveMenuExtra(g,0);

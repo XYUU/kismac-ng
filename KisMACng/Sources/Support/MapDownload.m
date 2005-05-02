@@ -302,6 +302,7 @@ err:
 
 - (void)dealloc {
     [_img release];
+	[super dealloc];
 }
 
 @end

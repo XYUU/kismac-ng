@@ -34,7 +34,7 @@
 
 typedef struct WaveSort {
     int ascend;
-    int *sortedList;
+    unsigned int *sortedList;
     WaveNetEntry *idList;
 } WaveSort;
 
@@ -421,18 +421,18 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     ws.ascend = ascend ? 1 : -1;
     ws.idList = _idList;
     
-    if ([ident isEqualToString:@"channel"])         qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)channelSort);
-    else if ([ident isEqualToString:@"id"])         qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)idSort);
-    else if ([ident isEqualToString:@"bssid"])      qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)bssidSort);
-    else if ([ident isEqualToString:@"ssid"])       qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)ssidSort);
-    else if ([ident isEqualToString:@"wep"])        qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)wepSort);
-    else if ([ident isEqualToString:@"type"])       qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)typeSort);
-    else if ([ident isEqualToString:@"signal"])     qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)signalSort);
-    else if ([ident isEqualToString:@"maxsignal"])  qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)maxSignalSort);
-    else if ([ident isEqualToString:@"avgsignal"])  qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)avgSignalSort);
-    else if ([ident isEqualToString:@"packets"])    qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)packetsSort);
-    else if ([ident isEqualToString:@"data"])       qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)dataSort);
-    else if ([ident isEqualToString:@"lastseen"])   qsort_r(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)lastSeenSort);
+    if ([ident isEqualToString:@"channel"])         qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)channelSort);
+    else if ([ident isEqualToString:@"id"])         qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)idSort);
+    else if ([ident isEqualToString:@"bssid"])      qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)bssidSort);
+    else if ([ident isEqualToString:@"ssid"])       qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)ssidSort);
+    else if ([ident isEqualToString:@"wep"])        qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)wepSort);
+    else if ([ident isEqualToString:@"type"])       qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)typeSort);
+    else if ([ident isEqualToString:@"signal"])     qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)signalSort);
+    else if ([ident isEqualToString:@"maxsignal"])  qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)maxSignalSort);
+    else if ([ident isEqualToString:@"avgsignal"])  qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)avgSignalSort);
+    else if ([ident isEqualToString:@"packets"])    qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)packetsSort);
+    else if ([ident isEqualToString:@"data"])       qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)dataSort);
+    else if ([ident isEqualToString:@"lastseen"])   qsort_kismac(_sortedList, _sortedCount, sizeof(unsigned int), &ws, (SORTFUNC)lastSeenSort);
     else NSLog(@"Unknown sorting column. This is a bug and should never happen.");
     
     [_sortLock unlock];
@@ -752,6 +752,7 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
 
     [self clearAllEntries];
     [_sortLock release];
+	[super dealloc];
 }
 
 @end

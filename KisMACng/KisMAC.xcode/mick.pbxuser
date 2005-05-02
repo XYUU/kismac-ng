@@ -63,782 +63,6 @@
 			sepNavVisRect = "{{0, 0}, {964, 689}}";
 		};
 	};
-	00230B02081FE0350026DA9A = {
-		fRef = 0035341006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriver.m: 248";
-		rLen = 0;
-		rLoc = 5817;
-		rType = 0;
-		vrLen = 1346;
-		vrLoc = 5232;
-	};
-	00230B03081FE0350026DA9A = {
-		fRef = 0035341506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.h: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 1381;
-		vrLoc = 0;
-	};
-	00230B04081FE0350026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = atheros_load;
-		rLen = 12;
-		rLoc = 3015;
-		rType = 0;
-		vrLen = 977;
-		vrLoc = 2344;
-	};
-	00230B07081FE0350026DA9A = {
-		fRef = 0035341006A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriver.m: 248";
-		rLen = 0;
-		rLoc = 5817;
-		rType = 0;
-		vrLen = 1346;
-		vrLoc = 5232;
-	};
-	00230B08081FE0350026DA9A = {
-		fRef = 0035341506A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.h: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 1381;
-		vrLoc = 0;
-	};
-	00230B09081FE0350026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = atheros_load;
-		rLen = 12;
-		rLoc = 3015;
-		rType = 0;
-		vrLen = 977;
-		vrLoc = 2344;
-	};
-	00230B0A081FE0350026DA9A = {
-		fRef = 0035334306A5DD5700AB4577;
-		isa = PBXTextBookmark;
-		name = "airojack_load.sh: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 608;
-		vrLoc = 0;
-	};
-	00230B16081FE48F0026DA9A = {
-		fRef = 0035334306A5DD5700AB4577;
-		isa = PBXTextBookmark;
-		name = "airojack_load.sh: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 608;
-		vrLoc = 0;
-	};
-	00231016081FE8510026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = usbprism2_prep;
-		rLen = 14;
-		rLoc = 2279;
-		rType = 0;
-		vrLen = 1538;
-		vrLoc = 1321;
-	};
-	00231017081FE8510026DA9A = {
-		fRef = 0035334F06A5DD5700AB4577;
-		isa = PBXTextBookmark;
-		name = "usbprism2_prep.sh: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 850;
-		vrLoc = 0;
-	};
-	00231018081FE8510026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = usbprism2_prep;
-		rLen = 14;
-		rLoc = 2279;
-		rType = 0;
-		vrLen = 1538;
-		vrLoc = 1321;
-	};
-	00231019081FE8510026DA9A = {
-		fRef = 0035334F06A5DD5700AB4577;
-		isa = PBXTextBookmark;
-		name = "usbprism2_prep.sh: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 850;
-		vrLoc = 0;
-	};
-	0023101E081FE8860026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = usbprism2_prep;
-		rLen = 14;
-		rLoc = 2279;
-		rType = 0;
-		vrLen = 1538;
-		vrLoc = 1321;
-	};
-	0023101F081FE8860026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = usbprism2_prep;
-		rLen = 14;
-		rLoc = 2279;
-		rType = 0;
-		vrLen = 1538;
-		vrLoc = 1321;
-	};
-	00231022081FE9B60026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 82";
-		rLen = 0;
-		rLoc = 2666;
-		rType = 0;
-		vrLen = 1636;
-		vrLoc = 1321;
-	};
-	00231025081FE9C20026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 82";
-		rLen = 0;
-		rLoc = 2666;
-		rType = 0;
-		vrLen = 1636;
-		vrLoc = 1321;
-	};
-	00231028081FEA820026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 28";
-		rLen = 0;
-		rLoc = 1072;
-		rType = 0;
-		vrLen = 1356;
-		vrLoc = 0;
-	};
-	00231029081FEA820026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 95";
-		rLen = 0;
-		rLoc = 2953;
-		rType = 0;
-		vrLen = 1729;
-		vrLoc = 1325;
-	};
-	0023102C081FEABD0026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 95";
-		rLen = 0;
-		rLoc = 2953;
-		rType = 0;
-		vrLen = 1729;
-		vrLoc = 1325;
-	};
-	0023102D081FEABD0026DA9A = {
-		fRef = 0035341706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverMacJack.h: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 1072;
-		vrLoc = 0;
-	};
-	0023102E081FEABD0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 5";
-		rLen = 0;
-		rLoc = 73;
-		rType = 0;
-		vrLen = 2000;
-		vrLoc = 0;
-	};
-	0023102F081FEABD0026DA9A = {
-		fRef = 0035341C06A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverUSBIntersil.mm: 95";
-		rLen = 0;
-		rLoc = 2953;
-		rType = 0;
-		vrLen = 1729;
-		vrLoc = 1325;
-	};
-	00231030081FEABD0026DA9A = {
-		fRef = 0035341706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverMacJack.h: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 1072;
-		vrLoc = 0;
-	};
-	00231031081FEABD0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 2003;
-		vrLoc = 0;
-	};
-	00231034081FEAE30026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 7";
-		rLen = 0;
-		rLoc = 144;
-		rType = 0;
-		vrLen = 2003;
-		vrLoc = 0;
-	};
-	00231037081FEB4D0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXBookmark;
-	};
-	00231038081FEB4D0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 29";
-		rLen = 0;
-		rLoc = 1000;
-		rType = 0;
-		vrLen = 1825;
-		vrLoc = 0;
-	};
-	0023103B081FEB5C0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 29";
-		rLen = 0;
-		rLoc = 1000;
-		rType = 0;
-		vrLen = 1825;
-		vrLoc = 0;
-	};
-	0023103C081FEB5C0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 29";
-		rLen = 0;
-		rLoc = 1000;
-		rType = 0;
-		vrLen = 1825;
-		vrLoc = 0;
-	};
-	0023103F081FEB7C0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 29";
-		rLen = 0;
-		rLoc = 1000;
-		rType = 0;
-		vrLen = 1825;
-		vrLoc = 0;
-	};
-	00231042081FEB9D0026DA9A = {
-		fRef = 00F57CAB06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "CHANGES: 29";
-		rLen = 0;
-		rLoc = 1000;
-		rType = 0;
-		vrLen = 1825;
-		vrLoc = 0;
-	};
-	00231059081FED060026DA9A = {
-		fRef = 00875D1A0708ADB300CACFCB;
-		isa = PBXBookmark;
-	};
-	0023105A081FED060026DA9A = {
-		fRef = 00875D1A0708ADB300CACFCB;
-		isa = PBXTextBookmark;
-		name = "WaveHelper.m: 178";
-		rLen = 0;
-		rLoc = 5522;
-		rType = 0;
-		vrLen = 1617;
-		vrLoc = 4814;
-	};
-	0023105F081FED330026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231060081FED330026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231065081FEE9C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXBookmark;
-	};
-	00231066081FEE9C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	0023106A081FEEAF0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	0023106D081FEEB80026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231070081FEEDD0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231073081FEF620026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231076081FEFBA0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231079081FF01C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	0023107A081FF01C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	0023107E081FF1AB0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231081081FF1D30026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231084081FF1D50026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231088081FF2BD0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	00231089081FF2BD0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	0023108C081FF2DB0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310980820E62D0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310AA0820E83C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310BB0820EC9D0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310C00821DE210026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310C50821DE340026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310CA0821E1F40026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310CF0821ECD80026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310D70822167C0026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310E1082217320026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310E608228C470026DA9A = {
-		fRef = 00F57CAC06A8887F0035AE2F;
-		isa = PBXTextBookmark;
-		name = "TODO: 43";
-		rLen = 0;
-		rLoc = 1160;
-		rType = 0;
-		vrLen = 1455;
-		vrLoc = 0;
-	};
-	002310EB08228F8A0026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXBookmark;
-	};
-	002310EC08228F8A0026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "USBIntersil.mm: 924";
-		rLen = 0;
-		rLoc = 31446;
-		rType = 0;
-		vrLen = 2206;
-		vrLoc = 30370;
-	};
-	002310F10822A1510026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "USBIntersil.mm: 924";
-		rLen = 0;
-		rLoc = 31446;
-		rType = 0;
-		vrLen = 2206;
-		vrLoc = 30370;
-	};
-	002310F20822A1510026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "USBIntersil.mm: 924";
-		rLen = 0;
-		rLoc = 31446;
-		rType = 0;
-		vrLen = 2168;
-		vrLoc = 30370;
-	};
-	002310F70822AC780026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "USBIntersil.mm: 924";
-		rLen = 0;
-		rLoc = 31446;
-		rType = 0;
-		vrLen = 2168;
-		vrLoc = 30370;
-	};
-	002310FC0822BBF40026DA9A = {
-		fRef = 003533D706A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = 0x00;
-		rLen = 4;
-		rLoc = 7056;
-		rType = 0;
-		vrLen = 1481;
-		vrLoc = 6415;
-	};
-	002311640822C31D0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: _operationModeIBSS";
-		rLen = 0;
-		rLoc = 2223;
-		rType = 0;
-		vrLen = 1513;
-		vrLoc = 2508;
-	};
-	002311650822C31D0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	002311760822C3200026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	002311790822C8500026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023117D0822CBB30026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023117E0822CC020026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023117F0822CC1A0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023118C0822CC590026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023118E0822CC620026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023118F0822CC690026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	002311900822CC770026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	002311930822CCB40026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 264";
-		rLen = 0;
-		rLoc = 8302;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	0023119F0822CCFA0026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
-	002311A00822CD290026DA9A = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1444;
-		vrLoc = 7118;
-	};
 	002E7DF506A86C6F00C9D931 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 657}}";
@@ -870,16 +94,18 @@
 	};
 	002E7DFD06A86D7E00C9D931 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 5851}}";
-			sepNavSelRange = "{12139, 459}";
-			sepNavVisRect = "{{0, 5161}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1724, 5768}}";
+			sepNavSelRange = "{11940, 85}";
+			sepNavVisRect = "{{0, 5089}, {1239, 309}}";
+			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
 	002E7DFE06A86D7E00C9D931 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 690}}";
-			sepNavSelRange = "{1822, 29}";
-			sepNavVisRect = "{{0, 0}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 666}}";
+			sepNavSelRange = "{1432, 103}";
+			sepNavVisRect = "{{0, 0}, {711, 666}}";
+			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
 		};
 	};
 	002F187907003E5A004F5FEF = {
@@ -983,16 +209,37 @@
 	};
 	0035335106A5DD5700AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 1679}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 1680}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 289}}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	0035335206A5DD5700AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 289}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 289}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{44, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
+		};
+	};
+	0035335306A5DD5700AB4577 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{128, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
+		};
+	};
+	0035335406A5DD5700AB4577 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{414, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
+		};
+	};
+	0035335506A5DD5700AB4577 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{45, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	003533A106A5DD8500AB4577 = {
@@ -1004,16 +251,17 @@
 	};
 	003533A206A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 689}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{136, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	003533A306A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 2393}}";
-			sepNavSelRange = "{2046, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 2394}}";
+			sepNavSelRange = "{3264, 0}";
+			sepNavVisRect = "{{0, 1232}, {1031, 662}}";
+			sepNavWindowFrame = "{{107, 185}, {750, 558}}";
 		};
 	};
 	003533A706A5DD8500AB4577 = {
@@ -1046,9 +294,9 @@
 	};
 	003533AB06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 10485}}";
-			sepNavSelRange = "{24970, 61}";
-			sepNavVisRect = "{{0, 9763}, {964, 564}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1430, 10332}}";
+			sepNavSelRange = "{25154, 52}";
+			sepNavVisRect = "{{0, 9656}, {1031, 662}}";
 			sepNavWindowFrame = "{{107, 185}, {750, 558}}";
 		};
 	};
@@ -1131,9 +379,9 @@
 	};
 	003533B806A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 4395}}";
-			sepNavSelRange = "{6186, 0}";
-			sepNavVisRect = "{{0, 2114}, {964, 675}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 4424}}";
+			sepNavSelRange = "{8773, 0}";
+			sepNavVisRect = "{{0, 4087}, {1239, 309}}";
 		};
 	};
 	003533B906A5DD8500AB4577 = {
@@ -1145,9 +393,9 @@
 	};
 	003533BA06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 10332}}";
-			sepNavSelRange = "{18569, 43}";
-			sepNavVisRect = "{{0, 8217}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 10626}}";
+			sepNavSelRange = "{1194, 0}";
+			sepNavVisRect = "{{0, 357}, {1239, 309}}";
 		};
 	};
 	003533BF06A5DD8500AB4577 = {
@@ -1159,9 +407,9 @@
 	};
 	003533C006A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 11704}}";
-			sepNavSelRange = "{30717, 0}";
-			sepNavVisRect = "{{0, 11116}, {964, 563}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 23058}}";
+			sepNavSelRange = "{25099, 0}";
+			sepNavVisRect = "{{0, 9071}, {1239, 309}}";
 		};
 	};
 	003533C106A5DD8500AB4577 = {
@@ -1258,9 +506,9 @@
 	};
 	003533CF06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 5081}}";
-			sepNavSelRange = "{947, 28}";
-			sepNavVisRect = "{{0, 0}, {964, 564}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 5068}}";
+			sepNavSelRange = "{7834, 107}";
+			sepNavVisRect = "{{0, 3003}, {1239, 309}}";
 		};
 	};
 	003533D006A5DD8500AB4577 = {
@@ -1272,9 +520,9 @@
 	};
 	003533D106A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 5445}}";
-			sepNavSelRange = "{4122, 0}";
-			sepNavVisRect = "{{0, 1405}, {964, 564}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1322, 5432}}";
+			sepNavSelRange = "{10739, 6}";
+			sepNavVisRect = "{{0, 3731}, {1239, 309}}";
 		};
 	};
 	003533D406A5DD8500AB4577 = {
@@ -1363,9 +611,9 @@
 	};
 	003533E306A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 2855}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 2828}}";
+			sepNavSelRange = "{3003, 0}";
+			sepNavVisRect = "{{0, 1141}, {1239, 309}}";
 		};
 	};
 	003533E406A5DD8500AB4577 = {
@@ -1419,9 +667,9 @@
 	};
 	003533EB06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 1637}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 1638}}";
+			sepNavSelRange = "{654, 17}";
+			sepNavVisRect = "{{0, 259}, {1239, 309}}";
 		};
 	};
 	003533EC06A5DD8500AB4577 = {
@@ -1504,9 +752,9 @@
 	};
 	003533F806A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 4886}}";
-			sepNavSelRange = "{7203, 0}";
-			sepNavVisRect = "{{0, 2771}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 5278}}";
+			sepNavSelRange = "{12465, 2}";
+			sepNavVisRect = "{{0, 4955}, {1239, 309}}";
 			sepNavWindowFrame = "{{61, 227}, {750, 558}}";
 		};
 	};
@@ -1533,9 +781,9 @@
 	};
 	003533FD06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 714}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 2534}}";
+			sepNavSelRange = "{4645, 0}";
+			sepNavVisRect = "{{0, 2211}, {1239, 309}}";
 		};
 	};
 	0035340C06A5DD8500AB4577 = {
@@ -1547,9 +795,9 @@
 	};
 	0035340D06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 2295}}";
-			sepNavSelRange = "{4617, 0}";
-			sepNavVisRect = "{{0, 1602}, {964, 675}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1239, 2310}}";
+			sepNavSelRange = "{4760, 0}";
+			sepNavVisRect = "{{0, 1967}, {1239, 309}}";
 		};
 	};
 	0035340F06A5DD8500AB4577 = {
@@ -1575,16 +823,16 @@
 	};
 	0035341206A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 1371}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 1372}}";
 			sepNavSelRange = "{1409, 0}";
-			sepNavVisRect = "{{0, 636}, {964, 478}}";
+			sepNavVisRect = "{{0, 406}, {1031, 662}}";
 		};
 	};
 	0035341306A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 503}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
 			sepNavSelRange = "{280, 0}";
-			sepNavVisRect = "{{0, 25}, {964, 478}}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	0035341406A5DD8500AB4577 = {
@@ -1603,9 +851,9 @@
 	};
 	0035341606A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 5417}}";
-			sepNavSelRange = "{7273, 0}";
-			sepNavVisRect = "{{0, 3122}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 5418}}";
+			sepNavSelRange = "{6069, 0}";
+			sepNavVisRect = "{{0, 2026}, {1031, 662}}";
 		};
 	};
 	0035341706A5DD8500AB4577 = {
@@ -1631,9 +879,9 @@
 	};
 	0035341A06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 4661}}";
-			sepNavSelRange = "{1759, 0}";
-			sepNavVisRect = "{{0, 3664}, {964, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 4662}}";
+			sepNavSelRange = "{3843, 0}";
+			sepNavVisRect = "{{0, 1284}, {1031, 662}}";
 		};
 	};
 	0035341B06A5DD8500AB4577 = {
@@ -1659,9 +907,9 @@
 	};
 	0035341E06A5DD8500AB4577 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 2379}}";
-			sepNavSelRange = "{945, 0}";
-			sepNavVisRect = "{{0, 985}, {964, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 2380}}";
+			sepNavSelRange = "{1745, 33}";
+			sepNavVisRect = "{{0, 657}, {1031, 662}}";
 		};
 	};
 	0035342006A5DD8500AB4577 = {
@@ -1706,25 +954,40 @@
 			sepNavVisRect = "{{0, 1102}, {964, 689}}";
 		};
 	};
-	0036D951081BA69B00EF780F = {
-		fRef = 003533B306A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "80211b.h: 58";
-		rLen = 0;
-		rLoc = 1708;
-		rType = 0;
-		vrLen = 941;
-		vrLoc = 1213;
+	00412E680826587C00E757BC = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{194, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
+		};
 	};
-	0036D953081BA69B00EF780F = {
-		fRef = 003533B306A5DD8500AB4577;
+	00412E8608265B0800E757BC = {
+		fileReference = 0035341E06A5DD8500AB4577;
+		functionName = "+unloadBackend";
+		isa = PBXFileBreakpoint;
+		lineNumber = 164;
+		state = 1;
+	};
+	00412E8808265B3300E757BC = {
+		fileReference = 0035341E06A5DD8500AB4577;
+		functionName = "+initBackend";
+		isa = PBXFileBreakpoint;
+		lineNumber = 106;
+		state = 1;
+	};
+	00412EC608265E5600E757BC = {
+		fRef = 0035335406A5DD5700AB4577;
+		isa = PBXBookmark;
+	};
+	00412EE208265F7600E757BC = {
+		fRef = 0035335406A5DD5700AB4577;
 		isa = PBXTextBookmark;
-		name = "80211b.h: 58";
+		name = "viha_unload.sh: 24";
 		rLen = 0;
-		rLoc = 1708;
+		rLoc = 414;
 		rType = 0;
-		vrLen = 941;
-		vrLoc = 1213;
+		vrLen = 414;
+		vrLoc = 0;
 	};
 	005B12660730051A00906C36 = {
 		uiCtxt = {
@@ -1749,9 +1012,9 @@
 	};
 	005E817106FDCFF20016F5E7 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 3808}}";
-			sepNavSelRange = "{5820, 14}";
-			sepNavVisRect = "{{0, 1693}, {964, 689}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1322, 4326}}";
+			sepNavSelRange = "{6215, 73}";
+			sepNavVisRect = "{{0, 1981}, {1239, 309}}";
 		};
 	};
 	00875D190708ADB300CACFCB = {
@@ -1763,9 +1026,9 @@
 	};
 	00875D1A0708ADB300CACFCB = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 9981}}";
-			sepNavSelRange = "{5939, 0}";
-			sepNavVisRect = "{{0, 2194}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1052, 9968}}";
+			sepNavSelRange = "{16803, 0}";
+			sepNavVisRect = "{{0, 7345}, {911, 305}}";
 		};
 	};
 	00875DA807097D8D00CACFCB = {
@@ -1785,42 +1048,12 @@
 	008AC9BF07C3889400A76ADA = {
 		activeExec = 0;
 	};
-	008ACC46081A71B200D78F96 = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "        while (!IODataQueueDataAvailable(_packetQueue)) {\n            kernResult = IODataQueueWaitForAvailableData(_packetQueue,\n                                                         _packetQueuePort);\n            if (kernResult != KERN_SUCCESS) {\n                NSLog(@\"nextFrame: IODataQueueWaitForAvailableData: 0x%x\\n\", kernResult);\n                return NULL;\n            }\n        }\n\n\n        kernResult = IODataQueueDequeue(_packetQueue, tempframe, &frameSize);\n";
-		rLen = 474;
-		rLoc = 8193;
-		rType = 0;
-		vrLen = 1701;
-		vrLoc = 7955;
-	};
 	008ACC71081A786700D78F96 = {
 		fileReference = 00FF593D06C630CC006C7F1E;
 		functionName = "-nextFrame";
 		isa = PBXFileBreakpoint;
 		lineNumber = 282;
 		state = 1;
-	};
-	008ACC74081A7ABE00D78F96 = {
-		fRef = 00FF593D06C630CC006C7F1E;
-		isa = PBXTextBookmark;
-		name = "WaveDriverPrismGT.m: 282";
-		rLen = 0;
-		rLoc = 8589;
-		rType = 0;
-		vrLen = 1701;
-		vrLoc = 7955;
-	};
-	008ACC78081A7ABE00D78F96 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 318";
-		rLen = 0;
-		rLoc = 9900;
-		rType = 0;
-		vrLen = 1636;
-		vrLoc = 8850;
 	};
 	0090AC8306E5E3250096C5FC = {
 		uiCtxt = {
@@ -1946,12 +1179,966 @@
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
 		isa = PBXExecutable;
 		libgmallocEnabled = 0;
 		name = KisMAC;
 		savedGlobals = {
 		};
 		shlibInfoDictList = (
+		);
+		shlibInfoDictList_v2 = (
+			{
+				level = 0;
+				path = /usr/lib/system/libmathCommon.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libSystem.B.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libicucore.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libauto.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libobjc.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libz.1.2.2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Security.framework/Versions/A/Security;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CFNetwork.framework/Versions/A/CFNetwork;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/WebServicesCore.framework/Versions/A/WebServicesCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libbsm.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libcrypto.0.9.7.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreText.framework/Versions/A/CoreText;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libcups.2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/FindByContent.framework/Versions/A/FindByContent;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libRaw.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libmx.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A/ImageIO;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CarbonSound.framework/Versions/A/CarbonSound;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libiconv.2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libxml2.2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libsqlite3.0.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/CoreData.framework/Versions/A/CoreData;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /Users/mick/openDev/KisMACng/build/KisMAC.app/Contents/Frameworks/BIGL.framework/Versions/A/BIGL;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HTMLRendering.framework/Versions/A/HTMLRendering;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/NavigationServices.framework/Versions/A/NavigationServices;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/Carbon.framework/Versions/A/Carbon;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libgcc_s.1.0.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/usr/lib/libstdc++.6.0.3.dylib";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /Users/mick/openDev/KisMACng/build/KisMAC.app/Contents/Frameworks/BIGeneric.framework/Versions/A/BIGeneric;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libxslt.1.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/WebCore;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/WebKit.framework/Versions/A/WebKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/OSAKit.framework/Versions/A/OSAKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libpcap.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/DirectoryService.framework/Versions/A/DirectoryService;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libsasl2.2.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libssl.0.9.7.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /usr/lib/libresolv.9.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/LDAP.framework/Versions/A/LDAP;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/PrivateFrameworks/DSObjCWrappers.framework/Versions/A/DSObjCWrappers;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/PrivateFrameworks/ZeroLink.framework/Versions/A/ZeroLink;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /Users/mick/openDev/KisMACng/build/KisMAC.app/Contents/MacOS/KisMAC;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerMenus.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerPrivate.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerScriptable.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetLEAPCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNet.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWPACrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWPACrackAltivec.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptAdditions.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPWordlist.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapViewPrivate.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BIView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapViewAreaView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPWeakCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/main.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCSync.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveHelper.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/InfoController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveScanner.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveContainer.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/TrafficController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/SpinChannel.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCGATS.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanHierarch.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libRIP.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BISubView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/PointView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BIImageView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/Trace.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BITextView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapControlPanel.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapControlItem.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/GPSController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/PrivateFrameworks/AppleScript.framework/Versions/A/AppleScript;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Components/AppleScript.component/Contents/MacOS/AppleScript;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /System/Library/Components/DictionaryService.component/Contents/MacOS/DictionaryService;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptingEngine.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriverAtheros.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriver.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ImportController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = /Developer/Applications/Xcode.app/Contents/PlugIns/GDBMIDebugging.xcplugin/Contents/Resources/PBGDBIntrospectionSupport.A.dylib;
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Library/Application Support/Apple/Developer Tools/CustomDataViews/CFDataFormatters.bundle/Contents/MacOS/CFDataFormatters";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WavePacket.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/NetView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/Users/mick/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveClient.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerMenus.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerPrivate.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanControllerScriptable.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetLEAPCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNet.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWPACrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWPACrackAltivec.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptAdditions.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPWordlist.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapViewPrivate.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BIView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapViewAreaView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveNetWEPWeakCrack.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/main.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveHelper.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/InfoController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveScanner.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveContainer.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/SpinChannel.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/TrafficController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BISubView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/PointView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BIImageView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/Trace.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/BITextView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapControlPanel.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/MapControlItem.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScanHierarch.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/GPSController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ScriptingEngine.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriverAirport.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriver.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriverViha.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveDriverPCMCIA.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/ImportController.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WavePacket.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/NetView.ob";
+				whenToLoad = 0;
+			},
+			{
+				level = 0;
+				path = "/unencrypted/devTemp/KisMAC.build/KisMAC.build/Objects-normal/ppc/WaveClient.ob";
+				whenToLoad = 0;
+			},
 		);
 		sourceDirectories = (
 		);
@@ -1961,22 +2148,27 @@
 		isSCMEnabled = 1;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
+			SubversionToolPath = /usr/local/bin/svn;
 		};
 		scmType = scm.subversion;
 	};
 	009F5C6106A5C8FF004BB18E = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 0;
-		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoSuggestions = 1;
-		wantsCodeCompletionCaseSensitivity = 1;
-		wantsCodeCompletionListAlways = 1;
-		wantsCodeCompletionOnlyMatchingItems = 1;
-		wantsCodeCompletionParametersIncluded = 1;
-		wantsCodeCompletionPlaceholdersInserted = 1;
-		wantsCodeCompletionTabCompletes = 1;
-		wantsIndex = 1;
+	};
+	00A3E91808243D4C003CD96A = {
+		fileReference = 0035341606A5DD8500AB4577;
+		functionName = "-_connect";
+		isa = PBXFileBreakpoint;
+		lineNumber = 179;
+		state = 1;
+	};
+	00A3E97C082445B8003CD96A = {
+		fileReference = 0035341606A5DD8500AB4577;
+		functionName = "-_connect";
+		isa = PBXFileBreakpoint;
+		lineNumber = 146;
+		state = 1;
 	};
 	00A622A706FEE4FB005D248A = {
 		uiCtxt = {
@@ -1991,46 +2183,6 @@
 			sepNavSelRange = "{4604, 0}";
 			sepNavVisRect = "{{0, 2053}, {964, 564}}";
 		};
-	};
-	00A70CFA0818F4C100EAB8DE = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveScanner.mm: stopScanning";
-		rLen = 0;
-		rLoc = 9772;
-		rType = 0;
-		vrLen = 1004;
-		vrLoc = 9356;
-	};
-	00A70CFC0818F4C100EAB8DE = {
-		fRef = 003533C406A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveScanner.mm: stopScanning";
-		rLen = 0;
-		rLoc = 9772;
-		rType = 0;
-		vrLen = 1004;
-		vrLoc = 9356;
-	};
-	00A70D3408198F2E00EAB8DE = {
-		fRef = 003533C206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WavePacket.mm: 67";
-		rLen = 0;
-		rLoc = 1993;
-		rType = 0;
-		vrLen = 1401;
-		vrLoc = 2112;
-	};
-	00A70D3608198F2E00EAB8DE = {
-		fRef = 003533C206A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WavePacket.mm: 67";
-		rLen = 0;
-		rLoc = 1993;
-		rType = 0;
-		vrLen = 1401;
-		vrLoc = 2112;
 	};
 	00B6296607058E2B006FC563 = {
 		uiCtxt = {
@@ -2133,126 +2285,6 @@
 			sepNavVisRect = "{{0, 0}, {964, 564}}";
 		};
 	};
-	00DC7D160822CFA200D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D1C0822CFB900D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D210822D03900D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D240822D0C400D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D260822D10200D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D280822D13100D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D2A0822D13400D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D2C0822D14200D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D2E0822D14900D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D300822D15400D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D320822D15A00D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
-	00DC7D340822D16300D570F9 = {
-		fRef = 0035341606A5DD8500AB4577;
-		isa = PBXTextBookmark;
-		name = "WaveDriverAtheros.m: 226";
-		rLen = 0;
-		rLoc = 7273;
-		rType = 0;
-		vrLen = 1414;
-		vrLoc = 7118;
-	};
 	00E1426B06E62A44009DC179 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {964, 689}}";
@@ -2298,9 +2330,9 @@
 	};
 	00F57CAB06A8887F0035AE2F = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 4032}}";
-			sepNavSelRange = "{1278, 0}";
-			sepNavVisRect = "{{0, 0}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 4032}}";
+			sepNavSelRange = "{1121, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	00F57CAC06A8887F0035AE2F = {
@@ -2327,17 +2359,18 @@
 	};
 	00FF593D06C630CC006C7F1E = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {964, 5011}}";
-			sepNavSelRange = "{8193, 474}";
-			sepNavVisRect = "{{0, 3624}, {964, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2204, 4984}}";
+			sepNavSelRange = "{4472, 0}";
+			sepNavVisRect = "{{0, 1511}, {1031, 662}}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA = {
-		activeBuildStyle = 4A9504CDFFE6A4B311CA0CBA;
+		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
 		activeExecutable = 009F5C5D06A5C8DF004BB18E;
 		activeTarget = 8D1107260486CEB800E47090;
 		addToTargets = (
 			008AC9BF07C3889400A76ADA,
+			8D1107260486CEB800E47090,
 		);
 		breakpoints = (
 			00F57CBC06A99A8B0035AE2F,
@@ -2346,6 +2379,10 @@
 			0000F596079C465400CF70EE,
 			0000F5D1079C49ED00CF70EE,
 			008ACC71081A786700D78F96,
+			00A3E91808243D4C003CD96A,
+			00A3E97C082445B8003CD96A,
+			00412E8608265B0800E757BC,
+			00412E8808265B3300E757BC,
 		);
 		codeSenseManager = 009F5C6106A5C8FF004BB18E;
 		executables = (
@@ -2401,7 +2438,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					684,
+					751,
 					20,
 					106,
 					43,
@@ -2482,7 +2519,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 136499089;
+			PBXPerProjectTemplateStateSaveDate = 136730255;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -2913,110 +2950,11 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 136499089;
+			PBXWorkspaceStateSaveDate = 136730255;
 		};
 		perUserProjectItems = {
-			00230B02081FE0350026DA9A = 00230B02081FE0350026DA9A;
-			00230B03081FE0350026DA9A = 00230B03081FE0350026DA9A;
-			00230B04081FE0350026DA9A = 00230B04081FE0350026DA9A;
-			00230B07081FE0350026DA9A = 00230B07081FE0350026DA9A;
-			00230B08081FE0350026DA9A = 00230B08081FE0350026DA9A;
-			00230B09081FE0350026DA9A = 00230B09081FE0350026DA9A;
-			00230B0A081FE0350026DA9A = 00230B0A081FE0350026DA9A;
-			00230B16081FE48F0026DA9A = 00230B16081FE48F0026DA9A;
-			00231016081FE8510026DA9A = 00231016081FE8510026DA9A;
-			00231017081FE8510026DA9A = 00231017081FE8510026DA9A;
-			00231018081FE8510026DA9A = 00231018081FE8510026DA9A;
-			00231019081FE8510026DA9A = 00231019081FE8510026DA9A;
-			0023101E081FE8860026DA9A = 0023101E081FE8860026DA9A;
-			0023101F081FE8860026DA9A = 0023101F081FE8860026DA9A;
-			00231022081FE9B60026DA9A = 00231022081FE9B60026DA9A;
-			00231025081FE9C20026DA9A = 00231025081FE9C20026DA9A;
-			00231028081FEA820026DA9A = 00231028081FEA820026DA9A;
-			00231029081FEA820026DA9A = 00231029081FEA820026DA9A;
-			0023102C081FEABD0026DA9A = 0023102C081FEABD0026DA9A;
-			0023102D081FEABD0026DA9A = 0023102D081FEABD0026DA9A;
-			0023102E081FEABD0026DA9A = 0023102E081FEABD0026DA9A;
-			0023102F081FEABD0026DA9A = 0023102F081FEABD0026DA9A;
-			00231030081FEABD0026DA9A = 00231030081FEABD0026DA9A;
-			00231031081FEABD0026DA9A = 00231031081FEABD0026DA9A;
-			00231034081FEAE30026DA9A = 00231034081FEAE30026DA9A;
-			00231037081FEB4D0026DA9A = 00231037081FEB4D0026DA9A;
-			00231038081FEB4D0026DA9A = 00231038081FEB4D0026DA9A;
-			0023103B081FEB5C0026DA9A = 0023103B081FEB5C0026DA9A;
-			0023103C081FEB5C0026DA9A = 0023103C081FEB5C0026DA9A;
-			0023103F081FEB7C0026DA9A = 0023103F081FEB7C0026DA9A;
-			00231042081FEB9D0026DA9A = 00231042081FEB9D0026DA9A;
-			00231059081FED060026DA9A = 00231059081FED060026DA9A;
-			0023105A081FED060026DA9A = 0023105A081FED060026DA9A;
-			0023105F081FED330026DA9A = 0023105F081FED330026DA9A;
-			00231060081FED330026DA9A = 00231060081FED330026DA9A;
-			00231065081FEE9C0026DA9A = 00231065081FEE9C0026DA9A;
-			00231066081FEE9C0026DA9A = 00231066081FEE9C0026DA9A;
-			0023106A081FEEAF0026DA9A = 0023106A081FEEAF0026DA9A;
-			0023106D081FEEB80026DA9A = 0023106D081FEEB80026DA9A;
-			00231070081FEEDD0026DA9A = 00231070081FEEDD0026DA9A;
-			00231073081FEF620026DA9A = 00231073081FEF620026DA9A;
-			00231076081FEFBA0026DA9A = 00231076081FEFBA0026DA9A;
-			00231079081FF01C0026DA9A = 00231079081FF01C0026DA9A;
-			0023107A081FF01C0026DA9A = 0023107A081FF01C0026DA9A;
-			0023107E081FF1AB0026DA9A = 0023107E081FF1AB0026DA9A;
-			00231081081FF1D30026DA9A = 00231081081FF1D30026DA9A;
-			00231084081FF1D50026DA9A = 00231084081FF1D50026DA9A;
-			00231088081FF2BD0026DA9A = 00231088081FF2BD0026DA9A;
-			00231089081FF2BD0026DA9A = 00231089081FF2BD0026DA9A;
-			0023108C081FF2DB0026DA9A = 0023108C081FF2DB0026DA9A;
-			002310980820E62D0026DA9A = 002310980820E62D0026DA9A;
-			002310AA0820E83C0026DA9A = 002310AA0820E83C0026DA9A;
-			002310BB0820EC9D0026DA9A = 002310BB0820EC9D0026DA9A;
-			002310C00821DE210026DA9A = 002310C00821DE210026DA9A;
-			002310C50821DE340026DA9A = 002310C50821DE340026DA9A;
-			002310CA0821E1F40026DA9A = 002310CA0821E1F40026DA9A;
-			002310CF0821ECD80026DA9A = 002310CF0821ECD80026DA9A;
-			002310D70822167C0026DA9A = 002310D70822167C0026DA9A;
-			002310E1082217320026DA9A = 002310E1082217320026DA9A;
-			002310E608228C470026DA9A = 002310E608228C470026DA9A;
-			002310EB08228F8A0026DA9A = 002310EB08228F8A0026DA9A;
-			002310EC08228F8A0026DA9A = 002310EC08228F8A0026DA9A;
-			002310F10822A1510026DA9A = 002310F10822A1510026DA9A;
-			002310F20822A1510026DA9A = 002310F20822A1510026DA9A;
-			002310F70822AC780026DA9A = 002310F70822AC780026DA9A;
-			002310FC0822BBF40026DA9A = 002310FC0822BBF40026DA9A;
-			002311640822C31D0026DA9A = 002311640822C31D0026DA9A;
-			002311650822C31D0026DA9A = 002311650822C31D0026DA9A;
-			002311760822C3200026DA9A = 002311760822C3200026DA9A;
-			002311790822C8500026DA9A = 002311790822C8500026DA9A;
-			0023117D0822CBB30026DA9A = 0023117D0822CBB30026DA9A;
-			0023117E0822CC020026DA9A = 0023117E0822CC020026DA9A;
-			0023117F0822CC1A0026DA9A = 0023117F0822CC1A0026DA9A;
-			0023118C0822CC590026DA9A = 0023118C0822CC590026DA9A;
-			0023118E0822CC620026DA9A = 0023118E0822CC620026DA9A;
-			0023118F0822CC690026DA9A = 0023118F0822CC690026DA9A;
-			002311900822CC770026DA9A = 002311900822CC770026DA9A;
-			002311930822CCB40026DA9A = 002311930822CCB40026DA9A;
-			0023119F0822CCFA0026DA9A = 0023119F0822CCFA0026DA9A;
-			002311A00822CD290026DA9A = 002311A00822CD290026DA9A;
-			0036D951081BA69B00EF780F = 0036D951081BA69B00EF780F;
-			0036D953081BA69B00EF780F = 0036D953081BA69B00EF780F;
-			008ACC46081A71B200D78F96 = 008ACC46081A71B200D78F96;
-			008ACC74081A7ABE00D78F96 = 008ACC74081A7ABE00D78F96;
-			008ACC78081A7ABE00D78F96 = 008ACC78081A7ABE00D78F96;
-			00A70CFA0818F4C100EAB8DE = 00A70CFA0818F4C100EAB8DE;
-			00A70CFC0818F4C100EAB8DE = 00A70CFC0818F4C100EAB8DE;
-			00A70D3408198F2E00EAB8DE = 00A70D3408198F2E00EAB8DE;
-			00A70D3608198F2E00EAB8DE = 00A70D3608198F2E00EAB8DE;
-			00DC7D160822CFA200D570F9 = 00DC7D160822CFA200D570F9;
-			00DC7D1C0822CFB900D570F9 = 00DC7D1C0822CFB900D570F9;
-			00DC7D210822D03900D570F9 = 00DC7D210822D03900D570F9;
-			00DC7D240822D0C400D570F9 = 00DC7D240822D0C400D570F9;
-			00DC7D260822D10200D570F9 = 00DC7D260822D10200D570F9;
-			00DC7D280822D13100D570F9 = 00DC7D280822D13100D570F9;
-			00DC7D2A0822D13400D570F9 = 00DC7D2A0822D13400D570F9;
-			00DC7D2C0822D14200D570F9 = 00DC7D2C0822D14200D570F9;
-			00DC7D2E0822D14900D570F9 = 00DC7D2E0822D14900D570F9;
-			00DC7D300822D15400D570F9 = 00DC7D300822D15400D570F9;
-			00DC7D320822D15A00D570F9 = 00DC7D320822D15A00D570F9;
-			00DC7D340822D16300D570F9 = 00DC7D340822D16300D570F9;
+			00412EC608265E5600E757BC = 00412EC608265E5600E757BC;
+			00412EE208265F7600E757BC = 00412EE208265F7600E757BC;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E;
 		userBuildSettings = {

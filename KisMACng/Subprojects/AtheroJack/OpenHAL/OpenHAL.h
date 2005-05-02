@@ -7,8 +7,6 @@
  *
  */
 
-#define BYTE_ORDER BIG_ENDIAN
-
 #include "OpenHALDefinitions.h"
 #include <IOKit/IOService.h>
 #include <IOKit/IOLib.h>

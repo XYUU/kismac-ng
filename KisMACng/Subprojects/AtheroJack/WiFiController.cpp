@@ -71,8 +71,8 @@ bool WiFiController::_initDriver(IOService * provider) {
     // take care of the low-level interrupt registration stuff.
     //
     _interruptSrc = IOInterruptEventSource::interruptEventSource(
-               this,
-               (IOInterruptEventAction) &WiFiController::interruptOccurred,
+               (OSObject *) this,
+               (IOInterruptEventAction) & WiFiController::interruptOccurred,
                provider);
 
     if (!_interruptSrc ||
@@ -449,19 +449,22 @@ const OSString* WiFiController::newModelString() const {
 // Periodic timer that monitors the receiver status, updates error
 // and collision statistics, and update the current link status.
 
-void WiFiController::timeoutOccurred(IOTimerEventSource * /*timer*/) {
-    handleTimer();
+void WiFiController::timeoutOccurred(OSObject * owner, IOTimerEventSource * /*timer*/) {
+    WiFiController *self = (WiFiController*) owner; 
+    self->handleTimer();
     
-    _timerSrc->setTimeoutMS(LOAD_STATISTICS_INTERVAL);
+    self->_timerSrc->setTimeoutMS(LOAD_STATISTICS_INTERVAL);
 }
 
-void WiFiController::interruptOccurred(IOInterruptEventSource * src, int /*count*/) {
-    handleInterrupt();
+void WiFiController::interruptOccurred(OSObject * owner, IOInterruptEventSource * src, int /*count*/) {
+    WiFiController *self = (WiFiController*) owner; 
+	
+	self->handleInterrupt();
 }
 
 #pragma mark -
 
-UInt32 WiFiController::outputPacket(struct mbuf * m, void * param) {
+UInt32 WiFiController::outputPacket(mbuf_t m, void * param) {
     IOReturn ret;
     
     if (!_enabledForNetif) {		// drop the packet.
@@ -579,7 +582,7 @@ bool WiFiController::setMediumHardware(mediumType_t medium) { return medium == M
 bool WiFiController::handleInterrupt() { return false; }
 bool WiFiController::handleTimer() { return false; }
 
-IOReturn WiFiController::outputPacketHardware(struct mbuf * m) { return kIOReturnOutputDropped; }
+IOReturn WiFiController::outputPacketHardware(mbuf_t m) { return kIOReturnOutputDropped; }
 IOReturn WiFiController::setHardwareAddressHardware(UInt8 *addr) { return kIOReturnUnsupported; }
 
 UInt32 WiFiController::getLinkSpeed() { return 0; }

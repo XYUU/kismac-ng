@@ -11,16 +11,6 @@
 	007312E706AC485D007FD51E = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 0;
-		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoSuggestions = 1;
-		wantsCodeCompletionCaseSensitivity = 1;
-		wantsCodeCompletionListAlways = 1;
-		wantsCodeCompletionOnlyMatchingItems = 1;
-		wantsCodeCompletionParametersIncluded = 1;
-		wantsCodeCompletionPlaceholdersInserted = 1;
-		wantsCodeCompletionTabCompletes = 1;
-		wantsIndex = 1;
 	};
 	007313A606AC4A22007FD51E = {
 		uiCtxt = {
@@ -42,7 +32,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					242,
+					243,
 					20,
 					48,
 					43,
@@ -81,7 +71,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 127592410;
+			PBXPerProjectTemplateStateSaveDate = 136591720;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -428,7 +418,7 @@
 				};
 				RubberWindowFrame = "50 227 1111 605 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 127592410;
+			PBXWorkspaceStateSaveDate = 136591720;
 		};
 		sourceControlManager = 007312E606AC485D007FD51E;
 		userBuildSettings = {

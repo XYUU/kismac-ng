@@ -267,6 +267,7 @@
 		00F9C4BF06DA9DCF00E357F0 = {
 			children = (
 				00F9C4C006DA9DCF00E357F0,
+				00FAA80E0822D72E00F5E220,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -299,6 +300,21 @@
 			isa = PBXTargetDependency;
 			name = "KisMAC (from KisMAC.xcode)";
 			targetProxy = 00F9C62906DA9E2B00E357F0;
+		};
+		00FAA80E0822D72E00F5E220 = {
+			fileType = wrapper.cfbundle;
+			isa = PBXReferenceProxy;
+			path = KisMACUnitTest.bundle;
+			refType = 3;
+			remoteRef = 00FAA80F0822D75200F5E220;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00FAA80F0822D75200F5E220 = {
+			containerPortal = 00F9C4B806DA9DCC00E357F0;
+			isa = PBXContainerItemProxy;
+			proxyType = 2;
+			remoteGlobalIDString = 008AC9C007C3889400A76ADA;
+			remoteInfo = KisMACUnitTest;
 		};
 		00FC4EE40647F6C800F2220A = {
 			fileEncoding = 30;

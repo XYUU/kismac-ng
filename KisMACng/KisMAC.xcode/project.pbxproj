@@ -591,6 +591,7 @@
 		};
 		0035332D06A5DD5700AB4577 = {
 			children = (
+				00A3EB160824E448003CD96A,
 				0035332E06A5DD5700AB4577,
 				0035332F06A5DD5700AB4577,
 				0035333006A5DD5700AB4577,
@@ -778,6 +779,7 @@
 				0035334C06A5DD5700AB4577,
 				0035334F06A5DD5700AB4577,
 				0035335006A5DD5700AB4577,
+				00412E680826587C00E757BC,
 				0035335106A5DD5700AB4577,
 				0035335206A5DD5700AB4577,
 				0035335306A5DD5700AB4577,
@@ -3027,6 +3029,26 @@
 			settings = {
 			};
 		};
+		00412E680826587C00E757BC = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.script.sh;
+			path = viha_load.sh;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00412E690826587C00E757BC = {
+			fileRef = 00412E680826587C00E757BC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00412E6A0826587C00E757BC = {
+			fileRef = 00412E680826587C00E757BC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		005B12660730051A00906C36 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -3258,6 +3280,8 @@
 				008ACA8107C389A700A76ADA,
 				008ACA9807C38A0400A76ADA,
 				008ACB1807C38ADF00A76ADA,
+				00A3EB170824E448003CD96A,
+				00412E690826587C00E757BC,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4732,6 +4756,26 @@
 		};
 		009D64F306FF73BA00B0F1EC = {
 			fileRef = 009D64F206FF73BA00B0F1EC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00A3EB160824E448003CD96A = {
+			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.executable";
+			name = AirPortMenu;
+			path = Subprojects/files/AirPortMenu;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		00A3EB170824E448003CD96A = {
+			fileRef = 00A3EB160824E448003CD96A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00A3EB180824E448003CD96A = {
+			fileRef = 00A3EB160824E448003CD96A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -6221,6 +6265,8 @@
 				00F0FE8106AC5F72006D4119,
 				00A7F9D306C6D20A00A6BB8F,
 				002F1F17070071F4004F5FEF,
+				00A3EB180824E448003CD96A,
+				00412E6A0826587C00E757BC,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

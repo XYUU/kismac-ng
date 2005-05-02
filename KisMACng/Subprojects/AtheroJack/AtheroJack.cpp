@@ -223,7 +223,7 @@ bool AtheroJack::handleInterrupt() {
             
         while(true) {
             index = _headRx % ATH_NUM_RX_DESCS;
-			UInt8 *p = mtod(_rxData[index], UInt8*);
+			UInt8 *p = (UInt8*) mbuf_data(_rxData[index]);
 
             if ((_tailRx % ATH_NUM_RX_DESCS) == index) {
                 WLLogCrit("RX overrun!!!!");
@@ -395,7 +395,7 @@ bool AtheroJack::_fillFragment(int index) {
         return false;
     }
     
-	bzero(mtod(_rxData[index], void*), _rxBufferSize);
+	bzero(mbuf_data(_rxData[index]), _rxBufferSize);
 	count = _mbufCursor->getPhysicalSegmentsWithCoalesce(_rxData[index], &vector, 1);
     if (count == 0) {
         WLLogEmerg("Could not allocated a nice mbuf!");

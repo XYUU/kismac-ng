@@ -75,8 +75,8 @@ public:
     virtual bool handleTimer();
     virtual bool setMediumHardware(mediumType_t medium);
     
-    virtual UInt32 outputPacket(struct mbuf * m, void * param);
-    virtual IOReturn outputPacketHardware(struct mbuf * m);
+    virtual UInt32 outputPacket(mbuf_t m, void * param);
+    virtual IOReturn outputPacketHardware(mbuf_t m);
     virtual IOReturn setHardwareAddressHardware(UInt8 *addr);
 
     virtual bool enableAdapter();
@@ -98,8 +98,8 @@ public:
     virtual void getPacketBufferConstraints(IOPacketBufferConstraints *constraints) const;
     virtual IOOutputQueue * createOutputQueue();
 
-    void interruptOccurred(IOInterruptEventSource * src, int count);
-    void timeoutOccurred(IOTimerEventSource * timer);
+    static void interruptOccurred(OSObject * owner, IOInterruptEventSource * src, int count);
+    static void timeoutOccurred(OSObject * owner, IOTimerEventSource * timer);
 
     virtual IOReturn message(UInt32 type, IOService *provider, void *argument = 0);
 

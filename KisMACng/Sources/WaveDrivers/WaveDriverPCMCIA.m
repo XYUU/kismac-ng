@@ -113,7 +113,7 @@ typedef enum WLUCMethods {
 
     serviceObject = IOIteratorNext(iterator);
     IOObjectRelease(iterator);
-    if (serviceObject != NULL) {
+    if (serviceObject) {
         kernResult = IOServiceOpen(serviceObject, mach_task_self(), 0,
                                    &_userClientPort);
 

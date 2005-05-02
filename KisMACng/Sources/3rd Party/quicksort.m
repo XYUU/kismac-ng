@@ -89,7 +89,7 @@ med3(char *a, char *b, char *c, cmp_t *cmp, void *thunk)
 }
 
 void
-qsort_r(void *a, size_t n, size_t es, void *thunk, cmp_t *cmp)
+qsort_kismac(void *a, size_t n, size_t es, void *thunk, cmp_t *cmp)
 {
 	char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
 	int d, r, swaptype, swap_cnt;
