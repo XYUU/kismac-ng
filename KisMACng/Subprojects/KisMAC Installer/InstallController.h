@@ -34,7 +34,7 @@ enum states {
     stateConfigure = 6,
     stateConfirmConfigure = 7,
     stateInstallDone = 8,
-    
+    stateInstallCanceled = 9,
     
     stateCleanKisMAC = 97,
     stateRemovingKisMAC = 98,
@@ -73,14 +73,15 @@ enum states {
         IBOutlet NSPopUpButton  *_selectedDriver;
         
     IBOutlet NSView     *_installDoneView;
-        IBOutlet NSTextField    *_restartWarning;
+	IBOutlet NSTextField    *_installationStatus;
+	IBOutlet NSTextField    *_restartWarning;
     
     IBOutlet NSView     *_removeKisMACView;
         IBOutlet NSTextField            *_removeStatus;
         IBOutlet NSProgressIndicator    *_removeBar;
     
-    IBOutlet NSView     *_removalDoneView;
-        IBOutlet NSTextField    *_removeRestartWarning;
+    IBOutlet NSView			*_removalDoneView;
+	IBOutlet NSTextField    *_removeRestartWarning;
         
     enum states         _currentState;
     BOOL                _prevEnabled;

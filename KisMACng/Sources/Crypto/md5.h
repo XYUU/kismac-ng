@@ -3,6 +3,8 @@
 extern "C" {
 #endif
 
+#include <CoreServices/CoreServices.h>
+
 #ifndef MD5_H
 #define MD5_H
 

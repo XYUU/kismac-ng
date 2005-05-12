@@ -150,7 +150,7 @@ in Safari.");
     //NSLog(@"Response from expedia %@",s);
     
     myMessage = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, FALSE);
-    if (!CFHTTPMessageAppendBytes(myMessage, [s cString], [s length])) {
+    if (!CFHTTPMessageAppendBytes(myMessage, (UInt8*)[s cString], [s length])) {
         error = @"CFTTPResponse Parsing error";
         close(sockd);
         goto err;

@@ -1,25 +1,5 @@
 // !$*UTF8*$!
 {
-	0015000907F4C3BD009F83D4 = {
-		fRef = 00C136010695D1AA004F02A8;
-		isa = PBXTextBookmark;
-		name = "BIToolbarView.h: 11";
-		rLen = 0;
-		rLoc = 202;
-		rType = 0;
-		vrLen = 244;
-		vrLoc = 0;
-	};
-	0015FFE307F4C39D009F83D4 = {
-		fRef = 00C136010695D1AA004F02A8;
-		isa = PBXTextBookmark;
-		name = "BIToolbarView.h: 11";
-		rLen = 0;
-		rLoc = 202;
-		rType = 0;
-		vrLen = 244;
-		vrLoc = 0;
-	};
 	002E7A6606A8625700C9D931 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {946, 586}}";
@@ -82,46 +62,6 @@
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRect = "{{0, 0}, {1020, 689}}";
 		};
-	};
-	008ACD9C07C390A400A76ADA = {
-		fRef = 008E0F2106A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.m: 10";
-		rLen = 0;
-		rLoc = 175;
-		rType = 0;
-		vrLen = 1466;
-		vrLoc = 0;
-	};
-	008ACD9D07C390A400A76ADA = {
-		fRef = 008E0F2006A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = NSWindow;
-		rLen = 8;
-		rLoc = 184;
-		rType = 0;
-		vrLen = 639;
-		vrLoc = 0;
-	};
-	008ACD9F07C390A400A76ADA = {
-		fRef = 008E0F2006A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = BIExtension;
-		rLen = 11;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 649;
-		vrLoc = 0;
-	};
-	008ACDA007C390A400A76ADA = {
-		fRef = 008E0F2106A441E60064AB5C;
-		isa = PBXTextBookmark;
-		name = "BINSExtensions.m: 10";
-		rLen = 0;
-		rLoc = 175;
-		rType = 0;
-		vrLen = 1466;
-		vrLoc = 0;
 	};
 	008E0F2006A441E60064AB5C = {
 		uiCtxt = {
@@ -186,22 +126,13 @@
 		isSCMEnabled = 1;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
+			SubversionToolPath = /usr/local/bin/svn;
 		};
 		scmType = scm.subversion;
 	};
 	00C135700695B3D7004F02A8 = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 0;
-		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoSuggestions = 1;
-		wantsCodeCompletionCaseSensitivity = 1;
-		wantsCodeCompletionListAlways = 1;
-		wantsCodeCompletionOnlyMatchingItems = 1;
-		wantsCodeCompletionParametersIncluded = 1;
-		wantsCodeCompletionPlaceholdersInserted = 1;
-		wantsCodeCompletionTabCompletes = 1;
-		wantsIndex = 1;
 	};
 	00C135750695B632004F02A8 = {
 		uiCtxt = {
@@ -262,9 +193,9 @@
 	};
 	00F15E4306975F6A00AF33BA = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {960, 1343}}";
-			sepNavSelRange = "{1279, 22}";
-			sepNavVisRect = "{{0, 615}, {960, 213}}";
+			sepNavIntBoundsRect = "{{0, 0}, {506, 1344}}";
+			sepNavSelRange = "{1230, 82}";
+			sepNavVisRect = "{{0, 628}, {459, 186}}";
 		};
 	};
 	00F57B1806A87A0C0035AE2F = {
@@ -296,7 +227,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					668,
+					163,
 					20,
 					104,
 					43,
@@ -353,7 +284,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 133481358;
+			PBXPerProjectTemplateStateSaveDate = 137532061;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -790,15 +721,7 @@
 				Frame = "{{0, 0}, {745, 422}}";
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 133481358;
-		};
-		perUserProjectItems = {
-			0015000907F4C3BD009F83D4 = 0015000907F4C3BD009F83D4;
-			0015FFE307F4C39D009F83D4 = 0015FFE307F4C39D009F83D4;
-			008ACD9C07C390A400A76ADA = 008ACD9C07C390A400A76ADA;
-			008ACD9D07C390A400A76ADA = 008ACD9D07C390A400A76ADA;
-			008ACD9F07C390A400A76ADA = 008ACD9F07C390A400A76ADA;
-			008ACDA007C390A400A76ADA = 008ACDA007C390A400A76ADA;
+			PBXWorkspaceStateSaveDate = 137532061;
 		};
 		sourceControlManager = 00C1356F0695B3D7004F02A8;
 		userBuildSettings = {

@@ -737,6 +737,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				LIBRARY_SEARCH_PATHS = "";
 				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "-mcpu=G3 -force_cpusubtype_ALL";
 				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
@@ -749,6 +750,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../files";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				OTHER_CFLAGS = "-mcpu=G3 -force_cpusubtype_ALL";
 				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;

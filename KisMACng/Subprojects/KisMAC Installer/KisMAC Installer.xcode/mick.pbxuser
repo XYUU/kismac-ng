@@ -1,24 +1,24 @@
 // !$*UTF8*$!
 {
-	002F18D207006878004F5FEF = {
-		fRef = 00FC4EE40647F6C800F2220A;
+	009CE669082D1CE500135EE1 = {
+		fRef = 00B9E6140647BA2E009FEF35;
 		isa = PBXTextBookmark;
-		name = "install.sh: 9";
+		name = "InstallController.m: 732";
 		rLen = 0;
-		rLoc = 127;
+		rLoc = 26573;
 		rType = 0;
-		vrLen = 127;
-		vrLoc = 0;
+		vrLen = 1383;
+		vrLoc = 19249;
 	};
-	002F18D407006878004F5FEF = {
-		fRef = 00FC4EE40647F6C800F2220A;
+	009CE66A082D1CE500135EE1 = {
+		fRef = 00B9E6140647BA2E009FEF35;
 		isa = PBXTextBookmark;
-		name = "install.sh: 9";
+		name = "InstallController.m: 623";
 		rLen = 0;
-		rLoc = 127;
+		rLoc = 22721;
 		rType = 0;
-		vrLen = 127;
-		vrLoc = 0;
+		vrLen = 1760;
+		vrLoc = 21686;
 	};
 	00B9E5E00647B7A9009FEF35 = {
 		activeArgIndex = 2147483647;
@@ -37,10 +37,14 @@
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
 		isa = PBXExecutable;
 		libgmallocEnabled = 0;
 		name = "KisMAC Installer";
 		shlibInfoDictList = (
+		);
+		shlibInfoDictList_v2 = (
 		);
 		sourceDirectories = (
 		);
@@ -50,35 +54,27 @@
 		isSCMEnabled = 1;
 		isa = PBXSourceControlManager;
 		scmConfiguration = {
+			SubversionToolPath = /usr/local/bin/svn;
 		};
 		scmType = scm.subversion;
 	};
 	00B9E5EA0647B7BD009FEF35 = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-		usesDefaults = 0;
-		wantsCodeCompletion = 1;
-		wantsCodeCompletionAutoSuggestions = 1;
-		wantsCodeCompletionCaseSensitivity = 1;
-		wantsCodeCompletionListAlways = 1;
-		wantsCodeCompletionOnlyMatchingItems = 1;
-		wantsCodeCompletionParametersIncluded = 1;
-		wantsCodeCompletionPlaceholdersInserted = 1;
-		wantsCodeCompletionTabCompletes = 1;
-		wantsIndex = 1;
 	};
 	00B9E6130647BA2E009FEF35 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {952, 1371}}";
-			sepNavSelRange = "{2908, 26}";
-			sepNavVisRect = "{{0, 681}, {952, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 1386}}";
+			sepNavSelRange = "{2448, 19}";
+			sepNavVisRect = "{{0, 642}, {1031, 662}}";
+			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
 		};
 	};
 	00B9E6140647BA2E009FEF35 = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {952, 10597}}";
-			sepNavSelRange = "{11601, 0}";
-			sepNavVisRect = "{{0, 4072}, {952, 690}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2108, 10836}}";
+			sepNavSelRange = "{22721, 0}";
+			sepNavVisRect = "{{0, 8396}, {1031, 662}}";
 		};
 	};
 	00B9E97E0647F3B8009FEF35 = {
@@ -87,146 +83,6 @@
 			sepNavSelRange = "{9001, 20}";
 			sepNavVisRect = "{{0, 3635}, {1057, 668}}";
 		};
-	};
-	00F9C62C06DA9EAE00E357F0 = {
-		fRef = 00FC4EE70647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "sfpatch_install.sh: 13";
-		rLen = 0;
-		rLoc = 510;
-		rType = 0;
-		vrLen = 197;
-		vrLoc = 404;
-	};
-	00F9C62D06DA9EAE00E357F0 = {
-		fRef = 00FC4EF50647F70B00F2220A;
-		isa = PBXTextBookmark;
-		name = "remove_prefs.sh: 11";
-		rLen = 0;
-		rLoc = 498;
-		rType = 0;
-		vrLen = 698;
-		vrLoc = 0;
-	};
-	00F9C62E06DA9EAE00E357F0 = {
-		fRef = 00FC4EE60647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "remove.sh: 5";
-		rLen = 0;
-		rLoc = 53;
-		rType = 0;
-		vrLen = 726;
-		vrLoc = 0;
-	};
-	00F9C63006DA9EAE00E357F0 = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "InstallController.m: 66";
-		rLen = 0;
-		rLoc = 2023;
-		rType = 0;
-		vrLen = 186;
-		vrLoc = 1877;
-	};
-	00F9C63106DA9EAE00E357F0 = {
-		fRef = 00FC4EE70647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "sfpatch_install.sh: 13";
-		rLen = 0;
-		rLoc = 510;
-		rType = 0;
-		vrLen = 197;
-		vrLoc = 404;
-	};
-	00F9C63206DA9EAE00E357F0 = {
-		fRef = 00FC4EF50647F70B00F2220A;
-		isa = PBXTextBookmark;
-		name = "remove_prefs.sh: 11";
-		rLen = 0;
-		rLoc = 498;
-		rType = 0;
-		vrLen = 698;
-		vrLoc = 0;
-	};
-	00F9C63306DA9EAE00E357F0 = {
-		fRef = 00FC4EE60647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "remove.sh: 5";
-		rLen = 0;
-		rLoc = 53;
-		rType = 0;
-		vrLen = 726;
-		vrLoc = 0;
-	};
-	00F9C69E06DB396900E357F0 = {
-		fRef = 00FC4EE50647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "permissions.sh: 6";
-		rLen = 0;
-		rLoc = 114;
-		rType = 0;
-		vrLen = 798;
-		vrLoc = 0;
-	};
-	00F9C69F06DB396900E357F0 = {
-		fRef = 00FC4EE50647F6C800F2220A;
-		isa = PBXTextBookmark;
-		name = "permissions.sh: 6";
-		rLen = 0;
-		rLoc = 114;
-		rType = 0;
-		vrLen = 798;
-		vrLoc = 0;
-	};
-	00FAA8100822D79B00F5E220 = {
-		fRef = 00B9E6130647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "-(IBAction)prev:(id)sender";
-		rLen = 26;
-		rLoc = 2908;
-		rType = 0;
-		vrLen = 1521;
-		vrLoc = 1486;
-	};
-	00FAA8110822D79B00F5E220 = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "InstallController.m: 389";
-		rLen = 0;
-		rLoc = 14365;
-		rType = 0;
-		vrLen = 2054;
-		vrLoc = 13336;
-	};
-	00FAA8120822D79B00F5E220 = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "InstallController.m: 389";
-		rLen = 0;
-		rLoc = 14365;
-		rType = 0;
-		vrLen = 2065;
-		vrLoc = 13325;
-	};
-	00FAA8130822D79B00F5E220 = {
-		fRef = 00B9E6130647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "-(IBAction)prev:(id)sender";
-		rLen = 26;
-		rLoc = 2908;
-		rType = 0;
-		vrLen = 1521;
-		vrLoc = 1486;
-	};
-	00FAA8180822D82300F5E220 = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "InstallController.m: 332";
-		rLen = 0;
-		rLoc = 11601;
-		rType = 0;
-		vrLen = 1918;
-		vrLoc = 10195;
 	};
 	00FC4EE40647F6C800F2220A = {
 		uiCtxt = {
@@ -279,9 +135,9 @@
 	};
 	00FC4EF50647F70B00F2220A = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {952, 342}}";
-			sepNavSelRange = "{498, 0}";
-			sepNavVisRect = "{{0, 0}, {952, 342}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1031, 662}}";
+			sepNavSelRange = "{698, 0}";
+			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
 	089C165DFE840E0CC02AAC07 = {
@@ -305,12 +161,26 @@
 			00B9E5E00647B7A9009FEF35,
 		);
 		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					400,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					681,
+					760,
 					20,
 					121,
 					43,
@@ -349,7 +219,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 136501038;
+			PBXPerProjectTemplateStateSaveDate = 137172459;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -828,25 +698,11 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 136501038;
+			PBXWorkspaceStateSaveDate = 137172459;
 		};
 		perUserProjectItems = {
-			002F18D207006878004F5FEF = 002F18D207006878004F5FEF;
-			002F18D407006878004F5FEF = 002F18D407006878004F5FEF;
-			00F9C62C06DA9EAE00E357F0 = 00F9C62C06DA9EAE00E357F0;
-			00F9C62D06DA9EAE00E357F0 = 00F9C62D06DA9EAE00E357F0;
-			00F9C62E06DA9EAE00E357F0 = 00F9C62E06DA9EAE00E357F0;
-			00F9C63006DA9EAE00E357F0 = 00F9C63006DA9EAE00E357F0;
-			00F9C63106DA9EAE00E357F0 = 00F9C63106DA9EAE00E357F0;
-			00F9C63206DA9EAE00E357F0 = 00F9C63206DA9EAE00E357F0;
-			00F9C63306DA9EAE00E357F0 = 00F9C63306DA9EAE00E357F0;
-			00F9C69E06DB396900E357F0 = 00F9C69E06DB396900E357F0;
-			00F9C69F06DB396900E357F0 = 00F9C69F06DB396900E357F0;
-			00FAA8100822D79B00F5E220 = 00FAA8100822D79B00F5E220;
-			00FAA8110822D79B00F5E220 = 00FAA8110822D79B00F5E220;
-			00FAA8120822D79B00F5E220 = 00FAA8120822D79B00F5E220;
-			00FAA8130822D79B00F5E220 = 00FAA8130822D79B00F5E220;
-			00FAA8180822D82300F5E220 = 00FAA8180822D82300F5E220;
+			009CE669082D1CE500135EE1 = 009CE669082D1CE500135EE1;
+			009CE66A082D1CE500135EE1 = 009CE66A082D1CE500135EE1;
 		};
 		sourceControlManager = 00B9E5E90647B7BD009FEF35;
 		userBuildSettings = {

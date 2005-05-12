@@ -219,6 +219,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -264,7 +266,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -299,8 +300,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -318,10 +317,10 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>00412EB708265C9300E757BC</string>
+										<string>0070F7BD082CFA9600FAF338</string>
 										<key>history</key>
 										<array>
-											<string>00A3EB520824EC10003CD96A</string>
+											<string>00412EB708265C9300E757BC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -379,9 +378,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>00412EB808265C9300E757BC</string>
+				<string>0070F7B9082CFA5800FAF338</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>00412EB908265C9300E757BC</string>
+				<string>0070F7BA082CFA5800FAF338</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -515,7 +514,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>00A3EA660824DBC6003CD96A</string>
 		<string>/Users/mick/openDev/KisMACng/Subprojects/AirPortMenu/AirPortMenu.xcode</string>
 	</array>
 	<key>WindowString</key>

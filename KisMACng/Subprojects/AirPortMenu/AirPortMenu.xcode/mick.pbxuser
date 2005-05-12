@@ -10,6 +10,16 @@
 		vrLen = 1900;
 		vrLoc = 731;
 	};
+	0070F7BD082CFA9600FAF338 = {
+		fRef = 08FB7796FE84155DC02AAC07;
+		isa = PBXTextBookmark;
+		name = "main.c: 60";
+		rLen = 0;
+		rLoc = 2447;
+		rType = 0;
+		vrLen = 1900;
+		vrLoc = 731;
+	};
 	00A3EA510824DB5B003CD96A = {
 		activeArgIndex = 2147483647;
 		activeArgIndices = (
@@ -47,16 +57,6 @@
 	00A3EA590824DB7B003CD96A = {
 		indexTemplatePath = "";
 		isa = PBXCodeSenseManager;
-	};
-	00A3EB520824EC10003CD96A = {
-		fRef = 08FB7796FE84155DC02AAC07;
-		isa = PBXTextBookmark;
-		name = CoreMenuExtraAddMenuExtra;
-		rLen = 25;
-		rLoc = 1681;
-		rType = 0;
-		vrLen = 2050;
-		vrLoc = 302;
 	};
 	08FB7793FE84155DC02AAC07 = {
 		activeBuildStyle = 014CEA4A0018CE3211CA2923;
@@ -114,12 +114,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 136731678;
-			PBXWorkspaceStateSaveDate = 136731678;
+			PBXPerProjectTemplateStateSaveDate = 137165385;
+			PBXWorkspaceStateSaveDate = 137165385;
 		};
 		perUserProjectItems = {
 			00412EB708265C9300E757BC = 00412EB708265C9300E757BC;
-			00A3EB520824EC10003CD96A = 00A3EB520824EC10003CD96A;
+			0070F7BD082CFA9600FAF338 = 0070F7BD082CFA9600FAF338;
 		};
 		sourceControlManager = 00A3EA580824DB7B003CD96A;
 		userBuildSettings = {

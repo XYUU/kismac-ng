@@ -2,9 +2,9 @@
         
         File:			InstallController.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of the KisMAC Installer.
 
@@ -460,7 +460,9 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         break;
     case stateDoInstall:
         _prevEnabled = NO; //cannot go back to config
-        if ([self findKisMACPrefs]) {
+		if ([_progBar doubleValue] == 0) {
+			_currentState = stateInstallCanceled;
+		} else if ([self findKisMACPrefs]) {
             _currentState = stateInstallDone;
         } else 
             _currentState = stateConfigure;
@@ -477,8 +479,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         if ([self findWirelessDriverPatch]) [self reboot];
         [NSApp terminate:nil];
         break;
-    
-    
+	case stateInstallCanceled:
+        [NSApp terminate:nil];
+        break;
+		
     case stateCleanKisMAC:
         _currentState = stateRemovingKisMAC;
         break;
@@ -536,6 +540,9 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     case stateInstallDone:
         _currentState = stateConfirmConfigure;
         break;
+	case stateInstallCanceled:
+		break;
+		
     default:
         NSAssert(0, @"Illegal state in prev");
     }
@@ -573,33 +580,33 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     
     pool = [[NSAutoreleasePool alloc] init];
     
-    [self removeKisMACInstallation:[[self getPreviousInstallDir] stringByExpandingTildeInPath]];
+    if (![self removeKisMACInstallation:[[self getPreviousInstallDir] stringByExpandingTildeInPath]]) goto cancel;
     [_progBar incrementBy:1.0];
         
-    [self removeKisMACInstallation:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]];
+    if (![self removeKisMACInstallation:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]]) goto cancel;
     [_progBar incrementBy:1.0];
     
     if ([self findWirelessDriverPatch]) {
         [_installStatus setStringValue:@"Removing Wireless driver patch..."];
-        [self removeWirelessDriverPatch];
+        if (![self removeWirelessDriverPatch]) goto cancel;
         [_progBar incrementBy:1.0];
     }
     
     [_installStatus setStringValue:@"Installing KisMAC..."];
-    [self installKisMACToPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]];
+    if (![self installKisMACToPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]]) goto cancel;
     [_progBar incrementBy:1.0];
     
     [_installStatus setStringValue:@"Adjusting Permissions for KisMAC..."];
-    [self adjustKisMACPermissionsAtPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]];
+    if (![self adjustKisMACPermissionsAtPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]]) goto cancel;
     [_progBar incrementBy:1.0];
     
     if ([self findWirelessDriver] && ([_installPatch state] == NSOnState)) {
         [_installStatus setStringValue:@"Installing Wireless Patch..."];
-        [self installWirelessPatchToPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]];
+        if (![self installWirelessPatchToPath:[[[_targetDirectory stringValue] stringByExpandingTildeInPath] stringByResolvingSymlinksInPath]]) goto cancel;
         [_progBar incrementBy:1.0];
 
         [_installStatus setStringValue:@"Adjusting Permissions for Wireless Patch..."];
-        [self adjustWirelessPatchPermissions];
+        if (![self adjustWirelessPatchPermissions]) goto cancel;
         [_progBar incrementBy:1.0];
     }
     
@@ -611,6 +618,18 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     
     [self performSelectorOnMainThread:@selector(next:) withObject:nil waitUntilDone:NO];
     
+    [pool release];
+	
+	return;
+cancel:
+    [_installStatus setStringValue:@"Installation canceled..."];
+    [_progBar setDoubleValue:0];
+	        
+    [_next setEnabled:YES];
+    _nextEnabled = YES;
+    
+    [self performSelectorOnMainThread:@selector(next:) withObject:nil waitUntilDone:NO];
+	
     [pool release];
 }
 
@@ -705,7 +724,17 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 
         [_mainBox setContentView:_installDoneView];
         break;
+	case stateInstallCanceled:
+	    [NSApp requestUserAttention:NSInformationalRequest];
+        [_next setImage:[NSImage imageNamed:@"stop_active"]];
+        [_next setAlternateImage:[NSImage imageNamed:@"stop_blue"]];
         
+		[_restartWarning setStringValue:@""];
+		[_installationStatus setStringValue:@"Installation canceled!"];
+		
+        [_mainBox setContentView:_installDoneView];
+        break;
+	
     case stateRemovingKisMAC:
         _prevEnabled = NO;
         _nextEnabled = NO;

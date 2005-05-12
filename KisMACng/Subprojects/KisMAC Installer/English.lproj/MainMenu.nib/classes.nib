@@ -15,6 +15,7 @@
                 "_installSFPatchView" = NSView; 
                 "_installStatus" = NSTextField; 
                 "_installView" = NSView; 
+                "_installationStatus" = NSTextField; 
                 "_keepPrefs" = NSButtonCell; 
                 "_licenseView" = NSView; 
                 "_mainBox" = NSBox; 

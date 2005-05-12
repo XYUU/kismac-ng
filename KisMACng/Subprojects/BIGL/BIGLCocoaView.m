@@ -47,5 +47,6 @@
 -(void)dealloc {
     [_color release];
     [_subs release];
+	[super dealloc];
 }
 @end

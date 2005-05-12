@@ -396,6 +396,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "-mcpu=G3 -force_cpusubtype_ALL";
 				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
@@ -405,6 +406,7 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "-mcpu=G3 -force_cpusubtype_ALL";
 				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;
