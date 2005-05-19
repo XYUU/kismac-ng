@@ -35,6 +35,7 @@ enum _rowIndexes {
     indexEmptyLine1,
     indexChannel,
     indexOriginalChannel,
+	indexSupportedDataRates,
     indexSignal,
     indexMaxSignal,
     indexAvgSignal,
@@ -144,7 +145,9 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
                  return (col) ? NSLocalizedString(@"Channel", "table description") : [NSString stringWithFormat:@"%i", [_n channel]];
             case indexOriginalChannel:
                  return (col) ? NSLocalizedString(@"Main Channel", "table description") : [NSString stringWithFormat:@"%i", [_n originalChannel]];
-            case indexSignal:
+            case indexSupportedDataRates:
+			     return (col) ? NSLocalizedString(@"Supported Rates", "table description") : [_n rates];
+			case indexSignal:
                  return (col) ? NSLocalizedString(@"Signal", "table description") : [NSString stringWithFormat:@"%i", [_n curSignal]];
             case indexMaxSignal:
                  return (col) ? NSLocalizedString(@"MaxSignal", "table description") : [NSString stringWithFormat:@"%i", [_n maxSignal]];
@@ -253,7 +256,7 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
     if([aTableView isEqualTo:aTable])
-        return 24;
+        return 25;
     else if([aTableView isEqualTo:aClientTable])
         return [aClientKeys count];
     else if([aTableView isEqualTo:aShortTable])

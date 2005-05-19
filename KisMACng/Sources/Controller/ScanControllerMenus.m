@@ -707,11 +707,10 @@
     int i, j;
     NSMutableString *ms;
     
-    
     if (!wpaTestPasswordHash()) NSLog(@"WPA hash test failed");
     else NSLog(@"WPA hash test succeeded");
     
-    wpaPasswordHash("password", "IEEE", 4, output);
+    wpaPasswordHash("password", (const UInt8*)"IEEE", 4, output);
     ms = [NSMutableString string];
     for (i=0; i < WPA_PMK_LENGTH; i++) {
         j = output[i];
@@ -719,7 +718,7 @@
     }
     NSLog(@"Testvector 1 returned: %@", ms);
     
-    wpaPasswordHash("ThisIsAPassword", "ThisIsASSID", 11, output);
+    wpaPasswordHash("ThisIsAPassword", (const UInt8*)"ThisIsASSID", 11, output);
     ms = [NSMutableString string];
     for (i=0; i < WPA_PMK_LENGTH; i++) {
         j = output[i];

@@ -1,13 +1,10 @@
 
-inspect atheros
-athero jack 255 signal quality
 apple script support
 
 icon for lately active network
 
 adhoc - ignorieren?
 
-caching dictionary?
 BIArray? optimized for large datasets
 
 ---could be done with apple script---
@@ -19,14 +16,11 @@ rework and extend help files
 
 .021
 add better WPA detection
-show 802.11g/a/b accesspoint
 show ip addresses traffic...
 
 later
-more work on injection attacks
 multiple drivers at once
 wordlist attacks by john the ripper
-XML im/export
 graph in menu bar?
 
 GET /gif?&CT=53.000000:13.000000:100000&IC=&W=640&H=512&FAM=myblast HTTP/1.0

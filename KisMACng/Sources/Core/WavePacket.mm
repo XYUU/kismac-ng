@@ -59,6 +59,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
     
     [WaveHelper secureRelease:&_SSID];
 	[WaveHelper secureRelease:&_SSIDs];
+	_rateCount = 0;
+	
     while(length>2) {
         switch (*packet) {
         case IEEE80211_ELEMID_SSID:
@@ -74,6 +76,14 @@ bool inline is8021xPacket(const UInt8* fileData) {
 				}
 			}
             break;
+		case IEEE80211_ELEMID_RATES:
+		case IEEE80211_ELEMID_EXTENDED_RATES:
+			len=(*(packet+1));
+            if ((length >= len+2) && (len <= (MAX_RATE_COUNT - _rateCount))) {
+				memcpy(&_rates[_rateCount], packet+2, len);
+				_rateCount += len;
+			}
+			break;
         case IEEE80211_ELEMID_DSPARMS:
             len=(*(packet+1));
             if (len == 1 && length >= 3)
@@ -516,6 +526,10 @@ bool inline is8021xPacket(const UInt8* fileData) {
 }
 - (NSArray*)SSIDs {
     return _SSIDs;
+}
+- (UInt8)getRates:(UInt8*)rates {
+	memcpy(rates, _rates, _rateCount);
+	return _rateCount;
 }
 - (UInt8*) framebody {
     return _rawFrame + sizeof(WLFrame);

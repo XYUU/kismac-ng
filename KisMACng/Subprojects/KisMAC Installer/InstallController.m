@@ -86,12 +86,14 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     _currentState = stateWelcome;
     _nextEnabled = YES;
     
+	[NSApp setDelegate:self];
+	
     return self;
 }
 
 - (void)awakeFromNib {
     [self updateState];
-    [_prev setEnabled:_prevEnabled];
+	[_prev setEnabled:_prevEnabled];
 }
 
 #pragma mark -
@@ -770,4 +772,26 @@ cancel:
 
 }
 
+
+#pragma mark -
+
+- (void)quitInstaller:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertDefaultReturn) {
+        [NSApp terminate:nil];
+	} else {
+		_nextEnabled = YES;
+		[_next setEnabled:_nextEnabled];
+	}
+}
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
+	if (NSAppKitVersionNumber < 900) {
+		NSLog(@"MacOS is not 10.4! AppKitVersion: %f < 800", NSAppKitVersionNumber);
+		
+		NSBeginInformationalAlertSheet(@"Incompatible MacOS version!", @"Quit", @"Override this Warning", Nil, [self window], self, @selector(quitInstaller:returnCode:contextInfo:), nil, nil, @"This version of KisMAC requires at least MacOS 10.4 (Tiger). You will need to either update your operating system or get an older version of KisMAC from <http://kismac.binaervarianz.de/>.");
+
+		_nextEnabled = NO;
+		[_next setEnabled:_nextEnabled];
+	}
+}
 @end

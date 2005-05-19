@@ -300,9 +300,9 @@ struct _Prism_HEADER {
 } __attribute__((packed));
 
 - (WLFrame*) nextFrame {
-    static UInt8  frame[2364];
-    UInt8  tempframe[2364];
-    UInt32 frameSize = 2364;
+    static UInt8  frame[2500];
+    UInt8  tempframe[2500];
+    UInt32 frameSize = 2500;
     kern_return_t kernResult;
     UInt32 headerLength;
     WLFrame *f;

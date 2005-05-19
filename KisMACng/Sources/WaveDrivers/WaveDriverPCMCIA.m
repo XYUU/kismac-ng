@@ -241,8 +241,8 @@ typedef enum WLUCMethods {
 #pragma mark -
 
 - (WLFrame*) nextFrame {
-    static UInt8  frame[2364];
-    UInt32 frameSize = 2364;
+    static UInt8  frame[2500];
+    UInt32 frameSize = 2500;
     kern_return_t kernResult;
 
     while (!IODataQueueDataAvailable(_packetQueue)) {

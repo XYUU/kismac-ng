@@ -41,6 +41,8 @@
 #define AMOD(x, y) ((x) % (y) < 0 ? ((x) % (y)) + (y) : (x) % (y))
 #define N 256
 
+#define min(a, b)	(a) < (b) ? a : b
+
 struct graphStruct zeroGraphData;
 
 struct signalCoords {
@@ -95,7 +97,8 @@ int lengthSort(id string1, id string2, void *context)
     _primaryChannel = 0;
     curTrafficData = 0;
     curPacketData = 0;
-    
+    _rateCount = 0;
+	
     _SSID = Nil;
     _firstPacket = YES;
     _liveCaptured = NO;
@@ -158,7 +161,7 @@ int lengthSort(id string1, id string2, void *context)
     }
     
     for (int x=0; x<6; x++)
-        aRawID[x] = bssid[x];
+        _rawID[x] = bssid[x];
     
     _SSID=[[coder decodeObjectForKey:@"aSSID"] retain];
     _BSSID=[[coder decodeObjectForKey:@"aBSSID"] retain];
@@ -166,10 +169,10 @@ int lengthSort(id string1, id string2, void *context)
         if (_BSSID!=Nil && sscanf([_BSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
             NSLog(@"Error could not decode BSSID %@!", _BSSID);
         for (int x=0; x<6; x++)
-            aRawBSSID[x] = bssid[x];
+            _rawBSSID[x] = bssid[x];
     } else {
          for (int x=0; x<6; x++)
-            aRawBSSID[x] = bssid[0];
+            _rawBSSID[x] = bssid[0];
     }
     _date=[[coder decodeObjectForKey:@"aDate"] retain];
     aFirstDate=[[coder decodeObjectForKey:@"aFirstDate"] retain];
@@ -272,7 +275,7 @@ int lengthSort(id string1, id string2, void *context)
     _ID = [[NSString stringWithFormat:@"%2X%2X%2X%2X%2X%2X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]] retain];
     _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]] retain];
     for (int x=0; x<6; x++)
-        aRawID[x] = bssid[x];
+        _rawID[x] = bssid[x];
     
     wp._lat  = ns_coord * (ns_dir == 'N' ? 1.0 : -1.0);
     wp._long = ew_coord * (ew_dir == 'E' ? 1.0 : -1.0);
@@ -354,7 +357,7 @@ int lengthSort(id string1, id string2, void *context)
     }
     
     for (int x=0; x<6; x++)
-        aRawID[x] = bssid[x];
+        _rawID[x] = bssid[x];
     
     _SSID  = [[dict objectForKey:@"SSID"] retain];
     _SSIDs = [[dict objectForKey:@"SSIDs"] retain];
@@ -363,14 +366,18 @@ int lengthSort(id string1, id string2, void *context)
         if (_BSSID!=Nil && sscanf([_BSSID cString], "%2X:%2X:%2X:%2X:%2X:%2X", &bssid[0], &bssid[1], &bssid[2], &bssid[3], &bssid[4], &bssid[5])!=6) 
             NSLog(@"Error could not decode BSSID %@!", _BSSID);
         for (int x=0; x<6; x++)
-            aRawBSSID[x] = bssid[x];
+            _rawBSSID[x] = bssid[x];
     } else {
          for (int x=0; x<6; x++)
-            aRawBSSID[x] = bssid[0];
+            _rawBSSID[x] = bssid[0];
     }
     _date=[[dict objectForKey:@"date"] retain];
     aFirstDate = [[dict objectForKey:@"firstDate"] retain];
     
+	data = [dict objectForKey:@"rates"];
+	_rateCount = min([data length], MAX_RATE_COUNT);
+	[data getBytes:_rates length:_rateCount];
+	
     data = [dict objectForKey:@"ivData0"];
     if (data) _ivData[0] = [[WaveWeakContainer alloc] initWithData:data];
     data = [dict objectForKey:@"ivData1"];
@@ -508,6 +515,8 @@ int lengthSort(id string1, id string2, void *context)
 	
 	[dict setObject:[NSNumber numberWithBool:_liveCaptured] forKey:@"liveCaptured"];
 	if (_bytes > 0) [dict setObject:[NSNumber numberWithDouble:_bytes] forKey:@"bytes"];
+	
+	if (_rateCount) [dict setObject:[NSData dataWithBytes:_rates length:_rateCount] forKey:@"rates"];
 	
 	if (wp._lat != 0) [dict setObject:[NSNumber numberWithFloat:wp._lat] forKey:@"lat"];
 	if (wp._long != 0) [dict setObject:[NSNumber numberWithFloat:wp._long] forKey:@"long"];
@@ -751,7 +760,7 @@ int lengthSort(id string1, id string2, void *context)
 	
     if (!_ID) {
         _ID = [[w IDString] retain];
-        [w ID:aRawID];
+        [w ID:_rawID];
     }
     
     _curSignal = [w signal];
@@ -778,7 +787,7 @@ int lengthSort(id string1, id string2, void *context)
     
     if (_BSSID==Nil) {
         _BSSID=[[NSString stringWithString:[w BSSIDString]] retain];
-        [w BSSID:aRawBSSID];
+        [w BSSID:_rawBSSID];
     }
     
     wep = [w wep];
@@ -799,7 +808,7 @@ int lengthSort(id string1, id string2, void *context)
             body = [w framebody];
             bodyLength = [w bodyLength];
             
-            if (_isWep > encryptionTypeNone && bodyLength > 3) memcpy(aIV, body, 3);	//sets the last IV thingy
+            if (_isWep > encryptionTypeNone && bodyLength > 3) memcpy(_IV, body, 3);	//sets the last IV thingy
             
             if (_isWep==encryptionTypeWEP || _isWep==encryptionTypeWEP40) {
                 
@@ -838,7 +847,9 @@ int lengthSort(id string1, id string2, void *context)
         case IEEE80211_TYPE_MGT:        //this is a management packet
 			if ([w SSIDs]) [WaveHelper secureReplace:&_SSIDs withObject:[w SSIDs]];
 			[self updateSSID:[w SSID] withSound:sound]; //might contain SSID infos
-            if ([w primaryChannel]) _primaryChannel = [w primaryChannel];
+            
+			if ([w primaryChannel]) _primaryChannel = [w primaryChannel];
+			if ([w subType] == IEEE80211_SUBTYPE_BEACON) _rateCount = [w getRates:_rates];
     }
 
     //update the clients to out client array
@@ -884,7 +895,7 @@ int lengthSort(id string1, id string2, void *context)
     if (!_ID) {
         _ID = [[NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
                 info->macAddress[3], info->macAddress[4], info->macAddress[5]] retain];
-        memcpy(aRawID, info->macAddress, sizeof(info->macAddress));
+        memcpy(_rawID, info->macAddress, sizeof(info->macAddress));
     }
             
     _curSignal = info->signal - info->noise;
@@ -905,7 +916,7 @@ int lengthSort(id string1, id string2, void *context)
     if (_BSSID==Nil) {
         _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
                 info->macAddress[3], info->macAddress[4], info->macAddress[5]] retain];
-        memcpy(aRawBSSID, info->macAddress, sizeof(info->macAddress));
+        memcpy(_rawBSSID, info->macAddress, sizeof(info->macAddress));
     }
     
     wep = (info->flags & IEEE80211_CAPINFO_PRIVACY_LE) ? encryptionTypeWEP : encryptionTypeNone;
@@ -1096,6 +1107,14 @@ int lengthSort(id string1, id string2, void *context)
     _vendor=[[WaveHelper vendorForMAC:_BSSID] retain];
     return _vendor;
 }
+- (NSString*)rates {
+	int i;
+	NSMutableArray *a = [NSMutableArray array];
+	for (i = 0; i < _rateCount; i++) {
+		[a addObject:[NSNumber numberWithFloat:((float)(_rates[i] & 0x7F)) / 2]];
+	}
+	return [a componentsJoinedByString:@", "];
+}
 - (NSString*)comment {
     return aComment;
 }
@@ -1184,13 +1203,13 @@ int lengthSort(id string1, id string2, void *context)
     return _password;
 }
 - (NSString*)lastIV {
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X", aIV[0], aIV[1], aIV[2]];
+    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X", _IV[0], _IV[1], _IV[2]];
 }
 - (UInt8*)rawBSSID {
-    return aRawBSSID;
+    return _rawBSSID;
 }
 - (UInt8*)rawID {
-    return aRawID;
+    return _rawID;
 }
 - (NSDictionary*)coordinates {
     return _coordinates;

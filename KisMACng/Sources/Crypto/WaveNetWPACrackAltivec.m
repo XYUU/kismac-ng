@@ -296,11 +296,11 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
             if ([[wc ID] isEqualToString: _BSSID]) {
                 keys--;
             } else {
-                if (memcmp(aRawBSSID, [[wc rawID] bytes], 6)>0) {
+                if (memcmp(_rawBSSID, [[wc rawID] bytes], 6)>0) {
                     memcpy(&c[curKey].ptkInput[0], [[wc rawID] bytes] , 6);
-                    memcpy(&c[curKey].ptkInput[6], aRawBSSID, 6);
+                    memcpy(&c[curKey].ptkInput[6], _rawBSSID, 6);
                 } else {
-                    memcpy(&c[curKey].ptkInput[0], aRawBSSID, 6);
+                    memcpy(&c[curKey].ptkInput[0], _rawBSSID, 6);
                     memcpy(&c[curKey].ptkInput[6], [[wc rawID] bytes] , 6);
                 }
                 

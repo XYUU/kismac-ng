@@ -436,11 +436,11 @@
     for (i=0; i<[container count]; i++) {
         net = [container netAtIndex:i];
         
-        if (sscanf([[net latitude] cString], "%f%c", &f, &c)==2) fprintf(fd, "%c %f\t",c,f);
-        else fprintf(fd, "N 0.000000\t");
+        if (sscanf([[net latitude] cString], "%f%c", &f, &c)==2) fprintf(fd, "%c %f0\t",c,f);
+        else fprintf(fd, "N 0.0000000\t");
         
-        if (sscanf([[net longitude] cString], "%f%c", &f, &c)==2) fprintf(fd, "%c %f\t",c,f);
-        else fprintf(fd, "E 0.000000\t");
+        if (sscanf([[net longitude] cString], "%f%c", &f, &c)==2) fprintf(fd, "%c %f0\t",c,f);
+        else fprintf(fd, "E 0.0000000\t");
 
         fprintf(fd, "( %s )\t", [[net SSID] cString]);
         switch ([net type]) {

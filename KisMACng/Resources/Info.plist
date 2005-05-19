@@ -42,7 +42,7 @@
 	<key>CFBundleExecutable</key>
 	<string>KisMAC</string>
 	<key>CFBundleGetInfoString</key>
-	<string>KisMAC version 0.2a</string>
+	<string>KisMAC version 0.2a [$Revision$]</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>KisMACHelp</string>
 	<key>CFBundleHelpBookName</key>

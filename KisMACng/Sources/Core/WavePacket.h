@@ -35,6 +35,8 @@
 // 1201 = 5 minutes (plus one) for 0.25s interval
 #define MAX_YIELD_SIZE (int)1200
 
+#define MAX_RATE_COUNT 64
+
 //this is given to us by the driver
 struct sAirportFrame { // 14 Byte
     UInt16 status;
@@ -101,8 +103,11 @@ typedef enum _leapAuthCode {
     bool _isFrDS;		//from access point?
     bool _isEAP;
 
-    NSString *_SSID;
-    NSMutableArray *_SSIDs;
+    NSString		*_SSID;
+    NSMutableArray	*_SSIDs;
+	
+	UInt8			_rateCount;
+	UInt8			_rates[MAX_RATE_COUNT];
 	
 	NSString *_username;
     NSData   *_challenge;
@@ -145,6 +150,7 @@ typedef enum _leapAuthCode {
 - (int)isResolved;	//for wep cracking 
 - (NSString*)SSID;
 - (NSArray*)SSIDs;
+- (UInt8)getRates:(UInt8*)rates;
 
 - (UInt8*)rawSenderID;
 - (NSString*)clientFromID;

@@ -1,3 +1,10 @@
+can show rates
+fixed minor problem with MACJack cards
+warning if not running tiger
+increasing reliability of Airport reload (aggressive reload)
+
+till R65:
+
 traffic view -> opengl
 new design
 de.binaervarianz.kismac

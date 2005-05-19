@@ -35,34 +35,40 @@ int main (int argc, const char * argv[]) {
     CFURLRef url;
     WirelessContextPtr airportContext;
    
-    if (argc==1) return -1;
-    if (strcmp(argv[1],"start")==0) {
-            url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault,c,strlen((char*)c),true);
-            CoreMenuExtraAddMenuExtra(url, 1, 0, 0, 0, 0);
-            CFRelease(url);
-            
-             //see whether we can disable the airport via API
-            if (WirelessIsAvailable()) {
-                if (WirelessAttach(&airportContext, 0) == 0) {
-                    WirelessSetEnabled(airportContext, 1);
-                    WirelessSetPower(airportContext, 1);
-                    WirelessDetach(airportContext);
-                }
-                airportContext = NULL;
-            }
+    if (argc==1) {
+		if (WirelessIsAvailable()) return 0;
+		return 1;
+    }
+	if (strcmp(argv[1],"start")==0) {
+		url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault,c,strlen((char*)c),true);
+		CoreMenuExtraAddMenuExtra(url, 1, 0, 0, 0, 0);
+		CFRelease(url);
+		
+		 //see whether we can disable the airport via API
+		if (WirelessIsAvailable()) {
+			if (WirelessAttach(&airportContext, 0) == 0) {
+				WirelessSetEnabled(airportContext, 1);
+				WirelessSetPower(airportContext, 1);
+				WirelessDetach(airportContext);
+			} else return 2;
+			airportContext = NULL;
+		}
+		return 0;
 	} else if (strcmp(argv[1],"enable")==0) {
 		if (WirelessIsAvailable()) {
 			if (WirelessAttach(&airportContext, 0) == 0) {
 				WirelessSetEnabled(airportContext, 1);
 				WirelessSetPower(airportContext, 1);
 				WirelessDetach(airportContext);
-			}
+			} else return 2;
 			airportContext = NULL;
 		}
-    } else {
+		return 0;
+    } else if (strcmp(argv[1],"stop")==0) {
         CoreMenuExtraGetMenuExtra(CFSTR("com.apple.menuextra.airport"),&g);
         CoreMenuExtraRemoveMenuExtra(g,0);
         //CFRelease(g);
+		return 0;
     }
-    return 0;
+    return 1;
 }

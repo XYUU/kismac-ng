@@ -260,9 +260,9 @@ typedef struct {
 } rfmonHeader;
 
 - (WLFrame*) nextFrame {
-    static UInt8  frame[2300];
-    UInt8  tempframe[2300];
-    UInt32 frameSize = 2300;
+    static UInt8  frame[2500];
+    UInt8  tempframe[2500];
+    UInt32 frameSize = 2500;
     kern_return_t kernResult;
     UInt32 headerLength;
     WLFrame *f;

@@ -45,30 +45,30 @@ struct graphStruct {
 @class WaveWeakContainer;
 
 @interface WaveNet : NSObject <UKTest> {
-    int _netID;					//network ID
-    int _maxSignal;				//biggest signal ever
-    int _curSignal;				//current signal
-    int _channel;				//last channel
-    int _primaryChannel;       //channel which is brodacsted by AP
-    networkType _type;          //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel 4=probe 5=lucent tunnel
-    int _packets;				//# of packets
-    int _packetsPerChannel[16];	//how many packets on each channel
-    int _dataPackets;			//# of data packets
-    double _bytes;				//bytes, float because of size
-    int graphLength;
+    int					_netID;					//network ID
+    int					_maxSignal;				//biggest signal ever
+    int					_curSignal;				//current signal
+    int					_channel;				//last channel
+    int					_primaryChannel;       //channel which is brodacsted by AP
+    networkType			_type;          //0=unknown, 1=ad-hoc, 2=managed, 3=tunnel 4=probe 5=lucent tunnel
+    int					_packets;				//# of packets
+    int					_packetsPerChannel[16];	//how many packets on each channel
+    int					_dataPackets;			//# of data packets
+    double				_bytes;				//bytes, float because of size
+    int					graphLength;
     struct graphStruct *graphData;
-    encryptionType _isWep;      //0=unknown, 1=disabled, 2=enabled 3=40-bit 4-WPA
-    UInt8 aIV[3];				//last iv
-    UInt8 aRawID[6];			//our id
-    UInt8 aRawBSSID[6];			//our bssid
-    UInt8 aPoint1[6];			//tunnel partner 1
-    UInt8 aPoint2[6];			//tunnel partner 2
-    bool _gotData;
-    bool _firstPacket;
-    bool _liveCaptured;
-	bool _graphInit;
-	NSDictionary *_cache;
-    bool _cacheValid;
+    encryptionType		_isWep;      //0=unknown, 1=disabled, 2=enabled 3=40-bit 4-WPA
+    UInt8				_IV[3];				//last iv
+    UInt8				_rawID[6];			//our id
+    UInt8				_rawBSSID[6];			//our bssid
+	UInt8				_rateCount;
+	UInt8				_rates[MAX_RATE_COUNT];
+    bool				_gotData;
+    bool				_firstPacket;
+    bool				_liveCaptured;
+	bool				_graphInit;
+	NSDictionary		*_cache;
+    bool				_cacheValid;
 
     NSRecursiveLock *_dataLock;
     
@@ -143,6 +143,7 @@ struct graphStruct {
 - (NSDate *)firstSeenDate;
 - (NSString*)data;
 - (NSString*)getVendor;
+- (NSString*)rates;
 - (NSArray*)cryptedPacketsLog;      //a couple of encrypted packets
 - (NSMutableArray*)arpPacketsLog;	//a couple of reinject packets
 - (NSMutableArray*)ackPacketsLog;	//a couple of reinject packets
