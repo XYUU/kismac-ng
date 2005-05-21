@@ -266,6 +266,14 @@ extern WIErr WirelessScan(
 	CFArrayRef *apList,
 	const UInt32 stripDups);
 
+//reverse engineered by mick
+extern WIErr WirelessCreateScanResults(
+	WirelessContextPtr inContext,
+	CFDataRef ssidFilter,
+	CFArrayRef *apList,
+	CFArrayRef *adhocList,
+	const UInt32 stripDups);
+
 /*
  *  WirelessJoin()
  *

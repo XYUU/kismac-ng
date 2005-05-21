@@ -107,6 +107,7 @@
                 changeSearchValue = id; 
                 clearNetwork = id; 
                 closeActiveWindow = id; 
+                deautheticateAllNetworks = id; 
                 deautheticateNetwork = id; 
                 debugBeaconFlood = id; 
                 debugExportTrafficView = id; 
@@ -144,6 +145,8 @@
                 "_authFloodMenu" = NSMenuItem; 
                 "_channelProg" = SpinChannel; 
                 "_container" = WaveContainer; 
+                "_deauthAllMenu" = NSMenuItem; 
+                "_deauthMenu" = NSMenuItem; 
                 "_debugMenu" = NSMenuItem; 
                 "_detailsButton" = NSButton; 
                 "_detailsDrawerMenu" = NSMenuItem; 
@@ -178,7 +181,6 @@
                 aBruteForceMenu = NSMenu; 
                 aChannelMenu = NSMenu; 
                 aCrackMenu = NSMenu; 
-                aDeauthMenu = NSMenuItem; 
                 aDetailsTable = ColoredRowTableView; 
                 aInfoController = InfoController; 
                 aInjPacketsMenu = NSMenuItem; 

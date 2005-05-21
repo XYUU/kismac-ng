@@ -10,6 +10,8 @@
 	<string>Acer Access Point</string>
 	<key>00:03:93:EB</key>
 	<string>Apple Airport Extreme</string>
+	<key>00:05:4E:42</key>
+	<string>IBM Thinkpad</string>
 	<key>00:05:8B:D0</key>
 	<string>Compaq WL-100</string>
 	<key>00:09:5B:74</key>
@@ -20,6 +22,8 @@
 	<string>Cisco AIR-LMC352</string>
 	<key>00:0D:54:9F</key>
 	<string>3Com 3CRWE154G72 54MbitCard</string>
+	<key>00:0D:93:86</key>
+	<string>AirPort Extreme Card</string>
 	<key>00:11:24:08</key>
 	<string>Apple Airport Express</string>
 	<key>00:12:DA:9E</key>

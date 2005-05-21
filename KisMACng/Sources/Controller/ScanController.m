@@ -138,7 +138,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [_showMap      setImage: [NSImage imageNamed:@"map-button.tif"]];
     [_showDetails  setImage: [NSImage imageNamed:@"details-button.tif"]];
     
-    [_networkTable setDoubleAction:@selector(showClient:)];
+    [_networkTable setDoubleAction:@selector(showDetails:)];
     [_window makeFirstResponder:_networkTable]; //select the network table not the search box
     
     [self menuSetEnabled:NO menu:aNetworkMenu];
@@ -395,10 +395,6 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [_detailsDrawer openOnEdge:NSMaxXEdge];
     [sender setTitle: NSLocalizedString(@"Hide Details", "menu item")];
     _detailsPaneVisibile = YES;
-}
-
-- (IBAction)showClient:(id)sender {
-    if ([_networkTable selectedRow]>=0) [self showDetailsFor:[_container netAtIndex:[_networkTable selectedRow]]];
 }
 
 - (IBAction)showNetHierarch:(id)sender {

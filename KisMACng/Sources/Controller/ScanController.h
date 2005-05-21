@@ -121,7 +121,8 @@ typedef enum {
     IBOutlet NSMenu             *aChannelMenu;
     IBOutlet NSMenuItem         *_detailsDrawerMenu;
     IBOutlet NSMenuItem         *_debugMenu;
-    IBOutlet NSMenuItem         *aDeauthMenu;
+    IBOutlet NSMenuItem         *_deauthMenu;
+	IBOutlet NSMenuItem			*_deauthAllMenu;
     IBOutlet NSMenuItem         *_authFloodMenu;
     IBOutlet NSMenuItem         *aInjPacketsMenu;
     IBOutlet NSMenuItem         *_showNetInMap;
@@ -142,7 +143,6 @@ typedef enum {
 - (IBAction)updateNetworkTable:(id)sender complete:(bool)complete;
 
 - (IBAction)showInfo:(id)sender;
-- (IBAction)showClient:(id)sender;
 - (IBAction)showNetHierarch:(id)sender;
 
 - (IBAction)changeSearchValue:(id)sender;
@@ -171,6 +171,7 @@ typedef enum {
 - (IBAction)joinNetwork:(id)sender;
 
 - (IBAction)deautheticateNetwork:(id)sender;
+- (IBAction)deautheticateAllNetworks:(id)sender;
 - (IBAction)authFloodNetwork:(id)sender;
 - (IBAction)injectPackets:(id)sender;
 

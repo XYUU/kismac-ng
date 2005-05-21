@@ -110,6 +110,7 @@ struct __beaconFrame {
 
 //active attacks
 - (NSString*) tryToInject:(WaveNet*)net;
+- (void) setDeauthingAll:(BOOL)deauthing;
 - (bool) authFloodNetwork:(WaveNet*)net;
 - (bool) deauthenticateNetwork:(WaveNet*)net atInterval:(int)interval;
 - (bool) deauthenticateClient:(UInt8*)client inNetworkWithBSSID:(UInt8*)bssid;

@@ -27,7 +27,6 @@
 #import <UnitKit/UnitKit.h>
 #import "WavePacket.h"
 #import "ImportController.h"
-#import "Apple80211.h"
 
 enum {
     trafficData,
@@ -183,7 +182,7 @@ struct graphStruct {
 - (bool)joinNetwork;
 
 - (void)parsePacket:(WavePacket*) w withSound:(bool)sound;
-- (void)parseAppleAPIData:(WirelessNetworkInfo*)info;
+- (void)parseAppleAPIData:(NSDictionary*)info;
 
 - (void)sortByColumn:(NSString*)ident order:(bool)ascend;
 

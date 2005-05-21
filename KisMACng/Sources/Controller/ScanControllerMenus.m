@@ -502,9 +502,18 @@
 	
 }
 - (IBAction)deautheticateNetwork:(id)sender {
-    if ([aDeauthMenu state]==NSOffState && [self startActiveAttack] && [scanner deauthenticateNetwork:_curNet atInterval:100]) {
-        [aDeauthMenu setState:NSOnState];
-        [aDeauthMenu setTitle:[NSLocalizedString(@"Deauthenticating ", "menu item") stringByAppendingString:[_curNet BSSID]]];
+    if ([_deauthMenu state]==NSOffState && [self startActiveAttack] && [scanner deauthenticateNetwork:_curNet atInterval:100]) {
+        [_deauthMenu setState:NSOnState];
+        [_deauthMenu setTitle:[NSLocalizedString(@"Deauthenticating ", "menu item") stringByAppendingString:[_curNet BSSID]]];
+    } else {
+        [self stopActiveAttacks];
+    }
+}
+- (IBAction)deautheticateAllNetworks:(id)sender {
+    if ([sender state]==NSOffState && [self startActiveAttack]) {
+		if (!_scanning) [self startScan];
+		[scanner setDeauthingAll:YES];
+        [sender setState:NSOnState];
     } else {
         [self stopActiveAttacks];
     }

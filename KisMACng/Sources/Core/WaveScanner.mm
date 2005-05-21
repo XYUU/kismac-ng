@@ -122,8 +122,7 @@ got:
 //does the active scanning (extra thread)
 - (void)doActiveScan:(WaveDriver*)wd {
     NSArray *nets;
-    NSData *rawData;
-    WirelessNetworkInfo *info;
+    NSDictionary *network;
     unsigned int i;
     float interval;
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
@@ -135,10 +134,8 @@ got:
         
         if (nets) {
             for(i=0; i<[nets count]; i++) {
-                rawData = [nets objectAtIndex:i];
-                info = (WirelessNetworkInfo *)[rawData bytes];
-                
-                [_container addAppleAPIData:info];
+                network = [nets objectAtIndex:i];                
+                [_container addAppleAPIData:network];
             }
         }
         [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
@@ -223,7 +220,8 @@ got:
 				if ((dumpFilter==1)||((dumpFilter==2)&&([w type]==IEEE80211_TYPE_DATA))||((dumpFilter==3)&&([w isResolved]!=-1))) [w dump:f]; //dump if needed
 				
 				if (_deauthing && [w toDS]) {
-					[self deauthenticateClient:[w rawSenderID] inNetworkWithBSSID:[w rawBSSID]];
+					if (![_container IDFiltered:[w rawSenderID]] && ![_container IDFiltered:[w rawBSSID]])
+						[self deauthenticateClient:[w rawSenderID] inNetworkWithBSSID:[w rawBSSID]];
 				}
 				
 				if ((geiger!=Nil) && ((_packets % _geigerInt)==0)) {
@@ -479,6 +477,10 @@ error:
 
 #pragma mark -
 
+- (void) setDeauthingAll:(BOOL)deauthing {
+	_deauthing = deauthing;
+}
+
 - (bool) deauthenticateNetwork:(WaveNet*)net atInterval:(int)interval {
     int tmp[6];
     UInt8 x[6];
@@ -530,7 +532,7 @@ error:
     memcpy(frame.hdr.address2, bssid, 6);
     memcpy(frame.hdr.address3, bssid, 6);
     frame.hdr.dataLen=2;
-    frame.reason=NSSwapHostShortToLittle(2);
+    frame.reason=NSSwapHostShortToLittle(1);
     
     [w sendFrame:(UInt8*)&frame withLength:sizeof(frame) atInterval:0];
     

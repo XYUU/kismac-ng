@@ -264,8 +264,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>7</integer>
-									<integer>2</integer>
+									<integer>22</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -308,7 +307,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>OpenHAL5212.cpp</string>
+								<string>AtheroJack.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,27 +315,24 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>OpenHAL5212.cpp</string>
+										<string>AtheroJack.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>008A938E082E033600B0C1D8</string>
+										<string>006E5503083CEC2500F21462</string>
 										<key>history</key>
 										<array>
 											<string>00A3E9A00824478F003CD96A</string>
 											<string>000EAB9A0828956D003819B4</string>
-											<string>008A9387082E033600B0C1D8</string>
-											<string>008A9388082E033600B0C1D8</string>
-											<string>008A9389082E033600B0C1D8</string>
+											<string>006E54FF083CEC2500F21462</string>
+											<string>006E5500083CEC2500F21462</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>00A3E9A20824478F003CD96A</string>
 											<string>000EAB9C0828956D003819B4</string>
-											<string>008A938A082E033600B0C1D8</string>
-											<string>008A938B082E033600B0C1D8</string>
-											<string>008A938C082E033600B0C1D8</string>
-											<string>008A938D082E033600B0C1D8</string>
+											<string>006E5501083CEC2500F21462</string>
+											<string>006E5502083CEC2500F21462</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -394,9 +390,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>008A938F082E033600B0C1D8</string>
+				<string>006E54F7083CEA1B00F21462</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>008A9390082E033600B0C1D8</string>
+				<string>006E54F8083CEA1B00F21462</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>

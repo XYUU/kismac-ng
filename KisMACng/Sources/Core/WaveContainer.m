@@ -27,6 +27,7 @@
 #import "WaveHelper.h"
 #import "KisMACNotifications.h"
 #import "quicksort.h"
+#import "Apple80211.h"
 
 //TODO make _idList binary search compatible 
 // AVL trees?!
@@ -516,15 +517,23 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
 
 #pragma mark -
 
-- (unsigned int) findNetwork:(unsigned char*)ID {
+- (BOOL)IDFiltered:(const unsigned char*)ID {
+	unsigned int i;
+	
+	for (i=0; i<_filterCount; i++)
+		if (memcmp(ID, _filter[i], 6)==0) return YES;
+	
+	return NO;
+}
+
+- (unsigned int) findNetwork:(const unsigned char*)ID {
     unsigned int i, lentry;
     unsigned int entry = 0xFFFFFFFF;
     unsigned int l = 0;
     
     
     //see if it is filtered
-    for (i=0; i<_filterCount; i++)
-        if (memcmp(ID, _filter[i], 6)==0) return 0xFFFFFFFF;
+    if ([self IDFiltered:ID]) return 0xFFFFFFFF;
 
     
     //lookup the net in the hashtable
@@ -585,15 +594,16 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     return YES;
 }
 
-- (bool) addAppleAPIData:(WirelessNetworkInfo*)i {
+- (bool) addAppleAPIData:(NSDictionary*)net {
     unsigned int entry;
+	NSParameterAssert(net);
 
     if (_dropAll) return YES;
-    
-    entry = [self findNetwork:i->macAddress];
+
+    entry = [self findNetwork:[[net objectForKey:@"BSSID"] bytes]];
     if (entry == 0xFFFFFFF) return NO;                          //the object is filtered...
     
-    [_idList[entry].net parseAppleAPIData:i];                   //add the data to the network
+    [_idList[entry].net parseAppleAPIData:net];                   //add the data to the network
     _idList[entry].changed = YES;
     
     return YES;

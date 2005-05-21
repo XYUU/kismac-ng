@@ -189,15 +189,20 @@ bool inline is8021xPacket(const UInt8* fileData) {
             if (_length >= 24 && is8021xPacket((UInt8*)(f+1))) {
                 _isEAP = YES;
                 
-                if ([self isWPAKeyPacket]) _isWep = encryptionTypeWPA;
+                if ([self isWPAKeyPacket]) 
+					_isWep = encryptionTypeWPA;
                 else if ([self isLEAPKeyPacket]) _isWep = encryptionTypeLEAP;
-				else if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
-                else if (f->frameControl & IEEE80211_WEP) _isWep = encryptionTypeWEP;     //is just WEP
+                else if (f->frameControl & IEEE80211_WEP) {
+					if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
+					else _isWep = encryptionTypeWEP;     //is just WEP
+				}
                 else _isWep = encryptionTypeNone;
             } else {
-                if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
-                else if (f->frameControl & IEEE80211_WEP) _isWep = encryptionTypeWEP;     //is just WEP
-                else _isWep = encryptionTypeNone;
+                if (f->frameControl & IEEE80211_WEP) {     //is just WEP
+					if ((_length > 16) && (data[3] & WPA_EXT_IV_PRESENT)) _isWep = encryptionTypeWPA;
+					else _isWep = encryptionTypeWEP;
+				}
+				else _isWep = encryptionTypeNone;
             }
             break;            
         case IEEE80211_TYPE_CTL: //Control Frames
@@ -257,7 +262,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
                     [self parseTaggedData:((unsigned char*)f)+sizeof(WLFrame)+10 length:_length-10]; //10 byte fixed info
                     break;
                 case IEEE80211_SUBTYPE_DEAUTH:
-                    NSLog(@"ATTENTION! Recieved deauthentication frame. You might want to check for other WiFi people.");
+                    //NSLog(@"ATTENTION! Recieved deauthentication frame. You might want to check for other WiFi people.");
+					break;
             }
             break;
         default:

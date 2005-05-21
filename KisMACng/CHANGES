@@ -1,3 +1,11 @@
+R67:
+
+Deauth All Networks
+fixed bug false WPA detection
+WPA detection in active mode
+
+R66:
+
 can show rates
 fixed minor problem with MACJack cards
 warning if not running tiger

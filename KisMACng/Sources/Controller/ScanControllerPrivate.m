@@ -379,9 +379,10 @@
     _activeAttackNetID = Nil;
     
     [scanner stopSendingFrames];
+	[scanner setDeauthingAll:NO];
     
-    [aDeauthMenu setState: NSOffState];
-    [aDeauthMenu setTitle: NSLocalizedString(@"Deauthenticate", "menu item. description must be the same as in MainMenu.nib!")];
+    [_deauthMenu setState: NSOffState];
+    [_deauthMenu setTitle: NSLocalizedString(@"Deauthenticate", "menu item. description must be the same as in MainMenu.nib!")];
     [_authFloodMenu setState: NSOffState];
     [_authFloodMenu setTitle: NSLocalizedString(@"Authentication Flood", "menu item. description must be the same as in MainMenu.nib!")];
     [aInjPacketsMenu setState: NSOffState];

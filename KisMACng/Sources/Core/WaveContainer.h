@@ -90,12 +90,13 @@ typedef struct WaveNetEntry {
 - (void) sortWithShakerByColumn:(NSString*)ident order:(bool)ascend;
 
 //for adding data
+- (BOOL) IDFiltered:(const unsigned char*)ID;
 - (bool) addPacket:(WavePacket*)p liveCapture:(bool)live;
-- (bool) addAppleAPIData:(WirelessNetworkInfo*)i;
+- (bool) addAppleAPIData:(NSDictionary*)net;
 - (bool) addNetwork:(WaveNet*)net;
 
 - (unsigned int) count;
-- (WaveNet*) netAtIndex:(unsigned int)index;
+- (WaveNet*) netAtIndex:(unsigned int) index;
 - (WaveNet*) netForKey:(unsigned char*) ID;
 - (NSMutableArray*) allNets;
 

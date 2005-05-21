@@ -887,22 +887,31 @@ int lengthSort(id string1, id string2, void *context)
     [_dataLock unlock];
 }
 
-- (void)parseAppleAPIData:(WirelessNetworkInfo*)info {
+- (void)parseAppleAPIData:(NSDictionary*)info {
     encryptionType wep;
-   
+    const char *mac;
+	int flags;
+	
+	NSParameterAssert(info);
+	
 	_cacheValid = NO;
 	
     if (!_ID) {
-        _ID = [[NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
-                info->macAddress[3], info->macAddress[4], info->macAddress[5]] retain];
-        memcpy(_rawID, info->macAddress, sizeof(info->macAddress));
+        mac = (const char*)[[info objectForKey:@"BSSID"] bytes];
+		NSAssert([[info objectForKey:@"BSSID"] length] == 6, @"BSSID length is not 6");
+        memcpy(_rawID, mac, 6);
+		memcpy(_rawBSSID, mac, 6);
+
+        _ID = [[NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", _rawID[0], _rawID[1], _rawID[2],
+                _rawID[3], _rawID[4], _rawID[5]] retain];
+        _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", _rawBSSID[0], _rawBSSID[1], _rawBSSID[2],
+                _rawBSSID[3], _rawBSSID[4], _rawBSSID[5]] retain];
     }
-            
-    _curSignal = info->signal - info->noise;
+        
+    _curSignal = [[info objectForKey:@"signal"] intValue] - [[info objectForKey:@"noise"] intValue];
     if (_curSignal<0) _curSignal = 0;
     
-    _channel = info->channel;
-    _primaryChannel = _channel;
+    _primaryChannel = _channel = [[info objectForKey:@"channel"] intValue];
     if (_packetsPerChannel[_channel]==0) {
         if (!_firstPacket) [[NSNotificationCenter defaultCenter] postNotificationName:KisMACViewItemChanged object:self];
         _packetsPerChannel[_channel] = 1;
@@ -912,27 +921,27 @@ int lengthSort(id string1, id string2, void *context)
     //not much though
     curSignalData += _curSignal;
     curPacketData++;
-    
-    if (_BSSID==Nil) {
-        _BSSID = [[NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", info->macAddress[0], info->macAddress[1], info->macAddress[2],
-                info->macAddress[3], info->macAddress[4], info->macAddress[5]] retain];
-        memcpy(_rawBSSID, info->macAddress, sizeof(info->macAddress));
+	
+	flags = [[info objectForKey:@"capability"] intValue];
+	if (CFBooleanGetValue((CFBooleanRef)[info objectForKey:@"isWPA"])) {
+		wep = encryptionTypeWPA;
+	} else {
+		wep = (flags & IEEE80211_CAPINFO_PRIVACY_LE) ? encryptionTypeWEP : encryptionTypeNone;
     }
-    
-    wep = (info->flags & IEEE80211_CAPINFO_PRIVACY_LE) ? encryptionTypeWEP : encryptionTypeNone;
-    if (_isWep!=wep) {
-        _isWep=wep;	//check if wep is enabled
+	
+	if (_isWep != wep) {
+        _isWep = wep;	//check if wep is enabled
         [_netView setWep:_isWep];
     }
     
-    if (info->flags & IEEE80211_CAPINFO_ESS_LE) {
+    if (flags & IEEE80211_CAPINFO_ESS_LE) {
         _type = networkTypeManaged;
-    } else if (info->flags & IEEE80211_CAPINFO_IBSS_LE) {
+    } else if (flags & IEEE80211_CAPINFO_IBSS_LE) {
         _type = networkTypeAdHoc;
     }
 
     [_dataLock lock];
-    [self updateSSID:[NSString stringWithCString:(char*)info->name length:info->nameLen] withSound:YES];
+    [self updateSSID:[info objectForKey:@"name"] withSound:YES];
     [self generalEncounterStuff:YES];
     
     if (_firstPacket) {

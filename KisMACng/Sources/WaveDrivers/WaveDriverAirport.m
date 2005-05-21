@@ -110,17 +110,20 @@ static int AirPortInstances = 0;
 #pragma mark -
 
 - (NSArray*) networksInRange {
-    CFArrayRef netsp = NULL;
+    CFArrayRef netsp = NULL, netsAdHocp = NULL;
     WIErr res;
 
     if (_context==Nil) return Nil;        //someone killed the aiport driver?!
     
-    res = WirelessScan(_context, &netsp, 0);
-    if (res) {
+	res = WirelessCreateScanResults(_context, 0, &netsp, &netsAdHocp, 0);
+	if (res) {
         return Nil;
     }
     
-    return (NSArray*)netsp;
+	NSMutableArray *ret = [NSMutableArray arrayWithArray:(NSArray*)netsp];
+	[ret addObjectsFromArray:(NSArray*)netsAdHocp];
+	
+    return ret;
 }
 
 #pragma mark - 
