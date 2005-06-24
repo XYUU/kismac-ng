@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00C0B3480665385200B1F653 /* WiFiUserClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C0B3460665385200B1F653 /* WiFiUserClient.h */; };
+		00C0B3490665385200B1F653 /* WiFiUserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00C0B3470665385200B1F653 /* WiFiUserClient.cpp */; };
+		00C0B34F06653A7600B1F653 /* WiFiUserInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C0B34E06653A7600B1F653 /* WiFiUserInterface.h */; };
+		00CE483A065FE84300225F0A /* WiFiController.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CE4838065FE84300225F0A /* WiFiController.h */; };
+		00CE483B065FE84300225F0A /* WiFiController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00CE4839065FE84300225F0A /* WiFiController.cpp */; };
+		00CE484D0660817500225F0A /* WiFiControllerPCI.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CE484B0660817500225F0A /* WiFiControllerPCI.h */; };
+		00CE484E0660817500225F0A /* WiFiControllerPCI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00CE484C0660817500225F0A /* WiFiControllerPCI.cpp */; };
+		00CE486F066094DB00225F0A /* WiFiLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CE486E066094DB00225F0A /* WiFiLogger.h */; };
+		00CE4873066095A600225F0A /* GTIDs.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CE4872066095A600225F0A /* GTIDs.h */; };
+		00CE48C80660962F00225F0A /* GTFirmware.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CE48C70660962F00225F0A /* GTFirmware.h */; };
+		00E651B3067DC6E2009DC735 /* WiFiPower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00E651B2067DC6E2009DC735 /* WiFiPower.cpp */; };
+		00E9374407E9809C00AFDBC9 /* BIWiFiInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 00E9374207E9809C00AFDBC9 /* BIWiFiInterface.h */; };
+		32D94FC60562CBF700B6AF17 /* GTDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* GTDriver.h */; };
+		32D94FC80562CBF700B6AF17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		32D94FCA0562CBF700B6AF17 /* GTDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */; settings = {ATTRIBUTES = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		06AA1265FFB2107B11CA28AA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		06AA1266FFB2107B11CA28AA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		00C0B3460665385200B1F653 /* WiFiUserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiUserClient.h; sourceTree = "<group>"; };
+		00C0B3470665385200B1F653 /* WiFiUserClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WiFiUserClient.cpp; sourceTree = "<group>"; };
+		00C0B34E06653A7600B1F653 /* WiFiUserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiUserInterface.h; sourceTree = "<group>"; };
+		00CE4838065FE84300225F0A /* WiFiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiController.h; sourceTree = "<group>"; };
+		00CE4839065FE84300225F0A /* WiFiController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WiFiController.cpp; sourceTree = "<group>"; };
+		00CE484B0660817500225F0A /* WiFiControllerPCI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiControllerPCI.h; sourceTree = "<group>"; };
+		00CE484C0660817500225F0A /* WiFiControllerPCI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WiFiControllerPCI.cpp; sourceTree = "<group>"; };
+		00CE486E066094DB00225F0A /* WiFiLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiLogger.h; sourceTree = "<group>"; };
+		00CE4872066095A600225F0A /* GTIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTIDs.h; sourceTree = "<group>"; };
+		00CE48C70660962F00225F0A /* GTFirmware.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GTFirmware.h; sourceTree = "<group>"; };
+		00E651B2067DC6E2009DC735 /* WiFiPower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WiFiPower.cpp; sourceTree = "<group>"; };
+		00E9374207E9809C00AFDBC9 /* BIWiFiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIWiFiInterface.h; sourceTree = "<group>"; };
+		00E9374307E9809C00AFDBC9 /* BIWiFiInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BIWiFiInterface.cpp; sourceTree = "<group>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1A224C3EFF42367911CA2CB7 /* GTDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDriver.h; sourceTree = "<group>"; };
+		1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GTDriver.cpp; sourceTree = "<group>"; };
+		32D94FCF0562CBF700B6AF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		32D94FD00562CBF700B6AF17 /* GTDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32D94FCB0562CBF700B6AF17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00CE48C90660963900225F0A /* Firmware */ = {
+			isa = PBXGroup;
+			children = (
+				00CE48C70660962F00225F0A /* GTFirmware.h */,
+			);
+			name = Firmware;
+			sourceTree = "<group>";
+		};
+		089C166AFE841209C02AAC07 /* GTDriver */ = {
+			isa = PBXGroup;
+			children = (
+				247142CAFF3F8F9811CA285C /* Source */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				19C28FB6FE9D52B211CA2CBB /* Products */,
+			);
+			name = GTDriver;
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				32D94FCF0562CBF700B6AF17 /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		19C28FB6FE9D52B211CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32D94FD00562CBF700B6AF17 /* GTDriver.kext */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		247142CAFF3F8F9811CA285C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				00E9374207E9809C00AFDBC9 /* BIWiFiInterface.h */,
+				00E9374307E9809C00AFDBC9 /* BIWiFiInterface.cpp */,
+				00CE48C90660963900225F0A /* Firmware */,
+				00CE4872066095A600225F0A /* GTIDs.h */,
+				1A224C3EFF42367911CA2CB7 /* GTDriver.h */,
+				1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */,
+				00CE486E066094DB00225F0A /* WiFiLogger.h */,
+				00CE4838065FE84300225F0A /* WiFiController.h */,
+				00CE4839065FE84300225F0A /* WiFiController.cpp */,
+				00CE484B0660817500225F0A /* WiFiControllerPCI.h */,
+				00CE484C0660817500225F0A /* WiFiControllerPCI.cpp */,
+				00E651B2067DC6E2009DC735 /* WiFiPower.cpp */,
+				00C0B34E06653A7600B1F653 /* WiFiUserInterface.h */,
+				00C0B3460665385200B1F653 /* WiFiUserClient.h */,
+				00C0B3470665385200B1F653 /* WiFiUserClient.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		32D94FC50562CBF700B6AF17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FC60562CBF700B6AF17 /* GTDriver.h in Headers */,
+				00CE483A065FE84300225F0A /* WiFiController.h in Headers */,
+				00CE484D0660817500225F0A /* WiFiControllerPCI.h in Headers */,
+				00CE486F066094DB00225F0A /* WiFiLogger.h in Headers */,
+				00CE4873066095A600225F0A /* GTIDs.h in Headers */,
+				00CE48C80660962F00225F0A /* GTFirmware.h in Headers */,
+				00C0B3480665385200B1F653 /* WiFiUserClient.h in Headers */,
+				00C0B34F06653A7600B1F653 /* WiFiUserInterface.h in Headers */,
+				00E9374407E9809C00AFDBC9 /* BIWiFiInterface.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		32D94FC30562CBF700B6AF17 /* GTDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0060D3F6086C2287003A0458 /* Build configuration list for PBXNativeTarget "GTDriver" */;
+			buildPhases = (
+				32D94FC50562CBF700B6AF17 /* Headers */,
+				32D94FC70562CBF700B6AF17 /* Resources */,
+				32D94FC90562CBF700B6AF17 /* Sources */,
+				32D94FCB0562CBF700B6AF17 /* Frameworks */,
+				32D94FCC0562CBF700B6AF17 /* Rez */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LIBRARY_SEARCH_PATHS = "";
+				MODULE_NAME = de.binaervarianz.driver.GTDriver;
+				MODULE_VERSION = 1.0.0d1;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GTDriver;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = kext;
+			};
+			dependencies = (
+			);
+			name = GTDriver;
+			productInstallPath = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+			productName = GTDriver;
+			productReference = 32D94FD00562CBF700B6AF17 /* GTDriver.kext */;
+			productType = "com.apple.product-type.kernel-extension.iokit";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 0060D3FA086C2287003A0458 /* Build configuration list for PBXProject "GTDriver" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				06AA1265FFB2107B11CA28AA /* Development */,
+				06AA1266FFB2107B11CA28AA /* Deployment */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* GTDriver */;
+			projectDirPath = "";
+			targets = (
+				32D94FC30562CBF700B6AF17 /* GTDriver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32D94FC70562CBF700B6AF17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FC80562CBF700B6AF17 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		32D94FCC0562CBF700B6AF17 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32D94FC90562CBF700B6AF17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FCA0562CBF700B6AF17 /* GTDriver.cpp in Sources */,
+				00CE483B065FE84300225F0A /* WiFiController.cpp in Sources */,
+				00CE484E0660817500225F0A /* WiFiControllerPCI.cpp in Sources */,
+				00C0B3490665385200B1F653 /* WiFiUserClient.cpp in Sources */,
+				00E651B3067DC6E2009DC735 /* WiFiPower.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0060D3F7086C2287003A0458 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LIBRARY_SEARCH_PATHS = "";
+				MODULE_NAME = de.binaervarianz.driver.GTDriver;
+				MODULE_VERSION = 1.0.0d1;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GTDriver;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		0060D3F8086C2287003A0458 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LIBRARY_SEARCH_PATHS = "";
+				MODULE_NAME = de.binaervarianz.driver.GTDriver;
+				MODULE_VERSION = 1.0.0d1;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GTDriver;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		0060D3F9086C2287003A0458 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LIBRARY_SEARCH_PATHS = "";
+				MODULE_NAME = de.binaervarianz.driver.GTDriver;
+				MODULE_VERSION = 1.0.0d1;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GTDriver;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Default;
+		};
+		0060D3FB086C2287003A0458 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		0060D3FC086C2287003A0458 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		0060D3FD086C2287003A0458 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0060D3F6086C2287003A0458 /* Build configuration list for PBXNativeTarget "GTDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0060D3F7086C2287003A0458 /* Development */,
+				0060D3F8086C2287003A0458 /* Deployment */,
+				0060D3F9086C2287003A0458 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		0060D3FA086C2287003A0458 /* Build configuration list for PBXProject "GTDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0060D3FB086C2287003A0458 /* Development */,
+				0060D3FC086C2287003A0458 /* Deployment */,
+				0060D3FD086C2287003A0458 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

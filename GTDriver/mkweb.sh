@@ -13,4 +13,4 @@ do
 	webcpp $i web/$i.html -h -l
 done
 
-mv web ~/Desktop/eclipse/workspace/kismac/gtdriver/src
+mv web ~/Websites/bi/projekte/programmieren/gtdriver/src

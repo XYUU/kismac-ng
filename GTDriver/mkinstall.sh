@@ -4,9 +4,9 @@ rm -rf _inst
 mkdir _inst
 
 mkdir _inst/files
-cp -R build/GTDriver.kext _inst/files
+cp -R build/Deployment/GTDriver.kext _inst/files
 cp install.command _inst
-cp -R WiFiGUI/build/WiFiGUI.app _inst/files
+cp -R WiFiGUI/build/Deployment/WiFiGUI.app _inst/files
 cp uninstall.command _inst
 cp removeLoginItem.scpt _inst/files
 cp addStartupItem.scpt _inst/files

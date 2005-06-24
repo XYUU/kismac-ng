@@ -37,6 +37,7 @@
 #include <IOKit/IODataQueue.h>
 #include "WiFiLogger.h"
 #include "WiFiUserInterface.h"
+//#include "BIWiFiInterface.h"
 
 typedef enum {
     MEDIUM_TYPE_NONE = 0,
@@ -74,8 +75,8 @@ public:
     virtual bool handleTimer();
     virtual bool setMediumHardware(mediumType_t medium);
     
-    virtual UInt32 outputPacket(struct mbuf * m, void * param);
-    virtual IOReturn outputPacketHardware(struct mbuf * m);
+    virtual UInt32 outputPacket(mbuf_t m, void * param);
+    virtual IOReturn outputPacketHardware(mbuf_t m);
     virtual IOReturn setHardwareAddressHardware(UInt8 *addr);
 
     virtual bool enableAdapter();
@@ -97,8 +98,8 @@ public:
     virtual void getPacketBufferConstraints(IOPacketBufferConstraints *constraints) const;
     virtual IOOutputQueue * createOutputQueue();
 
-    void interruptOccurred(IOInterruptEventSource * src, int count);
-    void timeoutOccurred(IOTimerEventSource * timer);
+	static void interruptOccurred(OSObject * owner, IOInterruptEventSource * src, int count);
+    static void timeoutOccurred(OSObject * owner, IOTimerEventSource * timer);
 
     virtual IOReturn message(UInt32 type, IOService *provider, void *argument = 0);
 
@@ -127,12 +128,16 @@ public:
     //for monitor mode
     virtual IODataQueue* getPacketQueue() { return _packetQueue; }
 protected:
+    //virtual IONetworkInterface * createRawInterface();
+    //virtual bool attachRawInterface(IONetworkInterface ** interfaceP, bool  doRegister);
+
     virtual bool _initDriver(IOService * provider);
     virtual bool _addMediumType(UInt32 type, UInt32 speed, UInt32 code, char* name = 0);
     virtual IONetworkMedium *_getMediumWithType(UInt32 type);
     
     IOWorkLoop              *_workLoop;
     IOEthernetInterface     *_netif;
+	//BIWiFiInterface			*_rawNetif;
     IOEthernetAddress       _myAddress;
     bool                    _enabledForNetif;
     bool                    _cardGone;

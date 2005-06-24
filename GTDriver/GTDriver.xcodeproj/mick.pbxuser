@@ -1,12 +1,8 @@
 // !$*UTF8*$!
 {
-	0065552108293E4F00689AFF = {
-		fRef = 1A224C3FFF42367911CA2CB7;
-		isa = PBXBookmark;
-	};
-	006555250829400500689AFF = {
-		fRef = 1A224C3FFF42367911CA2CB7;
+	0060D406086C22DC003A0458 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
+		fRef = 1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */;
 		name = "GTDriver.cpp: 282";
 		rLen = 0;
 		rLoc = 8478;
@@ -14,7 +10,17 @@
 		vrLen = 2534;
 		vrLoc = 6807;
 	};
-	00C0B3460665385200B1F653 = {
+	006555250829400500689AFF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */;
+		name = "GTDriver.cpp: 282";
+		rLen = 0;
+		rLoc = 8478;
+		rType = 0;
+		vrLen = 2534;
+		vrLoc = 6807;
+	};
+	00C0B3460665385200B1F653 /* WiFiUserClient.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 993}}";
 			sepNavSelRange = "{1674, 0}";
@@ -22,7 +28,7 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00C0B3470665385200B1F653 = {
+	00C0B3470665385200B1F653 /* WiFiUserClient.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 4409}}";
 			sepNavSelRange = "{7690, 0}";
@@ -30,27 +36,27 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00C0B34E06653A7600B1F653 = {
+	00C0B34E06653A7600B1F653 /* WiFiUserInterface.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 1008}}";
 			sepNavSelRange = "{1882, 0}";
 			sepNavVisRect = "{{0, 379}, {1033, 461}}";
 		};
 	};
-	00CE4836065FE80900225F0A = {
+	00CE4836065FE80900225F0A /* Source Control */ = {
+		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 1;
-		isa = PBXSourceControlManager;
 		scmConfiguration = {
 			SubversionToolPath = /usr/local/bin/svn;
 		};
 		scmType = scm.subversion;
 	};
-	00CE4837065FE80900225F0A = {
-		indexTemplatePath = "";
+	00CE4837065FE80900225F0A /* Code sense */ = {
 		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
 	};
-	00CE4838065FE84300225F0A = {
+	00CE4838065FE84300225F0A /* WiFiController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 2394}}";
 			sepNavSelRange = "{5883, 0}";
@@ -58,7 +64,7 @@
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
-	00CE4839065FE84300225F0A = {
+	00CE4839065FE84300225F0A /* WiFiController.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 9604}}";
 			sepNavSelRange = "{4337, 0}";
@@ -66,21 +72,21 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE484B0660817500225F0A = {
+	00CE484B0660817500225F0A /* WiFiControllerPCI.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 980}}";
 			sepNavSelRange = "{532, 0}";
 			sepNavVisRect = "{{0, 0}, {1031, 662}}";
 		};
 	};
-	00CE484C0660817500225F0A = {
+	00CE484C0660817500225F0A /* WiFiControllerPCI.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 3486}}";
 			sepNavSelRange = "{3996, 17}";
 			sepNavVisRect = "{{0, 1230}, {1031, 662}}";
 		};
 	};
-	00CE486E066094DB00225F0A = {
+	00CE486E066094DB00225F0A /* WiFiLogger.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 1218}}";
 			sepNavSelRange = "{1521, 0}";
@@ -88,7 +94,7 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE4872066095A600225F0A = {
+	00CE4872066095A600225F0A /* GTIDs.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 3583}}";
 			sepNavSelRange = "{2615, 0}";
@@ -96,7 +102,7 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE48C70660962F00225F0A = {
+	00CE48C70660962F00225F0A /* GTFirmware.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {984, 164625}}";
 			sepNavSelRange = "{208, 0}";
@@ -104,21 +110,21 @@
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00E651B2067DC6E2009DC735 = {
+	00E651B2067DC6E2009DC735 /* WiFiPower.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1033, 3723}}";
 			sepNavSelRange = "{8769, 0}";
 			sepNavVisRect = "{{0, 2866}, {1033, 666}}";
 		};
 	};
-	00E9374207E9809C00AFDBC9 = {
+	00E9374207E9809C00AFDBC9 /* BIWiFiInterface.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 4536}}";
 			sepNavSelRange = "{10817, 0}";
 			sepNavVisRect = "{{0, 3134}, {1031, 662}}";
 		};
 	};
-	00E9374307E9809C00AFDBC9 = {
+	00E9374307E9809C00AFDBC9 /* BIWiFiInterface.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 17360}}";
 			sepNavSelRange = "{10702, 0}";
@@ -126,15 +132,16 @@
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
-	089C1669FE841209C02AAC07 = {
-		activeBuildStyle = 06AA1266FFB2107B11CA28AA;
-		activeTarget = 32D94FC30562CBF700B6AF17;
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Deployment;
+		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Development */;
+		activeTarget = 32D94FC30562CBF700B6AF17 /* GTDriver */;
 		addToTargets = (
-			32D94FC30562CBF700B6AF17,
+			32D94FC30562CBF700B6AF17 /* GTDriver */,
 		);
 		breakpoints = (
 		);
-		codeSenseManager = 00CE4837065FE80900225F0A;
+		codeSenseManager = 00CE4837065FE80900225F0A /* Code sense */;
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
@@ -216,7 +223,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 136917644;
+			PBXPerProjectTemplateStateSaveDate = 141304445;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -711,24 +718,24 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 136917644;
+			PBXWorkspaceStateSaveDate = 141304445;
 		};
 		perUserProjectItems = {
-			0065552108293E4F00689AFF = 0065552108293E4F00689AFF;
-			006555250829400500689AFF = 006555250829400500689AFF;
+			0060D406086C22DC003A0458 /* PBXTextBookmark */ = 0060D406086C22DC003A0458 /* PBXTextBookmark */;
+			006555250829400500689AFF /* PBXTextBookmark */ = 006555250829400500689AFF /* PBXTextBookmark */;
 		};
-		sourceControlManager = 00CE4836065FE80900225F0A;
+		sourceControlManager = 00CE4836065FE80900225F0A /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	089C167EFE841241C02AAC07 = {
+	089C167EFE841241C02AAC07 /* English */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {984, 666}}";
 			sepNavSelRange = "{228, 0}";
 			sepNavVisRect = "{{0, 0}, {984, 666}}";
 		};
 	};
-	1A224C3EFF42367911CA2CB7 = {
+	1A224C3EFF42367911CA2CB7 /* GTDriver.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 1806}}";
 			sepNavSelRange = "{1181, 0}";
@@ -736,17 +743,17 @@
 			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
 		};
 	};
-	1A224C3FFF42367911CA2CB7 = {
+	1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1406, 15358}}";
 			sepNavSelRange = "{8478, 0}";
-			sepNavVisRect = "{{0, 3468}, {1031, 662}}";
+			sepNavVisRect = "{{0, 3468}, {1025, 662}}";
 		};
 	};
-	32D94FC30562CBF700B6AF17 = {
+	32D94FC30562CBF700B6AF17 /* GTDriver */ = {
 		activeExec = 0;
 	};
-	32D94FCF0562CBF700B6AF17 = {
+	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1031, 798}}";
 			sepNavSelRange = "{2046, 0}";

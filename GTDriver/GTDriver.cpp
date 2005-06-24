@@ -2,9 +2,9 @@
         
         File:			GTDriver.cpp
         Program:		GTDriver
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		GTDriver is a free driver for PrismGT based cards under OS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	GTDriver is a free driver for PrismGT based cards under OS X.
                 
         This file is part of GTDriver.
 
@@ -30,6 +30,21 @@ extern "C" {
 #include <sys/param.h>
 #include <sys/mbuf.h>
 #include <string.h>
+
+extern mutex_t		*mutex_alloc(
+						unsigned short	tag);
+
+extern void			mutex_free(
+						mutex_t		*mutex);
+
+extern void			mutex_lock(
+						mutex_t		*mutex);
+
+extern void			mutex_unlock(
+						mutex_t		*mutex);
+
+extern boolean_t	mutex_try(
+						mutex_t		*mutex);
 }
 
 #define GT_WRITEDELAY 1
@@ -48,8 +63,8 @@ bool GTDriver::startHardware() {
     int i;
     WLEnter();
 
-    _mgmtMutex = mutex_alloc(ETAP_NO_TRACE);
-    _dataMutex = mutex_alloc(ETAP_NO_TRACE);
+    _mgmtMutex = mutex_alloc(0);
+    _dataMutex = mutex_alloc(0);
     _interruptBusy = false;
     _stalled = false;
     
@@ -198,7 +213,7 @@ typedef struct {
 	UInt16 unk3;
 	volatile UInt8 rssi;
 	UInt8 padding[3];
-} rfmonHeader __attribute__ ((packed));
+} rfmonHeader;
 
 bool GTDriver::handleInterrupt() {
     UInt32 ident;
@@ -253,7 +268,7 @@ bool GTDriver::handleInterrupt() {
             UInt32 fragMod = frag % CB_RX_QSIZE;
             
             if (_enabledForNetif) {
-                m_adj(_rxDataHigh[fragMod], 2);
+                mbuf_adj(_rxDataHigh[fragMod], 2);
                 _netif->inputPacket(_rxDataHigh[fragMod], OSSwapLittleToHostInt16(_controlBlock.cb->rx_data_high[fragMod].size),
                                    IONetworkInterface::kInputOptionQueuePacket);
                 _netStats->inputPackets++;
@@ -274,14 +289,17 @@ bool GTDriver::handleInterrupt() {
             UInt32 fragMod = frag % CB_RX_QSIZE;
             
             if (_mode == modeMonitor) {
-                rfHead = mtod(_rxDataLow[fragMod], rfmonHeader*);
+                rfHead = (rfmonHeader*)mbuf_data(_rxDataLow[fragMod]);
                 if ((rfHead->flags & 0x01) == 0x0) {
-                    if (!_packetQueue->enqueue(mtod(_rxDataLow[fragMod], void*), OSSwapLittleToHostInt16(_controlBlock.cb->rx_data_low[fragMod].size))) WLLogInfo("packet queue overflow");
+                    if (!_packetQueue->enqueue(mbuf_data(_rxDataLow[fragMod]), OSSwapLittleToHostInt16(_controlBlock.cb->rx_data_low[fragMod].size))) WLLogInfo("packet queue overflow");
                 } else WLLogErr("dropping packet");
                 
+                mbuf_adj(_rxDataLow[fragMod], 20);
+                //_rawNetif->inputPacket(_rxDataLow[fragMod], OSSwapLittleToHostInt16(_controlBlock.cb->rx_data_low[fragMod].size),
+                //                   IONetworkInterface::kInputOptionQueuePacket);
                 freePacket(_rxDataLow[fragMod]);                
             } else if (_enabledForNetif) {
-                m_adj(_rxDataLow[fragMod], 2);
+                mbuf_adj(_rxDataLow[fragMod], 2);
                 _netif->inputPacket(_rxDataLow[fragMod], OSSwapLittleToHostInt16(_controlBlock.cb->rx_data_low[fragMod].size),
                                    IONetworkInterface::kInputOptionQueuePacket);
                 _netStats->inputPackets++;
@@ -328,7 +346,7 @@ bool GTDriver::handleTimer() {
     return true;
 }
 
-IOReturn GTDriver::outputPacketHardware(struct mbuf * m) {
+IOReturn GTDriver::outputPacketHardware(mbuf_t m) {
     return _transmitInQueue(m, QUEUE_TX_LOW);
 }
 
@@ -522,12 +540,12 @@ bool GTDriver::_initHW() {
     return true;
 }
 
-IOReturn GTDriver::_transmitInQueue(struct mbuf * m, int queue) {
+IOReturn GTDriver::_transmitInQueue(mbuf_t m, int queue) {
     UInt32 queueSize, driverPos, i, freeFrags, offset, count;
     volatile gt_fragment *f;
     mutex_t *l;
-    struct mbuf **q;
-    mbuf *nm = NULL;
+    mbuf_t* q;
+    mbuf_t nm = NULL;
     struct IOPhysicalSegment vector[MAX_FRAGMENT_COUNT];
     
     if (_cardGone || _controlBlock.cb == NULL) return kIOReturnOutputDropped;
@@ -581,7 +599,7 @@ IOReturn GTDriver::_transmitInQueue(struct mbuf * m, int queue) {
     }
 
     if (freeFrags > MAX_FRAGMENT_COUNT) freeFrags = MAX_FRAGMENT_COUNT;    //at most 4 fragments in queue
-    offset = (4 - ((int)(m->m_data) & 3)) % 4;    //packet needs to be 4 byte aligned
+    offset = (4 - ((int)(mbuf_data(m)) & 3)) % 4;    //packet needs to be 4 byte aligned
     driverPos = OSSwapLittleToHostInt32(_controlBlock.cb->driver_curr_frag[queue]);
     
     if (offset) { 
@@ -597,7 +615,7 @@ IOReturn GTDriver::_transmitInQueue(struct mbuf * m, int queue) {
         /*} else { //broken
             //make up more fragments to avoid copying of large buffers
             nm = copyPacket(m, offset);
-            WLLogDebug("freeFrags: %d offset: %d nm: 0x%x packet len %d data 0x%x driverPos %d ringPos: %d", freeFrags, offset, nm, nm->m_len, *mtod(nm, int*), driverPos, _txDataLowPos);
+            WLLogDebug("freeFrags: %d offset: %d nm: 0x%x packet len %d data 0x%x driverPos %d ringPos: %d", freeFrags, offset, nm, nmbuf_len(m), *mtod(nm, int*), driverPos, _txDataLowPos);
             if (!_fillFragment(&f[driverPos % queueSize], nm, FRAGMENT_FLAG_MF)) goto fillError;
             WLLogDebug("fsize: 0x%x flags: 0x%x address:0x%x", f[driverPos % queueSize].size,  f[driverPos % queueSize].flags, OSSwapLittleToHostInt32(f[driverPos % queueSize].address));
             m_adj(m, offset);
@@ -680,7 +698,7 @@ void GTDriver::_fillPIMFOR(UInt32 operation, UInt32 oid, UInt32 length, pimforHe
 }
 
 bool GTDriver::_transmitPIM(UInt32 operation, UInt32 oid, UInt32 length, void* data, bool waitForResponse) {
-    struct mbuf *packet;
+    mbuf_t packet;
     
     //WLEnter();
     _doAsyncIO = waitForResponse;
@@ -691,9 +709,9 @@ bool GTDriver::_transmitPIM(UInt32 operation, UInt32 oid, UInt32 length, void* d
         return false;
     }
     
-    _fillPIMFOR(operation, oid, length, mtod(packet, pimforHeader*));
+    _fillPIMFOR(operation, oid, length, (pimforHeader*)mbuf_data(packet));
     if ((length>0) && (data!=NULL)) {
-        memcpy(mtod(packet, UInt8*) + PIMFOR_HEADER_SIZE, data, length);
+        memcpy((UInt8*)mbuf_data(packet) + PIMFOR_HEADER_SIZE, data, length);
     }
     
     if (_transmitInQueue(packet, QUEUE_TX_MGMT) != kIOReturnOutputSuccess) {
@@ -717,12 +735,12 @@ bool GTDriver::_transmitPIM(UInt32 operation, UInt32 oid, UInt32 length, void* d
     return true;
 }
 
-bool GTDriver::_parsePIMFOR(struct mbuf *m) {
+bool GTDriver::_parsePIMFOR(mbuf_t m) {
     bool ret = false;
     pimforHeader *h;
     void *data;
     UInt32 operation, oid, version, linkSpeed;
-    SInt32 length;
+    UInt32 length;
     objBSSList *bssList;
     //WLEnter();
     
@@ -732,21 +750,21 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
     }
     
     do {
-        if (m->m_len < PIMFOR_HEADER_SIZE) {
+        if (mbuf_len(m) < PIMFOR_HEADER_SIZE) {
             WLLogErr("Recieved short PIMFOR message");
             break;
         }
-        h = mtod(m, pimforHeader*);
+        h = (pimforHeader*)mbuf_data(m);
         
         version = h->version;
         if (version != PIMFOR_VERSION) {
-            WLLogErr("Recieved incompatible PIMFOR message. Version %d. mbuf address 0x%x", (int)version, (int)m->m_data);
+            WLLogErr("Recieved incompatible PIMFOR message. Version %d. mbuf address 0x%x", (int)version, (int)mbuf_data(m));
             break;
         }
         
         length = OSSwapBigToHostInt32(h->length);
         if (length) {
-            if (m->m_len < length + PIMFOR_HEADER_SIZE) break;
+            if (mbuf_len(m) < length + PIMFOR_HEADER_SIZE) break;
             data = (void*)(h + 1);
         } else {
             data = NULL;
@@ -766,7 +784,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
         switch(oid) {
             case OID_MACADDRESS:
                 if (length != 6) {
-                    WLLogErr("MAC Address has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("MAC Address has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
                 memcpy(&_myAddress, data, 6);
@@ -776,7 +794,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
                 break;
             case OID_LINKSTATE:
                 if (length != 4) {
-                    WLLogErr("LinkState has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("LinkState has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
 
@@ -789,7 +807,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
                 break;
             case OID_BSSID:
                 if (length != 6) {
-                    WLLogErr("MAC BSSID has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("MAC BSSID has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
                 
@@ -797,7 +815,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
                 break;
             case OID_FREQUENCY:
                 if (length != 4) {
-                    WLLogErr("Frequency has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("Frequency has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
                 
@@ -806,7 +824,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
                 break;
             case OID_TXPOWER:
                 if (length != 4) {
-                    WLLogErr("Tx Power has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("Tx Power has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
                 
@@ -830,7 +848,7 @@ bool GTDriver::_parsePIMFOR(struct mbuf *m) {
                 break;
             case OID_BSS_LIST:
                 if (length < 4) {
-                    WLLogErr("BSS list has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)m->m_len);
+                    WLLogErr("BSS list has wrong length! len: 0x%x m_len: 0x%x", (int)length, (int)mbuf_len(m));
                     break;
                 }
                 
@@ -934,7 +952,7 @@ UInt32 GTDriver::_freeFragmentsInQueue(int queue) {
     return  (devicePos + queueSize - driverPos);
 }
 
-bool GTDriver::_fillFragment(volatile gt_fragment *f, struct mbuf *packet, UInt16 flags) {
+bool GTDriver::_fillFragment(volatile gt_fragment *f, mbuf_t packet, UInt16 flags) {
     struct IOPhysicalSegment vector;
     UInt32 count;
 
@@ -955,7 +973,7 @@ bool GTDriver::_fillFragment(volatile gt_fragment *f, struct mbuf *packet, UInt1
     return true;
 }
 
-bool GTDriver::_allocPacketForFragment(struct mbuf **packet, volatile gt_fragment *f) {
+bool GTDriver::_allocPacketForFragment(mbuf_t *packet, volatile gt_fragment *f) {
     (*packet) = allocatePacket(MAX_FRAGMENT_SIZE);
     if (!(*packet)) {
         WLLogEmerg("Could not alloc Packet for Queue!");
@@ -1001,7 +1019,7 @@ bool GTDriver::_allocQueues() {
     return true;
 }
 
-bool GTDriver::_freePacketForFragment(struct mbuf **packet, volatile gt_fragment *f) {
+bool GTDriver::_freePacketForFragment(mbuf_t *packet, volatile gt_fragment *f) {
     //WLEnter();
     
     f->flags = 0;

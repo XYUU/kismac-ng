@@ -31,6 +31,8 @@ typedef struct {
     IOPhysicalAddress   dmaAddress;
 } controlBlock;
 
+typedef struct __mutex__ mutex_t;
+
 class GTDriver : public WiFiControllerPCI {
     OSDeclareDefaultStructors(GTDriver)
 
@@ -48,7 +50,7 @@ public:
     virtual bool handleInterrupt();
     virtual bool handleTimer();
 
-    virtual IOReturn outputPacketHardware(struct mbuf * m);
+    virtual IOReturn outputPacketHardware(mbuf_t m);
     virtual IOReturn setHardwareAddressHardware(UInt8 *addr);
 
     virtual UInt32          getLinkSpeed();
@@ -64,16 +66,16 @@ protected:
     bool        _updateMACAddress();
    
     //memory managment
-    bool        _allocPacketForFragment(struct mbuf **packet, volatile gt_fragment *f);
+    bool        _allocPacketForFragment(mbuf_t *packet, volatile gt_fragment *f);
     bool        _allocQueues();
-    bool        _freePacketForFragment(struct mbuf **packet, volatile gt_fragment *f);
+    bool        _freePacketForFragment(mbuf_t *packet, volatile gt_fragment *f);
     bool        _freeTransmitQueues();
     bool        _freeQueues();
     
     //frame transport
     UInt32      _freeFragmentsInQueue(int queue);
-    bool        _fillFragment(volatile gt_fragment *f, struct mbuf *packet, UInt16 flags = 0);
-    IOReturn    _transmitInQueue(struct mbuf * m, int queue);
+    bool        _fillFragment(volatile gt_fragment *f, mbuf_t packet, UInt16 flags = 0);
+    IOReturn    _transmitInQueue(mbuf_t m, int queue);
     int         _inQueue(int queue);
     
     //PIMFOR handling
@@ -82,7 +84,7 @@ protected:
     bool        _getValue(UInt32 oid, UInt32 len = 4, bool waitForResponse = false);
     void        _fillPIMFOR(UInt32 operation, UInt32 oid, UInt32 length, pimforHeader *h);
     bool        _transmitPIM(UInt32 operation, UInt32 oid, UInt32 length, void* data, bool waitForResponse = false);
-    bool        _parsePIMFOR(struct mbuf *m);
+    bool        _parsePIMFOR(mbuf_t m);
     
     
     inline UInt32 getRegister(int r, bool littleEndian = true) {
@@ -117,9 +119,9 @@ protected:
 
     UInt32                      _txDataLowPos, _txDataHighPos, _txDataMgmtPos;
     
-    struct mbuf                 *_rxDataLow[CB_RX_QSIZE],   *_txDataLow[CB_TX_QSIZE], 
-                                *_rxDataHigh[CB_RX_QSIZE],  *_txDataHigh[CB_TX_QSIZE],
-                                *_rxDataMgmt[CB_MGMT_QSIZE],*_txDataMgmt[CB_MGMT_QSIZE];
+    mbuf_t						_rxDataLow[CB_RX_QSIZE],   _txDataLow[CB_TX_QSIZE], 
+                                _rxDataHigh[CB_RX_QSIZE],  _txDataHigh[CB_TX_QSIZE],
+                                _rxDataMgmt[CB_MGMT_QSIZE],_txDataMgmt[CB_MGMT_QSIZE];
                                 
     UInt32                      _allocated, _freed, _rxAllocated, _rxFreed;
     volatile int                _interruptPoint, _lastIndex;

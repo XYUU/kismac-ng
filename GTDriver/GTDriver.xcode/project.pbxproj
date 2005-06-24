@@ -168,6 +168,28 @@
 			settings = {
 			};
 		};
+		00E9374207E9809C00AFDBC9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = BIWiFiInterface.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00E9374307E9809C00AFDBC9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = BIWiFiInterface.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		00E9374407E9809C00AFDBC9 = {
+			fileRef = 00E9374207E9809C00AFDBC9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //000
 //001
 //002
@@ -321,6 +343,8 @@
 //244
 		247142CAFF3F8F9811CA285C = {
 			children = (
+				00E9374207E9809C00AFDBC9,
+				00E9374307E9809C00AFDBC9,
 				00CE48C90660963900225F0A,
 				00CE4872066095A600225F0A,
 				1A224C3EFF42367911CA2CB7,
@@ -399,6 +423,7 @@
 				00CE48C80660962F00225F0A,
 				00C0B3480665385200B1F653,
 				00C0B34F06653A7600B1F653,
+				00E9374407E9809C00AFDBC9,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

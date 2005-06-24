@@ -115,6 +115,61 @@ bool WiFiController::_initDriver(IOService * provider) {
 
     return true;
 }
+/*
+
+bool
+WiFiController::attachRawInterface(IONetworkInterface ** interfaceP,
+                                     bool  doRegister)
+{
+    IONetworkInterface * netif;
+
+    *interfaceP = 0;
+
+    do {
+        // Allocate a concrete subclass of IONetworkInterface
+        // by calling createInterface().
+
+        netif = createRawInterface();
+        if (!netif)
+            break;
+
+        // Configure the interface instance by calling 
+        // configureInterface(), then attach it as our client.
+
+        if ( !configureInterface(netif) || !netif->attach(this) )
+        {
+            netif->release();
+            break;
+        }
+
+        *interfaceP = netif;
+
+        // Register the interface nub. Spawns a matching thread.
+
+        if (doRegister)
+            netif->registerService();
+
+        return true;    // success
+    }
+    while (0);
+
+    return false;   // failure
+}
+
+//---------------------------------------------------------------------------
+// Allocate and return a new BIWiFiInterface instance.
+
+IONetworkInterface * WiFiController::createRawInterface()
+{
+    BIWiFiInterface * netif = new BIWiFiInterface;
+
+    if ( netif && ( netif->init( this ) == false ) )
+    {
+        netif->release();
+        netif = 0;
+    }
+    return netif;
+}*/
 
 //---------------------------------------------------------------------------
 // Function: start <IOService>
@@ -175,14 +230,26 @@ bool WiFiController::start(IOService * provider) {
         // object.
 
         if (attachInterface((IONetworkInterface **) &_netif, false) == false) break;
-        //_netif->setARPHeaderMode(DLT_IEEE802_11);
- 
         // Start matching for clients of IONetworkInterface.
-        _netif->registerService();
-        registerService();
+        /*
+		IOEthernetAddress addr;
+		addr.bytes[0] = 0x00;
+        addr.bytes[1] = 0x00;
+		addr.bytes[2] = 0x00;
+		addr.bytes[3] = 0x00;
+		addr.bytes[4] = 0x00;
+		addr.bytes[5] = 0x23;
+		setProperty("IOMACAddress2",  (void *) &addr, kIOEthernetAddressSize);
+						  
+        if (attachRawInterface((IONetworkInterface **) &_rawNetif, false) == false) break;
+		*/
+		
+		_netif->registerService();
+		//_rawNetif->registerService();
+		registerService();
         
         ret = true;
-    }
+	}
     while (false);
 
     // Issue a stop on failure.
@@ -250,7 +317,7 @@ void WiFiController::free() {
     #define RELEASE(x) do { if(x) { (x)->release(); (x) = 0; } } while(0)
 
     RELEASE(_netif);
-
+	//RELEASE(_rawNetif);
     if (_interruptSrc && _workLoop) {
         _workLoop->removeEventSource(_interruptSrc);
     }
@@ -454,19 +521,22 @@ const OSString* WiFiController::newModelString() const {
 // Periodic timer that monitors the receiver status, updates error
 // and collision statistics, and update the current link status.
 
-void WiFiController::timeoutOccurred(IOTimerEventSource * /*timer*/) {
-    handleTimer();
+void WiFiController::timeoutOccurred(OSObject * owner, IOTimerEventSource * /*timer*/) {
+    WiFiController *self = (WiFiController*) owner; 
+    self->handleTimer();
     
-    _timerSrc->setTimeoutMS(LOAD_STATISTICS_INTERVAL);
+    self->_timerSrc->setTimeoutMS(LOAD_STATISTICS_INTERVAL);
 }
 
-void WiFiController::interruptOccurred(IOInterruptEventSource * src, int /*count*/) {
-    handleInterrupt();
+void WiFiController::interruptOccurred(OSObject * owner, IOInterruptEventSource * src, int /*count*/) {
+    WiFiController *self = (WiFiController*) owner; 
+	
+	self->handleInterrupt();
 }
 
 #pragma mark -
 
-UInt32 WiFiController::outputPacket(struct mbuf * m, void * param) {
+UInt32 WiFiController::outputPacket(mbuf_t m, void * param) {
     IOReturn ret;
     
     if (!_enabledForNetif) {		// drop the packet.
@@ -583,7 +653,7 @@ bool WiFiController::setMediumHardware(mediumType_t medium) { return medium == M
 bool WiFiController::handleInterrupt() { return false; }
 bool WiFiController::handleTimer() { return false; }
 
-IOReturn WiFiController::outputPacketHardware(struct mbuf * m) { return kIOReturnOutputDropped; }
+IOReturn WiFiController::outputPacketHardware(mbuf_t m) { return kIOReturnOutputDropped; }
 IOReturn WiFiController::setHardwareAddressHardware(UInt8 *addr) { return kIOReturnUnsupported; }
 
 UInt32 WiFiController::getLinkSpeed() { return 0; }

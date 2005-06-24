@@ -2,9 +2,9 @@
         
         File:			WiFiGUI.m
         Program:		WiFiGUI
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		GTDriver is a free driver for PrismGT based cards under OS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	GTDriver is a free driver for PrismGT based cards under OS X.
                 
         This file is part of GTDriver.
 
