@@ -86,6 +86,7 @@ enum selmode {
 - (void)setVisible:(BOOL)visible;
 - (BOOL)setCurrentPostionToLatitude:(double)lat andLongitude:(double)lon;
 
+- (NSPoint)pixelForCoordinateNoZoom:(waypoint)wp;
 - (NSPoint)pixelForCoordinate:(waypoint)wp;
 - (void)setNeedsDisplayInMoveRect:(NSRect)invalidRect;
 

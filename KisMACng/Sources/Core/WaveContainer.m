@@ -39,7 +39,7 @@ typedef struct WaveSort {
     WaveNetEntry *idList;
 } WaveSort;
 
-inline UInt32 hashForMAC(UInt8* val) {
+inline UInt32 hashForMAC(const UInt8* val) {
     UInt32 l, j, k;
     
     //add to hash table
@@ -589,8 +589,11 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     entry = [self findNetwork:ID];
     if (entry == 0xFFFFFFF) return NO;                          //the object is filtered...
     
-    [_idList[entry].net parsePacket:p withSound:live];		//add the packet to the network
-    _idList[entry].changed = YES;
+    @synchronized(_idList[entry].net) {
+		[_idList[entry].net parsePacket:p withSound:live];		//add the packet to the network
+    }
+	
+	_idList[entry].changed = YES;
     return YES;
 }
 
@@ -603,8 +606,10 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     entry = [self findNetwork:[[net objectForKey:@"BSSID"] bytes]];
     if (entry == 0xFFFFFFF) return NO;                          //the object is filtered...
     
-    [_idList[entry].net parseAppleAPIData:net];                   //add the data to the network
-    _idList[entry].changed = YES;
+	@synchronized(_idList[entry].net) {
+		[_idList[entry].net parseAppleAPIData:net];             //add the data to the network
+    }
+	_idList[entry].changed = YES;
     
     return YES;
 }

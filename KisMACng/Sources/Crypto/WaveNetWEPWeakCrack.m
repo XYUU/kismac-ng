@@ -51,7 +51,7 @@
     NSParameterAssert(len == keyLen104bit || len == keyLen40bit);
     
     if (!_ivData[keyID]) RET;
-    if ([_ivData[keyID] count] < 8) RET; //need at least 8 IVs
+    if ([_ivData[keyID] count] <= 8) RET; //need at least 8 IVs
     
     AirCrackWrapper *a = [[AirCrackWrapper alloc] init];
     

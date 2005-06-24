@@ -131,7 +131,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
         }
         
         packet++;
-        length-=(*packet)+1;
+        length-=(*packet)+2;
         packet+=(*packet)+1;
     }
 }

@@ -280,6 +280,21 @@
     else [self _alignCurrentPos];
 }
 
+- (NSPoint)pixelForCoordinateNoZoom:(waypoint)wp {
+    NSPoint p;
+    if ([_statusView visible]) return INVALIDPOINT;
+    if (wp._long == 0 && wp._lat == 0) return INVALIDPOINT;
+    
+    NS_DURING
+        p.x = ((_point[1].x - (_wp[1]._long- wp._long) / (_wp[1]._long-_wp[2]._long) * (_point[1].x-_point[2].x)));
+        p.y = ((_point[1].y - (_wp[1]._lat - wp._lat)  / (_wp[1]._lat - _wp[2]._lat) * (_point[1].y-_point[2].y)));
+    NS_HANDLER
+        return INVALIDPOINT;
+    NS_ENDHANDLER
+
+    return p;
+}
+
 - (NSPoint)pixelForCoordinate:(waypoint)wp {
     NSPoint p;
     if ([_statusView visible]) return INVALIDPOINT;

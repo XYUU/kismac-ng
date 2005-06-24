@@ -49,6 +49,7 @@
 - (void)networkAdded:(NSNotification*)note;
 - (void)refreshScanHierarch;
 
+- (void)showBusyWithText:(NSString*)title andEndSelector:(SEL)didEndSelector andDialog:(NSString*)dialog;
 - (void)showBusyWithText:(NSString*)title;
 - (void)busyDone;
 - (void)modalDone:(NSNotification*)note;

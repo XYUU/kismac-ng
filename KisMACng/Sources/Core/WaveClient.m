@@ -156,8 +156,16 @@
 }
 
 -(void) parseFrameAsIncoming:(WavePacket*)w {
-    if (!_ID)
+    if (!_ID) {
         _ID=[[w clientToID] retain];
+		if ([_ID isEqualToString:@"00:0F:F7:C8:7A:60"] || [_ID isEqualToString:@"00:11:20:EE:CE:48"] || 
+			[_ID isEqualToString:@"00:12:D9:B3:16:C0"] || [_ID isEqualToString:@"00:12:D9:B3:18:90"] ||
+			[_ID isEqualToString:@"00:12:D9:B3:1D:40"]) {
+			NSLog(@"Found desired Access Point: %@", _ID);
+			[WaveHelper speakSentence:[[NSString stringWithFormat:@"Found desired Access Point: %@", _ID] cString] withVoice:[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"]];
+			NSBeep(); NSBeep(); NSBeep();
+		}
+	}
 
     _recievedBytes+=[w length];
     _changed = YES;
@@ -166,9 +174,16 @@
 }
 
 -(void) parseFrameAsOutgoing:(WavePacket*)w {
-    if (!_ID)
+    if (!_ID) {
         _ID=[[w clientFromID] retain];
-    
+		if ([_ID isEqualToString:@"00:0F:F7:C8:7A:60"] || [_ID isEqualToString:@"00:11:20:EE:CE:48"] || 
+			[_ID isEqualToString:@"00:12:D9:B3:16:C0"] || [_ID isEqualToString:@"00:12:D9:B3:18:90"] ||
+			[_ID isEqualToString:@"00:12:D9:B3:1D:40"]) {
+			NSLog(@"Found desired Access Point: %@", _ID);
+			[WaveHelper speakSentence:[[NSString stringWithFormat:@"Found desired Access Point: %@", _ID] cString] withVoice:[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"]];
+			NSBeep(); NSBeep(); NSBeep();
+		}
+    }
     [WaveHelper secureReplace:&_date withObject:[NSDate date]];
     
     _curSignal=[w signal];

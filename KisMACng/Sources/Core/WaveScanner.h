@@ -87,7 +87,7 @@ struct __beaconFrame {
     
     unsigned char aFrameBuf[2364];	//for reading in pcaps (still messy)
     WLFrame* aWF;
-    pcap_t*  aPCapT;
+    pcap_t*  _pcapP;
 
     ImportController *_im;
 

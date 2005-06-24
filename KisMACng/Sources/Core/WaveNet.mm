@@ -1033,7 +1033,7 @@ int lengthSort(id string1, id string2, void *context)
 }
 
 - (void)setVisible:(BOOL)visible {
-	[_netView setVisible: visible];
+	[_netView setFiltered: !visible];
 }
 
 #pragma mark -

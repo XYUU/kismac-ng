@@ -2,9 +2,9 @@
         
         File:			ScanControllerPrivate.m
         Program:		KisMAC
-	Author:			Michael Rossberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -424,11 +424,16 @@
 }
 
 - (void)showBusyWithText:(NSString*)title {
+	[self showBusyWithText:title andEndSelector:nil andDialog:@"Import"];
+}
+
+- (void)showBusyWithText:(NSString*)title andEndSelector:(SEL)didEndSelector andDialog:(NSString*)dialog {
     NSParameterAssert(title);
-    
+    NSParameterAssert(dialog);
+	
     if (_importOpen++ > 0) return; //we are already busy
     
-    _importController = [[ImportController alloc] initWithWindowNibName:@"Import"];
+    _importController = [[ImportController alloc] initWithWindowNibName:dialog];
     if (!_importController) {
         NSLog(@"Error could not open Import.nib!");
         return;
@@ -436,7 +441,7 @@
 
     [WaveHelper setImportController:_importController];
     [_importController setTitle:title];
-    [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
+    [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:didEndSelector contextInfo:nil];
 }
 
 - (void)busyDone {

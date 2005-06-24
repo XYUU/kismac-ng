@@ -59,6 +59,7 @@ static NSImage* _networkStrange;
         _wp._long = 0;
 		_wp._elevation = 0;
         _network = network;
+		_filtered = NO;
         [[WaveHelper mapView] addNetView:self];
 		_attachedToSuperView = YES;
     }
@@ -69,6 +70,12 @@ static NSImage* _networkStrange;
     [WaveHelper secureReplace:&_name withObject:name];
     [self setImage:[self generateImage]];
     [[WaveHelper mapView] setNeedsDisplay:YES];
+}
+
+- (void)setFiltered:(BOOL)filtered {
+	_filtered = filtered;
+	if (!filtered) [self align];
+	else [self setVisible:NO];
 }
 
 - (void) setWep:(encryptionType)wep {
@@ -133,7 +140,7 @@ static NSImage* _networkStrange;
         return;
     }
         
-    if (!_visible) [self setVisible:YES];
+    if (!_visible && !_filtered) [self setVisible:YES];
     
     [self setLocation:p];
 }

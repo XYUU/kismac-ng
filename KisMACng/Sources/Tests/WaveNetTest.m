@@ -33,7 +33,7 @@
     int i, j;
     NSMutableString *ms;
     
-    wpaPasswordHash("password", "IEEE", 4, output);
+    wpaPasswordHash("password",  (const UInt8*)"IEEE", 4, output);
     ms = [NSMutableString string];
     for (i=0; i < WPA_PMK_LENGTH; i++) {
         j = output[i];
@@ -41,7 +41,7 @@
     }
 	UKStringsEqual(ms, @"f42c6fc52df0ebef9ebb4b90b38a5f902e83fe1b135a70e23aed762e9710a12e");
 	 
-    wpaPasswordHash("ThisIsAPassword", "ThisIsASSID", 11, output);
+    wpaPasswordHash("ThisIsAPassword",  (const UInt8*)"ThisIsASSID", 11, output);
     ms = [NSMutableString string];
     for (i=0; i < WPA_PMK_LENGTH; i++) {
         j = output[i];

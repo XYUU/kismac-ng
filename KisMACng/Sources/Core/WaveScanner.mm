@@ -127,7 +127,7 @@ got:
     float interval;
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     
-    interval = [defs floatForKey:@"active_scanInterval"];
+    interval = [defs floatForKey:@"activeScanInterval"];
     
     while (_scanning) {
         nets = [wd networksInRange];
@@ -364,12 +364,18 @@ error:
     }
 #endif
     
-    aPCapT=pcap_open_offline([dumpFile cString],err);
-    if (aPCapT==NULL) {
-        NSLog(@"Could not open dump file: %@", dumpFile);
+    _pcapP=pcap_open_offline([dumpFile cString],err);
+    if (_pcapP==NULL) {
+        NSLog(@"Could not open dump file: %@. Reason: %s", dumpFile, err);
         return;
     }
 
+	if (pcap_datalink(_pcapP) != DLT_IEEE802_11) {
+	    NSLog(@"Could not open dump file: %@. Unsupported Datalink Type.", dumpFile);
+		pcap_close(_pcapP);
+        return;
+	}
+	
     memset(aFrameBuf, 0, sizeof(aFrameBuf));
     aWF=(WLFrame*)aFrameBuf;
     
@@ -397,7 +403,7 @@ error:
 #endif
 
     [w release];
-    pcap_close(aPCapT);
+    pcap_close(_pcapP);
 }
 
 
@@ -418,7 +424,7 @@ error:
     
     *corrupted = NO;
     
-    b=(UInt8*)pcap_next(aPCapT,&h);	//get frame from current pcap file
+    b=(UInt8*)pcap_next(_pcapP,&h);	//get frame from current pcap file
     if(b==NULL) return NULL;
 
     *corrupted = YES;

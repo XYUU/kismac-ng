@@ -531,6 +531,27 @@
 #pragma mark MAP MENU
 #pragma mark -
 
+
+- (void)showAreaDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    _importOpen--;
+	NSParameterAssert(_importOpen == 0);
+
+    [[_importController window] close];
+    [_importController stopAnimation];
+	
+	if ([_importController canceled]) {
+		[self clearAreaMap];
+		[_showNetInMap setTitle:@"Show Net Area"];
+		[_showNetInMap setState: NSOffState];
+	} else {
+		[_showNetInMap setTitle:[NSLocalizedString(@"Show Net Area of ", "menu item") stringByAppendingString:[_curNet BSSID]]];
+		[_showNetInMap setState: NSOnState];
+	}
+		
+	[self showMap];
+	[WaveHelper secureRelease:&_importController];   
+}
+
 - (IBAction)showCurNetArea:(id)sender {
    if ([sender state] == NSOffState) {
         if (![[WaveHelper mapView] hasValidMap]) {
@@ -540,36 +561,32 @@
 		
 		[self stopScan];
 
-        _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
-        [_importController setTitle: NSLocalizedString(@"Caching Map...", "Title of busy dialog")];
-        [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:nil didEndSelector:nil contextInfo:nil];
-        [WaveHelper setImportController:_importController];
+		[self showBusyWithText:NSLocalizedString(@"Caching Map...", "Title of busy dialog") andEndSelector:@selector(showAreaDone:returnCode:contextInfo:) andDialog:@"Crack"];
         
         if ([_showAllNetsInMap state] == NSOnState) [self showAllNetArea:_showAllNetsInMap];
-        [_mappingView showAreaNet:_curNet];
-        
-        [NSApp runModalForWindow:[_importController window]];
-        
-        [NSApp endSheet:[_importController window]];
-        [[_importController window] close];
-        [_importController stopAnimation];
-        
-        if ([_importController canceled]) {
-            [_mappingView showAreaNet:Nil];
-            [sender setTitle:@"Show Net Area"];
-            [sender setState: NSOffState];
-        } else {
-            [sender setTitle:[NSLocalizedString(@"Show Net Area of ", "menu item") stringByAppendingString:[_curNet BSSID]]];
-            [sender setState: NSOnState];
-        }
-        
-        [_importController release];
-        _importController=Nil;
 
+		[_mappingView showAreaNet:_curNet];
     } else {
         [self clearAreaMap];
     }
 }
+
+- (void)showAreaAllDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    _importOpen--;
+	NSParameterAssert(_importOpen == 0);
+
+    [[_importController window] close];
+    [_importController stopAnimation];
+	
+	if ([_importController canceled]) {
+		[self clearAreaMap];
+		[_showAllNetsInMap setState: NSOffState];
+	} else [_showAllNetsInMap setState: NSOnState];
+	
+    [WaveHelper secureRelease:&_importController]; 
+	[self showMap];
+}
+
 
 - (IBAction)showAllNetArea:(id)sender {
     NSMutableArray *a;
@@ -582,32 +599,14 @@
 		}
         [self stopScan];
         
-        _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
-        [_importController setTitle: NSLocalizedString(@"Caching Map...", "Title of busy dialog")];
-    
-        [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:nil didEndSelector:nil contextInfo:nil];
-        [WaveHelper setImportController:_importController];
-        
+   		[self showBusyWithText:NSLocalizedString(@"Caching Map...", "Title of busy dialog") andEndSelector:@selector(showAreaAllDone:returnCode:contextInfo:) andDialog:@"Crack"];
+     
          if ([_showNetInMap state] == NSOnState) [self showCurNetArea:_showNetInMap];
     
-        a = [[NSMutableArray alloc] init];
+        a = [[[NSMutableArray alloc] init] autorelease];
         for (i=0; i<[_container count]; i++) [a addObject:[_container netAtIndex:i]];
         [_mappingView showAreaNets:[NSArray arrayWithArray:a]];
-        [a release];
-
-        [NSApp runModalForWindow:[_importController window]];
         
-        [NSApp endSheet:[_importController window]];
-        [[_importController window] close];
-        [_importController stopAnimation];
-        
-        if ([_importController canceled]) {
-            [_mappingView showAreaNet:Nil];
-            [sender setState: NSOffState];
-        } else [sender setState: NSOnState];
-        
-        [_importController release];
-        _importController=Nil;
     } else {
         [self clearAreaMap];
     }

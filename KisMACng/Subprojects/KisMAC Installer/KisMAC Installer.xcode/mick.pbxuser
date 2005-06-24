@@ -1,5 +1,15 @@
 // !$*UTF8*$!
 {
+	001243B2083FA73D00A47FCA = {
+		fRef = 00B9E6140647BA2E009FEF35;
+		isa = PBXTextBookmark;
+		name = "InstallController.m: 788";
+		rLen = 0;
+		rLoc = 28197;
+		rType = 0;
+		vrLen = 1774;
+		vrLoc = 26957;
+	};
 	006E5281083C74C700F21462 = {
 		fRef = 00B9E6140647BA2E009FEF35;
 		isa = PBXTextBookmark;
@@ -9,16 +19,6 @@
 		rType = 0;
 		vrLen = 1773;
 		vrLoc = 26958;
-	};
-	009CE66A082D1CE500135EE1 = {
-		fRef = 00B9E6140647BA2E009FEF35;
-		isa = PBXTextBookmark;
-		name = "InstallController.m: 623";
-		rLen = 0;
-		rLoc = 22747;
-		rType = 0;
-		vrLen = 1760;
-		vrLoc = 21686;
 	};
 	00B9E5E00647B7A9009FEF35 = {
 		activeArgIndex = 2147483647;
@@ -73,8 +73,8 @@
 	00B9E6140647BA2E009FEF35 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2324, 11172}}";
-			sepNavSelRange = "{28285, 0}";
-			sepNavVisRect = "{{0, 10510}, {1031, 662}}";
+			sepNavSelRange = "{28197, 0}";
+			sepNavVisRect = "{{0, 10498}, {1031, 662}}";
 		};
 	};
 	00B9E97E0647F3B8009FEF35 = {
@@ -219,7 +219,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 138178792;
+			PBXPerProjectTemplateStateSaveDate = 138389287;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -698,11 +698,11 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 138178792;
+			PBXWorkspaceStateSaveDate = 138389287;
 		};
 		perUserProjectItems = {
+			001243B2083FA73D00A47FCA = 001243B2083FA73D00A47FCA;
 			006E5281083C74C700F21462 = 006E5281083C74C700F21462;
-			009CE66A082D1CE500135EE1 = 009CE66A082D1CE500135EE1;
 		};
 		sourceControlManager = 00B9E5E90647B7BD009FEF35;
 		userBuildSettings = {

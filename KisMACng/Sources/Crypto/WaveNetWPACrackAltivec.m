@@ -234,7 +234,7 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
     int i, j, pwdLen[4];
     
     for(j = 0; j < 4; j++) {
-        pwdLen[j] = strlen(password[j]);
+        pwdLen[j] = strlen((SInt8*)password[j]);
         
         /* XOR key with ipad and opad values */ 
         for (i = 0; i < pwdLen[j]; i++) { 
@@ -337,8 +337,8 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
         do {
             if (feof(fptr)) break;
 
-            fgets(wrd[k], 64, fptr);
-            i = strlen(wrd[k]) - 1;
+            fgets((SInt8*)wrd[k], 64, fptr);
+            i = strlen((SInt8*)wrd[k]) - 1;
             wrd[k][i--] = 0;
             if (wrd[k][i]=='\r') wrd[k][i] = 0;
             

@@ -222,8 +222,8 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
     SHA1InitWithStatic64(&ipadContext, k_ipad);
     SHA1InitWithStatic64(&opadContext, k_opad);
  
-    fastF(password, pwdLen, ssid, ssidlength, &ipadContext, &opadContext, 1, output);
-    fastF(password, pwdLen, ssid, ssidlength, &ipadContext, &opadContext, 2, &output[SHA_DIGEST_LENGTH]); 
+    fastF((UInt8*)password, pwdLen, ssid, ssidlength, &ipadContext, &opadContext, 1, output);
+    fastF((UInt8*)password, pwdLen, ssid, ssidlength, &ipadContext, &opadContext, 2, &output[SHA_DIGEST_LENGTH]); 
 } 
 
 #pragma mark -
@@ -311,10 +311,10 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
             if ((wrd[j] < 32) || (wrd[j] > 126)) break;
         if (j!=i) continue;
     
-        fastWP_passwordHash(wrd, ssid, ssidLength, pmk);
+        fastWP_passwordHash(wrd, (const UInt8*)ssid, ssidLength, pmk);
     
         for (curKey = 0; curKey < keys; curKey++) {
-            PRF(pmk, 32, prefix, strlen(prefix), c[curKey].ptkInput, WPA_NONCE_LENGTH*2 + 12, ptk, 16);
+            PRF(pmk, 32, prefix, strlen((SInt8*)prefix), c[curKey].ptkInput, WPA_NONCE_LENGTH*2 + 12, ptk, 16);
             
             fast_hmac_md5(c[curKey].data, c[curKey].dataLen, ptk, 16, digest);
             

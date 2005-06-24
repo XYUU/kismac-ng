@@ -110,7 +110,7 @@
         
         e = [coord keyEnumerator];
         while (v = [e nextObject]) {
-            p = [self pixelForCoordinate:[v wayPoint]];
+            p = [self pixelForCoordinateNoZoom:[v wayPoint]];
             f[t][q++] = p.x;
             f[t][q++] = p.y;
             f[t][q++] = [[coord objectForKey:v] intValue];
@@ -184,7 +184,7 @@
 	[self setNeedsDisplay:YES];
     
 exit:
-	[networks release];
+	[networks autorelease];
     for(t=0; t<networkCount; t++) delete [] f[t];
     delete [] f;
     delete [] c;
@@ -194,18 +194,19 @@ exit:
     delete [] cache;
 
 exitNoCleanUp:
-    [im terminateWithCode:0];
-    [NSApp stopModal];
+    [im terminateWithCode:[im canceled] ? -1 : 0];
     [subpool release];
 }
 
 - (void)showAreaNet:(WaveNet*)net {
+	NSParameterAssert(net);
 	[_mapImage release];
 	_mapImage = [_orgImage copy];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:[NSArray arrayWithObject:net]];
 }
 
 - (void)showAreaNets:(NSArray*)nets {
+	NSParameterAssert(nets);
 	[_mapImage release];
 	_mapImage = [_orgImage copy];
     [NSThread detachNewThreadSelector:@selector(makeCache:) toTarget:self withObject:nets];

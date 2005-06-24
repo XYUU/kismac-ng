@@ -37,6 +37,7 @@
     WaveNet         *_network;
     NSImage         *_netImg;
     NSColor         *_netColor;
+	BOOL			_filtered;
 	BOOL			_attachedToSuperView;
 }
 
@@ -44,6 +45,7 @@
 - (void)setName:(NSString*)name;
 - (void)setWep:(encryptionType)wep;
 - (void)setCoord:(waypoint)wp;
+- (void)setFiltered:(BOOL)filtered;
 - (waypoint)coord;
 
 - (void)align;
