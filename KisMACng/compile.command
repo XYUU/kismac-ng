@@ -24,10 +24,10 @@ xcodebuild -buildstyle Deployment
 cd ../AiroJack
 xcodebuild -buildstyle Deployment
 cd ../BIGL
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../BIGeneric
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../AirPortMenu
 xcodebuild -buildstyle Deployment
 cd ../..
-xcodebuild -target KisMAC -buildstyle Deployment
+xcodebuild -target KisMAC -configuration Deployment
