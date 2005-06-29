@@ -24,5 +24,6 @@
 
 - (IBAction)flood:(id)sender;
 - (IBAction)changeValue:(id)sender;
+- (IBAction)captureScreen:(id)sender;
 
 @end

@@ -165,4 +165,8 @@ err:
     }
 }
 
+- (IBAction)captureScreen:(id)sender {
+	[[_graph dataWithTIFFInsideRect:[_graph frame]] writeToFile:[@"~/screen.tiff" stringByExpandingTildeInPath] atomically:YES];
+}
+
 @end

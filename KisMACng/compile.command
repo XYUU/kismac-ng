@@ -16,18 +16,18 @@ rm -rf *.framework 2>/dev/null
 cd ..
 
 cd MACJack
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../VihaDriver
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../AtheroJack
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../AiroJack
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../BIGL
 xcodebuild -configuration Deployment
 cd ../BIGeneric
 xcodebuild -configuration Deployment
 cd ../AirPortMenu
-xcodebuild -buildstyle Deployment
+xcodebuild -configuration Deployment
 cd ../..
 xcodebuild -target KisMAC -configuration Deployment

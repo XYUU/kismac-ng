@@ -112,6 +112,19 @@
 			settings = {
 			};
 		};
+		0084D562072E948300F48720 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = UDPFlooder.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		0084D563072E948300F48720 = {
+			fileRef = 0084D562072E948300F48720;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //000
 //001
 //002
@@ -270,6 +283,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				0084D562072E948300F48720,
 				8D1107310486CEB800E47090,
 				089C165CFE840E0CC02AAC07,
 				29B97318FDCFA39411CA2CEA,
@@ -419,6 +433,7 @@
 				8D11072B0486CEB800E47090,
 				0005CFEE071D5661001037B7,
 				0005CFF2071D566C001037B7,
+				0084D563072E948300F48720,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

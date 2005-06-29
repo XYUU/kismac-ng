@@ -1,166 +1,130 @@
 // !$*UTF8*$!
 {
-	0060D406086C22DC003A0458 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */;
-		name = "GTDriver.cpp: 282";
-		rLen = 0;
-		rLoc = 8478;
-		rType = 0;
-		vrLen = 2534;
-		vrLoc = 6807;
-	};
-	0060D6C6086C5196003A0458 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */;
-		name = OSSwapLittleToHostInt16;
-		rLen = 23;
-		rLoc = 8009;
-		rType = 0;
-		vrLen = 2534;
-		vrLoc = 6807;
-	};
-	00C0B3460665385200B1F653 /* WiFiUserClient.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 993}}";
-			sepNavSelRange = "{1674, 0}";
-			sepNavVisRect = "{{0, 327}, {1033, 666}}";
-			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
+	00033F820664EE4400B06924 /* WiFiGUI */ = {
+		isa = PBXExecutable;
+		activeArgIndex = 2147483647;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		configStateDict = {
 		};
+		cppStopOnCatchEnabled = 0;
+		cppStopOnThrowEnabled = 0;
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = WiFiGUI;
+		sourceDirectories = (
+		);
 	};
-	00C0B3470665385200B1F653 /* WiFiUserClient.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 4409}}";
-			sepNavSelRange = "{7690, 0}";
-			sepNavVisRect = "{{0, 3928}, {1033, 461}}";
-			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
-		};
-	};
-	00C0B34E06653A7600B1F653 /* WiFiUserInterface.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 1008}}";
-			sepNavSelRange = "{1882, 0}";
-			sepNavVisRect = "{{0, 379}, {1033, 461}}";
-		};
-	};
-	00CE4836065FE80900225F0A /* Source Control */ = {
+	00033F8B0664EE5500B06924 /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
-		isSCMEnabled = 1;
+		isSCMEnabled = 0;
 		scmConfiguration = {
-			SubversionToolPath = /usr/local/bin/svn;
 		};
-		scmType = scm.subversion;
+		scmType = scm.cvs;
 	};
-	00CE4837065FE80900225F0A /* Code sense */ = {
+	00033F8C0664EE5500B06924 /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
-	00CE4838065FE84300225F0A /* WiFiController.h */ = {
+	00033F8F0664EEBF00B06924 /* WiFiGUI.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 2394}}";
-			sepNavSelRange = "{5883, 0}";
-			sepNavVisRect = "{{0, 1610}, {1031, 662}}";
-			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
-		};
-	};
-	00CE4839065FE84300225F0A /* WiFiController.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 9604}}";
-			sepNavSelRange = "{4337, 0}";
-			sepNavVisRect = "{{0, 626}, {1031, 662}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 825}}";
+			sepNavSelRange = "{1657, 8}";
+			sepNavVisRect = "{{0, 228}, {1033, 461}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE484B0660817500225F0A /* WiFiControllerPCI.h */ = {
+	00033F900664EEBF00B06924 /* WiFiGUI.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 980}}";
-			sepNavSelRange = "{532, 0}";
-			sepNavVisRect = "{{0, 0}, {1031, 662}}";
-		};
-	};
-	00CE484C0660817500225F0A /* WiFiControllerPCI.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 3486}}";
-			sepNavSelRange = "{3996, 17}";
-			sepNavVisRect = "{{0, 1230}, {1031, 662}}";
-		};
-	};
-	00CE486E066094DB00225F0A /* WiFiLogger.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 1218}}";
-			sepNavSelRange = "{1521, 0}";
-			sepNavVisRect = "{{0, 378}, {1031, 662}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 5053}}";
+			sepNavSelRange = "{1390, 18}";
+			sepNavVisRect = "{{0, 281}, {1033, 461}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE4872066095A600225F0A /* GTIDs.h */ = {
+	0045934A066CF7710028EF4B /* WiFiPasswordEncrypt.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 3583}}";
-			sepNavSelRange = "{2615, 0}";
-			sepNavVisRect = "{{0, 686}, {1033, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1057, 689}}";
+			sepNavSelRange = "{221, 0}";
+			sepNavVisRect = "{{0, 0}, {1057, 689}}";
+		};
+	};
+	0045934B066CF7710028EF4B /* WiFiPasswordEncrypt.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 3793}}";
+			sepNavSelRange = "{1816, 0}";
+			sepNavVisRect = "{{0, 602}, {1033, 461}}";
+		};
+	};
+	00C0B37006653F3100B1F653 /* WiFiDriverInterface.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1057, 689}}";
+			sepNavSelRange = "{1042, 0}";
+			sepNavVisRect = "{{0, 0}, {1057, 689}}";
+		};
+	};
+	00C0B37106653F3100B1F653 /* WiFiDriverInterface.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 2827}}";
+			sepNavSelRange = "{4374, 174}";
+			sepNavVisRect = "{{0, 1751}, {1033, 461}}";
+		};
+	};
+	00C69403066E2ED800F134D2 /* HexNumberFormatter.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1057, 689}}";
+			sepNavSelRange = "{0, 972}";
+			sepNavVisRect = "{{0, 0}, {1057, 689}}";
+		};
+	};
+	00C69404066E2ED800F134D2 /* HexNumberFormatter.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 1735}}";
+			sepNavSelRange = "{99, 0}";
+			sepNavVisRect = "{{0, 0}, {1033, 461}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00CE48C70660962F00225F0A /* GTFirmware.h */ = {
+	089C165DFE840E0CC02AAC07 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {984, 164625}}";
-			sepNavSelRange = "{208, 0}";
-			sepNavVisRect = "{{0, 0}, {984, 666}}";
+			sepNavIntBoundsRect = "{{0, 0}, {709, 464}}";
+			sepNavSelRange = "{181, 0}";
+			sepNavVisRect = "{{0, 0}, {709, 464}}";
 			sepNavWindowFrame = "{{15, 269}, {750, 558}}";
 		};
 	};
-	00E651B2067DC6E2009DC735 /* WiFiPower.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 3723}}";
-			sepNavSelRange = "{8769, 0}";
-			sepNavVisRect = "{{0, 2866}, {1033, 666}}";
-		};
-	};
-	00E9374207E9809C00AFDBC9 /* BIWiFiInterface.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 4536}}";
-			sepNavSelRange = "{10817, 0}";
-			sepNavVisRect = "{{0, 3134}, {1031, 662}}";
-		};
-	};
-	00E9374307E9809C00AFDBC9 /* BIWiFiInterface.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 17360}}";
-			sepNavSelRange = "{10702, 0}";
-			sepNavVisRect = "{{0, 0}, {0, 0}}";
-			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
-		};
-	};
-	089C1669FE841209C02AAC07 /* Project object */ = {
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Deployment;
-		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Development */;
-		activeTarget = 32D94FC30562CBF700B6AF17 /* GTDriver */;
+		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA /* Development */;
+		activeExecutable = 00033F820664EE4400B06924 /* WiFiGUI */;
+		activeTarget = 8D1107260486CEB800E47090 /* WiFiGUI */;
 		addToTargets = (
-			32D94FC30562CBF700B6AF17 /* GTDriver */,
+			8D1107260486CEB800E47090 /* WiFiGUI */,
 		);
 		breakpoints = (
 		);
-		codeSenseManager = 00CE4837065FE80900225F0A /* Code sense */;
+		codeSenseManager = 00033F8C0664EE5500B06924 /* Code sense */;
+		executables = (
+			00033F820664EE4400B06924 /* WiFiGUI */,
+		);
 		perUserDictionary = {
-			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
-				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
-				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
-				PBXFileTableDataSourceColumnWidthsKey = (
-					22,
-					979.7974,
-				);
-				PBXFileTableDataSourceColumnsKey = (
-					PBXExecutablesDataSource_ActiveFlagID,
-					PBXExecutablesDataSource_NameID,
-				);
-			};
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					748,
+					158,
 					20,
 					133,
 					43,
@@ -177,37 +141,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
-				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
-				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
-				PBXFileTableDataSourceColumnWidthsKey = (
-					20,
-					20,
-					809,
-					20,
-					48.1626,
-					43,
-					43,
-					20,
-				);
-				PBXFileTableDataSourceColumnsKey = (
-					PBXFileDataSource_SCM_ColumnID,
-					PBXFileDataSource_FiletypeID,
-					PBXFileDataSource_Filename_ColumnID,
-					PBXFileDataSource_Built_ColumnID,
-					PBXFileDataSource_ObjectSize_ColumnID,
-					PBXFileDataSource_Errors_ColumnID,
-					PBXFileDataSource_Warnings_ColumnID,
-					PBXFileDataSource_Target_ColumnID,
-				);
-			};
 			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
 					635,
-					132,
+					134,
 					20,
 					134,
 					43,
@@ -223,7 +163,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 141315068;
+			PBXPerProjectTemplateStateSaveDate = 141304557;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -409,12 +349,12 @@
 							_percentageOfCollapsedView = 0;
 							isCollapsed = yes;
 							sizes = (
-								"{{0, 0}, {1025, 0}}",
-								"{{0, 0}, {1025, 683}}",
+								"{{0, 0}, {1098, 0}}",
+								"{{0, 0}, {1098, 706}}",
 							);
 						};
 						PBXProjectWorkspaceModule_DataSourceSelectionKey_Rev6 = {
-							BoundsStr = "{{0, 0}, {1010, 15}}";
+							BoundsStr = "{{0, 0}, {1083, 15}}";
 							Rows = (
 								0,
 							);
@@ -424,30 +364,14 @@
 						PBXProjectWorkspaceModule_EmbeddedNavigatorGroup = {
 							PBXSplitModuleInNavigatorKey = {
 								Split0 = {
-									bookmark = 0014505A06B4F47500FC47B9;
+									bookmark = 000D190B069D92FD00C3A293;
 									history = (
-										008E0F2706A4446F0064AB5C,
-										009F5C2306A5C07A004BB18E,
-										009F5C2406A5C07A004BB18E,
-										00F57D6506A9CCCE0035AE2F,
-										00F57D6606A9CCCE0035AE2F,
-										0014505106B4F47400FC47B9,
-										0014505206B4F47500FC47B9,
-										0014505306B4F47500FC47B9,
-										0014505406B4F47500FC47B9,
+										000D1909069D92FD00C3A293,
+										00372931067F0E7000AAFD86,
 									);
 									prevStack = (
-										008EAAD80682062800359EC5,
-										008C1167068372D400BE7B9C,
-										004358390687234F0098554C,
-										0043583A0687234F0098554C,
-										009F5C2606A5C07A004BB18E,
-										009F5C2706A5C07A004BB18E,
-										0014505506B4F47500FC47B9,
-										0014505606B4F47500FC47B9,
-										0014505706B4F47500FC47B9,
-										0014505806B4F47500FC47B9,
-										0014505906B4F47500FC47B9,
+										00372933067F0E7000AAFD86,
+										000D190A069D92FD00C3A293,
 									);
 								};
 								SplitCount = 1;
@@ -459,14 +383,14 @@
 								_indexOfCollapsedView = 0;
 								_percentageOfCollapsedView = 0;
 								sizes = (
-									"{{0, 0}, {182, 683}}",
-									"{{182, 0}, {1025, 683}}",
+									"{{0, 0}, {182, 706}}",
+									"{{182, 0}, {1098, 706}}",
 								);
 							};
 						};
-						PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1025, 0}}";
-						PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 0}, {1025, 683}}";
-						PBXProjectWorkspaceModule_OldSuperviewFrame = "{{182, 0}, {1025, 683}}";
+						PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1098, 0}}";
+						PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 0}, {1098, 706}}";
+						PBXProjectWorkspaceModule_OldSuperviewFrame = "{{182, 0}, {1098, 706}}";
 						PBXProjectWorkspaceModule_SGTM = {
 							PBXBottomSmartGroupGIDs = (
 								1C37FBAC04509CD000000102,
@@ -489,19 +413,18 @@
 							};
 							PBXSmartGroupTreeModuleOutlineStateKey_v7 = {
 								PBXSmartGroupTreeModuleOutlineStateExpansionKey = (
-									089C166AFE841209C02AAC07,
-									247142CAFF3F8F9811CA285C,
-									089C167CFE841241C02AAC07,
+									29B97314FDCFA39411CA2CEA,
+									080E96DDFE201D6D7F000001,
 									1C37FBAC04509CD000000102,
 								);
 								PBXSmartGroupTreeModuleOutlineStateSelectionKey = (
 									(
-										13,
+										3,
 										1,
 										0,
 									),
 								);
-								PBXSmartGroupTreeModuleOutlineStateVisibleRectKey = "{{0, 0}, {165, 665}}";
+								PBXSmartGroupTreeModuleOutlineStateVisibleRectKey = "{{0, 0}, {165, 688}}";
 							};
 							PBXTopSmartGroupGIDs = (
 							);
@@ -510,8 +433,6 @@
 				},
 			);
 			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXBuildResultsModule" = {
-			};
-			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXCVSModule" = {
 			};
 			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXDebugCLIModule" = {
 			};
@@ -523,8 +444,8 @@
 						_percentageOfCollapsedView = 0;
 						isCollapsed = yes;
 						sizes = (
-							"{{0, 0}, {283, 209}}",
-							"{{283, 0}, {462, 209}}",
+							"{{0, 0}, {468, 312}}",
+							"{{468, 0}, {777, 312}}",
 						);
 					};
 					VerticalSplitView = {
@@ -533,8 +454,8 @@
 						_percentageOfCollapsedView = 0;
 						isCollapsed = yes;
 						sizes = (
-							"{{0, 0}, {745, 209}}",
-							"{{0, 209}, {745, 213}}",
+							"{{0, 0}, {1245, 312}}",
+							"{{0, 312}, {1245, 349}}",
 						);
 					};
 				};
@@ -545,74 +466,18 @@
 					SplitCount = 1;
 				};
 			};
-			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXProjectFindModule" = {
-			};
 			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
 				PBXProjectWorkspaceModule_StateKey_Rev39 = {
-					PBXProjectWorkspaceModule_DEGV_Geometry = {
-						_collapsingFrameDimension = 0;
-						_indexOfCollapsedView = 0;
-						_percentageOfCollapsedView = 0;
-						isCollapsed = yes;
-						sizes = (
-							"{{0, 0}, {1098, 0}}",
-							"{{0, 0}, {1098, 706}}",
-						);
-					};
 					PBXProjectWorkspaceModule_DataSourceSelectionKey_Rev6 = {
-						BoundsStr = "{{0, 0}, {1083, 15}}";
+						BoundsStr = "{{0, 0}, {1083, 689}}";
 						Rows = (
 							0,
 						);
-						VisibleRectStr = "{{0, 0}, {0, 0}}";
+						VisibleRectStr = "{{0, 0}, {1083, 689}}";
 					};
-					PBXProjectWorkspaceModule_EditorOpen = true;
+					PBXProjectWorkspaceModule_EditorOpen = false;
 					PBXProjectWorkspaceModule_EmbeddedNavigatorGroup = {
 						PBXSplitModuleInNavigatorKey = {
-							Split0 = {
-								bookmark = 003E28F20660E78100C236BD;
-								history = (
-									00CE48740660962500225F0A,
-									00CE48D00660A97C00225F0A,
-									003E28C20660E33500C236BD,
-									003E28C30660E33500C236BD,
-									003E28C40660E33500C236BD,
-									003E28C50660E33500C236BD,
-									003E28C60660E33500C236BD,
-									003E28C80660E33500C236BD,
-									003E28EE0660E78100C236BD,
-									003E28EF0660E78100C236BD,
-								);
-								prevStack = (
-									00CE489C0660962500225F0A,
-									00CE48A80660962500225F0A,
-									00CE48D90660A97C00225F0A,
-									00CE48DB0660A97C00225F0A,
-									003E28CA0660E33500C236BD,
-									003E28CB0660E33500C236BD,
-									003E28CC0660E33500C236BD,
-									003E28CD0660E33500C236BD,
-									003E28CE0660E33500C236BD,
-									003E28CF0660E33500C236BD,
-									003E28D00660E33500C236BD,
-									003E28D10660E33500C236BD,
-									003E28D20660E33500C236BD,
-									003E28D30660E33500C236BD,
-									003E28D40660E33500C236BD,
-									003E28D50660E33500C236BD,
-									003E28D60660E33500C236BD,
-									003E28D70660E33500C236BD,
-									003E28D80660E33500C236BD,
-									003E28D90660E33500C236BD,
-									003E28DA0660E33500C236BD,
-									003E28DB0660E33500C236BD,
-									003E28DC0660E33500C236BD,
-									003E28DD0660E33500C236BD,
-									003E28DE0660E33500C236BD,
-									003E28F00660E78100C236BD,
-									003E28F10660E78100C236BD,
-								);
-							};
 							SplitCount = 1;
 						};
 					};
@@ -627,8 +492,8 @@
 							);
 						};
 					};
-					PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1098, 0}}";
-					PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 0}, {1098, 706}}";
+					PBXProjectWorkspaceModule_OldDetailFrame = "{{0, 0}, {1098, 706}}";
+					PBXProjectWorkspaceModule_OldEditorFrame = "{{0, 0}, {750, 480}}";
 					PBXProjectWorkspaceModule_OldSuperviewFrame = "{{182, 0}, {1098, 706}}";
 					PBXProjectWorkspaceModule_SGTM = {
 						PBXBottomSmartGroupGIDs = (
@@ -652,16 +517,9 @@
 						};
 						PBXSmartGroupTreeModuleOutlineStateKey_v7 = {
 							PBXSmartGroupTreeModuleOutlineStateExpansionKey = (
-								089C166AFE841209C02AAC07,
-								247142CAFF3F8F9811CA285C,
-								00CE48C90660963900225F0A,
-								089C167CFE841241C02AAC07,
-								1C37FBAC04509CD000000102,
 							);
 							PBXSmartGroupTreeModuleOutlineStateSelectionKey = (
 								(
-									6,
-									1,
 									0,
 								),
 							);
@@ -672,22 +530,43 @@
 					};
 				};
 			};
+			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXRunSessionModule" = {
+				LauncherConfigVersion = 3;
+				Runner = {
+					HorizontalSplitView = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {491, 167}}",
+							"{{0, 176}, {491, 267}}",
+						);
+					};
+					VerticalSplitView = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {405, 443}}",
+							"{{414, 0}, {514, 443}}",
+						);
+					};
+				};
+			};
 			PBXWorkspaceGeometries = (
 				{
-					Frame = "{{0, 0}, {1207, 683}}";
+					Frame = "{{0, 0}, {1280, 706}}";
 					PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
 					};
-					RubberWindowFrame = "49 107 1207 725 0 0 1280 832 ";
+					RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 				},
 			);
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXBuildResultsModule" = {
-				Frame = "{{0, 0}, {796, 227}}";
+				Frame = "{{0, 0}, {1280, 711}}";
 				PBXModuleWindowStatusBarHidden = YES;
-				RubberWindowFrame = "400 468 796 248 0 0 1280 832 ";
-			};
-			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXCVSModule" = {
-				Frame = "{{0, 0}, {482, 276}}";
-				RubberWindowFrame = "390 300 482 318 0 0 1280 832 ";
+				RubberWindowFrame = "0 100 1280 732 0 0 1280 832 ";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXDebugCLIModule" = {
 				Frame = "{{0, 0}, {400, 201}}";
@@ -699,65 +578,49 @@
 				DebugConsoleVisible = None;
 				DebugConsoleWindowFrame = "{{200, 200}, {500, 300}}";
 				DebugSTDIOWindowFrame = "{{200, 200}, {500, 300}}";
-				Frame = "{{0, 0}, {745, 422}}";
-				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
+				Frame = "{{0, 0}, {1245, 661}}";
+				RubberWindowFrame = "3 128 1245 703 0 0 1280 832 ";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
 				Frame = "{{0, 0}, {750, 481}}";
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "15 325 750 502 0 0 1280 832 ";
 			};
-			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectFindModule" = {
-				Frame = "{{0, 0}, {614, 316}}";
-				RubberWindowFrame = "333 390 614 358 0 0 1280 832 ";
-			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
 				Frame = "{{0, 0}, {1280, 706}}";
 				PBXProjectWorkspaceModule_GeometryKey_Rev15 = {
-					PBXProjectWorkspaceModule_BuildResultsWindowVisible = true;
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 141315068;
+			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXRunSessionModule" = {
+				Frame = "{{0, 0}, {745, 443}}";
+				PBXModuleWindowStatusBarHidden = YES;
+				RubberWindowFrame = "267 359 745 464 0 0 1280 832 ";
+			};
+			PBXWorkspaceStateSaveDate = 141304557;
 		};
-		perUserProjectItems = {
-			0060D406086C22DC003A0458 /* PBXTextBookmark */ = 0060D406086C22DC003A0458 /* PBXTextBookmark */;
-			0060D6C6086C5196003A0458 /* PBXTextBookmark */ = 0060D6C6086C5196003A0458 /* PBXTextBookmark */;
-		};
-		sourceControlManager = 00CE4836065FE80900225F0A /* Source Control */;
+		sourceControlManager = 00033F8B0664EE5500B06924 /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	089C167EFE841241C02AAC07 /* English */ = {
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {984, 666}}";
-			sepNavSelRange = "{228, 0}";
-			sepNavVisRect = "{{0, 0}, {984, 666}}";
+			sepNavIntBoundsRect = "{{0, 0}, {453, 210}}";
+			sepNavSelRange = "{186, 0}";
+			sepNavVisRect = "{{0, 24}, {453, 186}}";
 		};
 	};
-	1A224C3EFF42367911CA2CB7 /* GTDriver.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 1806}}";
-			sepNavSelRange = "{1181, 0}";
-			sepNavVisRect = "{{0, 126}, {1031, 662}}";
-			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
-		};
-	};
-	1A224C3FFF42367911CA2CB7 /* GTDriver.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1406, 15358}}";
-			sepNavSelRange = "{8009, 23}";
-			sepNavVisRect = "{{0, 3468}, {1025, 662}}";
-		};
-	};
-	32D94FC30562CBF700B6AF17 /* GTDriver */ = {
+	8D1107260486CEB800E47090 /* WiFiGUI */ = {
 		activeExec = 0;
+		executables = (
+			00033F820664EE4400B06924 /* WiFiGUI */,
+		);
 	};
-	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
+	8D1107310486CEB800E47090 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 798}}";
-			sepNavSelRange = "{2046, 0}";
-			sepNavVisRect = "{{0, 108}, {1031, 662}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1057, 689}}";
+			sepNavSelRange = "{640, 0}";
+			sepNavVisRect = "{{0, 0}, {1057, 689}}";
 		};
 	};
 }

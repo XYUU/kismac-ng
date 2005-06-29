@@ -2,7 +2,7 @@
     IBClasses = (
         {CLASS = BIGLView; LANGUAGE = ObjC; SUPERCLASS = NSOpenGLView; }, 
         {
-            ACTIONS = {changeValue = id; flood = id; }; 
+            ACTIONS = {captureScreen = id; changeValue = id; flood = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {

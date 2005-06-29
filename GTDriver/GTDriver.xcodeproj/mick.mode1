@@ -219,8 +219,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -303,6 +301,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -320,10 +320,10 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0060D406086C22DC003A0458</string>
+										<string>0060D6C6086C5196003A0458</string>
 										<key>history</key>
 										<array>
-											<string>006555250829400500689AFF</string>
+											<string>0060D406086C22DC003A0458</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -381,9 +381,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0060D3F4086C2287003A0458</string>
+				<string>0060D670086C4C30003A0458</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0060D3F5086C2287003A0458</string>
+				<string>0060D671086C4C30003A0458</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -517,7 +517,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>006554290829358E00689AFF</string>
 		<string>/Users/mick/openDev/GTDriver/GTDriver.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
