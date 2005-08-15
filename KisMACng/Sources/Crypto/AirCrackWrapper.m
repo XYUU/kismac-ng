@@ -595,10 +595,10 @@ int cmp_votes( const void *bs1, const void *bs2 )
     BOOL ret = [self do_wep_crack:0];
     
     for( i = 0; i < nfork; i++) {
-        close( mc_pipe[i][0] );
         close( mc_pipe[i][1] );
-        close( cm_pipe[i][0] );
+        close( mc_pipe[i][0] );
         close( cm_pipe[i][1] );
+        close( cm_pipe[i][0] );
     }
     
     return ret;

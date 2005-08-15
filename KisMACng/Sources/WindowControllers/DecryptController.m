@@ -215,7 +215,7 @@ unsigned long doFCS(unsigned char* buf, int len) {
         f=(header*)x;
         if (((f->frameControl & IEEE80211_TYPE_MASK)==IEEE80211_TYPE_DATA) && (h.caplen>=32) && ((f->frameControl & IEEE80211_WEP)==IEEE80211_WEP)) {
             //shall we handle a tunnel?
-            if (f->frameControl & IEEE80211_DIR_MASK == IEEE80211_DIR_DSTODS) {
+            if ((f->frameControl & IEEE80211_DIR_MASK) == IEEE80211_DIR_DSTODS) {
                 data = f->data + 4;
                 framelen = h.caplen - 4;
             } else {

@@ -204,11 +204,15 @@
     imgView = [[BIImageView alloc] initWithImage:map];
     [imgView setLocation:frame.origin];
     
+	//this is a quick hack!
+	frame.size.height += frame.origin.y;
+	frame.size.width += frame.origin.x;
     view = [[BIView alloc] initWithFrame:frame];
     [view addSubView:imgView];
     [view addSubView:_moveContainer];
-
-    data = [view dataWithPDFInsideRect:frame];
+	 
+	frame.size = NSMakeSize([_mapImage size].width * _zoomFact, [_mapImage size].height * _zoomFact);
+	data = [view dataWithPDFInsideRect:frame];
     
     [view release];
     [imgView release];

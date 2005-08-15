@@ -2,9 +2,9 @@
         
         File:			BISubView.m
         Program:		KisMAC
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		KisMAC is a wireless stumbler for MacOS X.
+		Author:			Michael Roßberg
+						mick@binaervarianz.de
+		Description:	KisMAC is a wireless stumbler for MacOS X.
                 
         This file is part of KisMAC.
 
@@ -126,7 +126,8 @@
     p.x += _frame.origin.x;
     p.y += _frame.origin.y;
 
-    if (!NSIntersectsRect(NSMakeRect(p.x,p.y,_frame.size.width,_frame.size.height), rect)) return NO;
+    if (!NSIntersectsRect(NSMakeRect(p.x,p.y,_frame.size.width,_frame.size.height), rect))
+		return NO;
     
     [_lock lock];
     for (i = 0; i < [_subViews count]; i++)

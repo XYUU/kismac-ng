@@ -594,25 +594,27 @@ int lengthSort(id string1, id string2, void *context)
 
 	if (updatedSSID) return;
 	
-	lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
-	if (lVoice) {
-		switch(_isWep) {
-			case encryptionTypeNone: 
-					oc = NSLocalizedString(@"open", "for speech");
-					break;
-			case encryptionTypeWEP:
-			case encryptionTypeWEP40:
-			case encryptionTypeWPA:
-					oc = NSLocalizedString(@"closed", "for speech");
-					break;
-			default: oc=@"";
+	if (sound) {
+		lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
+		if (lVoice) {
+			switch(_isWep) {
+				case encryptionTypeNone: 
+						oc = NSLocalizedString(@"open", "for speech");
+						break;
+				case encryptionTypeWEP:
+				case encryptionTypeWEP40:
+				case encryptionTypeWPA:
+						oc = NSLocalizedString(@"closed", "for speech");
+						break;
+				default: oc=@"";
+			}
+			lSentence=[NSString stringWithFormat: NSLocalizedString(@"found %@ network. SSID is %@", "this is for speech output"),
+				oc, isHidden ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
+			NS_DURING
+				[WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
+			NS_HANDLER
+			NS_ENDHANDLER
 		}
-		lSentence=[NSString stringWithFormat: NSLocalizedString(@"found %@ network. SSID is %@", "this is for speech output"),
-			oc, isHidden ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
-		NS_DURING
-			[WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
-		NS_HANDLER
-		NS_ENDHANDLER
 	}
 }
 

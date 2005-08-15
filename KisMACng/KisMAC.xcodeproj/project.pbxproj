@@ -2246,6 +2246,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -2292,6 +2293,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -2331,6 +2333,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
 			};
@@ -2440,18 +2443,21 @@
 		00A915970858D6410093943F /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
 		00A915980858D6410093943F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
 		};
 		00A915990858D6410093943F /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Default;
 		};
