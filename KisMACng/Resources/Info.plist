@@ -42,7 +42,7 @@
 	<key>CFBundleExecutable</key>
 	<string>KisMAC</string>
 	<key>CFBundleGetInfoString</key>
-	<string>KisMAC version 0.2a</string>
+	<string>KisMAC version 0.2a [$Revision$]</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>KisMACHelp</string>
 	<key>CFBundleHelpBookName</key>
@@ -62,9 +62,9 @@
 	<key>CFBundleSignature</key>
 	<string>BIKM</string>
 	<key>CFBundleVersion</key>
-	<string>0.2a</string>
+	<string>0.2a [$Revision$]</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.3.0</string>
+	<string>10.4.0</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>

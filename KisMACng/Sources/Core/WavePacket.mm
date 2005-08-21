@@ -146,6 +146,11 @@ bool inline is8021xPacket(const UInt8* fileData) {
 	
     if (f==NULL) return NO;
     
+	if ((f->frameControl & IEEE80211_VERSION_MASK) != IEEE80211_VERSION_0) {
+		NSLog(@"Packet with illegal 802.11 version captured.\n");
+		return NO;
+	}
+	
     [WaveHelper secureRelease:&_SSID];
     _netType = networkTypeUnknown;
     _isWep = encryptionTypeUnknown;
@@ -156,16 +161,16 @@ bool inline is8021xPacket(const UInt8* fileData) {
         delete [] _frame;
         _frame = NULL;
     }
-    
-    _type=(f->frameControl & IEEE80211_TYPE_MASK);
-    _subtype=(f->frameControl & IEEE80211_SUBTYPE_MASK);
-    _isToDS=((f->frameControl & IEEE80211_DIR_TODS) ? YES : NO);
-    _isFrDS=((f->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
+	
+    _type =    (f->frameControl & IEEE80211_TYPE_MASK);
+    _subtype = (f->frameControl & IEEE80211_SUBTYPE_MASK);
+    _isToDS = ((f->frameControl & IEEE80211_DIR_TODS) ? YES : NO);
+    _isFrDS = ((f->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
 
     //the viha driver actually switches these fields
     //and macjack doesn't, so now it is the silence field
-    _signal=f->silence-f->signal;
-    if (_signal<0) _signal=0;	
+    _signal = f->silence - f->signal;
+    if (_signal < 0) _signal=0;	
 
     _channel=(f->channel>14 || f->channel<1 ? 1 : f->channel);
         
@@ -468,21 +473,14 @@ bool inline is8021xPacket(const UInt8* fileData) {
     if (!f) return; //this happens when dumping was switched on while scanning
     pcap_pkthdr h;
 
-    memcpy(&h.ts,&_creationTime,sizeof(struct timeval));
-    h.caplen = _length+_headerLength;
-    h.len    = h.caplen;
-
-    if (!_frame) {
-        _frame = (UInt8*) new char[_length+_headerLength];
-        memcpy(_frame,((char*)_rawFrame)+sizeof(struct sAirportFrame),_headerLength);
-        memcpy(((char*)_frame)+_headerLength,((char*)_rawFrame)+sizeof(WLFrame),_length);
-    }
+    memcpy(&h.ts, &_creationTime, sizeof(struct timeval));
+	h.len = h.caplen = _length + _headerLength;
     
-    pcap_dump((u_char*)f,&h,(u_char*)_frame);
+    pcap_dump((u_char*)f, &h, (u_char*)[self frame]);
 }
 
 -(id)init {
-    if (self = [super init]) {
+    if ((self = [super init]) != nil) {
         memset(_MACAddress, 0, 30);
         _frame = NULL;
     }
@@ -546,6 +544,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
         memcpy(_frame,                        (_rawFrame) + sizeof(struct sAirportFrame),_headerLength);
         memcpy(((char*)_frame)+_headerLength, (_rawFrame) + sizeof(WLFrame),             _length);
     }
+	
     return _frame;
 }
 - (bool)isEAPPacket {

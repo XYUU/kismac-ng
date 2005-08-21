@@ -1,6 +1,6 @@
 /*
         
-        File:			WaveDriverAirport.h
+        File:			WaveDriverAirportExtreme.h
         Program:		KisMAC
 		Author:			Michael Rossberg
 						mick@binaervarianz.de
@@ -23,13 +23,13 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#import <pcap.h>
 #import "WaveDriver.h"
-#import "../3rd Party/Apple80211.h"
 
-@interface WaveDriverAirport : WaveDriver {
-    WirelessContextPtr  _context;
+@interface WaveDriverAirportExtreme : WaveDriver {
+	pcap_t *_device;
+	UInt8 _channel;
 }
 
-+ (int) airportInstanceCount;
 @end

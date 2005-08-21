@@ -48,7 +48,7 @@
     [[aWEPSounds menu] addItem:[NSMenuItem separatorItem]];
     [[aNOWEPSounds menu] addItem:[NSMenuItem separatorItem]];
 
-    while (object = [sounds nextObject]) {
+    while ((object = [sounds nextObject]) != nil) {
         [aGeigerSounds addItemWithTitle:[object stringByDeletingPathExtension]];
         [aWEPSounds addItemWithTitle:[object stringByDeletingPathExtension]];
         [aNOWEPSounds addItemWithTitle:[object stringByDeletingPathExtension]];

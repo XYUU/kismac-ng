@@ -26,6 +26,8 @@
 	<string>AirPort Extreme Card</string>
 	<key>00:11:24:08</key>
 	<string>Apple Airport Express</string>
+	<key>00:11:24:C2</key>
+	<string>Airport Extreme Card</string>
 	<key>00:12:DA:9E</key>
 	<string>Cisco AP-1200</string>
 	<key>00:12:D9:B3</key>

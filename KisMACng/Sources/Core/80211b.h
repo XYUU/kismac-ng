@@ -25,6 +25,9 @@
 
 #include "libkern/OSByteOrder.h"
 
+
+#define MAXLEN80211 2400
+
 typedef struct _WLFrame {
     /* Control Fields (Little Endian) 14 byte*/ 
     UInt16 status;
@@ -68,6 +71,18 @@ typedef struct {
     UInt8  tx_rate;
     UInt16 txControl;
 } __attribute__((packed)) WLPrismHeader;
+
+typedef struct _WLIEEEFrame {
+    UInt16 frameControl;
+    UInt8  duration;
+    UInt8  idnum;
+    UInt8  address1[6];
+    UInt8  address2[6];
+    UInt8  address3[6];
+    UInt16 sequenceControl;
+    UInt8  address4[6];
+} __attribute__((packed)) WLIEEEFrame;
+
 
 typedef struct _WLCryptedFrame {
     WLFrame frame;

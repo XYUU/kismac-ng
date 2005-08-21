@@ -555,7 +555,7 @@ static ScanController *_scanController;
     NSEnumerator* e = [s keyEnumerator];
     id key;
     
-    while(key = [e nextObject]) {
+    while ((key = [e nextObject]) != nil) {
         [d setObject:[s objectForKey:key] forKey:key];
     }
 }

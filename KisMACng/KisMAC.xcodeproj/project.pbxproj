@@ -414,6 +414,10 @@
 		00D4228E07C7BA61000499F1 /* WavePacketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4228D07C7BA61000499F1 /* WavePacketTest.m */; };
 		00D4229707C7BB1C000499F1 /* WaveHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4229607C7BB1C000499F1 /* WaveHelperTest.m */; };
 		00D4229F07C7BB8F000499F1 /* WaveNetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4229E07C7BB8F000499F1 /* WaveNetTest.m */; };
+		00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */; };
+		00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */; };
+		00DF456508B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */; };
+		00DF456608B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */; };
 		00E1426D06E62A44009DC179 /* PointView.h in Headers */ = {isa = PBXBuildFile; fileRef = 00E1426B06E62A44009DC179 /* PointView.h */; };
 		00E1426E06E62A44009DC179 /* PointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E1426C06E62A44009DC179 /* PointView.m */; };
 		00ED80A806E32C9600455A05 /* NetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 00ED80A606E32C9600455A05 /* NetView.h */; };
@@ -756,6 +760,8 @@
 		00D4228D07C7BA61000499F1 /* WavePacketTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WavePacketTest.m; sourceTree = "<group>"; };
 		00D4229607C7BB1C000499F1 /* WaveHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveHelperTest.m; sourceTree = "<group>"; };
 		00D4229E07C7BB8F000499F1 /* WaveNetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveNetTest.m; sourceTree = "<group>"; };
+		00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveDriverAirportExtreme.h; sourceTree = "<group>"; };
+		00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveDriverAirportExtreme.m; sourceTree = "<group>"; };
 		00E1426B06E62A44009DC179 /* PointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointView.h; sourceTree = "<group>"; };
 		00E1426C06E62A44009DC179 /* PointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointView.m; sourceTree = "<group>"; };
 		00ED80A606E32C9600455A05 /* NetView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NetView.h; sourceTree = "<group>"; };
@@ -1183,6 +1189,8 @@
 				0035341206A5DD8500AB4577 /* WaveDriverAironet.m */,
 				0035341306A5DD8500AB4577 /* WaveDriverAirport.h */,
 				0035341406A5DD8500AB4577 /* WaveDriverAirport.m */,
+				00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */,
+				00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */,
 				0035341506A5DD8500AB4577 /* WaveDriverAtheros.h */,
 				0035341606A5DD8500AB4577 /* WaveDriverAtheros.m */,
 				0035341706A5DD8500AB4577 /* WaveDriverMacJack.h */,
@@ -1495,6 +1503,7 @@
 				008ACB1207C38AC900A76ADA /* WaveWeakContainer.h in Headers */,
 				008ACB1407C38ACB00A76ADA /* WayPoint.h in Headers */,
 				008ACB1707C38AD100A76ADA /* WPA.h in Headers */,
+				00DF456508B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1583,6 +1592,7 @@
 				00875DAA07097D8D00CACFCB /* WaveWeakContainer.h in Headers */,
 				005B12680730051A00906C36 /* MapControlItem.h in Headers */,
 				0090B7CB07B2A43D005FEEB1 /* WaveStorageController.h in Headers */,
+				00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1953,6 +1963,7 @@
 				00D4228E07C7BA61000499F1 /* WavePacketTest.m in Sources */,
 				00D4229707C7BB1C000499F1 /* WaveHelperTest.m in Sources */,
 				00D4229F07C7BB8F000499F1 /* WaveNetTest.m in Sources */,
+				00DF456608B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2036,6 +2047,7 @@
 				00875DAB07097D8D00CACFCB /* WaveWeakContainer.m in Sources */,
 				005B12690730051A00906C36 /* MapControlItem.m in Sources */,
 				0090B7CC07B2A43D005FEEB1 /* WaveStorageController.m in Sources */,
+				00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

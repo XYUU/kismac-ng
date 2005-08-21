@@ -204,17 +204,17 @@ got:
     
     [wd startCapture:0];
     while (_scanning) {				//this is for canceling
-        frame = [wd nextFrame];                 //captures the next frame (locking)
-        if (frame==NULL) 
-			break;
-        
-        if (_injecting) {
-            [self handleInjection:frame];
-            //continue;
-        }
-        
 		@try {
-			if ([w parseFrame:frame]!=NO) {	//parse packet (no if unknown type)
+			frame = [wd nextFrame];     //captures the next frame (locking)
+			if (frame==NULL) 
+				break;
+			
+			if (_injecting) {
+				[self handleInjection:frame];
+				//continue;
+			}
+        
+			if ([w parseFrame:frame] != NO) {	//parse packet (no if unknown type)
 				if ([_container addPacket:w liveCapture:YES]==NO) continue; // the packet shall be dropped
 
 				if ((dumpFilter==1)||((dumpFilter==2)&&([w type]==IEEE80211_TYPE_DATA))||((dumpFilter==3)&&([w isResolved]!=-1))) [w dump:f]; //dump if needed

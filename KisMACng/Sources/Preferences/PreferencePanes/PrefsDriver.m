@@ -140,7 +140,7 @@
        [_dumpFilter selectCellAtRow:[[d objectForKey:@"dumpFilter"] intValue] column:0];
        [_dumpDestination setEnabled:[[d objectForKey:@"dumpFilter"] intValue] ? YES : NO];
     } else {
-       [_dumpDestination setStringValue:@"../DumpLog %y-%m-%d %H:%M"];
+       [_dumpDestination setStringValue:@"~/DumpLog %y-%m-%d %H:%M"];
        [_dumpFilter selectCellAtRow:0 column:0];
        [_dumpDestination setEnabled:NO];
     }
@@ -266,7 +266,7 @@
         [NSNumber numberWithBool: NO]   , @"useChannel14",
         [NSNumber numberWithInt: 0]     , @"injectionDevice",
         [NSNumber numberWithInt: 0]     , @"dumpFilter",
-        @"../DumpLog %y-%m-%d %H:%M"    , @"dumpDestination",
+        @"~/DumpLog %y-%m-%d %H:%M"    , @"dumpDestination",
         [NSClassFromString(driverClassName) deviceName], @"deviceName", //todo make this unique for ever instance
         nil]];
     [controller setObject:drivers forKey:@"ActiveDrivers"];

@@ -972,7 +972,7 @@ void USBIntersilJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator)
     int                 count = 0;
     //USBIntersilJack     *me = (USBIntersilJack*)refCon;
     
-    while (obj = IOIteratorNext(iterator)) {
+    while ((obj = IOIteratorNext(iterator)) != nil) {
         count++;
         //NSLog(@"Device removed.\n");
         kr = IOObjectRelease(obj);

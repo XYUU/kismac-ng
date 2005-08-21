@@ -487,7 +487,7 @@ int lengthSort(id string1, id string2, void *context)
 		clients = [NSMutableDictionary dictionaryWithCapacity:[aClients count]];
 		NSEnumerator *e = [aClients keyEnumerator];
 		
-		while (c = [e nextObject]) {
+		while ((c = [e nextObject]) != nil) {
 			[clients setObject:[[aClients objectForKey:c] dataDictionary] forKey:c];
 		}
 	}

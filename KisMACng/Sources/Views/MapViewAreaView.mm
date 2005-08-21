@@ -109,7 +109,7 @@
         q = 0;
         
         e = [coord keyEnumerator];
-        while (v = [e nextObject]) {
+        while ((v = [e nextObject]) != nil) {
             p = [self pixelForCoordinateNoZoom:[v wayPoint]];
             f[t][q++] = p.x;
             f[t][q++] = p.y;

@@ -210,7 +210,7 @@ unsigned long doFCS(unsigned char* buf, int len) {
     setupIdentity();		//initialized the RC4 sboxes
     memcpy(kkey+3, ckey, keylen);
     
-    while(b=pcap_next(aPCapIN,&h)) {
+    while ((b=pcap_next(aPCapIN,&h)) != NULL) {
         memcpy(x,b,h.caplen);
         f=(header*)x;
         if (((f->frameControl & IEEE80211_TYPE_MASK)==IEEE80211_TYPE_DATA) && (h.caplen>=32) && ((f->frameControl & IEEE80211_WEP)==IEEE80211_WEP)) {

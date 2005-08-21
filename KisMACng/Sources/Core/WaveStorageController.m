@@ -114,7 +114,7 @@
 	memcpy(&i, [(NSData*)data bytes], sizeof(i));
 	
 	[im setMax:i];
-	while(data = [deco nextData]) {
+	while ((data = [deco nextData]) != NULL) {
 		data = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:nil errorDescription:&error];
 		if (!data) {
 			NSLog(@"Could not decode wavenet: %@", error);
@@ -210,7 +210,7 @@
 	for(i = 0, maxID=0; i < [container count]; i++)
         if ([[container netAtIndex:i] netID] > maxID) maxID = [[container netAtIndex:i] netID];
 	
-	while(data = [deco nextData]) {
+	while ((data = [deco nextData]) != NULL) {
 		data = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:nil errorDescription:&error];
 		if (!data) {
 			NSLog(@"Could not decode wavenet: %@", error);

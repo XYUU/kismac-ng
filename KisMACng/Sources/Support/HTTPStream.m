@@ -93,7 +93,7 @@
     topost = [NSMutableString string];
     e = [_postVariables keyEnumerator];
     
-    while (var = [e nextObject])
+    while ((var = [e nextObject]) != nil)
         [topost appendFormat:@"&%@=%@", [WaveHelper urlEncodeString: var], [WaveHelper urlEncodeString: [_postVariables objectForKey:var]]];
     [topost deleteCharactersInRange:NSMakeRange(0, 1)];
     

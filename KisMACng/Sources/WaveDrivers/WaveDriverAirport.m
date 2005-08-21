@@ -126,7 +126,7 @@ static int AirPortInstances = 0;
     return ret;
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void) hopToNextChannel {
 	return;
