@@ -164,8 +164,8 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	
 	[NSThread sleep:1.0];
 
-	[[BLAuthentication sharedInstance] executeCommand:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
-		withArgs:[NSArray arrayWithObject:@"-a"]];
+	[[NSTask launchedTaskWithLaunchPath:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
+		arguments:[NSArray arrayWithObject:@"-a"]] waitUntilExit];
 
 	return YES;
 }
@@ -196,8 +196,8 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
-    [[BLAuthentication sharedInstance] executeCommand:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
-		withArgs:[NSArray arrayWithObjects:@"-z", [NSString stringWithFormat:@"--channel=%u", newChannel], nil]];
+   [[NSTask launchedTaskWithLaunchPath:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
+		arguments:[NSArray arrayWithObjects:@"-z", [NSString stringWithFormat:@"--channel=%u", newChannel], nil]] waitUntilExit];
 	_channel = newChannel;
     return YES;
 }
