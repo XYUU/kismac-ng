@@ -1,24 +1,58 @@
 // !$*UTF8*$!
 {
-	005EEFF2087143BE00423387 /* PBXTextBookmark */ = {
+	0054928008E6EF8800307083 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 00B9E6140647BA2E009FEF35 /* InstallController.m */;
-		name = "InstallController.m: 761";
+		fRef = 00B9E97D0647F3B8009FEF35 /* BLAuthentication.h */;
+		name = "BLAuthentication.h: 1";
 		rLen = 0;
-		rLoc = 27409;
+		rLoc = 0;
 		rType = 0;
-		vrLen = 1774;
-		vrLoc = 26957;
+		vrLen = 1350;
+		vrLoc = 0;
 	};
-	00AC27140871437C00885CB6 /* PBXTextBookmark */ = {
+	0054928108E6EF8800307083 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00B9E6130647BA2E009FEF35 /* InstallController.h */;
+		name = _installationStatus;
+		rLen = 19;
+		rLoc = 2448;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 1439;
+	};
+	0054928208E6EF8800307083 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 00B9E6140647BA2E009FEF35 /* InstallController.m */;
+	};
+	0054928308E6EF8800307083 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00B9E97D0647F3B8009FEF35 /* BLAuthentication.h */;
+		name = "BLAuthentication.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1350;
+		vrLoc = 0;
+	};
+	0054928408E6EF8800307083 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00B9E6130647BA2E009FEF35 /* InstallController.h */;
+		name = _installationStatus;
+		rLen = 19;
+		rLoc = 2448;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 1439;
+	};
+	0054928508E6EF8800307083 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 00B9E6140647BA2E009FEF35 /* InstallController.m */;
-		name = "InstallController.m: 761";
+		name = "InstallController.m: 435";
 		rLen = 0;
-		rLoc = 27409;
+		rLoc = 16298;
 		rType = 0;
-		vrLen = 1774;
-		vrLoc = 26957;
+		vrLen = 1580;
+		vrLoc = 0;
 	};
 	00B9E5E00647B7A9009FEF35 /* KisMAC Installer */ = {
 		isa = PBXExecutable;
@@ -60,17 +94,24 @@
 	};
 	00B9E6130647BA2E009FEF35 /* InstallController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1031, 1386}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 1386}}";
 			sepNavSelRange = "{2448, 19}";
-			sepNavVisRect = "{{0, 642}, {1031, 662}}";
+			sepNavVisRect = "{{0, 642}, {1025, 662}}";
 			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
 		};
 	};
 	00B9E6140647BA2E009FEF35 /* InstallController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2324, 11172}}";
-			sepNavSelRange = "{27409, 0}";
-			sepNavVisRect = "{{0, 10486}, {1025, 662}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2324, 11284}}";
+			sepNavSelRange = "{16298, 0}";
+			sepNavVisRect = "{{0, 0}, {1025, 662}}";
+		};
+	};
+	00B9E97D0647F3B8009FEF35 /* BLAuthentication.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 662}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {1025, 662}}";
 		};
 	};
 	00B9E97E0647F3B8009FEF35 /* BLAuthentication.m */ = {
@@ -82,9 +123,9 @@
 	};
 	00FC4EE40647F6C800F2220A /* install.sh */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {952, 342}}";
-			sepNavSelRange = "{127, 0}";
-			sepNavVisRect = "{{0, 0}, {952, 342}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 662}}";
+			sepNavSelRange = "{57, 12}";
+			sepNavVisRect = "{{0, 0}, {1025, 662}}";
 		};
 	};
 	00FC4EE50647F6C800F2220A /* permissions.sh */ = {
@@ -216,7 +257,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 141640593;
+			PBXPerProjectTemplateStateSaveDate = 149350556;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -695,11 +736,15 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 141640593;
+			PBXWorkspaceStateSaveDate = 149350556;
 		};
 		perUserProjectItems = {
-			005EEFF2087143BE00423387 /* PBXTextBookmark */ = 005EEFF2087143BE00423387 /* PBXTextBookmark */;
-			00AC27140871437C00885CB6 /* PBXTextBookmark */ = 00AC27140871437C00885CB6 /* PBXTextBookmark */;
+			0054928008E6EF8800307083 /* PBXTextBookmark */ = 0054928008E6EF8800307083 /* PBXTextBookmark */;
+			0054928108E6EF8800307083 /* PBXTextBookmark */ = 0054928108E6EF8800307083 /* PBXTextBookmark */;
+			0054928208E6EF8800307083 /* PBXBookmark */ = 0054928208E6EF8800307083 /* PBXBookmark */;
+			0054928308E6EF8800307083 /* PBXTextBookmark */ = 0054928308E6EF8800307083 /* PBXTextBookmark */;
+			0054928408E6EF8800307083 /* PBXTextBookmark */ = 0054928408E6EF8800307083 /* PBXTextBookmark */;
+			0054928508E6EF8800307083 /* PBXTextBookmark */ = 0054928508E6EF8800307083 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 00B9E5E90647B7BD009FEF35 /* Source Control */;
 		userBuildSettings = {

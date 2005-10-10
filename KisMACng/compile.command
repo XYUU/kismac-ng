@@ -8,6 +8,10 @@ ln -s "../build/KisMACUnitTest.bundle/Contents/Frameworks" . 2>/dev/null
 tar xjf UnitKit.tbz 2>/dev/null
 cd ..
 
+val=`svnversion -n .`
+sed -e "s/\\\$Revision.*\\\$/\\\$Revision: $val\\\$/" Resources/Info.plist.templ > Resources/Info.plist
+sed -e "s/\\\$Revision.*\\\$/\\\$Revision: $val\\\$/" Resources/Strings/English.lproj/InfoPlist.strings.templ > Resources/Strings/English.lproj/InfoPlist.strings
+
 touch "./Sources/not public/WaveSecret.h"
 touch "./Sources/WindowControllers/CrashReportController.m"
 mkdir "./Subprojects/files" 2>/dev/null
@@ -29,5 +33,8 @@ cd ../BIGeneric
 xcodebuild -configuration Deployment
 cd ../AirPortMenu
 xcodebuild -configuration Deployment
+cd ../KisMAC\ Installer
+xcodebuild -configuration Deployment
+
 cd ../..
 xcodebuild -target KisMAC -configuration Deployment

@@ -116,6 +116,9 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 - (BOOL)findKisMACPrefs {
     return [self findFile:@"~/Library/Preferences/de.binaervarianz.kismac.plist"];
 }
+- (BOOL)findTAR {
+	return [self findFile:@"/usr/bin/tar"];
+}
 
 - (NSString*)getPreviousInstallDir {
     NSUserDefaults *d;
@@ -427,8 +430,13 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     switch(_currentState) {
     case stateWelcome:
         if ([_installKisMAC state] == NSOnState) 
-            _currentState = stateLicense;
-            //_currentState = stateConfigure;
+			if (![self findTar]) {
+				NSBeginInformationalAlertSheet(@"Unable to find Support Program!", @"OK", Nil, Nil, [self window], self, nil, nil, nil, 
+					@"The KisMAC installer was unable to find /usr/bin/tar. Make sure it exists! The program is part of the MacOS X BSD Subsystem, which is a default part of the operating system.");
+				_currentState = stateWelcome;
+			} else {
+				_currentState = stateLicense;
+			}
         else if ([_removeKisMAC state] == NSOnState) 
             NSBeginInformationalAlertSheet(@"Erase permanently?", @"Remove", @"Cancel", Nil, [self window], self, @selector(reallyWantToDelete:returnCode:contextInfo:), nil, nil, @"Do you really want to delete KisMAC permanently? You will loose all your preferences!");
         else 
@@ -436,7 +444,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
             
         break;
     case stateLicense:
-        if ([self findKisMACPrefs])
+		if ([self findKisMACPrefs])
             _currentState = stateRemovePrefs;
         else if ([self findWirelessDriver])
             _currentState = stateInstallSFPatch;

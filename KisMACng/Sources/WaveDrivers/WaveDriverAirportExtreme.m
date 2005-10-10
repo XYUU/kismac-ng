@@ -91,6 +91,17 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
     explicitlyLoadedAirportExtremeDriver = YES;
     
+	if (NSAppKitVersionNumber < 824.11) {
+		NSLog(@"MacOS is not 10.4.2! AppKitVersion: %f < 824.11", NSAppKitVersionNumber);
+		
+		NSRunCriticalAlertPanel(
+			NSLocalizedString(@"Could not enable Monitor Mode for Airport Extreme.", "Error dialog title"),
+			NSLocalizedString(@"Incompatible MacOS version! You will need at least MacOS 10.4.2!.", "Error dialog description"),
+			OK, nil, nil);
+
+		return 2;
+	}
+
 	ret = [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
 	if (!ret) {
 		NSLog(@"WARNING!!! User canceled password dialog for: kextunload");
@@ -175,8 +186,8 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 - (id)init {
     char err[PCAP_ERRBUF_SIZE];
 	
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]];
+	if (![[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]]) return Nil;
+	if (![[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]]) return Nil;
 	_device = pcap_open_live([devicePath cString], 3000, 0, 2, err);
 	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]];
 	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]];

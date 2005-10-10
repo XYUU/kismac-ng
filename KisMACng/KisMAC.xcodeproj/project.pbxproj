@@ -714,6 +714,25 @@
 		0035342406A5DD8500AB4577 /* WayPoint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WayPoint.h; sourceTree = "<group>"; };
 		0035342506A5DD8500AB4577 /* WayPoint.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WayPoint.m; sourceTree = "<group>"; };
 		00412E680826587C00E757BC /* viha_load.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = viha_load.sh; sourceTree = "<group>"; };
+		0054920D08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/Crack.nib; sourceTree = "<group>"; };
+		0054920E08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/CrashReporter.nib; sourceTree = "<group>"; };
+		0054920F08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/DecryptDialog.nib; sourceTree = "<group>"; };
+		0054921008E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/DownloadMap.nib; sourceTree = "<group>"; };
+		0054921108E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/Import.nib; sourceTree = "<group>"; };
+		0054921208E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		0054921308E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/Preferences.nib; sourceTree = "<group>"; };
+		0054921408E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsDriver.nib; sourceTree = "<group>"; };
+		0054921508E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsFilter.nib; sourceTree = "<group>"; };
+		0054921608E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsGPS.nib; sourceTree = "<group>"; };
+		0054921708E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsMap.nib; sourceTree = "<group>"; };
+		0054921808E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsScanning.nib; sourceTree = "<group>"; };
+		0054921908E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsSleep.nib; sourceTree = "<group>"; };
+		0054921A08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsSounds.nib; sourceTree = "<group>"; };
+		0054921B08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsTraffic.nib; sourceTree = "<group>"; };
+		0054921C08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/PrefsWebService.nib; sourceTree = "<group>"; };
+		0054921D08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/WayPointDialog.nib; sourceTree = "<group>"; };
+		0054922608E6E4F300307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0054922708E6E4F300307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		005B12660730051A00906C36 /* MapControlItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlItem.h; sourceTree = "<group>"; };
 		005B12670730051A00906C36 /* MapControlItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlItem.m; sourceTree = "<group>"; };
 		005E817006FDCFF20016F5E7 /* MapDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDownload.h; sourceTree = "<group>"; };
@@ -1736,6 +1755,13 @@
 				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
 			);
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Spanish,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* KisMAC */;
 			projectDirPath = "";
 			targets = (
@@ -2058,6 +2084,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C4C06A886630035AE2F /* English */,
+				0054922708E6E4F300307083 /* Spanish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2066,6 +2093,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C4B06A886630035AE2F /* English */,
+				0054922608E6E4F300307083 /* Spanish */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2082,6 +2110,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C1806A886350035AE2F /* English */,
+				0054920D08E6E4C900307083 /* Spanish */,
 			);
 			name = Crack.nib;
 			sourceTree = "<group>";
@@ -2090,6 +2119,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C1A06A886350035AE2F /* English */,
+				0054920E08E6E4C900307083 /* Spanish */,
 			);
 			name = CrashReporter.nib;
 			sourceTree = "<group>";
@@ -2098,6 +2128,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C1C06A886350035AE2F /* English */,
+				0054920F08E6E4C900307083 /* Spanish */,
 			);
 			name = DecryptDialog.nib;
 			sourceTree = "<group>";
@@ -2106,6 +2137,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C1E06A886350035AE2F /* English */,
+				0054921008E6E4C900307083 /* Spanish */,
 			);
 			name = DownloadMap.nib;
 			sourceTree = "<group>";
@@ -2114,6 +2146,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2006A886350035AE2F /* English */,
+				0054921108E6E4C900307083 /* Spanish */,
 			);
 			name = Import.nib;
 			sourceTree = "<group>";
@@ -2122,6 +2155,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2206A886350035AE2F /* English */,
+				0054921208E6E4C900307083 /* Spanish */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -2130,6 +2164,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2406A886350035AE2F /* English */,
+				0054921308E6E4C900307083 /* Spanish */,
 			);
 			name = Preferences.nib;
 			sourceTree = "<group>";
@@ -2138,6 +2173,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2606A886350035AE2F /* English */,
+				0054921408E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsDriver.nib;
 			sourceTree = "<group>";
@@ -2146,6 +2182,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2806A886350035AE2F /* English */,
+				0054921508E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsFilter.nib;
 			sourceTree = "<group>";
@@ -2154,6 +2191,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2A06A886350035AE2F /* English */,
+				0054921608E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsGPS.nib;
 			sourceTree = "<group>";
@@ -2162,6 +2200,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2C06A886350035AE2F /* English */,
+				0054921708E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsMap.nib;
 			sourceTree = "<group>";
@@ -2170,6 +2209,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C2E06A886350035AE2F /* English */,
+				0054921808E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsScanning.nib;
 			sourceTree = "<group>";
@@ -2178,6 +2218,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C3006A886350035AE2F /* English */,
+				0054921908E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsSleep.nib;
 			sourceTree = "<group>";
@@ -2186,6 +2227,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C3206A886350035AE2F /* English */,
+				0054921A08E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsSounds.nib;
 			sourceTree = "<group>";
@@ -2194,6 +2236,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C3406A886350035AE2F /* English */,
+				0054921B08E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsTraffic.nib;
 			sourceTree = "<group>";
@@ -2202,6 +2245,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C3606A886350035AE2F /* English */,
+				0054921C08E6E4C900307083 /* Spanish */,
 			);
 			name = PrefsWebService.nib;
 			sourceTree = "<group>";
@@ -2210,6 +2254,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00F57C3806A886350035AE2F /* English */,
+				0054921D08E6E4C900307083 /* Spanish */,
 			);
 			name = WayPointDialog.nib;
 			sourceTree = "<group>";
