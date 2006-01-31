@@ -1,74 +1,140 @@
-<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
 
-<HEAD>
-<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
-<TITLE>KisMAC Manual - Installation</TITLE>
-</HEAD>
+  <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
 
-<BODY BGCOLOR="#ffffff">
-<DIV ALIGN="left">
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR HEIGHT="40">
-<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
-<TD WIDTH="6" HEIGHT="40"></TD>
-<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>KisMAC Manual - Installation</B></FONT></TD>
-</TR>
-</TABLE>
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">KisMAC uses its own, more powerful, installation
+  <title>KisMAC Manual - Installation</title>
+</head>
+
+
+<body bgcolor="#ffffff">
+
+<div align="left">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+  <tbody>
+    <tr height="40">
+
+      <td height="40" width="40"><img src="../gfx/kismacm.png" height="40" width="40"></td>
+
+      <td height="40" width="6"></td>
+
+      <td height="40" valign="middle"><font face="Lucida Grande,Helvetica,Arial" size="4"><b>KisMAC Manual - Installation</b></font></td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<p><font face="Lucida Grande,Geneva,Arial" size="2">KisMAC uses its own, more powerful installation
 program similar to the Apple supplied installer application. To begin the installation, double click 
-KisMACInstaller icon in the Finder and follow the prompts.</FONT>
+KisMACInstaller icon in the Finder and follow the prompts.</font>
 
-<P>
-<OL>
-    <LI>Clicking on the Go button will start the installation process<BR>
-        <IMG SRC="../gfx/installer.png" HEIGHT="281" WIDTH="350" BORDER="0" ALT="Installer"><BR>
-        <FONT SIZE="1" FACE="Lucida Grande,Geneva,Arial">
-            The KisMAC installer can be used to either install or remove KisMAC.<BR>
+</p>
+<p>
+</p>
+<ol>
+
+    <li>Clicking on the Go button will start the installation process<br>
+
+        <img src="../gfx/installer.png" alt="Installer" border="0" height="281" width="350"><br>
+
+        <font face="Lucida Grande,Geneva,Arial" size="1">
+            The KisMAC installer can be used to either install or remove KisMAC.<br>
+
             Removing KisMAC is covered in another chapter.
-        </FONT><BR><BR>
-    <LI>If you have previously installed the Sourceforge Wireless Driver for a third party wireless card, 
+        </font><br>
+    <br>
+
+    </li>
+  <li>If you have previously installed the Sourceforge Wireless Driver for a third party wireless card, 
         the KisMAC installer will now ask whether you want to install a patch for this driver.  If you do 
-        not have this driver installed, this dialog will be skipped and you can proceed with the next step.<BR>
-        <BR>
+        not have this driver installed, this dialog will be skipped and you can proceed with the next step.<br>
+
+        <br>
+
         The Sourceforge Wireless Driver has a bug, which disallows KisMAC to unload and reload the driver 
-        at run-time.  If you choose to patch it, the Installer will also install a utility, which allows 
-        you to change the MAC address of your Prism II or Orinoco card.<BR>
-        <BR>
+        at run-time.  If you choose to patch it, the Installer will also install a utility which allows 
+        you to change the MAC address of your Prism II or Orinoco card.<br>
+
+        <br>
+
         Installing a new driver is always a bit risky. If there should be problems, you can always boot
-        your system by holding the SHIFT key at startup and remove KisMAC.<BR>
-        <BR>
-        Please remember to reinstall KisMAC, if you install the Sourceforge Wireless Drivers later on.<BR><BR>
-    <LI>Next will be the General Public License agreement, after reading the license, click go again.<BR><BR>
-    <LI>The installer will now ask for your admin password.  You must be an admin user to install KisMAC.<BR>
-        <IMG SRC="../gfx/authenticator.png" HEIGHT="200" WIDTH="317" BORDER="0"><BR><BR>
-    <LI>Once you click okay in the password dialogue, the installer will immediately search for older versions
+        your system by holding the SHIFT key at startup and remove KisMAC.<br>
+
+        <br>
+
+        Please remember to reinstall KisMAC, if you install the Sourceforge Wireless Drivers later on.<br>
+    <br>
+
+    </li>
+  <li>Next will be the General Public License agreement, after reading the license, click go again.<br>
+    <br>
+
+    </li>
+  <li>The installer will now ask for your admin password.  You must be an admin user to install KisMAC.<br>
+
+        <img src="../gfx/authenticator.png" border="0" height="200" width="317"><br>
+    <br>
+
+    </li>
+  <li>Once you click okay in the password dialogue, the installer will immediately search for older versions
         of KisMAC and remove any it finds before proceeding.  It will then place the KisMAC application in your
         Applications folder along with the KisMAC Driver Tool.  The installer also places alternative wireless
         card drivers used by KisMAC in the required place on your System drive.  (A complete list of files
-        installed can be found at the end of this chapter)<BR><BR>
-    <LI>You are now ready to begin using KisMAC.  Start by double clicking the KisMAC icon in the Finder. 
-        Note: Sometimes it takes a minute until the Finder refreshes the Application Folder.<BR><BR>
-</OL>
+        installed can be found at the end of this chapter)<br>
+    <br>
 
-<B>Files Installed by KisMAC:</B><BR><BR>
+    </li>
+  <li>You are now ready to begin using KisMAC.  Start by double clicking the KisMAC icon in the Finder. 
+        Note: Sometimes it takes a minute until the Finder refreshes the Application Folder under systems prior to 10.4.<br>
+    <br>
+
+  </li>
+</ol>
+
+
+<b>Files Installed by KisMAC:</b><br>
+<br>
+
 	Basic Installation:
-<UL>
-        <LI>/Applications/KisMAC.app
-	<LI>/Applications/KisMAC Driver Tool.app
-</UL>
-	Sourceforge Wireless Patch:
-<UL>
-        <LI>/System/Library/Extensions/WirelessDriver.kext/bipatch
-        <LI>/System/Library/Extensions/WirelessDriver.kext/Contents/MacOS/WirelessDriver (old file is renamed to WirelessDriver.old)
-        <LI>/Applications/WirelessMAC.app
-</UL>
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR VALIGN="top">
-<TD ALIGN="left"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="index.html">back</A></FONT></TD>
-<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='installation' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
-</TR>
-</TABLE>
-</DIV>
-</BODY>
+<ul>
 
-</HTML>
+        <li>/Applications/KisMAC.app
+	</li>
+  <li>/Applications/KisMAC Driver Tool.app
+  </li>
+</ul>
+
+	Sourceforge Wireless Patch:
+<ul>
+
+        <li>/System/Library/Extensions/WirelessDriver.kext/bipatch
+        </li>
+  <li>/System/Library/Extensions/WirelessDriver.kext/Contents/MacOS/WirelessDriver (old file is renamed to WirelessDriver.old)
+        </li>
+  <li>/Applications/WirelessMAC.app
+  </li>
+</ul>
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+  <tbody>
+    <tr valign="top">
+
+      <td align="left"><font face="Lucida Grande,Geneva,Arial" size="2"><a href="index.html">back</a></font></td>
+
+      <td align="right"><font face="Lucida Grande,Geneva,Arial" size="2"><a href="help:search=%27installation%27%20bookID=KisMAC%20Help">Tell me more</a></font></td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+</div>
+
+</body>
+</html>

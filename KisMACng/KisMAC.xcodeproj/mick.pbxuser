@@ -739,7 +739,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {932, 1316}}";
 			sepNavSelRange = "{1057, 0}";
-			sepNavVisRect = "{{0, 654}, {932, 662}}";
+			sepNavVisRect = "{{0, 642}, {932, 662}}";
 		};
 	};
 	003533F006A5DD8500AB4577 /* PrefsController.h */ = {
@@ -1042,10 +1042,6 @@
 		rType = 0;
 		vrLen = 1942;
 		vrLoc = 3196;
-	};
-	0054927B08E6EF8200307083 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 003533EF06A5DD8500AB4577 /* PrefsWebService.m */;
 	};
 	0054927C08E6EF8200307083 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1728,6 +1724,16 @@
 			sepNavVisRect = "{{0, 0}, {964, 675}}";
 		};
 	};
+	00E457C908FEB86300CC5246 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 003533EF06A5DD8500AB4577 /* PrefsWebService.m */;
+		name = "PrefsWebService.m: updateRestrictions";
+		rLen = 0;
+		rLoc = 1057;
+		rType = 0;
+		vrLen = 1853;
+		vrLoc = 1519;
+	};
 	00ED80A606E32C9600455A05 /* NetView.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {933, 798}}";
@@ -1986,7 +1992,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 149349487;
+			PBXPerProjectTemplateStateSaveDate = 150839453;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -2417,13 +2423,13 @@
 				PBXModuleWindowStatusBarHidden = YES;
 				RubberWindowFrame = "267 358 745 464 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 149349487;
+			PBXWorkspaceStateSaveDate = 150839453;
 		};
 		perUserProjectItems = {
 			0054927A08E6EF8200307083 /* PBXTextBookmark */ = 0054927A08E6EF8200307083 /* PBXTextBookmark */;
-			0054927B08E6EF8200307083 /* PBXBookmark */ = 0054927B08E6EF8200307083 /* PBXBookmark */;
 			0054927C08E6EF8200307083 /* PBXTextBookmark */ = 0054927C08E6EF8200307083 /* PBXTextBookmark */;
 			0054927D08E6EF8200307083 /* PBXTextBookmark */ = 0054927D08E6EF8200307083 /* PBXTextBookmark */;
+			00E457C908FEB86300CC5246 /* PBXTextBookmark */ = 00E457C908FEB86300CC5246 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E /* Source Control */;
 		userBuildSettings = {

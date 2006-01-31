@@ -1,64 +1,94 @@
-<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <title>What is the difference between "active" and "passive"
+  sniffing?</title>
+</head>
 
-<HEAD>
-<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
-<TITLE>What is the difference between &quot;active&quot; and &quot;passive&quot; sniffing?</TITLE>
-</HEAD>
+<body style="background-color: rgb(255, 255, 255);">
 
-<BODY BGCOLOR="#ffffff">
-<DIV ALIGN="left">
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR HEIGHT="40">
-<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
-<TD WIDTH="6" HEIGHT="40"></TD>
-<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>What is the difference between &quot;active&quot; and &quot;passive&quot; sniffing?</B></FONT></TD>
-</TR>
-</TABLE>
-<P><TABLE BORDER="2" ALIGN="CENTER" CELLPADDING="0" CELLSPACING="0" WIDTH="80%">
-<TR><TH>actice Sniffing</TH><TH>passive Sniffing</TH></TR>
-<TR><TD>
-* in active mode the WiFi device sends out probe request and waits for answers. The data obtained from these answers is shown.
-</TD><TD>
-* When you use KisMAC passively the WiFi device is switched into "monitor mode". It waits silently for any valid packets and this data is used to derive the network structure.
-</TD></TR>
-<TR><TD>
-- probe request can be easily detected
-</TD><TD>
-+ passive sniffers cannot be detected
-</TD></TR>
-<TR><TD>
-- the sniffer cannot see raw data, therefore PCAP logging and cracking will not work
-</TD><TD>
-+ only passive devices can perform WEP cracking and logging of data
-</TD></TR>
-<TR><TD>
-- the active component of KisMAC cannot detect WPA networks (they are shown as WEPed?)
-</TD><TD>
-+ WPA and LEAP detection is possible
-</TD></TR>
-<TR><TD>
-- active programs cannot see hidden networks (per definition)
-</TD><TD>
-+ KisMAC can find and reveal cloaked networks if used in monitor mode
-</TD></TR>
-<TR><TD>
-+ you will not loose your WiFi connectivity (it will only become slower because of all the probing)
-</TD><TD>
-- KisMAC will need to load a replacement for your normal driver in order to switch the device into monitor mode. Connectivity will be lost
-</TD></TR>
-<TR><TD>
-+ Airport Extreme is supported
-</TD><TD>
-- Airport Extreme devices will not work in passive mode
-</TD></TR>
-</TABLE>
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR VALIGN="top">
-<TD ALIGN="left"></TD>
-<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='passive' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
-</TR>
-</TABLE>
-</DIV>
-</BODY>
+<div align="left">
 
-</HTML>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr height="40">
+      <td height="40" width="40"><img src="../gfx/kismacm.png" height="40"
+        width="40"></td>
+      <td height="40" width="6"></td>
+      <td height="40" valign="middle"><font
+        face="Lucida Grande,Helvetica,Arial" size="4"><b>What is the
+        difference between "active" and "passive" sniffing?</b></font></td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+
+<table align="center" border="2" cellpadding="0" cellspacing="0" width="80%">
+  <tbody>
+    <tr>
+      <th>Active Sniffing</th>
+      <th>Passive Sniffing</th>
+    </tr>
+    <tr>
+      <td>* In active mode the WiFi device sends out probe request and waits
+        for answers. The data obtained from these answers is shown.</td>
+      <td>* When you use KisMAC passively the WiFi device is switched into
+        "monitor mode". It waits silently for any valid packets and this data
+        is used to derive the network structure.</td>
+    </tr>
+    <tr>
+      <td>- Probe requests can be easily detected, even by people using
+        KisMac in passive mode.</td>
+      <td>+ Passive sniffers cannot be detected</td>
+    </tr>
+    <tr>
+      <td>- The sniffer cannot see raw data, therefore PCAP logging and
+        cracking will not work.</td>
+      <td>+ Only passive devices can perform WEP cracking and logging of
+      data.</td>
+    </tr>
+    <tr>
+      <td>* WPA networks can be found in active mode now.</td>
+      <td>* WPA and LEAP detection is possible</td>
+    </tr>
+    <tr>
+      <td>- Active programs cannot see hidden networks (per definition).</td>
+      <td>+ KisMAC can find and reveal hidden networks if used in monitor
+      mode</td>
+    </tr>
+    <tr>
+      <td>+ You will not lose your WiFi connectivity (it will only become
+        slightly slower because of all the probing)</td>
+      <td>- KisMAC will need to load a replacement for your normal driver in
+        order to switch the device into monitor mode. Connectivity will be
+        lost.</td>
+    </tr>
+    <tr>
+      <td>+ Airport Extreme is supported.</td>
+      <td>+ Airport Extreme cards are now supported as well.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Basically: If you have an active mode driver,  you will be able to find
+open, WEPed and WPAed networks. You will not be able to crack these networks
+or find closed networks.<br>
+<br>
+</p>
+
+<table style="width: 644px; height: 21px;" border="0" cellpadding="0"
+cellspacing="0">
+  <tbody>
+    <tr valign="top">
+      <td align="left"></td>
+      <td align="right"><font face="Lucida Grande,Geneva,Arial" size="2"><a
+        href="help:search=%27passive%27%20bookID=KisMAC%20Help">Tell me
+        more</a></font></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

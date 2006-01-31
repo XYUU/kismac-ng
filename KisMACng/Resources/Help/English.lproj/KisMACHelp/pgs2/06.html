@@ -1,31 +1,54 @@
-<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <title>Can I use external programs with the driver?</title>
+</head>
 
-<HEAD>
-<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
-<TITLE>Can I use external programs with the driver?</TITLE>
-</HEAD>
+<body bgcolor="#ffffff">
 
-<BODY BGCOLOR="#ffffff">
-<DIV ALIGN="left">
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR HEIGHT="40">
-<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
-<TD WIDTH="6" HEIGHT="40"></TD>
-<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>Can I use external programs with the driver?</B></FONT></TD>
-</TR>
-</TABLE>
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">You cannot use an external application with the driver directly. However if you use KisMACs dump feature, you will be able to 
-create pcap file, which can be read by a lot of UNIX style programs. One of the most useful pcap-enabled applications is ethereal, a packet analysis tool. It is available as
-a fink package (<A HREF="http://fink.sourceforge.org">fink.sourceforge.org</A>)</FONT>
-<P><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="2"><B>Hint: If you want to capture packets of a specific network, you should disable channel hopping in order to recieve more packets.</B></FONT>
+<div align="left">
 
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR VALIGN="top">
-<TD ALIGN="left"></TD>
-<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='pcap' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
-</TR>
-</TABLE>
-</DIV>
-</BODY>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr height="40">
+      <td height="40" width="40"><img src="../gfx/kismacm.png" height="40"
+        width="40"></td>
+      <td height="40" width="6"></td>
+      <td height="40" valign="middle"><font
+        face="Lucida Grande,Helvetica,Arial" size="4"><b>Can I use external
+        programs with the driver?</b></font></td>
+    </tr>
+  </tbody>
+</table>
 
-</HTML>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">You cannot use an
+external application with the driver directly. However if you use KisMACs
+dump feature, you will be able to create pcap file, which can be read by a
+lot of UNIX style programs. One of the most useful pcap-enabled applications
+is ethereal, a packet analysis tool. It is available as a fink package (<a
+href="http://fink.sf.net">fink.sf.net</a>). Install fink and type in
+Terminal: "fink install ethereal". Then go into X11 and start it with "sudo
+ethereal".</font></p>
+
+<p><font face="Lucida Grande,Helvetica,Arial" size="2"><b>Hint: If you want
+to capture packets of a specific network, you should disable channel hopping
+- with channel hopping enabled, only packets from the curent channel will be
+captured, and you will miss data when the card goes to another
+channel.</b></font></p>
+
+<p></p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td align="left"></td>
+      <td align="right"><font face="Lucida Grande,Geneva,Arial" size="2"><a
+        href="help:search=%27pcap%27%20bookID=KisMAC%20Help">Tell me
+        more</a></font></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,140 +1,383 @@
-<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <title>KisMAC Manual - Getting started with KisMAC</title>
+</head>
 
-<HEAD>
-<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
-<TITLE>KisMAC Manual - Getting started with KisMAC</TITLE>
-</HEAD>
+<body bgcolor="#ffffff">
 
-<BODY BGCOLOR="#ffffff">
-<DIV ALIGN="left">
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR HEIGHT="40">
-<TD WIDTH="40" HEIGHT="40"><IMG HEIGHT="40" WIDTH="40" SRC="../gfx/kismacm.png"></TD>
-<TD WIDTH="6" HEIGHT="40"></TD>
-<TD HEIGHT="40" VALIGN="middle"><FONT FACE="Lucida Grande,Helvetica,Arial" SIZE="4"><B>KisMAC Manual - Getting started with KisMAC</B></FONT></TD>
-</TR>
-</TABLE>
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">Before you can begin using KisMAC you must
-open the preferences and select a driver to use for your specific wireless card.</FONT>
-<P>
-<OL>
-    <LI>Open the preferences from the KisMAC menu and click on the Driver icon.<BR>
-        <IMG SRC="../gfx/driverprefs.png" HEIGHT="423" WIDTH="350" BORDER="0" ALT="Driver Preference Pane"><BR>
-        <FONT SIZE="1" FACE="Lucida Grande,Geneva,Arial">
-            Note: Each of these drivers will prevent you from using your wireless<BR>
-            card to access a network while KisMAC is running, however KisMAC<BR>
-            must use one of these drivers to scan for networks.  For more information<BR> 
-            about driver capabilities, see the expanded driver section later in this manual.
-        </FONT><BR><BR>
-    <LI>There are six different drivers to choose from.
-        <OL>
-            <LI>The first is the Apple Airport or Airport Extreme card, which operates in active mode.  This means that you can still use your wireless card, but you will not have full functionality when using KisMAC. This is the driver you want to use if you have an Apple branded Airport card and all you want to do is search for networks.  If you have a Apple Airport, or an Apple Airport extreme card and would like to operate it in active mode, choose this driver.
-            <LI>The second driver is for the Apple Airport card, passive mode.  You will not be able to access any networks while in passive mode, but you will have expanded capabilities in KisMAC.  This driver does not work with Airport Extreme cards.  If you have an Apple Airport card, and you want to operate it in passive mode, choose this driver.
-            <LI>The third driver is for Prism2/Orinoco/Hermes cards.  It operates only in passive mode.  If you have a Prism2, an Orinoco, or a Hermes card, choose this driver.
-            <LI>The fourth driver is for Cisco Aironet cards.  It operates only in passive mode.  If you have a Cisco Aironet card, choose this driver.
-            <LI>The fifth driver is for if you have a USB wireless adapter with a Prism2 chipset.  It operates only in passive mode.  If you have a USB device with a Prism2 chipset, choose this driver.
-            <LI>The sixth driver is for Atheros based cards.  It operates only in passive mode.  If you have a Atheros based card, choose this driver.
-        </OL>
-        Note: if you do not know which driver to use, you can refer to the table of common card brands at the end of this chapter.  Updates to KisMAC are released more frequently than updates to the documentation, if this information is not up to date, please submit a new version.<BR><BR>
-    <LI>Your password will be asked for each time you start KisMAC because the drivers must be loaded and unloaded.  
-        If you would like KisMAC to load the drivers without asking for your password, check the Make scripts SUID root checkbox.
-        You can also use the KisMAC Driver Tool, installed with KisMAC, to start or stop the drivers.<BR><BR>
-</OL>
+<div align="left">
 
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">After selecting a driver, you can now use KisMAC to scan for networks 
-by clicking on the scan button in the main window.  It is recommended however, that you go through all of the preferences
-in order to get the best KisMAC experience.</FONT><P>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr height="40">
+      <td height="40" width="40"><img src="../gfx/kismacm.png" height="40"
+        width="40"></td>
+      <td height="40" width="6"></td>
+      <td height="40" valign="middle"><font
+        face="Lucida Grande,Helvetica,Arial" size="4"><b>KisMAC Manual -
+        Getting started with KisMAC</b></font></td>
+    </tr>
+  </tbody>
+</table>
 
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">Scanning Preferences</FONT><P>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">Before you can begin
+using KisMAC you must open the preferences and select a driver to use for
+your specific wireless card.</font></p>
 
-<OL>
-    <LI>WI-FI networks have 11 possible channels (14 non-us, 13 in Europe).  A typical access point will be available
-    on 3 channels a time, since these channels actually overlap.  In order to detect all networks, KisMAC will make 
-    the wireless card &quot;hop&quot; between all selected channels. The frequency field changes how often KisMAC changes channels. 
-    Before you select channel 12-14 please make sure your card can use this channels, otherwise strange side effects might occur.<BR>
-    <IMG SRC="../gfx/scanningprefs.png" HEIGHT="205" WIDTH="309" BORDER="0" ALT="Scanning Preference Pane"><BR><BR>
-    <LI>Once you find a network that you want to monitor, it is recommended that you only select the channel the 
-    network uses in order to capture more data from that network.  Note:  Cisco Aironet cards perform hopping internally
-    and the settings will be disabled when using one of these cards.<BR><BR>
-    <LI>If you would like KisMAC to automatically scan for networks as soon as it starts, check the scan at startup checkbox.
-    Note: Unless you have an alternative network connection, selecting this option will prevent you from downloading maps 
-    from the Internet.  See the GPS chapter for more information.<BR><BR>
-    <LI>The dump filter settings will tell KisMAC to create a PCAP file with the following filtering options:
-        <OL>
-            <LI>The default setting is no dumping, KisMAC simply discards the data.
-            <LI>Keep everything - All intercepted traffic is written to the log file.
-            <LI>Data only - Only packets containing data are written to the log file;
-                empty, "I'm here," traffic is ignored, but any packets with weak initialization vectors (IVs) will be logged.
-            <LI>Weak frames only - only packets with weak initialization vectors will be written to the log file. 
-        </OL>
-        Please note: Dumping traffic is only useful if you want to make the captured data available for third party tools. 
-        Such as ethereal, dsniff or ettercap.
-</OL>
+<p></p>
+<ol>
+  <li>Open the preferences from the KisMAC menu and click on the Driver
+    icon.<br>
+    <img src="../gfx/driverprefs.png" alt="Driver Preference Pane" border="0"
+    height="423" width="350"><br>
+    <font face="Lucida Grande,Geneva,Arial" size="1"> Note: Each of these
+    drivers will prevent you from using your wireless<br>
+    card to access networks while KisMAC is running, however KisMAC<br>
+    must use one of these drivers to scan for networks.  For more
+    information<br>
+    about driver capabilities, see the expanded driver section later in this
+    manual. </font><br>
+    <br>
+  </li>
+  <li>There are six different drivers to choose from.
+    <ol>
+      <li>The first is the Apple Airport or Airport Extreme card, which
+        operates in active mode. This means that you can still use your
+        wireless card, but you will not have full functionality when using
+        KisMAC. This is the driver you want to use if you have an Apple
+        branded Airport card and all you want to do is search for networks.
+        If you have a Apple Airport, or an Apple Airport extreme card and
+        would like to operate it in active mode, choose this driver. If you
+        just want to simply wardrive, choose this driver - it will not see
+        closed networks, but closed networks are nearly always WEP or WPAed,
+        which are no use to you. You can't crack networks with this
+      driver.</li>
+      <li>The second driver is for the Apple AirPort Extreme card in passive
+        mode. This has recently been reverse-engineered and now works in
+        passive mode.</li>
+      <li>The second driver is for the Apple Airport card, passive mode. You
+        will not be able to access any networks while in passive mode, but
+        you will have expanded capabilities in KisMAC. This driver does not
+        work with Airport Extreme cards (use the previous one). If you have
+        an Apple Airport card, and you want to operate it in passive mode,
+        choose this driver.</li>
+      <li>The third driver is for Prism2/Orinoco/Hermes cards. It operates
+        only in passive mode. If you have a Prism2, an Orinoco, or a Hermes
+        card, choose this driver.</li>
+      <li>The fourth driver is for Cisco Aironet cards. It operates only in
+        passive mode. If you have a Cisco Aironet card, choose this
+      driver.</li>
+      <li>The fifth driver is for if you have a USB wireless adapter with a
+        Prism2 chipset. It operates only in passive mode. If you have a USB
+        device with a Prism2 chipset, choose this driver.</li>
+      <li>The sixth driver is for Atheros based cards. It operates only in
+        passive mode. If you have a Atheros based card, choose this
+      driver.</li>
+    </ol>
+    Note: if you do not know which driver to use, you can refer to the table
+    of common card brands at the end of this chapter. Updates to KisMAC are
+    released more frequently than updates to the documentation, if this
+    information is not up to date, please submit a new version.<br>
+    <br>
+  </li>
+  <li>Your password will be asked for each time you start KisMAC because the
+    drivers must be loaded and unloaded. If you would like KisMAC to load the
+    drivers without asking for your password, check the Make scripts SUID
+    root checkbox. You can also use the KisMAC Driver Tool, installed with
+    KisMAC, to start or stop the drivers.<br>
+    <br>
+  </li>
+</ol>
 
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">Sound Preferences</FONT><P>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">After selecting a driver,
+you can now use KisMAC to scan for networks by clicking on the scan button in
+the main window.  It is recommended however, that you go through all of the
+preferences in order to get the best KisMAC experience.</font></p>
 
-<OL>
-    <LI>KisMAC can be set to play different sounds when different types of networks have been detected.
-        This can be helpful for war driving when you might not be able to look at the computer screen.
-        <OL>
-            <LI>WEP enabled network: play the selected sound when an encrypted network is detected.
-            <LI>WEP disabled network: play this sound when an open network is detected
-            <LI>Play every x packets:  This option is useful when to gathering data to attempt to crack a network.
-                Alerts you when a certain amount of data has been collected.  See the cracking chapter later in this manual.
-            <LI>Optionally, KisMAC can speak the names (SSID) of detected networks, also useful while war driving.
-        </OL>
-</OL>
+<p></p>
 
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">These are the basic preferences needed, in order to get started with KisMAC.
-There are many more advanced features that are covered in depth in their own chapters of the manual.</FONT><P>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">Scanning
+Preferences</font></p>
 
+<p></p>
+<ol>
+  <li>WI-FI networks have 11 possible channels (14 non-us, 13 in Europe). A
+    typical access point will be available on 3 channels a time, since these
+    channels actually overlap. In order to detect all networks, KisMAC will
+    make the wireless card "hop" between all selected channels. The frequency
+    field changes how often KisMAC changes channels. Before you select
+    channel 12-14 please make sure your card can use this channels, otherwise
+    strange side effects might occur, such as phantom base stations being
+    detected, inability to detect anything else, or simply just nothing - the
+    wireless card may shut down.<br>
+    <img src="../gfx/scanningprefs.png" alt="Scanning Preference Pane"
+    border="0" height="205" width="309"><br>
+    <br>
+  </li>
+  <li>Once you find a network that you want to monitor, it is recommended
+    that you only select the channel the network uses in order to capture
+    more data from that network.  Note:  Cisco Aironet cards perform hopping
+    internally and the settings will be disabled when using one of these
+    cards.<br>
+    <br>
+  </li>
+  <li>If you would like KisMAC to automatically scan for networks as soon as
+    it starts, check the scan at startup checkbox. Note: Unless you have
+    another network connection, selecting this option will prevent you from
+    downloading maps from the Internet.  See the GPS chapter for more
+    information.<br>
+    <br>
+  </li>
+  <li>The dump filter settings will tell KisMAC to create a PCAP file with
+    the following filtering options:
+    <ol>
+      <li>The default setting is no dumping, KisMAC simply discards the
+      data.</li>
+      <li>Keep everything - All intercepted traffic is written to the log
+        file.</li>
+      <li>Data only - Only packets containing data are written to the log
+        file; empty, "I'm here," traffic is ignored, but any packets with
+        weak initialization vectors (IVs) will be logged.</li>
+      <li>Weak frames only - only packets with weak initialization vectors
+        will be written to the log file.</li>
+    </ol>
+    Please note: Dumping traffic is only useful if you want to make the
+    captured data available for third party tools, such as ethereal, dsniff
+    or ettercap. You probably don't need this unless you want to see what the
+    data was or monitor it.</li>
+</ol>
 
-<P><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial">Table of common card brands:</FONT><P>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">Sound
+Preferences</font></p>
 
-<TABLE BORDER="1">
-<TR><TD>Manufacturer</TD><TD>Model	    </TD><TD>Chipset	</TD><TD>Compatibility</TD></TR>
-<TR><TD>3Com        </TD><TD>3CRWE154G72    </TD><TD>PrismGT	</TD><TD>           </TD></TR>
-<TR><TD>Addtron	    </TD><TD>AWP-100	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>AWP-101	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>Apple	    </TD><TD>Airport	    </TD><TD>Hermes	</TD><TD>Verified   </TD></TR>
-<TR><TD>	    </TD><TD>Airport Extreme</TD><TD>Broadcom	</TD><TD>works in active mode</TD></TR>
-<TR><TD>AsantŽ	    </TD><TD>AL1011	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>Belkin	    </TD><TD>F5D6020 (old)  </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>F5D7010	    </TD><TD>Broadcom	</TD><TD>           </TD></TR>
-<TR><TD>Buffalo     </TD><TD>WLI-CB-G54     </TD><TD>Broadcom	</TD><TD>           </TD></TR>
-<TR><TD>Cisco	    </TD><TD>AIR-PCM35x     </TD><TD>Aironet	</TD><TD>Verified   </TD></TR>
-<TR><TD>	    </TD><TD>AIR-LMC35x	    </TD><TD>Aironet	</TD><TD>           </TD></TR>
-<TR><TD>Compaq	    </TD><TD>WL-100	    </TD><TD>PrismII	</TD><TD>Verified   </TD></TR>
-<TR><TD>D-Link	    </TD><TD>DWL-650 (old)  </TD><TD>PrismII	</TD><TD>Verified   </TD></TR>
-<TR><TD>	    </TD><TD>DWL-G520	    </TD><TD>Atheros	</TD><TD>           </TD></TR>
-<TR><TD>LinkSys	    </TD><TD>WPC11	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>WPC54G	    </TD><TD>Broadcom	</TD><TD>           </TD></TR>
-<TR><TD>Proxim	    </TD><TD>Orinoco 11b/g  </TD><TD>Atheros	</TD><TD>Verified       </TD></TR>
-<TR><TD>Lucent	    </TD><TD>Orinoco Silver 11Mbit  </TD><TD>Hermes	</TD><TD>Verified</TD></TR>
-<TR><TD>	    </TD><TD>Orinoco Silver 2Mbit   </TD><TD>Hermes	</TD><TD>Verified</TD></TR>
-<TR><TD>	    </TD><TD>Orinoco Gold 11Mbit    </TD><TD>Hermes	</TD><TD>   </TD></TR>
-<TR><TD>Netgear     </TD><TD>MA401	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>WG511	    </TD><TD>PrismGT	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>WG511T	    </TD><TD>Atheros	</TD><TD>           </TD></TR>
-<TR><TD>SMC	    </TD><TD>SMC2632W (old) </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>ZCOMAX	    </TD><TD>XI-300         </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>	    </TD><TD>XI-815	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD>Zoom	    </TD><TD>4105	    </TD><TD>PrismII	</TD><TD>           </TD></TR>
-<TR><TD colspan="4">
-The Aironet, Atheros, PrismII and Hermes chips are natively supported by KisMAC.<br>
-The Broadcom chipset is supported over the Airport Extreme driver only in limited mode.<br>
-All other chipsets are currently unsupported.<BR>
-</TD></TR>
-</TABLE>
+<p></p>
+<ol>
+  <li>KisMAC can be set to play different sounds when different types of
+    networks have been detected. This can be helpful for wardriving when you
+    might not be able to look at the computer screen.
+    <ol>
+      <li>WEP enabled network: play the selected sound when an encrypted
+        network is detected.</li>
+      <li>WEP disabled network: play this sound when an open network is
+        detected.</li>
+      <li>Play every x packets:  This option is useful when to gathering data
+        to attempt to crack a network. Alerts you when a certain amount of
+        data has been collected.  See the cracking chapter later in this
+        manual.</li>
+      <li>Optionally, KisMAC can speak the names (SSID) of detected networks,
+        also useful while wardriving.</li>
+    </ol>
+  </li>
+</ol>
 
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR VALIGN="top">
-<TD ALIGN="left"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="index.html">back</A></FONT></TD>
-<TD ALIGN="right"><FONT SIZE="2" FACE="Lucida Grande,Geneva,Arial"><A HREF="help:search='preferences' bookID=KisMAC%20Help">Tell me more</A></FONT></TD>
-</TR>
-</TABLE>
-</DIV>
-</BODY>
+<p><font face="Lucida Grande,Geneva,Arial" size="2">These are the basic
+preferences that you need to know in order to get started with KisMAC. There
+are many more advanced features that are covered in depth in their own
+chapters of the manual.</font></p>
 
-</HTML>
+<p></p>
 
+<p><font face="Lucida Grande,Geneva,Arial" size="2">Table of common card
+brands:</font></p>
+
+<p></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>Manufacturer</td>
+      <td>Model</td>
+      <td>Chipset</td>
+      <td>Compatibility</td>
+    </tr>
+    <tr>
+      <td>3Com</td>
+      <td>3CRWE154G72</td>
+      <td>PrismGT</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Addtron</td>
+      <td>AWP-100</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>AWP-101</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Apple</td>
+      <td>Airport</td>
+      <td>Hermes</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Airport Extreme</td>
+      <td>Broadcom</td>
+      <td>Verified - works in passive mode now!</td>
+    </tr>
+    <tr>
+      <td>Asant&#x17d;     </td>
+      <td>AL1011</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Belkin</td>
+      <td>F5D6020 (old)</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>F5D7010</td>
+      <td>Broadcom</td>
+      <td>Should work in active mode only</td>
+    </tr>
+    <tr>
+      <td>Buffalo</td>
+      <td>WLI-CB-G54</td>
+      <td>Broadcom</td>
+      <td>Should work in active mode only</td>
+    </tr>
+    <tr>
+      <td>Cisco</td>
+      <td>AIR-PCM35x</td>
+      <td>Aironet</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>AIR-LMC35x</td>
+      <td>Aironet</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Compaq</td>
+      <td>WL-100</td>
+      <td>PrismII</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td>D-Link</td>
+      <td>DWL-650 (old)</td>
+      <td>PrismII</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>DWL-G520</td>
+      <td>Atheros</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>LinkSys</td>
+      <td>WPC11</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>WPC54G</td>
+      <td>Broadcom</td>
+      <td>Should work in active mode only</td>
+    </tr>
+    <tr>
+      <td>Proxim</td>
+      <td>Orinoco 11b/g</td>
+      <td>Atheros</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td>Lucent</td>
+      <td>Orinoco Silver 11Mbit</td>
+      <td>Hermes</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Orinoco Silver 2Mbit</td>
+      <td>Hermes</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Orinoco Gold 11Mbit</td>
+      <td>Hermes</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Netgear</td>
+      <td>MA401</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>WG511</td>
+      <td>PrismGT</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>WG511T</td>
+      <td>Atheros</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>SMC</td>
+      <td>SMC2632W (old)</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>ZCOMAX</td>
+      <td>XI-300</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>XI-815</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td>Zoom</td>
+      <td>4105</td>
+      <td>PrismII</td>
+      <td>Should work</td>
+    </tr>
+    <tr>
+      <td colspan="4">The Aironet, Atheros, PrismII and Hermes chips are
+        natively supported by KisMAC.<br>
+        The Broadcom chipset is supported over the Airport Extreme driver in
+        passive mode now.<br>
+        All other chipsets are currently unsupported.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td align="left"><font face="Lucida Grande,Geneva,Arial" size="2"><a
+        href="index.html">back</a></font></td>
+      <td align="right"><font face="Lucida Grande,Geneva,Arial" size="2"><a
+        href="help:search=%27preferences%27%20bookID=KisMAC%20Help">Tell me
+        more</a></font></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

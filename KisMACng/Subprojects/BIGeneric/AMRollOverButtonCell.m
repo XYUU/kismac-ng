@@ -681,15 +681,17 @@ float am_textInsetFactor = 1.3;
 	return result;
 }
 
+void showMenu(AMRollOverButtonCell *bc, NSRect cellFrame, NSView * controlView, NSEvent *theEvent)
+{
+	NSPoint menuPosition = [bc menuPositionForFrame:cellFrame inView:controlView];
+	// create event for pop up menu with adjusted mouse position
+	NSEvent *menuEvent = [NSEvent mouseEventWithType:[theEvent type] location:menuPosition modifierFlags:[theEvent modifierFlags] timestamp:[theEvent timestamp] windowNumber:[theEvent windowNumber] context:[theEvent context] eventNumber:[theEvent eventNumber] clickCount:[theEvent clickCount] pressure:[theEvent pressure]];
+	[NSMenu popUpContextMenu:[bc menu] withEvent:menuEvent forView:controlView];
+}
+
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 {
-	void showMenu()
-	{
-		NSPoint menuPosition = [self menuPositionForFrame:cellFrame inView:controlView];
-		// create event for pop up menu with adjusted mouse position
-		NSEvent *menuEvent = [NSEvent mouseEventWithType:[theEvent type] location:menuPosition modifierFlags:[theEvent modifierFlags] timestamp:[theEvent timestamp] windowNumber:[theEvent windowNumber] context:[theEvent context] eventNumber:[theEvent eventNumber] clickCount:[theEvent clickCount] pressure:[theEvent pressure]];
-		[NSMenu popUpContextMenu:[self menu] withEvent:menuEvent forView:controlView];
-	}
+	showMenu(self, cellFrame, controlView, theEvent);
 	
 	BOOL result = NO;
 	//NSLog(@"trackMouse:inRect:ofView:untilMouseUp:");
@@ -702,7 +704,7 @@ float am_textInsetFactor = 1.3;
 		if (localPoint.x >= (am_textRect.origin.x+am_textRect.size.width)) {
 			done = YES;
 			result = YES;
-			showMenu();
+			showMenu(self, cellFrame, controlView, theEvent);
 		}
 	}
 	BOOL trackContinously = [self startTrackingAt:currentPoint inView:controlView];
@@ -748,7 +750,7 @@ float am_textInsetFactor = 1.3;
 		} else { // show menu
 			done = YES;
 			result = YES;
-			showMenu();
+			showMenu(self, cellFrame, controlView, theEvent);
 		}
 	} // ... while (!done)
 	return result;
