@@ -303,10 +303,12 @@
 
 - (BOOL)save:(NSString*)filename {
     BOOL ret = NO;
-    
     NSParameterAssert(filename);
+    if (!_saveFilteredOnly) {
+        [_container setFilterString:@""];
+    }
     filename = [filename standardPath];
-    
+    NSLog(@"FileName is %@", filename);
     if ([[[filename pathExtension] lowercaseString] isEqualToString:@"kismac"]) {
         [self showBusyWithText:[NSString stringWithFormat:NSLocalizedString(@"Saving to %@...", "Status for busy dialog"), [filename stringByAbbreviatingWithTildeInPath]]];  
 
@@ -319,6 +321,7 @@
             else [_window setDocumentEdited: _scanning];
     
             [self busyDone];
+			[[WaveHelper scanController] changeSearchValue:self];
             NS_VALUERETURN(ret, BOOL);
         NS_HANDLER
             NSLog(@"Saving failed, because of an internal error!");
@@ -343,6 +346,11 @@
     NSLog(@"Warning unknown file format or internal error!");
     NSBeep();
     return NO;
+}
+
+- (BOOL)saveAs:(NSString*)filename {
+    [[WaveHelper scanController] checkFilter:self];
+    return [self save: filename];
 }
 
 #pragma mark -

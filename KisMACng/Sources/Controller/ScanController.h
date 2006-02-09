@@ -61,6 +61,7 @@ typedef enum {
     bool                _detailsPaneVisibile;   //is the details drawer visible
     bool                _doModal;
     bool                _refreshGUI;
+    bool                _saveFilteredOnly;
     
     NSRect              _zoomToRect;
     
@@ -146,6 +147,7 @@ typedef enum {
 - (IBAction)showNetHierarch:(id)sender;
 
 - (IBAction)changeSearchValue:(id)sender;
+- (void)checkFilter:(id)sender;
 @end
 
 @interface ScanController(MenuExtension) 

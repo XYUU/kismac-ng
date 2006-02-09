@@ -47,6 +47,7 @@
 - (BOOL)importPCAP:(NSString*)filename;
 - (BOOL)downloadMapFrom:(NSString*)server forPoint:(waypoint)w resolution:(NSSize)size zoomLevel:(int)zoom;
 - (BOOL)save:(NSString*)filename;
+- (BOOL)saveAs:(NSString*)filename;
 
 - (BOOL)selectNetworkWithBSSID:(NSString*)BSSID;
 - (BOOL)selectNetworkAtIndex:(NSNumber*)index;
@@ -66,4 +67,6 @@
 - (BOOL)wordlistLEAP:(NSString*)wordlist;
 
 - (BOOL)weakSchedulingAttackForKeyLen:(int)keyLen andKeyID:(int)keyID;
+
+    BOOL saveAllNets;
 @end

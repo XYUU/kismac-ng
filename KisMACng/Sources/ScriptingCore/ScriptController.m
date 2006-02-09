@@ -195,7 +195,7 @@
     [sp setCanSelectHiddenExtension:YES];
     [sp setTreatsFilePackagesAsDirectories:NO];
     if ([sp runModal]==NSFileHandlingPanelOKButton) {
-        if (![ScriptingEngine selfSendEvent:'save' withClass:'core' andDefaultArgString:[sp filename]]) 
+        if (![ScriptingEngine selfSendEvent:'KsaA' withDefaultArgString:[sp filename]]) 
             [[NSApp delegate] showSavingFailureDialog];    
     }
 }

@@ -161,7 +161,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkAdded:)        name:KisMACNetworkAdded         object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePrefs:)         name:KisMACUserDefaultsChanged  object:nil];
 	
-	NSLog(@"KiMAC startup done. Build from %@. Homedir is %s. NSAppKitVersionNumber: %f", [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__], [[[NSBundle mainBundle] bundlePath] fileSystemRepresentation], NSAppKitVersionNumber);
+	NSLog(@"KisMAC startup done. Build from %@. Homedir is %s. NSAppKitVersionNumber: %f", [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__], [[[NSBundle mainBundle] bundlePath] fileSystemRepresentation], NSAppKitVersionNumber);
 	[sets setObject:[[[NSBundle mainBundle] bundlePath] stringByAbbreviatingWithTildeInPath] forKey:@"KisMACHomeDir"];
 }
 
@@ -417,6 +417,24 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     [_networkTable reloadData];
 	[(NSView*)_mappingView setNeedsDisplay:YES];
 	[self tableViewSelectionDidChange:nil];
+}
+
+- (void)checkFilter:(id)sender {
+    //written by themacuser
+	if(![[_searchField stringValue] isEqualToString:@""]){
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert addButtonWithTitle:@"Save all nets"];
+		[alert addButtonWithTitle:@"Save filtered nets"];
+		[alert setMessageText:@"You are filtering the list of networks."];
+		[alert setInformativeText:@"Do you want to save just the filtered networks, or all the networks?"];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		if([alert runModal] == NSAlertFirstButtonReturn){
+			[_container setFilterString:@""];
+            _saveFilteredOnly = NO;
+        }else {
+            _saveFilteredOnly = YES;
+        }
+    }
 }
 
 #pragma mark -

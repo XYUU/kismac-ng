@@ -63,6 +63,10 @@
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] save:[command directParameter]]];
 }
 
+- (id)saveAs:(NSScriptCommand *)command {
+    return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] saveAs:[command directParameter]]];
+}
+
 - (id)importKisMAC:(NSScriptCommand *)command {
     return [NSNumber numberWithBool:[(ScanController*)[NSApp delegate] importKisMAC:[command directParameter]]];
 }

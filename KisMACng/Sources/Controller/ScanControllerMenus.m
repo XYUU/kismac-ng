@@ -114,10 +114,13 @@
     }
 }
 - (void)performExportNS:(id)filename {
+	[[WaveHelper scanController] checkFilter:self];
+	
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
     if (![WaveStorageController exportNSToFile:filename withContainer:_container andImportController:_importController]) _asyncFailure = YES;
     else _asyncFailure = NO;
+	[[WaveHelper scanController] changeSearchValue:self];
 }
 
 - (IBAction)exportWarD:(id)sender {
@@ -133,9 +136,11 @@
     }
 }
 - (void)performExportWarD:(id)filename {
+	[[WaveHelper scanController] checkFilter:self];
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
     _asyncFailure = ! [[WaveStorageController webServiceDataOfContainer:_container andImportController:_importController] writeToFile:[filename stringByExpandingTildeInPath] atomically:YES];
+	[[WaveHelper scanController] changeSearchValue:self];
 }
 
 - (IBAction)exportToServer:(id)sender {
@@ -173,6 +178,8 @@
 }
 
 - (void)performExportToServer:(id)reportErrors {
+	[[WaveHelper scanController] checkFilter:self];
+
     NSUserDefaults *defs;
     NSString *account, *password, *data, *errorStr;
     NSURL *url;
@@ -235,6 +242,7 @@
 		_asyncFailure = NO;
 	}
     [stream release];
+	[[WaveHelper scanController] changeSearchValue:self];
 }
 
 - (IBAction)exportMacstumbler:(id)sender {
@@ -250,10 +258,13 @@
     }
 }
 - (void)performExportMacStumbler:(id)filename {
+	[[WaveHelper scanController] checkFilter:self];
+    
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
 
     if (![WaveStorageController exportMacStumblerToFile:filename withContainer:_container andImportController:_importController]) _asyncFailure = YES;
     else _asyncFailure = NO;
+	[[WaveHelper scanController] changeSearchValue:self];
 }
 
 - (IBAction)exportPDF:(id)sender {
@@ -269,6 +280,8 @@
     }
 }
 - (void)performExportPDF:(id)filename {
+	[[WaveHelper scanController] checkFilter:self];
+
     NSData *data;
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
     
@@ -280,6 +293,7 @@
     NS_HANDLER
         _asyncFailure = YES;
     NS_ENDHANDLER
+	[[WaveHelper scanController] changeSearchValue:self];
 }
 
 - (IBAction)exportJPEG:(id)sender {
@@ -295,6 +309,8 @@
     }
 }
 - (void)performExportJPEG:(id)filename {
+	[[WaveHelper scanController] checkFilter:self];
+    
     NSData *data;
     NSImage *img;
     [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
@@ -311,6 +327,7 @@
     NS_HANDLER
         _asyncFailure = YES;
     NS_ENDHANDLER
+	[[WaveHelper scanController] changeSearchValue:self];
 }
     
 #pragma mark -
