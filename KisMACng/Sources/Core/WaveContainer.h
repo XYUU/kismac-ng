@@ -56,7 +56,8 @@ typedef struct WaveNetEntry {
     
     NSString *_viewSSID;
     NSString *_filterString;
-    
+	NSString *_filterType;
+	
     WaveNetEntry _idList[MAXNETS + 1];
     unsigned int _sortedList[MAXNETS + 1];
     unsigned int _lookup[LOOKUPSIZE];
@@ -83,7 +84,9 @@ typedef struct WaveNetEntry {
 //for view filtering
 - (void) refreshView;
 - (void) setViewType:(int)type value:(id)val;
+- (void) setFilterType:(NSString*)filter; 
 - (void) setFilterString:(NSString*)filter;
+- (NSString*) getStringForEncryptionType:(encryptionType)encryption; 
 
 //for sorting
 - (void) sortByColumn:(NSString*)ident order:(bool)ascend;

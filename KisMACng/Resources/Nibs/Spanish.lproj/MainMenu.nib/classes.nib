@@ -104,6 +104,7 @@
         {
             ACTIONS = {
                 authFloodNetwork = id; 
+                changeSearchType = id; 
                 changeSearchValue = id; 
                 clearNetwork = id; 
                 closeActiveWindow = id; 
@@ -126,6 +127,7 @@
                 injectPackets = id; 
                 joinNetwork = id; 
                 openDonateURL = id; 
+                openPCAPInEthereal = id; 
                 openWebsiteURL = id; 
                 restartGPS = id; 
                 selChannel = id; 
@@ -162,6 +164,7 @@
                 "_networksButton" = NSButton; 
                 "_scanButton" = AMRollOverButton; 
                 "_searchField" = NSSearchField; 
+                "_searchTypeMenu" = id; 
                 "_showAllNetsInMap" = NSMenuItem; 
                 "_showDetails" = NSMenuItem; 
                 "_showHierarch" = NSMenuItem; 

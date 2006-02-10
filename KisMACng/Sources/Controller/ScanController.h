@@ -99,6 +99,7 @@ typedef enum {
 	
     IBOutlet NSTextField        *_headerField;
     IBOutlet NSSearchField      *_searchField;
+     IBOutlet NSPopUpButton		*_searchTypeMenu;
     
     IBOutlet NSButton           *_networksButton;
     IBOutlet NSButton           *_trafficButton;
@@ -147,6 +148,7 @@ typedef enum {
 - (IBAction)showNetHierarch:(id)sender;
 
 - (IBAction)changeSearchValue:(id)sender;
+- (IBAction)changeSearchType:(id)sender; 
 - (void)checkFilter:(id)sender;
 @end
 

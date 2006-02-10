@@ -437,6 +437,13 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     }
 }
 
+- (IBAction)changeSearchType:(id)sender {
+	[_container setFilterType:[sender titleOfSelectedItem]];
+	[_networkTable reloadData];
+	[(NSView*)_mappingView setNeedsDisplay:YES];
+	[self tableViewSelectionDidChange:nil];
+}
+
 #pragma mark -
 
 -(void) dealloc {

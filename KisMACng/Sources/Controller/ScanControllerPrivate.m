@@ -208,6 +208,7 @@
     [_showMap           setState: tab == tabMap      ? NSOnState : NSOffState];
     [_showDetails       setState: tab == tabDetails  ? NSOnState : NSOffState];
     [_searchField       setHidden: tab != tabNetworks && tab != tabMap];
+	[_searchTypeMenu        setHidden: tab != tabNetworks && tab != tabMap]; 
     [_trafficTimePopUp  setHidden: tab != tabTraffic];
     [_trafficModePopUp  setHidden: tab != tabTraffic];
     [_mappingView       setVisible: tab == tabMap];

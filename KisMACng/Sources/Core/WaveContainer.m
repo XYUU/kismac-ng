@@ -125,11 +125,57 @@ inline UInt32 hashForMAC(const UInt8* val) {
         NSLog(@"invalid view. this is a bug and shall never happen\n");
     }
     
-    if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
-        _sortedList[_sortedCount] = entry;
-        _sortedCount++;
-		[_idList[entry].net setVisible: YES];
-    } else [_idList[entry].net setVisible: NO];
+
+	// switch type here
+	if ( [_filterType isEqualToString:@"SSID"] ) {
+		if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO];
+	} else if ( [_filterType isEqualToString:@"BSSID"] ) {
+		if (add && (_filterString == nil || [[_idList[entry].net BSSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO];
+	} else if ( [_filterType isEqualToString:@"Vendor"]) {
+		if (add && (_filterString == nil || [[_idList[entry].net getVendor] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO];
+	} else if ( [_filterType isEqualToString:@"Encryption"]) { 
+		if (add && (_filterString == nil || ( [[self getStringForEncryptionType:[_idList[entry].net wep]] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location) != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO]; 
+	} else {
+		_filterType = @"SSID";
+		if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO];
+	}
+	
+}
+
+- (NSString*) getStringForEncryptionType:(encryptionType)encryption {
+	switch(encryption) {
+		case encryptionTypeNone: 
+			return @"NO";
+		case encryptionTypeWEP:
+			return @"WEP";
+		case encryptionTypeWEP40:
+			return @"WEP-40";
+		case encryptionTypeWPA:
+			return @"WPA";
+		default:
+			return @"Unknown";
+	}
+	
 }
 
 - (void) refreshView {
@@ -165,6 +211,11 @@ inline UInt32 hashForMAC(const UInt8* val) {
     if ([filter length] == 0) [WaveHelper secureRelease:&_filterString];
     else [WaveHelper secureReplace:&_filterString withObject:filter];
     
+    [self refreshView];    
+}
+
+- (void) setFilterType:(NSString*)filter {
+    [WaveHelper secureReplace:&_filterType withObject:filter];
     [self refreshView];    
 }
 
