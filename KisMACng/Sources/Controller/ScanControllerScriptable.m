@@ -303,6 +303,10 @@
 
 - (BOOL)save:(NSString*)filename {
     BOOL ret = NO;
+    BOOL wasScanning = NO;
+    if (_scanning) {
+        wasScanning = YES;
+    }
     NSParameterAssert(filename);
     if (!_saveFilteredOnly) {
         [_container setFilterString:@""];
@@ -322,6 +326,9 @@
     
             [self busyDone];
 			[[WaveHelper scanController] changeSearchValue:self];
+            if (wasScanning) {
+                [self startScan];
+            }
             NS_VALUERETURN(ret, BOOL);
         NS_HANDLER
             NSLog(@"Saving failed, because of an internal error!");

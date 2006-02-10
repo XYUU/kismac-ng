@@ -1,3 +1,7 @@
+R80:
+
+Continue scanning after save if we were scanning before saving
+
 R79:
 
 Fixed "Save Filtered Nets" bug with modified patches by themacuser.  
