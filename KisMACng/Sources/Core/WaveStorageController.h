@@ -41,6 +41,7 @@
 
 + (BOOL)saveToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im;
 + (BOOL)exportNSToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im;
++ (BOOL)exportKMLToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im;
 + (BOOL)exportMacStumblerToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im;
 
 @end

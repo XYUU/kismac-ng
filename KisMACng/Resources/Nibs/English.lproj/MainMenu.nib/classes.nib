@@ -116,6 +116,7 @@
                 debugTestWPAHashingFunction = id; 
                 decryptPCAPFile = id; 
                 exportJPEG = id; 
+                exportKML = id; 
                 exportMacstumbler = id; 
                 exportNS = id; 
                 exportPDF = id; 

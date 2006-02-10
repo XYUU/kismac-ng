@@ -123,6 +123,24 @@
 	[[WaveHelper scanController] changeSearchValue:self];
 }
 
+- (IBAction)exportKML:(id)sender {
+    NSSavePanel *aSP;
+    aSP=[NSSavePanel savePanel];
+    [aSP setRequiredFileType:@"kml"];
+    [aSP setCanSelectHiddenExtension:YES];
+    [aSP setTreatsFilePackagesAsDirectories:NO];
+    if ([aSP runModal]==NSFileHandlingPanelOKButton) {
+        [self showBusy:@selector(performExportKML:) withArg:[aSP filename]];
+        if (_asyncFailure) [self showExportFailureDialog];
+    }
+}
+- (void)performExportKML:(id)filename {
+    [_importController setTitle:[NSString stringWithFormat:NSLocalizedString(@"Exporting to %@...", "Status for busy dialog"), filename]];  
+
+    if (![WaveStorageController exportKMLToFile:filename withContainer:_container andImportController:_importController]) _asyncFailure = YES;
+    else _asyncFailure = NO;
+}
+
 - (IBAction)exportWarD:(id)sender {
     NSSavePanel *aSP;
     

@@ -476,6 +476,227 @@
     return YES;
 }
 
+//export in Google Earth format
++ (BOOL)exportKMLToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im {
+    WaveNet *net;
+    float f;
+    char c;
+    unsigned int i,j;
+	double lat,lon=0;
+	char netname[80],netesc[80];
+    
+	NSParameterAssert(filename);
+	NSParameterAssert(container);
+	NSParameterAssert(im);
+
+    FILE* fd = fopen([filename cString],"w");
+
+    if (!fd) {
+        NSLog(@"Could not open %@ for writing.", filename);
+        return NO;
+    }
+    
+    // KML file header and all styles
+	fprintf(fd,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+	fprintf(fd,"<kml xmlns=\"http://earth.google.com/kml/2.0\">\n");
+	fprintf(fd,"<Document>\n");
+	fprintf(fd,"	<Style id=\"net_managed_open\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>128</x>\n");
+	fprintf(fd,"				<y>0</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_managed_encrypted\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>128</x>\n");
+	fprintf(fd,"				<y>32</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_adhoc_open\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>0</x>\n");
+	fprintf(fd,"				<y>0</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_adhoc_encrypted\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>0</x>\n");
+	fprintf(fd,"				<y>32</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_tunnel_open\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>32</x>\n");
+	fprintf(fd,"				<y>0</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_tunnel_encrypted\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>32</x>\n");
+	fprintf(fd,"				<y>32</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_probe_open\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>96</x>\n");
+	fprintf(fd,"				<y>0</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_probe_encrypted\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>96</x>\n");
+	fprintf(fd,"				<y>32</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_unknown_open\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>160</x>\n");
+	fprintf(fd,"				<y>0</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<Style id=\"net_unknown_encrypted\">\n");
+	fprintf(fd,"		<IconStyle>\n");
+	fprintf(fd,"			<Icon>\n");
+	fprintf(fd,"				<href>root://icons/palette-4.png</href>\n");
+	fprintf(fd,"				<x>160</x>\n");
+	fprintf(fd,"				<y>32</y>\n");
+	fprintf(fd,"				<w>32</w>\n");
+	fprintf(fd,"				<h>32</h>\n");
+	fprintf(fd,"			</Icon>\n");
+	fprintf(fd,"		</IconStyle>\n");
+	fprintf(fd,"	</Style>\n");
+	fprintf(fd,"	<open>1</open>\n");
+	fprintf(fd,"\n");
+
+//    fprintf(fd,"# Latitude\tLongitude\t( SSID )	Type\t( BSSID )\tTime (GMT)\t[ SNR Sig Noise ]\t# ( Name )\tFlags\tChannelbits\tBcnIntvl\r\n");
+
+	[im setMax:[container count]];
+    for (i=0; i<[container count]; i++) {
+        net = [container netAtIndex:i];
+        
+		lat = 100;
+		
+        if (sscanf([[net latitude] cString], "%f%c", &f, &c)==2) lat = f * (c == 'N' ? 1 : -1);		
+        if (sscanf([[net longitude] cString], "%f%c", &f, &c)==2) lon = f * (c == 'E' ? 1 : -1);
+		strcpy(netname,[[net SSID] cString]);
+		
+		// now escape any ampersands or < or >...
+		
+		netesc[0]='\0';
+		
+		for (j=0;j<strlen(netname);j++) {
+			switch(netname[j]) {
+				case '&':
+					strcat(netesc,"&amp;");
+					break;
+				case '<':
+					strcat(netesc,"&lt;");
+					break;
+				case '>':
+					strcat(netesc,"&gt;");
+					break;
+				default:
+					strncat(netesc,netname+j,1);
+			}
+		}
+		strcpy(netname,netesc);
+
+		if (lat != 100) {
+			// we have a valid lat/long pair - skip any that don't
+			fprintf(fd,"	<Placemark>\n");
+			fprintf(fd,"		<name>%s</name>\n",netname);
+			fprintf(fd,"		<description><![CDATA[");
+			fprintf(fd,"<b>Signal:</b> %u",[net maxSignal]);
+			if (strcmp([[net BSSID] cString],"<no bssid>") != 0) {
+				fprintf(fd,"<br><b>BSSID:</b> %s",[[net BSSID] cString]);
+				fprintf(fd,"<br><b>Vendor:</b> %s",[[net getVendor] cString]);
+			}
+			fprintf(fd,"<br><b>Time seen:</b> %s",[[[net lastSeenDate] descriptionWithCalendarFormat:@"%H:%M:%S (GMT)\t" timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"] locale:nil] cString]);
+			fprintf(fd,"]]></description>\n");
+			fprintf(fd,"		<open>0</open>\n");
+			fprintf(fd,"		<styleUrl>#net_");
+			switch ([net type]) {
+				case networkTypeUnknown:
+					fprintf(fd,"unknown");
+					break;
+				case networkTypeAdHoc: 
+					fprintf(fd,"adhoc");
+					break;
+				case networkTypeManaged: 
+					fprintf(fd,"managed");
+					break;
+				case networkTypeTunnel: 
+				case networkTypeLucentTunnel: 
+					fprintf(fd,"tunnel");
+					break;
+				case networkTypeProbe: 
+					fprintf(fd,"probe");
+					break;
+				default:
+					NSAssert(NO, @"Invalid network type");
+			}
+			fprintf(fd,"_%s</styleUrl>\n",[net wep] > encryptionTypeNone ? "encrypted" : "open");
+			fprintf(fd,"		<Point>\n");
+			fprintf(fd,"			<coordinates>%f,%f</coordinates>\n",lon,lat);
+			fprintf(fd,"		</Point>\n");
+			fprintf(fd,"	</Placemark>\n");
+		}
+			
+		[im increment];
+    }
+	fprintf(fd,"\n");
+	fprintf(fd,"</Document>\n");
+	fprintf(fd,"</kml>\n");
+    
+    fclose(fd);
+    return YES;
+}
+
 //export in macstumbler format
 + (BOOL)exportMacStumblerToFile:(NSString*)filename withContainer:(WaveContainer*)container andImportController:(ImportController*)im {
     WaveNet *net;
