@@ -155,7 +155,7 @@ inline UInt32 hashForMAC(const UInt8* val) {
 		_filterType = @"SSID";
 		if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
 			_sortedList[_sortedCount] = entry;
-			_sortedCount;
+			_sortedCount++;
 			[_idList[entry].net setVisible: YES];
 		} else [_idList[entry].net setVisible: NO];
 	}
