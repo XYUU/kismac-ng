@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd `dirname "$0"`
+cd "`dirname "$0"`"
 
 mkdir "./build/KisMACUnitTest.bundle/Contents/Frameworks" 2>/dev/null
 cd UnitTest
