@@ -151,8 +151,25 @@ inline UInt32 hashForMAC(const UInt8* val) {
 			_sortedCount++;
 			[_idList[entry].net setVisible: YES];
 		} else [_idList[entry].net setVisible: NO]; 
-	} else {
-		_filterType = @"SSID";
+	} else if ( [_filterType isEqualToString:@"Main Channel"]) { 
+		if (add && (_filterString == nil || ( [[NSString stringWithFormat:@"%i",[_idList[entry].net originalChannel]] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location) != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO]; 
+	} else if ( [_filterType isEqualToString:@"Comment"]) { 
+		if (add && (_filterString == nil || ( [[_idList[entry].net comment] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location) != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO]; 
+	} else if ( [_filterType isEqualToString:@"Type"]) {
+		if (add && (_filterString == nil || ( [[self getStringForNetType:[_idList[entry].net type]] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location) != NSNotFound)) {
+			_sortedList[_sortedCount] = entry;
+			_sortedCount++;
+			[_idList[entry].net setVisible: YES];
+		} else [_idList[entry].net setVisible: NO]; 
+	} else {		_filterType = @"SSID";
 		if (add && (_filterString == nil || [[_idList[entry].net SSID] rangeOfString:_filterString options:NSCaseInsensitiveSearch].location != NSNotFound)) {
 			_sortedList[_sortedCount] = entry;
 			_sortedCount++;
@@ -176,6 +193,26 @@ inline UInt32 hashForMAC(const UInt8* val) {
 			return @"Unknown";
 	}
 	
+}
+
+- (NSString*) getStringForNetType:(networkType)type {
+	switch (type) {
+		case networkTypeUnknown:
+			return @"Unknown";
+		case networkTypeAdHoc:
+			return @"ad-hoc";
+		case networkTypeManaged:
+			return @"managed";
+		case networkTypeTunnel:
+			return @"tunnel";
+		case networkTypeProbe:
+			return @"probe";
+		case networkTypeLucentTunnel:
+			return @"lucent tunnel";
+		default:
+			return @"Unknown";
+			NSLog(@"Invalid net type %i, WTF?", type);
+	}
 }
 
 - (void) refreshView {

@@ -87,6 +87,7 @@ typedef struct WaveNetEntry {
 - (void) setFilterType:(NSString*)filter; 
 - (void) setFilterString:(NSString*)filter;
 - (NSString*) getStringForEncryptionType:(encryptionType)encryption; 
+- (NSString*) getStringForNetType:(networkType)type;
 
 //for sorting
 - (void) sortByColumn:(NSString*)ident order:(bool)ascend;
