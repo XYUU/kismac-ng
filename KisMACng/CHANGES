@@ -1,3 +1,9 @@
+R85: Fix all active attacks after packet reinjection was cancelled or failed
+
+R84: Fix problem when build path contained a space
+
+R83: Fix Default case in search code thanks themacuser
+
 R82:
 Added Export to Google Maps
 

@@ -446,6 +446,7 @@
 }
 
 - (void)busyDone {
+    if (_importOpen == 0) return; //the import controller was already closed!!
     if (--_importOpen > 0) return; //still retains
     
     if (_importController) [NSApp endSheet:[_importController window]];
