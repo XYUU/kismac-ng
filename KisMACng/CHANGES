@@ -1,3 +1,5 @@
+R87: Change InfoPlist.strings.templ back into a text file so that compile.command can update the revision info in the get info string
+
 R86: More search improvements by themacuser
 
 R85: Fix all active attacks after packet reinjection was cancelled or failed
