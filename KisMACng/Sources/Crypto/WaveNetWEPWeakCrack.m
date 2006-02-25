@@ -36,24 +36,8 @@
 
 @implementation WaveNet(WEPWeakCrackExtension)
 
-- (void)performCrackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen {
-    int temp, keyID;
-    enum keyLen len;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    CHECK;
-    
-    temp = [keyidAndLen intValue];
-    
-    keyID = temp & 0xFF;
-    NSParameterAssert(keyID <= 3 && keyID >= 0);
-    len   = (temp >> 8) & 0xFF;
-    NSParameterAssert(len == keyLen104bit || len == keyLen40bit);
-    
-    if (!_ivData[keyID]) RET;
-    if ([_ivData[keyID] count] <= 8) RET; //need at least 8 IVs
-    
-    AirCrackWrapper *a = [[AirCrackWrapper alloc] init];
+- (BOOL)doWeakCrackForLen:(int)len andKeyID:(int)keyID {
+	AirCrackWrapper *a = [[AirCrackWrapper alloc] init];
     
     [a setKeyLen:len];
     [a setKeyID:keyID];
@@ -72,11 +56,36 @@
             [(NSMutableString*)_password appendString:[NSString stringWithFormat:@":%.2X", k[i]]];
 		
 		[a release];
-		SRET;
+		return TRUE;
     }
     
     [a release];
-
+	return FALSE;
+} 
+- (void)performCrackWEPWeakforKeyIDAndLen:(NSNumber*)keyidAndLen {
+    int temp, keyID;
+    enum keyLen len;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    CHECK;
+    
+    temp = [keyidAndLen intValue];
+    
+    keyID = temp & 0xFF;
+    NSParameterAssert(keyID <= 3 && keyID >= 0);
+    len   = (temp >> 8) & 0xFFFFFF;
+    NSParameterAssert(len == keyLen104bit || len == keyLen40bit || len == keyLenAll);
+    
+    if (!_ivData[keyID]) RET;
+    if ([_ivData[keyID] count] <= 8) RET; //need at least 8 IVs
+    
+	if(len == keyLenAll) {
+		if([self doWeakCrackForLen:keyLen40bit andKeyID:keyID]) SRET;
+		if([self doWeakCrackForLen:keyLen104bit andKeyID:keyID]) SRET;
+	} else {
+		if([self doWeakCrackForLen:len andKeyID:keyID]) SRET;
+	}
+ 
     RET;
 }
 

@@ -27,8 +27,9 @@
 #import "WaveNet.h"
 
 enum keyLen {
-    keyLen40bit = 5,
-    keyLen104bit = 13,
+    keyLen40bit		= 5,
+    keyLen104bit	= 13,
+	keyLenAll		= 0xFFFFFF
 };
 
 @interface WaveNet(WEPWeakCrackExtension)

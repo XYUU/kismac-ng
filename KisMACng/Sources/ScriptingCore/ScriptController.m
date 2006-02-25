@@ -345,11 +345,10 @@
 
 - (IBAction)weakSchedulingAttack40And104bit:(id)sender {
     WEPCHECKS;
-    NSAppleEventDescriptor *keyLen = [NSAppleEventDescriptor descriptorWithInt32:5];
+    NSAppleEventDescriptor *keyLen = [NSAppleEventDescriptor descriptorWithInt32:0xFFFFFF];
     
     NSDictionary *args = [NSDictionary dictionaryWithObject:keyLen forKey:[NSString stringWithFormat:@"%d", 'KCKl']];
     [ScriptingEngine selfSendEvent:'KCSc' withArgs:args];
-    [ScriptingEngine selfSendEvent:'KCSc'];
 }
 
 #pragma mark -

@@ -675,7 +675,7 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     if (![p ID:ID]) return YES;
     
     entry = [self findNetwork:ID];
-    if (entry == 0xFFFFFFF) return NO;                          //the object is filtered...
+    if (entry == 0xFFFFFFFF) return NO;                          //the object is filtered...
     
     @synchronized(_idList[entry].net) {
 		[_idList[entry].net parsePacket:p withSound:live];		//add the packet to the network
@@ -692,7 +692,7 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
     if (_dropAll) return YES;
 
     entry = [self findNetwork:[[net objectForKey:@"BSSID"] bytes]];
-    if (entry == 0xFFFFFFF) return NO;                          //the object is filtered...
+    if (entry == 0xFFFFFFFF) return NO;                          //the object is filtered...
     
 	@synchronized(_idList[entry].net) {
 		[_idList[entry].net parseAppleAPIData:net];             //add the data to the network

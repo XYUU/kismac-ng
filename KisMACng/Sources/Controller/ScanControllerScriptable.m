@@ -527,7 +527,7 @@
     if ([_curNet passwordAvailable]) return YES;
     if ([_curNet wep] != encryptionTypeWEP && [_curNet wep] != encryptionTypeWEP40) return NO;
     if ([_curNet uniqueIVs] < 8) return NO;
-    if (keyLen != 13 && keyLen != 5) return NO;
+    if (keyLen != 13 && keyLen != 5 && keyLen != 0xFFFFFF) return NO;
     if (keyID < 0 || keyID > 3) return NO;
     
     int arg = (keyLen << 8) | keyID;

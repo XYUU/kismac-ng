@@ -94,7 +94,7 @@ int safe_write( int fd, void *buf, size_t len )
     keyid  =  0;                /* WEP KeyID            */
     weplen = 13;                /* WEP key length       */
     ffact  =  2;                /* fudge threshold      */
-    nfork  =  1;                /* number of forks      */
+    nfork  =  4;                /* number of forks      */
 
     nb_ivs = 0;
     if (! ( ivbuf = (unsigned char *) malloc( 5 * 256 * 256 * 256 ) ) ) {
