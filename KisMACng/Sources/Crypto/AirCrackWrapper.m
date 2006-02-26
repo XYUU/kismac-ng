@@ -28,6 +28,8 @@
 #import "AirCrackWrapper.h"
 #import "WaveHelper.h"
 #import "ImportController.h"
+#include <sys/types.h>
+#include <sys/sysctl.h>
 
 #import <unistd.h>
 int coeff_attacks[4][N_ATTACKS] =
@@ -94,8 +96,16 @@ int safe_write( int fd, void *buf, size_t len )
     keyid  =  0;                /* WEP KeyID            */
     weplen = 13;                /* WEP key length       */
     ffact  =  2;                /* fudge threshold      */
-    nfork  =  4;                /* number of forks      */
+    nfork  =  1;                /* number of forks      */
 
+    //find number of processors and setup the same number of cracking threads
+    int value;
+    size_t valSize = sizeof(value);
+    if (sysctlbyname ("hw.activecpu", &value, &valSize, NULL, 0) == 0){
+        nfork  =  value;        
+        //NSLog([NSString stringWithFormat:@"Creating %i cracking threads...", nfork]);
+    }
+      
     nb_ivs = 0;
     if (! ( ivbuf = (unsigned char *) malloc( 5 * 256 * 256 * 256 ) ) ) {
         [self release];
@@ -145,7 +155,7 @@ int safe_write( int fd, void *buf, size_t len )
     min = 5 * ( ( (     child ) * nb_ivs ) / nfork );
     max = 5 * ( ( ( 1 + child ) * nb_ivs ) / nfork );
 
-    for( i = 0; i < 256; i++ )
+    for( i = 0; i < 256; i++ ) 
         R[i] = i;
 
 wait_for_master:

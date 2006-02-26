@@ -1,3 +1,7 @@
+R89: Apply multi-thread crack patch.  This version sets 1 thread per cpu instead of just 4
+
+R88: 
+
 R87: Change InfoPlist.strings.templ back into a text file so that compile.command can update the revision info in the get info string
 
 R86: More search improvements by themacuser
