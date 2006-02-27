@@ -163,6 +163,9 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 	
 	NSLog(@"KisMAC startup done. Build from %@. Homedir is %s. NSAppKitVersionNumber: %f", [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__], [[[NSBundle mainBundle] bundlePath] fileSystemRepresentation], NSAppKitVersionNumber);
 	[sets setObject:[[[NSBundle mainBundle] bundlePath] stringByAbbreviatingWithTildeInPath] forKey:@"KisMACHomeDir"];
+	NSLog(@"Registering with Growl");
+    aGrowlController = [[GrowlController alloc] init];
+	[aGrowlController registerGrowl];
 }
 
 #pragma mark -

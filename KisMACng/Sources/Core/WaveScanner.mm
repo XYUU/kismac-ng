@@ -290,6 +290,7 @@ error:
 
 - (bool)stopScanning {
     if (_scanning) {
+		[GrowlController notifyGrowlStopScan];
         _scanning=NO;
         [_scanTimer invalidate];
         _scanTimer = nil;

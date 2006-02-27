@@ -92,6 +92,7 @@
     }
     
     [self updateChannelMenu];
+	[GrowlController notifyGrowlStartScan];
     return YES;
 }
 

@@ -29,6 +29,7 @@
 #import "ImportController.h"
 #import "ScanHierarch.h"
 #import "PrefsController.h"
+#import "GrowlController.h"
 
 typedef enum {
     tabInvalid = -1,
@@ -113,7 +114,8 @@ typedef enum {
     IBOutlet AMRollOverButton   *_scanButton;
     IBOutlet TrafficController  *_trafficController;
     IBOutlet InfoController     *aInfoController;
-    IBOutlet ColoredRowTableView    *aDetailsTable;
+	IBOutlet GrowlController	*aGrowlController;
+	IBOutlet ColoredRowTableView    *aDetailsTable;
     IBOutlet ColoredRowTableView    *_networkTable;
     IBOutlet NSWindow           *_window;
     IBOutlet NSOutlineView      *aOutView;

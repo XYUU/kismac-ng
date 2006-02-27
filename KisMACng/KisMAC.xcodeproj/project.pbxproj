@@ -452,6 +452,10 @@
 		00F9C65106DB37E200E357F0 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C64F06DB37E200E357F0 /* IOKit.framework */; };
 		00FF593E06C630CC006C7F1E /* WaveDriverPrismGT.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF593C06C630CC006C7F1E /* WaveDriverPrismGT.h */; };
 		00FF593F06C630CC006C7F1E /* WaveDriverPrismGT.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */; };
+		6C84335809B28705008F181C /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CEBA4409AEEF6100AEB0B8 /* Growl.framework */; };
+		87CEBA4509AEEF6100AEB0B8 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87CEBA4409AEEF6100AEB0B8 /* Growl.framework */; };
+		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
+		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
 		8D1107280486CEB800E47090 /* KisMAC_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -518,6 +522,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				87CEBA4509AEEF6100AEB0B8 /* Growl.framework in CopyFiles */,
 				00F57BAE06A87EC30035AE2F /* BIGeneric.framework in CopyFiles */,
 				00F57BAF06A87EC30035AE2F /* BIGL.framework in CopyFiles */,
 			);
@@ -822,6 +827,9 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
+		87CEBA4409AEEF6100AEB0B8 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
+		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
+		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* KisMAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KisMAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -848,6 +856,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C84335809B28705008F181C /* Growl.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				00F57AAE06A876EC0035AE2F /* BIGeneric.framework in Frameworks */,
 				00F57AAF06A876EC0035AE2F /* BIGL.framework in Frameworks */,
@@ -1012,6 +1021,8 @@
 				003533AF06A5DD8500AB4577 /* ScanControllerScriptable.m */,
 				003533B006A5DD8500AB4577 /* TrafficController.h */,
 				003533B106A5DD8500AB4577 /* TrafficController.mm */,
+				87CEBA8009AEF03700AEB0B8 /* GrowlController.h */,
+				87CEBA8109AEF03700AEB0B8 /* GrowlController.m */,
 			);
 			name = Controller;
 			path = Sources/Controller;
@@ -1351,6 +1362,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87CEBA4409AEEF6100AEB0B8 /* Growl.framework */,
 				000D3A3807C731D200485FDD /* UnitKit.framework */,
 				00F9C64E06DB37E200E357F0 /* Carbon.framework */,
 				00F9C64F06DB37E200E357F0 /* IOKit.framework */,
@@ -1612,6 +1624,7 @@
 				005B12680730051A00906C36 /* MapControlItem.h in Headers */,
 				0090B7CB07B2A43D005FEEB1 /* WaveStorageController.h in Headers */,
 				00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
+				87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2074,6 +2087,7 @@
 				005B12690730051A00906C36 /* MapControlItem.m in Sources */,
 				0090B7CC07B2A43D005FEEB1 /* WaveStorageController.m in Sources */,
 				00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
+				87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2271,6 +2285,7 @@
 					"$(SRCROOT)/Subprojects/files",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					"$(SRCROOT)/UnitTest",
+					"$(SRCROOT)/Resources",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2318,6 +2333,7 @@
 					"$(SRCROOT)/Subprojects/files",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					"$(SRCROOT)/UnitTest",
+					"$(SRCROOT)/Resources",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -2365,6 +2381,7 @@
 					"$(SRCROOT)/Subprojects/files",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					"$(SRCROOT)/UnitTest",
+					"$(SRCROOT)/Resources",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;

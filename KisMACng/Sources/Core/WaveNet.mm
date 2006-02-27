@@ -632,7 +632,14 @@ int lengthSort(id string1, id string2, void *context)
         if (onlineCapture) { //sound?
             if (_isWep >= encryptionTypeWEP) [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
             else [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"noWEPSound"]] play];
-        }
+			
+			if (_isWep == encryptionTypeUnknown) [GrowlController notifyGrowlProbeRequest:@"" BSSID:_BSSID signal:_curSignal];
+			if (_isWep == encryptionTypeNone) [GrowlController notifyGrowlOpenNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+			if (_isWep == encryptionTypeWEP) [GrowlController notifyGrowlWEPNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+			if (_isWep == encryptionTypeWEP40) [GrowlController notifyGrowlWEPNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+			if (_isWep == encryptionTypeWPA) [GrowlController notifyGrowlWPANetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+			if (_isWep == encryptionTypeLEAP) [GrowlController notifyGrowlLEAPNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+		}
     } else if (onlineCapture && _SSID != nil && ([_date timeIntervalSinceNow] < -120.0)) {
         int lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
         if (lVoice) {

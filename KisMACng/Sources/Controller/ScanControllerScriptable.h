@@ -25,6 +25,7 @@
 #import <Foundation/Foundation.h>
 #import "ScanController.h"
 #import <BIGeneric/BIGeneric.h>
+#import "GrowlController.h"
 
 @interface ScanController(ScriptableAdditions)
 

@@ -27,6 +27,7 @@
 #import <UnitKit/UnitKit.h>
 #import "WavePacket.h"
 #import "ImportController.h"
+#import "GrowlController.h"
 
 enum {
     trafficData,
@@ -106,6 +107,8 @@ struct graphStruct {
     int _avgTime;               // how many seconds are take for average?
 
     ImportController *_im;
+	
+
 }
 
 - (id)initWithID:(int)netID;
