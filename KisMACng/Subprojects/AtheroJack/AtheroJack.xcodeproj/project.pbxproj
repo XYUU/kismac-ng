@@ -347,38 +347,49 @@
 		00AC266C0870A36C00885CB6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Development;
 		};
 		00AC266D0870A36C00885CB6 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Deployment;
 		};
 		00AC266E0870A36C00885CB6 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+			};
+			name = Default;
+		};
+		6C03D88E09B55164005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				MODULE_NAME = de.binaervarianz.driver.AtheroJack;
+				MODULE_VERSION = 1.0.0d1;
+				PRODUCT_NAME = AtheroJack;
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D88F09B55164005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
-			name = Default;
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -388,6 +399,7 @@
 			buildConfigurations = (
 				00AC26680870A36C00885CB6 /* Development */,
 				00AC26690870A36C00885CB6 /* Deployment */,
+				6C03D88E09B55164005B2316 /* Universal */,
 				00AC266A0870A36C00885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -398,6 +410,7 @@
 			buildConfigurations = (
 				00AC266C0870A36C00885CB6 /* Development */,
 				00AC266D0870A36C00885CB6 /* Deployment */,
+				6C03D88F09B55164005B2316 /* Universal */,
 				00AC266E0870A36C00885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;

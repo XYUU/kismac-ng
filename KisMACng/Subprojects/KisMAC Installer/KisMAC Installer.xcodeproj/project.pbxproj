@@ -541,38 +541,65 @@
 		00AC27110871437B00885CB6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Development;
 		};
 		00AC27120871437B00885CB6 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Deployment;
 		};
 		00AC27130871437B00885CB6 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+			};
+			name = Default;
+		};
+		6C03D85409B54FEC005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KisMAC Installer_Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "KisMAC Installer";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D85509B54FEC005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
-			name = Default;
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -582,6 +609,7 @@
 			buildConfigurations = (
 				00AC270D0871437B00885CB6 /* Development */,
 				00AC270E0871437B00885CB6 /* Deployment */,
+				6C03D85409B54FEC005B2316 /* Universal */,
 				00AC270F0871437B00885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -592,6 +620,7 @@
 			buildConfigurations = (
 				00AC27110871437B00885CB6 /* Development */,
 				00AC27120871437B00885CB6 /* Deployment */,
+				6C03D85509B54FEC005B2316 /* Universal */,
 				00AC27130871437B00885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;

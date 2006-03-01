@@ -256,38 +256,51 @@
 		00AC26920871408700885CB6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Development;
 		};
 		00AC26930871408700885CB6 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Deployment;
 		};
 		00AC26940871408700885CB6 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+			};
+			name = Default;
+		};
+		6C03D89609B5519A005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(HOME)/bin";
+				PREBINDING = NO;
+				PRODUCT_NAME = AirPortMenu;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D89709B5519A005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
-			name = Default;
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -297,6 +310,7 @@
 			buildConfigurations = (
 				00AC268E0871408700885CB6 /* Development */,
 				00AC268F0871408700885CB6 /* Deployment */,
+				6C03D89609B5519A005B2316 /* Universal */,
 				00AC26900871408700885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -307,6 +321,7 @@
 			buildConfigurations = (
 				00AC26920871408700885CB6 /* Development */,
 				00AC26930871408700885CB6 /* Deployment */,
+				6C03D89709B5519A005B2316 /* Universal */,
 				00AC26940871408700885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -452,9 +452,9 @@
 		00F9C65106DB37E200E357F0 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C64F06DB37E200E357F0 /* IOKit.framework */; };
 		00FF593E06C630CC006C7F1E /* WaveDriverPrismGT.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF593C06C630CC006C7F1E /* WaveDriverPrismGT.h */; };
 		00FF593F06C630CC006C7F1E /* WaveDriverPrismGT.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */; };
-		6C84335809B28705008F181C /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CEBA4409AEEF6100AEB0B8 /* Growl.framework */; };
+		6C03D77009B547F2005B2316 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
+		6C03D77309B547F6005B2316 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
-		87CEBA4509AEEF6100AEB0B8 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 87CEBA4409AEEF6100AEB0B8 /* Growl.framework */; };
 		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
 		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
 		8D1107280486CEB800E47090 /* KisMAC_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */; };
@@ -523,7 +523,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				87CEBA4509AEEF6100AEB0B8 /* Growl.framework in CopyFiles */,
+				6C03D77309B547F6005B2316 /* Growl.framework in CopyFiles */,
 				00F57BAE06A87EC30035AE2F /* BIGeneric.framework in CopyFiles */,
 				00F57BAF06A87EC30035AE2F /* BIGL.framework in CopyFiles */,
 			);
@@ -828,8 +828,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
+		6C03D76F09B547F2005B2316 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		87CEBA4409AEEF6100AEB0B8 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
 		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
 		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* KisMAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KisMAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -858,7 +858,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C84335809B28705008F181C /* Growl.framework in Frameworks */,
+				6C03D77009B547F2005B2316 /* Growl.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				00F57AAE06A876EC0035AE2F /* BIGeneric.framework in Frameworks */,
 				00F57AAF06A876EC0035AE2F /* BIGL.framework in Frameworks */,
@@ -1365,7 +1365,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				87CEBA4409AEEF6100AEB0B8 /* Growl.framework */,
 				000D3A3807C731D200485FDD /* UnitKit.framework */,
 				00F9C64E06DB37E200E357F0 /* Carbon.framework */,
 				00F9C64F06DB37E200E357F0 /* IOKit.framework */,
@@ -1403,6 +1402,7 @@
 		29B97314FDCFA39411CA2CEA /* KisMAC */ = {
 			isa = PBXGroup;
 			children = (
+				6C03D76F09B547F2005B2316 /* Growl.framework */,
 				6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */,
 				00F57CAB06A8887F0035AE2F /* CHANGES */,
 				00F57CAC06A8887F0035AE2F /* TODO */,
@@ -2514,8 +2514,6 @@
 		00A915970858D6410093943F /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
@@ -2523,12 +2521,7 @@
 		00A915980858D6410093943F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
@@ -2536,11 +2529,99 @@
 		00A915990858D6410093943F /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Default;
+		};
+		6C03D83F09B54F2B005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Subprojects/files",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(SRCROOT)/UnitTest",
+					"$(SRCROOT)/Resources",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_GCC3_PFE_SUPPORT = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = KisMAC;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"-Wall",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D84009B54F2B005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Subprojects/files",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(SRCROOT)/UnitTest",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = "KisMACUnitTest-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = (
+					"-mcpu=G3",
+					"-force_cpusubtype_ALL",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = KisMACUnitTest;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D84109B54F2B005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -2550,6 +2631,7 @@
 			buildConfigurations = (
 				00A9158F0858D6410093943F /* Development */,
 				00A915900858D6410093943F /* Deployment */,
+				6C03D83F09B54F2B005B2316 /* Universal */,
 				00A915910858D6410093943F /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2560,6 +2642,7 @@
 			buildConfigurations = (
 				00A915930858D6410093943F /* Development */,
 				00A915940858D6410093943F /* Deployment */,
+				6C03D84009B54F2B005B2316 /* Universal */,
 				00A915950858D6410093943F /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2570,6 +2653,7 @@
 			buildConfigurations = (
 				00A915970858D6410093943F /* Development */,
 				00A915980858D6410093943F /* Deployment */,
+				6C03D84109B54F2B005B2316 /* Universal */,
 				00A915990858D6410093943F /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;

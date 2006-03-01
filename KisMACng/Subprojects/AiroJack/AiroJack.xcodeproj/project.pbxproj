@@ -358,38 +358,59 @@
 		00AC26A00871410600885CB6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Development;
 		};
 		00AC26A10871410600885CB6 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Deployment;
 		};
 		00AC26A20871410600885CB6 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+			};
+			name = Default;
+		};
+		6C03D89E09B551C9005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LIBRARY_SEARCH_PATHS = "";
+				MODULE_NAME = org.binaervarianz.iokit.AiroJack;
+				MODULE_VERSION = 1.0.0d1;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = AiroJack;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D89F09B551C9005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
-			name = Default;
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -399,6 +420,7 @@
 			buildConfigurations = (
 				00AC269C0871410600885CB6 /* Development */,
 				00AC269D0871410600885CB6 /* Deployment */,
+				6C03D89E09B551C9005B2316 /* Universal */,
 				00AC269E0871410600885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -409,6 +431,7 @@
 			buildConfigurations = (
 				00AC26A00871410600885CB6 /* Development */,
 				00AC26A10871410600885CB6 /* Deployment */,
+				6C03D89F09B551C9005B2316 /* Universal */,
 				00AC26A20871410600885CB6 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;

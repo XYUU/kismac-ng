@@ -1,3 +1,5 @@
+R92: Set -arch back to native to allow compile on ppc without the universal sdk.  This also adds a Universal compile configuration to make it easier to make a universal release
+
 R91: First Intel Commit.  Large number of changes
 
 R90: Add growl notifications.  Requires intalation of growl to use feature.  If grow is not installed, this is not a problem. (themacuser)

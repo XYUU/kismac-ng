@@ -505,38 +505,76 @@
 		00B4DCBC086C6A35009A8F23 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Development;
 		};
 		00B4DCBD086C6A35009A8F23 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(NATIVE_ARCH)";
 			};
 			name = Deployment;
 		};
 		00B4DCBE086C6A35009A8F23 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+			};
+			name = Default;
+		};
+		6C03D86809B55081005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BIGL_Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x10000000,
+				);
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = BIGL;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = NO;
+			};
+			name = Universal;
+		};
+		6C03D86909B55081005B2316 /* Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
-			name = Default;
+			name = Universal;
 		};
 /* End XCBuildConfiguration section */
 
@@ -546,6 +584,7 @@
 			buildConfigurations = (
 				00B4DCB8086C6A35009A8F23 /* Development */,
 				00B4DCB9086C6A35009A8F23 /* Deployment */,
+				6C03D86809B55081005B2316 /* Universal */,
 				00B4DCBA086C6A35009A8F23 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -556,6 +595,7 @@
 			buildConfigurations = (
 				00B4DCBC086C6A35009A8F23 /* Development */,
 				00B4DCBD086C6A35009A8F23 /* Deployment */,
+				6C03D86909B55081005B2316 /* Universal */,
 				00B4DCBE086C6A35009A8F23 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
