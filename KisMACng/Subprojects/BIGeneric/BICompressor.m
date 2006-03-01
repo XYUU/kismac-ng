@@ -29,6 +29,8 @@
 
 - (id)initWithFile:(NSString*)file {
 	UInt32 magic = 'BIGe';
+    
+    magic = CFSwapInt32HostToBig(magic);
 	
 	self = [super init];
 	if (!self) return nil;
@@ -49,8 +51,10 @@
 
 - (bool)addString:(NSString*)dataset {
 	UInt32 size = [dataset length];
+    
+    UInt32 sizeToWrite = CFSwapInt32HostToBig(size);
 	
-	if (gzwrite(_file, &size, sizeof(size)) != sizeof(size)) return NO;
+	if (gzwrite(_file, &sizeToWrite, sizeof(sizeToWrite)) != sizeof(sizeToWrite)) return NO;
 	if (gzwrite(_file, (void*)[dataset UTF8String], size) != size) return NO;
 	
 	return YES;
@@ -59,7 +63,9 @@
 - (bool)addData:(NSData*)dataset {
 	UInt32 size = [dataset length];
 	
-	if (gzwrite(_file, &size, sizeof(size)) != sizeof(size)) return NO;
+    UInt32 sizeToWrite = CFSwapInt32HostToBig(size);
+    
+	if (gzwrite(_file, &sizeToWrite, sizeof(sizeToWrite)) != sizeof(sizeToWrite)) return NO;
 	if (gzwrite(_file, (void*)[dataset bytes], size) != size) return NO;
 	
 	return YES;

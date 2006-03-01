@@ -37,8 +37,11 @@
 #define AR5K_AR5212_INIT_CFG	(					\
 	AR5K_AR5212_CFG_SWTD | AR5K_AR5212_CFG_SWRD		\
 )
-//#define AR5K_AR5212_INIT_CFG	0x00000000
+#else
+//not really sure what we should do here, this is way over my head
+#define AR5K_AR5212_INIT_CFG   0x00000000
 #endif
+
 
 /*
  * Internal RX/TX descriptor structures

@@ -41,19 +41,31 @@ typedef struct WaveSort {
 
 inline UInt32 hashForMAC(const UInt8* val) {
     UInt32 l, j, k;
-    
+#if BYTE_ORDER == BIG_ENDIAN
     //add to hash table
 #ifdef FASTLOOKUP
     memcpy(((char*)&l)+1, val, 3);
     memcpy(((char*)&j)+1, val+3, 3);
-    l = (l ^ j) & 0x00FFFFFF;
+    l = (l ^ j) & 0x00FFFFFF; 
 #else
     memcpy(((char*)&l)+2, val,   2);
     memcpy(((char*)&j)+2, val+2, 2);
     memcpy(((char*)&k)+2, val+4, 2);
     l = (l ^ j ^ k) & 0x0000FFFF;
 #endif
-
+    
+#else
+#ifdef FASTLOOKUP
+    memcpy(((char*)&l), val, 3);
+    memcpy(((char*)&j), val+3, 3);
+    l = (l ^ j) & 0x00FFFFFF; 
+#else
+    memcpy(((char*)&l), val,   2);
+    memcpy(((char*)&j), val+2, 2);
+    memcpy(((char*)&k), val+4, 2);
+    l = (l ^ j ^ k) & 0x0000FFFF;
+#endif
+#endif
     return l;
 }
 

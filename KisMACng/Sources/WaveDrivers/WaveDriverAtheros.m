@@ -91,13 +91,14 @@ enum _operationMode {
     explicitlyLoadedAtheros = YES;
     
     if (![WaveHelper runScript:@"atheros_load.sh"]) return 2;
+    NSLog(@"Finished runnning load script");
 
     for(x = 0; x < 70; x++) {
         [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
-        
+        NSLog(@"Checking to see if driver is alive");
         if ([WaveHelper isServiceAvailable:driverName]) return 0;
     }
-    
+    NSLog(@"Something bad happened");
     return 1;
 }
 

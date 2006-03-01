@@ -29,6 +29,7 @@
 #import "WPA.h"
 #import <openssl/md5.h>
 #import <openssl/sha.h>
+#include <Accelerate/Accelerate.h>
 
 struct clientData {
     UInt8 ptkInput[WPA_NONCE_LENGTH+WPA_NONCE_LENGTH+12];
@@ -46,7 +47,7 @@ typedef struct {
 } SHA1_CTX;
 
 typedef union {
-    vector unsigned int v[5];
+    vUInt32 v[5];
     unsigned int i[5][4];
 } SHA1_CTX_A;
 
@@ -54,47 +55,56 @@ typedef union {
 #pragma mark Macros for SHA1 Altivec optimized
 #pragma mark-
 
+#if defined(__i386__)
+    //not sure what this first one should really be?
+    #define vec_step(a) 8
+    #define vec_add(a, b) _mm_add_epi32(a, b)
+    #define vec_and(a, b) _mm_and_si128(a, b)
+    #define vec_xor(a, b) _mm_xor_si128(a, b)
+    #define vec_or(a, b)  _mm_or_si128(a, b)
+#endif
+
 #define blkA0(i) buf[i].v
 
-#define blkA(i) (buf[i & 15].v = vec_rl(vec_xor(buf[(i + 13) & 15].v, vec_xor(buf[(i + 8) & 15].v, vec_xor(buf[(i + 2) & 15].v, buf[i & 15].v))), one))
+#define blkA(i) (buf[i & 15].v = vL128Rotate(vec_xor(buf[(i + 13) & 15].v, vec_xor(buf[(i + 8) & 15].v, vec_xor(buf[(i + 2) & 15].v, buf[i & 15].v))), one))
 
 /* (R0+R1), R2, R3, R4 are the different operations used in SHA1 */
 #define R0A(v,w,x,y,z,i) \
-	z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA0(i), vec_add(const0, vec_rl(v, five))))); \
-	w = vec_rl(w, thirty);
+       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA0(i), vec_add(const0, vL128Rotate(v, five))))); \
+       w = vL128Rotate(w, thirty);
 #define R1A(v,w,x,y,z,i) \
-	z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA(i), vec_add(const0, vec_rl(v, five))))); \
-	w = vec_rl(w, thirty);
+       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA(i), vec_add(const0, vL128Rotate(v, five))))); \
+       w = vL128Rotate(w, thirty);
 #define R2A(v,w,x,y,z,i) \
-        z = vec_add(z, vec_add((vec_xor(w, vec_xor(x, y))), vec_add(blkA(i), vec_add(const2, vec_rl(v, five))))); \
-        w = vec_rl(w, thirty);
+        z = vec_add(z, vec_add((vec_xor(w, vec_xor(x, y))), vec_add(blkA(i), vec_add(const2, vL128Rotate(v, five))))); \
+        w = vL128Rotate(w, thirty);
 #define R3A(v,w,x,y,z,i) \
-	z = vec_add(z, vec_add(vec_or(vec_and(vec_or(w, x), y), vec_and(w, x)), vec_add(blkA(i), vec_add(const3, vec_rl(v, five))))); \
-	w = vec_rl(w, thirty);
+       z = vec_add(z, vec_add(vec_or(vec_and(vec_or(w, x), y), vec_and(w, x)), vec_add(blkA(i), vec_add(const3, vL128Rotate(v, five))))); \
+       w = vL128Rotate(w, thirty);
 #define R4A(v,w,x,y,z,i) \
-	z = vec_add(z, vec_add((vec_xor(vec_xor(w,x), y)), vec_add(blkA(i), vec_add(const4, vec_rl(v, five))))); \
-	w = vec_rl(w, thirty);
+       z = vec_add(z, vec_add((vec_xor(vec_xor(w,x), y)), vec_add(blkA(i), vec_add(const4, vL128Rotate(v, five))))); \
+       w = vL128Rotate(w, thirty);
 
 #pragma mark-
 #pragma mark SHA1 functions
 #pragma mark-
 
-inline void SHA1TransformAltivec(vector unsigned int state[5], unsigned long buffer[4][16]) {
+inline void SHA1TransformAltivec(vUInt32 state[5], unsigned long buffer[4][16]) {
         union vec {
-            UInt32 scalars[ vec_step( vector unsigned int ) ];
-            vector unsigned int v;
+            UInt32 scalars[ vec_step(vUInt32) ];
+            vUInt32 v;
         };
         union vec buf[16];
-        vector unsigned int  a, b, c, d, e, const0, const2, const3, const4, thirty, five, one;
+        vUInt32  a, b, c, d, e, const0, const2, const3, const4, thirty, five, one;
         int i;
         
-        const0 = (vector unsigned int)(0x5A827999);
-        const2 = (vector unsigned int)(0x6ED9EBA1);
-        const3 = (vector unsigned int)(0x8F1BBCDC);
-        const4 = (vector unsigned int)(0xCA62C1D6);
-        thirty = (vector unsigned int)(30);
-        five   = (vector unsigned int)(5);
-        one    = (vector unsigned int)(1);
+        const0 = (vUInt32){(0x5A827999)};
+        const2 = (vUInt32){(0x6ED9EBA1)};
+        const3 = (vUInt32){(0x8F1BBCDC)};
+        const4 = (vUInt32){(0xCA62C1D6)};
+        thirty = (vUInt32){(30)};
+        five   = (vUInt32){(5)};
+        one    = (vUInt32){(1)};
         
         for (i = 0; i < 16; i++) {
             buf[i].scalars[0] = buffer[0][i];
@@ -142,12 +152,12 @@ inline void SHA1TransformAltivec(vector unsigned int state[5], unsigned long buf
 
 /* SHA1InitAndUpdateFistSmall64 - Initialize new context And fillup 64*/
 inline void SHA1InitWithStatic64Altivec(SHA1_CTX_A* state, unsigned long buffer[4][16]) {
-	state->v[0] = (vector unsigned int)(0x67452301);
-	state->v[1] = (vector unsigned int)(0xEFCDAB89);
-	state->v[2] = (vector unsigned int)(0x98BADCFE);
-	state->v[3] = (vector unsigned int)(0x10325476);
-	state->v[4] = (vector unsigned int)(0xC3D2E1F0);
-        SHA1TransformAltivec(state->v, buffer);
+	state->v[0] = (vUInt32){(0x67452301)};
+    state->v[1] = (vUInt32){(0xEFCDAB89)};
+    state->v[2] = (vUInt32){(0x98BADCFE)};
+    state->v[3] = (vUInt32){(0x10325476)};
+    state->v[4] = (vUInt32){(0xC3D2E1F0)};
+    SHA1TransformAltivec(state->v, buffer);
 }
 
 unsigned long altivec20ByteBuffer[4][16];

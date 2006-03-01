@@ -1044,6 +1044,25 @@ __bswap32(u_int32_t _x)
 //						\
 //    ((reg < 0x4000 || reg >= 0x5000) ? OSReadLittleInt32(ah_sh, reg) :  OSReadBigInt32(ah_sh, reg))
 
+#else
+
+#define OS_REG_WRITE_RED(_reg, _val) do {                                  \
+            *((volatile u_int32_t *)((char*)ah_sh + (_reg))) =     \
+            (_val);                                \
+                OSSynchronizeIO(); \
+        } while (0)
+
+#define OS_REG_READ_RED(_reg) \
+*((volatile u_int32_t *)((char*)ah_sh + (_reg))) 
+
+#define AR5K_REG_WRITE(reg, val) OS_REG_WRITE_RED(reg, val)
+//                             \
+//    ((reg < 0x4000 || reg >= 0x5000) ? OSWriteLittleInt32(ah_sh, reg, val) : OSWriteBigInt32(ah_sh, reg, val))
+
+#define AR5K_REG_READ(reg) OS_REG_READ_RED(reg)
+//                                             \
+//    ((reg < 0x4000 || reg >= 0x5000) ? OSReadLittleInt32(ah_sh, reg) :  OSReadBigInt32(ah_sh, reg))
+
 #endif
 
 

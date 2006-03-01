@@ -932,6 +932,7 @@ int lengthSort(id string1, id string2, void *context)
     curPacketData++;
 	
 	flags = [[info objectForKey:@"capability"] intValue];
+    
 	if (CFBooleanGetValue((CFBooleanRef)[info objectForKey:@"isWPA"])) {
 		wep = encryptionTypeWPA;
 	} else {
@@ -1601,6 +1602,7 @@ typedef int (*SORTFUNC)(id, id, void *);
         error = [scanner tryToInject:self];
         if (!error) {
             [_im terminateWithCode:1];
+            //look here!!!
             break; //we are injecting
         }
         

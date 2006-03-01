@@ -39,7 +39,7 @@
 		return nil;
 	}
 	
-	if (gzread(_file, &magic, sizeof(magic)) != sizeof(magic) || magic != 'BIGe')  {
+	if (gzread(_file, &magic, sizeof(magic)) != sizeof(magic) || CFSwapInt32BigToHost(magic) != 'BIGe')  {
 		NSLog(@"Invalid magic cookie");
 		[self release];
 		return nil;
@@ -53,6 +53,8 @@
 	UInt8* data;
 	NSString *str;
 	if (gzread(_file, &size, sizeof(size)) != sizeof(size)) return nil;
+    
+    size = CFSwapInt32BigToHost(size);
 	
 	if (size & 0x80000000) {
 		NSLog(@"Encoded too large item for this method");
@@ -77,6 +79,8 @@
 	UInt8* data;
 	NSData *str;
 	if (gzread(_file, &size, sizeof(size)) != sizeof(size)) return nil;
+    
+     size = CFSwapInt32BigToHost(size);
 	
 	if (size & 0x80000000) {
 		NSLog(@"Encoded too large item for this method");

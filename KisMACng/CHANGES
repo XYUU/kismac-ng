@@ -1,3 +1,5 @@
+R91: First Intel Commit.  Large number of changes
+
 R90: Add growl notifications.  Requires intalation of growl to use feature.  If grow is not installed, this is not a problem. (themacuser)
 
 R89: Apply multi-thread crack patch.  This version sets 1 thread per cpu instead of just 4

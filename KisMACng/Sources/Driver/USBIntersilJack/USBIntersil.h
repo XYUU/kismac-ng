@@ -52,8 +52,13 @@ private:
 
     IOReturn    _doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
     IOReturn    _doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
-    IOReturn    _getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes = true);
-    IOReturn    _setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes = true);
+#if BYTE_ORDER == BIG_ENDIAN
+        IOReturn    _getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes = true);
+        IOReturn    _setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes = true);
+#else 
+        IOReturn    _getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes = false); 
+        IOReturn    _setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes = false); 
+#endif
     IOReturn    _getValue(UInt16 rid, UInt16* v);
     IOReturn    _setValue(UInt16 rid, UInt16 v);
     IOReturn    _sendFrame(UInt8* data, IOByteCount size);
