@@ -34,10 +34,10 @@ static int AirPortInstances = 0;
     self = [super init];
     if (!self)  return nil;
     
-    if (![WaveHelper isServiceAvailable:"AirPortDriver"] && ![WaveHelper isServiceAvailable:"AirPortPCI"]) {
+    if (![WaveHelper isServiceAvailable:"AirPortDriver"] && ![WaveHelper isServiceAvailable:"AirPortPCI"] && ![WaveHelper isServiceAvailable:"AirPort_Athr5424"]) {
         NSRunCriticalAlertPanel(NSLocalizedString(@"Could not load Airport Driver.", "Error dialog title"),
             NSLocalizedString(@"Could not load Airport Driver. Apple Driver not loaded", "LONG desc with solution"),
-            //@"KisMAC is not able to load the Apple Airport driver, if you killed it by loading the Viha driver. Try restarting KisMAC."
+           // @"KisMAC is not able to load the Apple Airport driver, if you killed it by loading the Viha driver. Try restarting KisMAC."
             OK, Nil, Nil);
         return nil;
     }
@@ -46,7 +46,7 @@ static int AirPortInstances = 0;
         NSRunCriticalAlertPanel(
             NSLocalizedString(@"Could not load Airport Driver.", "Error dialog title"),
             NSLocalizedString(@"Could not load Airport Driver. Apple API gone mad", "LONG desc"),
-            //@"KisMAC was able to find the driver, but the Apple API tells us, it is not there. No idea what this means.", 
+         //   @"KisMAC was able to find the driver, but the Apple API tells us, it is not there. No idea what this means.", 
             OK, Nil, Nil);
         return nil;
     }
@@ -55,7 +55,7 @@ static int AirPortInstances = 0;
         NSRunCriticalAlertPanel(
             NSLocalizedString(@"Could not load Airport Driver.", "Error dialog title"),
             NSLocalizedString(@"Could not load Airport Driver. Attachment error", "LONG desc"),
-            //@"KisMAC could not attach to the Apple Airport Driver.", 
+          //  @"KisMAC could not attach to the Apple Airport Driver.", 
             OK, Nil, Nil);
         return nil;
     }
@@ -89,7 +89,7 @@ static int AirPortInstances = 0;
 #pragma mark -
 
 + (bool) loadBackend {
-    if (!([WaveHelper isServiceAvailable:"AirPortDriver"] || [WaveHelper isServiceAvailable:"AirPortPCI"] || WirelessIsAvailable()==1)) {
+    if (!([WaveHelper isServiceAvailable:"AirPortDriver"] || [WaveHelper isServiceAvailable:"AirPortPCI"] || [WaveHelper isServiceAvailable:"AirPort_Athr5424"] || WirelessIsAvailable()==1)) {
         NSLog(@"Could not find an AirPortCard for PseudoJack.");
         NSRunCriticalAlertPanel(
             NSLocalizedString(@"Could not load Airport Driver.", "Error dialog title"),

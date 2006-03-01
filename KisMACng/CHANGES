@@ -1,3 +1,5 @@
+R94: Fixed Active mode on MacBook Pro (Hopfully) please test
+
 R93: Missed one.  Also changed compile.command to allow us to specify the configuration
 
 R92: Set -arch back to native to allow compile on ppc without the universal sdk.  This also adds a Universal compile configuration to make it easier to make a universal release
