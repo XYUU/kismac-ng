@@ -1,5 +1,7 @@
 #!/bin/bash
 
+configuration=Deployment
+
 cd "`dirname "$0"`"
 
 mkdir "./build/KisMACUnitTest.bundle/Contents/Frameworks" 2>/dev/null
@@ -20,21 +22,21 @@ rm -rf *.framework 2>/dev/null
 cd ..
 
 cd MACJack
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../VihaDriver
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../AtheroJack
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../AiroJack
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../BIGL
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../BIGeneric
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../AirPortMenu
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 cd ../KisMAC\ Installer
-xcodebuild -configuration Deployment
+xcodebuild -configuration $configuration
 
 cd ../..
-xcodebuild -target KisMAC -configuration Deployment
+xcodebuild -target KisMAC -configuration $configuration

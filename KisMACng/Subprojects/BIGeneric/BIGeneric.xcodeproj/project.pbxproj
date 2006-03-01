@@ -564,10 +564,7 @@
 		00B4DCCC086C6B8F009A8F23 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
