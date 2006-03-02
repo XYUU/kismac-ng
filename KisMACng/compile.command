@@ -10,6 +10,10 @@ ln -s "../build/KisMACUnitTest.bundle/Contents/Frameworks" . 2>/dev/null
 tar xjf UnitKit.tbz 2>/dev/null
 cd ..
 
+cd Resources
+tar -xvvzf growl.tgz
+cd ..
+
 val=`svnversion -n .`
 sed -e "s/\\\$Revision.*\\\$/\\\$Revision: $val\\\$/" Resources/Info.plist.templ > Resources/Info.plist
 sed -e "s/\\\$Revision.*\\\$/\\\$Revision: $val\\\$/" Resources/Strings/English.lproj/InfoPlist.strings.templ > Resources/Strings/English.lproj/InfoPlist.strings

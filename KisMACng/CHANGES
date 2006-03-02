@@ -1,3 +1,5 @@
+R95: Hopfully fix the last of the build issues some people are having  (including growl link issues)
+
 R94: Fixed Active mode on MacBook Pro (Hopfully) please test
 
 R93: Missed one.  Also changed compile.command to allow us to specify the configuration
