@@ -1,3 +1,5 @@
+R96: Fix Altivec WPA Wordlist crack on ppc that I broke in R91.  This accelerated wpa crack does not work on intel but I'll leave the code there in case anyone wants to investigate further.  Also added a words / sec status to the wpa crack dialog that I used for benchmarking while debigging this problem.
+
 R95: Hopfully fix the last of the build issues some people are having  (including growl link issues)
 
 R94: Fixed Active mode on MacBook Pro (Hopfully) please test

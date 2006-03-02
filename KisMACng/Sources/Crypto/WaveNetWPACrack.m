@@ -292,7 +292,8 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
 
     ssid = [_SSID cString];
     ssidLength = [_SSID cStringLength];
-    
+  
+    float theTime, prevTime = clock() / (float)CLK_TCK;
     while(![im canceled] && !feof(fptr)) {
         fgets(wrd, 90, fptr);
         i = strlen(wrd) - 1;
@@ -301,8 +302,10 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
         
         words++;
 
-        if (words % 100 == 0) {
-            [im setStatusField:[NSString stringWithFormat:@"%d words tested", words]];
+        if (words % 500 == 0) {
+            theTime =clock() / (float)CLK_TCK;
+            [im setStatusField:[NSString stringWithFormat:@"%d words tested    %.2f/second", words, 500.0 / (theTime - prevTime)]];
+            prevTime = theTime;
         }
 
         if (i < 8 || i > 63) continue; //passwords must be shorter than 63 signs
@@ -347,7 +350,7 @@ inline void fastWP_passwordHash(char *password, const unsigned char *ssid, int s
 	NSParameterAssert(wordlist);
 	
 	[wordlist retain];
-	
+
 	if ([WaveHelper isAltiVecAvailable]) {
 		if ([self crackWPAWithWordlistAltivec:[wordlist stringByExpandingTildeInPath] andImportController:[WaveHelper importController]]) successful = YES;
 	} else {

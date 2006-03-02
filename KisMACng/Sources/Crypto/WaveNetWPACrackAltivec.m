@@ -62,28 +62,30 @@ typedef union {
     #define vec_and(a, b) _mm_and_si128(a, b)
     #define vec_xor(a, b) _mm_xor_si128(a, b)
     #define vec_or(a, b)  _mm_or_si128(a, b)
+//this is not right but at least we can compile it!
+    #define vec_rl(a, b)  vL128Rotate(a, b)
 #endif
 
 #define blkA0(i) buf[i].v
 
-#define blkA(i) (buf[i & 15].v = vL128Rotate(vec_xor(buf[(i + 13) & 15].v, vec_xor(buf[(i + 8) & 15].v, vec_xor(buf[(i + 2) & 15].v, buf[i & 15].v))), one))
+#define blkA(i) (buf[i & 15].v = vec_rl(vec_xor(buf[(i + 13) & 15].v, vec_xor(buf[(i + 8) & 15].v, vec_xor(buf[(i + 2) & 15].v, buf[i & 15].v))), one))
 
 /* (R0+R1), R2, R3, R4 are the different operations used in SHA1 */
 #define R0A(v,w,x,y,z,i) \
-       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA0(i), vec_add(const0, vL128Rotate(v, five))))); \
-       w = vL128Rotate(w, thirty);
+       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA0(i), vec_add(const0, vec_rl(v, five))))); \
+       w = vec_rl(w, thirty);
 #define R1A(v,w,x,y,z,i) \
-       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA(i), vec_add(const0, vL128Rotate(v, five))))); \
-       w = vL128Rotate(w, thirty);
+       z = vec_add(z, vec_add(vec_xor(vec_and(w, vec_xor(x, y)), y), vec_add(blkA(i), vec_add(const0, vec_rl(v, five))))); \
+       w = vec_rl(w, thirty);
 #define R2A(v,w,x,y,z,i) \
-        z = vec_add(z, vec_add((vec_xor(w, vec_xor(x, y))), vec_add(blkA(i), vec_add(const2, vL128Rotate(v, five))))); \
-        w = vL128Rotate(w, thirty);
+        z = vec_add(z, vec_add((vec_xor(w, vec_xor(x, y))), vec_add(blkA(i), vec_add(const2, vec_rl(v, five))))); \
+        w = vec_rl(w, thirty);
 #define R3A(v,w,x,y,z,i) \
-       z = vec_add(z, vec_add(vec_or(vec_and(vec_or(w, x), y), vec_and(w, x)), vec_add(blkA(i), vec_add(const3, vL128Rotate(v, five))))); \
-       w = vL128Rotate(w, thirty);
+       z = vec_add(z, vec_add(vec_or(vec_and(vec_or(w, x), y), vec_and(w, x)), vec_add(blkA(i), vec_add(const3, vec_rl(v, five))))); \
+       w = vec_rl(w, thirty);
 #define R4A(v,w,x,y,z,i) \
-       z = vec_add(z, vec_add((vec_xor(vec_xor(w,x), y)), vec_add(blkA(i), vec_add(const4, vL128Rotate(v, five))))); \
-       w = vL128Rotate(w, thirty);
+       z = vec_add(z, vec_add((vec_xor(vec_xor(w,x), y)), vec_add(blkA(i), vec_add(const4, vec_rl(v, five))))); \
+       w = vec_rl(w, thirty);
 
 #pragma mark-
 #pragma mark SHA1 functions
@@ -342,6 +344,7 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
     ssid = [_SSID cString];
     ssidLength = [_SSID cStringLength];
     
+    float theTime, prevTime = clock() / (float)CLK_TCK;
     do {
         k = 0;
         do {
@@ -354,8 +357,10 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
             
             words++;
 
-            if (words % 100 == 0) {
-                [im setStatusField:[NSString stringWithFormat:@"%d words tested", words]];
+            if (words % 500 == 0) {
+                theTime =clock() / (float)CLK_TCK;
+                [im setStatusField:[NSString stringWithFormat:@"%d words tested    %.2f/second", words, 500 / (theTime - prevTime)]];
+                prevTime = theTime;
             }
 
             if (i < 8 || i > 63) continue; //passwords must be shorter than 63 signs
