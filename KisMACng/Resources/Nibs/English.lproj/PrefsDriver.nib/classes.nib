@@ -11,10 +11,17 @@
             SUPERCLASS = NSObject; 
         }, 
         {
-            ACTIONS = {selAddDriver = id; selAll = id; selNone = id; selRemoveDriver = id; }; 
+            ACTIONS = {
+                enableAEForever = id; 
+                selAddDriver = id; 
+                selAll = id; 
+                selNone = id; 
+                selRemoveDriver = id; 
+            }; 
             CLASS = PrefsDriver; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                "_aeForever" = NSButton; 
                 "_channelSel" = NSMatrix; 
                 "_driver" = NSPopUpButton; 
                 "_driverTable" = NSTableView; 

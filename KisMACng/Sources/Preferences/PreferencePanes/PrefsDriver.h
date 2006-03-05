@@ -26,6 +26,8 @@
     
     IBOutlet NSMatrix       *_dumpFilter;
     IBOutlet NSTextField    *_dumpDestination;
+    
+    IBOutlet NSButton       *_aeForever;
 }
 
 - (IBAction)selAddDriver:(id)sender;
@@ -33,5 +35,6 @@
 
 - (IBAction)selAll:(id)sender;
 - (IBAction)selNone:(id)sender;
+- (IBAction)enableAEForever:(id)sender;
 
 @end

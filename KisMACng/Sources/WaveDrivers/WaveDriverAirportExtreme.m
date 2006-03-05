@@ -88,48 +88,55 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	BOOL ret;
     int x;
     
-	if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
-    explicitlyLoadedAirportExtremeDriver = YES;
+    NSUserDefaults *defs;
     
-	if (NSAppKitVersionNumber < 824.11) {
-		NSLog(@"MacOS is not 10.4.2! AppKitVersion: %f < 824.11", NSAppKitVersionNumber);
+    defs = [NSUserDefaults standardUserDefaults];
+    if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
+    if (![[defs objectForKey:@"aeForever"] intValue]){
+        //NSLog(@"Loading AE Passive for this session only!");
+        explicitlyLoadedAirportExtremeDriver = YES;
+    
+        if (NSAppKitVersionNumber < 824.11) {
+            NSLog(@"MacOS is not 10.4.2! AppKitVersion: %f < 824.11", NSAppKitVersionNumber);
 		
-		NSRunCriticalAlertPanel(
-			NSLocalizedString(@"Could not enable Monitor Mode for Airport Extreme.", "Error dialog title"),
-			NSLocalizedString(@"Incompatible MacOS version! You will need at least MacOS 10.4.2!.", "Error dialog description"),
-			OK, nil, nil);
+            NSRunCriticalAlertPanel(
+                                NSLocalizedString(@"Could not enable Monitor Mode for Airport Extreme.", "Error dialog title"),
+                                NSLocalizedString(@"Incompatible MacOS version! You will need at least MacOS 10.4.2!.", "Error dialog description"),
+                                OK, nil, nil);
 
-		return 2;
-	}
+            return 2;
+        }
 
-	ret = [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
-	if (!ret) {
-		NSLog(@"WARNING!!! User canceled password dialog for: kextunload");
-		return 2;
-	}
-	[WaveDriverAirportExtreme setMonitorMode:YES];
+        ret = [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
+        if (!ret) {
+            NSLog(@"WARNING!!! User canceled password dialog for: kextunload");
+            return 2;
+        }
+        [WaveDriverAirportExtreme setMonitorMode:YES];
 	
-	for (x=0; x<5; x++) {
-		[NSThread sleep:1.0];
-		[[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
+        for (x=0; x<5; x++) {
+            [NSThread sleep:1.0];
+            [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
 		
-		if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
-    }
-	[[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
-	for (x=0; x<5; x++) {
-		[NSThread sleep:1.0];
-		[[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
-		
-		if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
-    }
+            if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
+        }
+        [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
+        for (x=0; x<5; x++) {
+            [NSThread sleep:1.0];
+            [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
+    
+            if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
+        }
 	
+        [WaveDriverAirportExtreme setMonitorMode:NO];
+    }
 	NSLog(@"Could not enable monitor mode for Airport Extreme.");
 	NSRunCriticalAlertPanel(
 		NSLocalizedString(@"Could not enable Monitor Mode for Airport Extreme.", "Error dialog title"),
-		NSLocalizedString(@"Could not load Monitor Mode for Airport Extreme. Drivers were not found.", "Error dialog description"),
+		NSLocalizedString(@"Could not load Monitor Mode for Airport Extreme. Drivers were not found.  If you just enabled Monitor Mode permanently, you must reboot.", "Error dialog description"),
 		OK, nil, nil);
 	
-	[WaveDriverAirportExtreme setMonitorMode:NO];
+	
 	
 	return 2;
 }
