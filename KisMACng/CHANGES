@@ -1,3 +1,5 @@
+R98: ASCII values below 32 are not valid in XML.  Fixes Google Earth Export.  Also use UTF-8 cString since that is what our encoding claims to be.
+
 R97: Add option to enable Airport Extreme Monitor Mode forever
 
 R96: Fix Altivec WPA Wordlist crack on ppc that I broke in R91.  This accelerated wpa crack does not work on intel but I'll leave the code there in case anyone wants to investigate further.  Also added a words / sec status to the wpa crack dialog that I used for benchmarking while debigging this problem.

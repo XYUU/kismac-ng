@@ -623,9 +623,10 @@
 		
         if (sscanf([[net latitude] cString], "%f%c", &f, &c)==2) lat = f * (c == 'N' ? 1 : -1);		
         if (sscanf([[net longitude] cString], "%f%c", &f, &c)==2) lon = f * (c == 'E' ? 1 : -1);
-		strcpy(netname,[[net SSID] cString]);
+		strcpy(netname,[[net SSID] cStringUsingEncoding: NSUTF8StringEncoding]);
 		
 		// now escape any ampersands or < or >...
+        // also, ascii chars below ascii value 32 are not valid in xml so skip them
 		
 		netesc[0]='\0';
 		
@@ -641,7 +642,13 @@
 					strcat(netesc,"&gt;");
 					break;
 				default:
-					strncat(netesc,netname+j,1);
+                    if (netname[j] < 32) {
+                        NSLog(@"KML Export: Invalid character found, skipping.");
+                    }
+                    else {
+                         strncat(netesc,netname+j,1);
+                    }
+
 			}
 		}
 		strcpy(netname,netesc);
