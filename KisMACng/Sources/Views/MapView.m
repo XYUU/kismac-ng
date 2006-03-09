@@ -37,6 +37,8 @@
 #import "WayPoint.h"
 #import "Trace.h"
 
+#define ZOOMFACT 1.5
+
 @implementation MapView
 
 - (void)awakeFromNib {
@@ -79,6 +81,11 @@
     
     [self setNeedsDisplay:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateGPSStatus:) name:KisMACGPSStatusChanged object:nil];
+	
+	[self loadFromFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/world.kismap"]];
+	_zoomFact = 1.0 / (ZOOMFACT * ZOOMFACT * ZOOMFACT * ZOOMFACT);
+	[self _alignNetworks];
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark -
@@ -138,27 +145,11 @@
     NSDictionary *wp;
     int i;
     NSData* data;
-    NSImage* img;
+	NSDictionary* settings;
+    NSImage* img = Nil;
     waypoint wpoint;
     
-    NS_DURING
-        img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.pdf"]];
-        if (!img) {
-            //fall back
-            img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.png"]];
-            if (!img) {
-                NSLog(@"Invalid KisMAP file");
-                NS_VALUERETURN(NO, BOOL);
-            }
-        }
-        [self setMap:img];
-        [img release];
-    NS_HANDLER
-        NSLog(@"Could not open Image file from KisMAP bundle!");
-        return NO;
-    NS_ENDHANDLER
-    
-    NS_DURING
+	NS_DURING
         data = [NSData dataWithContentsOfFile:[mapName stringByAppendingPathComponent:@"waypoints.plist"]];
         wps = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&error];
     NS_HANDLER
@@ -171,6 +162,29 @@
         return NO; 
     }
     
+	NS_DURING
+		settings = [wps objectAtIndex:2];
+		if ([settings objectForKey:@"fileName"]) {
+			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:[[wps objectAtIndex:2] objectForKey:@"fileName"]]];
+        } 
+		if (!img) {
+			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.pdf"]];
+		}
+		if (!img) {
+			//fall back
+			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.png"]];
+		}
+		if (!img) {
+			NSLog(@"Invalid KisMAP file");
+			NS_VALUERETURN(NO, BOOL);
+		}
+        [self setMap:img];
+        [img release];
+    NS_HANDLER
+        NSLog(@"Could not open Image file from KisMAP bundle!");
+        return NO;
+    NS_ENDHANDLER
+	
     for (i=1;i<=2;i++) {
         wp = [wps objectAtIndex:i-1];
         
@@ -466,8 +480,6 @@
 		[[WaveHelper mainWindow] invalidateCursorRectsForView:self];	
 	}
 }
-
-#define ZOOMFACT 1.5
 
 - (IBAction)zoomIn:(id)sender {
     if (_zoomFact > 20) {

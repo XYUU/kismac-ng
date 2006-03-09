@@ -34,6 +34,7 @@
 #import "../WaveDrivers/WaveDriver.h"
 #import "ScriptController.h"
 #import "SpinChannel.h"
+#import "MapView.h"
 #import <sys/sysctl.h>
 #import <BIGeneric/BIGeneric.h>
 #import <BIGL/BIGL.h>

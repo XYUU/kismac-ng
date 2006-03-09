@@ -199,6 +199,8 @@
 		0035349C06A5DD8500AB4577 /* WayPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0035342506A5DD8500AB4577 /* WayPoint.m */; };
 		00412E690826587C00E757BC /* viha_load.sh in Resources */ = {isa = PBXBuildFile; fileRef = 00412E680826587C00E757BC /* viha_load.sh */; };
 		00412E6A0826587C00E757BC /* viha_load.sh in Resources */ = {isa = PBXBuildFile; fileRef = 00412E680826587C00E757BC /* viha_load.sh */; };
+		0042E7A609C0C8B600183F90 /* world.kismap in Resources */ = {isa = PBXBuildFile; fileRef = 0042E7A209C0C8B600183F90 /* world.kismap */; };
+		0042E7A709C0C8B600183F90 /* world.kismap in Resources */ = {isa = PBXBuildFile; fileRef = 0042E7A209C0C8B600183F90 /* world.kismap */; };
 		005B12680730051A00906C36 /* MapControlItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 005B12660730051A00906C36 /* MapControlItem.h */; };
 		005B12690730051A00906C36 /* MapControlItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B12670730051A00906C36 /* MapControlItem.m */; };
 		005E817206FDCFF20016F5E7 /* MapDownload.h in Headers */ = {isa = PBXBuildFile; fileRef = 005E817006FDCFF20016F5E7 /* MapDownload.h */; };
@@ -720,6 +722,7 @@
 		0035342406A5DD8500AB4577 /* WayPoint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WayPoint.h; sourceTree = "<group>"; };
 		0035342506A5DD8500AB4577 /* WayPoint.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WayPoint.m; sourceTree = "<group>"; };
 		00412E680826587C00E757BC /* viha_load.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = viha_load.sh; sourceTree = "<group>"; };
+		0042E7A209C0C8B600183F90 /* world.kismap */ = {isa = PBXFileReference; lastKnownFileType = folder; name = world.kismap; path = Resources/Map/world.kismap; sourceTree = "<group>"; };
 		0054920D08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/Crack.nib; sourceTree = "<group>"; };
 		0054920E08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/CrashReporter.nib; sourceTree = "<group>"; };
 		0054920F08E6E4C900307083 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/DecryptDialog.nib; sourceTree = "<group>"; };
@@ -1365,6 +1368,8 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C03D76F09B547F2005B2316 /* Growl.framework */,
+				6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */,
 				000D3A3807C731D200485FDD /* UnitKit.framework */,
 				00F9C64E06DB37E200E357F0 /* Carbon.framework */,
 				00F9C64F06DB37E200E357F0 /* IOKit.framework */,
@@ -1402,8 +1407,6 @@
 		29B97314FDCFA39411CA2CEA /* KisMAC */ = {
 			isa = PBXGroup;
 			children = (
-				6C03D76F09B547F2005B2316 /* Growl.framework */,
-				6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */,
 				00F57CAB06A8887F0035AE2F /* CHANGES */,
 				00F57CAC06A8887F0035AE2F /* TODO */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -1427,6 +1430,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0042E7A209C0C8B600183F90 /* world.kismap */,
 				0073142C06AC4B3C007FD51E /* Drivers */,
 				0035330306A5DD5700AB4577 /* Buttons */,
 				0035331206A5DD5700AB4577 /* CachedViews */,
@@ -1798,6 +1802,7 @@
 				008ACB1807C38ADF00A76ADA /* vendor.db in Resources */,
 				00A3EB170824E448003CD96A /* AirPortMenu in Resources */,
 				00412E690826587C00E757BC /* viha_load.sh in Resources */,
+				0042E7A709C0C8B600183F90 /* world.kismap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1901,6 +1906,7 @@
 				002F1F17070071F4004F5FEF /* KisMACHelp in Resources */,
 				00A3EB180824E448003CD96A /* AirPortMenu in Resources */,
 				00412E6A0826587C00E757BC /* viha_load.sh in Resources */,
+				0042E7A609C0C8B600183F90 /* world.kismap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
