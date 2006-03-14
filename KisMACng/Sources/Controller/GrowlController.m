@@ -57,7 +57,7 @@
 	notifyWithTitle:@"KisMAC"
 		description:[NSString stringWithFormat:@"Open network found:\nSSID: %@\nBSSID: %@\nSignal: %i\nChannel: %i",SSID,BSSID,signal,channel]
    notificationName:@"Open Network Found"
-		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"NetworkNoEnc"] TIFFRepresentation]]
+		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"growl-noenc"] TIFFRepresentation]]
 		   priority:0
 		   isSticky:NO
 	   clickContext:nil];
@@ -69,7 +69,7 @@
 	notifyWithTitle:@"KisMAC"
 		description:[NSString stringWithFormat:@"WEP network found:\nSSID: %@\nBSSID: %@\nSignal: %i\nChannel: %i",SSID,BSSID,signal,channel]
    notificationName:@"Closed Network Found"
-		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"NetworkWEP"] TIFFRepresentation]]
+		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"growl-wep"] TIFFRepresentation]]
 		   priority:0
 		   isSticky:NO
 	   clickContext:nil];
@@ -81,7 +81,7 @@
 	notifyWithTitle:@"KisMAC"
 		description:[NSString stringWithFormat:@"WPA network found:\nSSID: %@\nBSSID: %@\nSignal: %i\nChannel: %i",SSID,BSSID,signal,channel]
    notificationName:@"Closed Network Found"
-		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"NetworkWPA"] TIFFRepresentation]]
+		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"growl-wpa"] TIFFRepresentation]]
 		   priority:0
 		   isSticky:NO
 	   clickContext:nil];
@@ -104,7 +104,7 @@
 	notifyWithTitle:@"KisMAC"
 		description:[NSString stringWithFormat:@"LEAP network found:\nSSID:%@\nBSSID:%@\nSignal:%i\nChannel:%i",SSID,BSSID,signal,channel]
    notificationName:@"Closed Network Found"
-		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"NetworkLEAP"] TIFFRepresentation]]
+		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"growl-leap"] TIFFRepresentation]]
 		   priority:0
 		   isSticky:NO
 	   clickContext:nil];
@@ -116,7 +116,7 @@
 	notifyWithTitle:@"KisMAC"
 		description:[NSString stringWithFormat:@"Probe Request Recieved:\nMAC: %@\nSignal: %i",BSSID,signal]
    notificationName:@"Probe Request Recieved"
-		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"NetworkUnkEnc"] TIFFRepresentation]]
+		   iconData:[NSData dataWithData:[[NSImage imageNamed:@"growl-probe"] TIFFRepresentation]]
 		   priority:0
 		   isSticky:NO
 	   clickContext:nil];

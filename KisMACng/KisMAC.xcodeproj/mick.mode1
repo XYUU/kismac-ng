@@ -185,48 +185,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>00D563E109C4948100FB787B</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WaveHelper.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>00D563E209C4948100FB787B</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WaveHelper.m</string>
-						<key>_historyCapacity</key>
-						<integer>20</integer>
-						<key>bookmark</key>
-						<string>00D5669009C73D6300FB787B</string>
-						<key>history</key>
-						<array>
-							<string>00D563E309C4948100FB787B</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {750, 698}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 88 750 739 0 0 1280 832 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -299,24 +258,22 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>003533DA06A5DD8500AB4577</string>
-								<string>003533DB06A5DD8500AB4577</string>
-								<string>003533FE06A5DD8500AB4577</string>
+								<string>003533A406A5DD8500AB4577</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
+								<string>0035333206A5DD5700AB4577</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>16</integer>
-									<integer>12</integer>
-									<integer>11</integer>
+									<integer>19</integer>
+									<integer>6</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {279, 681}}</string>
+							<string>{{0, 322}, {279, 681}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -355,7 +312,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PrefsDriver.m</string>
+								<string>GrowlController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -363,11 +320,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PrefsDriver.m</string>
+										<string>GrowlController.m</string>
 										<key>_historyCapacity</key>
 										<integer>20</integer>
 										<key>bookmark</key>
-										<string>00D5668F09C73D6300FB787B</string>
+										<string>00D566B109C74A0700FB787B</string>
 										<key>history</key>
 										<array>
 											<string>00D5633809C47AA400FB787B</string>
@@ -383,11 +340,13 @@
 											<string>00D5662409C733D800FB787B</string>
 											<string>00D5662C09C7343700FB787B</string>
 											<string>00D5662D09C7343700FB787B</string>
-											<string>00D5663909C734DD00FB787B</string>
 											<string>00D5663B09C734DD00FB787B</string>
 											<string>00D5668209C73C9000FB787B</string>
-											<string>00D5668D09C73D6300FB787B</string>
-											<string>00D5663A09C734DD00FB787B</string>
+											<string>00D566A809C74A0700FB787B</string>
+											<string>00D566A909C74A0700FB787B</string>
+											<string>00D566AA09C74A0700FB787B</string>
+											<string>00D566AB09C74A0700FB787B</string>
+											<string>00D566AC09C74A0700FB787B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -416,6 +375,10 @@
 											<string>00D5664009C734DD00FB787B</string>
 											<string>00D5668409C73C9100FB787B</string>
 											<string>00D5668E09C73D6300FB787B</string>
+											<string>00D566AD09C74A0700FB787B</string>
+											<string>00D566AE09C74A0700FB787B</string>
+											<string>00D566AF09C74A0700FB787B</string>
+											<string>00D566B009C74A0700FB787B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -611,7 +574,6 @@
 	<array>
 		<string>00A3E66608242A87003CD96A</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>00D563E109C4948100FB787B</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/mick/openDev/KisMACng/KisMAC.xcodeproj</string>
 	</array>

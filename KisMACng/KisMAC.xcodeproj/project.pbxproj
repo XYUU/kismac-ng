@@ -416,6 +416,16 @@
 		00D4228E07C7BA61000499F1 /* WavePacketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4228D07C7BA61000499F1 /* WavePacketTest.m */; };
 		00D4229707C7BB1C000499F1 /* WaveHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4229607C7BB1C000499F1 /* WaveHelperTest.m */; };
 		00D4229F07C7BB8F000499F1 /* WaveNetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4229E07C7BB8F000499F1 /* WaveNetTest.m */; };
+		00D566B709C74A8200FB787B /* growl-leap.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B209C74A8200FB787B /* growl-leap.png */; };
+		00D566B809C74A8200FB787B /* growl-noenc.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B309C74A8200FB787B /* growl-noenc.png */; };
+		00D566B909C74A8200FB787B /* growl-probe.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B409C74A8200FB787B /* growl-probe.png */; };
+		00D566BA09C74A8200FB787B /* growl-wep.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B509C74A8200FB787B /* growl-wep.png */; };
+		00D566BB09C74A8200FB787B /* growl-wpa.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B609C74A8200FB787B /* growl-wpa.png */; };
+		00D566BC09C74A8200FB787B /* growl-leap.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B209C74A8200FB787B /* growl-leap.png */; };
+		00D566BD09C74A8200FB787B /* growl-noenc.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B309C74A8200FB787B /* growl-noenc.png */; };
+		00D566BE09C74A8200FB787B /* growl-probe.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B409C74A8200FB787B /* growl-probe.png */; };
+		00D566BF09C74A8200FB787B /* growl-wep.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B509C74A8200FB787B /* growl-wep.png */; };
+		00D566C009C74A8200FB787B /* growl-wpa.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D566B609C74A8200FB787B /* growl-wpa.png */; };
 		00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */; };
 		00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */; };
 		00DF456508B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */; };
@@ -788,6 +798,11 @@
 		00D4228D07C7BA61000499F1 /* WavePacketTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WavePacketTest.m; sourceTree = "<group>"; };
 		00D4229607C7BB1C000499F1 /* WaveHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveHelperTest.m; sourceTree = "<group>"; };
 		00D4229E07C7BB8F000499F1 /* WaveNetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveNetTest.m; sourceTree = "<group>"; };
+		00D566B209C74A8200FB787B /* growl-leap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-leap.png"; sourceTree = "<group>"; };
+		00D566B309C74A8200FB787B /* growl-noenc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-noenc.png"; sourceTree = "<group>"; };
+		00D566B409C74A8200FB787B /* growl-probe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-probe.png"; sourceTree = "<group>"; };
+		00D566B509C74A8200FB787B /* growl-wep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wep.png"; sourceTree = "<group>"; };
+		00D566B609C74A8200FB787B /* growl-wpa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa.png"; sourceTree = "<group>"; };
 		00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveDriverAirportExtreme.h; sourceTree = "<group>"; };
 		00DF456208B1E969003F3C7E /* WaveDriverAirportExtreme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveDriverAirportExtreme.m; sourceTree = "<group>"; };
 		00E1426B06E62A44009DC179 /* PointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointView.h; sourceTree = "<group>"; };
@@ -954,6 +969,11 @@
 		0035333206A5DD5700AB4577 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				00D566B209C74A8200FB787B /* growl-leap.png */,
+				00D566B309C74A8200FB787B /* growl-noenc.png */,
+				00D566B409C74A8200FB787B /* growl-probe.png */,
+				00D566B509C74A8200FB787B /* growl-wep.png */,
+				00D566B609C74A8200FB787B /* growl-wpa.png */,
 				00A7F9D206C6D20A00A6BB8F /* devilDocument.icns */,
 				0035333306A5DD5700AB4577 /* ActivityMonitor.icns */,
 				0035333406A5DD5700AB4577 /* devil.icns */,
@@ -1803,6 +1823,11 @@
 				00A3EB170824E448003CD96A /* AirPortMenu in Resources */,
 				00412E690826587C00E757BC /* viha_load.sh in Resources */,
 				0042E7A709C0C8B600183F90 /* world.kismap in Resources */,
+				00D566BC09C74A8200FB787B /* growl-leap.png in Resources */,
+				00D566BD09C74A8200FB787B /* growl-noenc.png in Resources */,
+				00D566BE09C74A8200FB787B /* growl-probe.png in Resources */,
+				00D566BF09C74A8200FB787B /* growl-wep.png in Resources */,
+				00D566C009C74A8200FB787B /* growl-wpa.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1907,6 +1932,11 @@
 				00A3EB180824E448003CD96A /* AirPortMenu in Resources */,
 				00412E6A0826587C00E757BC /* viha_load.sh in Resources */,
 				0042E7A609C0C8B600183F90 /* world.kismap in Resources */,
+				00D566B709C74A8200FB787B /* growl-leap.png in Resources */,
+				00D566B809C74A8200FB787B /* growl-noenc.png in Resources */,
+				00D566B909C74A8200FB787B /* growl-probe.png in Resources */,
+				00D566BA09C74A8200FB787B /* growl-wep.png in Resources */,
+				00D566BB09C74A8200FB787B /* growl-wpa.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

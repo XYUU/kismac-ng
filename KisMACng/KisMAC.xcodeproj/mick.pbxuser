@@ -1482,7 +1482,7 @@
 	00875D1A0708ADB300CACFCB /* WaveHelper.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1268, 10010}}";
-			sepNavSelRange = "{22969, 0}";
+			sepNavSelRange = "{9370, 0}";
 			sepNavVisRect = "{{0, 4028}, {705, 666}}";
 			sepNavWindowFrame = "{{15, 32}, {750, 795}}";
 		};
@@ -2406,7 +2406,7 @@
 		fRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */;
 		name = "GrowlController.m: 107";
 		rLen = 0;
-		rLoc = 3902;
+		rLoc = 3899;
 		rType = 0;
 		vrLen = 1596;
 		vrLoc = 3333;
@@ -2486,7 +2486,7 @@
 		fRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */;
 		name = "GrowlController.m: 119";
 		rLen = 0;
-		rLoc = 4213;
+		rLoc = 4209;
 		rType = 0;
 		vrLen = 1579;
 		vrLoc = 0;
@@ -3802,7 +3802,7 @@
 		fRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */;
 		name = "GrowlController.m: 120";
 		rLen = 0;
-		rLoc = 3323;
+		rLoc = 3320;
 		rType = 0;
 		vrLen = 1787;
 		vrLoc = 0;
@@ -4097,6 +4097,101 @@
 		vrLen = 2026;
 		vrLoc = 8885;
 	};
+	00D5669509C7492300FB787B /* leap.png */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = image.png;
+		name = leap.png;
+		path = /Users/mick/openDev/KisMACng/Resources/Icons/leap.png;
+		sourceTree = "<absolute>";
+	};
+	00D566A809C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 003533DF06A5DD8500AB4577 /* PrefsDriver.m */;
+		name = "PrefsDriver.m: 310";
+		rLen = 0;
+		rLoc = 10818;
+		rType = 0;
+		vrLen = 1617;
+		vrLoc = 10162;
+	};
+	00D566A909C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00F57CAC06A8887F0035AE2F /* TODO */;
+		name = "TODO: 26";
+		rLen = 0;
+		rLoc = 422;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 0;
+	};
+	00D566AA09C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00F57CAB06A8887F0035AE2F /* CHANGES */;
+		name = "CHANGES: 1";
+		rLen = 154;
+		rLoc = 6;
+		rType = 0;
+		vrLen = 2603;
+		vrLoc = 0;
+	};
+	00D566AB09C74A0700FB787B /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 00D5669509C7492300FB787B /* leap.png */;
+	};
+	00D566AC09C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */;
+		name = "GrowlController.m: 30";
+		rLen = 0;
+		rLoc = 996;
+		rType = 0;
+		vrLen = 2123;
+		vrLoc = 1432;
+	};
+	00D566AD09C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 003533DF06A5DD8500AB4577 /* PrefsDriver.m */;
+		name = "PrefsDriver.m: 310";
+		rLen = 0;
+		rLoc = 10818;
+		rType = 0;
+		vrLen = 1617;
+		vrLoc = 10162;
+	};
+	00D566AE09C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00F57CAC06A8887F0035AE2F /* TODO */;
+		name = "TODO: 26";
+		rLen = 0;
+		rLoc = 422;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 0;
+	};
+	00D566AF09C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00F57CAB06A8887F0035AE2F /* CHANGES */;
+		name = "CHANGES: 1";
+		rLen = 154;
+		rLoc = 6;
+		rType = 0;
+		vrLen = 2603;
+		vrLoc = 0;
+	};
+	00D566B009C74A0700FB787B /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 00D5669509C7492300FB787B /* leap.png */;
+	};
+	00D566B109C74A0700FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */;
+		name = "GrowlController.m: 119";
+		rLen = 0;
+		rLoc = 4496;
+		rType = 0;
+		vrLen = 2128;
+		vrLoc = 2408;
+	};
 	00DF456108B1E969003F3C7E /* WaveDriverAirportExtreme.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {932, 662}}";
@@ -4211,15 +4306,15 @@
 	00F57CAB06A8887F0035AE2F /* CHANGES */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1850, 5180}}";
-			sepNavSelRange = "{1787, 0}";
+			sepNavSelRange = "{6, 154}";
 			sepNavVisRect = "{{0, 0}, {932, 662}}";
 		};
 	};
 	00F57CAC06A8887F0035AE2F /* TODO */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {939, 658}}";
+			sepNavIntBoundsRect = "{{0, 0}, {932, 714}}";
 			sepNavSelRange = "{422, 0}";
-			sepNavVisRect = "{{0, 0}, {939, 453}}";
+			sepNavVisRect = "{{0, 0}, {932, 662}}";
 		};
 	};
 	00F57CBC06A99A8B0035AE2F /* WaveDriverAirport.m:93 */ = {
@@ -5120,6 +5215,16 @@
 			00D5668E09C73D6300FB787B /* PBXTextBookmark */ = 00D5668E09C73D6300FB787B /* PBXTextBookmark */;
 			00D5668F09C73D6300FB787B /* PBXTextBookmark */ = 00D5668F09C73D6300FB787B /* PBXTextBookmark */;
 			00D5669009C73D6300FB787B /* PBXTextBookmark */ = 00D5669009C73D6300FB787B /* PBXTextBookmark */;
+			00D566A809C74A0700FB787B /* PBXTextBookmark */ = 00D566A809C74A0700FB787B /* PBXTextBookmark */;
+			00D566A909C74A0700FB787B /* PBXTextBookmark */ = 00D566A909C74A0700FB787B /* PBXTextBookmark */;
+			00D566AA09C74A0700FB787B /* PBXTextBookmark */ = 00D566AA09C74A0700FB787B /* PBXTextBookmark */;
+			00D566AB09C74A0700FB787B /* PBXBookmark */ = 00D566AB09C74A0700FB787B /* PBXBookmark */;
+			00D566AC09C74A0700FB787B /* PBXTextBookmark */ = 00D566AC09C74A0700FB787B /* PBXTextBookmark */;
+			00D566AD09C74A0700FB787B /* PBXTextBookmark */ = 00D566AD09C74A0700FB787B /* PBXTextBookmark */;
+			00D566AE09C74A0700FB787B /* PBXTextBookmark */ = 00D566AE09C74A0700FB787B /* PBXTextBookmark */;
+			00D566AF09C74A0700FB787B /* PBXTextBookmark */ = 00D566AF09C74A0700FB787B /* PBXTextBookmark */;
+			00D566B009C74A0700FB787B /* PBXBookmark */ = 00D566B009C74A0700FB787B /* PBXBookmark */;
+			00D566B109C74A0700FB787B /* PBXTextBookmark */ = 00D566B109C74A0700FB787B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 009F5C6006A5C8FF004BB18E /* Source Control */;
 		userBuildSettings = {
@@ -5148,9 +5253,9 @@
 	};
 	87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1094, 2296}}";
-			sepNavSelRange = "{1018, 0}";
-			sepNavVisRect = "{{0, 41}, {932, 662}}";
+			sepNavIntBoundsRect = "{{0, 0}, {932, 2018}}";
+			sepNavSelRange = "{4496, 0}";
+			sepNavVisRect = "{{0, 1018}, {932, 662}}";
 		};
 	};
 	8D1107260486CEB800E47090 /* KisMAC */ = {
