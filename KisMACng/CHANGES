@@ -1,3 +1,16 @@
+R100:  This is a big commit, a present for R100.  
+       -Added Client IP Address detection.  I need to think about ways to detect the ip of the ap if possible.
+              --Fixed bug in existing sourceIPAsString() where we were adding sizeof(WLFrame) to the value instead of to the pointer.
+       -Fixed # 29 columns are no longer selected when resizing.
+       -Moved the search catagory menu into the Search cell where it belongs
+       -Better matching to vendors.db  (some macs in vendors.db are in the form xx:xx and we were not checking against these)
+       -AE Passive mode forever now reads setting directly from the .kext.  This should make sure our settings always reflect what is really set.
+       -Add ae passive forever setting to installer for both install and remove.
+       -Add Licence Info to growl controler files
+       -Maybe other stuff I can't remember
+
+R99: Default Map
+
 R98: ASCII values below 32 are not valid in XML.  Fixes Google Earth Export.  Also use UTF-8 cString since that is what our encoding claims to be.
 
 R97: Add option to enable Airport Extreme Monitor Mode forever

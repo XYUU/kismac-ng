@@ -83,6 +83,11 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	[NSThread sleep:1.0];
 }
 
++ (BOOL)getMonitorMode {
+    NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
+	return [[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue];
+}
+
 // return 0 for success, 1 for error, 2 for self handled error
 + (int) initBackend {
 	BOOL ret;
@@ -303,7 +308,7 @@ typedef struct __avs_80211_1_header {
 		f->signal = af->ssi_noise;
 		f->channel = af->channel;
 		
-		f->length = f->dataLen = header.caplen - headerLength - sizeof(avs_80211_1_header) - 4; //we dont want the fcs
+		f->length = f->dataLen = header.caplen - headerLength - sizeof(avs_80211_1_header) - 4; //we dont want the fcs or do we?
         //NSLog(@"Got packet!!! hLen %u signal: %d  noise: %d channel %u length: %u\n", headerLength, af->ssi_signal, af->ssi_noise, f->channel, f->dataLen );
 		memcpy(frame + sizeof(WLFrame), data + sizeof(avs_80211_1_header) + headerLength, f->dataLen);
         

@@ -70,7 +70,8 @@ enum states {
     IBOutlet NSView     *_configureView;
     
     IBOutlet NSView     *_confirmConfigureView;
-        IBOutlet NSPopUpButton  *_selectedDriver;
+    IBOutlet NSPopUpButton  *_selectedDriver;
+    IBOutlet NSButton   *_aeForeverCheckBox;
         
     IBOutlet NSView     *_installDoneView;
 	IBOutlet NSTextField    *_installationStatus;

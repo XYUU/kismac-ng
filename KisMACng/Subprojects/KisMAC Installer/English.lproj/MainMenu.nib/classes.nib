@@ -6,6 +6,7 @@
             CLASS = InstallController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                "_aeForeverCheckBox" = NSButton; 
                 "_configureView" = NSView; 
                 "_confirmConfigureView" = NSView; 
                 "_installDirectoryView" = NSView; 

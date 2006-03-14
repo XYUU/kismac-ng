@@ -39,6 +39,7 @@
         
         _ID     = [[coder decodeObjectForKey:@"aID"] retain];
         _date   = [[coder decodeObjectForKey:@"aDate"] retain];
+        _IPAddress = [[coder decodeObjectForKey:@"aIPA"] retain];
         
         //WPA stuff
         _sNonce = [[coder decodeObjectForKey:@"sNonce"] retain];
@@ -69,6 +70,7 @@
 	
 	_ID     = [[dict objectForKey:@"ID"] retain];
 	_date   = [[dict objectForKey:@"date"] retain];
+    _IPAddress = [[dict objectForKey:@"IPAddress"] retain];
 	
 	//WPA stuff
 	_sNonce = [[dict objectForKey:@"wpaSNonce"] retain];
@@ -95,6 +97,7 @@
 	
 	[dict setObject:_ID forKey:@"ID"];
 	if (_date) [dict setObject:_date forKey:@"date"];
+    if (_IPAddress) [dict setObject:_IPAddress forKey:@"IPAddress"];
 	
 	if (_sNonce) [dict setObject:_sNonce forKey:@"wpaSNonce"];
 	if (_aNonce) [dict setObject:_aNonce forKey:@"wpaANonce"];
@@ -170,6 +173,11 @@
     _recievedBytes+=[w length];
     _changed = YES;
     
+    if ([w destinationIPAsString] != nil && ![[w destinationIPAsString] isEqualToString:@"0.0.0.0"] ) {
+        _IPAddress = [[w destinationIPAsString] retain];
+     //   NSLog(@"Incoming Packet Client dest IP Found: %@", [w destinationIPAsString]);
+    }
+    
     if (![w toDS]) [self wpaHandler:w]; //dont store it in the AP client
 }
 
@@ -189,6 +197,10 @@
     _curSignal=[w signal];
     _sentBytes+=[w length];    
     _changed = YES;
+    if ([w sourceIPAsString] != nil  && ![[w sourceIPAsString] isEqualToString:@"0.0.0.0"] ) {
+        _IPAddress = [[w sourceIPAsString] retain];
+        //NSLog(@"Outgoing Packet Client source IP Found: %@", [w sourceIPAsString]);
+    }
     
     if (![w fromDS]) [self wpaHandler:w]; //dont store it in the AP client
 }
@@ -217,6 +229,11 @@
 - (NSString *)date {
     if (_date==Nil) return @"";
     else return [NSString stringWithFormat:@"%@", _date]; //return [_date descriptionWithCalendarFormat:@"%H:%M %d-%m-%y" timeZone:nil locale:nil];
+}
+
+- (NSString *)getIPAddress{
+    if (_IPAddress == Nil) return @"unknown";
+    return _IPAddress;
 }
 
 #pragma mark -

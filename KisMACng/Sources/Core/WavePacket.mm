@@ -738,7 +738,7 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     int frameLength = [self bodyLength];
     
     if (isValidPacket(_rawFrame+sizeof(WLFrame), frameLength) == 4) 
-        return [NSString stringWithFormat:@"%u.%u.%u.%u", _rawFrame[20]+sizeof(WLFrame), _rawFrame[21]+sizeof(WLFrame), _rawFrame[22]+sizeof(WLFrame), _rawFrame[23]+sizeof(WLFrame)];
+        return [NSString stringWithFormat:@"%u.%u.%u.%u", _rawFrame[20+sizeof(WLFrame)], _rawFrame[21+sizeof(WLFrame)], _rawFrame[22+sizeof(WLFrame)], _rawFrame[23+sizeof(WLFrame)]];
     else
         return nil;
 }

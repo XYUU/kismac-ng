@@ -1115,6 +1115,12 @@ int lengthSort(id string1, id string2, void *context)
 - (NSDate *)firstSeenDate {
     return aFirstDate;
 }
+- (NSString *)getIP {
+    if (_IPAddress) {
+        return _IPAddress;
+    }
+    return nil;
+}
 - (NSString *)data {
     return [WaveHelper bytesToString: _bytes];
 }
@@ -1495,7 +1501,26 @@ int sentSort(WaveClient* w1, WaveClient* w2, int ascend) {
 int dateSort(WaveClient* w1, WaveClient* w2, int ascend) {
     return ascend * [[w1 rawDate] compare:[w2 rawDate]];
 }
-
+int ipSort(WaveClient* w1, WaveClient* w2, int ascend) {
+    //we break the ips into sections and sort 
+    int i, ndx = 0;
+    NSArray *ip1 = [[w1 getIPAddress] componentsSeparatedByString:@"."];
+    NSArray *ip2 = [[w2 getIPAddress] componentsSeparatedByString:@"."];
+    if ([ip1 count] < 4) {
+        return ascend * NSOrderedDescending;
+    }
+    else if ([ip2 count] < 4) {
+        return ascend * NSOrderedAscending;
+    }
+    while(ndx < 4){
+        i = compValues([[ip1 objectAtIndex:ndx] intValue], [[ip2 objectAtIndex:ndx]intValue]);
+        if (i == NSOrderedSame) {
+            ndx++;
+        }
+        else break;
+    }
+    return ascend * i;
+}
 
 typedef int (*SORTFUNC)(id, id, void *);
 
@@ -1512,6 +1537,7 @@ typedef int (*SORTFUNC)(id, id, void *);
     else if ([ident isEqualToString:@"recieved"]) sf=(SORTFUNC)recievedSort;
     else if ([ident isEqualToString:@"sent"])   sf = (SORTFUNC)sentSort;
     else if ([ident isEqualToString:@"lastseen"]) sf=(SORTFUNC)dateSort;
+    else if ([ident isEqualToString:@"ipa"])      sf=(SORTFUNC)ipSort;
     else {
         NSLog(@"Unknown sorting column. This is a bug and should never happen.");
         return;

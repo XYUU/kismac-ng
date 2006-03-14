@@ -81,6 +81,7 @@ struct graphStruct {
     NSString *_SSID;
 	NSArray  *_SSIDs;
     NSString* _BSSID;
+    NSString* _IPAddress;
     NSString* _vendor;
     NSString* _password;
     NSString* aComment;
@@ -143,6 +144,7 @@ struct graphStruct {
 - (NSDate*)lastSeenDate;
 - (NSString *)firstDate;
 - (NSDate *)firstSeenDate;
+- (NSString *)getIP;
 - (NSString*)data;
 - (NSString*)getVendor;
 - (NSString*)rates;

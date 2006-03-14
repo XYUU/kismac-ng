@@ -29,6 +29,7 @@
 
 @interface WaveClient : NSObject {
     NSString *_ID, *_vendor;
+    NSString * _IPAddress;
     NSDate *_date;
     int _curSignal;
     float _recievedBytes;
@@ -53,6 +54,7 @@
 - (NSString *)sent;
 - (NSString *)vendor;
 - (NSString *)date;
+- (NSString *)getIPAddress;
 
 - (float)recievedBytes;
 - (float)sentBytes;

@@ -155,7 +155,10 @@ static ScanController *_scanController;
         aVendor = [_vendors objectForKey:[MAC substringToIndex:11]];
         if (aVendor == nil) {
             aVendor = [_vendors objectForKey:[MAC substringToIndex:8]];
-            if (aVendor == nil) return @"unknown";
+            if (aVendor == nil) {
+                aVendor = [_vendors objectForKey:[MAC substringToIndex:5]];
+                if (aVendor == nil) return @"unknown";
+            }
         }
     }
     return aVendor;

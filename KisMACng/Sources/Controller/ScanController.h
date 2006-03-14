@@ -150,7 +150,7 @@ typedef enum {
 - (IBAction)showNetHierarch:(id)sender;
 
 - (IBAction)changeSearchValue:(id)sender;
-- (IBAction)changeSearchType:(id)sender; 
+- (IBAction)changeSearchType:(id)sender;
 - (void)checkFilter:(id)sender;
 @end
 

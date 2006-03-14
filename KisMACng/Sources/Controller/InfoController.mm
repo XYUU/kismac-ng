@@ -41,6 +41,7 @@ enum _rowIndexes {
     indexAvgSignal,
     indexType,
     indexEncryption,
+//    indexIPAddress,
     indexEmptyLine3,
     indexPackets,
     indexDataPackets,
@@ -178,6 +179,13 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
                     }
                 }
                  return @"";
+/*  FOR AP IP Detect -- Later
+            case indexIPAddress:
+                if ([_n getIP]) {
+                    NSLog(@"Has IP");
+                    return (col) ? NSLocalizedString(@"IP Address", "table description") : [NSString stringWithFormat:@"%@", [_n getIP]];
+                }
+*/  
             case indexEmptyLine3:
                  return @"";
             case indexPackets:
@@ -213,6 +221,7 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
         else if ([[aTableColumn identifier] isEqualToString:@"signal"]) return [NSString stringWithFormat:@"%i", [lWCl curSignal]];
         else if ([[aTableColumn identifier] isEqualToString:@"sent"]) return [lWCl sent];
         else if ([[aTableColumn identifier] isEqualToString:@"recieved"]) return [lWCl recieved];
+        else if ([[aTableColumn identifier] isEqualToString:@"ipa"]) return [lWCl getIPAddress];
         else return @"unknown column";
     } else if([aTableView isEqualTo:aShortTable]) {
         if ([[aTableColumn identifier] isEqualToString:@"key"]) col=1;
@@ -264,7 +273,7 @@ objectValueForTableColumn:(NSTableColumn *) aTableColumn
    return 0;
 }
 
-- (void)tableView:(NSTableView*)tableView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn {
+- (void)tableView:(NSTableView*)tableView didClickTableColumn:(NSTableColumn *)tableColumn {
     NSString *ident = [tableColumn identifier];
     
     if(![tableView isEqualTo:aClientTable]) return;

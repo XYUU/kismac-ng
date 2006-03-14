@@ -25,6 +25,9 @@
 #import "InstallController.h"
 #import "BLAuthentication.h"
 #import <Carbon/Carbon.h>
+#include <unistd.h>
+
+#define optionsFile @"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"
 
 struct identStruct {
     UInt16 vendor;
@@ -116,7 +119,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 - (BOOL)findKisMACPrefs {
     return [self findFile:@"~/Library/Preferences/de.binaervarianz.kismac.plist"];
 }
-- (BOOL)findTAR {
+- (BOOL)findTar {
 	return [self findFile:@"/usr/bin/tar"];
 }
 
@@ -174,6 +177,21 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     
     a = [BLAuthentication sharedInstance];
     return [a executeCommandSynced:[NSString stringWithFormat:@"%@/permissions.sh", [[NSBundle mainBundle] resourcePath]] withArgs:[NSArray arrayWithObject:targetDir]];
+}
+
+- (void)setMonitorMode:(BOOL)enable {
+    sleep(1);
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", optionsFile, nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0664", optionsFile, nil]];
+    
+    sleep(1);
+	NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
+	[dict setValue:[NSNumber numberWithBool:enable] forKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"];
+	[[NSPropertyListSerialization dataFromPropertyList:dict format:kCFPropertyListXMLFormat_v1_0 errorDescription:nil] writeToFile:optionsFile atomically:NO];
+    
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0644", optionsFile, nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"wheel", optionsFile, nil]];
+    sleep(1);
 }
 
 - (BOOL)removeWirelessDriverPatch {
@@ -333,6 +351,9 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     if ([self isServiceAvailable:"AirPortPCI"]) {
         [_selectedDriver addItemWithTitle:@"Apple Airport Extreme Card, active mode"];
         [[_selectedDriver lastItem] setTag: 2];
+        [_selectedDriver addItemWithTitle:@"Apple Airport Extreme Card, passive mode"];
+        [[_selectedDriver lastItem] setTag: 8];
+
     }
     
     ids = [NSArray arrayWithObjects:@"pccard156,3", @"pccardb,7300", @"pccard156,2", @"pccard126,8000", @"pccard105,7", @"pccard89,1", @"pccard124,1110", @"pccard138,2", @"pccard268,1", @"pccard250,2", @"pccard26f,30b", @"pccard274,1612", @"pccard274,1613", @"pccard274,3301", @"pccard28a,2", @"pccard2d2,1", @"pccardd601,2", @"pccardd601,5", nil];
@@ -365,6 +386,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     int i;
     
     if ([[_selectedDriver selectedItem] tag] == 0) return;
+    if ([_aeForeverCheckBox state]) {
+        [self setMonitorMode:YES];
+        NSLog(@"Enable AE forever!");
+    }
     
     md = [NSMutableDictionary dictionary];
     
@@ -396,6 +421,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     case 7:
         [md setObject:@"PrismGT based Card" forKey:@"deviceName"];
         [md setObject:@"WaveDriverPrismGT" forKey:@"driverID"];
+        break;
+    case 8:
+        [md setObject:@"Apple Airport Extreme card" forKey:@"deviceName"];
+        [md setObject:@"WaveDriverAirportExtreme" forKey:@"driverID"];
         break;
     }    
     
@@ -645,8 +674,12 @@ cancel:
 
 -(void)performRemoval:(id)nilObject {
     NSAutoreleasePool *pool;
-    
     pool = [[NSAutoreleasePool alloc] init];
+    
+    NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] 
+                                                         mutabilityOption:kCFPropertyListMutableContainers
+                                                                   format:NULL errorDescription:Nil];
+    
     
     [_installStatus setStringValue:@"Removing Preferences..."];
     [self removePreferences];
@@ -661,6 +694,12 @@ cancel:
         [self removeWirelessDriverPatch];
         [_progBar incrementBy:1.0];
     }
+        
+	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) {
+        [_installStatus setStringValue:@"Restoring Airport Extreme Monitor Mode to Normal"];
+        [self setMonitorMode:NO];
+    }
+
     
     [_installStatus setStringValue:@"Removal complete..."];
     [_progBar setDoubleValue:[_progBar maxValue]];

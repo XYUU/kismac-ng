@@ -32,4 +32,5 @@
 	UInt8 _channel;
 }
 
++ (BOOL)getMonitorMode;
 @end

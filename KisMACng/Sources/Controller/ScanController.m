@@ -271,7 +271,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     else [self selectNet:[_container netAtIndex:[_networkTable selectedRow]]];
 }
 
-- (void)tableView:(NSTableView*)tableView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn {
+- (void)tableView:(NSTableView*)tableView didClickTableColumn:(NSTableColumn *)tableColumn {
     NSString *ident = [tableColumn identifier];
     
     if(![tableView isEqualTo:_networkTable]) return;
@@ -442,7 +442,14 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 }
 
 - (IBAction)changeSearchType:(id)sender {
-	[_container setFilterType:[sender titleOfSelectedItem]];
+    int ndx;
+	[_container setFilterType:[sender title]];
+    NSMenu * searchMenu = [sender menu];
+    for (ndx=0; ndx < [searchMenu numberOfItems]; ndx++) {
+        [[searchMenu itemAtIndex:ndx] setState:0];
+    }
+    //[searchMenu release];
+    [sender setState:1];
 	[_networkTable reloadData];
 	[(NSView*)_mappingView setNeedsDisplay:YES];
 	[self tableViewSelectionDidChange:nil];

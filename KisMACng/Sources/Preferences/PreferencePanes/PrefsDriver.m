@@ -75,7 +75,7 @@
     int val, startCorrect = 0;
     
     [_frequence     setFloatValue:  [[controller objectForKey:@"frequence"   ] floatValue]];
-    [_aeForever     setState:       [[controller objectForKey:@"aeForever"   ] intValue]]; 
+    [_aeForever     setState:       [WaveDriverAirportExtreme getMonitorMode]]; 
 
     if ([_driverTable numberOfSelectedRows]) {
         d = [self getCurrentSettings];
@@ -157,7 +157,6 @@
     unsigned int x, y;
     
     [controller setObject:[NSNumber numberWithFloat: [_frequence     floatValue]]    forKey:@"frequence"];
-    [controller setObject:[NSNumber numberWithInt:[_aeForever state]] forKey:@"aeForever"];
 
     if (i < 0) return YES;
     d = [[self getCurrentSettings] mutableCopy];
