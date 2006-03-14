@@ -93,7 +93,8 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
         [NSNumber numberWithInt:0], @"DebugMode",
         [NSNumber numberWithInt:2], @"WaveNetAvgTime",
         [NSArray array], @"ActiveDrivers",
-        [NSNumber numberWithBool: NO], @"useWebService",
+        [NSNumber numberWithBool: NO], @"aeForever",
+		[NSNumber numberWithBool: NO], @"useWebService",
         [NSNumber numberWithBool: NO], @"useWebServiceAutomatically",
         @"", @"webServiceAccount",
         nil];

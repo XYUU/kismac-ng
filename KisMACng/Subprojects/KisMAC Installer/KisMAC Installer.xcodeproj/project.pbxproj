@@ -23,6 +23,7 @@
 		00B9E97A0647E715009FEF35 /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = 00B9E9790647E715009FEF35 /* target.png */; };
 		00B9E97F0647F3B8009FEF35 /* BLAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 00B9E97D0647F3B8009FEF35 /* BLAuthentication.h */; };
 		00B9E9800647F3B8009FEF35 /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9E97E0647F3B8009FEF35 /* BLAuthentication.m */; };
+		00D5667109C73AE100FB787B /* airportExtreme.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D5667009C73AE100FB787B /* airportExtreme.png */; };
 		00FC4EEB0647F6C800F2220A /* install.sh in Resources */ = {isa = PBXBuildFile; fileRef = 00FC4EE40647F6C800F2220A /* install.sh */; };
 		00FC4EEC0647F6C800F2220A /* permissions.sh in Resources */ = {isa = PBXBuildFile; fileRef = 00FC4EE50647F6C800F2220A /* permissions.sh */; };
 		00FC4EED0647F6C800F2220A /* remove.sh in Resources */ = {isa = PBXBuildFile; fileRef = 00FC4EE60647F6C800F2220A /* remove.sh */; };
@@ -70,23 +71,6 @@
 		};
 /* End PBXBuildStyle section */
 
-/* Begin PBXContainerItemProxy section */
-		005EEFEC087143AC00423387 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00F9C4B806DA9DCC00E357F0 /* KisMAC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D1107320486CEB800E47090;
-			remoteInfo = KisMAC;
-		};
-		005EEFEE087143AC00423387 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00F9C4B806DA9DCC00E357F0 /* KisMAC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 008AC9C007C3889400A76ADA;
-			remoteInfo = KisMACUnitTest;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		00B9E6090647BA04009FEF35 /* skip_forward_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_forward_active.png; sourceTree = "<group>"; };
 		00B9E60A0647BA04009FEF35 /* skip_forward_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_forward_blue.png; sourceTree = "<group>"; };
@@ -104,7 +88,7 @@
 		00B9E9790647E715009FEF35 /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target.png; sourceTree = "<group>"; };
 		00B9E97D0647F3B8009FEF35 /* BLAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BLAuthentication.h; sourceTree = "<group>"; };
 		00B9E97E0647F3B8009FEF35 /* BLAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BLAuthentication.m; sourceTree = "<group>"; };
-		00F9C4B806DA9DCC00E357F0 /* KisMAC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KisMAC.xcodeproj; path = ../../KisMAC.xcodeproj; sourceTree = SOURCE_ROOT; };
+		00D5667009C73AE100FB787B /* airportExtreme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airportExtreme.png; sourceTree = "<group>"; };
 		00FC4EE40647F6C800F2220A /* install.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		00FC4EE50647F6C800F2220A /* permissions.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = permissions.sh; sourceTree = "<group>"; };
 		00FC4EE60647F6C800F2220A /* remove.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = remove.sh; sourceTree = "<group>"; };
@@ -145,18 +129,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		005EEFE8087143AC00423387 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				005EEFED087143AC00423387 /* KisMAC.app */,
-				005EEFEF087143AC00423387 /* KisMACUnitTest.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		00B9E6080647B9E5009FEF35 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				00D5667009C73AE100FB787B /* airportExtreme.png */,
 				00FC4F72064837B900F2220A /* orinoco.png */,
 				00FC4F700648361200F2220A /* opensource.png */,
 				00FC4F6E0648321500F2220A /* airport.png */,
@@ -233,7 +209,6 @@
 		29B97314FDCFA39411CA2CEA /* KisMAC Installer */ = {
 			isa = PBXGroup;
 			children = (
-				00F9C4B806DA9DCC00E357F0 /* KisMAC.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -347,34 +322,11 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* KisMAC Installer */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 005EEFE8087143AC00423387 /* Products */;
-					ProjectRef = 00F9C4B806DA9DCC00E357F0 /* KisMAC.xcodeproj */;
-				},
-			);
 			targets = (
 				8D1107260486CEB800E47090 /* KisMAC Installer */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		005EEFED087143AC00423387 /* KisMAC.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = KisMAC.app;
-			remoteRef = 005EEFEC087143AC00423387 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		005EEFEF087143AC00423387 /* KisMACUnitTest.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = KisMACUnitTest.bundle;
-			remoteRef = 005EEFEE087143AC00423387 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D1107290486CEB800E47090 /* Resources */ = {
@@ -406,6 +358,7 @@
 				00FC4F6F0648321500F2220A /* airport.png in Resources */,
 				00FC4F710648361200F2220A /* opensource.png in Resources */,
 				00FC4F73064837B900F2220A /* orinoco.png in Resources */,
+				00D5667109C73AE100FB787B /* airportExtreme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

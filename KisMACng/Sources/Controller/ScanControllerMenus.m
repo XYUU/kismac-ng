@@ -369,7 +369,7 @@
     
     wd = [WaveHelper driverWithName:_whichDriver];
     if (!wd) {
-        NSLog(@"Error: invalid driver selected");
+        NSLog(@"Error: invalid driver selected (%@)", _whichDriver);
         return;
     }
     

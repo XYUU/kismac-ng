@@ -2,9 +2,9 @@
         
         File:			BIGL.h
         Program:		binaervarianz OpenGL Framework
-	Author:			Michael Roßberg
-				mick@binaervarianz.de
-	Description:		This framework provides abstract Cocoa methods to quickly draw 2D sprites
+		Author:			Michael Rossberg
+						mick@binaervarianz.de
+		Description:	This framework provides abstract Cocoa methods to quickly draw 2D sprites
                 
         This file is part of BIGL.
 

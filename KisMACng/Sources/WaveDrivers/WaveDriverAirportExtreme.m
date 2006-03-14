@@ -28,7 +28,6 @@
 #import "WaveHelper.h"
 #import <BIGeneric/BIGeneric.h>
 
-#define driverName "AirportExtremeDriver"
 #define devicePath @"wlt1"
 #define optionsFile @"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"
 #define devFile @"/dev/bpf0"
@@ -68,24 +67,49 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	return NO;
 }
 
-+ (void)setMonitorMode:(BOOL)enable {
-	[NSThread sleep:1.0];
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", optionsFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0664", optionsFile, nil]];
++ (BOOL)monitorModeEnabled {
+	NSDictionary *dict;
+	NSData *fileData;
 	
-	[NSThread sleep:1.0];
-	NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
-	[dict setValue:[NSNumber numberWithBool:enable] forKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"];
-	[[NSPropertyListSerialization dataFromPropertyList:dict format:kCFPropertyListXMLFormat_v1_0 errorDescription:nil] writeToFile:optionsFile atomically:NO];
-		
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0644", optionsFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"wheel", optionsFile, nil]];
-	[NSThread sleep:1.0];
+	fileData = [NSData dataWithContentsOfFile:@"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"];
+	dict = [NSPropertyListSerialization propertyListFromData:fileData mutabilityOption:kCFPropertyListImmutable format:NULL errorDescription:Nil];
+	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) return YES;
+	
+	fileData = [NSData dataWithContentsOfFile:@"/System/Library/Extensions/IO80211Family.kext/Contents/PlugIns/AppleAirPortBrcm4311.kext/Contents/Info.plist"];
+	dict = [NSPropertyListSerialization propertyListFromData:fileData mutabilityOption:kCFPropertyListImmutable format:NULL errorDescription:Nil];
+	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) return YES;
+	
+	return NO;
 }
 
-+ (BOOL)getMonitorMode {
-    NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
-	return [[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue];
++ (BOOL)setMonitorMode:(BOOL)enable forFile:(NSString*)fileName {
+	[NSThread sleep:1.0];
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", fileName, nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0664", fileName, nil]];
+	
+	[NSThread sleep:1.0];
+	NSDictionary *dict = [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:fileName] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
+	[dict setValue:[NSNumber numberWithBool:enable] forKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"];
+	[[NSPropertyListSerialization dataFromPropertyList:dict format:kCFPropertyListXMLFormat_v1_0 errorDescription:nil] writeToFile:fileName atomically:NO];
+		
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0644", fileName, nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"wheel", fileName, nil]];
+	
+	return YES;
+}
+
++ (void)setMonitorMode:(BOOL)enable {
+	NSUserDefaults *defs;
+    
+    defs = [NSUserDefaults standardUserDefaults];
+    [WaveDriverAirportExtreme setMonitorMode:enable forFile:@"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"];
+	[WaveDriverAirportExtreme setMonitorMode:enable forFile:@"/System/Library/Extensions/IO80211Family.kext/Contents/PlugIns/AppleAirPortBrcm4311.kext/Contents/Info.plist"];
+	
+	if ([[defs objectForKey:@"aeForever"] boolValue]) {
+		[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.kextcache"]];
+		[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
+		[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.mkext"]];
+	}
 }
 
 // return 0 for success, 1 for error, 2 for self handled error
@@ -97,8 +121,8 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
     
     defs = [NSUserDefaults standardUserDefaults];
     if ([WaveDriverAirportExtreme deviceAvailable]) return 0;
-    if (![[defs objectForKey:@"aeForever"] intValue]){
-        //NSLog(@"Loading AE Passive for this session only!");
+    if (![[defs objectForKey:@"aeForever"] boolValue]){
+        NSLog(@"Loading AE Passive for this session only!");
         explicitlyLoadedAirportExtremeDriver = YES;
     
         if (NSAppKitVersionNumber < 824.11) {
@@ -141,8 +165,6 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 		NSLocalizedString(@"Could not load Monitor Mode for Airport Extreme. Drivers were not found.  If you just enabled Monitor Mode permanently, you must reboot.", "Error dialog description"),
 		OK, nil, nil);
 	
-	
-	
 	return 2;
 }
 
@@ -175,18 +197,18 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 
 + (bool) unloadBackend {
 	BOOL ret;
-    if (!explicitlyLoadedAirportExtremeDriver) return YES;
+    if (explicitlyLoadedAirportExtremeDriver) {
+		ret = [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
+		if (!ret) {
+			NSLog(@"WARNING!!! User canceled password dialog for: kextunload");
+			return NO;
+		}
+		[WaveDriverAirportExtreme setMonitorMode:NO];
+		[[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
 
-	ret = [[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextunload" withArgs:[NSArray arrayWithObjects:@"-b", @"com.apple.iokit.AppleAirPort2", nil]];
-	if (!ret) {
-		NSLog(@"WARNING!!! User canceled password dialog for: kextunload");
-		return NO;
+		[NSThread sleep:1.0];
 	}
-	[WaveDriverAirportExtreme setMonitorMode:NO];
-	[[BLAuthentication sharedInstance] executeCommand:@"/sbin/kextload" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions/AppleAirPort2.kext"]];
 	
-	[NSThread sleep:1.0];
-
 	[[NSTask launchedTaskWithLaunchPath:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
 		arguments:[NSArray arrayWithObject:@"-a"]] waitUntilExit];
 
@@ -200,6 +222,8 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	
 	if (![[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]]) return Nil;
 	if (![[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]]) return Nil;
+	[NSThread sleep:0.5];
+	
 	_device = pcap_open_live([devicePath cString], 3000, 0, 2, err);
 	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]];
 	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]];
@@ -215,17 +239,18 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 #pragma mark -
 
 - (unsigned short) getChannelUnCached {
-	return _channel;
+	return _currentChannel;
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
    [[NSTask launchedTaskWithLaunchPath:@"/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
 		arguments:[NSArray arrayWithObjects:@"-z", [NSString stringWithFormat:@"--channel=%u", newChannel], nil]] waitUntilExit];
-	_channel = newChannel;
+	_currentChannel = newChannel;
     return YES;
 }
 
 - (bool) startCapture:(unsigned short)newChannel {
+	[self setChannel:newChannel];
     return YES;
 }
 

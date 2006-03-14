@@ -102,23 +102,6 @@
 		};
 /* End PBXBuildStyle section */
 
-/* Begin PBXContainerItemProxy section */
-		002E7DA006A869C900C9D931 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 002E7D9906A869BF00C9D931 /* BIGL.xcode */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = BIGL;
-		};
-		00F0FF7306AD4D4A006D4119 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 002E7D9906A869BF00C9D931 /* BIGL.xcode */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = BIGL;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		002E7A7E06A8652700C9D931 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -163,7 +146,6 @@
 		002E7A6A06A8625700C9D931 /* ColoredRowTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ColoredRowTableView.h; sourceTree = "<group>"; };
 		002E7A6B06A8625700C9D931 /* ColoredRowTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ColoredRowTableView.m; sourceTree = "<group>"; };
 		002E7A8106A865D500C9D931 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		002E7D9906A869BF00C9D931 /* BIGL.xcode */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BIGL.xcode; path = ../BIGL/BIGL.xcode; sourceTree = SOURCE_ROOT; };
 		004A8B6A069EC85F00CC8FAB /* AMRollOverButton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AMRollOverButton.h; sourceTree = "<group>"; };
 		004A8B6B069EC85F00CC8FAB /* AMRollOverButton.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AMRollOverButton.m; sourceTree = "<group>"; };
 		004A8B6C069EC85F00CC8FAB /* AMRollOverButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AMRollOverButtonCell.h; sourceTree = "<group>"; };
@@ -238,14 +220,6 @@
 			name = "3rd Party Code";
 			sourceTree = "<group>";
 		};
-		002E7D9E06A869BF00C9D931 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				00F0FF6E06AD4D2C006D4119 /* BIGL.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,7 +231,6 @@
 		0867D691FE84028FC02AAC07 /* BIGeneric */ = {
 			isa = PBXGroup;
 			children = (
-				002E7D9906A869BF00C9D931 /* BIGL.xcode */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				089C1665FE841158C02AAC07 /* Resources */,
@@ -417,7 +390,6 @@
 				WRAPPER_EXTENSION = framework;
 			};
 			dependencies = (
-				002E7DA106A869C900C9D931 /* PBXTargetDependency */,
 			);
 			name = BIGeneric;
 			productInstallPath = "$(HOME)/Library/Frameworks";
@@ -441,27 +413,11 @@
 			mainGroup = 0867D691FE84028FC02AAC07 /* BIGeneric */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 002E7D9E06A869BF00C9D931 /* Products */;
-					ProjectRef = 002E7D9906A869BF00C9D931 /* BIGL.xcode */;
-				},
-			);
 			targets = (
 				8DC2EF4F0486A6940098B216 /* BIGeneric */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		00F0FF6E06AD4D2C006D4119 /* BIGL.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BIGL.framework;
-			remoteRef = 00F0FF7306AD4D4A006D4119 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8DC2EF520486A6940098B216 /* Resources */ = {
@@ -497,14 +453,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		002E7DA106A869C900C9D931 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BIGL (from BIGL.xcode)";
-			targetProxy = 002E7DA006A869C900C9D931 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {

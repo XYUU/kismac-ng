@@ -33,8 +33,9 @@ enum states {
     stateDoInstall = 5,
     stateConfigure = 6,
     stateConfirmConfigure = 7,
-    stateInstallDone = 8,
-    stateInstallCanceled = 9,
+	stateEnableMonitorMode = 8,
+    stateInstallDone = 9,
+    stateInstallCanceled = 10,
     
     stateCleanKisMAC = 97,
     stateRemovingKisMAC = 98,
@@ -42,52 +43,55 @@ enum states {
 };
 
 @interface InstallController : NSWindowController {
-    IBOutlet NSButton   *_next;
-    IBOutlet NSButton   *_prev;
-    IBOutlet NSBox      *_mainBox;
+    IBOutlet NSButton		*_next;
+    IBOutlet NSButton		*_prev;
+    IBOutlet NSBox			*_mainBox;
     
-    IBOutlet NSView     *_welcomeView;
-        IBOutlet NSButtonCell   *_installKisMAC;
-        IBOutlet NSButtonCell   *_removeKisMAC;
+    IBOutlet NSView			*_welcomeView;
+	IBOutlet NSButtonCell   *_installKisMAC;
+	IBOutlet NSButtonCell   *_removeKisMAC;
 
-    IBOutlet NSView     *_licenseView;
+    IBOutlet NSView			*_licenseView;
     
-    IBOutlet NSView     *_removePreferencesView;
-        IBOutlet NSButtonCell   *_keepPrefs;
-        IBOutlet NSButtonCell   *_removePrefs;
+    IBOutlet NSView			*_removePreferencesView;
+	IBOutlet NSButtonCell   *_keepPrefs;
+	IBOutlet NSButtonCell   *_removePrefs;
 
-    IBOutlet NSView     *_installSFPatchView;
-        IBOutlet NSButtonCell   *_installPatch;
-        IBOutlet NSButtonCell   *_skipPatch;
+    IBOutlet NSView			*_installSFPatchView;
+	IBOutlet NSButtonCell   *_installPatch;
+	IBOutlet NSButtonCell   *_skipPatch;
 
-    IBOutlet NSView     *_installDirectoryView;
-        IBOutlet NSTextField    *_targetDirectory;
+    IBOutlet NSView			*_installDirectoryView;
+	IBOutlet NSTextField    *_targetDirectory;
 
-    IBOutlet NSView     *_installView;
-        IBOutlet NSTextField            *_installStatus;
-        IBOutlet NSProgressIndicator    *_progBar;
+    IBOutlet NSView					*_installView;
+	IBOutlet NSTextField            *_installStatus;
+	IBOutlet NSProgressIndicator    *_progBar;
     
-    IBOutlet NSView     *_configureView;
+    IBOutlet NSView					*_configureView;
     
-    IBOutlet NSView     *_confirmConfigureView;
-    IBOutlet NSPopUpButton  *_selectedDriver;
-    IBOutlet NSButton   *_aeForeverCheckBox;
+    IBOutlet NSView					*_confirmConfigureView;
+	IBOutlet NSPopUpButton			*_selectedDriver;
+    
+	IBOutlet NSView					*_enableMonitorModeView;
+	IBOutlet NSButtonCell			*_enableMonitorMode;
+	IBOutlet NSButtonCell			*_skipMonModeInstallation;
+		    
+    IBOutlet NSView					*_installDoneView;
+	IBOutlet NSTextField			*_installationStatus;
+	IBOutlet NSTextField			*_restartWarning;
+    
+    IBOutlet NSView					*_removeKisMACView;
+	IBOutlet NSTextField            *_removeStatus;
+	IBOutlet NSProgressIndicator    *_removeBar;
+    
+    IBOutlet NSView					*_removalDoneView;
+	IBOutlet NSTextField			*_removeRestartWarning;
         
-    IBOutlet NSView     *_installDoneView;
-	IBOutlet NSTextField    *_installationStatus;
-	IBOutlet NSTextField    *_restartWarning;
-    
-    IBOutlet NSView     *_removeKisMACView;
-        IBOutlet NSTextField            *_removeStatus;
-        IBOutlet NSProgressIndicator    *_removeBar;
-    
-    IBOutlet NSView			*_removalDoneView;
-	IBOutlet NSTextField    *_removeRestartWarning;
-        
-    enum states         _currentState;
-    BOOL                _prevEnabled;
-    BOOL                _nextEnabled;
-    BOOL                _patchWasInstalled;
+    enum states						_currentState;
+    BOOL							_prevEnabled;
+    BOOL							_nextEnabled;
+	BOOL							_shallReboot;
 }
 
 -(IBAction)next:(id)sender;

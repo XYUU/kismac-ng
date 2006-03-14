@@ -7,7 +7,7 @@
 //
 
 #import "BIZoomView.h"
-
+#import <BIGL/BIGL.h>
 
 @implementation BIZoomView
 
@@ -49,12 +49,12 @@
     [newV setFrame:[oldV frame]];
     
     if ([oldV respondsToSelector:@selector(dataWithTIFFInsideRect:)]) {
-        v1 = [[NSImage alloc] initWithData:[oldV dataWithTIFFInsideRect:_frame]];
+        v1 = [[NSImage alloc] initWithData:[(BIGLView*)oldV dataWithTIFFInsideRect:_frame]];
     } else {
         v1 = [[NSImage alloc] initWithData:[oldV dataWithPDFInsideRect:_frame]];
     }
     if ([newV respondsToSelector:@selector(dataWithTIFFInsideRect:)]) {
-        v2 = [[NSImage alloc] initWithData:[newV dataWithTIFFInsideRect:_frame]];
+        v2 = [[NSImage alloc] initWithData:[(BIGLView*)newV dataWithTIFFInsideRect:_frame]];
     } else {
         v2 = [[NSImage alloc] initWithData:[newV dataWithPDFInsideRect:_frame]];
     }

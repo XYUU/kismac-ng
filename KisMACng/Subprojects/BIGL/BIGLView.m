@@ -200,7 +200,7 @@ NSString *const BIGLMainViewResized = @"BIGLMainViewResized";
                         bytesPerRow: 0
                         bitsPerPixel: 0];
                         
-    src = imageBuffer;
+    src = (unsigned char*)imageBuffer;
     end = src + bytesPerImage;
     dest = [b bitmapData];
 

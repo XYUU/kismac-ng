@@ -76,6 +76,7 @@
     waypoint w;
     w._long = _x;
     w._lat  = _y;
+	w._elevation = 0.0;
     return w;
 }
 

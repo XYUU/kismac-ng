@@ -25,9 +25,6 @@
 #import "InstallController.h"
 #import "BLAuthentication.h"
 #import <Carbon/Carbon.h>
-#include <unistd.h>
-
-#define optionsFile @"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"
 
 struct identStruct {
     UInt16 vendor;
@@ -87,8 +84,8 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     if (self==Nil) return Nil;
 
     _currentState = stateWelcome;
-    _nextEnabled = YES;
-    
+    _nextEnabled  = YES;
+    _shallReboot  = NO;
 	[NSApp setDelegate:self];
 	
     return self;
@@ -110,6 +107,48 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     m = [NSFileManager defaultManager];
     return [m fileExistsAtPath:[file stringByExpandingTildeInPath]];
 }
+- (BOOL)enableMonitorModeForFile:(NSString*)fileName andEnable:(BOOL)enable {
+	NSDictionary *dict;
+	NSData *data;
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0666", fileName, nil]];
+	
+	[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+	data = [NSData dataWithContentsOfFile:fileName];
+	if(!data) return NO;
+	dict = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
+	if(!dict) return NO;
+	[dict setValue:[NSNumber numberWithBool:enable] forKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"];
+	[[NSPropertyListSerialization dataFromPropertyList:dict format:kCFPropertyListXMLFormat_v1_0 errorDescription:nil] writeToFile:fileName atomically:NO];
+		
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0644", fileName, nil]];
+	return YES;	
+}
+- (BOOL)enableMonitorMode:(BOOL)enable {
+	BOOL ret;
+	_shallReboot = YES;
+	ret = [self enableMonitorModeForFile:@"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist" andEnable:enable] || 
+	[self enableMonitorModeForFile:@"/System/Library/Extensions/IO80211Family.kext/Contents/PlugIns/AppleAirPortBrcm4311.kext/Contents/Info.plist" andEnable:enable];
+	
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.kextcache"]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.mkext"]];
+	
+	return ret;
+}
+- (BOOL)monitorModeEnabled {
+	NSDictionary *dict;
+	NSData *fileData;
+	
+	fileData = [NSData dataWithContentsOfFile:@"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"];
+	dict = [NSPropertyListSerialization propertyListFromData:fileData mutabilityOption:kCFPropertyListImmutable format:NULL errorDescription:Nil];
+	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) return YES;
+	
+	fileData = [NSData dataWithContentsOfFile:@"/System/Library/Extensions/IO80211Family.kext/Contents/PlugIns/AppleAirPortBrcm4311.kext/Contents/Info.plist"];
+	dict = [NSPropertyListSerialization propertyListFromData:fileData mutabilityOption:kCFPropertyListImmutable format:NULL errorDescription:Nil];
+	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) return YES;
+	
+	return NO;
+}
 - (BOOL)findWirelessDriverPatch {
     return [self findFile:@"/System/Library/Extensions/WirelessDriver.kext/bipatch"];
 }
@@ -119,7 +158,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 - (BOOL)findKisMACPrefs {
     return [self findFile:@"~/Library/Preferences/de.binaervarianz.kismac.plist"];
 }
-- (BOOL)findTar {
+- (BOOL)findTAR {
 	return [self findFile:@"/usr/bin/tar"];
 }
 
@@ -179,24 +218,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     return [a executeCommandSynced:[NSString stringWithFormat:@"%@/permissions.sh", [[NSBundle mainBundle] resourcePath]] withArgs:[NSArray arrayWithObject:targetDir]];
 }
 
-- (void)setMonitorMode:(BOOL)enable {
-    sleep(1);
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", optionsFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0664", optionsFile, nil]];
-    
-    sleep(1);
-	NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] mutabilityOption:kCFPropertyListMutableContainers format:NULL errorDescription:Nil];
-	[dict setValue:[NSNumber numberWithBool:enable] forKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"];
-	[[NSPropertyListSerialization dataFromPropertyList:dict format:kCFPropertyListXMLFormat_v1_0 errorDescription:nil] writeToFile:optionsFile atomically:NO];
-    
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0644", optionsFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"wheel", optionsFile, nil]];
-    sleep(1);
-}
-
 - (BOOL)removeWirelessDriverPatch {
     BLAuthentication *a;
     
+	_shallReboot = YES;
     a = [BLAuthentication sharedInstance];
     return [a executeCommandSynced:[NSString stringWithFormat:@"%@/sfpatch_remove.sh", [[NSBundle mainBundle] resourcePath]] withArgs:nil];
 }
@@ -204,6 +229,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 - (BOOL)installWirelessPatchToPath:(NSString*)targetDir {
     BLAuthentication *a;
     
+	_shallReboot = YES;
     a = [BLAuthentication sharedInstance];
     return [a executeCommandSynced:[NSString stringWithFormat:@"%@/sfpatch_install.sh", [[NSBundle mainBundle] resourcePath]] withArgs:[NSArray arrayWithObjects:targetDir, [[NSBundle mainBundle] resourcePath], nil]];
 }
@@ -348,12 +374,11 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         [_selectedDriver addItemWithTitle:@"Apple Airport Card, active mode"];
         [[_selectedDriver lastItem] setTag: 2];
     }
-    if ([self isServiceAvailable:"AirPortPCI"]) {
+    if ([self isServiceAvailable:"AirPortPCI"] || [self isServiceAvailable:"AirPortPCI_MM"]) {
         [_selectedDriver addItemWithTitle:@"Apple Airport Extreme Card, active mode"];
         [[_selectedDriver lastItem] setTag: 2];
-        [_selectedDriver addItemWithTitle:@"Apple Airport Extreme Card, passive mode"];
+		[_selectedDriver addItemWithTitle:@"Apple Airport Extreme Card, passive mode"];
         [[_selectedDriver lastItem] setTag: 8];
-
     }
     
     ids = [NSArray arrayWithObjects:@"pccard156,3", @"pccardb,7300", @"pccard156,2", @"pccard126,8000", @"pccard105,7", @"pccard89,1", @"pccard124,1110", @"pccard138,2", @"pccard268,1", @"pccard250,2", @"pccard26f,30b", @"pccard274,1612", @"pccard274,1613", @"pccard274,3301", @"pccard28a,2", @"pccard2d2,1", @"pccardd601,2", @"pccardd601,5", nil];
@@ -383,13 +408,10 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 - (void)writeDriverSetting {
     NSString *s;
     NSMutableDictionary *md;
+	NSMutableDictionary *md2;
     int i;
     
     if ([[_selectedDriver selectedItem] tag] == 0) return;
-    if ([_aeForeverCheckBox state]) {
-        [self setMonitorMode:YES];
-        NSLog(@"Enable AE forever!");
-    }
     
     md = [NSMutableDictionary dictionary];
     
@@ -422,13 +444,13 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         [md setObject:@"PrismGT based Card" forKey:@"deviceName"];
         [md setObject:@"WaveDriverPrismGT" forKey:@"driverID"];
         break;
-    case 8:
-        [md setObject:@"Apple Airport Extreme card" forKey:@"deviceName"];
+	case 8:
+	    [md setObject:@"Airport Card" forKey:@"deviceName"];
         [md setObject:@"WaveDriverAirportExtreme" forKey:@"driverID"];
         break;
     }    
     
-    [md setObject:@"../DumpLog %y-%m-%d %H:%M" forKey:@"dumpDestination"];
+    [md setObject:@"~/DumpLog %y-%m-%d %H:%M" forKey:@"dumpDestination"];
     [md setObject:[NSNumber numberWithInt:0] forKey:@"dumpFilter"];
     [md setObject:[NSNumber numberWithInt:1] forKey:@"firstChannel"];
     [md setObject:[NSNumber numberWithBool:NO] forKey:@"injectionDevice"];
@@ -441,7 +463,12 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         [md setObject:[NSNumber numberWithBool:NO] forKey:s];
     }
     
-    [[NSDictionary dictionaryWithObject:[NSArray arrayWithObject:md] forKey:@"ActiveDrivers"] writeToFile:[@"~/Library/Preferences/de.binaervarianz.kismac.plist" stringByExpandingTildeInPath] atomically:YES];
+	md2 = [NSMutableDictionary dictionaryWithObject:[NSArray arrayWithObject:md] forKey:@"ActiveDrivers"];
+	if(([_enableMonitorMode state] == NSOnState) && ([_selectedDriver selectedTag] == 8)) {
+		[md2 setValue:[NSNumber numberWithBool:YES] forKey:@"aeForever"];
+	}
+	
+    [md2 writeToFile:[@"~/Library/Preferences/de.binaervarianz.kismac.plist" stringByExpandingTildeInPath] atomically:YES];
 }
 #pragma mark -
 
@@ -459,7 +486,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     switch(_currentState) {
     case stateWelcome:
         if ([_installKisMAC state] == NSOnState) 
-			if (![self findTar]) {
+			if (![self findTAR]) {
 				NSBeginInformationalAlertSheet(@"Unable to find Support Program!", @"OK", Nil, Nil, [self window], self, nil, nil, nil, 
 					@"The KisMAC installer was unable to find /usr/bin/tar. Make sure it exists! The program is part of the MacOS X BSD Subsystem, which is a default part of the operating system.");
 				_currentState = stateWelcome;
@@ -493,29 +520,35 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         break;
     case stateInstallDir:
         if ([self validDir:[_targetDirectory stringValue]])
-            _currentState = stateDoInstall;
+            if ([self findKisMACPrefs])
+				_currentState = stateDoInstall;
+			else
+				_currentState = stateConfigure;
         else
             NSBeginInformationalAlertSheet(@"Invalid Directory", Nil, Nil, Nil, [self window], self, nil, nil, nil, @"The path you have chosen, does either not exist or is not writeable!");
         break;
-    case stateDoInstall:
-        _prevEnabled = NO; //cannot go back to config
-		if ([_progBar doubleValue] == 0) {
-			_currentState = stateInstallCanceled;
-		} else if ([self findKisMACPrefs]) {
-            _currentState = stateInstallDone;
-        } else 
-            _currentState = stateConfigure;
-        break;
-    case stateConfigure:
+	case stateConfigure:
         _prevEnabled = YES;
         _currentState = stateConfirmConfigure;
         break;
     case stateConfirmConfigure:
-        [self writeDriverSetting];
-        _currentState = stateInstallDone;
+        if([_selectedDriver selectedTag] == 8 && ![self monitorModeEnabled])
+			_currentState = stateEnableMonitorMode;
+		else
+			_currentState = stateDoInstall;
+        break;
+	case stateEnableMonitorMode:
+		_currentState = stateDoInstall;
+		break;
+    case stateDoInstall:
+        _prevEnabled = NO; //cannot go back to config
+		if ([_progBar doubleValue] == 0)
+			_currentState = stateInstallCanceled;
+		else
+            _currentState = stateInstallDone;
         break;
     case stateInstallDone:
-        if ([self findWirelessDriverPatch]) [self reboot];
+        if (_shallReboot) [self reboot];
         [NSApp terminate:nil];
         break;
 	case stateInstallCanceled:
@@ -529,7 +562,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         _currentState = stateRemovalDone;
         break;
     case stateRemovalDone:
-        if (_patchWasInstalled) [self reboot];
+        if (_shallReboot) [self reboot];
         [NSApp terminate:nil];
         break;
         
@@ -548,6 +581,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     
     switch(_currentState) {
     case stateLicense:
+		_prevEnabled  = NO;
         _currentState = stateWelcome;
         break;
     case stateRemovePrefs:
@@ -568,18 +602,22 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
             _currentState = stateLicense;
         
         break;
-    case stateDoInstall:
-        break;
     case stateConfigure:
+		_currentState = stateInstallDir;
         break;
     case stateConfirmConfigure:
-        _prevEnabled = NO;
         _currentState = stateConfigure;
         break;
-    case stateInstallDone:
+	case stateEnableMonitorMode:
         _currentState = stateConfirmConfigure;
         break;
+    case stateDoInstall:
+        break;
+	case stateInstallDone:
+		break;
 	case stateInstallCanceled:
+		_prevEnabled  = YES;
+		_currentState = stateWelcome;
 		break;
 		
     default:
@@ -619,6 +657,8 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
     
     pool = [[NSAutoreleasePool alloc] init];
     
+	[self writeDriverSetting];
+		
     if (![self removeKisMACInstallation:[[self getPreviousInstallDir] stringByExpandingTildeInPath]]) goto cancel;
     [_progBar incrementBy:1.0];
         
@@ -648,6 +688,12 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
         if (![self adjustWirelessPatchPermissions]) goto cancel;
         [_progBar incrementBy:1.0];
     }
+	
+	if (![self monitorModeEnabled] && ([_selectedDriver selectedTag] == 8) && ([_enableMonitorMode state] == NSOnState)) {
+		[_installStatus setStringValue:@"Enabling Airport Extreme Monitor Mode..."];
+		[self enableMonitorMode:YES];
+		[_progBar incrementBy:1.0];
+	}
     
     [_installStatus setStringValue:@"Installation complete..."];
     [_progBar setDoubleValue:[_progBar maxValue]];
@@ -674,12 +720,8 @@ cancel:
 
 -(void)performRemoval:(id)nilObject {
     NSAutoreleasePool *pool;
+    
     pool = [[NSAutoreleasePool alloc] init];
-    
-    NSDictionary *dict= [NSPropertyListSerialization propertyListFromData:[NSData dataWithContentsOfFile:optionsFile] 
-                                                         mutabilityOption:kCFPropertyListMutableContainers
-                                                                   format:NULL errorDescription:Nil];
-    
     
     [_installStatus setStringValue:@"Removing Preferences..."];
     [self removePreferences];
@@ -694,13 +736,13 @@ cancel:
         [self removeWirelessDriverPatch];
         [_progBar incrementBy:1.0];
     }
-        
-	if ([[dict valueForKeyPath:@"IOKitPersonalities.Broadcom PCI.APMonitorMode"] boolValue]) {
-        [_installStatus setStringValue:@"Restoring Airport Extreme Monitor Mode to Normal"];
-        [self setMonitorMode:NO];
-    }
-
-    
+ 
+	if([self monitorModeEnabled]) {
+		[_installStatus setStringValue:@"Disabling Airport Extreme Monitor Mode..."];
+		[self enableMonitorMode:NO];
+		[_progBar incrementBy:1.0];
+	}
+   
     [_installStatus setStringValue:@"Removal complete..."];
     [_progBar setDoubleValue:[_progBar maxValue]];
 
@@ -718,6 +760,8 @@ cancel:
     switch(_currentState) {
     case stateWelcome:
         _prevEnabled = NO;
+		[_next setImage:[NSImage imageNamed:@"skip_forward_active"]];
+        [_next setAlternateImage:[NSImage imageNamed:@"skip_forward_blue"]];
         [_mainBox setContentView:_welcomeView];        
         break;
     case stateLicense:
@@ -734,22 +778,6 @@ cancel:
         [_targetDirectory setStringValue:[self getPreviousInstallDir]];
         [_mainBox setContentView:_installDirectoryView];
         break;
-    case stateDoInstall:
-        _prevEnabled = NO;
-        _nextEnabled = NO;
-        numberOfSteps = 4;
-        if ([self findWirelessDriverPatch]) numberOfSteps++;
-        if ([self findWirelessDriver] && ([_installPatch state] == NSOnState)) numberOfSteps+=2;
-        
-        [_progBar setMinValue:0];
-        [_progBar setMaxValue:numberOfSteps];
-        [_progBar setDoubleValue:0.0];
-        [_progBar setUsesThreadedAnimation:YES];
-        [_installStatus setStringValue:@"Removing any old components..."];
-        [_mainBox setContentView:_installView];
-        
-        [NSThread detachNewThreadSelector:@selector(performInstall:) toTarget:self withObject:nil];
-        break;
     case stateConfigure:
         [_mainBox setContentView:_configureView];
         break;
@@ -761,12 +789,32 @@ cancel:
         [self populateDriverBox];
         [_mainBox setContentView:_confirmConfigureView];
         break;
+	case stateEnableMonitorMode:
+		[_mainBox setContentView:_enableMonitorModeView];
+		break;
+    case stateDoInstall:
+        _prevEnabled = NO;
+        _nextEnabled = NO;
+        numberOfSteps = 4;
+        if ([self findWirelessDriverPatch]) numberOfSteps++;
+        if ([self findWirelessDriver] && ([_installPatch state] == NSOnState)) numberOfSteps+=2;
+        if (![self monitorModeEnabled] && ([_selectedDriver selectedTag] == 8) && ([_enableMonitorMode state] == NSOnState)) numberOfSteps++;
+		
+        [_progBar setMinValue:0];
+        [_progBar setMaxValue:numberOfSteps];
+        [_progBar setDoubleValue:0.0];
+        [_progBar setUsesThreadedAnimation:YES];
+        [_installStatus setStringValue:@"Removing any old components..."];
+        [_mainBox setContentView:_installView];
+        
+        [NSThread detachNewThreadSelector:@selector(performInstall:) toTarget:self withObject:nil];
+        break;
     case stateInstallDone:
         [NSApp requestUserAttention:NSInformationalRequest];
         [_next setImage:[NSImage imageNamed:@"stop_active"]];
         [_next setAlternateImage:[NSImage imageNamed:@"stop_blue"]];
         
-        if ([self findWirelessDriverPatch])
+        if (_shallReboot)
             [_restartWarning setStringValue:@"WARNING! Your computer will be rebooted!"];
         else
             [_restartWarning setStringValue:@""];
@@ -774,6 +822,7 @@ cancel:
         [_mainBox setContentView:_installDoneView];
         break;
 	case stateInstallCanceled:
+		_prevEnabled = YES;
 	    [NSApp requestUserAttention:NSInformationalRequest];
         [_next setImage:[NSImage imageNamed:@"stop_active"]];
         [_next setAlternateImage:[NSImage imageNamed:@"stop_blue"]];
@@ -788,20 +837,16 @@ cancel:
         _prevEnabled = NO;
         _nextEnabled = NO;
         numberOfSteps = 2;
-        if ([self findWirelessDriverPatch]) {
-            numberOfSteps++;
-            _patchWasInstalled = YES;
-        } else {
-            _patchWasInstalled = NO;
-        }
-
+        if ([self findWirelessDriverPatch]) numberOfSteps++;
+        if ([self monitorModeEnabled]) numberOfSteps++;
+		
         [_progBar setMinValue:0];
         [_progBar setMaxValue:numberOfSteps];
         [_progBar setDoubleValue:0.0];
         [_progBar setUsesThreadedAnimation:YES];
         [_installStatus setStringValue:@"Removing KisMAC..."];
         [_mainBox setContentView:_removeKisMACView];
-        
+
         [NSThread detachNewThreadSelector:@selector(performRemoval:) toTarget:self withObject:nil];
         break;
     case stateRemovalDone:
@@ -810,15 +855,17 @@ cancel:
         [_next setImage:[NSImage imageNamed:@"stop_active"]];
         [_next setAlternateImage:[NSImage imageNamed:@"stop_blue"]];
         
-        if (!_patchWasInstalled) [_removeRestartWarning setStringValue:@""];
+		if (_shallReboot)
+			[_removeRestartWarning setStringValue:@"WARNING! Your computer will be rebooted!"];
+		else
+			[_removeRestartWarning setStringValue:@""];
+
         [_mainBox setContentView:_removalDoneView];
         break;
     default:
         NSAssert(0, @"Illegal state");
     }
-
 }
-
 
 #pragma mark -
 

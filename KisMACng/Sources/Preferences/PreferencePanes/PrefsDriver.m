@@ -73,9 +73,11 @@
     NSDictionary *d = Nil;
     unsigned int x, y;
     int val, startCorrect = 0;
+	BOOL aeEnabledForever;
     
+	aeEnabledForever = [[controller objectForKey:@"aeForever"] boolValue] && [WaveDriverAirportExtreme monitorModeEnabled];
     [_frequence     setFloatValue:  [[controller objectForKey:@"frequence"   ] floatValue]];
-    [_aeForever     setState:       [WaveDriverAirportExtreme getMonitorMode]]; 
+    [_aeForever     setState:       aeEnabledForever ? NSOnState : NSOffState]; 
 
     if ([_driverTable numberOfSelectedRows]) {
         d = [self getCurrentSettings];
@@ -157,6 +159,7 @@
     unsigned int x, y;
     
     [controller setObject:[NSNumber numberWithFloat: [_frequence     floatValue]]    forKey:@"frequence"];
+    [controller setObject:[NSNumber numberWithBool: [_aeForever state] == NSOnState] forKey:@"aeForever"];
 
     if (i < 0) return YES;
     d = [[self getCurrentSettings] mutableCopy];

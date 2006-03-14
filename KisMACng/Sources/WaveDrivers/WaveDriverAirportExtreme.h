@@ -29,8 +29,9 @@
 
 @interface WaveDriverAirportExtreme : WaveDriver {
 	pcap_t *_device;
-	UInt8 _channel;
 }
 
-+ (BOOL)getMonitorMode;
++ (BOOL)monitorModeEnabled;
++ (void)setMonitorMode:(BOOL)enable;
+
 @end

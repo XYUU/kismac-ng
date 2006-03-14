@@ -14,25 +14,25 @@
 	};
 	000238DB06933029007C44ED /* BIGLView.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {945, 615}}";
-			sepNavSelRange = "{713, 0}";
-			sepNavVisRect = "{{0, 154}, {945, 461}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 662}}";
+			sepNavSelRange = "{285, 0}";
+			sepNavVisRect = "{{0, 0}, {1025, 662}}";
 			sepNavWindowFrame = "{{61, 227}, {750, 558}}";
 		};
 	};
 	000238DC06933029007C44ED /* BIGLView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {716, 3682}}";
-			sepNavSelRange = "{6252, 23}";
-			sepNavVisRect = "{{0, 2742}, {459, 186}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 3682}}";
+			sepNavSelRange = "{6277, 0}";
+			sepNavVisRect = "{{0, 2504}, {1025, 662}}";
 			sepNavWindowFrame = "{{38, 248}, {750, 558}}";
 		};
 	};
 	000239B20693365E007C44ED /* BIGL.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1057, 489}}";
-			sepNavSelRange = "{693, 0}";
-			sepNavVisRect = "{{0, 205}, {1057, 256}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 662}}";
+			sepNavSelRange = "{387, 0}";
+			sepNavVisRect = "{{0, 0}, {1025, 662}}";
 		};
 	};
 	00023ACA069347CC007C44ED /* BIGLSubView.h */ = {
@@ -91,14 +91,16 @@
 	};
 	005D9B8C069DDC3400A4BA7B /* BIGLView.m:212 */ = {
 		isa = PBXFileBreakpoint;
+		actions = (
+		);
 		continueAfterActions = 0;
 		delayBeforeContinue = 0;
 		fileReference = 000238DC06933029007C44ED /* BIGLView.m */;
 		functionName = "-dataWithTIFFInsideRect:";
 		hitCount = 0;
 		lineNumber = 212;
-		modificationTime = 0;
-		state = 1;
+		modificationTime = 163854615.467753;
+		state = 2;
 	};
 	00A299F60693EC1500E39953 /* BIGLPolyView.h */ = {
 		uiCtxt = {
@@ -128,6 +130,46 @@
 			sepNavSelRange = "{1320, 0}";
 			sepNavVisRect = "{{0, 1019}, {1057, 689}}";
 		};
+	};
+	00D562EC09C4391F00FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 000238DB06933029007C44ED /* BIGLView.h */;
+		name = "BIGLView.h: 9";
+		rLen = 0;
+		rLoc = 285;
+		rType = 0;
+		vrLen = 1419;
+		vrLoc = 0;
+	};
+	00D562ED09C4391F00FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 000238DC06933029007C44ED /* BIGLView.m */;
+		name = "src = imageBuffer;";
+		rLen = 39;
+		rLoc = 6252;
+		rType = 0;
+		vrLen = 1560;
+		vrLoc = 5382;
+	};
+	00D562EE09C4391F00FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 000238DB06933029007C44ED /* BIGLView.h */;
+		name = "BIGLView.h: 9";
+		rLen = 0;
+		rLoc = 285;
+		rType = 0;
+		vrLen = 1419;
+		vrLoc = 0;
+	};
+	00D5631309C4786900FB787B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 000238DC06933029007C44ED /* BIGLView.m */;
+		name = "BIGLView.m: 203";
+		rLen = 0;
+		rLoc = 6277;
+		rType = 0;
+		vrLen = 1576;
+		vrLoc = 5382;
 	};
 	00F514C606944F0500F4D67C /* BIGLLineView.h */ = {
 		uiCtxt = {
@@ -235,9 +277,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					16,
-					301.8008,
-					329.0356,
-					306.2085,
+					301,
+					329,
+					393.2085,
 				);
 				PBXFileTableDataSourceColumnsKey = (
 					PBXSymbolsDataSource_SymbolTypeIconID,
@@ -268,7 +310,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 141325504;
+			PBXPerProjectTemplateStateSaveDate = 163854304;
 			PBXPrepackagedSmartGroups_v2 = (
 				{
 					PBXTransientLocationAtTop = bottom;
@@ -723,7 +765,13 @@
 				};
 				RubberWindowFrame = "0 84 1280 748 0 0 1280 832 ";
 			};
-			PBXWorkspaceStateSaveDate = 141325504;
+			PBXWorkspaceStateSaveDate = 163854304;
+		};
+		perUserProjectItems = {
+			00D562EC09C4391F00FB787B /* PBXTextBookmark */ = 00D562EC09C4391F00FB787B /* PBXTextBookmark */;
+			00D562ED09C4391F00FB787B /* PBXTextBookmark */ = 00D562ED09C4391F00FB787B /* PBXTextBookmark */;
+			00D562EE09C4391F00FB787B /* PBXTextBookmark */ = 00D562EE09C4391F00FB787B /* PBXTextBookmark */;
+			00D5631309C4786900FB787B /* PBXTextBookmark */ = 00D5631309C4786900FB787B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 000238D906933015007C44ED /* Source Control */;
 		userBuildSettings = {

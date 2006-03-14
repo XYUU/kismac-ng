@@ -6,9 +6,10 @@
             CLASS = InstallController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                "_aeForeverCheckBox" = NSButton; 
                 "_configureView" = NSView; 
                 "_confirmConfigureView" = NSView; 
+                "_enableMonitorMode" = NSButtonCell; 
+                "_enableMonitorModeView" = NSView; 
                 "_installDirectoryView" = NSView; 
                 "_installDoneView" = NSView; 
                 "_installKisMAC" = NSButtonCell; 
@@ -33,6 +34,7 @@
                 "_removeStatus" = NSTextField; 
                 "_restartWarning" = NSTextField; 
                 "_selectedDriver" = NSPopUpButton; 
+                "_skipMonModeInstallation" = NSButtonCell; 
                 "_skipPatch" = NSButtonCell; 
                 "_targetDirectory" = NSTextField; 
                 "_welcomeView" = NSView; 

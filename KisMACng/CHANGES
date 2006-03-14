@@ -1,3 +1,10 @@
+R102: - improved permanent airport extreme enabling & installing (even more)
+	  - including removal
+	  - fixed serveral small bugs
+	  - added new "build system"
+
+R101: - changes in spanish translation
+
 R100:  This is a big commit, a present for R100.  
        -Added Client IP Address detection.  I need to think about ways to detect the ip of the ap if possible.
               --Fixed bug in existing sourceIPAsString() where we were adding sizeof(WLFrame) to the value instead of to the pointer.

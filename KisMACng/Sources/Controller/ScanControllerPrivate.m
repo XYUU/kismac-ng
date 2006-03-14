@@ -66,8 +66,11 @@
         a = [a sortedArrayUsingSelector:@selector(compareDrivers:)];
 
         whichDriver = [sets objectForKey:@"whichDriver"];
-        if (!whichDriver) whichDriver = [[a objectAtIndex:0] deviceName];
-        
+        if (!whichDriver) {
+			whichDriver = [[a objectAtIndex:0] deviceName];
+			[sets setObject:whichDriver forKey:@"whichDriver"];
+		}
+		
         for (x = 0; x < [a count]; x++) {
             wd = [a objectAtIndex:x];
             mi = (NSMenuItem*)[aChannelMenu insertItemWithTitle:[wd deviceName] action:@selector(selDriver:) keyEquivalent:@"" atIndex:0];

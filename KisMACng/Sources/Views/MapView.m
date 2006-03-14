@@ -167,9 +167,17 @@
 		if ([settings objectForKey:@"fileName"]) {
 			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:[[wps objectAtIndex:2] objectForKey:@"fileName"]]];
         } 
-		if (!img) {
-			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.pdf"]];
-		}
+	NS_HANDLER
+    NS_ENDHANDLER
+	
+	NS_DURING
+	if (!img) {
+		img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.pdf"]];
+	}
+	NS_HANDLER
+    NS_ENDHANDLER
+	
+	NS_DURING
 		if (!img) {
 			//fall back
 			img = [[NSImage alloc] initWithContentsOfFile:[mapName stringByAppendingPathComponent:@"map.png"]];

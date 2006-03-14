@@ -224,7 +224,7 @@ static ScanController *_scanController;
         if (![self isServiceAvailable:"AiroJackDriver"]) return NO;
         else return YES;
     case 4:
-        if ([self isServiceAvailable:"AirPortDriver"] || [self isServiceAvailable:"AirPortPCI"] || [WaveHelper isServiceAvailable:"AirPort_Athr5424"]) return YES;
+        if ([self isServiceAvailable:"AirPortDriver"] || [self isServiceAvailable:"AirPortPCI"] || [self isServiceAvailable:"AirPortPCI_MM"]  || [WaveHelper isServiceAvailable:"AirPort_Athr5424"]) return YES;
         else return NO;
     default:
         return NO;
