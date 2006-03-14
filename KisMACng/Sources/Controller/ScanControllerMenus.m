@@ -570,6 +570,7 @@
 - (void)showAreaDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
     _importOpen--;
 	NSParameterAssert(_importOpen == 0);
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
 
     [[_importController window] close];
     [_importController stopAnimation];
@@ -609,6 +610,7 @@
 - (void)showAreaAllDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
     _importOpen--;
 	NSParameterAssert(_importOpen == 0);
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
 
     [[_importController window] close];
     [_importController stopAnimation];

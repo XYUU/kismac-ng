@@ -50,7 +50,7 @@
 #pragma mark -
 
 - (void)showWantToSaveDialog:(SEL)overrideFunction {
-    NSBeginAlertSheet(
+	NSBeginAlertSheet(
         NSLocalizedString(@"Save Changes?", "Save changes dialog title"),
         NSLocalizedString(@"Save", "Save changes dialog button"),
         NSLocalizedString(@"Don't Save", "Save changes dialog button"),

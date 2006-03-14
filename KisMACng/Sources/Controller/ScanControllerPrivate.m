@@ -252,7 +252,8 @@
 - (void)crackDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
     _importOpen--;
 	NSParameterAssert(_importOpen == 0);
-	
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
+
 	[aInfoController reloadData];
     
     [[_importController window] close];
@@ -320,13 +321,14 @@
     NSParameterAssert(title);
     NSParameterAssert(_importOpen == 0); //we are already busy
 	_importOpen++;
+	[self menuSetEnabled:NO menu:[NSApp mainMenu]];
 	
     if (stopScan) [self stopScan];
     
     _importController = [[ImportController alloc] initWithWindowNibName:@"Crack"];
     [_importController setTitle:title];
     [WaveHelper setImportController:_importController];
-
+	
     [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:@selector(crackDone:returnCode:contextInfo:) contextInfo:nil];
 }
 
@@ -433,9 +435,9 @@
 
 - (void)showBusyWithText:(NSString*)title andEndSelector:(SEL)didEndSelector andDialog:(NSString*)dialog {
     NSParameterAssert(title);
-    NSParameterAssert(dialog);
-	
+    NSParameterAssert(dialog);	
     if (_importOpen++ > 0) return; //we are already busy
+	[self menuSetEnabled:NO menu:[NSApp mainMenu]];
     
     _importController = [[ImportController alloc] initWithWindowNibName:dialog];
     if (!_importController) {
@@ -445,13 +447,15 @@
 
     [WaveHelper setImportController:_importController];
     [_importController setTitle:title];
+	
     [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:didEndSelector contextInfo:nil];
 }
 
 - (void)busyDone {
     if (_importOpen == 0) return; //the import controller was already closed!!
     if (--_importOpen > 0) return; //still retains
-    
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
+	
     if (_importController) [NSApp endSheet:[_importController window]];
     [[_importController window] orderOut:self];
     [WaveHelper secureRelease:&_importController];   
@@ -468,12 +472,14 @@
     }
     _doModal = YES;
 
+	[self menuSetEnabled:NO menu:[NSApp mainMenu]];
     [NSApp beginSheet:[_importController window] modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
       
     [self performSelector:_busyFunction withObject:obj];
         
     [obj release];
 
+    [self menuSetEnabled:YES menu:[NSApp mainMenu]];
     [NSApp endSheet: [_importController window]];        
     [[_importController window] close];
     [_importController stopAnimation];
@@ -486,7 +492,8 @@
     [self performSelector:_busyFunction withObject:anObject];
     
     _doModal = NO;
-    
+	
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
     [NSApp endSheet: [_importController window]];        
     [[_importController window] orderOut:self];
     [[_importController window] close];
@@ -497,6 +504,7 @@
 #pragma mark -
 
 - (void)showWantToSaveDialog:(SEL)overrideFunction {
+    [self menuSetEnabled:NO menu:[NSApp mainMenu]];
     NSBeginAlertSheet(
         NSLocalizedString(@"Save Changes?", "Save changes dialog title"),
         NSLocalizedString(@"Save", "Save changes dialog button"),

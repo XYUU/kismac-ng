@@ -481,7 +481,7 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {    
     if (![self isSaved]) {
-        [self showWantToSaveDialog:@selector(reallyQuitDidEnd:returnCode:contextInfo:)];
+		[self showWantToSaveDialog:@selector(reallyQuitDidEnd:returnCode:contextInfo:)];
         return NSTerminateLater;
     }
     
@@ -489,7 +489,8 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 }
 
 - (void)reallyQuitDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    switch (returnCode) {
+    [self menuSetEnabled:YES menu:[NSApp mainMenu]];
+	switch (returnCode) {
     case NSAlertOtherReturn:
         [NSApp replyToApplicationShouldTerminate:NO];
         break;
@@ -575,7 +576,8 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
     }
 }
 - (void)reallyCloseDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    switch (returnCode) {
+	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
+	switch (returnCode) {
     case NSAlertDefaultReturn:
         [NSNotificationCenter postNotification:KisMACTryToSave];
     case NSAlertOtherReturn:

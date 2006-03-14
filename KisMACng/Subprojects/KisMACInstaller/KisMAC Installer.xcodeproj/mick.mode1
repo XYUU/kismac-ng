@@ -219,6 +219,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -308,14 +310,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>InstallController.m</string>
+								<string>airportExtreme.png</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,32 +323,25 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>InstallController.m</string>
+										<string>airportExtreme.png</string>
 										<key>_historyCapacity</key>
 										<integer>20</integer>
 										<key>bookmark</key>
-										<string>00D5667F09C73C3700FB787B</string>
+										<string>00D566D809C760A000FB787B</string>
 										<key>history</key>
 										<array>
 											<string>0017842B09C1E48500530D82</string>
 											<string>00B1200D09C1F95C00AD6B0D</string>
 											<string>00D5632209C478C300FB787B</string>
-											<string>00D5667509C73B6D00FB787B</string>
-											<string>00D5667609C73B6D00FB787B</string>
+											<string>00D5667809C73B6D00FB787B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>0054928308E6EF8800307083</string>
-											<string>0017842E09C1E48500530D82</string>
 											<string>0017842F09C1E48500530D82</string>
-											<string>00D5632309C478C300FB787B</string>
 											<string>00D5632409C478C300FB787B</string>
-											<string>00D5632509C478C300FB787B</string>
 											<string>00D5632609C478C300FB787B</string>
-											<string>00D5632709C478C300FB787B</string>
 											<string>00D5632809C478C300FB787B</string>
-											<string>00D5667709C73B6D00FB787B</string>
-											<string>00D5667809C73B6D00FB787B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -756,14 +749,12 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>InstallController.m</string>
+										<string>&lt;No Editor&gt;</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
