@@ -40,7 +40,7 @@
     NSAppleEventDescriptor *e = [NSAppleEventDescriptor appleEventWithEventClass:class eventID:event targetDescriptor:target returnID:kAutoGenerateReturnID transactionID:kAnyTransactionID];
     
     enu = [args keyEnumerator];
-    while (ae = [enu nextObject]) {
+    while ((ae = [enu nextObject])) {
         [e setDescriptor:[args objectForKey:ae] forKeyword:[ae intValue]];
     }
     

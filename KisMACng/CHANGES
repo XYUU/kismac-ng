@@ -1,3 +1,5 @@
+R106: - Fixed some silly warnings as described in #61 note, this is not the patch from 61 because it was incorrect
+
 R102: - improved permanent airport extreme enabling & installing (even more)
 	  - including removal
 	  - fixed serveral small bugs

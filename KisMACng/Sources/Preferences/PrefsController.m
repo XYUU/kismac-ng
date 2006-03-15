@@ -330,7 +330,7 @@ void addToolbarItem(NSMutableDictionary *theDict,NSString *identifier,NSString *
 
     if (![currentClient updateDictionary]) return;
     
-    while(key = [keyEnum nextObject]) {
+    while((key = [keyEnum nextObject])) {
         //[defaults setObject:[changesDict objectForKey:key] forKey:key];
     }
     

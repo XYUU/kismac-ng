@@ -301,7 +301,7 @@ inline UInt32 hashForMAC(const UInt8* val) {
     WaveNet *net;
         
     e = [data objectEnumerator];
-    while (n = [e nextObject]) {
+    while ((n = [e nextObject])) {
         if (![n isMemberOfClass:[WaveNet class]]) {
             NSLog(@"Could not load legacy data, because it is bad!");
             return NO;
@@ -359,7 +359,7 @@ inline UInt32 hashForMAC(const UInt8* val) {
         if ([_idList[i].net netID] > maxID) maxID = [_idList[i].net netID];
 
     e = [data objectEnumerator];
-    while (n = [e nextObject]) {
+    while ((n = [e nextObject])) {
         if (![n isMemberOfClass:[WaveNet class]]) {
             NSLog(@"Could not load legacy data, because it is bad!");
             return NO;

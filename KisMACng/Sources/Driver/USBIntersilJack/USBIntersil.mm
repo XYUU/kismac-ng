@@ -760,7 +760,7 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
    
     kr = (*dev)->CreateInterfaceIterator(dev, &request, &iterator);
     
-    while (usbInterface = IOIteratorNext(iterator)) {
+    while ((usbInterface = IOIteratorNext(iterator))) {
         //NSLog(@"Interface found.\n");
        
         kr = IOCreatePlugInInterfaceForService(usbInterface, kIOUSBInterfaceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
@@ -901,7 +901,7 @@ void USBIntersilJack::_addDevice(void *refCon, io_iterator_t iterator) {
     int                         i;
     
     
-    while (usbDevice = IOIteratorNext(iterator)) {
+    while ((usbDevice = IOIteratorNext(iterator))) {
         //NSLog(@"USB Device added.\n");
        
         kr = IOCreatePlugInInterfaceForService(usbDevice, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);

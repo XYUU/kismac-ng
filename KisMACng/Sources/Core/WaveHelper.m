@@ -200,7 +200,7 @@ static ScanController *_scanController;
     }
         
     if (IORegistryCreateIterator(masterPort, kIOServicePlane, kIORegistryIterateRecursively, &iterator) == KERN_SUCCESS) {
-        while (sdev = IOIteratorNext(iterator))
+        while ((sdev = IOIteratorNext(iterator)))
             if (IOObjectConformsTo(sdev, service)) {
                 IOObjectRelease (iterator);
                 return YES;
@@ -240,7 +240,7 @@ static ScanController *_scanController;
     
     e = [_waveDrivers keyEnumerator];
     
-    while (key = [e nextObject]) {
+    while ((key = [e nextObject])) {
         w = [_waveDrivers objectForKey:key];
         [_waveDrivers removeObjectForKey:key];
         [w unloadBackend];
@@ -344,7 +344,7 @@ static ScanController *_scanController;
     NSDictionary *d;
     
     e = [_waveDrivers keyEnumerator];
-    while (k = [e nextObject]) {
+    while ((k = [e nextObject])) {
         d = [[_waveDrivers objectForKey:k] configuration];
         if ([[d objectForKey:@"injectionDevice"] intValue]) return [_waveDrivers objectForKey:k];
     }

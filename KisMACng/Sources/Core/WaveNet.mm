@@ -401,7 +401,7 @@ int lengthSort(id string1, id string2, void *context)
 		aClients = [[NSMutableDictionary dictionaryWithCapacity:[clients count]] retain];
 		NSEnumerator *e = [clients keyEnumerator];
 		
-		while (c = [e nextObject]) {
+		while ((c = [e nextObject])) {
 			[aClients setObject:[[[WaveClient alloc] initWithDataDictionary:[clients objectForKey:c]] autorelease] forKey:c];
 		}
 		aClientKeys = [[aClients allKeys] mutableCopy];
@@ -474,7 +474,7 @@ int lengthSort(id string1, id string2, void *context)
 		pL = (struct signalCoords *)[coord mutableBytes];
 		NSEnumerator *e = [_coordinates keyEnumerator];
 		
-		while (vp = [e nextObject]) {
+		while ((vp = [e nextObject])) {
 			pL->strength = [[_coordinates objectForKey:vp] intValue];
 			pL->x = [vp getX];
 			pL->y = [vp getY];

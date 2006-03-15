@@ -110,7 +110,7 @@
     {
         goto err; // REV/FIX: throw.
     }
-    while (sdev = IOIteratorNext (serialIterator))
+    while ((sdev = IOIteratorNext (serialIterator)))
     {
         NSString *tty = [self getRegistryString: sdev name:kIODialinDeviceKey];
         [a addObject: tty];
