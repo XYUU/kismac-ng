@@ -665,7 +665,7 @@ int lengthSort(id string1, id string2, void *context)
                 [_coordinates setObject:[NSNumber numberWithInt:_curSignal] forKey:pV];
             [pV release];
         }
-		if(_curSignal>=_maxSignal) {
+		if(_curSignal>=_maxSignal || ([aLat floatValue] == 0 && [aLong floatValue] == 0)) {
             gpsc = [WaveHelper gpsController];
             s = [gpsc NSCoord];
             if (s) [WaveHelper secureReplace:&aLat withObject:s];

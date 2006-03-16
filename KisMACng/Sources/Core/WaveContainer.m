@@ -822,26 +822,27 @@ typedef int (*SORTFUNC)(void *, const void *, const void *);
         _lookup[i] = LOOKUPSIZE;
         
     //find the entry in the sorted list
-    for (i=0; i<_sortedCount; i++)
-        if (memcmp(ID, _idList[_sortedList[i]].ID, 6)==0) break;
-    
+    for (i=0; i<_sortedCount; i++) {
+		entry = _sortedList[i];
+		if (memcmp(ID, _idList[entry].ID, 6)==0) break;
+    }
     //if the entry exists in the sorted list move all sorted items one down...
-    if(i<_sortedCount) {
+    if(i < _sortedCount) {
         _sortedCount--;
-        for (;i<_sortedCount; i++)
-            _sortedList[i]=_sortedList[i+1];
+        for (;i < _sortedCount; i++)
+            _sortedList[i] = _sortedList[i+1];
     }
     
-    net = _idList[entry].net;
+	net = _idList[entry].net;
     _netCount--;
     
     //move down from the whole list
-    for (i=entry; i<_netCount; i++) {
-        _idList[i]=_idList[i+1];
+    for (i = entry; i < _netCount; i++) {
+        _idList[i] = _idList[i+1];
     }
     
     //if it was not the last item in the list eradicate the one before
-    if (entry!=i) _idList[i+1].net = nil;
+    if (entry != i) _idList[i+1].net = nil;
     else _idList[entry].net = nil;
     
     
