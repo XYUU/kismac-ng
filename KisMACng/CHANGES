@@ -1,3 +1,5 @@
+R108: - Fixed #35, #36 and #54.  When not hopping, still set channel in hopping method.  This avoids a nasty race condition.
+
 R107: - Fixed #51 - deleting a net causes kismac to crash
 	  - Fixed #9 - used Geoffs patch to fix GPS update...
 

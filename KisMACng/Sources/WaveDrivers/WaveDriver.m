@@ -158,24 +158,7 @@ char WaveDrivers [][30] = { "WaveDriverAirport", "WaveDriverAirportExtreme", "Wa
     }
     [sets setObject:a forKey:@"ActiveDrivers"];
     [a release];
-    
-    if (!_hop) {
-        if (ch == 0) ch = 1;
-        _firstChannel = ch;
-        if ([self allowsChannelHopping]) {
-            for (i = 0; i < 20; i++) { //try again if the card does not want to react
-                [self setChannel:ch];
-                ch = [self getChannelUnCached];
-                if (ch==_firstChannel) break;
-            }
-            if (i == 20) {
-                [self stopCapture];
-                [self startCapture: _firstChannel];
-            }
-        }
-        _currentChannel = _firstChannel;
-    }
-    
+
     return YES;
 }
 
@@ -220,9 +203,29 @@ char WaveDrivers [][30] = { "WaveDriverAirport", "WaveDriverAirportExtreme", "Wa
 }
 
 - (void)hopToNextChannel {
-    int channel, i;
-
-    if (!_hop) return;
+    int channel = _currentChannel+1, i;
+   
+    if (!_hop) {
+        while (_useChannel[channel - 1] == NO) {
+            channel = (channel % 14) + 1;
+            if (channel == _currentChannel) break; //just make sure it ends
+        }
+         _currentChannel = [self getChannelUnCached];
+         if (_currentChannel == channel) {
+             return;
+         } else {
+             for(i=0; i < 20; i++) {
+                 [self setChannel: channel];
+                 _currentChannel = [self getChannelUnCached];
+                 if (_currentChannel == channel) break;
+             }
+             if (i == 20) {
+                 [self stopCapture];
+                 [self startCapture: channel];
+             }
+         }
+         return;
+    }
     
     if (_autoAdjustTimer && (_packets!=0)) {
         if (_autoRepeat<1) {
