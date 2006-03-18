@@ -170,9 +170,9 @@ struct termios ttyset;
 		else if (sectortime > 0) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d seconds (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,sectortime,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
 		else return [NSString stringWithFormat:@"Total: %.1f %s (%.1f nm)",(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
 	} else {
-		if (sectortime > 3600) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d:%02d [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/3600),(sectortime%3600/60),(sectortime%60),sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
-		else if (sectortime > 60) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/60),(sectortime%60),sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
-		else return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d seconds [ERROR: %ds] (avg: %.1f %s)\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,sectortime,sterror,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+        if (sectortime > 3600) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d:%02d (avg: %.1f %s) [ERROR: %ds]\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/3600),(sectortime%3600/60),(sectortime%60),(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,sterror,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+        else if (sectortime > 60) return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d:%02d (avg: %.1f %s) [ERROR: %ds]\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,(sectortime/60),(sectortime%60),(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,sterror,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
+        else return [NSString stringWithFormat:@"Sector: %.1f %s (%.1f nm) in %d seconds (avg: %.1f %s) [ERROR: %ds]\nTotal: %.1f %s (%.1f nm)",(_sectordist * VELOCITY_CONVERSION),DISTANCE_UNIT,_sectordist,sectortime,(3600 * _sectordist * VELOCITY_CONVERSION)/_sectortime,VELOCITY_UNIT,sterror,(_totaldist * VELOCITY_CONVERSION),DISTANCE_UNIT,_totaldist];
 	}
 }
 
@@ -489,7 +489,7 @@ int ss(char* inp, char* outp) {
 
     if (_debugEnabled) NSLog(@"GPSd write command");
     
-    if (write(fd, "PAMVTQ\r\n", 8) < 8) {
+    if (write(fd, "PMVTAQ\r\n", 8) < 8) {
         NSLog(@"GPSd write failed");
         return NO;
     }
@@ -507,12 +507,13 @@ int ss(char* inp, char* outp) {
     gpsbuf[0+len]=0;
  	numsat = -1;
 	hdop = 100;
-   
+	elev = 0;
+	
 	date = [[NSDate alloc] init];
 
-	if (sscanf(gpsbuf, "GPSD,P=%lg %lg,A=%lg,M=%d,V=%f,T=%f,Q=%d %*f %f",
-        &ns, &ew, &elev, &valid, &velkt, &fveldir, &numsat, &hdop) >=6) {
-                        
+	if (sscanf(gpsbuf, "GPSD,P=%lg %lg,M=%d,V=%f,T=%f,A=%lg,Q=%d %*f %f",
+        &ns, &ew, &valid, &velkt, &fveldir, &elev, &numsat, &hdop) >=4) {
+                    
         if (valid >= 2) _reliable = YES;
         else _reliable = NO;
         
@@ -576,7 +577,7 @@ int ss(char* inp, char* outp) {
         }
 
     } else {
-        NSLog(@"GPSd parsing failure");
+        NSLog(@"GPSd parsing failure - received: %s",gpsbuf);
     }
     
     [date release];
