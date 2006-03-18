@@ -194,14 +194,15 @@ if [ $BUILD_IMAGE == 1 ]; then
   cd "image/KisMAC.app"
 	rm `find . -type f -name .DS_Store` 2>/dev/null
 	rm -rf `find . -name .svn`
-	tar -czf "/Volumes/KisMAC/KisMAC Installer.app/Contents/Resources/KisMAC.tgz" *>/dev/null
 	cd ..
+	tar -czf "/Volumes/KisMAC/KisMAC Installer.app/Contents/Resources/KisMAC.tgz" KisMAC.app>/dev/null
 	rm -rf KisMAC.app
 	cd ..
   	
 	rm `find "/Volumes/KisMAC/KisMAC Installer.app" -type f -name .DS_Store` 2>/dev/null
 	rm -rf `find "/Volumes/KisMAC/KisMAC Installer.app" -name .svn`
-
+  rm /Volumes/KisMAC/Desktop* 2>/dev/null
+  
   while [ -d  /Volumes/KisMAC ]; do
     hdiutil detach /Volumes/KisMAC >/dev/null
     sleep 1
@@ -211,9 +212,11 @@ if [ $BUILD_IMAGE == 1 ]; then
 	#trim dumb characters from SVN version
 	SVNVERS=`echo $SVNVERS | sed 's/.*://g'`
   SVNVERS=`echo $SVNVERS | sed 's/\]//g'`
-  
-	zip -9 KisMACR$SVNVERS.zip image/KisMAC.dmg >/dev/null
-	
+  	
+	cd image
+	zip -9 ../KisMACR$SVNVERS.zip KisMAC.dmg >/dev/null
+	cd ..
+
 	rm image/KisMAC.dmg
 	echo "ok"
 fi
