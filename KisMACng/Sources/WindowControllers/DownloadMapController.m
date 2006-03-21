@@ -49,13 +49,18 @@
 
 - (IBAction)selectOtherServer:(id)sender {
     BOOL map24 = [[sender titleOfSelectedItem] isEqualToString:NSLocalizedString(@"Map24", "menu item, needs to be like in DownloadMap.nib")];
+    BOOL sdau = [[sender titleOfSelectedItem] isEqualToString:NSLocalizedString(@"Street-Directory.com.au", "menu item, needs to be like in DownloadMap.nib")];
     [_scale  setEnabled:!map24];
-    [_height setEnabled:!map24];
-    [_width  setEnabled:!map24];
+    [_height setEnabled:!(map24 || sdau)];
+    [_width  setEnabled:!(map24 || sdau)];
     if (map24) {
         [_height setIntValue:1000];
         [_width  setIntValue:1000];
     }
+       if (sdau) {
+        [_height setIntValue:1200];
+        [_width  setIntValue:1200];
+       }
 }
 
 - (IBAction)okAction:(id)sender {
@@ -65,7 +70,8 @@
     NSMutableDictionary *d;
     NSAppleEventDescriptor *serv, *lat, *lon, *zoom, *width, *height;
     BOOL map24 = NO;
-    
+    BOOL sdau = NO;
+
     w._lat  = [_latitude  floatValue] * ([[_nsButton titleOfSelectedItem] isEqualToString:@"N"] ? 1.0 : -1.0);
     w._long = [_longitude floatValue] * ([[_ewButton titleOfSelectedItem] isEqualToString:@"E"] ? 1.0 : -1.0);
     
@@ -80,6 +86,9 @@
     } else if ([[_server titleOfSelectedItem] isEqualToString:NSLocalizedString(@"Map24", "menu item, needs to be like in DownloadMap.nib")]) {
         server = @"Map24";
         map24 = YES;
+    } else if ([[_server titleOfSelectedItem] isEqualToString:NSLocalizedString(@"Street-Directory.com.au", "menu item, needs to be like in DownloadMap.nib")]) {
+        server = @"Street-Directory.com.au";
+        sdau = YES;
     } else if ([[_server titleOfSelectedItem] isEqualToString:NSLocalizedString(@"Census Bureau Maps (United States)", "menu item, needs to be like in DownloadMap.nib")]) {
         server = @"Census Bureau Maps (United States)";
     } else {
