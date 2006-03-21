@@ -50,6 +50,7 @@ if echo $0 | grep " " > /dev/null; then
 	exit 1
 fi
 
+cd `dirname "$0"`
 echo "ok"
 
 echo -n "Decompressing UnitTest bundle... "
@@ -201,7 +202,7 @@ if [ $BUILD_IMAGE == 1 ]; then
   	
 	rm `find "/Volumes/KisMAC/KisMAC Installer.app" -type f -name .DS_Store` 2>/dev/null
 	rm -rf `find "/Volumes/KisMAC/KisMAC Installer.app" -name .svn`
-  rm /Volumes/KisMAC/Desktop* 2>/dev/null
+  #rm /Volumes/KisMAC/Desktop*
   
   while [ -d  /Volumes/KisMAC ]; do
     hdiutil detach /Volumes/KisMAC >/dev/null
