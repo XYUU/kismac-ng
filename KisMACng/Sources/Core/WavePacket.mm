@@ -53,7 +53,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
 -(void) parseTaggedData:(unsigned char*) packet length:(int) length {
     int len;
 	UInt32 *vendorID;
-    char ssid[33];
+    char ssid[256];
 	
     _primaryChannel = 0;
     

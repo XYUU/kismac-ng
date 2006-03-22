@@ -1,3 +1,5 @@
+R112: - fixing a security issue, discovered by Stefan Esser. was introduced with R54
+
 R111: - Added Austrailan Map Server Closes #70 
 
 R108: - Fixed #35, #36 and #54.  When not hopping, still set channel in hopping method.  This avoids a nasty race condition.
