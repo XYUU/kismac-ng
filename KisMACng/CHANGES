@@ -1,3 +1,10 @@
+R114: - Fixed APs not being drawn on map (closes #12)
+	  - Added sound feedback to crack attempts (updates #69 - awaiting added preference)
+	  - Changed invalid location position to impossible values (closes #68 part 1)
+	  - Improved auto-center behaviour for map and added shortcut key (closes #68 part 2 & #71)
+	  - added commented pseudocode for trace inclusion in KML export (refer #72)
+	  - added zoom limit patch for map download (re-closes #70)
+
 R112: - fixing a security issue, discovered by Stefan Esser. was introduced with R54
 
 R111: - Added Austrailan Map Server Closes #70 
