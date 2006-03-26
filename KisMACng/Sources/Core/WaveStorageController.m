@@ -697,6 +697,49 @@
 		[im increment];
     }
 	fprintf(fd,"\n");
+
+/* this code isn't working at all yet
+
+I think what I wrote (largely copied in from trace.m) was probably quite misleading for someone who actually knows how KisMAC traces are stored,
+so I've replaced some of it with pseudocode below
+
+pseudocode variables:
+traceCount = number of subtraces
+subtrace[n] = subtrace number n
+wp = current waypoint
+
+	NSLog(@"Completed network export - beginning trace export...");
+	
+	if (traceCount>0) {
+		fprintf(fd,"	<Style id=\"track\">\n");
+		fprintf(fd,"		<LineStyle>\n");
+		fprintf(fd,"			<color>ff00ff33</color>\n");
+		fprintf(fd,"			<width>3</width>\n");
+		fprintf(fd,"		</LineStyle>\n");
+		fprintf(fd,"	</Style>\n");
+		fprintf(fd,"<MultiGeometry>\n");
+		fprintf(fd,"	<name>Track</name>\n");
+		fprintf(fd,"	<styleUrl>#track</styleUrl>\n");
+		fprintf(fd,"	<tesselate>1</tesselate>\n");
+		for (i = 0; i < traceCount; i++) {
+			fprintf(fd,"	<LineString>\n");
+			fprintf(fd,"		<coordinates>\n");
+			
+				subtrace[i] = (whatever it takes to make this)
+
+				for (j = 0; j < [subtrace[i] length]; j++) {
+					wp = [[subtrace[i] objectAtIndex:j] wayPoint];
+					fprintf(fd,"%f,%f\n",wp._long,wp._lat);
+				}
+			}
+			fprintf(fd,"		</coordinates>\n");
+			fprintf(fd,"	</LineString>\n");
+		}
+		fprintf(fd,"</MultiGeometry>\n");
+		NSLog(@"Completed trace export.");
+	} else NSLog(@"no trace found - skipping trace export");
+*/
+	
 	fprintf(fd,"</Document>\n");
 	fprintf(fd,"</kml>\n");
     

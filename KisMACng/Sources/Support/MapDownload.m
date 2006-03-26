@@ -226,7 +226,8 @@ err:
     if ((int)size.width == 0) { size.width = 1000; }
     if ((int)size.height == 0) { size.height = 1000; }
     if (zoom == 0) { zoom = 3; }
-    
+    if ((![server isEqualToString:@"Street-Directory.com.au"]) && (zoom > 5)) zoom = 5;
+	
     if (!server) return NO;
     if ((int)size.height < 0 || (int)size.width < 0 || (int)size.height > 10000 || (int)size.width > 10000) return NO;
     if (w._lat > 90 || w._lat < -90 || w._long < -180 || w._long > 180) return NO;
@@ -275,125 +276,134 @@ err:
         _p1.y = size.height;
         _p2 = NSZeroPoint;
 
-               numpx = 55;
-        
-               if ((w._lat > -39.52350013) || (w._long < 143.7716731)|| (w._long > 150)) {
-               // use non-Tassie scale factors, lat and long
-                       switch (zoom) {
-                               case 1:
-                                       scalef = 106;
-                                       break;
-                               case 2:
-                                       scalef = 19;
-                                       break;
-                               case 3:
-                                       scalef = 8;
-                                       numpx = 55.1;
-                                       break;
-                               case 4:
-                                       scalef = 2;
-                                       numpx = 56.7;
-                                       break;
-                               case 5:
-                                       scalef = 0.3;
-                                       numpx = 53.1;
-                                       break;
-                               case 6:
-                                       scalef = 0.15;
-                                       numpx = 53.1;
-                                       break;
-                               case 7:
-                                       scalef = 0.075;
-                                       numpx = 53.3;
-                                       break;
-                               default:
-                                       scalef= 1;
-                                       NSLog(@"Warning Invalid Zoom Size!");
-                                       NSBeep();
-                       }
-                       req = [NSString stringWithFormat:@"http://www.street-directory.com.au/sd_new/genmap.cgi?x=%f&y=%f&sizex=%d&sizey=%d&level=%d&star=&circle=", w._long, w._lat, (int)size.width, (int)size.height, zoom];    
-               } else {
-               // use Tasmania scale factors, eastings and northings (UTM zone 55)
-                       switch (zoom) {
-                               case 1:
-                                       scalef = 106;
-                                       break;
-                               case 2:
-                                       scalef = 15;
-                                       break;
-                               case 3:
-                                       scalef = 7.5;
-                                       break;
-                               case 4:
-                                       scalef = 2.4;
-                                       break;
-                               case 5:
-                                       scalef = 0.489;
-                                       break;
-                               case 6:
-                                       scalef = 0.244;
-                                       break;
-                               case 7:
-                                       scalef = 0.136;
-                                       break;
-                               default:
-                                       scalef= 1;
-                                       NSLog(@"Warning Invalid Zoom Size!");
-                                       NSBeep();
-                       }
+		rlat = w._lat * pi / 180;
+		rlong = w._long * pi / 180;
 
-                       // code here to convert lat & long to UTM
-                       /* formulae taken from http://www.uwgb.edu/dutchs/UsefulData/UTMFormulas.HTM */
+	   numpx = 55;
 
-                       // figure out zone:
-                       if (w._long < 0) zone = floor((w._long + 180)/6)+1;
-                       else zone = floor(w._long/6)+31;
-                       lon0 = zone * 6 - 183;
+	   if ((w._lat > -39.52350013) || (w._long < 143.7716731)|| (w._long > 150)) {
+	   // use non-Tassie scale factors, lat and long
+			   switch (zoom) {
+					   case 1:
+							   scalef = 106;
+							   break;
+					   case 2:
+							   scalef = 19;
+							   numpx = 52.3;
+							   break;
+					   case 3:
+							   scalef = 8;
+							   numpx = 55.1;
+							   break;
+					   case 4:
+							   scalef = 2;
+							   numpx = 56.7;
+							   break;
+					   case 5:
+							   scalef = 0.3;
+							   numpx = 53.1;
+							   break;
+					   case 6:
+							   scalef = 0.15;
+							   numpx = 53.1;
+							   break;
+					   case 7:
+							   scalef = 0.075;
+							   numpx = 53.3;
+							   break;
+					   default:
+							   scalef= 1;
+							   NSLog(@"Warning Invalid Zoom Size!");
+							   NSBeep();
+			   }
+			   req = [NSString stringWithFormat:@"http://www.street-directory.com.au/sd_new/genmap.cgi?x=%f&y=%f&sizex=%d&sizey=%d&level=%d&star=&circle=", w._long, w._lat, (int)size.width, (int)size.height, zoom];    
+	   } else {
+	   // use Tasmania scale factors, eastings and northings (UTM zone 55)
+			   switch (zoom) {
+					   case 1:
+							   scalef = 106;
+							   break;
+					   case 2:
+							   scalef = 15;
+							   break;
+					   case 3:
+							   scalef = 7.5;
+							   break;
+					   case 4:
+							   scalef = 2.4;
+							   break;
+					   case 5:
+							   scalef = 0.489;
+							   break;
+					   case 6:
+							   scalef = 0.244;
+							   break;
+					   case 7:
+							   scalef = 0.136;
+							   break;
+					   default:
+							   scalef= 1;
+							   NSLog(@"Warning Invalid Zoom Size!");
+							   NSBeep();
+			   }
 
-                       NSLog([NSString stringWithFormat:@"UTM zone %d, central meridian %d",zone,(int)lon0]);
+			   // code here to convert lat & long to UTM
+			   /* formulae taken from http://www.uwgb.edu/dutchs/UsefulData/UTMFormulas.HTM */
 
-                       e = sqrt(1 - pow(b_WGS84,2)/pow(a_WGS84,2));
-                       eprimesqd = pow(e,2)/(1-pow(e,2));
-                       rlat = w._lat * pi / 180;
-                       rlong = w._long * pi / 180;
+			   // figure out zone:
+			   if (w._long < 0) zone = floor((w._long + 180)/6)+1;
+			   else zone = floor(w._long/6)+31;
+			   lon0 = zone * 6 - 183;
 
-                       S = a_WGS84 * ((1 - pow(e,2)/4 - 3*pow(e,4)/64 - 5*pow(e,6)/256)*rlat - (3*pow(e,2)/8 + 3*pow(e,4)/32 + 45*pow(e,6)/1024)*sin(2*rlat) + (15*pow(e,4)/256 + 45*pow(e,6)/1024)*sin(4*rlat) - (35*pow(e,6)/3072)*sin(6*rlat));
-                       k0 = 0.9996;
-                       K1 = S * k0;
-                       p = (w._long - lon0)*3600/10000;
+			   NSLog([NSString stringWithFormat:@"UTM zone %d, central meridian %d",zone,(int)lon0]);
 
-                       sin1sec = pi/(180*60*60);
-                       nu = a_WGS84/sqrt(1 - pow(e,2) * pow(sin(rlat),2));
-                       K2 = k0 * pow(sin1sec,2) * nu * sin(rlat) * cos(rlat)*100000000/2;
-                       K3 = k0 * pow(sin1sec,4) * nu * sin(rlat) * pow(cos(rlat),3)/24 * (5 - pow(tan(rlat),2) + 9*eprimesqd*pow(cos(rlat),2) + 4*pow(eprimesqd,2)*pow(cos(rlat),4))*10000000000000000;
+			   e = sqrt(1 - pow(b_WGS84,2)/pow(a_WGS84,2));
+			   eprimesqd = pow(e,2)/(1-pow(e,2));
 
-                       utmn = K1 + K2*pow(p,2) + K3*pow(p,4);
-                       if (w._lat < 0) utmn += 10000000;
+			   S = a_WGS84 * ((1 - pow(e,2)/4 - 3*pow(e,4)/64 - 5*pow(e,6)/256)*rlat - (3*pow(e,2)/8 + 3*pow(e,4)/32 + 45*pow(e,6)/1024)*sin(2*rlat) + (15*pow(e,4)/256 + 45*pow(e,6)/1024)*sin(4*rlat) - (35*pow(e,6)/3072)*sin(6*rlat));
+			   k0 = 0.9996;
+			   K1 = S * k0;
+			   p = (w._long - lon0)*3600/10000;
 
-                       K4 = k0 * sin1sec * nu * cos(rlat) * 10000;
-                       K5 = k0 * pow(sin1sec,3) * nu * pow(cos(rlat),3)/6 * (1 - pow(tan(rlat),2) + eprimesqd * pow(cos(rlat),2)) * 1000000000000;
+			   sin1sec = pi/(180*60*60);
+			   nu = a_WGS84/sqrt(1 - pow(e,2) * pow(sin(rlat),2));
+			   K2 = k0 * pow(sin1sec,2) * nu * sin(rlat) * cos(rlat)*100000000/2;
+			   K3 = k0 * pow(sin1sec,4) * nu * sin(rlat) * pow(cos(rlat),3)/24 * (5 - pow(tan(rlat),2) + 9*eprimesqd*pow(cos(rlat),2) + 4*pow(eprimesqd,2)*pow(cos(rlat),4))*10000000000000000;
 
-                       utme = K4*p + K5*pow(p,3) + 500000;
+			   utmn = K1 + K2*pow(p,2) + K3*pow(p,4);
+			   if (w._lat < 0) utmn += 10000000;
 
-                       // I hope those formulae are right... if not, someone in Tasmania can fix them
-                       req = [NSString stringWithFormat:@"http://www.street-directory.com.au/sd_new/tas_genmap.cgi?x=%f&y=%f&sizex=%d&sizey=%d&level=%d&star=&circle=", utme, utmn, (int)size.width, (int)size.height, zoom];    
-               }
-               // scalef now equals number of km in approx 68?? (using numpx) px, and we should have a 1200x1200 map image request ready to go
-               // distance to edge of map = scalef*600/numpx km north AND east
-                               mperdeglon = pi / 180 * (a_WGS84 - (21384*fabs(w._lat)/90)) * cos(rlat);
-                               mperdeglat = 111132;
-               // degrees to north/south edge from centre = 1000 * scalef * size.height / 2 / numpx / mperdeglat
-               // trying my own conversion... may or may not work well
+			   K4 = k0 * sin1sec * nu * cos(rlat) * 10000;
+			   K5 = k0 * pow(sin1sec,3) * nu * pow(cos(rlat),3)/6 * (1 - pow(tan(rlat),2) + eprimesqd * pow(cos(rlat),2)) * 1000000000000;
+
+			   utme = K4*p + K5*pow(p,3) + 500000;
+
+			   // I hope those formulae are right... if not, someone in Tasmania can fix them
+			   req = [NSString stringWithFormat:@"http://www.street-directory.com.au/sd_new/tas_genmap.cgi?x=%f&y=%f&sizex=%d&sizey=%d&level=%d&star=&circle=", utme, utmn, (int)size.width, (int)size.height, zoom];    
+	   }
+	   // scalef now equals number of km in approx 68?? (using numpx) px, and we should have a 1200x1200 map image request ready to go
+	   // distance to edge of map = scalef*600/numpx km north AND east
+		// at the moment, mperdeglon is not used, but it still makes sense to calculate it since - in theory - it *should* be used
+		mperdeglon = pi / 180 * (a_WGS84 - (21384*fabs(w._lat)/90)) * cos(rlat);
+		mperdeglat = 111132;
+	   // degrees to north/south edge from centre = 1000 * scalef * size.height / 2 / numpx / mperdeglat
+	   // trying my own conversion... may or may not work well
+	   // looks like we may have a square grid in degrees?  doesn't make sense...
         _w1._lat  = w._lat  + 1000 * scalef * size.height / 2 / numpx / mperdeglat;
-        _w1._long = w._long + 1000 * scalef * size.width / 2 / numpx / mperdeglon; 
+        _w1._long = w._long + 1000 * scalef * size.width / 2 / numpx / mperdeglat; // should use mperdeglon... but mperdeglat appears to work instead
         _w2._lat  = w._lat  - 1000 * scalef * size.height / 2 / numpx / mperdeglat;
-        _w2._long = w._long - 1000 * scalef * size.width / 2 / numpx / mperdeglon;
+        _w2._long = w._long - 1000 * scalef * size.width / 2 / numpx / mperdeglat; // should use mperdeglon... but mperdeglat appears to work instead
+		
+		NSLog([NSString stringWithFormat:@"mperdeglon %f, mperdeglat %f, numpx %f",mperdeglon,mperdeglat,numpx]);
+		NSLog([NSString stringWithFormat:@"Waypoint 1: %f %f",_w1._lat,_w1._long]);
+		NSLog([NSString stringWithFormat:@"Waypoint 2: %f %f",_w2._lat,_w2._long]);
+		NSLog([NSString stringWithFormat:@"Center: %f %f",w._lat,w._long]);
     } else {
         NSLog(@"Invalid server!");
         return NO;
     }
 
-    NSLog(@"Try to load map from the following location: %@", req);
+    NSLog(@"Loading map from the following location: %@", req);
     
     [_img autorelease];
     _img = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:req]];

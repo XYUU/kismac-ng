@@ -77,7 +77,7 @@
     NSPoint wp;
     if (_selmode != selCurPos && _selmode != selShowCurPos) return;
     wp = [self pixelForCoordinate:[[WaveHelper gpsController] currentPoint]];
-    if (wp.x != INVALIDPOINT.x || wp.y != INVALIDPOINT.y) {
+    if (wp.x != INVALIDPOINT.x && wp.y != INVALIDPOINT.y) {
         [_pView setLocation:wp];
         [_pView setVisible:YES];
     } else {
@@ -165,6 +165,8 @@
 	if (!_autoCenter) return;
 	
 	w = [[WaveHelper gpsController] currentPoint];
+	if (w._lat==100) return;
+	
 	p = [self pixelForCoordinate:w];
 	
 	_center.x = (p.x / _zoomFact);

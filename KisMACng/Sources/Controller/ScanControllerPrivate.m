@@ -23,6 +23,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#include <unistd.h>
+
 #import <BIGeneric/BIGeneric.h>
 #import "ScanControllerPrivate.h"
 #import "ScanControllerScriptable.h"
@@ -250,6 +252,8 @@
 #pragma mark -
 
 - (void)crackDone:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+	int i;
+	
     _importOpen--;
 	NSParameterAssert(_importOpen == 0);
 	[self menuSetEnabled:YES menu:[NSApp mainMenu]];
@@ -260,7 +264,11 @@
     [_importController stopAnimation];
 
     if (returnCode == -1 && ![_importController canceled]) {
-        switch(_crackType) {
+		for (i=0;i<3;i++) {
+			[[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
+			sleep(1);
+		}
+		switch(_crackType) {
         case 1:
             NSBeginAlertSheet(NSLocalizedString(@"Cracking unsuccessful", "Error box title for WEP attacks"),
             OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
@@ -305,6 +313,10 @@
             [aInjPacketsMenu setState:NSOnState];
             [aInjPacketsMenu setTitle:[NSLocalizedString(@"Reinjecting into ", "menu item") stringByAppendingString:[_curNet BSSID]]];
         } else {
+			for (i=0;i<3;i++) {
+				[[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"noWEPSound"]] play];
+				sleep(1);
+			}
 			NSBeginAlertSheet(NSLocalizedString(@"Cracking successful", "Crack dialog title"),
                 OK, NULL, NULL, _window, self, NULL, NULL, NULL, 
                 NSLocalizedString(@"KisMAC was able to recover the key of the selected network. It is: %@", "crack dialog"),

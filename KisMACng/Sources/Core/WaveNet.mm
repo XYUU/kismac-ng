@@ -625,13 +625,22 @@ int lengthSort(id string1, id string2, void *context)
     NSNumber *v;
     NSString *s;
     
-    //after the first packet we should play some sound 
-    if (_date == Nil) {
-        if (_SSID==Nil) [_netView setName:_BSSID]; //draw BSSID into the map
-        
-        if (onlineCapture) { //sound?
-            if (_isWep >= encryptionTypeWEP) [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
-            else [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"noWEPSound"]] play];
+    if (onlineCapture) {
+        gpsc = [WaveHelper gpsController];
+        cp = [gpsc currentPoint];    
+		//after the first packet we should play some sound 
+		if (_date == Nil) {
+			if (cp._lat != 100) {
+				// we have a GPS position and this is the first time we've seen the network - initialise _netView
+				_netView = [[NetView alloc] initWithNetwork:self];
+				[_netView setWep:_isWep];
+				if (_SSID==Nil) [_netView setName:_BSSID]; //draw BSSID into the map
+				else [_netView setName:_SSID];
+				[_netView setCoord:cp];
+			}
+			
+			if (_isWep >= encryptionTypeWEP) [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"WEPSound"]] play];
+			else [[NSSound soundNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"noWEPSound"]] play];
 			
 			if (_isWep == encryptionTypeUnknown) [GrowlController notifyGrowlProbeRequest:@"" BSSID:_BSSID signal:_curSignal];
 			if (_isWep == encryptionTypeNone) [GrowlController notifyGrowlOpenNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
@@ -639,25 +648,21 @@ int lengthSort(id string1, id string2, void *context)
 			if (_isWep == encryptionTypeWEP40) [GrowlController notifyGrowlWEPNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
 			if (_isWep == encryptionTypeWPA) [GrowlController notifyGrowlWPANetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
 			if (_isWep == encryptionTypeLEAP) [GrowlController notifyGrowlLEAPNetwork:@"" SSID:_SSID BSSID:_BSSID signal:_curSignal channel:_channel];
+		} else if (_SSID != nil && ([_date timeIntervalSinceNow] < -120.0)) {
+			int lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
+			if (lVoice) {
+				NSString * lSentence = [NSString stringWithFormat: NSLocalizedString(@"Reencountered network. SSID is %@", "this is for speech output"),
+					[_SSID length] == 0 ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
+				NS_DURING
+					[WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
+				NS_HANDLER
+				NS_ENDHANDLER
+			}
 		}
-    } else if (onlineCapture && _SSID != nil && ([_date timeIntervalSinceNow] < -120.0)) {
-        int lVoice=[[NSUserDefaults standardUserDefaults] integerForKey:@"Voice"];
-        if (lVoice) {
-            NSString * lSentence = [NSString stringWithFormat: NSLocalizedString(@"Reencountered network. SSID is %@", "this is for speech output"),
-                [_SSID length] == 0 ? NSLocalizedString(@"hidden", "for speech"): [_SSID uppercaseString]];
-            NS_DURING
-                [WaveHelper speakSentence:[lSentence cString] withVoice:lVoice];
-            NS_HANDLER
-            NS_ENDHANDLER
-        }
-    }
-    
-    [WaveHelper secureReplace:&_date withObject:[NSDate date]];
+		
+		[WaveHelper secureReplace:&_date withObject:[NSDate date]];
 
-    if (onlineCapture) {
-        gpsc = [WaveHelper gpsController];
-        cp = [gpsc currentPoint];    
-        if (cp._lat!=0 && cp._long!=0) {
+        if (cp._lat!=100) {
             pV = [BIValuePair new];
             [pV setPairFromWaypoint:cp];
             v = [_coordinates objectForKey:pV];
@@ -673,7 +678,7 @@ int lengthSort(id string1, id string2, void *context)
             if (s) [WaveHelper secureReplace:&aLong withObject:s];
             s = [gpsc ElevCoord];
             if (s) [WaveHelper secureReplace:&aElev withObject:s];
-            if (cp._lat!=0 && cp._long!=0) [_netView setCoord:cp];		
+			[_netView setCoord:cp];
 		}
     }
     
@@ -694,7 +699,7 @@ int lengthSort(id string1, id string2, void *context)
         _maxSignal = temp;
         [WaveHelper secureReplace:&aLat  withObject:[net latitude]];
         [WaveHelper secureReplace:&aLong withObject:[net longitude]];
-	[WaveHelper secureReplace:&aElev withObject:[net elevation]];
+		[WaveHelper secureReplace:&aElev withObject:[net elevation]];
     }
     
     if ([_date compare:[net lastSeenDate]] == NSOrderedDescending) {
@@ -978,7 +983,7 @@ int lengthSort(id string1, id string2, void *context)
     } else if ([[NSDate date] timeIntervalSinceDate:_date]>1 && _gotData) {
         cp = [[WaveHelper gpsController] currentPoint];
        
-        if (cp._lat!=0 && cp._long!=0) {
+        if (cp._lat!=100) {
             [_dataLock lock];
             pV = [[BIValuePair alloc] init];
             [pV setPairFromWaypoint:cp];

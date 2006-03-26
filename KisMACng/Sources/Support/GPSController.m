@@ -75,10 +75,10 @@ struct termios ttyset;
 - (bool)startForDevice:(NSString*) device {
     _reliable = NO;
     _ns.dir = 'N';
-    _ns.coordinates = 0;
+    _ns.coordinates = 100;
     _ew.dir = 'E';
     _ew.coordinates = 0;
-    _elev.coordinates = 0;
+    _elev.coordinates = -10000;
     _elev.dir = 'm';
     _velkt = 0;
 	_peakvel = 0;
@@ -119,17 +119,17 @@ struct termios ttyset;
 }
 
 - (NSString*) NSCoord {
-    if (_ns.coordinates==0) return nil;
+    if (_ns.coordinates==100) return nil;
     return [NSString stringWithFormat:@"%f%c",_ns.coordinates, _ns.dir];
 }
 
 - (NSString*) EWCoord {
-    if (_ew.coordinates==0) return nil;
+    if (_ns.coordinates==100) return nil;
     return [NSString stringWithFormat:@"%f%c",_ew.coordinates, _ew.dir];
 }
 
 - (NSString*) ElevCoord {
-    if (_elev.coordinates==0) return [NSString stringWithFormat:@"No Elevation Data"];
+    if (_elev.coordinates==-10000) return [NSString stringWithFormat:@"No Elevation Data"];
     //NSLog([NSString stringWithFormat:@"%f",_elev.coordinates]);
     return [NSString stringWithFormat:@"%.1f %c/%.1f ft",_elev.coordinates, _elev.dir, (_elev.coordinates * 3.2808399)]; //don't know if formatting stuff is correct
 }
@@ -451,8 +451,8 @@ int ss(char* inp, char* outp) {
             _ns.dir = 'N';
             _ew.dir = 'E';
             
-            _elev.coordinates = 0;
-            _ns.coordinates = 0;
+            _elev.coordinates = -10000;
+            _ns.coordinates = 100;
             _ew.coordinates = 0;
             _velkt = 0;
         }
@@ -559,8 +559,8 @@ int ss(char* inp, char* outp) {
             _ns.dir = 'N';
             _ew.dir = 'E';
             
-            _elev.coordinates = 0;
-            _ns.coordinates = 0;
+            _elev.coordinates = -10000;
+            _ns.coordinates = 100;
             _ew.coordinates = 0;
             _velkt = 0;
         }
@@ -577,7 +577,8 @@ int ss(char* inp, char* outp) {
         }
 
     } else {
-        NSLog(@"GPSd parsing failure - received: %s",gpsbuf);
+// be quiet for now
+//        NSLog(@"GPSd parsing failure - received: %s",gpsbuf);
     }
     
     [date release];
