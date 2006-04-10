@@ -38,6 +38,10 @@
     #define CRCFUNCTION(s) @"00:00:00:00:00:00:00:00:00:00:00:00:00:00:FF"
 #endif
 
+struct pointCoords {
+	double x, y;
+} __attribute__((packed));
+
 @implementation WaveStorageController
 
 //loads a saved kismac meta file. pre 0.2a
@@ -698,52 +702,59 @@
     }
 	fprintf(fd,"\n");
 
-/* this code isn't working at all yet
-
-I think what I wrote (largely copied in from trace.m) was probably quite misleading for someone who actually knows how KisMAC traces are stored,
-so I've replaced some of it with pseudocode below
-
-pseudocode variables:
-traceCount = number of subtraces
-subtrace[n] = subtrace number n
-wp = current waypoint
-
+// now export trace (thanks to Jon Steinmetz for Objective-C coding assistance)
+	
+	NSMutableArray* xtrace = [[WaveHelper trace] trace];
+	int traceCount = [xtrace count];
+	
 	NSLog(@"Completed network export - beginning trace export...");
-	
-	if (traceCount>0) {
-		fprintf(fd,"	<Style id=\"track\">\n");
-		fprintf(fd,"		<LineStyle>\n");
-		fprintf(fd,"			<color>ff00ff33</color>\n");
-		fprintf(fd,"			<width>3</width>\n");
-		fprintf(fd,"		</LineStyle>\n");
-		fprintf(fd,"	</Style>\n");
-		fprintf(fd,"<MultiGeometry>\n");
-		fprintf(fd,"	<name>Track</name>\n");
-		fprintf(fd,"	<styleUrl>#track</styleUrl>\n");
-		fprintf(fd,"	<tesselate>1</tesselate>\n");
-		for (i = 0; i < traceCount; i++) {
-			fprintf(fd,"	<LineString>\n");
-			fprintf(fd,"		<coordinates>\n");
-			
-				subtrace[i] = (whatever it takes to make this)
 
-				for (j = 0; j < [subtrace[i] length]; j++) {
-					wp = [[subtrace[i] objectAtIndex:j] wayPoint];
-					fprintf(fd,"%f,%f\n",wp._long,wp._lat);
-				}
+	if (traceCount>0) {
+		NSLog(@"Traces to export: %d", traceCount);
+		fprintf(fd,"    <Style id=\"track\">\n");
+		fprintf(fd,"            <LineStyle>\n");
+		fprintf(fd,"                    <color>ff00ff33</color>\n");
+		fprintf(fd,"                    <width>3</width>\n");
+		fprintf(fd,"            </LineStyle>\n");
+		fprintf(fd,"    </Style>\n");
+		BIValuePair* tempBIValuePair = [[[BIValuePair alloc] init] autorelease];
+		int i;
+		for (i = 0; i < traceCount; ++i) {
+			NSLog(@"Trace number: %d", i);
+			fprintf(fd,"<Placemark>\n");
+			fprintf(fd,"    <name>Trace %d</name>\n",i+1);
+			fprintf(fd,"    <styleUrl>#track</styleUrl>\n");
+			fprintf(fd,"    <tesselate>1</tesselate>\n");
+			fprintf(fd,"    <LineString>\n");
+			fprintf(fd,"            <coordinates>\n");
+			
+			NSMutableData* subtrace = [xtrace objectAtIndex: i];
+			const struct pointCoords *pL = (const struct pointCoords *)[subtrace bytes];
+			
+			int subtraceCount = [subtrace length] / sizeof(struct pointCoords);
+			int j;
+			for (j = 0; j < subtraceCount; ++j) {
+//				NSLog(@"Subtrace: %d", j);
+//				NSLog(@"pLx, pLy: %f, %f", pL->x, pL->y);
+				[tempBIValuePair setPairX: pL->x Y: pL->y];
+				waypoint wp = [tempBIValuePair wayPoint];
+//				NSLog(@"lat, long: %f, %f", wp._lat, wp._long);
+				fprintf(fd, "                %f,%f,0\n", wp._long, wp._lat);
+				++pL;
 			}
-			fprintf(fd,"		</coordinates>\n");
-			fprintf(fd,"	</LineString>\n");
+			fprintf(fd,"            </coordinates>\n");
+			fprintf(fd,"    </LineString>\n");
+			fprintf(fd,"</Placemark>\n");
 		}
-		fprintf(fd,"</MultiGeometry>\n");
 		NSLog(@"Completed trace export.");
-	} else NSLog(@"no trace found - skipping trace export");
-*/
-	
+	} else {
+		NSLog(@"no trace found - skipping trace export");
+	}
+
 	fprintf(fd,"</Document>\n");
 	fprintf(fd,"</kml>\n");
     
-    fclose(fd);
+    fclose(fd);	
     return YES;
 }
 
