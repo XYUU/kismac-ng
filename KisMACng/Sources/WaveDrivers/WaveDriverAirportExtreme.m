@@ -107,7 +107,7 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 	
 	if ([[defs objectForKey:@"aeForever"] boolValue]) {
 		[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.kextcache"]];
-		[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
+		//[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
 		[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.mkext"]];
 	}
 }

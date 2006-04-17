@@ -1,3 +1,5 @@
+R118: - Fixed AE Forever for real this time (maybe)
+
 R114: - Fixed APs not being drawn on map (closes #12)
 	  - Added sound feedback to crack attempts (updates #69 - awaiting added preference)
 	  - Changed invalid location position to impossible values (closes #68 part 1)

@@ -130,7 +130,7 @@ OSStatus SendAppleEventToSystemProcess(AEEventID EventToSend)
 	[self enableMonitorModeForFile:@"/System/Library/Extensions/IO80211Family.kext/Contents/PlugIns/AppleAirPortBrcm4311.kext/Contents/Info.plist" andEnable:enable];
 	
 	[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.kextcache"]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
+	//[[BLAuthentication sharedInstance] executeCommand:@"/usr/sbin/kextcache" withArgs:[NSArray arrayWithObjects:@"-k", @"/System/Library/Extensions", nil]];
 	[[BLAuthentication sharedInstance] executeCommand:@"/bin/rm" withArgs:[NSArray arrayWithObject:@"/System/Library/Extensions.mkext"]];
 	
 	return ret;
