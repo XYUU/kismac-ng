@@ -602,6 +602,8 @@ error:
 
 - (void)doBeaconFloodNetwork:(WaveDriver*)w {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	NSUserDefaults *defs;
+	defs = [NSUserDefaults standardUserDefaults];
     UInt16 x[3];
     int i = 0;
     
@@ -614,7 +616,7 @@ error:
         memcpy(_beaconFrame.hdr.address3, x, 6); //needs to be random
     
         [w sendFrame:(UInt8*)&_beaconFrame withLength:sizeof(_beaconFrame) atInterval:0];
-        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:[[defs objectForKey:@"bf_interval"] floatValue]]];
         if (i++>600) break;
     }
     

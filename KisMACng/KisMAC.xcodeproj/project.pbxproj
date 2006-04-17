@@ -466,6 +466,9 @@
 		00FF593F06C630CC006C7F1E /* WaveDriverPrismGT.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */; };
 		6C03D77009B547F2005B2316 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
 		6C03D77309B547F6005B2316 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
+		6C1D31C009F37BC70005A9F8 /* PrefsAdvanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1D31BE09F37BC70005A9F8 /* PrefsAdvanced.h */; };
+		6C1D31C109F37BC70005A9F8 /* PrefsAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D31BF09F37BC70005A9F8 /* PrefsAdvanced.m */; };
+		6C1D31C409F37BE10005A9F8 /* PrefsAdvanced.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D31C209F37BE10005A9F8 /* PrefsAdvanced.nib */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
 		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
 		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
@@ -847,6 +850,10 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
 		6C03D76F09B547F2005B2316 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
+		6C1D31BE09F37BC70005A9F8 /* PrefsAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PrefsAdvanced.h; sourceTree = "<group>"; };
+		6C1D31BF09F37BC70005A9F8 /* PrefsAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PrefsAdvanced.m; sourceTree = "<group>"; };
+		6C1D31C309F37BE10005A9F8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/Nibs/English.lproj/PrefsAdvanced.nib; sourceTree = SOURCE_ROOT; };
+		6C1D31C509F37BF40005A9F8 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Resources/Nibs/Spanish.lproj/PrefsAdvanced.nib; sourceTree = SOURCE_ROOT; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
 		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
@@ -1157,6 +1164,8 @@
 		003533DB06A5DD8500AB4577 /* PreferencePanes */ = {
 			isa = PBXGroup;
 			children = (
+				6C1D31BE09F37BC70005A9F8 /* PrefsAdvanced.h */,
+				6C1D31BF09F37BC70005A9F8 /* PrefsAdvanced.m */,
 				003533DC06A5DD8500AB4577 /* PrefsClient.h */,
 				003533DD06A5DD8500AB4577 /* PrefsClient.m */,
 				003533DE06A5DD8500AB4577 /* PrefsDriver.h */,
@@ -1322,6 +1331,7 @@
 		00F57C1606A886350035AE2F /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				6C1D31C209F37BE10005A9F8 /* PrefsAdvanced.nib */,
 				00F57C1706A886350035AE2F /* Crack.nib */,
 				00F57C1906A886350035AE2F /* CrashReporter.nib */,
 				00F57C1B06A886350035AE2F /* DecryptDialog.nib */,
@@ -1653,6 +1663,7 @@
 				0090B7CB07B2A43D005FEEB1 /* WaveStorageController.h in Headers */,
 				00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
 				87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */,
+				6C1D31C009F37BC70005A9F8 /* PrefsAdvanced.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1937,6 +1948,7 @@
 				00D566B909C74A8200FB787B /* growl-probe.png in Resources */,
 				00D566BA09C74A8200FB787B /* growl-wep.png in Resources */,
 				00D566BB09C74A8200FB787B /* growl-wpa.png in Resources */,
+				6C1D31C409F37BE10005A9F8 /* PrefsAdvanced.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2128,6 +2140,7 @@
 				0090B7CC07B2A43D005FEEB1 /* WaveStorageController.m in Sources */,
 				00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
 				87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */,
+				6C1D31C109F37BC70005A9F8 /* PrefsAdvanced.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2311,6 +2324,16 @@
 				0054921D08E6E4C900307083 /* Spanish */,
 			);
 			name = WayPointDialog.nib;
+			sourceTree = "<group>";
+		};
+		6C1D31C209F37BE10005A9F8 /* PrefsAdvanced.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C1D31C309F37BE10005A9F8 /* English */,
+				6C1D31C509F37BF40005A9F8 /* Spanish */,
+			);
+			name = PrefsAdvanced.nib;
+			path = ../../Sources/WaveDrivers;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -169,6 +169,20 @@ void addToolbarItem(NSMutableDictionary *theDict,NSString *identifier,NSString *
                    [NSImage imageNamed:@"map"],
                    @selector(changeView:),
                    nil);
+	
+	[nibNamesDict setObject:@"PrefsAdvanced" forKey:@"Advanced"];
+    [classNamesDict setObject:@"PrefsAdvanced" forKey:@"Advanced"];
+    addToolbarItem(toolbarItems,
+                   @"Advanced",
+                   @"Advanced",
+                   @"Advanced",
+                   @"Advanced Options",
+                   self,
+                   @selector(setImage:),
+                   [NSImage imageNamed:@"EnergySaver"],
+                   @selector(changeView:),
+                   nil);
+	
     [nibNamesDict setObject:@"PrefsWebService" forKey:@"WebService"];
     [classNamesDict setObject:@"PrefsWebService" forKey:@"WebService"];
     addToolbarItem(toolbarItems,
@@ -259,7 +273,7 @@ void addToolbarItem(NSMutableDictionary *theDict,NSString *identifier,NSString *
 
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar {
-    return [NSArray arrayWithObjects:@"Scanning", @"Filter", @"Sounds", @"Driver", @"GPS", @"Map", @"Traffic", @"WebService", nil];
+    return [NSArray arrayWithObjects:@"Scanning", @"Filter", @"Sounds", @"Driver", @"GPS", @"Map", @"Traffic", @"WebService", @"Advanced", nil];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar {

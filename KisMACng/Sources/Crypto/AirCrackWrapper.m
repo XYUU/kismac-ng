@@ -89,14 +89,16 @@ int safe_write( int fd, void *buf, size_t len )
 - (id)init {
     self = [super init];
     if (!self) return nil;
+	NSUserDefaults *defs;
+	defs = [NSUserDefaults standardUserDefaults];
         
     /* initialize all the data */
-    debug_lvl = 0;              /* # of keybytes fixed  */
-    stability = 0;              /* unstable attacks on  */
-    keyid  =  0;                /* WEP KeyID            */
-    weplen = 13;                /* WEP key length       */
-    ffact  =  2;                /* fudge threshold      */
-    nfork  =  1;                /* number of forks      */
+    debug_lvl = 0;										/* # of keybytes fixed  */
+    stability = 0;										/* unstable attacks on  */
+    keyid  =  0;										/* WEP KeyID            */
+    weplen = 13;										/* WEP key length       */
+    ffact  = [[defs objectForKey:@"ac_ff"] intValue];	/* fudge threshold      */
+    nfork  =  1;										/* number of forks      */
 
     //find number of processors and setup the same number of cracking threads
     int value;

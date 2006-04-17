@@ -28,9 +28,9 @@
 #import "WaveHelper.h"
 #import <BIGeneric/BIGeneric.h>
 
-#define devicePath @"wlt1"
+//#define devicePath @"wlt1"
 #define optionsFile @"/System/Library/Extensions/AppleAirPort2.kext/Contents/Info.plist"
-#define devFile @"/dev/bpf0"
+//#define devFile @"/dev/bpf0"
 
 static bool explicitlyLoadedAirportExtremeDriver = NO;
 
@@ -218,15 +218,17 @@ static bool explicitlyLoadedAirportExtremeDriver = NO;
 #pragma mark -
 
 - (id)init {
+	NSUserDefaults *defs;
+    defs = [NSUserDefaults standardUserDefaults];
     char err[PCAP_ERRBUF_SIZE];
 	
-	if (![[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]]) return Nil;
-	if (![[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]]) return Nil;
+	if (![[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", [defs objectForKey:@"bpfloc"], nil]]) return Nil;
+	if (![[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", [defs objectForKey:@"bpfloc"], nil]]) return Nil;
 	[NSThread sleep:0.5];
 	
-	_device = pcap_open_live([devicePath cString], 3000, 0, 2, err);
-	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", devFile, nil]];
-	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", devFile, nil]];
+	_device = pcap_open_live([[defs objectForKey:@"bpfdevice"] cString], 3000, 0, 2, err);
+	[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/chgrp" withArgs:[NSArray arrayWithObjects:@"admin", [defs objectForKey:@"bpfloc"], nil]];
+	[[BLAuthentication sharedInstance] executeCommand:@"/bin/chmod" withArgs:[NSArray arrayWithObjects:@"0660", [defs objectForKey:@"bpfloc"], nil]];
 
 	if (!_device) return Nil;
     

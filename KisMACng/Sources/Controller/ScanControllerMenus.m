@@ -537,7 +537,9 @@
 	
 }
 - (IBAction)deautheticateNetwork:(id)sender {
-    if ([_deauthMenu state]==NSOffState && [self startActiveAttack] && [scanner deauthenticateNetwork:_curNet atInterval:100]) {
+	NSUserDefaults *defs;
+	defs = [NSUserDefaults standardUserDefaults];
+    if ([_deauthMenu state]==NSOffState && [self startActiveAttack] && [scanner deauthenticateNetwork:_curNet atInterval:[[defs objectForKey:@"pr_interval"] intValue]]) {
         [_deauthMenu setState:NSOnState];
         [_deauthMenu setTitle:[NSLocalizedString(@"Deauthenticating ", "menu item") stringByAppendingString:[_curNet BSSID]]];
     } else {
