@@ -1,4 +1,6 @@
-R119 - Advanced Prefs from themacuser
+R120: - Add Nibs I missed.  When creating new Nibs, be sure to remove the .svn dir from inside the .nib package if you copied an older nib
+
+R119: - Advanced Prefs from themacuser
 
 R118: - Fixed AE Forever for real this time (maybe)
 
