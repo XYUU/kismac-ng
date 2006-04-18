@@ -89,14 +89,22 @@ bool USBIntersilJack::startCapture(UInt16 channel) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
+	// _doCommand(wlcInit,0) seems to be the key part of _reset() to make the USB driver work after sleeping	
+	// how about we only call this when an error occurs
+/*    if (_doCommand(wlcInit, 0) != kIOReturnSuccess) {
+        NSLog(@"USBIntersilJack::::startCapture: _doCommand(wlcInit, 0) failed\n");
+        return false;
+    } */
+
     if ((!_isEnabled) && (_disable() != kIOReturnSuccess)) {
-        NSLog(@"MACJackCard::startCapture: Couldn't disable card\n");
+        NSLog(@"USBIntersilJack::::startCapture: Couldn't disable card\n");
         return false;
     }
     
     if (setChannel(channel) == false) {
-        NSLog(@"USBIntersilJack::::startCapture: setChannel(%d) failed\n",
+        NSLog(@"USBIntersilJack::::startCapture: setChannel(%d) failed - resetting...\n",
                  channel);
+		_reset();
         return false;
     }
 

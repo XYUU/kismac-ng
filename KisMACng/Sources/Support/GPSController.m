@@ -64,6 +64,7 @@ struct termios ttyset;
     _gpsThreadUp    = NO;
     _gpsShallRun    = NO;
     _debugEnabled   = NO;
+	_gpsdReconnect	= YES;
     _lastAdd        = [[NSDate date] retain];
     _linesRead      = 0;
 
@@ -91,6 +92,10 @@ struct termios ttyset;
 
     [self stop];
     
+	sleep(1);
+	
+	_gpsdReconnect = YES;
+	
     [WaveHelper secureReplace:&_gpsDevice withObject:device];
     [WaveHelper secureRelease:&_lastUpdate];
     [WaveHelper secureRelease:&_sectorStart];
@@ -733,50 +738,52 @@ int ss(char* inp, char* outp) {
 
         sets = [NSUserDefaults standardUserDefaults];
         
-        sockd  = socket(AF_INET, SOCK_STREAM, 0);
-        if (sockd == -1) {
-            NSLog(@"Socket creation failed!");
-			[self setStatus:NSLocalizedString(@"Could not create GPSd socket.", @"GPS status")];
-            goto err;
-        }
-        
-        hostname = [[sets objectForKey:@"GPSDaemonHost"] cString];
-        
-        if (inet_addr(hostname) != INADDR_NONE) {
-            ip = inet_addr(hostname);
-        } else {
-            hp = gethostbyname(hostname);
-            if (hp == NULL) {
-                NSLog(@"Could not resolve %s", hostname);
-				[self setStatus:NSLocalizedString(@"Could not resolve GPSd server.", @"GPS status")];
-                goto err;
-            }
-            ip = *(int *)hp->h_addr_list[0];
-        }
-        
-        /* server address */
-        serv_name.sin_addr.s_addr = ip;
-        serv_name.sin_family = AF_INET;
-        serv_name.sin_port = htons([sets integerForKey:@"GPSDaemonPort"]);
+		while(_gpsdReconnect) {
+			sockd  = socket(AF_INET, SOCK_STREAM, 0);
+			if (sockd == -1) {
+				NSLog(@"Socket creation failed!");
+				[self setStatus:NSLocalizedString(@"Could not create GPSd socket.", @"GPS status")];
+				goto err;
+			}
+			
+			hostname = [[sets objectForKey:@"GPSDaemonHost"] cString];
+			
+			if (inet_addr(hostname) != INADDR_NONE) {
+				ip = inet_addr(hostname);
+			} else {
+				hp = gethostbyname(hostname);
+				if (hp == NULL) {
+					NSLog(@"Could not resolve %s", hostname);
+					[self setStatus:NSLocalizedString(@"Could not resolve GPSd server.", @"GPS status")];
+					goto err;
+				}
+				ip = *(int *)hp->h_addr_list[0];
+			}
+			
+			/* server address */
+			serv_name.sin_addr.s_addr = ip;
+			serv_name.sin_family = AF_INET;
+			serv_name.sin_port = htons([sets integerForKey:@"GPSDaemonPort"]);
 
-        NSLog(@"Connecting to gpsd (%s)",inet_ntoa(serv_name.sin_addr));
+			NSLog(@"Connecting to gpsd (%s)",inet_ntoa(serv_name.sin_addr));
 
-        /* connect to the server */
-        status = connect(sockd, (struct sockaddr*)&serv_name, sizeof(serv_name));
-        
-        if (status == -1) {
-            NSLog(@"Could not connect to %s port %d", hostname, [sets integerForKey:@"GPSDaemonPort"]);
-			[self setStatus:NSLocalizedString(@"Could not connect to GPSd.", @"GPS status")];
-			goto err;
-        }
+			/* connect to the server */
+			status = connect(sockd, (struct sockaddr*)&serv_name, sizeof(serv_name));
+			
+			if (status == -1) {
+				NSLog(@"Could not connect to %s port %d", hostname, [sets integerForKey:@"GPSDaemonPort"]);
+				[self setStatus:NSLocalizedString(@"Could not connect to GPSd.", @"GPS status")];
+				goto err;
+			}
 
-        NSLog(@"GPS started successfully in GPSd mode.\n");
-        [self setStatus:NSLocalizedString(@"GPS started in GPSd mode.", @"GPS status")];
+			NSLog(@"GPS started successfully in GPSd mode.\n");
+			[self setStatus:NSLocalizedString(@"GPS started in GPSd mode.", @"GPS status")];
 
-        [self continousParseGPSd: sockd];
-        close(sockd);
+			[self continousParseGPSd: sockd];
+			close(sockd);
 
-        [self setStatus:NSLocalizedString(@"GPSd connection terminated.", @"GPS status")];
+			[self setStatus:NSLocalizedString(@"GPSd connection terminated - reconnecting...", @"GPS status")];
+		}
     err:
         [_gpsLock unlock];
         _gpsThreadUp = NO;
@@ -799,6 +806,7 @@ int ss(char* inp, char* outp) {
 - (void)stop {
     int fd;
     _gpsShallRun=NO;
+	_gpsdReconnect=NO;
 
     [self setStatus:NSLocalizedString(@"Trying to terminate GPS subsystem.", @"GPS status")];
     

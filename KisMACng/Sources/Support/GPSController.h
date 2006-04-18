@@ -34,6 +34,7 @@ struct _position {
 @interface GPSController : NSObject {
     bool    _gpsThreadUp;
     bool    _gpsShallRun;
+	bool	_gpsdReconnect;
     bool    _reliable;
     bool    _tripmateMode;
     int     _traceInterval;
