@@ -11,6 +11,10 @@
 @implementation PrefsAdvanced
 
 -(void)updateUI {
+    if ([controller objectForKey:@"ac_ff"] == nil) {
+        [self setDefaults:self];
+        return;
+    }
     [ac_ff setStringValue:[controller objectForKey:@"ac_ff"]];
 	[bf_interval setStringValue:[controller objectForKey:@"bf_interval"]];
 	[bpfdevice setStringValue:[controller objectForKey:@"bpfdevice"]];
@@ -52,9 +56,3 @@
 }
 
 @end
-
-/* sample code
-NSUserDefaults *defs;
-defs = [NSUserDefaults standardUserDefaults];
-[defs objectForKey:@"bf_interval"]
-*/

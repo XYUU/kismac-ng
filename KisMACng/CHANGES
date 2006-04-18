@@ -1,3 +1,5 @@
+R121: - Fix problem where advanced prefs wouldn't show up if they had never been set before
+
 R120: - Add Nibs I missed.  When creating new Nibs, be sure to remove the .svn dir from inside the .nib package if you copied an older nib
 
 R119: - Advanced Prefs from themacuser

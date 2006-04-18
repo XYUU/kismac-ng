@@ -18,4 +18,5 @@
 	IBOutlet id pr_interval; //deauthenticate interval
 }
 
+-(IBAction)setDefaults:(id)sender;
 @end
