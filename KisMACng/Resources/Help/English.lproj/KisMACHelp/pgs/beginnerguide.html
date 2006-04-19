@@ -76,12 +76,19 @@ your specific wireless card.</font></p>
         passive mode. If you have a Atheros based card, choose this
       driver.</li>
     </ol>
-    Note: if you do not know which driver to use, you can refer to the table
+   <b> Note:</b> if you do not know which driver to use, you can refer to the table
     of common card brands at the end of this chapter. Updates to KisMAC are
     released more frequently than updates to the documentation, if this
     information is not up to date, please submit a new version.<br>
     <br>
   </li>
+  <li>KisMac also allows permanently enabling airport extreme to operate in
+    passive mode. To enable this feature check the box at the bottom of the
+    window (requires reboot).<b> Note:</b> If enabled, your wireless card can be used
+    by other applications however, this can cause your data to be captured in
+    the dump and result in confusion.
+  </li>
+    <br>
   <li>Your password will be asked for each time you start KisMAC because the
     drivers must be loaded and unloaded. If you would like KisMAC to load the
     drivers without asking for your password, check the Make scripts SUID
@@ -123,13 +130,6 @@ Preferences</font></p>
     cards.<br>
     <br>
   </li>
-  <li>If you would like KisMAC to automatically scan for networks as soon as
-    it starts, check the scan at startup checkbox. Note: Unless you have
-    another network connection, selecting this option will prevent you from
-    downloading maps from the Internet.  See the GPS chapter for more
-    information.<br>
-    <br>
-  </li>
   <li>The dump filter settings will tell KisMAC to create a PCAP file with
     the following filtering options:
     <ol>
@@ -143,10 +143,12 @@ Preferences</font></p>
       <li>Weak frames only - only packets with weak initialization vectors
         will be written to the log file.</li>
     </ol>
-    Please note: Dumping traffic is only useful if you want to make the
+    <b>Note:</b> Dumping traffic is only useful if you want to make the
     captured data available for third party tools, such as ethereal, dsniff
     or ettercap. You probably don't need this unless you want to see what the
-    data was or monitor it.</li>
+    data was or monitor it. You also don't need to use any of these features
+    to crack WEP. Weak (IVs) are automatically captured and can be saved in a 
+    KisMAC save file if needed.</li>
 </ol>
 
 <p><font face="Lucida Grande,Geneva,Arial" size="2">Sound
@@ -223,7 +225,7 @@ brands:</font></p>
       <td>Verified - works in passive mode now!</td>
     </tr>
     <tr>
-      <td>Asant&#x17d;     </td>
+      <td>Asante</td>
       <td>AL1011</td>
       <td>PrismII</td>
       <td>Should work</td>
@@ -287,6 +289,18 @@ brands:</font></p>
       <td>WPC54G</td>
       <td>Broadcom</td>
       <td>Should work in active mode only</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>WPC55AG</td>
+      <td>Atheros</td>
+      <td>Verified</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>WUSB11 ver. 2.5</td>
+      <td>PrismII</td>
+      <td>Verified</td>
     </tr>
     <tr>
       <td>Proxim</td>
