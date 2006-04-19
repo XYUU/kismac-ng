@@ -11,48 +11,44 @@
 @implementation PrefsAdvanced
 
 -(void)updateUI {
-    if ([controller objectForKey:@"ac_ff"] == nil) {
-        [self setDefaults:self];
-        return;
-    }
-    [ac_ff setStringValue:[controller objectForKey:@"ac_ff"]];
-	[bf_interval setStringValue:[controller objectForKey:@"bf_interval"]];
+    [ac_ff setIntValue:[[controller objectForKey:@"ac_ff"]intValue]];
+	[bf_interval setFloatValue:[[controller objectForKey:@"bf_interval"] intValue]];
 	[bpfdevice setStringValue:[controller objectForKey:@"bpfdevice"]];
 	[bpfloc setStringValue:[controller objectForKey:@"bpfloc"]];
-	[pr_interval setStringValue:[controller objectForKey:@"pr_interval"]];
+	[pr_interval setIntValue:[[controller objectForKey:@"pr_interval"] intValue]];
 }
 
 -(BOOL)updateDictionary {
-	[controller setObject:[ac_ff stringValue] forKey:@"ac_ff"];
-	[controller setObject:[bf_interval stringValue] forKey:@"bf_interval"];
+	[controller setObject:[NSNumber numberWithInt:[ac_ff intValue]] forKey:@"ac_ff"];
+	[controller setObject:[NSNumber numberWithFloat:[bf_interval floatValue]] forKey:@"bf_interval"];
 	[controller setObject:[bpfdevice stringValue] forKey:@"bpfdevice"];
 	[controller setObject:[bpfloc stringValue] forKey:@"bpfloc"];
-	[controller setObject:[pr_interval stringValue] forKey:@"pr_interval"];
+	[controller setObject:[NSNumber numberWithInt:[pr_interval intValue]] forKey:@"pr_interval"];
     return YES;
 }
 
 -(IBAction)setValueForSender:(id)sender {
    if(sender == ac_ff) {
-	[controller setObject:[ac_ff stringValue] forKey:@"ac_ff"];
+	[controller setObject:[NSNumber numberWithInt:[ac_ff intValue]] forKey:@"ac_ff"];
     } else if(sender == bf_interval) {
-		[controller setObject:[bf_interval stringValue] forKey:@"bf_interval"];
+		[controller setObject:[NSNumber numberWithFloat:[bf_interval floatValue]] forKey:@"bf_interval"];
     } else if(sender == bpfdevice) {
 		[controller setObject:[bpfdevice stringValue] forKey:@"bpfdevice"];
     } else if(sender == bpfloc) {
 		[controller setObject:[bpfloc stringValue] forKey:@"bpfloc"];
     } else if(sender == pr_interval) {
-       [controller setObject:[pr_interval stringValue] forKey:@"pr_interval"];
+       [controller setObject:[NSNumber numberWithInt:[pr_interval intValue]] forKey:@"pr_interval"];
 	} else {
         NSLog(@"Error: Invalid sender(%@) in setValueForSender:",sender);
     }
 }
 
 -(IBAction)setDefaults:(id)sender {
-	[ac_ff setStringValue:@"2"];
-	[bf_interval setStringValue:@"0.1"];
+	[ac_ff setIntValue:2];
+	[bf_interval setFloatValue:0.1];
 	[bpfdevice setStringValue:@"wlt1"];
 	[bpfloc setStringValue:@"/dev/bpf0"];
-	[pr_interval setStringValue:@"100"];
+	[pr_interval setIntValue:100];
 }
 
 @end

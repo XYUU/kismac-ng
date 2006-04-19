@@ -97,6 +97,11 @@ NSString *const KisMACGPSStatusChanged      = @"KisMACGPSStatusChanged";
 		[NSNumber numberWithBool: NO], @"useWebService",
         [NSNumber numberWithBool: NO], @"useWebServiceAutomatically",
         @"", @"webServiceAccount",
+        [NSNumber numberWithInt:2], @"ac_ff", 
+        [NSNumber numberWithFloat:0.1], @"bf_interval",
+        @"wlt1", @"bpfdevice", 
+        @"/dev/bpf0", @"bpfloc",
+        [NSNumber numberWithInt:100], @"pr_interval",
         nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDict];
