@@ -89,6 +89,11 @@ bool USBIntersilJack::startCapture(UInt16 channel) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
+    if (_doCommand(wlcInit, 0) != kIOReturnSuccess) {
+        NSLog(@"USBIntersilJack::startCapture: _doCommand(wlcInit, 0) failed\n");
+        return false;
+    }
+	
     if ((!_isEnabled) && (_disable() != kIOReturnSuccess)) {
         NSLog(@"USBIntersilJack::::startCapture: Couldn't disable card\n");
         return false;
@@ -122,7 +127,7 @@ bool USBIntersilJack::stopCapture() {
     if (!_deviceInit) return false;
     
     if (_doCommand(wlcMonitorOff, 0) != kIOReturnSuccess) {
-        NSLog(@"MACJackCard::stopCapture: _doCommand(wlcMonitorOff) failed\n");
+        NSLog(@"USBIntersilJack::stopCapture: _doCommand(wlcMonitorOff) failed\n");
         return false;
     }
 
