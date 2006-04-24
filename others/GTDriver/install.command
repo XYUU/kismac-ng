@@ -23,8 +23,8 @@ sudo rm -rf $SDEST
 sudo cp -r "$FROM/WiFiGUI.app" $DEST/Contents/Resources
 #sudo cp -r "$FROM/StartupParameters.plist" $SDEST
 #sudo cp -r "$FROM/GTDriver" $SDEST
-/usr/bin/osascript $FROM/removeLoginItem.scpt
-cp $FROM/addStartupItem.scpt /tmp/addStartupItem.scpt
+/usr/bin/osascript "$FROM/removeLoginItem.scpt"
+cp "$FROM/addStartupItem.scpt" /tmp/addStartupItem.scpt
 /usr/bin/osascript /tmp/addStartupItem.scpt
 rm /tmp/addStartupItem.scpt
 

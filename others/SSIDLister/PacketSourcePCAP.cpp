@@ -55,6 +55,9 @@ PacketSourcePCAP::PacketSourcePCAP(bool live, const char* filename) {
 	case DLT_PRISM_HEADER:
 		_headerOffset = 144; //new wlanng header type 
 		break;
+	case DLT_IEEE802_11_RADIO_AVS:
+		_headerOffset = 64;
+		break;
 	case DLT_IEEE802_11_RADIO:
 	case DLT_AIRONET_HEADER:
 		throw PacketSource_error("Unsupported 802.11 Datalink mode.");
