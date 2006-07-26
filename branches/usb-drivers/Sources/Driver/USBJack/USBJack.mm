@@ -23,12 +23,12 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 	
-#include <unistd.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 #include <IOKit/IOCFPlugIn.h>
 
-#include "USBIntersil.h"
+#include "USBJack.h"
+#include "IntersilJack.h"
 
 #define wlcDeviceGone   (int)0xe000404f
 #define align64(a)      (((a)+63)&~63)
@@ -37,6 +37,12 @@ struct identStruct {
     UInt16 vendor;
     UInt16 device;
 };
+
+enum  deviceTypes {
+    intersil,
+    zydas,
+    ralink
+} deviceType; 
 
 static struct identStruct devices[] = {
     { 0x04bb, 0x0922}, //1 IOData AirPort WN-B11/USBS
@@ -71,121 +77,47 @@ static struct identStruct devices[] = {
     { 0x9016, 0x182d}, //30 Sitecom WL-022 - new version
 	{ 0x0707, 0xee04}, //31 SMC WUSB32
 	{ 0x1915, 0x2236}, //32 WUSB11 version 3.0
+    //zydas
+    {0x0586, 0x3401}, //1 Zyxel duh
+    //ralink
+    {0x2001, 0x3C00}, //1 Dlink duh
 };
 
-#define dDeviceCount 32
+#define dIntersilDeviceCount 32
+#define dZydasDeviceCount 1
+#define dRalinkDeviceCount 1
 
-#define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );
-
-#define kInterruptPipe          3
-#define kOutPipe                2
-#define kInPipe                 1
+#define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
 #import <mach/mach_types.h>
 #import <mach/mach_error.h>
 
 
-bool USBIntersilJack::startCapture(UInt16 channel) {
-    if (!_devicePresent) return false;
-    if (!_deviceInit) return false;
-    	
-    if ((!_isEnabled) && (_disable() != kIOReturnSuccess)) {
-        NSLog(@"USBIntersilJack::::startCapture: Couldn't disable card\n");
-        return false;
-    }
-    
-    if (setChannel(channel) == false) {
-        NSLog(@"USBIntersilJack::::startCapture: setChannel(%d) failed - resetting...\n",
-                 channel);
-		_reset();
-        return false;
-    }
-
-    if (_doCommand(wlcMonitorOn, 0) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::::startCapture: _doCommand(wlcMonitorOn) failed\n");
-        return false;
-    }
-
-    if (_enable() != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::::startCapture: Couldn't enable card\n");
-        return false;
-    }
-    
-    _channel = channel;
-    return true;
+bool USBJack::startCapture(UInt16 channel) {
+    return false;   //this method MUST be overridden
 }
 
-bool USBIntersilJack::stopCapture() {
-    _channel = 0;
-    
-    if (!_devicePresent) return false;
-    if (!_deviceInit) return false;
-    
-    if (_doCommand(wlcMonitorOff, 0) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::stopCapture: _doCommand(wlcMonitorOff) failed\n");
-        return false;
-    }
-
-    return true;
+bool USBJack::stopCapture() {
+    return false;   //this method MUST be overridden
 }
 
-bool USBIntersilJack::getChannel(UInt16* channel) {
-    if (!_devicePresent) return false;
-    if (!_deviceInit) return false;
-    
-    if (_getValue(0xFDC1, channel) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::getChannel: getValue error\n");
-        return false;
-    }
-    
-    _channel = *channel;
-    return true;
+bool USBJack::getChannel(UInt16* channel) {
+    return false;   //this method MUST be overridden
 }
 
-bool USBIntersilJack::getAllowedChannels(UInt16* channels) {
-    if (!_devicePresent) return false;
-    if (!_deviceInit) return false;
-    
-    if (_getValue(0xFD10, channels) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::getAllowedChannels: getValue error\n");
-        return false;
-    }
-    
-     return true;
+bool USBJack::getAllowedChannels(UInt16* channels) {
+    return false;   //this method MUST be overridden
 }
 
-bool USBIntersilJack::setChannel(UInt16 channel) {
-    if (!_devicePresent) return false;
-    if (!_deviceInit) return false;
-    
-    if (_setValue(0xFC03, channel) != kIOReturnSuccess) {
-        usleep(10000);
-        if (_setValue(0xFC03, channel) != kIOReturnSuccess) {
-            NSLog(@"USBIntersilJack::setChannel: setValue error\n");
-            return false;
-        }
-    }
-
-    if (_isEnabled) {
-        if (_disable() != kIOReturnSuccess) {
-            NSLog(@"USBIntersilJack::setChannel: Couldn't disable card\n");
-            return false;
-        }
-        if (_enable() != kIOReturnSuccess) {
-            NSLog(@"USBIntersilJack::setChannel: Couldn't enable card\n");
-            return false;
-        }
-    }
-    
-    _channel = channel;
-    return true;
+bool USBJack::setChannel(UInt16 channel) {
+    return false;   //this method MUST be overridden
 }
 
-bool USBIntersilJack::devicePresent() {
+bool USBJack::devicePresent() {
     return _devicePresent;
 }
 
-WLFrame *USBIntersilJack::receiveFrame() {
+WLFrame *USBJack::recieveFrame() {
     WLFrame* ret;
     
     if (!_devicePresent) return NULL;
@@ -200,7 +132,7 @@ WLFrame *USBIntersilJack::receiveFrame() {
     return ret;
 }
 
-bool USBIntersilJack::sendFrame(UInt8* data) {
+bool USBJack::sendFrame(UInt8* data) {
     WLFrame *frameDescriptor;
     UInt8 aData[2364];
     IOByteCount pktsize;
@@ -237,54 +169,54 @@ bool USBIntersilJack::sendFrame(UInt8* data) {
 
 #pragma mark -
 
-IOReturn USBIntersilJack::_getHardwareAddress(struct WLHardwareAddress* addr) {
+IOReturn USBJack::_getHardwareAddress(struct WLHardwareAddress* addr) {
     UInt32 size = sizeof(struct WLHardwareAddress);
     
     if (_getRecord(0xFC01, (UInt16*)addr, &size, false) != kIOReturnSuccess) {
-	NSLog(@"USBIntersilJack::_getHardwareAddress: getRecord error\n");
+	NSLog(@"USBJack::_getHardwareAddress: getRecord error\n");
 	return kIOReturnError;
     }
 
-    NSLog(@"USBIntersilJack: MAC 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\n",
+    NSLog(@"USBJack: MAC 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\n",
                 addr->bytes[0], addr->bytes[1], addr->bytes[2],
                 addr->bytes[3], addr->bytes[4], addr->bytes[5]);
 
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_getIdentity(WLIdentity* wli) {
+IOReturn USBJack::_getIdentity(WLIdentity* wli) {
     UInt32 size = sizeof(WLIdentity);
     if (_getRecord(0xFD20, (UInt16*)wli, &size) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::getIdentity: getRecord failed\n");
+        NSLog(@"USBJack::getIdentity: getRecord failed\n");
         return kIOReturnError;
     }
 
     return kIOReturnSuccess;
 }
 
-int USBIntersilJack::_getFirmwareType() {
+int USBJack::_getFirmwareType() {
     UInt16 card_id;
     UInt32 size = 8;
     UInt8 d[8];
     
     if (_getRecord(0xFD0B, (UInt16*)d, &size) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::_getFirmwareType: getRecord failed\n");
+        NSLog(@"USBJack::_getFirmwareType: getRecord failed\n");
         return -1;
     }
 
     card_id = *(UInt16*)d;
     if (card_id & 0x8000) {
-        NSLog(@"USBIntersilJack: Detected a Prism2 card\n");
+        NSLog(@"USBJack: Detected a Prism2 card\n");
         return WI_INTERSIL;
     } else {
-        NSLog(@"USBIntersilJack: WARNING detected a Lucent card. This is not supported! 0x%x\n",card_id);
+        NSLog(@"USBJack: WARNING detected a Lucent card. This is not supported! 0x%x\n",card_id);
         return WI_LUCENT;
     }
 }
 
-IOReturn USBIntersilJack::_enable() {
+IOReturn USBJack::_enable() {
     if (_doCommand(wlcEnable, 0) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::startCapture: _doCommand(wlcEnable) failed\n");
+        NSLog(@"USBJackUSBJack::startCapture: _doCommand(wlcEnable) failed\n");
         return kIOReturnError;
     }
     _isEnabled = true;
@@ -292,9 +224,9 @@ IOReturn USBIntersilJack::_enable() {
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_disable() {
+IOReturn USBJack::_disable() {
     if (_doCommand(wlcDisable, 0) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::_disable: _doCommand(wlcDisable) failed\n");
+        NSLog(@"USBJack::_disable: _doCommand(wlcDisable) failed\n");
         return kIOReturnError;
     }
     _isEnabled = false;
@@ -302,7 +234,7 @@ IOReturn USBIntersilJack::_disable() {
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_init() {
+IOReturn USBJack::_init() {
     WLIdentity ident;
     WLHardwareAddress macAddr;
     int i; 
@@ -319,14 +251,14 @@ IOReturn USBIntersilJack::_init() {
      */
      
     if (_getIdentity(&ident) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::_init: Couldn't read card identity\n");
+        NSLog(@"USBJack::_init: Couldn't read card identity\n");
         return kIOReturnError;
     }
 
-    NSLog(@"USBIntersilJack: Firmware vendor %d, variant %d, version %d.%d\n", ident.vendor, ident.variant, ident.major, ident.minor);
+    NSLog(@"USBJack: Firmware vendor %d, variant %d, version %d.%d\n", ident.vendor, ident.variant, ident.major, ident.minor);
 
     if (_getHardwareAddress(&macAddr) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::_init: Couldn't read MAC address\n");
+        NSLog(@"USBJack::_init: Couldn't read MAC address\n");
         return kIOReturnError;
     }
     
@@ -335,62 +267,19 @@ IOReturn USBIntersilJack::_init() {
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_reset() {
-    int i;
-    
-    if (_doCommand(wlcInit, 0) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::_reset: _doCommand(wlcInit, 0) failed\n");
-        return kIOReturnError;
-    }
-    
-    usleep(100000); // give it a sec to reset
-    
-    for (i = 0; i < wlTimeout; i++) {
-        _firmwareType = _getFirmwareType();
-        if (_firmwareType != -1) break;
-    }
-    
-    for (i = 0; i < wlTimeout; i++) {
-        if (_setValue(0xFC00, (_firmwareType == WI_LUCENT) ? 0x3 : 0x5) == kIOReturnSuccess) break;
-    }
-
-    if (_firmwareType == WI_INTERSIL) {
-        _setValue(0xFC06, 1); //syscale
-        _setValue(0xFC07, 2304); //max data len
-        _setValue(0xFC09, 0); //pm off!
-        _setValue(0xFC84, 3); //default tx rate
-        _setValue(0xFC85, 0); //promiscous mode
-        _setValue(0xFC2A, 1); //auth type
-        _setValue(0xFC2D, 1); //roaming by firmware
-		_setValue(0xFC28, 0x90); //set wep ignore
-    }
-    
-    if (i==wlTimeout) {
-        NSLog(@"USBIntersilJack::_reset: could not set port type\n");
-        return kIOReturnError;
-    }
-    
-    /*
-     * Set list of interesting events
-     */
-    //_interrupts = wleRx;  //| wleTx | wleTxExc | wleAlloc | wleInfo | wleInfDrop | wleCmd | wleWTErr | wleTick;
-
-    _enable();
-    _isSending = false;
-    
-    return kIOReturnSuccess;
+IOReturn USBJack::_reset() {
+    return kIOReturnError;  //this method MUST be overridden
 }
-
 
 #pragma mark -
 
-IOReturn USBIntersilJack::_doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1, UInt16 param2) {
+IOReturn USBJack::_doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1, UInt16 param2) {
     UInt16 status;
     
     if (!_devicePresent) return kIOReturnError;
     
     if (_interface == NULL) {
-        NSLog(@"USBIntersilJack::_doCommand called with NULL interface this is prohibited!\n");
+        NSLog(@"USBJack::_doCommand called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
     
@@ -403,7 +292,7 @@ IOReturn USBIntersilJack::_doCommand(enum WLCommandCode cmd, UInt16 param0, UInt
     _outputBuffer.cmdreq.parm2 =	NSSwapHostShortToLittle(param2);
     
     if (_writeWaitForResponse(sizeof(_outputBuffer.cmdreq)) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::unable to execute commmand (%08x)\n", cmd);
+        NSLog(@"USBJack::unable to execute commmand (%08x)\n", cmd);
         _unlockDevice();
         return kIOReturnError;
     }
@@ -412,18 +301,18 @@ IOReturn USBIntersilJack::_doCommand(enum WLCommandCode cmd, UInt16 param0, UInt
     _unlockDevice();
     
     if (status) {
-        NSLog(@"USBIntersilJack::_doCommand: Status code (0x%x) at command cmd 0x%x\n", status, cmd);
+        NSLog(@"USBJack::_doCommand: Status code (0x%x) at command cmd 0x%x\n", status, cmd);
         return kIOReturnError;
     }
 
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1, UInt16 param2) {
+IOReturn USBJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1, UInt16 param2) {
     IOReturn kr;
     
     if (_interface == NULL) {
-        NSLog(@"USBIntersilJack::_doCommandNoWait called with NULL interface this is prohibited!\n");
+        NSLog(@"USBJack::_doCommandNoWait called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
     
@@ -441,13 +330,13 @@ IOReturn USBIntersilJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0
     return kr;
 }
 
-IOReturn USBIntersilJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes) {
+IOReturn USBJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes) {
     UInt32  readLength = 0;
     
     if (!_devicePresent) return kIOReturnError;
     
     if (_interface == NULL) {
-        NSLog(@"USBIntersilJack::_getRecord called with NULL interface this is prohibited!\n");
+        NSLog(@"USBJack::_getRecord called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
     
@@ -458,14 +347,14 @@ IOReturn USBIntersilJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swap
     _outputBuffer.rridreq.rid =    NSSwapHostShortToLittle(rid);
     
     if (_writeWaitForResponse(sizeof(_outputBuffer.rridreq)) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::unable to write record offset.\n");
+        NSLog(@"USBJack::unable to write record offset.\n");
         _unlockDevice();
         return kIOReturnError;
     }
     
     readLength = ((NSSwapLittleShortToHost(_inputBuffer.rridresp.frmlen)-1)*2);
     if (readLength != *n) {  
-        //NSLog(@"USBIntersilJack::RID len mismatch, rid=0x%04x hlen=%d fwlen=%d\n", rid, *n, readLength);
+        //NSLog(@"USBJack::RID len mismatch, rid=0x%04x hlen=%d fwlen=%d\n", rid, *n, readLength);
         _unlockDevice();
         return kIOReturnError;
     }
@@ -481,14 +370,14 @@ IOReturn USBIntersilJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swap
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes) {
+IOReturn USBJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes) {
     UInt32      numBytes;
     UInt16      status;
   
     if (!_devicePresent) return kIOReturnError;
     
     if (_interface == NULL) {
-        NSLog(@"USBIntersilJack::_setRecord called with NULL interface this is prohibited!\n");
+        NSLog(@"USBJack::_setRecord called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
     
@@ -509,14 +398,14 @@ IOReturn USBIntersilJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool
 			sizeof(_outputBuffer.wridreq.frmlen) + sizeof(_outputBuffer.wridreq.rid) + n);
    
     if (_writeWaitForResponse(numBytes) != kIOReturnSuccess) {
-        NSLog(@"USBIntersilJack::unable to write record offset for writing.\n");
+        NSLog(@"USBJack::unable to write record offset for writing.\n");
         _unlockDevice();
         return kIOReturnError;
     }
     
     status = NSSwapLittleShortToHost(_inputBuffer.wridresp.status);
     if (status & 0x7F00) {
-	NSLog(@"USBIntersilJack::_setRecord: setRecord result 0x%x\n", status & 0x7F00);
+	NSLog(@"USBJack::_setRecord: setRecord result 0x%x\n", status & 0x7F00);
         _unlockDevice();
         return kIOReturnError;
     }
@@ -526,12 +415,12 @@ IOReturn USBIntersilJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_getValue(UInt16 rid, UInt16* v) {
+IOReturn USBJack::_getValue(UInt16 rid, UInt16* v) {
     UInt32 n = 2;
     return _getRecord(rid, v, &n);
 }
 
-IOReturn USBIntersilJack::_setValue(UInt16 rid, UInt16 v) {
+IOReturn USBJack::_setValue(UInt16 rid, UInt16 v) {
     UInt16 value = v;
     IOReturn ret = _setRecord(rid, &value, 2);
 
@@ -544,21 +433,21 @@ IOReturn USBIntersilJack::_setValue(UInt16 rid, UInt16 v) {
         return ret;
 
     if (value != v) {
-        //NSLog(@"USBIntersilJack::setValue: Failed to set value (0x%x != 0x%x) for register 0x%x\n", value, v, rid);
+        //NSLog(@"USBJack::setValue: Failed to set value (0x%x != 0x%x) for register 0x%x\n", value, v, rid);
         return kIOReturnError;
     }
 
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_sendFrame(UInt8* data, IOByteCount size) {
+IOReturn USBJack::_sendFrame(UInt8* data, IOByteCount size) {
     UInt32      numBytes;
     IOReturn    kr;
   
     if (!_devicePresent) return kIOReturnError;
     
     if (_interface == NULL) {
-        NSLog(@"USBIntersilJack::_sendFrame called with NULL interface this is prohibited!\n");
+        NSLog(@"USBJack::_sendFrame called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
     
@@ -578,15 +467,15 @@ IOReturn USBIntersilJack::_sendFrame(UInt8* data, IOByteCount size) {
 
 #pragma mark -
 
-void  USBIntersilJack::_lockDevice() {
+void  USBJack::_lockDevice() {
     pthread_mutex_lock(&_wait_mutex);
 }
 
-void  USBIntersilJack::_unlockDevice() {
+void  USBJack::_unlockDevice() {
     pthread_mutex_unlock(&_wait_mutex);
 }
 
-IOReturn USBIntersilJack::_writeWaitForResponse(UInt32 size) {
+IOReturn USBJack::_writeWaitForResponse(UInt32 size) {
     IOReturn kr;
     struct timespec to;
     int error;
@@ -598,7 +487,7 @@ IOReturn USBIntersilJack::_writeWaitForResponse(UInt32 size) {
         kr = (*_interface)->WritePipe(_interface, kOutPipe, &_outputBuffer, size);
         if (kr != kIOReturnSuccess) {
             if (kr==wlcDeviceGone) _devicePresent = false;
-            else NSLog(@"USBIntersilJack::unable to write to USB Device(%08x)\n", kr);
+            else NSLog(@"USBJack::unable to write to USB Device(%08x)\n", kr);
             return kr;
         }
 
@@ -612,8 +501,8 @@ IOReturn USBIntersilJack::_writeWaitForResponse(UInt32 size) {
     return kIOReturnSuccess;
 }
  
-void USBIntersilJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
-    USBIntersilJack             *me = (USBIntersilJack*) refCon;
+void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
+    USBJack             *me = (USBJack*) refCon;
     IOReturn                    kr;
     UInt32                      type;
     
@@ -704,20 +593,20 @@ void USBIntersilJack::_interruptRecieved(void *refCon, IOReturn result, int len)
     
 readon:
     bzero(&me->_recieveBuffer, sizeof(me->_recieveBuffer));
-    kr = (*me->_interface)->ReadPipeAsync((me->_interface), kInPipe, &me->_recieveBuffer, sizeof(me->_recieveBuffer), (IOAsyncCallback1)_interruptRecieved, refCon);
+    kr = (*me->_interface)->ReadPipeAsync((me->_interface), (me->kInPipe), &me->_recieveBuffer, sizeof(me->_recieveBuffer), (IOAsyncCallback1)_interruptRecieved, refCon);
     if (kIOReturnSuccess != kr) {
         NSLog(@"unable to do async interrupt read (%08x). this means the card is stopped!\n", kr);
 		// I haven't been able to reproduce the error that caused it to hit this point in the code again since adding the following lines
 		// however, when it hit this point previously, the only solution was to kill and relaunch KisMAC, so at least this won't make anything worse
 		NSLog(@"Attempting to re-initialise adapter...");
-		if (me->_init() != kIOReturnSuccess) NSLog(@"USBIntersilJack::_interruptReceived: _init() failed\n");
+		if (me->_init() != kIOReturnSuccess) NSLog(@"USBJack::_interruptReceived: _init() failed\n");
     }
         
 }
 
 #pragma mark -
 
-IOReturn USBIntersilJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
+IOReturn USBJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     UInt8				numConf;
     IOReturn				kr;
     IOUSBConfigurationDescriptorPtr	confDesc;
@@ -741,7 +630,7 @@ IOReturn USBIntersilJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     return kIOReturnSuccess;
 }
 
-IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
+IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
     IOReturn			kr;
     IOUSBFindInterfaceRequest	request;
     io_iterator_t		iterator;
@@ -756,7 +645,8 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
     int				pipeRef;
     CFRunLoopSourceRef		runLoopSource;
     BOOL                        error;
-    USBIntersilJack             *me = (USBIntersilJack*)refCon;
+    USBJack             *me = (USBJack *) refCon;
+    
     
     request.bInterfaceClass = kIOUSBFindInterfaceDontCare;
     request.bInterfaceSubClass = kIOUSBFindInterfaceDontCare;
@@ -805,8 +695,8 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
             break;
         }
         
-        if (intfNumEndpoints != 3) {
-            NSLog(@"Error: Interface has %d endpoints. Needs 3!\n", intfNumEndpoints);
+        if (intfNumEndpoints < 1) {
+            NSLog(@"Error: Interface has %d endpoints. Needs at least one!!\n", intfNumEndpoints);
             (void) (*intf)->USBInterfaceClose(intf);
             (void) (*intf)->Release(intf);
             break;
@@ -829,19 +719,11 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
                 break;
             } else {
                 error = false;
-                switch (pipeRef) {
-                    case 1:
-                        if (direction != kUSBIn || transferType != kUSBBulk) error = true;
-                        break;
-                    case 2:
-                        if (direction != kUSBOut || transferType != kUSBBulk) error = true;
-                        break;
-                    case 3:
-                        if (direction != kUSBIn || transferType  != kUSBInterrupt) error = true;
-                        break;
-                    default:
-                        error = true;
-                }
+                if (direction == kUSBIn && transferType == kUSBBulk) me->kInPipe = pipeRef;
+                else if (direction == kUSBOut && transferType == kUSBBulk) me->kOutPipe = pipeRef;
+                else if (direction == kUSBIn && transferType  == kUSBInterrupt) me->kInterruptPipe = pipeRef;
+                else NSLog(@"Found unknown interface, ignoring");
+            
                 
                 if (error) {
                     NSLog(@"unable to properties of pipe %d are not as expected!\n", pipeRef);
@@ -865,7 +747,7 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
         
         _interface = intf;
         
-        NSLog(@"USBIntersilJack is now ready to start working.\n");
+        NSLog(@"USBJack is now ready to start working.\n");
         
         //startUp Interrupt handling
         UInt32 numBytesRead = sizeof(_recieveBuffer); // leave one byte at the end for NUL termination
@@ -892,8 +774,8 @@ IOReturn USBIntersilJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **d
     return kr;
 }
 
-void USBIntersilJack::_addDevice(void *refCon, io_iterator_t iterator) {
-    USBIntersilJack             *me = (USBIntersilJack*)refCon;
+void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
+    USBJack             *me = (USBJack*)refCon;
     kern_return_t		kr;
     io_service_t		usbDevice;
     IOCFPlugInInterface 	**plugInInterface=NULL;
@@ -930,12 +812,24 @@ void USBIntersilJack::_addDevice(void *refCon, io_iterator_t iterator) {
         kr = (*dev)->GetDeviceReleaseNumber(dev, &release);
         
         //find the correct device
-        for (i=0; i< dDeviceCount; i++) {
+        for (i=0; i< (dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount); i++) {
             if ((vendor == devices[i].vendor) && (product == devices[i].device)) break;
         }
         
-        if (i == dDeviceCount) {
-            NSLog(@"found device i didn't want (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+        if (i < dIntersilDeviceCount) {
+            NSLog(@"Intersil USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            deviceType = intersil;
+        }
+        else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
+            NSLog(@"Zydas USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            deviceType = zydas;
+        }
+        else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
+            NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            deviceType = ralink;
+        }
+        else {
+            NSLog(@"found unwanted device  (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             (*dev)->Release(dev);
             continue;
         }
@@ -971,11 +865,11 @@ void USBIntersilJack::_addDevice(void *refCon, io_iterator_t iterator) {
     }
 }
 
-void USBIntersilJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
+void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
     kern_return_t	kr;
     io_service_t	obj;
     int                 count = 0;
-    //USBIntersilJack     *me = (USBIntersilJack*)refCon;
+    //USBJack     *me = (USBJack*)refCon;
     
     while ((obj = IOIteratorNext(iterator)) != nil) {
         count++;
@@ -991,7 +885,7 @@ void USBIntersilJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator)
 
 #pragma mark -
 
-bool USBIntersilJack::stopRun() {
+bool USBJack::stopRun() {
     if (_runLoop == NULL && _intLoop == NULL) return false;
     _stayUp = false;
     if (_notifyPort) {
@@ -1007,7 +901,7 @@ bool USBIntersilJack::stopRun() {
     return true;
 }
 
-void USBIntersilJack::_runCFRunLoop(USBIntersilJack* me) {
+void USBJack::_runCFRunLoop(USBJack* me) {
     me->_runLoop = CFRunLoopGetCurrent();
     while(me->_stayUp) {
         CFRunLoopRun();
@@ -1019,7 +913,7 @@ void USBIntersilJack::_runCFRunLoop(USBIntersilJack* me) {
     }
 } 
 
-void USBIntersilJack::_intCFRunLoop(USBIntersilJack* me) {
+void USBJack::_intCFRunLoop(USBJack* me) {
     me->_intLoop = CFRunLoopGetCurrent();
     while(me->_stayUp) {
         CFRunLoopRun();
@@ -1030,7 +924,7 @@ void USBIntersilJack::_intCFRunLoop(USBIntersilJack* me) {
     }
 } 
 
-bool USBIntersilJack::run() {
+bool USBJack::run() {
     pthread_t pt;
     
     _stayUp = true;
@@ -1044,7 +938,7 @@ bool USBIntersilJack::run() {
     return true;
 }
 
-void USBIntersilJack::startMatching() {
+void USBJack::startMatching() {
     mach_port_t 		masterPort;
     CFMutableDictionaryRef 	matchingDict;
     kern_return_t		kr;
@@ -1104,7 +998,7 @@ void USBIntersilJack::startMatching() {
     masterPort = 0;
 }
 
-USBIntersilJack::USBIntersilJack() {
+USBJack::USBJack() {
     _isEnabled = false;
     _deviceInit = false;
     _devicePresent = false;
@@ -1128,7 +1022,7 @@ USBIntersilJack::USBIntersilJack() {
         usleep(100);
 }
 
-USBIntersilJack::~USBIntersilJack() {
+USBJack::~USBJack() {
     stopRun();
     _interface = NULL;
     _frameSize = 0;

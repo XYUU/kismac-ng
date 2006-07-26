@@ -27,28 +27,33 @@
 #include <IOKit/usb/IOUSBLib.h>
 #include <pthread.h>
 #include "../../Core/80211b.h"
+#include <unistd.h>
 #include "prism2.h"
 #include "structs.h"
 
-class USBIntersilJack {
+class USBJack {
 public:
     bool    startCapture(UInt16 channel);
     bool    stopCapture();
-    bool    getChannel(UInt16* channel);
-    bool    getAllowedChannels(UInt16* channel);
-    bool    setChannel(UInt16 channel);
+    virtual bool    getChannel(UInt16* channel);
+    virtual bool    getAllowedChannels(UInt16* channel);
+    virtual bool    setChannel(UInt16 channel);
     bool    devicePresent();
     
-    WLFrame *receiveFrame();
+    WLFrame *recieveFrame();
     bool    sendFrame(UInt8* data);
     
     void    startMatching();
-    USBIntersilJack();
-    ~USBIntersilJack();
+    USBJack();
+    virtual ~USBJack();
     
-private:
+protected:
     bool    run();
     bool    stopRun();
+    
+    int kInterruptPipe;
+    int kOutPipe;
+    int kInPipe; 
 
     IOReturn    _doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
     IOReturn    _doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
@@ -69,7 +74,7 @@ private:
     IOReturn    _disable();
     IOReturn    _enable();
     IOReturn    _init();
-    IOReturn    _reset();
+    virtual IOReturn    _reset();
     
     inline void        _lockDevice();
     inline void        _unlockDevice();
@@ -81,8 +86,8 @@ private:
     static void         _addDevice(void *refCon, io_iterator_t iterator);
     static void         _handleDeviceRemoval(void *refCon, io_iterator_t iterator);
     static void         _interruptRecieved(void *refCon, IOReturn result, int len);
-    static void         _runCFRunLoop(USBIntersilJack* me);
-    static void         _intCFRunLoop(USBIntersilJack* me);
+    static void         _runCFRunLoop(USBJack* me);
+    static void         _intCFRunLoop(USBJack* me);
 
     SInt32                      _vendorID;
     SInt32                      _productID;
@@ -113,4 +118,3 @@ private:
     pthread_mutex_t             _recv_mutex;
     pthread_cond_t              _recv_cond;
 };
-
