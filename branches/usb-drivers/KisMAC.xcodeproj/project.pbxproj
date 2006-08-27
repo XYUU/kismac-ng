@@ -136,10 +136,6 @@
 		0035345106A5DD8500AB4577 /* WaveNetWPACrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533CF06A5DD8500AB4577 /* WaveNetWPACrack.m */; };
 		0035345206A5DD8500AB4577 /* WaveNetWPACrackAltivec.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D006A5DD8500AB4577 /* WaveNetWPACrackAltivec.h */; };
 		0035345306A5DD8500AB4577 /* WaveNetWPACrackAltivec.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533D106A5DD8500AB4577 /* WaveNetWPACrackAltivec.m */; settings = {COMPILER_FLAGS = "-faltivec"; }; };
-		0035345406A5DD8500AB4577 /* prism2.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D406A5DD8500AB4577 /* prism2.h */; };
-		0035345506A5DD8500AB4577 /* structs.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D506A5DD8500AB4577 /* structs.h */; };
-		0035345606A5DD8500AB4577 /* USBIntersil.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D606A5DD8500AB4577 /* USBIntersil.h */; };
-		0035345706A5DD8500AB4577 /* USBIntersil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 003533D706A5DD8500AB4577 /* USBIntersil.mm */; };
 		0035345806A5DD8500AB4577 /* WaveSecret.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D906A5DD8500AB4577 /* WaveSecret.h */; };
 		0035345906A5DD8500AB4577 /* PrefsClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533DC06A5DD8500AB4577 /* PrefsClient.h */; };
 		0035345A06A5DD8500AB4577 /* PrefsClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533DD06A5DD8500AB4577 /* PrefsClient.m */; };
@@ -284,7 +280,6 @@
 		008ACAC207C38A5600A76ADA /* PrefsWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533EF06A5DD8500AB4577 /* PrefsWebService.m */; };
 		008ACAC307C38A5900A76ADA /* PrefsWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533F206A5DD8500AB4577 /* PrefsWindow.h */; };
 		008ACAC407C38A5A00A76ADA /* PrefsWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533F306A5DD8500AB4577 /* PrefsWindow.m */; };
-		008ACAC507C38A5D00A76ADA /* prism2.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D406A5DD8500AB4577 /* prism2.h */; };
 		008ACAC607C38A5F00A76ADA /* quicksort.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533A206A5DD8500AB4577 /* quicksort.h */; };
 		008ACAC707C38A6000A76ADA /* quicksort.m in Sources */ = {isa = PBXBuildFile; fileRef = 003533A306A5DD8500AB4577 /* quicksort.m */; };
 		008ACAC807C38A6600A76ADA /* RC4.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533CA06A5DD8500AB4577 /* RC4.h */; };
@@ -306,13 +301,10 @@
 		008ACAD807C38A7600A76ADA /* ScriptingEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 009B192206FC83A800E8883A /* ScriptingEngine.m */; };
 		008ACADA07C38A7A00A76ADA /* SpinChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0035340C06A5DD8500AB4577 /* SpinChannel.h */; };
 		008ACADB07C38A7A00A76ADA /* SpinChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0035340D06A5DD8500AB4577 /* SpinChannel.m */; };
-		008ACADC07C38A7C00A76ADA /* structs.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D506A5DD8500AB4577 /* structs.h */; };
 		008ACADD07C38A8900A76ADA /* Trace.h in Headers */ = {isa = PBXBuildFile; fileRef = 00A622A706FEE4FB005D248A /* Trace.h */; };
 		008ACADE07C38A8A00A76ADA /* Trace.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A622A806FEE4FB005D248A /* Trace.m */; };
 		008ACADF07C38A9000A76ADA /* TrafficController.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533B006A5DD8500AB4577 /* TrafficController.h */; };
 		008ACAE007C38A9100A76ADA /* TrafficController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 003533B106A5DD8500AB4577 /* TrafficController.mm */; };
-		008ACAE107C38A9200A76ADA /* USBIntersil.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533D606A5DD8500AB4577 /* USBIntersil.h */; };
-		008ACAE207C38A9300A76ADA /* USBIntersil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 003533D706A5DD8500AB4577 /* USBIntersil.mm */; };
 		008ACAE307C38A9700A76ADA /* ValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D15A906AB0D7C00935F7C /* ValuePair.m */; };
 		008ACAE407C38A9700A76ADA /* ValuePair.h in Headers */ = {isa = PBXBuildFile; fileRef = 000D15AA06AB0D7C00935F7C /* ValuePair.h */; };
 		008ACAE507C38A9D00A76ADA /* WaveClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 003533B706A5DD8500AB4577 /* WaveClient.h */; };
@@ -474,6 +466,14 @@
 		6C541AAC0A72003000B58A95 /* growl-wpa-challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */; };
 		6C541AAD0A72003000B58A95 /* growl-wpa-response.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
+		6CE20615C5B043AF00A26C3A /* IntersilJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE2060FC5B043AF00A26C3A /* IntersilJack.h */; };
+		6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE20610C5B043AF00A26C3A /* IntersilJack.mm */; };
+		6CE20617C5B043AF00A26C3A /* prism2.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20611C5B043AF00A26C3A /* prism2.h */; };
+		6CE20618C5B043AF00A26C3A /* structs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20612C5B043AF00A26C3A /* structs.h */; };
+		6CE20619C5B043AF00A26C3A /* USBJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20613C5B043AF00A26C3A /* USBJack.h */; };
+		6CE2061AC5B043AF00A26C3A /* USBJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE20614C5B043AF00A26C3A /* USBJack.mm */; };
+		6CE206E8C5B0502200A26C3A /* RalinkJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE206E6C5B0502200A26C3A /* RalinkJack.h */; };
+		6CE206E9C5B0502200A26C3A /* RalinkJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE206E7C5B0502200A26C3A /* RalinkJack.mm */; };
 		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
 		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
 		8D1107280486CEB800E47090 /* KisMAC_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */; };
@@ -635,10 +635,6 @@
 		003533CF06A5DD8500AB4577 /* WaveNetWPACrack.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WaveNetWPACrack.m; sourceTree = "<group>"; };
 		003533D006A5DD8500AB4577 /* WaveNetWPACrackAltivec.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WaveNetWPACrackAltivec.h; sourceTree = "<group>"; };
 		003533D106A5DD8500AB4577 /* WaveNetWPACrackAltivec.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WaveNetWPACrackAltivec.m; sourceTree = "<group>"; };
-		003533D406A5DD8500AB4577 /* prism2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = prism2.h; sourceTree = "<group>"; };
-		003533D506A5DD8500AB4577 /* structs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
-		003533D606A5DD8500AB4577 /* USBIntersil.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = USBIntersil.h; sourceTree = "<group>"; };
-		003533D706A5DD8500AB4577 /* USBIntersil.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = USBIntersil.mm; sourceTree = "<group>"; };
 		003533D906A5DD8500AB4577 /* WaveSecret.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WaveSecret.h; sourceTree = "<group>"; };
 		003533DC06A5DD8500AB4577 /* PrefsClient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PrefsClient.h; sourceTree = "<group>"; };
 		003533DD06A5DD8500AB4577 /* PrefsClient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PrefsClient.m; sourceTree = "<group>"; };
@@ -821,6 +817,14 @@
 		6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-challenge.png"; sourceTree = "<group>"; };
 		6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-response.png"; sourceTree = "<group>"; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		6CE2060FC5B043AF00A26C3A /* IntersilJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = IntersilJack.h; path = USBJack/IntersilJack.h; sourceTree = "<group>"; };
+		6CE20610C5B043AF00A26C3A /* IntersilJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = IntersilJack.mm; path = USBJack/IntersilJack.mm; sourceTree = "<group>"; };
+		6CE20611C5B043AF00A26C3A /* prism2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = prism2.h; path = USBJack/prism2.h; sourceTree = "<group>"; };
+		6CE20612C5B043AF00A26C3A /* structs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = structs.h; path = USBJack/structs.h; sourceTree = "<group>"; };
+		6CE20613C5B043AF00A26C3A /* USBJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = USBJack.h; path = USBJack/USBJack.h; sourceTree = "<group>"; };
+		6CE20614C5B043AF00A26C3A /* USBJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = USBJack.mm; path = USBJack/USBJack.mm; sourceTree = "<group>"; };
+		6CE206E6C5B0502200A26C3A /* RalinkJack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RalinkJack.h; path = USBJack/RalinkJack.h; sourceTree = "<group>"; };
+		6CE206E7C5B0502200A26C3A /* RalinkJack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RalinkJack.mm; path = USBJack/RalinkJack.mm; sourceTree = "<group>"; };
 		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
 		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* KisMAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KisMAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1092,21 +1096,10 @@
 		003533D206A5DD8500AB4577 /* Driver */ = {
 			isa = PBXGroup;
 			children = (
-				003533D306A5DD8500AB4577 /* USBIntersilJack */,
+				6CE2060EC5B0439100A26C3A /* USBJack */,
 			);
 			name = Driver;
 			path = Sources/Driver;
-			sourceTree = "<group>";
-		};
-		003533D306A5DD8500AB4577 /* USBIntersilJack */ = {
-			isa = PBXGroup;
-			children = (
-				003533D406A5DD8500AB4577 /* prism2.h */,
-				003533D506A5DD8500AB4577 /* structs.h */,
-				003533D606A5DD8500AB4577 /* USBIntersil.h */,
-				003533D706A5DD8500AB4577 /* USBIntersil.mm */,
-			);
-			path = USBIntersilJack;
 			sourceTree = "<group>";
 		};
 		003533D806A5DD8500AB4577 /* not public */ = {
@@ -1456,6 +1449,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6CE2060EC5B0439100A26C3A /* USBJack */ = {
+			isa = PBXGroup;
+			children = (
+				6CE2060FC5B043AF00A26C3A /* IntersilJack.h */,
+				6CE20610C5B043AF00A26C3A /* IntersilJack.mm */,
+				6CE20611C5B043AF00A26C3A /* prism2.h */,
+				6CE20612C5B043AF00A26C3A /* structs.h */,
+				6CE20613C5B043AF00A26C3A /* USBJack.h */,
+				6CE20614C5B043AF00A26C3A /* USBJack.mm */,
+				6CE206E6C5B0502200A26C3A /* RalinkJack.h */,
+				6CE206E7C5B0502200A26C3A /* RalinkJack.mm */,
+			);
+			name = USBJack;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1501,7 +1509,6 @@
 				008ACABF07C38A5300A76ADA /* PrefsTraffic.h in Headers */,
 				008ACAC107C38A5500A76ADA /* PrefsWebService.h in Headers */,
 				008ACAC307C38A5900A76ADA /* PrefsWindow.h in Headers */,
-				008ACAC507C38A5D00A76ADA /* prism2.h in Headers */,
 				008ACAC607C38A5F00A76ADA /* quicksort.h in Headers */,
 				008ACAC807C38A6600A76ADA /* RC4.h in Headers */,
 				008ACACA07C38A6800A76ADA /* ScanController.h in Headers */,
@@ -1512,10 +1519,8 @@
 				008ACAD507C38A7100A76ADA /* ScriptController.h in Headers */,
 				008ACAD707C38A7500A76ADA /* ScriptingEngine.h in Headers */,
 				008ACADA07C38A7A00A76ADA /* SpinChannel.h in Headers */,
-				008ACADC07C38A7C00A76ADA /* structs.h in Headers */,
 				008ACADD07C38A8900A76ADA /* Trace.h in Headers */,
 				008ACADF07C38A9000A76ADA /* TrafficController.h in Headers */,
-				008ACAE107C38A9200A76ADA /* USBIntersil.h in Headers */,
 				008ACAE407C38A9700A76ADA /* ValuePair.h in Headers */,
 				008ACAE507C38A9D00A76ADA /* WaveClient.h in Headers */,
 				008ACAE707C38A9E00A76ADA /* WaveContainer.h in Headers */,
@@ -1573,9 +1578,6 @@
 				0035344E06A5DD8500AB4577 /* WaveNetLEAPCrack.h in Headers */,
 				0035345006A5DD8500AB4577 /* WaveNetWPACrack.h in Headers */,
 				0035345206A5DD8500AB4577 /* WaveNetWPACrackAltivec.h in Headers */,
-				0035345406A5DD8500AB4577 /* prism2.h in Headers */,
-				0035345506A5DD8500AB4577 /* structs.h in Headers */,
-				0035345606A5DD8500AB4577 /* USBIntersil.h in Headers */,
 				0035345806A5DD8500AB4577 /* WaveSecret.h in Headers */,
 				0035345906A5DD8500AB4577 /* PrefsClient.h in Headers */,
 				0035345B06A5DD8500AB4577 /* PrefsDriver.h in Headers */,
@@ -1635,6 +1637,11 @@
 				00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
 				87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */,
 				6C1D31C009F37BC70005A9F8 /* PrefsAdvanced.h in Headers */,
+				6CE20615C5B043AF00A26C3A /* IntersilJack.h in Headers */,
+				6CE20617C5B043AF00A26C3A /* prism2.h in Headers */,
+				6CE20618C5B043AF00A26C3A /* structs.h in Headers */,
+				6CE20619C5B043AF00A26C3A /* USBJack.h in Headers */,
+				6CE206E8C5B0502200A26C3A /* RalinkJack.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1906,7 +1913,6 @@
 				008ACADB07C38A7A00A76ADA /* SpinChannel.m in Sources */,
 				008ACADE07C38A8A00A76ADA /* Trace.m in Sources */,
 				008ACAE007C38A9100A76ADA /* TrafficController.mm in Sources */,
-				008ACAE207C38A9300A76ADA /* USBIntersil.mm in Sources */,
 				008ACAE307C38A9700A76ADA /* ValuePair.m in Sources */,
 				008ACAE607C38A9E00A76ADA /* WaveClient.m in Sources */,
 				008ACAE807C38A9F00A76ADA /* WaveContainer.m in Sources */,
@@ -1966,7 +1972,6 @@
 				0035344F06A5DD8500AB4577 /* WaveNetLEAPCrack.m in Sources */,
 				0035345106A5DD8500AB4577 /* WaveNetWPACrack.m in Sources */,
 				0035345306A5DD8500AB4577 /* WaveNetWPACrackAltivec.m in Sources */,
-				0035345706A5DD8500AB4577 /* USBIntersil.mm in Sources */,
 				0035345A06A5DD8500AB4577 /* PrefsClient.m in Sources */,
 				0035345C06A5DD8500AB4577 /* PrefsDriver.m in Sources */,
 				0035345E06A5DD8500AB4577 /* PrefsFilter.m in Sources */,
@@ -2025,6 +2030,9 @@
 				00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
 				87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */,
 				6C1D31C109F37BC70005A9F8 /* PrefsAdvanced.m in Sources */,
+				6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */,
+				6CE2061AC5B043AF00A26C3A /* USBJack.mm in Sources */,
+				6CE206E9C5B0502200A26C3A /* RalinkJack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "USBJack.h"
+#include "USBJack.h"
 
 class RalinkJack: public USBJack
 {
@@ -16,6 +16,13 @@ public:
     
     RalinkJack();
     ~RalinkJack();
+    IOReturn	RTUSB_VendorRequest(UInt8 direction,
+                            UInt8 bRequest, 
+                            UInt16 wValue, 
+                            UInt16 wIndex, 
+                            UInt16 wLength, 
+                            void *pData, 
+                            UInt32 wLenDone );
     
 private:
         int temp;

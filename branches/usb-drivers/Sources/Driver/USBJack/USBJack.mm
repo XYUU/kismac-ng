@@ -820,10 +820,10 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
             NSLog(@"Intersil USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             deviceType = intersil;
         }
-        else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
+     /*   else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
             NSLog(@"Zydas USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             deviceType = zydas;
-        }
+        }*/
         else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
             NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             deviceType = ralink;
