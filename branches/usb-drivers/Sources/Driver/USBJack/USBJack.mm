@@ -235,36 +235,7 @@ IOReturn USBJack::_disable() {
 }
 
 IOReturn USBJack::_init() {
-    WLIdentity ident;
-    WLHardwareAddress macAddr;
-    int i; 
-    
-    _firmwareType = -1;
-    
-    for (i = 0; i< wlResetTries; i++) {
-        if (_reset() == kIOReturnSuccess) break;
-        if (!_devicePresent) return kIOReturnError;
-    }
-    
-    /*
-     * Get firmware vendor and version
-     */
-     
-    if (_getIdentity(&ident) != kIOReturnSuccess) {
-        NSLog(@"USBJack::_init: Couldn't read card identity\n");
-        return kIOReturnError;
-    }
-
-    NSLog(@"USBJack: Firmware vendor %d, variant %d, version %d.%d\n", ident.vendor, ident.variant, ident.major, ident.minor);
-
-    if (_getHardwareAddress(&macAddr) != kIOReturnSuccess) {
-        NSLog(@"USBJack::_init: Couldn't read MAC address\n");
-        return kIOReturnError;
-    }
-    
-    _deviceInit = true;
-    
-    return kIOReturnSuccess;
+    return kIOReturnError;  //this method MUST be overridden
 }
 
 IOReturn USBJack::_reset() {

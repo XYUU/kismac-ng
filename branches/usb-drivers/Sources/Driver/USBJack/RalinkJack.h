@@ -17,6 +17,8 @@ public:
     
     RalinkJack();
     ~RalinkJack();
+    IOReturn RalinkJack::_init();
+    
     IOReturn	RTUSB_VendorRequest(UInt8 direction,
                             UInt8 bRequest, 
                             UInt16 wValue, 

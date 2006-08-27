@@ -9,6 +9,156 @@
 
 #include "RalinkJack.h"
 
+IOReturn RalinkJack::_init() {
+    unsigned long			Index;
+	unsigned char			buffer[22];
+	unsigned short			temp;
+	unsigned char			Value = 0xff;
+	unsigned int			i;
+    
+	NSLog(@"--> NICInitializeAsic");
+    
+	do
+	{
+		//NdisMSleep(1000);
+		RTUSB_VendorRequest(kUSBOut,
+                            0x1,
+                            0x4,
+                            0x1,
+                            NULL,
+                            0);
+        
+		RTUSBSingleWrite(0x308, 0xf0);//asked by MAX
+            
+        // Disable RX at first beginning. Before BulkInReceive, we will enable RX.
+        RTUSBWriteMACRegister(TXRX_CSR2, 1);
+        RTUSBWriteMACRegister(MAC_CSR13, 0x1111);//requested by Jerry
+        RTUSBWriteMACRegister(MAC_CSR14, 0x1E11);
+        RTUSBWriteMACRegister(MAC_CSR1, 3); // reset MAC state machine, requested by Kevin 2003-2-11
+        RTUSBWriteMACRegister(MAC_CSR1, 0); // reset MAC state machine, requested by Kevin 2003-2-11
+        RTUSBWriteMACRegister(TXRX_CSR5, 0x8C8D);
+        RTUSBWriteMACRegister(TXRX_CSR6, 0x8B8A);
+        RTUSBWriteMACRegister(TXRX_CSR7, 0x8687);
+        RTUSBWriteMACRegister(TXRX_CSR8, 0x0085);
+        RTUSBWriteMACRegister(TXRX_CSR21, 0xe78f);
+        RTUSBWriteMACRegister(MAC_CSR9, 0xFF1D);
+                
+        i = 0;
+        //check and see if asic has powered up
+        RTUSBReadMACRegister(MAC_CSR17, &temp);
+        while (((temp & 0x01e0 ) != 0x01e0) && (i < 50))
+        {
+            sleep(1);
+            RTUSBReadMACRegister(MAC_CSR17, &temp);
+                    
+            i++;
+        }
+        if (i == 50)
+        {
+/*                    if (RTUSB_ResetDevice() == FALSE)
+                    {
+                        //RTMP_SET_FLAG( fRTMP_ADAPTER_REMOVE_IN_PROGRESS);
+                        DBGPRINT(RT_DEBUG_TRACE, "<== NICInitializeAsic ERROR\n");
+                        return;
+                    }
+                    else
+                        continue;
+                    */
+        }
+        
+        //lets mess with the leds to verify we have control
+        RTUSBWriteMACRegister(MAC_CSR20, 0x002);        //put led under software control
+                
+        RTUSBWriteMACRegister(MAC_CSR1, 4);
+        RTUSBReadMACRegister(MAC_CSR0, &temp);
+        if ( temp >= 3){
+            RTUSBReadMACRegister(PHY_CSR2, &temp);
+            RTUSBWriteMACRegister(PHY_CSR2, temp & 0xFFFD);		   
+        }
+        else
+        {
+            NSLog(@"LNA 3 mode\n");
+            RTUSBWriteMACRegister(PHY_CSR2, 0x3002); // LNA 3 mode
+        }
+        RTUSBWriteMACRegister(MAC_CSR11, 2);
+        RTUSBWriteMACRegister(MAC_CSR22, 0x53);
+        RTUSBWriteMACRegister(MAC_CSR15, 0x01ee);
+        RTUSBWriteMACRegister(MAC_CSR16, 0);
+        RTUSBWriteMACRegister(MAC_CSR8, 0x0780);//steven:limit the maximum frame length
+            
+        RTUSBReadMACRegister(TXRX_CSR0, &temp);
+        temp &= 0xe007;
+        temp |= ((LENGTH_802_11 << 3) | (0x000f << 9));
+        RTUSBWriteMACRegister(TXRX_CSR0, temp);
+                    
+        RTUSBWriteMACRegister(TXRX_CSR19, 0);
+        RTUSBWriteMACRegister(MAC_CSR18, 0x5a);
+                    
+        //set RF_LE to low when standby
+        RTUSBReadMACRegister(PHY_CSR4, &temp);
+        RTUSBWriteMACRegister(PHY_CSR4, temp | 1);
+        //NdisMSleep(1);//wait for PLL to become stable
+                    
+        i = 0;
+        do
+        {
+            RTUSBReadBBPRegister(BBP_Version, &Value);
+            NSLog(@"Read BBP_Version Value = %d\n", Value);
+            i++;
+        }while (((Value == 0xff) || (Value == 0x00)) && (i < 50));
+        if (i < 50)//BBP ready
+        {
+            break;
+        }
+                    /*
+        else
+        {
+            if ( RTUSB_ResetDevice(pAdapter) == FALSE)
+            {
+                RTMP_SET_FLAG( fRTMP_ADAPTER_REMOVE_IN_PROGRESS);
+                return;
+            }
+        }*/
+	}while (1);
+    
+	// Initialize BBP register to default value
+	for (Index = 0; Index < NUM_BBP_REG_PARMS; Index++)
+	{
+		i = 0;
+		do
+		{
+			RTUSBReadMACRegister(PHY_CSR8, &temp);
+			if (!(temp & BUSY))
+				break;
+			i++;
+		}
+		while (i < RETRY_LIMIT);
+		
+		RTUSBWriteMACRegister(PHY_CSR7, BBPRegTable[Index]);
+    }
+    
+    
+	// Initialize RF register to default value
+	//AsicSwitchChannel(pAdapter, pAdapter->PortCfg.Channel);
+	//AsicLockChannel(pAdapter, pAdapter->PortCfg.Channel);
+    
+	// Add radio off control
+	/*if (pAdapter->PortCfg.bRadio == FALSE)
+	{
+		RTUSBWriteMACRegister(pAdapter, MAC_CSR13, 0);
+		RTUSBWriteMACRegister(pAdapter, MAC_CSR14, 0);
+        
+		RTMP_SET_FLAG(pAdapter, fRTMP_ADAPTER_RADIO_OFF);
+        DBGPRINT(RT_DEBUG_ERROR, "1Set fRTMP_ADAPTER_RADIO_OFF ");
+	}*/
+    
+    
+	//RTUSBMultiRead(STA_CSR0, buffer, 22);
+	
+	NSLog(@"<-- NICInitializeAsic\n");
+        return kIOReturnSuccess;
+}
+
 IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
                         UInt8 bRequest, 
                         UInt16 wValue, 
@@ -17,6 +167,7 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
                         UInt16 wLength) {
     
     IOReturn ret;
+    char buf[10];
     
 	if (!_devicePresent)
 	{
@@ -25,19 +176,23 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
 	}
 	else
 	{
-        IOUSBDevRequest * theRequest;
-        theRequest->bmRequestType = USBmakebmRequestType(direction, kUSBVendor, kUSBEndpoint);
-        theRequest->bRequest = bRequest;
-        theRequest->wValue = wValue; 
-        theRequest->wIndex = wIndex; 
-        theRequest->pData = pData;
-        theRequest->wLength = wLength;
+        IOUSBDevRequest theRequest;
+        theRequest.bmRequestType = USBmakebmRequestType(direction, kUSBVendor, kUSBEndpoint);
+        theRequest.bRequest = bRequest;
+        theRequest.wValue = wValue; 
+        theRequest.wIndex = wIndex; 
+        theRequest.pData = pData;
+        theRequest.wLength = wLength;
         
-        ret = (*_interface)->ControlRequest(_interface, 0, theRequest);
+        ret = (*_interface)->ControlRequest(_interface, 0, &theRequest);
         
-        if (theRequest->wLenDone < wLength) {
-            NSLog(@"WTF, we didn't seem to write the whole request?");
-        }
+        //data is returned in the bus endian
+        //we need to swap
+        //this is going to be bad when we run on intel
+       
+        swab(theRequest.pData, buf, wLength);
+        memcpy(pData, buf,wLength);
+        
         
     }
 	return ret;    

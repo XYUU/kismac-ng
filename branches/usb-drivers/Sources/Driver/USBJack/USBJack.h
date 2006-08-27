@@ -73,7 +73,7 @@ protected:
     int         _getFirmwareType();
     IOReturn    _disable();
     IOReturn    _enable();
-    IOReturn    _init();
+    virtual IOReturn    _init();
     virtual IOReturn    _reset();
     
     inline void        _lockDevice();

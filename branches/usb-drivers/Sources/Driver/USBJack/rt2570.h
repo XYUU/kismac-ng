@@ -36,6 +36,49 @@
 #define USHORT unsigned short
 
 #define RETRY_LIMIT	3
+#define	LENGTH_802_11			24
+
+#define mdelay(a) usleep(a*100)
+#define NdisMSleep	mdelay
+
+USHORT	 BBPRegTable[] = {
+	0x0302,  // R03
+	0x0419,  // R04
+	0x0E1C,  // R14
+	0x0F30,  // R15
+	0x10ac,  // R16
+	0x1148,  // R17
+	0x1218,  // R18
+	0x13ff,  // R19
+	0x141E,  // R20
+	0x1508,  // R21
+	0x1608,  // R22
+	0x1708,  // R23
+             //modified by david    0x1870,	// R24
+	0x1880,  // R24	modified by david
+             //modified by gary	  0x1940,  // R25
+	0x1950,  // R25	//modified by gary
+	0x1A08,  // R26
+	0x1B23,  // R27
+	0x1E10,  // R30
+	0x1F2B,  // R31
+	0x20B9,  // R32
+	0x2212,  // R34
+	0x2350,  // R35
+	0x27c4,  // R39
+	0x2802,  // R40
+	0x2960,  // R41
+	0x3510,  // R53
+	0x3618,  // R54
+	0x3808,  // R56
+	0x3910,  // R57
+	0x3A08,  // R58
+	0x3D60,  // R61
+	0x3E10,  // R62
+	0x4BFF,  // R75//by MAX
+};
+#define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(USHORT))
+
 
 #ifndef	__RT2570_H__
 #define	__RT2570_H__

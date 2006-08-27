@@ -33,7 +33,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
     self=[super init];
     if(!self) return Nil;
 
-    _driver = new USBJack;
+    _driver = new RalinkJack;
     _driver->startMatching();
     
 	_errors = 0;
@@ -129,7 +129,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
 }
 
 - (bool) wakeDriver{
-    _driver = new USBJack;
+    _driver = new RalinkJack;
     _driver->startMatching();
     return YES;
 }
@@ -146,7 +146,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
 			if (_errors < 3) {
 				NSLog(@"USB receiveFrame failed - attempting to reload driver");
 				delete _driver;
-				_driver = new USBJack;
+				_driver = new RalinkJack;
 				_driver->startMatching();
 			} else {
 				NSLog(@"Excessive errors received - terminating driver");
