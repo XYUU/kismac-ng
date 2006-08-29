@@ -139,7 +139,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
 - (WLFrame*) nextFrame {
     WLFrame *f;
     
-   // f = _driver->receiveFrame();
+    f = _driver->receiveFrame();
     if (f==NULL) {
 		_errors++;
         if (_packets && _driver) {

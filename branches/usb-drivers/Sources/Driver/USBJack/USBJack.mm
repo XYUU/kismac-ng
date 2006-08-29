@@ -117,7 +117,7 @@ bool USBJack::devicePresent() {
     return _devicePresent;
 }
 
-WLFrame *USBJack::recieveFrame() {
+WLFrame * USBJack::receiveFrame() {
     WLFrame* ret;
     
     if (!_devicePresent) return NULL;
