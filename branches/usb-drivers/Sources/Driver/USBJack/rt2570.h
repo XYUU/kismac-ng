@@ -951,9 +951,15 @@ typedef	union	_BCNCSR_STRUC	{
 
 typedef	union	_PHY_CSR7_STRUC	{
 	struct	{
-		USHORT		Data:8;				// BBP data
-		USHORT		RegID:7;			// BBP register ID
-		USHORT		WriteControl:1;		// 1: Write, 0:	Read	
+        #if __BIG_ENDIAN__
+            USHORT		WriteControl:1;		// 1: Write, 0:	Read
+            USHORT		RegID:7;			// BBP register ID
+            USHORT		Data:8;				// BBP data
+        #else
+            USHORT		Data:8;				// BBP data
+            USHORT		RegID:7;			// BBP register ID
+            USHORT		WriteControl:1;		// 1: Write, 0:	Read
+        #endif
 	}				field;
 	USHORT			value;
 }	PHY_CSR7_STRUC, *PPHY_CSR7_STRUC;
