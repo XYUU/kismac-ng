@@ -31,6 +31,9 @@
  *	Name		Date		Modification logs
  *	Jan Lee		2005-06-01	Release
  ***************************************************************************/
+#ifndef	__RT2570_H__
+#define	__RT2570_H__
+
 #define ULONG unsigned long
 #define UCHAR unsigned char
 #define USHORT unsigned short
@@ -77,11 +80,8 @@ USHORT	 BBPRegTable[] = {
 	0x3E10,  // R62
 	0x4BFF,  // R75//by MAX
 };
+
 #define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(USHORT))
-
-
-#ifndef	__RT2570_H__
-#define	__RT2570_H__
 
 //
 // Control/Status Registers	(CSR)

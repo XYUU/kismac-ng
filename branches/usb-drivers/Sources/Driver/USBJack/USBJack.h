@@ -33,8 +33,8 @@
 
 class USBJack {
 public:
-    bool    startCapture(UInt16 channel);
-    bool    stopCapture();
+    virtual bool    startCapture(UInt16 channel);
+    virtual bool    stopCapture();
     virtual bool    getChannel(UInt16* channel);
     virtual bool    getAllowedChannels(UInt16* channel);
     virtual bool    setChannel(UInt16 channel);

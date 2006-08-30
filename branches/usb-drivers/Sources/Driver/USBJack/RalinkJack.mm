@@ -8,6 +8,7 @@
  */
 
 #include "RalinkJack.h"
+#include "rt2570.h"
 
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
@@ -145,8 +146,6 @@ IOReturn RalinkJack::_init() {
 	//AsicLockChannel(pAdapter, pAdapter->PortCfg.Channel);
     
 	//RTUSBMultiRead(STA_CSR0, buffer, 22);
-	UInt32 numBytesRead = sizeof(_recieveBuffer);
-    (*_interface)->ReadPipeAsync(_interface, kInPipe, &_recieveBuffer, numBytesRead, (IOAsyncCallback1)_interruptRecieved, this);
 	NSLog(@"<-- NICInitializeAsic\n");
         return kIOReturnSuccess;
 }
@@ -178,6 +177,7 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
         
         ret = (*_interface)->ControlRequest(_interface, 0, &theRequest);
         
+        #if __BIG_ENDIAN__
         //data is returned in the bus endian
         //we need to swap
         //this is going to be bad when we run on intel
@@ -186,7 +186,7 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
         swab(theRequest.pData, buf, wLength);
         memcpy(pData, buf,wLength);
         free(buf);
-        
+       #endif
     }
 	return ret;    
 }

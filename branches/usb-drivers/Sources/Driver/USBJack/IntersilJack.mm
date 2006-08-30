@@ -8,29 +8,29 @@
 
 #import "IntersilJack.h"
 
-bool USBJack::startCapture(UInt16 channel) {
+bool IntersilJack::startCapture(UInt16 channel) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
     if ((!_isEnabled) && (_disable() != kIOReturnSuccess)) {
-        NSLog(@"USBJack::::startCapture: Couldn't disable card\n");
+        NSLog(@"IntersilJack::startCapture: Couldn't disable card\n");
         return false;
     }
     
     if (setChannel(channel) == false) {
-        NSLog(@"USBJack::::startCapture: setChannel(%d) failed - resetting...\n",
+        NSLog(@"IntersilJack::startCapture: setChannel(%d) failed - resetting...\n",
               channel);
 		_reset();
         return false;
     }
     
     if (_doCommand(wlcMonitorOn, 0) != kIOReturnSuccess) {
-        NSLog(@"USBJack::::startCapture: _doCommand(wlcMonitorOn) failed\n");
+        NSLog(@"IntersilJack::startCapture: _doCommand(wlcMonitorOn) failed\n");
         return false;
     }
     
     if (_enable() != kIOReturnSuccess) {
-        NSLog(@"USBJack::::startCapture: Couldn't enable card\n");
+        NSLog(@"IntersilJack::startCapture: Couldn't enable card\n");
         return false;
     }
     
@@ -38,26 +38,26 @@ bool USBJack::startCapture(UInt16 channel) {
     return true;
 }
 
-bool USBJack::stopCapture() {
+bool IntersilJack::stopCapture() {
 _channel = 0;
 
 if (!_devicePresent) return false;
 if (!_deviceInit) return false;
 
 if (_doCommand(wlcMonitorOff, 0) != kIOReturnSuccess) {
-    NSLog(@"USBJack::stopCapture: _doCommand(wlcMonitorOff) failed\n");
+    NSLog(@"::stopCapture: _doCommand(wlcMonitorOff) failed\n");
     return false;
 }
 
 return true;
 }
 
-bool USBJack::getChannel(UInt16* channel) {
+bool IntersilJack::getChannel(UInt16* channel) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
     if (_getValue(0xFDC1, channel) != kIOReturnSuccess) {
-        NSLog(@"USBJack::getChannel: getValue error\n");
+        NSLog(@"IntersilJack::getChannel: getValue error\n");
         return false;
     }
     
@@ -65,37 +65,37 @@ bool USBJack::getChannel(UInt16* channel) {
     return true;
 }
 
-bool USBJack::getAllowedChannels(UInt16* channels) {
+bool IntersilJack::getAllowedChannels(UInt16* channels) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
     if (_getValue(0xFD10, channels) != kIOReturnSuccess) {
-        NSLog(@"USBJack::getAllowedChannels: getValue error\n");
+        NSLog(@"IntersilJack::getAllowedChannels: getValue error\n");
         return false;
     }
     
     return true;
 }
 
-bool USBJack::setChannel(UInt16 channel) {
+bool IntersilJack::setChannel(UInt16 channel) {
     if (!_devicePresent) return false;
     if (!_deviceInit) return false;
     
     if (_setValue(0xFC03, channel) != kIOReturnSuccess) {
         usleep(10000);
         if (_setValue(0xFC03, channel) != kIOReturnSuccess) {
-            NSLog(@"USBJack::setChannel: setValue error\n");
+            NSLog(@"IntersilJack::setChannel: setValue error\n");
             return false;
         }
     }
     
     if (_isEnabled) {
         if (_disable() != kIOReturnSuccess) {
-            NSLog(@"USBJack::setChannel: Couldn't disable card\n");
+            NSLog(@"IntersilJack::setChannel: Couldn't disable card\n");
             return false;
         }
         if (_enable() != kIOReturnSuccess) {
-            NSLog(@"USBJack::setChannel: Couldn't enable card\n");
+            NSLog(@"IntersilJack::setChannel: Couldn't enable card\n");
             return false;
         }
     }
@@ -104,7 +104,7 @@ bool USBJack::setChannel(UInt16 channel) {
     return true;
 }
 
-IOReturn USBJack::_init() {
+IOReturn IntersilJack::_init() {
     WLIdentity ident;
     WLHardwareAddress macAddr;
     int i; 
@@ -121,14 +121,14 @@ IOReturn USBJack::_init() {
      */
     
     if (_getIdentity(&ident) != kIOReturnSuccess) {
-        NSLog(@"USBJack::_init: Couldn't read card identity\n");
+        NSLog(@"IntersilJack::_init: Couldn't read card identity\n");
         return kIOReturnError;
     }
     
-    NSLog(@"USBJack: Firmware vendor %d, variant %d, version %d.%d\n", ident.vendor, ident.variant, ident.major, ident.minor);
+    NSLog(@"IntersilJack: Firmware vendor %d, variant %d, version %d.%d\n", ident.vendor, ident.variant, ident.major, ident.minor);
     
     if (_getHardwareAddress(&macAddr) != kIOReturnSuccess) {
-        NSLog(@"USBJack::_init: Couldn't read MAC address\n");
+        NSLog(@"IntersilJack::_init: Couldn't read MAC address\n");
         return kIOReturnError;
     }
     
@@ -138,11 +138,11 @@ IOReturn USBJack::_init() {
 }
 
 
-IOReturn USBJack::_reset() {
+IOReturn IntersilJack::_reset() {
     int i;
     
     if (_doCommand(wlcInit, 0) != kIOReturnSuccess) {
-        NSLog(@"USBJack::_reset: _doCommand(wlcInit, 0) failed\n");
+        NSLog(@"IntersilJack::_reset: _doCommand(wlcInit, 0) failed\n");
         return kIOReturnError;
     }
     
@@ -169,7 +169,7 @@ IOReturn USBJack::_reset() {
     }
     
     if (i==wlTimeout) {
-        NSLog(@"USBJack::_reset: could not set port type\n");
+        NSLog(@"IntersilJack::_reset: could not set port type\n");
         return kIOReturnError;
     }
     

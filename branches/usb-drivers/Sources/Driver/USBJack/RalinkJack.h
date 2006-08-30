@@ -8,8 +8,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include "USBJack.h"
-#include "rt2570.h"
+#import "USBJack.h"
 
 class RalinkJack: public USBJack
 {

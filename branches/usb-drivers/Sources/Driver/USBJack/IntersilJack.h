@@ -16,6 +16,16 @@ public:
     IntersilJack();
     ~IntersilJack();
     
+    IOReturn    _init();
+    IOReturn    _reset();
+    
+    bool    startCapture(UInt16 channel);
+    bool    stopCapture();
+    bool    getChannel(UInt16* channel);
+    bool    getAllowedChannels(UInt16* channel);
+    bool    setChannel(UInt16 channel);
+    
+    
 private:
         int temp;
 };
