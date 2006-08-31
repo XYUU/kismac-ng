@@ -41,6 +41,8 @@
 #define RETRY_LIMIT	3
 #define	LENGTH_802_11			24
 
+#define ETH_LENGTH_OF_ADDRESS   6
+
 #define mdelay(a) usleep(a*100)
 #define NdisMSleep	mdelay
 
@@ -82,6 +84,23 @@ USHORT	 BBPRegTable[] = {
 };
 
 #define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(USHORT))
+
+typedef struct _BBP_TUNING_PARAMETERS_STRUC
+{
+	UCHAR			BBPTuningThreshold;
+	UCHAR			R24LowerValue;
+	UCHAR			R24HigherValue;
+	UCHAR			R25LowerValue;
+	UCHAR			R25HigherValue;
+	UCHAR			R61LowerValue;
+	UCHAR			R61HigherValue;
+	UCHAR			BBPR17LowSensitivity;
+	UCHAR			BBPR17MidSensitivity;
+	UCHAR			RSSIToDbmOffset;
+	bool			LargeCurrentRSSI;
+}
+BBP_TUNING_PARAMETERS_STRUC, *PBBP_TUNING_PARAMETERS_STRUC;
+
 
 //
 // Control/Status Registers	(CSR)

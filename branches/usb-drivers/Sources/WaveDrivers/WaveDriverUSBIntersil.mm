@@ -24,6 +24,7 @@
 */
 #import "WaveDriverUSBIntersil.h"
 #import "WaveHelper.h"
+#import "../Driver/USBJack/RalinkJack.h"
 
 static bool explicitlyLoadedUSBIntersil = NO;
 

@@ -26,7 +26,8 @@
 #import <Foundation/Foundation.h>
 #import "WaveDriver.h"
 #import "../Driver/USBJack/IntersilJack.h"
-#import "../Driver/USBJack/RalinkJack.h"
+//#import "../Driver/USBJack/RalinkJack.h"
+class RalinkJack;
 
 @interface WaveDriverUSBIntersil : WaveDriver {
     RalinkJack *_driver;

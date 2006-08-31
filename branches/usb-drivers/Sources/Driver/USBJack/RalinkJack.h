@@ -6,9 +6,12 @@
  *  Copyright 2006 __MyCompanyName__. All rights reserved.
  *
  */
+#ifndef	__RALINKJACK_H__
+#define	__RALINKJACK_H__
 
 #import <Cocoa/Cocoa.h>
 #import "USBJack.h"
+#include "rt2570.h"
 
 class RalinkJack: public USBJack
 {
@@ -23,7 +26,8 @@ public:
                             UInt16 wValue, 
                             UInt16 wIndex, 
                             void *pData,
-                            UInt16 wLength);
+                            UInt16 wLength,
+                            bool swap);
     
     IOReturn RTUSBSingleRead(unsigned short	Offset,
                              unsigned short	* pValue);
@@ -40,7 +44,21 @@ public:
     IOReturn	RTUSBReadBBPRegister(unsigned char Id,
                                      unsigned char * pValue);
     
+    IOReturn	RTUSBWriteBBPRegister(unsigned char Id,
+                                      unsigned char Value);
+    
+    IOReturn	RTUSBReadEEPROM(unsigned short Offset,
+                                unsigned char * pData,
+                                unsigned short length);
+    
+    void	NICReadEEPROMParameters();
+    void    NICInitAsicFromEEPROM();
+    
 private:
         int temp;
-};
+        unsigned short EEPROMDefaultValue[NUM_EEPROM_BBP_PARMS];
+        unsigned short EEPROMBBPTuningParameters[NUM_EEPROM_BBP_TUNING_PARMS];
+        BBP_TUNING_PARAMETERS_STRUC			BBPTuningParameters;
 
+};
+#endif

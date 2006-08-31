@@ -8,11 +8,11 @@
  */
 
 #include "RalinkJack.h"
-#include "rt2570.h"
+
 
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
-	unsigned char			buffer[22];
+//	unsigned char			buffer[22];
 	unsigned short			temp;
 	unsigned char			Value = 0xff;
 	unsigned int			i;
@@ -28,7 +28,8 @@ IOReturn RalinkJack::_init() {
                             0x4,
                             0x1,
                             NULL,
-                            0);
+                            0,
+                            TRUE);
         
 		RTUSBSingleWrite(0x308, 0xf0);//asked by MAX
             
@@ -60,7 +61,7 @@ IOReturn RalinkJack::_init() {
 /*                    if (RTUSB_ResetDevice() == FALSE)
                     {
                         //RTMP_SET_FLAG( fRTMP_ADAPTER_REMOVE_IN_PROGRESS);
-                        DBGPRINT(RT_DEBUG_TRACE, "<== NICInitializeAsic ERROR\n");
+                        NSLog(@"<== NICInitializeAsic ERROR\n");
                         return;
                     }
                     else
@@ -116,7 +117,7 @@ IOReturn RalinkJack::_init() {
                     /*
         else
         {
-            if ( RTUSB_ResetDevice(pAdapter) == FALSE)
+            if ( RTUSB_ResetDevice() == FALSE)
             {
                 RTMP_SET_FLAG( fRTMP_ADAPTER_REMOVE_IN_PROGRESS);
                 return;
@@ -142,11 +143,14 @@ IOReturn RalinkJack::_init() {
     
     
 	// Initialize RF register to default value
-	//AsicSwitchChannel(pAdapter, pAdapter->PortCfg.Channel);
-	//AsicLockChannel(pAdapter, pAdapter->PortCfg.Channel);
+	//AsicSwitchChannel(PortCfg.Channel);
+	//AsicLockChannel(PortCfg.Channel);
     
 	//RTUSBMultiRead(STA_CSR0, buffer, 22);
 	NSLog(@"<-- NICInitializeAsic\n");
+    
+    NICReadEEPROMParameters();
+    NICInitAsicFromEEPROM();
         return kIOReturnSuccess;
 }
 
@@ -155,7 +159,8 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
                         UInt16 wValue, 
                         UInt16 wIndex, 
                         void *pData,
-                        UInt16 wLength) {
+                        UInt16 wLength,
+                        bool swap) {
     
     IOReturn ret;
     char * buf;
@@ -181,11 +186,12 @@ IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
         //data is returned in the bus endian
         //we need to swap
         //this is going to be bad when we run on intel
-       
-        buf = (char*) malloc(sizeof(char) * wLength);
-        swab(theRequest.pData, buf, wLength);
-        memcpy(pData, buf,wLength);
-        free(buf);
+        if (swap) {
+            buf = (char*) malloc(sizeof(char) * wLength);
+            swab(theRequest.pData, buf, wLength);
+            memcpy(pData, buf,wLength);
+            free(buf);
+        }
        #endif
     }
 	return ret;    
@@ -201,7 +207,8 @@ IOReturn RalinkJack::RTUSBSingleRead(unsigned short Offset,
                                  0,
                                  Offset,
                                  pValue,
-                                 2);
+                                 2,
+                                 TRUE);
 	return Status;
 }
 
@@ -216,7 +223,8 @@ IOReturn	RalinkJack::RTUSBSingleWrite(unsigned short	Offset,
                                  Value,
                                  Offset,
                                  NULL,
-                                 0);	
+                                 0,
+                                 TRUE);	
 	return Status;
 }
 
@@ -232,7 +240,8 @@ IOReturn RalinkJack::RTUSBWriteMACRegister(unsigned short Offset,
                                  Value,
                                  Offset + 0x400,
                                  NULL,
-                                 0);	
+                                 0,
+                                 TRUE);	
 	return Status;
 }
 
@@ -246,7 +255,8 @@ IOReturn	RalinkJack::RTUSBReadMACRegister(unsigned short Offset,
                                  0,
                                  Offset + 0x400,
                                  pValue,
-                                 2);	
+                                 2,
+                                 TRUE);	
 	return Status;
 }
 
@@ -287,6 +297,379 @@ IOReturn	RalinkJack::RTUSBReadBBPRegister(unsigned char Id,
 	*pValue = (unsigned char)PhyCsr7.field.Data;
 	
 	return ret;
+}
+
+IOReturn	RalinkJack::RTUSBWriteBBPRegister(unsigned char Id,
+                                  unsigned char Value)
+{
+	PHY_CSR7_STRUC	PhyCsr7;
+	unsigned short	temp;
+	unsigned int			i = 0;
+
+	do
+	{
+		RTUSBReadMACRegister(PHY_CSR8, &temp);
+		if (!(temp & BUSY))
+			break;
+		i++;
+	}
+	while (i < RETRY_LIMIT);
+    
+	if (i == RETRY_LIMIT)
+	{
+		NSLog(@"Retry count exhausted or device removed!!!\n");
+		return kIOReturnNoDevice;
+	}
+    
+	PhyCsr7.value				= 0;
+	PhyCsr7.field.WriteControl	= 0;
+	PhyCsr7.field.RegID 		= Id;
+	PhyCsr7.field.Data			= Value;
+	RTUSBWriteMACRegister(PHY_CSR7, PhyCsr7.value);
+	//pAdapter->PortCfg.BbpWriteLatch[Id] = Value;
+	
+	return kIOReturnSuccess;
+}
+
+
+
+IOReturn	RalinkJack::RTUSBReadEEPROM(unsigned short Offset,
+                            unsigned char * pData,
+                            unsigned short length)
+{
+	IOReturn	Status;
+	
+	Status = RTUSB_VendorRequest(kUSBIn,
+                                 0x9,
+                                 0,
+                                 Offset,
+                                 pData,
+                                 length,
+                                 FALSE);
+	return Status;
+}
+
+
+void	RalinkJack::NICReadEEPROMParameters()
+{
+	USHORT			i;
+	int			value;
+    unsigned char PermanentAddress[ETH_LENGTH_OF_ADDRESS];
+	EEPROM_ANTENNA_STRUC	Antenna;//blue
+    //	EEPROM_VERSION_STRUC	Version;
+        
+        NSLog(@"--> NICReadEEPROMParameters\n");
+        
+        //Read MAC address.
+        RTUSBReadEEPROM(EEPROM_MAC_ADDRESS_BASE_OFFSET, PermanentAddress, ETH_LENGTH_OF_ADDRESS);
+        NSLog(@"Permanent MAC is: %02x:%02x:%02x:%02x:%02x:%02x.", PermanentAddress[0], PermanentAddress[1], PermanentAddress[2], PermanentAddress[3], PermanentAddress[4], PermanentAddress[5]);
+        // Read BBP default value from EEPROM and store to array(EEPROMDefaultValue) in 
+        RTUSBReadEEPROM(EEPROM_BBP_BASE_OFFSET, (unsigned char *)(EEPROMDefaultValue), 2 * NUM_EEPROM_BBP_PARMS);
+        
+        // We have to parse NIC configuration 0 at here.
+        // If TSSI did not have preloaded value, it should reset the TxAutoAgc to false
+        // Therefore, we have to read TxAutoAgc control beforehand.
+        // Read Tx AGC control bit
+        Antenna.word = EEPROMDefaultValue[0];
+//        if (Antenna.field.DynamicTxAgcControl == 1)  //auto tx control
+		
+	
+    
+	// Read Tx power value for all 14 channels
+	// Value from 1 - 0x7f. Default value is 24.
+    char ChannelTxPower[14];
+	RTUSBReadEEPROM(EEPROM_TX_PWR_OFFSET, (unsigned char *)ChannelTxPower, 2 * NUM_EEPROM_TX_PARMS);
+	for (i = 0; i < 2 * NUM_EEPROM_TX_PARMS; i++)
+	{
+        
+		if (ChannelTxPower[i] > 31)
+			ChannelTxPower[i] = 24;
+		NSLog(@"Tx power for channel %d : %0x\n", i+1, ChannelTxPower[i]);
+	}
+        
+     /*   
+    
+	// Read Tx TSSI reference value, OK to reuse Power data structure
+	RTUSBReadEEPROM(EEPROM_TSSI_REF_OFFSET, PortCfg.ChannelTssiRef, 2 * NUM_EEPROM_TX_PARMS);
+	for (i = 0; i < 2 * NUM_EEPROM_TX_PARMS; i++)
+	{
+		if (PortCfg.ChannelTssiRef[i] == 0xff)
+			PortCfg.bAutoTxAgc = FALSE;					
+		NSLog(@"TSSI reference for channel %d : %0x\n", i, PortCfg.ChannelTssiRef[i]);
+	}
+	
+	// Tx Tssi delta offset 0x24
+	RTUSBReadEEPROM(EEPROM_TSSI_DELTA_OFFSET, (unsigned char)(&(Power.word)), 2);
+	PortCfg.ChannelTssiDelta = Power.field.Byte0;
+*/	
+	//CountryRegion byte offset = 0x35
+	value = EEPROMDefaultValue[2] >> 8;
+	NSLog(@"  CountryRegion= 0x%x \n",value);
+/*
+	if ((value >= 0) && (value <= 7))
+	{
+		PortCfg.CountryRegion = (unsigned char) value;
+		TmpPhy = PortCfg.PhyMode;
+		PortCfg.PhyMode = 0xff;
+		RTMPSetPhyMode(TmpPhy);
+	}
+	else
+	{
+		// set default country region 
+		PortCfg.CountryRegion = 6;
+		TmpPhy = PortCfg.PhyMode;
+		PortCfg.PhyMode = 0xff;
+		RTMPSetPhyMode(TmpPhy);
+	}
+*/    
+	RTUSBReadEEPROM(EEPROM_BBP_TUNING_OFFSET, (unsigned char *)(EEPROMBBPTuningParameters), 2 * NUM_EEPROM_BBP_TUNING_PARMS);
+	if ((EEPROMBBPTuningParameters[0] != 0xffff) && (EEPROMBBPTuningParameters[0] != 0))
+	{
+		BBPTuningParameters.BBPTuningThreshold = (unsigned char)((EEPROMBBPTuningParameters[0]) & 0xff);
+		//NSLog(@"BBPTuningThreshold = %d\n", BBPTuningParameters.BBPTuningThreshold);
+	}
+	if ((EEPROMBBPTuningParameters[1] != 0xffff) && (EEPROMBBPTuningParameters[1] != 0))
+	{
+		BBPTuningParameters.R24LowerValue = (unsigned char)(EEPROMBBPTuningParameters[1] & 0xff);
+		BBPTuningParameters.R24HigherValue = (unsigned char)((EEPROMBBPTuningParameters[1] & 0xff00) >> 8);
+		NSLog(@"R24LowerValue = 0x%x\n", BBPTuningParameters.R24LowerValue);
+		NSLog(@"R24HigherValue = 0x%x\n", BBPTuningParameters.R24HigherValue);
+	}
+	if ((EEPROMBBPTuningParameters[2] != 0xffff) && (EEPROMBBPTuningParameters[2] != 0))
+	{
+		BBPTuningParameters.R25LowerValue = (unsigned char)(EEPROMBBPTuningParameters[2] & 0xff);
+		BBPTuningParameters.R25HigherValue = (unsigned char)((EEPROMBBPTuningParameters[2] & 0xff00) >> 8);
+		NSLog(@"R25LowerValue = 0x%x\n", BBPTuningParameters.R25LowerValue);
+		NSLog(@"R25HigherValue = 0x%x\n", BBPTuningParameters.R25HigherValue);
+	}
+	if ((EEPROMBBPTuningParameters[3] != 0xffff) && (EEPROMBBPTuningParameters[3] != 0))
+	{
+		BBPTuningParameters.R61LowerValue = (unsigned char)(EEPROMBBPTuningParameters[3] & 0xff);
+		BBPTuningParameters.R61HigherValue = (unsigned char)((EEPROMBBPTuningParameters[3] & 0xff00) >> 8);
+		NSLog(@"R61LowerValue = 0x%x\n", BBPTuningParameters.R61LowerValue);
+		NSLog(@"R61HigherValue = 0x%x\n", BBPTuningParameters.R61HigherValue);
+	}
+/*	if ((EEPROMBBPTuningParameters[4] != 0xffff) && (EEPROMBBPTuningParameters[4] != 0))
+	{
+		PortCfg.BbpTuning.VgcUpperBound = (unsigned char)(EEPROMBBPTuningParameters[4] & 0xff);
+		NSLog(@"VgcUpperBound = 0x%x\n", PortCfg.BbpTuning.VgcUpperBound);
+	}*/
+	if ((EEPROMBBPTuningParameters[5] != 0xffff) && (EEPROMBBPTuningParameters[5] != 0))
+	{
+		BBPTuningParameters.BBPR17LowSensitivity = (unsigned char)(EEPROMBBPTuningParameters[5] & 0xff);
+		BBPTuningParameters.BBPR17MidSensitivity = (unsigned char)((EEPROMBBPTuningParameters[5] & 0xff00) >> 8);
+		NSLog(@"BBPR17LowSensitivity = 0x%x\n", BBPTuningParameters.BBPR17LowSensitivity);
+		NSLog(@"BBPR17MidSensitivity = 0x%x\n", BBPTuningParameters.BBPR17MidSensitivity);
+	}
+	if ((EEPROMBBPTuningParameters[6] != 0xffff) && (EEPROMBBPTuningParameters[6] != 0))
+	{
+		BBPTuningParameters.RSSIToDbmOffset = (unsigned char)(EEPROMBBPTuningParameters[6] & 0xff);
+		NSLog(@"RSSIToDbmOffset = 0x%x\n", BBPTuningParameters.RSSIToDbmOffset);
+	}
+    
+	NSLog(@"<-- NICReadEEPROMParameters\n");
+}
+
+void RalinkJack::NICInitAsicFromEEPROM()
+{
+    unsigned short i, value;
+	unsigned short Value5, Value6;
+	unsigned char  TxValue,RxValue;
+	EEPROM_ANTENNA_STRUC	Antenna;
+	EEPROM_NIC_CONFIG2_STRUC	NicConfig2;
+    
+	NSLog(@"--> NICInitAsicFromEEPROM\n");
+    
+	//Initialize BBP registers.
+	for(i = 3; i < NUM_EEPROM_BBP_PARMS; i++)
+	{
+		value = EEPROMDefaultValue[i];
+		
+		if((value != 0xFFFF) && (value != 0))
+		{
+			//blue,RTUSBWriteMACRegister(PHY_CSR7, value);
+			USHORT	ID;
+			ID = ((value & 0xff00) >> 8);
+			{
+				unsigned short	temp;
+				unsigned int	j = 0;
+				do
+				{
+					RTUSBReadMACRegister(PHY_CSR8, &temp);
+					if (!(temp & BUSY))
+						break;
+					j++;
+				}
+				while (j < RETRY_LIMIT);
+				
+				RTUSBWriteMACRegister(PHY_CSR7, value);
+			}
+            
+		}
+	}
+    
+	NSLog(@"BBPTuningParameters.R24LowerValue = %x\n", BBPTuningParameters.R24LowerValue);
+	NSLog(@ "BBPTuningParameters.R25LowerValue = %x\n", BBPTuningParameters.R25LowerValue);
+	NSLog(@ "BBPTuningParameters.R61LowerValue = %x\n", BBPTuningParameters.R61LowerValue);
+	RTUSBWriteBBPRegister(24, BBPTuningParameters.R24LowerValue);
+	RTUSBWriteBBPRegister(25, BBPTuningParameters.R25LowerValue);
+	RTUSBWriteBBPRegister(61, BBPTuningParameters.R61LowerValue);
+    
+    
+	//Select antennas.
+	Antenna.word = EEPROMDefaultValue[0];
+    
+	if ((Antenna.word == 0xFFFF) || (Antenna.field.TxDefaultAntenna > 2) || (Antenna.field.RxDefaultAntenna > 2))
+	{
+		NSLog(@"E2PROM error(=0x%04x), hard code as 0x0002\n", Antenna.word);
+		Antenna.word = 0x0002;
+	}
+    
+	NSLog(@"Antenna.word = 0x%x \n", Antenna.word);
+//	PortCfg.NumberOfAntenna = 2;	// (UCHAR)Antenna.field.NumOfAntenna;
+//	PortCfg.CurrentTxAntenna = (UCHAR)Antenna.field.TxDefaultAntenna;
+//	PortCfg.CurrentRxAntenna = (UCHAR)Antenna.field.RxDefaultAntenna;
+//	   PortCfg.RfType = (UCHAR) Antenna.field.RfType;//blue
+//           NSLog(@"PortCfg.RfType = 0x%x \n", PortCfg.RfType);
+           RTUSBReadBBPRegister(BBP_Tx_Configure, &TxValue);
+           RTUSBReadBBPRegister(BBP_Rx_Configure, &RxValue);
+           RTUSBReadMACRegister(PHY_CSR5, &Value5);
+           RTUSBReadMACRegister(PHY_CSR6, &Value6);
+           
+           // Tx antenna select
+           if(Antenna.field.TxDefaultAntenna == 1)   
+           {
+               TxValue = (TxValue & 0xFC) | 0x00; // Antenna A
+               Value5 = (Value5 & 0xFFFC) | 0x0000;
+               Value6 = (Value6 & 0xFFFC) | 0x0000;
+           }
+           else if(Antenna.field.TxDefaultAntenna == 2)  
+           {
+               TxValue = (TxValue & 0xFC) | 0x02; // Antenna B
+               Value5 = (Value5 & 0xFFFC) | 0x0002;
+               Value6 = (Value6 & 0xFFFC) | 0x0002;
+           }
+           else
+           {
+               TxValue = (TxValue & 0xFC) | 0x01; // Antenna Diversity
+               Value5 = (Value5 & 0xFFFC) | 0x0001;
+               Value6 = (Value6 & 0xFFFC) | 0x0001;
+           }
+           
+           
+           // Rx antenna select
+           if(Antenna.field.RxDefaultAntenna == 1)
+               RxValue = (RxValue & 0xFC) | 0x00; // Antenna A
+	else if(Antenna.field.RxDefaultAntenna == 2)
+		RxValue = (RxValue & 0xFC) | 0x02; // Antenna B
+	else
+		RxValue = (RxValue & 0xFC) | 0x01; // Antenna Diversity
+    
+  /*  
+	NSLog(@ "<-- NICInitAsicFromEEPROM PortCfg.RfType = %d\n", PortCfg.RfType);
+	// RT5222 needs special treatment to swap TX I/Q
+	if (PortCfg.RfType == RFIC_5222)
+	{
+		Value5 |= 0x0004;
+		Value6 |= 0x0004;
+		TxValue |= 0x04;		 // TX I/Q flip
+	}
+	// RT2525E need to flip TX I/Q but not RX I/Q
+	else if (PortCfg.RfType == RFIC_2525E)	
+	{
+		Value5 |= 0x0004;
+		Value6 |= 0x0004;
+		TxValue |= 0x04;		 // TX I/Q flip
+		RxValue &= 0xfb;		 // RX I/Q no flip
+	}
+	
+	RTUSBWriteMACRegister(PHY_CSR5, Value5);
+	RTUSBWriteMACRegister(PHY_CSR6, Value6);
+    
+	// Change to match microsoft definition, 0xff: diversity, 0: A, 1: B
+	PortCfg.CurrentTxAntenna--;
+	PortCfg.CurrentRxAntenna--;
+    
+	RTUSBWriteBBPRegister(BBP_Tx_Configure, TxValue);
+	RTUSBWriteBBPRegister(BBP_Rx_Configure, RxValue);
+    
+	
+	//Set LED mode.
+	if (Antenna.field.LedMode == LED_MODE_TXRX_ACTIVITY)
+		PortCfg.LedMode = LED_MODE_TXRX_ACTIVITY;
+	else if (Antenna.field.LedMode == LED_MODE_SINGLE)
+	{
+		PortCfg.LedMode = LED_MODE_SINGLE;
+		ASIC_LED_ACT_ON();
+	}
+	else if (Antenna.field.LedMode == LED_MODE_ASUS)
+	{
+		PortCfg.LedMode = LED_MODE_ASUS;
+		RTUSBWriteMACRegister(MAC_CSR20, 0x0002);
+	}
+	else if (Antenna.field.LedMode == LED_MODE_ALPHA)
+	{
+		PortCfg.LedMode = LED_MODE_ALPHA;
+		RTUSBWriteMACRegister(MAC_CSR20, 1);
+		PortCfg.LedCntl.fOdd = FALSE;
+	}	 
+	else
+		PortCfg.LedMode = LED_MODE_DEFAULT;
+   
+    
+	// Read Hardware controlled Radio state enable bit
+	if (Antenna.field.HardwareRadioControl == 1)
+	{
+//		PortCfg.bHardwareRadio = TRUE;
+		RTUSBWriteMACRegister(MAC_CSR19, 0);
+        
+		// Read GPIO pin0 as Hardware controlled radio state
+		RTUSBReadMACRegister(MAC_CSR19, &value);
+		if ((value & 0x80) == 0)
+		{
+			PortCfg.bHwRadio = FALSE;
+			PortCfg.bRadio = FALSE;
+			RTUSBWriteMACRegister(MAC_CSR13, 0);
+			RTUSBWriteMACRegister(MAC_CSR14, 0);
+			RTMP_SET_FLAG(fRTMP_ADAPTER_RADIO_OFF);
+//        	DBGPRINT(RT_DEBUG_ERROR, "2Set fRTMP_ADAPTER_RADIO_OFF ");
+			if (PortCfg.LedMode == LED_MODE_ASUS)
+			{
+				// Turn bit 17 for Radio OFF
+				RTUSBWriteMACRegister(MAC_CSR20, 1);
+			}
+         
+		}
+	}
+	else
+		PortCfg.bHardwareRadio = FALSE;		
+*/	
+	NicConfig2.word = EEPROMDefaultValue[1];
+	if (NicConfig2.word == 0xffff)
+		NicConfig2.word = 0;	// empty E2PROM, use default
+	
+	// for dynamic BBP R17:RX sensibility tuning
+	{
+		UCHAR r17;
+		RTUSBReadBBPRegister(17, &r17);
+	//	PortCfg.BbpTuningEnable = (NicConfig2.field.DynamicBbpTuning==0)? 1:0;
+	//	PortCfg.VgcLowerBound   = r17;
+        
+		// 2004-3-4 per David's request, R7 starts at upper bound
+		//r17 = PortCfg.BbpTuning.VgcUpperBound;
+	//	PortCfg.LastR17Value = r17;
+	//	RTUSBWriteBBPRegister(17, r17);
+        
+		// 2004-2-2 per David's request, lower R17 low-bound for very good quality NIC
+	//	PortCfg.VgcLowerBound -= 6;  
+	//	NSLog(@"R17 tuning enable=%d, R17=0x%02x, range=<0x%02x, 0x%02x>\n",
+      //           PortCfg.BbpTuningEnable, r17, PortCfg.VgcLowerBound, PortCfg.BbpTuning.VgcUpperBound);
+	}
+    
+//    AsicSwitchChannel(PortCfg.Channel);
+//	NSLog(@"RF IC=%d, LED mode=%d\n", PortCfg.RfType, PortCfg.LedMode);
+    
+	NSLog(@"<-- NICInitAsicFromEEPROM\n");
 }
 
 
