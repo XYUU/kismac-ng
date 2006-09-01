@@ -102,7 +102,8 @@ bool USBJack::stopCapture() {
 }
 
  bool USBJack::getChannel(UInt16* channel) {
-    return false;   //this method MUST be overridden
+     *channel = _channel;
+    return true;   //this method MUST be overridden
 }
 
 bool USBJack::getAllowedChannels(UInt16* channels) {

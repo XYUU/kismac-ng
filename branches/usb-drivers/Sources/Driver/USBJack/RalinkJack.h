@@ -47,6 +47,8 @@ public:
     IOReturn	RTUSBWriteBBPRegister(unsigned char Id,
                                       unsigned char Value);
     
+    IOReturn	RalinkJack::RTUSBWriteRFRegister(unsigned long Value);
+    
     IOReturn	RTUSBReadEEPROM(unsigned short Offset,
                                 unsigned char * pData,
                                 unsigned short length);
@@ -54,11 +56,16 @@ public:
     void	NICReadEEPROMParameters();
     void    NICInitAsicFromEEPROM();
     
+    bool setChannel(UInt16 channel);
+    bool getAllowedChannels(UInt16* channels);
+    bool startCapture(UInt16 channel);
+    
 private:
         int temp;
         unsigned short EEPROMDefaultValue[NUM_EEPROM_BBP_PARMS];
         unsigned short EEPROMBBPTuningParameters[NUM_EEPROM_BBP_TUNING_PARMS];
         BBP_TUNING_PARAMETERS_STRUC			BBPTuningParameters;
+        unsigned char RfType;
 
 };
 #endif

@@ -46,6 +46,182 @@
 #define mdelay(a) usleep(a*100)
 #define NdisMSleep	mdelay
 
+// value domain for pAdapter->PortCfg.RfType
+#define RFIC_2522               0
+#define RFIC_2523               1
+#define RFIC_2524               2
+#define RFIC_2525               3
+#if 0//steven:modified by brand,blue
+#define RFIC_2525E              4
+#else
+#define RFIC_2525E              5
+#endif
+#define RFIC_5222               16
+// This chip is same as RT2526, it's for 11b only purpose
+#define	RFIC_2426				6
+
+typedef	struct	_RTMP_RF_REGS
+{
+	UCHAR   Channel;
+	ULONG	R1;
+	ULONG   R2;
+	ULONG   R3;
+	ULONG   R4;
+}	RTMP_RF_REGS, *PRTMP_RF_REGS;
+
+typedef	struct	_RTMP_RF_REGS_1
+{
+	UCHAR   Channel;
+	ULONG	TempR2;
+	ULONG	R1;
+	ULONG   R2;
+	ULONG   R3;
+	ULONG   R4;
+}	RTMP_RF_REGS_1, *PRTMP_RF_REGS_1;
+
+RTMP_RF_REGS RF2522RegTable[] = {
+    //      ch   R1          R2          R3(TX0~4=0) R4
+{1,  0x94002050, 0x940c1fda, 0x94000101, 0},
+{2,  0x94002050, 0x940c1fee, 0x94000101, 0},
+{3,  0x94002050, 0x940c2002, 0x94000101, 0},
+{4,  0x94002050, 0x940c2016, 0x94000101, 0},
+{5,  0x94002050, 0x940c202a, 0x94000101, 0},
+{6,  0x94002050, 0x940c203e, 0x94000101, 0},
+{7,  0x94002050, 0x940c2052, 0x94000101, 0},
+{8,  0x94002050, 0x940c2066, 0x94000101, 0},
+{9,  0x94002050, 0x940c207a, 0x94000101, 0},
+{10, 0x94002050, 0x940c208e, 0x94000101, 0},
+{11, 0x94002050, 0x940c20a2, 0x94000101, 0},
+{12, 0x94002050, 0x940c20b6, 0x94000101, 0},
+{13, 0x94002050, 0x940c20ca, 0x94000101, 0},
+{14, 0x94002050, 0x940c20fa, 0x94000101, 0}
+};
+#define	NUM_OF_2522_CHNL	(sizeof(RF2522RegTable) / sizeof(RTMP_RF_REGS))
+
+RTMP_RF_REGS RF2523RegTable[] = {
+    //      ch   R1          R2          R3(TX0~4=0) R4
+    {1,  0x94022010, 0x94000c9e, 0x940e0111, 0x94000a1b},
+    {2,  0x94022010, 0x94000ca2, 0x940e0111, 0x94000a1b},
+    {3,  0x94022010, 0x94000ca6, 0x940e0111, 0x94000a1b},
+    {4,  0x94022010, 0x94000caa, 0x940e0111, 0x94000a1b},
+    {5,  0x94022010, 0x94000cae, 0x940e0111, 0x94000a1b},
+    {6,  0x94022010, 0x94000cb2, 0x940e0111, 0x94000a1b},
+    {7,  0x94022010, 0x94000cb6, 0x940e0111, 0x94000a1b},
+    {8,  0x94022010, 0x94000cba, 0x940e0111, 0x94000a1b},
+    {9,  0x94022010, 0x94000cbe, 0x940e0111, 0x94000a1b},
+    {10, 0x94022010, 0x94000d02, 0x940e0111, 0x94000a1b},
+    {11, 0x94022010, 0x94000d06, 0x940e0111, 0x94000a1b},
+    {12, 0x94022010, 0x94000d0a, 0x940e0111, 0x94000a1b},
+    {13, 0x94022010, 0x94000d0e, 0x940e0111, 0x94000a1b},
+    {14, 0x94022010, 0x94000d1a, 0x940e0111, 0x94000a03}
+};
+#define	NUM_OF_2523_CHNL	(sizeof(RF2523RegTable) / sizeof(RTMP_RF_REGS))
+
+RTMP_RF_REGS RF2524RegTable[] = {
+    //      ch   R1          R2          R3(TX0~4=0) R4
+    {1,  0x94032020, 0x94000c9e, 0x94000101, 0x94000a1b},
+    {2,  0x94032020, 0x94000ca2, 0x94000101, 0x94000a1b},
+    {3,  0x94032020, 0x94000ca6, 0x94000101, 0x94000a1b},
+    {4,  0x94032020, 0x94000caa, 0x94000101, 0x94000a1b},
+    {5,  0x94032020, 0x94000cae, 0x94000101, 0x94000a1b},
+    {6,  0x94032020, 0x94000cb2, 0x94000101, 0x94000a1b},
+    {7,  0x94032020, 0x94000cb6, 0x94000101, 0x94000a1b},
+    {8,  0x94032020, 0x94000cba, 0x94000101, 0x94000a1b},
+    {9,  0x94032020, 0x94000cbe, 0x94000101, 0x94000a1b},
+    {10, 0x94032020, 0x94000d02, 0x94000101, 0x94000a1b},
+    {11, 0x94032020, 0x94000d06, 0x94000101, 0x94000a1b},
+    {12, 0x94032020, 0x94000d0a, 0x94000101, 0x94000a1b},
+    {13, 0x94032020, 0x94000d0e, 0x94000101, 0x94000a1b},
+    {14, 0x94032020, 0x94000d1a, 0x94000101, 0x94000a03}
+};
+#define	NUM_OF_2524_CHNL	(sizeof(RF2524RegTable) / sizeof(RTMP_RF_REGS))
+
+RTMP_RF_REGS_1 RF2525RegTable[] = {
+    //      ch   TempR2		 R1          R2          R3(TX0~4=0) R4
+    {1,  0x94080cbe, 0x94022020, 0x94080c9e, 0x94060111, 0x94000a1b}, // {1,  0x94022010, 0x9408062e, 0x94060111, 0x94000a23}, 
+    {2,  0x94080d02, 0x94022020, 0x94080ca2, 0x94060111, 0x94000a1b},
+    {3,  0x94080d06, 0x94022020, 0x94080ca6, 0x94060111, 0x94000a1b},
+    {4,  0x94080d0a, 0x94022020, 0x94080caa, 0x94060111, 0x94000a1b},
+    {5,  0x94080d0e, 0x94022020, 0x94080cae, 0x94060111, 0x94000a1b},
+    {6,  0x94080d12, 0x94022020, 0x94080cb2, 0x94060111, 0x94000a1b},
+    {7,  0x94080d16, 0x94022020, 0x94080cb6, 0x94060111, 0x94000a1b},
+    {8,  0x94080d1a, 0x94022020, 0x94080cba, 0x94060111, 0x94000a1b},
+    {9,  0x94080d1e, 0x94022020, 0x94080cbe, 0x94060111, 0x94000a1b},
+    {10, 0x94080d22, 0x94022020, 0x94080d02, 0x94060111, 0x94000a1b},
+    {11, 0x94080d26, 0x94022020, 0x94080d06, 0x94060111, 0x94000a1b}, // {11, 0x94022010, 0x94080682, 0x94060111, 0x94000a23}, 
+    {12, 0x94080d2a, 0x94022020, 0x94080d0a, 0x94060111, 0x94000a1b},
+    {13, 0x94080d2e, 0x94022020, 0x94080d0e, 0x94060111, 0x94000a1b}, // {13, 0x94022010, 0x94080686, 0x94060111, 0x94000a23}, 
+    {14, 0x94080d3a, 0x94022020, 0x94080d1a, 0x94060111, 0x94000a03}
+};
+#define	NUM_OF_2525_CHNL	(sizeof(RF2525RegTable) / sizeof(RTMP_RF_REGS_1))
+
+RTMP_RF_REGS_1 RF2525eRegTable[] = {
+    // using 10 Mhz reference clock
+    //      ch   TempR2		 R1          R2          R3(TX0~4=0) R4
+    {1,  0x940008aa, 0x94022010, 0x9400089a, 0x94060111, 0x94000e1b},
+    {2,  0x940008ae, 0x94022010, 0x9400089e, 0x94060111, 0x94000e07},
+    {3,  0x940008ae, 0x94022010, 0x9400089e, 0x94060111, 0x94000e1b},
+    {4,  0x940008b2, 0x94022010, 0x940008a2, 0x94060111, 0x94000e07},
+    {5,  0x940008b2, 0x94022010, 0x940008a2, 0x94060111, 0x94000e1b},
+    {6,  0x940008b6, 0x94022010, 0x940008a6, 0x94060111, 0x94000e07},
+    {7,  0x940008b6, 0x94022010, 0x940008a6, 0x94060111, 0x94000e1b},
+    {8,  0x940008ba, 0x94022010, 0x940008aa, 0x94060111, 0x94000e07},
+    {9,  0x940008ba, 0x94022010, 0x940008aa, 0x94060111, 0x94000e1b},
+    {10, 0x940008be, 0x94022010, 0x940008ae, 0x94060111, 0x94000e07},
+    {11, 0x940008b7, 0x94022010, 0x940008ae, 0x94060111, 0x94000e1b}, 
+    {12, 0x94000902, 0x94022010, 0x940008b2, 0x94060111, 0x94000e07},
+    {13, 0x94000902, 0x94022010, 0x940008b2, 0x94060111, 0x94000e1b},
+    {14, 0x94000906, 0x94022010, 0x940008b6, 0x94060111, 0x94000e23}
+};
+#define	NUM_OF_2525E_CHNL	(sizeof(RF2525eRegTable) / sizeof(RTMP_RF_REGS_1))
+
+RTMP_RF_REGS RF5222RegTable[] = {
+    //      ch   R1          R2          R3(TX0~4=0) R4
+    {1,  0x94022020, 0x94001136, 0x94000101, 0x94000a0b},
+    {2,  0x94022020, 0x9400113a, 0x94000101, 0x94000a0b},
+    {3,  0x94022020, 0x9400113e, 0x94000101, 0x94000a0b},
+    {4,  0x94022020, 0x94001182, 0x94000101, 0x94000a0b},
+    {5,  0x94022020, 0x94001186, 0x94000101, 0x94000a0b},
+    {6,  0x94022020, 0x9400118a, 0x94000101, 0x94000a0b},
+    {7,  0x94022020, 0x9400118e, 0x94000101, 0x94000a0b},
+    {8,  0x94022020, 0x94001192, 0x94000101, 0x94000a0b},
+    {9,  0x94022020, 0x94001196, 0x94000101, 0x94000a0b},
+    {10, 0x94022020, 0x9400119a, 0x94000101, 0x94000a0b},
+    {11, 0x94022020, 0x9400119e, 0x94000101, 0x94000a0b},
+    {12, 0x94022020, 0x940011a2, 0x94000101, 0x94000a0b},
+    {13, 0x94022020, 0x940011a6, 0x94000101, 0x94000a0b},
+    {14, 0x94022020, 0x940011ae, 0x94000101, 0x94000a1b},
+    
+    // still lack of MMAC(Japan) ch 34,38,42,46
+    
+    {36, 0x94022010, 0x94018896, 0x94000101, 0x94000a1f},
+    {40, 0x94022010, 0x9401889a, 0x94000101, 0x94000a1f},
+    {44, 0x94022010, 0x9401889e, 0x94000101, 0x94000a1f},
+    {48, 0x94022010, 0x940188a2, 0x94000101, 0x94000a1f},
+    {52, 0x94022010, 0x940188a6, 0x94000101, 0x94000a1f},
+    {66, 0x94022010, 0x940188aa, 0x94000101, 0x94000a1f},
+    {60, 0x94022010, 0x940188ae, 0x94000101, 0x94000a1f},
+    {64, 0x94022010, 0x940188b2, 0x94000101, 0x94000a1f},
+    
+    {100, 0x94022010, 0x94008802, 0x94000101, 0x94000a0f},
+    {104, 0x94022010, 0x94008806, 0x94000101, 0x94000a0f},
+    {108, 0x94022010, 0x9400880a, 0x94000101, 0x94000a0f},
+    {112, 0x94022010, 0x9400880e, 0x94000101, 0x94000a0f},
+    {116, 0x94022010, 0x94008812, 0x94000101, 0x94000a0f},
+    {120, 0x94022010, 0x94008816, 0x94000101, 0x94000a0f},
+    {124, 0x94022010, 0x9400881a, 0x94000101, 0x94000a0f},
+    {128, 0x94022010, 0x9400881e, 0x94000101, 0x94000a0f},
+    {132, 0x94022010, 0x94008822, 0x94000101, 0x94000a0f},
+    {136, 0x94022010, 0x94008826, 0x94000101, 0x94000a0f},
+    {140, 0x94022010, 0x9400882a, 0x94000101, 0x94000a0f},
+    
+    {149, 0x94022020, 0x940090a6, 0x94000101, 0x94000a07},
+    {153, 0x94022020, 0x940090ae, 0x94000101, 0x94000a07},
+    {157, 0x94022020, 0x940090b6, 0x94000101, 0x94000a07},
+    {161, 0x94022020, 0x940090be, 0x94000101, 0x94000a07}
+};
+#define	NUM_OF_5222_CHNL	(sizeof(RF5222RegTable) / sizeof(RTMP_RF_REGS))
+
 USHORT	 BBPRegTable[] = {
 	0x0302,  // R03
 	0x0419,  // R04
@@ -993,11 +1169,19 @@ typedef	union	_PHY_CSR8_STRUC	{
 
 typedef	union	_PHY_CSR10_STRUC	{
 	struct	{
+#if __BIG_ENDIAN__
+        USHORT		Busy:1;				// 1: ASIC is busy execute RF programming.
+        USHORT		PLL_LD:1;			// RF PLL_LD status
+        USHORT		IFSelect:1;			// 1: select IF	to program,	0: select RF to	program
+        USHORT		NumberOfBits:5;		// Number of bits used in RFRegValue (I:20,	RFMD:22)
+        USHORT		RFRegValue:8;		// Register	value (include register	id)	serial out to RF/IF	chip.
+#else
 		USHORT		RFRegValue:8;		// Register	value (include register	id)	serial out to RF/IF	chip.
 		USHORT		NumberOfBits:5;		// Number of bits used in RFRegValue (I:20,	RFMD:22)
 		USHORT		IFSelect:1;			// 1: select IF	to program,	0: select RF to	program
 		USHORT		PLL_LD:1;			// RF PLL_LD status
 		USHORT		Busy:1;				// 1: ASIC is busy execute RF programming.
+#endif
 	}	field;
 	USHORT			value;
 }	PHY_CSR10_STRUC, *PPHY_CSR10_STRUC;
@@ -1102,6 +1286,15 @@ typedef	union	_MACCSR2_STRUC	{
 //
 typedef	union	_EEPROM_ANTENNA_STRUC	{
 	struct	{
+#if __BIG_ENDIAN__
+        USHORT      RfType:5;               // see E2PROM document
+        USHORT		HardwareRadioControl:1;	// 1: Hardware controlled radio enabled, Read GPIO0 required.
+        USHORT      DynamicTxAgcControl:1;	
+        USHORT      LedMode:3;              // 0-default mode, 1:TX/RX activity mode, 2: Single LED (didn't care about link), 3: reserved
+        USHORT		RxDefaultAntenna:2;		// default of antenna, 0: diversity, 1:antenna-A, 2:antenna-B reserved (default = 0)
+        USHORT		TxDefaultAntenna:2;		// default of antenna, 0: diversity, 1:antenna-A, 2:antenna-B reserved (default = 0)
+        USHORT		NumOfAntenna:2;			// Number of antenna
+#else
 		USHORT		NumOfAntenna:2;			// Number of antenna
 		USHORT		TxDefaultAntenna:2;		// default of antenna, 0: diversity, 1:antenna-A, 2:antenna-B reserved (default = 0)
 		USHORT		RxDefaultAntenna:2;		// default of antenna, 0: diversity, 1:antenna-A, 2:antenna-B reserved (default = 0)
@@ -1109,6 +1302,7 @@ typedef	union	_EEPROM_ANTENNA_STRUC	{
 		USHORT      DynamicTxAgcControl:1;	
 		USHORT		HardwareRadioControl:1;	// 1: Hardware controlled radio enabled, Read GPIO0 required.
 		USHORT      RfType:5;               // see E2PROM document
+#endif
 	}	field;
 	USHORT			word;
 }	EEPROM_ANTENNA_STRUC, *PEEPROM_ANTENNA_STRUC;

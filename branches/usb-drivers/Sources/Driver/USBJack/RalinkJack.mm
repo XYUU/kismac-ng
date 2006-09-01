@@ -331,6 +331,34 @@ IOReturn	RalinkJack::RTUSBWriteBBPRegister(unsigned char Id,
 	return kIOReturnSuccess;
 }
 
+IOReturn	RalinkJack::RTUSBWriteRFRegister(unsigned long Value)
+{
+	PHY_CSR10_STRUC	PhyCsr10;
+	unsigned int			i = 0;
+    
+	do
+	{
+		RTUSBReadMACRegister(PHY_CSR10, (unsigned short*)&PhyCsr10);
+		if (!(PhyCsr10.field.Busy))
+			break;
+		i++;
+	}
+	while (i < RETRY_LIMIT);
+    
+	if (i == RETRY_LIMIT)
+	{
+		NSLog(@"Retry count exhausted or device removed!!!\n");
+		return kIOReturnNoDevice;
+	}
+    
+	RTUSBWriteMACRegister(PHY_CSR9, (USHORT)(Value & 0x0000ffff));
+	
+	PhyCsr10.value = (unsigned short)(Value >> 16);
+	RTUSBWriteMACRegister(PHY_CSR10, PhyCsr10.value);
+	
+	return kIOReturnSuccess;
+}
+
 
 
 IOReturn	RalinkJack::RTUSBReadEEPROM(unsigned short Offset,
@@ -529,7 +557,7 @@ void RalinkJack::NICInitAsicFromEEPROM()
 //	PortCfg.NumberOfAntenna = 2;	// (UCHAR)Antenna.field.NumOfAntenna;
 //	PortCfg.CurrentTxAntenna = (UCHAR)Antenna.field.TxDefaultAntenna;
 //	PortCfg.CurrentRxAntenna = (UCHAR)Antenna.field.RxDefaultAntenna;
-//	   PortCfg.RfType = (UCHAR) Antenna.field.RfType;//blue
+    RfType = (unsigned char) Antenna.field.RfType;//blue
 //           NSLog(@"PortCfg.RfType = 0x%x \n", PortCfg.RfType);
            RTUSBReadBBPRegister(BBP_Tx_Configure, &TxValue);
            RTUSBReadBBPRegister(BBP_Rx_Configure, &RxValue);
@@ -565,17 +593,17 @@ void RalinkJack::NICInitAsicFromEEPROM()
 	else
 		RxValue = (RxValue & 0xFC) | 0x01; // Antenna Diversity
     
-  /*  
-	NSLog(@ "<-- NICInitAsicFromEEPROM PortCfg.RfType = %d\n", PortCfg.RfType);
+    
+	NSLog(@"<-- NICInitAsicFromEEPROM RfType = %d\n", RfType);
 	// RT5222 needs special treatment to swap TX I/Q
-	if (PortCfg.RfType == RFIC_5222)
+	if (RfType == RFIC_5222)
 	{
 		Value5 |= 0x0004;
 		Value6 |= 0x0004;
 		TxValue |= 0x04;		 // TX I/Q flip
 	}
 	// RT2525E need to flip TX I/Q but not RX I/Q
-	else if (PortCfg.RfType == RFIC_2525E)	
+	else if (RfType == RFIC_2525E)	
 	{
 		Value5 |= 0x0004;
 		Value6 |= 0x0004;
@@ -587,13 +615,13 @@ void RalinkJack::NICInitAsicFromEEPROM()
 	RTUSBWriteMACRegister(PHY_CSR6, Value6);
     
 	// Change to match microsoft definition, 0xff: diversity, 0: A, 1: B
-	PortCfg.CurrentTxAntenna--;
-	PortCfg.CurrentRxAntenna--;
+	//PortCfg.CurrentTxAntenna--;
+	//PortCfg.CurrentRxAntenna--;
     
 	RTUSBWriteBBPRegister(BBP_Tx_Configure, TxValue);
 	RTUSBWriteBBPRegister(BBP_Rx_Configure, RxValue);
     
-	
+	/*
 	//Set LED mode.
 	if (Antenna.field.LedMode == LED_MODE_TXRX_ACTIVITY)
 		PortCfg.LedMode = LED_MODE_TXRX_ACTIVITY;
@@ -668,10 +696,166 @@ void RalinkJack::NICInitAsicFromEEPROM()
     
 //    AsicSwitchChannel(PortCfg.Channel);
 //	NSLog(@"RF IC=%d, LED mode=%d\n", PortCfg.RfType, PortCfg.LedMode);
-    
+    _deviceInit = true;
 	NSLog(@"<-- NICInitAsicFromEEPROM\n");
 }
 
+bool    RalinkJack::setChannel(UInt16 channel){
+	ULONG R3;
+	UCHAR index;
+    
+    //set tx power to 100%
+    R3 = 31;
+    
+	R3 = R3 << 9; // shift TX power control to correct RF R3 bit position
+	switch (RfType)
+	{
+		case RFIC_2522:
+			for (index = 0; index < NUM_OF_2522_CHNL; index++)
+			{
+				if (channel == RF2522RegTable[index].Channel)
+				{
+					R3 = R3 | RF2522RegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF2522RegTable[index].R1);
+					RTUSBWriteRFRegister(RF2522RegTable[index].R2);
+					RTUSBWriteRFRegister(R3);
+					break;
+				}
+			}
+			break;
+            
+		case RFIC_2523:
+			for (index = 0; index < NUM_OF_2523_CHNL; index++)
+			{
+				if (channel == RF2523RegTable[index].Channel)
+				{
+					R3 = R3 | RF2523RegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF2523RegTable[index].R1);
+					RTUSBWriteRFRegister(RF2523RegTable[index].R2);
+					RTUSBWriteRFRegister(R3);
+					RTUSBWriteRFRegister(RF2523RegTable[index].R4);
+					//pAd->PortCfg.LatchRfRegs.Channel = Channel;
+					//pAd->PortCfg.LatchRfRegs.R1 = RF2523RegTable[index].R1;
+					//pAd->PortCfg.LatchRfRegs.R2 = RF2523RegTable[index].R2;
+					//pAd->PortCfg.LatchRfRegs.R3 = R3;
+					//pAd->PortCfg.LatchRfRegs.R4 = RF2523RegTable[index].R4;
+					break;
+				}
+			}
+			break;
+            
+		case RFIC_2524:
+			for (index = 0; index < NUM_OF_2524_CHNL; index++)
+			{
+				if (channel == RF2524RegTable[index].Channel)
+				{
+					R3 = R3 | RF2524RegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF2524RegTable[index].R1);
+					RTUSBWriteRFRegister(RF2524RegTable[index].R2);
+					RTUSBWriteRFRegister(R3);
+					RTUSBWriteRFRegister(RF2524RegTable[index].R4);
+					//pAd->PortCfg.LatchRfRegs.Channel = Channel;
+					//pAd->PortCfg.LatchRfRegs.R1 = RF2524RegTable[index].R1;
+					//pAd->PortCfg.LatchRfRegs.R2 = RF2524RegTable[index].R2;
+					//pAd->PortCfg.LatchRfRegs.R3 = R3;
+					//pAd->PortCfg.LatchRfRegs.R4 = RF2524RegTable[index].R4;
+					break;
+				}
+			}
+			break;
+			
+		case RFIC_2525:
+			for (index = 0; index < NUM_OF_2525_CHNL; index++)
+			{
+				if (channel == RF2525RegTable[index].Channel)
+				{
+					R3 = R3 | RF2525RegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF2525RegTable[index].R1);
+                    
+					RTUSBWriteRFRegister(RF2525RegTable[index].R2);
+                    
+					RTUSBWriteRFRegister(R3);
+                    
+					RTUSBWriteRFRegister(RF2525RegTable[index].R4);
+                    
+					//pAd->PortCfg.LatchRfRegs.Channel = Channel;
+					//pAd->PortCfg.LatchRfRegs.R1 = RF2525RegTable[index].R1;
+					//pAd->PortCfg.LatchRfRegs.R2 = RF2525RegTable[index].R2;
+					//pAd->PortCfg.LatchRfRegs.R3 = R3;
+					//pAd->PortCfg.LatchRfRegs.R4 = RF2525RegTable[index].R4;
+					break;
+				}
+			}
+			break;
+			
+		case RFIC_2525E:
+			for (index = 0; index < NUM_OF_2525E_CHNL; index++)
+			{
+				if (channel == RF2525eRegTable[index].Channel)
+				{
+					RTUSBWriteRFRegister(RF2525eRegTable[index].TempR2);
+					RTUSBWriteRFRegister(RF2525eRegTable[index].R4);
+					R3 = R3 | RF2525eRegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF2525eRegTable[index].R1);
+					RTUSBWriteRFRegister(RF2525eRegTable[index].R2);
+					RTUSBWriteRFRegister(R3);
+					RTUSBWriteRFRegister(RF2525eRegTable[index].R4);
+					//pAd->PortCfg.LatchRfRegs.Channel = Channel;
+					//pAd->PortCfg.LatchRfRegs.R1 = RF2525eRegTable[index].R1;
+					//pAd->PortCfg.LatchRfRegs.R2 = RF2525eRegTable[index].R2;
+					//pAd->PortCfg.LatchRfRegs.R3 = R3;
+					//pAd->PortCfg.LatchRfRegs.R4 = RF2525eRegTable[index].R4;
+					break;
+				}
+			}
+			break;
+			
+		case RFIC_5222:
+			for (index = 0; index < NUM_OF_5222_CHNL; index++)
+			{
+				if (channel == RF5222RegTable[index].Channel)
+				{
+					R3 = R3 | RF5222RegTable[index].R3; // set TX power
+					RTUSBWriteRFRegister(RF5222RegTable[index].R1);
+					RTUSBWriteRFRegister(RF5222RegTable[index].R2);
+					RTUSBWriteRFRegister(R3);
+					RTUSBWriteRFRegister(RF5222RegTable[index].R4);
+					//pAd->PortCfg.LatchRfRegs.Channel = Channel;
+					//pAd->PortCfg.LatchRfRegs.R1 = RF5222RegTable[index].R1;
+					//pAd->PortCfg.LatchRfRegs.R2 = RF5222RegTable[index].R2;
+					//pAd->PortCfg.LatchRfRegs.R3 = R3;
+					//pAd->PortCfg.LatchRfRegs.R4 = RF5222RegTable[index].R4;
+					break;
+				}
+			}
+			break;
+            
+		default:
+			return false;
+	}
+    _channel = channel;
+    NSLog(@"RalinkJack::Switched to channel %d", channel);
+    //lock channel seems to be an empty function
+    return true;
+	
+}
+
+bool RalinkJack::getAllowedChannels(UInt16* channels) {
+    if (!_devicePresent) return false;
+    if (!_deviceInit) return false;
+    
+    * channels = 0xFFFF;
+    
+    return true;
+}
+
+bool RalinkJack::startCapture(UInt16 channel) {
+    setChannel(channel);
+    RTUSBWriteMACRegister(TXRX_CSR2, 0x4e); //enable monitor mode?
+    IOReturn ref;
+    ref = (*_interface)->ReadPipeAsync(_interface, kInPipe, &_recieveBuffer, sizeof(_recieveBuffer), (IOAsyncCallback1)_interruptRecieved, this);
+    return true;   
+}
 
 RalinkJack::RalinkJack() {
     _isEnabled = false;
