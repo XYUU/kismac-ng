@@ -852,47 +852,42 @@ bool RalinkJack::getAllowedChannels(UInt16* channels) {
 bool RalinkJack::startCapture(UInt16 channel) {
     setChannel(channel);
     RTUSBWriteMACRegister(TXRX_CSR2, 0x4e); //enable monitor mode?
-    IOReturn ref;
-    ref = (*_interface)->ReadPipeAsync(_interface, kInPipe, &_recieveBuffer, sizeof(_recieveBuffer), (IOAsyncCallback1)_interruptRecieved, this);
     return true;   
 }
 
 bool RalinkJack::_massagePacket(int len){
     unsigned char* pData;
-    UInt8 frame[len*2];
+    UInt8 frame[sizeof(_recieveBuffer)];
     WLFrame * tempFrame;
     PRXD_STRUC		pRxD;
-    WLIEEEFrame* testIeee;
     
+if (len >= (sizeof(RXD_STRUC) + 24)) {
     tempFrame = (WLFrame *)frame;
     
     pData = (unsigned char*)&_recieveBuffer;
 
-    testIeee = (WLIEEEFrame*)pData;
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
-    if (pRxD->Crc || pRxD->CiErr || pRxD->PhyErr) {
+    if (pRxD->Crc) {
+        //NSLog(@"Bad CRC");
         return false;  //its a bad packet, signal the interrupt to continue
-    }    
-      
-    tempFrame->signal = pRxD->BBR1;
-    
-    //this should be a memcpy but I can't make it work!
-    tempFrame->frameControl = testIeee->frameControl;
-    tempFrame->duration = testIeee->duration;
-    tempFrame->idnum = testIeee->idnum;
-    tempFrame->sequenceControl = testIeee->sequenceControl;
-    tempFrame->dataLen = pRxD->DataByteCnt;
-    tempFrame->dataLen = NSSwapHostShortToLittle(tempFrame->dataLen);
-
-    memcpy(tempFrame->address1, testIeee->address1, 6);
-    memcpy(tempFrame->address2, testIeee->address2, 6);
-    memcpy(tempFrame->address3, testIeee->address3, 6);
-    memcpy(tempFrame->address4, testIeee->address4, 6);
-    memcpy(frame + sizeof(WLFrame) + sizeof(UInt16), pData+sizeof(WLIEEEFrame), len - sizeof(WLIEEEFrame));
-   
-    memcpy(&_recieveBuffer, tempFrame, len + sizeof(WLPrismHeader));
-        
-    return true;         //override if needed
+    }
+    else if(pRxD->CiErr) {
+        //NSLog(@"CiErr");
+        return false;  //its a bad packet, signal the interrupt to continue
+    }
+    else if(pRxD->PhyErr) {
+        //NSLog(@"PhyErr");
+        return false;  //its a bad packet, signal the interrupt to continue
+    }
+    else {
+       // NSLog(@"Good Frame : %d, %d, %d", pRxD->Crc, pRxD->CiErr, pRxD->PhyErr);
+        memcpy(frame + sizeof(WLPrismHeader), pData, sizeof(_recieveBuffer));
+        tempFrame->signal = pRxD->BBR1;
+        memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
+        return true;         //override if needed
+    }
+}
+return false;
 }
 
 RalinkJack::RalinkJack() {
