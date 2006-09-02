@@ -86,7 +86,7 @@ protected:
     static void         _addDevice(void *refCon, io_iterator_t iterator);
     static void         _handleDeviceRemoval(void *refCon, io_iterator_t iterator);
     static void         _interruptRecieved(void *refCon, IOReturn result, int len);
-    virtual void        _massagePacket(int len);
+    virtual bool        _massagePacket(int len);
     static void         _runCFRunLoop(USBJack* me);
     static void         _intCFRunLoop(USBJack* me);
 

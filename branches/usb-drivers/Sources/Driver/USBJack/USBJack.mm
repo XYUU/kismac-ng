@@ -496,7 +496,7 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
     
     type = NSSwapLittleShortToHost(me->_recieveBuffer.type);
     if (_USB_ISRXFRM(type)) {
-        me->_massagePacket(len);        //if this driver needs it, it will be overridden
+        if(!me->_massagePacket(len))  goto readon;        //if this driver needs it, it will be overridden, skip bad packets
         WLFrame* frameDescriptor = (WLFrame*)&(me->_recieveBuffer.rxfrm);
         frameDescriptor->status = NSSwapLittleShortToHost(frameDescriptor->status);
         frameDescriptor->dataLen = NSSwapLittleShortToHost(frameDescriptor->dataLen);
@@ -513,8 +513,8 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
             (frameDescriptor->status & 0x700) != 0x700 ||
             frameDescriptor->status & 0xe000) {
             goto readon;
-        }*/
-        
+        }
+        */
         if (frameDescriptor->dataLen > 2304) {
             NSLog(@"MACJackCard::_handleRx: Oversized packet (%d bytes)\n",
                         frameDescriptor->dataLen);
@@ -577,8 +577,8 @@ readon:
         
 }
 
-void USBJack::_massagePacket(int len){
-    return;         //override if needed
+bool USBJack::_massagePacket(int len){
+    return true;         //override if needed
 }
 
 #pragma mark -
@@ -846,7 +846,7 @@ void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
     kern_return_t	kr;
     io_service_t	obj;
     int                 count = 0;
-    //USBJack     *me = (USBJack*)refCon;
+    USBJack     *me = (USBJack*)refCon;
     
     while ((obj = IOIteratorNext(iterator)) != nil) {
         count++;
@@ -854,10 +854,10 @@ void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
         kr = IOObjectRelease(obj);
     }
     
-    /*if (count) {
+    if (count) {
         me->_interface = NULL;
         me->stopRun();
-    }*/
+    }
 }
 
 #pragma mark -

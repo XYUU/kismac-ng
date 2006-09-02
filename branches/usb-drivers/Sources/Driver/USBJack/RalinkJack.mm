@@ -857,9 +857,9 @@ bool RalinkJack::startCapture(UInt16 channel) {
     return true;   
 }
 
-void RalinkJack::_massagePacket(int len){
+bool RalinkJack::_massagePacket(int len){
     unsigned char* pData;
-    UInt8 frame[len+sizeof(WLFrame)];
+    UInt8 frame[len*2];
     WLFrame * tempFrame;
     PRXD_STRUC		pRxD;
     WLIEEEFrame* testIeee;
@@ -870,25 +870,29 @@ void RalinkJack::_massagePacket(int len){
 
     testIeee = (WLIEEEFrame*)pData;
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
-    
+    if (pRxD->Crc || pRxD->CiErr || pRxD->PhyErr) {
+        return false;  //its a bad packet, signal the interrupt to continue
+    }    
+      
     tempFrame->signal = pRxD->BBR1;
-    tempFrame->length = pRxD->DataByteCnt;
+    
     //this should be a memcpy but I can't make it work!
     tempFrame->frameControl = testIeee->frameControl;
     tempFrame->duration = testIeee->duration;
     tempFrame->idnum = testIeee->idnum;
     tempFrame->sequenceControl = testIeee->sequenceControl;
+    tempFrame->dataLen = pRxD->DataByteCnt;
+    tempFrame->dataLen = NSSwapHostShortToLittle(tempFrame->dataLen);
 
     memcpy(tempFrame->address1, testIeee->address1, 6);
     memcpy(tempFrame->address2, testIeee->address2, 6);
     memcpy(tempFrame->address3, testIeee->address3, 6);
     memcpy(tempFrame->address4, testIeee->address4, 6);
-    memcpy(frame + sizeof(WLFrame),pData+sizeof(WLIEEEFrame),len - sizeof(WLIEEEFrame) - sizeof(RXD_STRUC));
-    //tempFrame.
-    //memcpy(&tempFrame.frameControl, pData, len);
-    memcpy(&_recieveBuffer.rxfrm, tempFrame, len+sizeof(WLFrame) - sizeof(RXD_STRUC)-sizeof(WLIEEEFrame));
+    memcpy(frame + sizeof(WLFrame) + sizeof(UInt16), pData+sizeof(WLIEEEFrame), len - sizeof(WLIEEEFrame));
+   
+    memcpy(&_recieveBuffer, tempFrame, len + sizeof(WLPrismHeader));
         
-    return;         //override if needed
+    return true;         //override if needed
 }
 
 RalinkJack::RalinkJack() {
