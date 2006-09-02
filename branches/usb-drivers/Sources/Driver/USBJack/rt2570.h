@@ -261,6 +261,37 @@ USHORT	 BBPRegTable[] = {
 
 #define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(USHORT))
 
+//
+// P802.11 Frame control field, 16 bit
+//
+typedef	struct	_FRAME_CONTROL	{
+	USHORT		Ver:2;				// Protocol version
+	USHORT		Type:2;				// MSDU type
+	USHORT		Subtype:4;			// MSDU subtype
+	USHORT		ToDs:1;				// To DS indication
+	USHORT		FrDs:1;				// From DS indication
+	USHORT		MoreFrag:1;			// More fragment bit
+	USHORT		Retry:1;			// Retry status bit
+	USHORT		PwrMgt:1;			// Power management bit
+	USHORT		MoreData:1;			// More data bit
+	USHORT		Wep:1;				// Wep data
+	USHORT		Order:1;			// Strict order expected
+}	FRAME_CONTROL, *PFRAME_CONTROL;
+
+typedef	struct	_CONTROL_HEADER	{
+	FRAME_CONTROL	Frame;				// Frame control structure
+	USHORT			Duration;			// Duration value
+	UInt8			Addr1[6];				// Address 1 field
+	UInt8			Addr2[6];				// Address 2 field
+}	CONTROL_HEADER, *PCONTROL_HEADER;
+
+typedef	struct	_HEADER_802_11	{
+	CONTROL_HEADER	Controlhead;
+	UInt8			Addr3[6];				// Address 3 field
+	USHORT			Frag:4;				// Fragment number
+	USHORT			Sequence:12;		// Sequence number
+}	HEADER_802_11, *PHEADER_802_11;
+
 typedef struct _BBP_TUNING_PARAMETERS_STRUC
 {
 	UCHAR			BBPTuningThreshold;

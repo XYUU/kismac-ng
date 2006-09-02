@@ -857,6 +857,40 @@ bool RalinkJack::startCapture(UInt16 channel) {
     return true;   
 }
 
+void RalinkJack::_massagePacket(int len){
+    unsigned char* pData;
+    UInt8 frame[len+sizeof(WLFrame)];
+    WLFrame * tempFrame;
+    PRXD_STRUC		pRxD;
+    WLIEEEFrame* testIeee;
+    
+    tempFrame = (WLFrame *)frame;
+    
+    pData = (unsigned char*)&_recieveBuffer;
+
+    testIeee = (WLIEEEFrame*)pData;
+    pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
+    
+    tempFrame->signal = pRxD->BBR1;
+    tempFrame->length = pRxD->DataByteCnt;
+    //this should be a memcpy but I can't make it work!
+    tempFrame->frameControl = testIeee->frameControl;
+    tempFrame->duration = testIeee->duration;
+    tempFrame->idnum = testIeee->idnum;
+    tempFrame->sequenceControl = testIeee->sequenceControl;
+
+    memcpy(tempFrame->address1, testIeee->address1, 6);
+    memcpy(tempFrame->address2, testIeee->address2, 6);
+    memcpy(tempFrame->address3, testIeee->address3, 6);
+    memcpy(tempFrame->address4, testIeee->address4, 6);
+    memcpy(frame + sizeof(WLFrame),pData+sizeof(WLIEEEFrame),len - sizeof(WLIEEEFrame) - sizeof(RXD_STRUC));
+    //tempFrame.
+    //memcpy(&tempFrame.frameControl, pData, len);
+    memcpy(&_recieveBuffer.rxfrm, tempFrame, len+sizeof(WLFrame) - sizeof(RXD_STRUC)-sizeof(WLIEEEFrame));
+        
+    return;         //override if needed
+}
+
 RalinkJack::RalinkJack() {
     _isEnabled = false;
     _deviceInit = false;

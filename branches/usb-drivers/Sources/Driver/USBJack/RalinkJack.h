@@ -60,6 +60,8 @@ public:
     bool getAllowedChannels(UInt16* channels);
     bool startCapture(UInt16 channel);
     
+    void _massagePacket(int len);
+    
 private:
         int temp;
         unsigned short EEPROMDefaultValue[NUM_EEPROM_BBP_PARMS];

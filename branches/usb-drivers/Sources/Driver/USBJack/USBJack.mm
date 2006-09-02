@@ -496,6 +496,7 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
     
     type = NSSwapLittleShortToHost(me->_recieveBuffer.type);
     if (_USB_ISRXFRM(type)) {
+        me->_massagePacket(len);        //if this driver needs it, it will be overridden
         WLFrame* frameDescriptor = (WLFrame*)&(me->_recieveBuffer.rxfrm);
         frameDescriptor->status = NSSwapLittleShortToHost(frameDescriptor->status);
         frameDescriptor->dataLen = NSSwapLittleShortToHost(frameDescriptor->dataLen);
@@ -508,15 +509,15 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
             * than the monitor mode port, or is a message type other than
             * normal, we don't want it.
             */
-        if (frameDescriptor->status & 0x1 ||
+       /* if (frameDescriptor->status & 0x1 ||
             (frameDescriptor->status & 0x700) != 0x700 ||
             frameDescriptor->status & 0xe000) {
             goto readon;
-        }
+        }*/
         
         if (frameDescriptor->dataLen > 2304) {
-            //NSLog(@"MACJackCard::_handleRx: Oversized packet (%d bytes)\n",
-            //            frameDescriptor->dataLen);
+            NSLog(@"MACJackCard::_handleRx: Oversized packet (%d bytes)\n",
+                        frameDescriptor->dataLen);
             goto readon;
         }
         
@@ -574,6 +575,10 @@ readon:
 		if (me->_init() != kIOReturnSuccess) NSLog(@"USBJack::_interruptReceived: _init() failed\n");
     }
         
+}
+
+void USBJack::_massagePacket(int len){
+    return;         //override if needed
 }
 
 #pragma mark -
