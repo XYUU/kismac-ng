@@ -29,6 +29,7 @@
 
 #include "USBJack.h"
 #include "IntersilJack.h"
+#include "RalinkJack.h"
 
 #define wlcDeviceGone   (int)0xe000404f
 #define align64(a)      (((a)+63)&~63)
@@ -37,12 +38,6 @@ struct identStruct {
     UInt16 vendor;
     UInt16 device;
 };
-
-enum  deviceTypes {
-    intersil,
-    zydas,
-    ralink
-} deviceType; 
 
 static struct identStruct devices[] = {
     { 0x04bb, 0x0922}, //1 IOData AirPort WN-B11/USBS
@@ -80,12 +75,13 @@ static struct identStruct devices[] = {
     //zydas
     {0x0586, 0x3401}, //1 Zyxel duh
     //ralink
-    {0x2001, 0x3C00}, //1 Dlink duh
+    {0x2001, 0x3C00}, //1 Dlink rev B1 
+    {0x13b1, 0xd000}, //2 linksys wusb54g
 };
 
 #define dIntersilDeviceCount 32
 #define dZydasDeviceCount 1
-#define dRalinkDeviceCount 1
+#define dRalinkDeviceCount 2
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
@@ -116,6 +112,10 @@ bool USBJack::setChannel(UInt16 channel) {
 
 bool USBJack::devicePresent() {
     return _devicePresent;
+}
+
+int USBJack::getDeviceType(){
+    return deviceType;
 }
 
 WLFrame * USBJack::receiveFrame() {
@@ -739,7 +739,7 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
         }
         
         _devicePresent = true;
-        me->_init();
+        //me->_init();
         
         if (_channel) {
             startCapture(_channel);
@@ -752,7 +752,7 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
 }
 
 void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
-    USBJack             *me = (USBJack*)refCon;
+    USBJack *me;
     kern_return_t		kr;
     io_service_t		usbDevice;
     IOCFPlugInInterface 	**plugInInterface=NULL;
@@ -795,15 +795,18 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         
         if (i < dIntersilDeviceCount) {
             NSLog(@"Intersil USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            deviceType = intersil;
+            me = (IntersilJack*)refCon;
+            me->deviceType = intersil;
         }
      /*   else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
             NSLog(@"Zydas USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            deviceType = zydas;
+            me->deviceType = zydas;
+            me = (ZydasJack*) me;
         }*/
         else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
             NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            deviceType = ralink;
+            me = (RalinkJack*)refCon;
+            me->deviceType = ralink;
         }
         else {
             NSLog(@"found unwanted device  (vendor = 0x%x, product = 0x%x)\n", vendor, product);

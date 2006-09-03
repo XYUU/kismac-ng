@@ -851,7 +851,7 @@ bool RalinkJack::getAllowedChannels(UInt16* channels) {
 
 bool RalinkJack::startCapture(UInt16 channel) {
     setChannel(channel);
-    RTUSBWriteMACRegister(TXRX_CSR2, 0x4e); //enable monitor mode?
+    RTUSBWriteMACRegister(TXRX_CSR2, 0x004e); //enable monitor mode?
     return true;   
 }
 
@@ -861,13 +861,13 @@ bool RalinkJack::_massagePacket(int len){
     WLFrame * tempFrame;
     PRXD_STRUC		pRxD;
     
-if (len >= (sizeof(RXD_STRUC) + 24)) {
+    bzero(frame,sizeof(_recieveBuffer));
     tempFrame = (WLFrame *)frame;
     
     pData = (unsigned char*)&_recieveBuffer;
 
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
-    if (pRxD->Crc) {
+ /*   if (pRxD->Crc) {
         //NSLog(@"Bad CRC");
         return false;  //its a bad packet, signal the interrupt to continue
     }
@@ -879,15 +879,17 @@ if (len >= (sizeof(RXD_STRUC) + 24)) {
         //NSLog(@"PhyErr");
         return false;  //its a bad packet, signal the interrupt to continue
     }
-    else {
+    else {*/
        // NSLog(@"Good Frame : %d, %d, %d", pRxD->Crc, pRxD->CiErr, pRxD->PhyErr);
-        memcpy(frame + sizeof(WLPrismHeader), pData, sizeof(_recieveBuffer));
-        tempFrame->signal = pRxD->BBR1;
+        tempFrame->silence = pRxD->BBR1;
+        tempFrame->dataLen = NSSwapLittleShortToHost(len - sizeof(WLPrismHeader) - sizeof(RXD_STRUC));
+        
+        memcpy(frame + sizeof(WLPrismHeader), pData, 24 /*sizeof(_recieveBuffer)*/); //copy the 80211 header, nnot 24 not 32 bytes
+        memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,sizeof(_recieveBuffer)-(32+14+sizeof(WLPrismHeader)));
         memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
         return true;         //override if needed
-    }
-}
-return false;
+   // }
+   // return false;
 }
 
 RalinkJack::RalinkJack() {

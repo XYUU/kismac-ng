@@ -529,6 +529,31 @@ TXD_STRUC, *PTXD_STRUC;
 //
 typedef	struct	_RXD_STRUC
 {
+#if 0 
+    //__BIG_ENDIAN__
+    ULONG				Eiv;// EIV
+    
+    ULONG				Iv;// IV
+    
+    UCHAR				Rev3[2];// Rev3
+    UCHAR				BBR0;// BBP R1 - RSSI
+    UCHAR				BBR1;// BBP R0 - SIGNAL / rate
+        
+    ULONG				Rsv2:4;// Rev2
+    ULONG				DataByteCnt:12;// data byte count 
+        
+    ULONG				Rsv1:6;// Rev1
+    ULONG				CiErr:1;// ci error
+    ULONG				Cipher:1;// cipher
+    ULONG				PhyErr:1;// phy err
+    ULONG				Ofdm:1;// OFDM
+    ULONG				Crc:1;// crc error
+    ULONG				MyBss:1;// my bss
+    ULONG				Bcast:1;// bcast
+    ULONG				Mcast:1;// mcast
+    ULONG				U2M:1;// u2me
+    ULONG				Rev0:1;// Rev0
+#else
 	// Word    0
 	ULONG				Rev0:1;// Rev0
 	ULONG				U2M:1;// u2me
@@ -552,15 +577,12 @@ typedef	struct	_RXD_STRUC
 	UCHAR				BBR0;// BBP R1 - RSSI
 	UCHAR				Rev3[2];// Rev3
 	
-	
-	
 	// Word    2
 	ULONG				Iv;// IV
 	
-	
-	
 	// Word 3
 	ULONG				Eiv;// EIV
+#endif
 }
 RXD_STRUC, *PRXD_STRUC;
 

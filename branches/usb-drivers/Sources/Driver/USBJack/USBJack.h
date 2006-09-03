@@ -39,11 +39,13 @@ public:
     virtual bool    getAllowedChannels(UInt16* channel);
     virtual bool    setChannel(UInt16 channel);
     bool    devicePresent();
+    int     getDeviceType();
     
     WLFrame * receiveFrame();
     bool    sendFrame(UInt8* data);
     
     void    startMatching();
+    virtual IOReturn    _init();
     USBJack();
     virtual ~USBJack();
     
@@ -54,6 +56,12 @@ protected:
     int kInterruptPipe;
     int kOutPipe;
     int kInPipe; 
+    
+    enum  deviceTypes {
+        intersil = 1,
+        zydas,
+        ralink
+    } deviceType; 
 
     IOReturn    _doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
     IOReturn    _doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
@@ -73,7 +81,6 @@ protected:
     int         _getFirmwareType();
     IOReturn    _disable();
     IOReturn    _enable();
-    virtual IOReturn    _init();
     virtual IOReturn    _reset();
     
     inline void        _lockDevice();

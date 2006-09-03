@@ -24,7 +24,9 @@
 */
 #import "WaveDriverUSBIntersil.h"
 #import "WaveHelper.h"
+#import "../Driver/USBJack/USBJack.h"
 #import "../Driver/USBJack/RalinkJack.h"
+//#import "../Driver/USBJack/ZydasJack.h"
 
 static bool explicitlyLoadedUSBIntersil = NO;
 
@@ -37,6 +39,26 @@ static bool explicitlyLoadedUSBIntersil = NO;
     _driver = new RalinkJack;
     _driver->startMatching();
     
+    while(!_driver->getDeviceType())        //wait until the device is found
+        usleep(100);
+    
+    switch(_driver->getDeviceType()){       //cast ourself to the approp type
+        case intersil:
+            _driver = new IntersilJack;
+            _driver->startMatching();
+            break;
+        case ralink:
+       //     _driver = new RalinkJack;
+       //     _driver->startMatching();
+            break;
+  /*      case zydas:
+            _driver = (ZydasJack*)_driver;
+            break;*/
+        default:
+            NSLog(@"The impossible happened!");
+    }
+    
+    _driver->_init();
 	_errors = 0;
 	
     return self;
