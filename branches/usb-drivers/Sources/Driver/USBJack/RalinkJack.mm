@@ -70,7 +70,7 @@ IOReturn RalinkJack::_init() {
         }
         
         //lets mess with the leds to verify we have control
-        RTUSBWriteMACRegister(MAC_CSR20, 0x002);        //put led under software control
+        RTUSBWriteMACRegister(MAC_CSR20, 0x0000);        //put led under software control
                                    
         RTUSBWriteMACRegister(MAC_CSR1, 4);        //host is ready to work
         RTUSBReadMACRegister(MAC_CSR0, &temp);          //read the asic version number
@@ -855,6 +855,11 @@ bool RalinkJack::startCapture(UInt16 channel) {
     return true;   
 }
 
+bool RalinkJack::stopCapture(){
+    RTUSBWriteMACRegister(TXRX_CSR2, 0x00ff); //disable rx
+    return true;
+}
+
 bool RalinkJack::_massagePacket(int len){
     unsigned char* pData;
     UInt8 frame[sizeof(_recieveBuffer)];
@@ -864,6 +869,9 @@ bool RalinkJack::_massagePacket(int len){
     bzero(frame,sizeof(_recieveBuffer));
     tempFrame = (WLFrame *)frame;
     
+    //flash the led for fun
+    RTUSBWriteMACRegister(MAC_CSR20, 0x0004);        //put led under software control
+
     pData = (unsigned char*)&_recieveBuffer;
 
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
@@ -881,12 +889,21 @@ bool RalinkJack::_massagePacket(int len){
     }
     else {*/
        // NSLog(@"Good Frame : %d, %d, %d", pRxD->Crc, pRxD->CiErr, pRxD->PhyErr);
+    // this is probablty not the most efficient way to do this
         tempFrame->silence = pRxD->BBR1;
-        tempFrame->dataLen = NSSwapLittleShortToHost(len - sizeof(WLPrismHeader) - sizeof(RXD_STRUC));
+        tempFrame->dataLen = NSSwapLittleShortToHost(len - 28 - (sizeof(RXD_STRUC)));
         
-        memcpy(frame + sizeof(WLPrismHeader), pData, 24 /*sizeof(_recieveBuffer)*/); //copy the 80211 header, nnot 24 not 32 bytes
-        memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,sizeof(_recieveBuffer)-(32+14+sizeof(WLPrismHeader)));
+        memcpy(frame + sizeof(WLPrismHeader), pData, 24); //copy the 80211 header,  24 not 32 bytes
+        //if the packet is less than 46 bytes, we can't exactly copy any more
+        if (len > 46) {
+            memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,len-(32+sizeof(WLPrismHeader)));
+        }
+        else {
+            NSLog(@"RalinkJack::Really short packet!");
+        }
+
         memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
+        RTUSBWriteMACRegister(MAC_CSR20, 0x0002);        //put led under software control
         return true;         //override if needed
    // }
    // return false;

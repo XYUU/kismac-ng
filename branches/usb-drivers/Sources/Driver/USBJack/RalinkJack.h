@@ -59,6 +59,7 @@ public:
     bool setChannel(UInt16 channel);
     bool getAllowedChannels(UInt16* channels);
     bool startCapture(UInt16 channel);
+    bool stopCapture();
     
     bool _massagePacket(int len);
     
