@@ -466,6 +466,9 @@
 		6C541AAC0A72003000B58A95 /* growl-wpa-challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */; };
 		6C541AAD0A72003000B58A95 /* growl-wpa-response.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */; };
 		6C71721F0AA17A5A00CD6879 /* rt2570.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C71721E0AA17A5A00CD6879 /* rt2570.h */; };
+		6C87C31A0AB1168100182BC6 /* GPSInfoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C87C3180AB1168100182BC6 /* GPSInfoController.h */; };
+		6C87C31B0AB1168100182BC6 /* GPSInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87C3190AB1168100182BC6 /* GPSInfoController.m */; };
+		6C87C3260AB1170200182BC6 /* GPSDialog.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6C87C3240AB1170200182BC6 /* GPSDialog.nib */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
 		6CE20615C5B043AF00A26C3A /* IntersilJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE2060FC5B043AF00A26C3A /* IntersilJack.h */; };
 		6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE20610C5B043AF00A26C3A /* IntersilJack.mm */; };
@@ -818,6 +821,9 @@
 		6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-challenge.png"; sourceTree = "<group>"; };
 		6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-response.png"; sourceTree = "<group>"; };
 		6C71721E0AA17A5A00CD6879 /* rt2570.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rt2570.h; path = USBJack/rt2570.h; sourceTree = "<group>"; };
+		6C87C3180AB1168100182BC6 /* GPSInfoController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GPSInfoController.h; sourceTree = "<group>"; };
+		6C87C3190AB1168100182BC6 /* GPSInfoController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GPSInfoController.m; sourceTree = "<group>"; };
+		6C87C3250AB1170200182BC6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GPSDialog.nib; sourceTree = "<group>"; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		6CE2060FC5B043AF00A26C3A /* IntersilJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = IntersilJack.h; path = USBJack/IntersilJack.h; sourceTree = "<group>"; };
 		6CE20610C5B043AF00A26C3A /* IntersilJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = IntersilJack.mm; path = USBJack/IntersilJack.mm; sourceTree = "<group>"; };
@@ -1249,6 +1255,8 @@
 				002E7DF606A86C6F00C9D931 /* DownloadMapController.m */,
 				002E7DF706A86C6F00C9D931 /* ImportController.h */,
 				002E7DF806A86C6F00C9D931 /* ImportController.m */,
+				6C87C3180AB1168100182BC6 /* GPSInfoController.h */,
+				6C87C3190AB1168100182BC6 /* GPSInfoController.m */,
 				0035342406A5DD8500AB4577 /* WayPoint.h */,
 				0035342506A5DD8500AB4577 /* WayPoint.m */,
 			);
@@ -1296,6 +1304,7 @@
 		00F57C1606A886350035AE2F /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				6C87C3240AB1170200182BC6 /* GPSDialog.nib */,
 				6C1D31C209F37BE10005A9F8 /* PrefsAdvanced.nib */,
 				00F57C1706A886350035AE2F /* Crack.nib */,
 				00F57C1906A886350035AE2F /* CrashReporter.nib */,
@@ -1646,6 +1655,7 @@
 				6CE20619C5B043AF00A26C3A /* USBJack.h in Headers */,
 				6CE206E8C5B0502200A26C3A /* RalinkJack.h in Headers */,
 				6C71721F0AA17A5A00CD6879 /* rt2570.h in Headers */,
+				6C87C31A0AB1168100182BC6 /* GPSInfoController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1844,6 +1854,7 @@
 				6C541AAB0A72002F00B58A95 /* growl-ap-revealed.png in Resources */,
 				6C541AAC0A72003000B58A95 /* growl-wpa-challenge.png in Resources */,
 				6C541AAD0A72003000B58A95 /* growl-wpa-response.png in Resources */,
+				6C87C3260AB1170200182BC6 /* GPSDialog.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2037,6 +2048,7 @@
 				6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */,
 				6CE2061AC5B043AF00A26C3A /* USBJack.mm in Sources */,
 				6CE206E9C5B0502200A26C3A /* RalinkJack.mm in Sources */,
+				6C87C31B0AB1168100182BC6 /* GPSInfoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2230,6 +2242,14 @@
 			);
 			name = PrefsAdvanced.nib;
 			path = ../../Sources/WaveDrivers;
+			sourceTree = "<group>";
+		};
+		6C87C3240AB1170200182BC6 /* GPSDialog.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C87C3250AB1170200182BC6 /* English */,
+			);
+			name = GPSDialog.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
