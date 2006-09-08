@@ -756,7 +756,7 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
     kern_return_t		kr;
     io_service_t		usbDevice;
     IOCFPlugInInterface 	**plugInInterface=NULL;
-    IOUSBDeviceInterface 	**dev=NULL;
+    IOUSBDeviceInterface    **dev=NULL;
     HRESULT 			res;
     SInt32 			score;
     UInt16			vendor;
@@ -798,11 +798,11 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
             me = (IntersilJack*)refCon;
             me->deviceType = intersil;
         }
-     /*   else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
+        else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
             NSLog(@"Zydas USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            me = (USBJack*)refCon;
             me->deviceType = zydas;
-            me = (ZydasJack*) me;
-        }*/
+        }
         else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
             NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             me = (RalinkJack*)refCon;
@@ -817,7 +817,12 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         // need to open the device in order to change its state
         kr = (*dev)->USBDeviceOpen(dev);
         if (kIOReturnSuccess != kr) {
-            NSLog(@"unable to open device: %08x\n", kr);
+            if (kr == kIOReturnExclusiveAccess) {
+                NSLog(@"Device already in use.");
+            }
+            else {
+                NSLog(@"unable to open device: %08x\n", kr);
+            }
             (*dev)->Release(dev);
             continue;
         }
@@ -837,9 +842,12 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
             (*dev)->Release(dev);
             continue;
         }
-        
-        kr = (*dev)->USBDeviceClose(dev);
-        kr = (*dev)->Release(dev);
+
+   //I think we need to hold onto the device to maintain exclusive access
+   //     kr = (*dev)->USBDeviceClose(dev);
+   //     kr = (*dev)->Release(dev);
+   //we will release it in the destructor
+        me->_dev = dev;
         
         break;
     }
@@ -852,7 +860,8 @@ void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
     USBJack     *me = (USBJack*)refCon;
     
     while ((obj = IOIteratorNext(iterator)) != nil) {
-        count++;
+        //count++;
+        //we need to not release devices that don't belong to us!?
         //NSLog(@"Device removed.\n");
         kr = IOObjectRelease(obj);
     }
@@ -1003,7 +1012,10 @@ USBJack::USBJack() {
 }
 
 USBJack::~USBJack() {
+    NSLog(@"I'm being destroyed!!!");
     stopRun();
+    (*_dev)->USBDeviceClose(_dev);
+    (*_dev)->Release(_dev);
     _interface = NULL;
     _frameSize = 0;
 
@@ -1011,4 +1023,5 @@ USBJack::~USBJack() {
     pthread_cond_destroy(&_wait_cond);
     pthread_mutex_destroy(&_recv_mutex);
     pthread_cond_destroy(&_recv_cond);
+    
 }

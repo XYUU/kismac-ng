@@ -8,7 +8,7 @@
  */
 
 #include "RalinkJack.h"
-
+#include "rt2570.h"
 
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
@@ -19,7 +19,7 @@ IOReturn RalinkJack::_init() {
     IOReturn                ret;
     
 	NSLog(@"--> NICInitializeAsic");
-    
+
 	do
 	{
 		//NdisMSleep(1000);
@@ -83,7 +83,7 @@ IOReturn RalinkJack::_init() {
             NSLog(@"LNA 3 mode\n");
             RTUSBWriteMACRegister(PHY_CSR2, 0x3002); // LNA 3 mode
         }
-        //power save stuff
+/*        //power save stuff
         RTUSBWriteMACRegister(MAC_CSR11, 2);
         RTUSBWriteMACRegister(MAC_CSR22, 0x53);
         RTUSBWriteMACRegister(MAC_CSR15, 0x01ee);
@@ -102,7 +102,7 @@ IOReturn RalinkJack::_init() {
         RTUSBReadMACRegister(PHY_CSR4, &temp);
         RTUSBWriteMACRegister(PHY_CSR4, temp | 1);
         //NdisMSleep(100);//wait for PLL to become stable
-                    
+  */                  
         i = 0;
         do
         {
@@ -684,9 +684,10 @@ void RalinkJack::NICInitAsicFromEEPROM()
 	//	PortCfg.VgcLowerBound   = r17;
         
 		// 2004-3-4 per David's request, R7 starts at upper bound
-		//r17 = PortCfg.BbpTuning.VgcUpperBound;
-	//	PortCfg.LastR17Value = r17;
-	//	RTUSBWriteBBPRegister(17, r17);
+        NSLog(@"It is this %d,", r17);
+		r17 = 128;
+	    NSLog(@"It is this %d,", r17);
+		RTUSBWriteBBPRegister(17, r17);
         
 		// 2004-2-2 per David's request, lower R17 low-bound for very good quality NIC
 	//	PortCfg.VgcLowerBound -= 6;  
@@ -851,11 +852,13 @@ bool RalinkJack::getAllowedChannels(UInt16* channels) {
 
 bool RalinkJack::startCapture(UInt16 channel) {
     setChannel(channel);
+    RTUSBWriteMACRegister(MAC_CSR20, 0x0002); //turn on led
     RTUSBWriteMACRegister(TXRX_CSR2, 0x004e); //enable monitor mode?
     return true;   
 }
 
 bool RalinkJack::stopCapture(){
+    RTUSBWriteMACRegister(MAC_CSR20, 0x0000); //turn off led
     RTUSBWriteMACRegister(TXRX_CSR2, 0x00ff); //disable rx
     return true;
 }
@@ -870,7 +873,7 @@ bool RalinkJack::_massagePacket(int len){
     tempFrame = (WLFrame *)frame;
     
     //flash the led for fun
-    RTUSBWriteMACRegister(MAC_CSR20, 0x0004);        //put led under software control
+    RTUSBWriteMACRegister(MAC_CSR20, 0x0007);        //put led under software control
 
     pData = (unsigned char*)&_recieveBuffer;
 
@@ -903,7 +906,7 @@ bool RalinkJack::_massagePacket(int len){
         }
 
         memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
-        RTUSBWriteMACRegister(MAC_CSR20, 0x0002);        //put led under software control
+        RTUSBWriteMACRegister(MAC_CSR20, 0x0002);  
         return true;         //override if needed
    // }
    // return false;

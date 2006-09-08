@@ -291,7 +291,7 @@ typedef	struct	_HEADER_802_11	{
 	USHORT			Frag:4;				// Fragment number
 	USHORT			Sequence:12;		// Sequence number
 }	HEADER_802_11, *PHEADER_802_11;
-
+/*
 typedef struct _BBP_TUNING_PARAMETERS_STRUC
 {
 	UCHAR			BBPTuningThreshold;
@@ -307,7 +307,7 @@ typedef struct _BBP_TUNING_PARAMETERS_STRUC
 	bool			LargeCurrentRSSI;
 }
 BBP_TUNING_PARAMETERS_STRUC, *PBBP_TUNING_PARAMETERS_STRUC;
-
+*/
 
 //
 // Control/Status Registers	(CSR)

@@ -115,6 +115,7 @@ protected:
     io_iterator_t		_deviceAddedIter;
     io_iterator_t		_deviceRemovedIter;
     IOUSBInterfaceInterface**   _interface;
+    IOUSBDeviceInterface**      _dev;           //save this so we can't use the same device twice!
     union _usbout               _outputBuffer;
     union _usbin                _inputBuffer;
     union _usbin                _recieveBuffer;

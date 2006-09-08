@@ -33,29 +33,35 @@ static bool explicitlyLoadedUSBIntersil = NO;
 @implementation WaveDriverUSBIntersil
 
 - (id)init {
+    int timeoutCount = 0;
     self=[super init];
     if(!self) return Nil;
 
     _driver = new RalinkJack;
+    //make start matching a class function so we can call it before we try to make an instance
     _driver->startMatching();
     
-    while(!_driver->getDeviceType())        //wait until the device is found
+    while(!_driver->getDeviceType() && timeoutCount++ < 10)        //wait until the device is found
         usleep(100);
+    
+    usleep(1000);  //we should really do locking, but since this is temp anyway...
     
     switch(_driver->getDeviceType()){       //cast ourself to the approp type
         case intersil:
+            delete(_driver);
             _driver = new IntersilJack;
             _driver->startMatching();
             break;
         case ralink:
-       //     _driver = new RalinkJack;
-       //     _driver->startMatching();
+          //  delete(_driver);
+           // _driver = new RalinkJack;
+           // _driver->startMatching();
             break;
-  /*      case zydas:
-            _driver = (ZydasJack*)_driver;
-            break;*/
+        case zydas:
+            break;
         default:
             NSLog(@"The impossible happened!");
+            return Nil;
     }
     
     _driver->_init();
@@ -79,15 +85,15 @@ static bool explicitlyLoadedUSBIntersil = NO;
 }
 
 + (bool) allowsMultipleInstances {
-    return NO;  //may be later
+    return YES;  //may be later
 }
 
 + (NSString*) description {
-    return NSLocalizedString(@"USB device with Prism2 chipset, passive mode", "long driver description");
+    return NSLocalizedString(@"USB device, passive mode", "long driver description");
 }
 
 + (NSString*) deviceName {
-    return NSLocalizedString(@"Prism2 USB device", "short driver description");
+    return NSLocalizedString(@"USB device", "short driver description");
 }
 
 #pragma mark -

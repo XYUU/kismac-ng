@@ -11,7 +11,27 @@
 
 #import <Cocoa/Cocoa.h>
 #import "USBJack.h"
-#include "rt2570.h"
+
+//this stuff goes here for now because something is funkey with the include order
+#define	NUM_EEPROM_BBP_PARMS		19
+#define	NUM_EEPROM_BBP_TUNING_PARMS	7
+#define UCHAR unsigned char
+
+typedef struct _BBP_TUNING_PARAMETERS_STRUC
+{
+	UCHAR			BBPTuningThreshold;
+	UCHAR			R24LowerValue;
+	UCHAR			R24HigherValue;
+	UCHAR			R25LowerValue;
+	UCHAR			R25HigherValue;
+	UCHAR			R61LowerValue;
+	UCHAR			R61HigherValue;
+	UCHAR			BBPR17LowSensitivity;
+	UCHAR			BBPR17MidSensitivity;
+	UCHAR			RSSIToDbmOffset;
+	bool			LargeCurrentRSSI;
+}
+BBP_TUNING_PARAMETERS_STRUC, *PBBP_TUNING_PARAMETERS_STRUC;
 
 class RalinkJack: public USBJack
 {
@@ -64,11 +84,10 @@ public:
     bool _massagePacket(int len);
     
 private:
-        int temp;
-        unsigned short EEPROMDefaultValue[NUM_EEPROM_BBP_PARMS];
-        unsigned short EEPROMBBPTuningParameters[NUM_EEPROM_BBP_TUNING_PARMS];
-        BBP_TUNING_PARAMETERS_STRUC			BBPTuningParameters;
-        unsigned char RfType;
-
+    int temp;
+    unsigned short EEPROMDefaultValue[NUM_EEPROM_BBP_PARMS];
+    unsigned short EEPROMBBPTuningParameters[NUM_EEPROM_BBP_TUNING_PARMS];
+    BBP_TUNING_PARAMETERS_STRUC			BBPTuningParameters;
+    unsigned char RfType;
 };
 #endif
