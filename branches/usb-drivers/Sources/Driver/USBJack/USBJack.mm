@@ -74,14 +74,41 @@ static struct identStruct devices[] = {
 	{ 0x1915, 0x2236}, //32 WUSB11 version 3.0
     //zydas
     {0x0586, 0x3401}, //1 Zyxel duh
-    //ralink
-    {0x2001, 0x3C00}, //1 Dlink rev B1 
-    {0x13b1, 0xd000}, //2 linksys wusb54g
+    //ralink -- taken from the linux driver
+    {0x0411, 0x0066},	/* Melco */	
+    {0x0411, 0x0067},	/* Melco */		
+    {0x050d, 0x7050},	/* Belkin */		
+    {0x050d, 0x7051},	/* Belkin */		
+    {0x050d, 0x705a},  /* Belkin */		
+    {0x06f8, 0xe000}, /* GUILLEMOT */		
+    {0x0707, 0xee13},	/* SMC */		
+    {0x0b05, 0x1706},	/* ASUS */		
+    {0x0b05, 0x1707},	/* ASUS */		
+    {0x0db0, 0x6861},	/* MSI */		
+    {0x0db0, 0x6865},	/* MSI */		
+    {0x0db0, 0x6869},	/* MSI */		
+    {0x1044, 0x8001},	/* Gigabyte */		
+    {0x1044, 0x8007},	/* Gigabyte */		
+    {0x114b, 0x0110},	/* Spairon */		
+    {0x13b1, 0x000d},	/* Cisco Systems */	
+    {0x13b1, 0x0011},	/* Cisco Systems */	
+    {0x13b1, 0x001a},  /* Cisco Systems */	
+    {0x148f, 0x1706},	/* Ralink */		
+    {0x148f, 0x2570},	/* Ralink */		
+    {0x148f, 0x2573},	/* CNET CWD-854 */	
+    {0x148f, 0x9020},	/* Ralink */		
+    {0x14b2, 0x3c02},	/* Conceptronic */	
+    {0x14f8, 0x2570},	/* Eminent */		
+    {0x2001, 0x3c00},	/* D-LINK */		
+    {0x07d1, 0x3c03},	/* D-LINK */		
+    {0x0411, 0x008b},	/* Nintendo */		
+    {0x5a57, 0x0260},  /* Zinwell */		
+    {0x0eb0, 0x9020},  /* Novatech */		
 };
 
 #define dIntersilDeviceCount 32
 #define dZydasDeviceCount 1
-#define dRalinkDeviceCount 2
+#define dRalinkDeviceCount 30
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
