@@ -22,6 +22,8 @@
     along with KisMAC; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+#ifndef __USB_JACK
+#define __USB_JACK
 
 #include <Cocoa/Cocoa.h>
 #include <IOKit/usb/IOUSBLib.h>
@@ -88,14 +90,19 @@ protected:
     inline IOReturn    _writeWaitForResponse(UInt32 size);
     
     IOReturn    _configureAnchorDevice(IOUSBDeviceInterface **dev);
-    IOReturn    _findInterfaces(void *refCon, IOUSBDeviceInterface **dev);
+    IOReturn    _findInterfaces(IOUSBDeviceInterface **dev);
     
+    void                _attachDevice();
     static void         _addDevice(void *refCon, io_iterator_t iterator);
     static void         _handleDeviceRemoval(void *refCon, io_iterator_t iterator);
     static void         _interruptRecieved(void *refCon, IOReturn result, int len);
     virtual bool        _massagePacket(int len);
     static void         _runCFRunLoop(USBJack* me);
     static void         _intCFRunLoop(USBJack* me);
+  
+  // static IOUSBDeviceInterface **_foundDevices[10];
+  //  static int         _deviceType[10];
+  //  static int         _numDevices;
 
     SInt32                      _vendorID;
     SInt32                      _productID;
@@ -127,3 +134,6 @@ protected:
     pthread_mutex_t             _recv_mutex;
     pthread_cond_t              _recv_cond;
 };
+
+
+#endif

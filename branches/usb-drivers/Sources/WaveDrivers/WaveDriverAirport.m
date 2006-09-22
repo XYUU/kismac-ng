@@ -114,7 +114,6 @@ static int AirPortInstances = 0;
     WIErr res;
 
     if (_context==Nil) return Nil;        //someone killed the aiport driver?!
-    
 	res = WirelessCreateScanResults(_context, 0, &netsp, &netsAdHocp, 0);
 	if (res) {
         return Nil;

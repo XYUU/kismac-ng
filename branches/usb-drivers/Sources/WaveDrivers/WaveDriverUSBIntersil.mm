@@ -37,8 +37,8 @@ static bool explicitlyLoadedUSBIntersil = NO;
     self=[super init];
     if(!self) return Nil;
 
-    _driver = new RalinkJack;
-    //make start matching a class function so we can call it before we try to make an instance
+    _driver = new USBJack;
+    //this will only occur once!
     _driver->startMatching();
     
     while(!_driver->getDeviceType() && timeoutCount++ < 10)        //wait until the device is found
@@ -48,19 +48,18 @@ static bool explicitlyLoadedUSBIntersil = NO;
     
     switch(_driver->getDeviceType()){       //cast ourself to the approp type
         case intersil:
-            delete(_driver);
+         //   delete(_driver);
             _driver = new IntersilJack;
-            _driver->startMatching();
             break;
         case ralink:
-          //  delete(_driver);
-           // _driver = new RalinkJack;
-           // _driver->startMatching();
+         //   delete(_driver);
+            _driver = new RalinkJack;
             break;
         case zydas:
             break;
         default:
-            NSLog(@"The impossible happened!");
+            NSLog(@"No supported USB Device found!");
+            _errors++;
             return Nil;
     }
     
@@ -68,6 +67,23 @@ static bool explicitlyLoadedUSBIntersil = NO;
 	_errors = 0;
 	
     return self;
+}
+
+- (id)initAsMaster {
+    int timeoutCount = 0;
+    self=[super init];
+    if(!self) return Nil;
+    
+    _driver = new USBJack;
+    NSLog(@"Init Master USB driver.");
+    //make start matching a class function so we can call it before we try to make an instance
+    _driver->startMatching();
+    
+       
+   // _driver->_init();
+	_errors = 0;
+	
+    return self;    
 }
 
 #pragma mark -

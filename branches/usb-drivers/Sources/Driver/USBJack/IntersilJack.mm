@@ -109,6 +109,8 @@ IOReturn IntersilJack::_init() {
     WLHardwareAddress macAddr;
     int i; 
     
+    
+    _attachDevice();
     _firmwareType = -1;
     
     for (i = 0; i< wlResetTries; i++) {
@@ -188,6 +190,7 @@ IntersilJack::IntersilJack() {
     _isEnabled = false;
     _deviceInit = false;
     _devicePresent = false;
+    deviceType = intersil;
     
     _interface = NULL;
     _runLoopSource = NULL;

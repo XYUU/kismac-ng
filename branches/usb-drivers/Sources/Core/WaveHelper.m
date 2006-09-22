@@ -314,6 +314,8 @@ static GPSInfoController *_gc;
                 [w setConfiguration: driverProps];
                 [_waveDrivers setObject:w forKey:name];
             } else {
+                return NO;
+                //this seems to hang instead of ever running the alert panel
                 NSRunCriticalAlertPanel(NSLocalizedString(@"Could not instanitiate Driver.", "Driver init failed"),
                 [NSString stringWithFormat: NSLocalizedString (@"Instanitiation Failure Description", @"LONG description of what might have gone wrong"),
                 // @"KisMAC was able to load the driver backend for %@, but it was unable to create an interface. "

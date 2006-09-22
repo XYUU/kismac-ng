@@ -18,6 +18,8 @@ IOReturn RalinkJack::_init() {
 	unsigned int			i;
     IOReturn                ret;
     
+    _attachDevice();
+    
 	NSLog(@"--> NICInitializeAsic");
 
 	do
@@ -853,13 +855,13 @@ bool RalinkJack::getAllowedChannels(UInt16* channels) {
 bool RalinkJack::startCapture(UInt16 channel) {
     setChannel(channel);
     RTUSBWriteMACRegister(MAC_CSR20, 0x0002); //turn on led
-    RTUSBWriteMACRegister(TXRX_CSR2, 0x004e); //enable monitor mode?
+    RTUSBWriteMACRegister(TXRX_CSR2, 0x0046); //enable monitor mode?
     return true;   
 }
 
 bool RalinkJack::stopCapture(){
     RTUSBWriteMACRegister(MAC_CSR20, 0x0000); //turn off led
-    RTUSBWriteMACRegister(TXRX_CSR2, 0x00ff); //disable rx
+    RTUSBWriteMACRegister(TXRX_CSR2, 0xffffffff); //disable rx
     return true;
 }
 
@@ -916,6 +918,7 @@ RalinkJack::RalinkJack() {
     _isEnabled = false;
     _deviceInit = false;
     _devicePresent = false;
+    deviceType = ralink;
     
     _interface = NULL;
     _runLoopSource = NULL;

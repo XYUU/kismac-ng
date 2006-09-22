@@ -34,6 +34,11 @@
 #define wlcDeviceGone   (int)0xe000404f
 #define align64(a)      (((a)+63)&~63)
 
+bool         _matchingDone;   //this is static so all instances of this class can see it!
+int _numDevices = -1;
+IOUSBDeviceInterface **_foundDevices[10];
+int         _deviceType[10];
+
 struct identStruct {
     UInt16 vendor;
     UInt16 device;
@@ -79,8 +84,8 @@ static struct identStruct devices[] = {
     {0x0411, 0x0067},	/* Melco */		
     {0x050d, 0x7050},	/* Belkin */		
     {0x050d, 0x7051},	/* Belkin */		
-    {0x050d, 0x705a},  /* Belkin */		
-    {0x06f8, 0xe000}, /* GUILLEMOT */		
+    {0x050d, 0x705a},   /* Belkin */		
+    {0x06f8, 0xe000},   /* GUILLEMOT */		
     {0x0707, 0xee13},	/* SMC */		
     {0x0b05, 0x1706},	/* ASUS */		
     {0x0b05, 0x1707},	/* ASUS */		
@@ -92,7 +97,7 @@ static struct identStruct devices[] = {
     {0x114b, 0x0110},	/* Spairon */		
     {0x13b1, 0x000d},	/* Cisco Systems */	
     {0x13b1, 0x0011},	/* Cisco Systems */	
-    {0x13b1, 0x001a},  /* Cisco Systems */	
+    {0x13b1, 0x001a},   /* Cisco Systems */	
     {0x148f, 0x1706},	/* Ralink */		
     {0x148f, 0x2570},	/* Ralink */		
     {0x148f, 0x2573},	/* CNET CWD-854 */	
@@ -102,8 +107,8 @@ static struct identStruct devices[] = {
     {0x2001, 0x3c00},	/* D-LINK */		
     {0x07d1, 0x3c03},	/* D-LINK */		
     {0x0411, 0x008b},	/* Nintendo */		
-    {0x5a57, 0x0260},  /* Zinwell */		
-    {0x0eb0, 0x9020},  /* Novatech */		
+    {0x5a57, 0x0260},   /* Zinwell */		
+    {0x0eb0, 0x9020},   /* Novatech */		
 };
 
 #define dIntersilDeviceCount 32
@@ -142,7 +147,10 @@ bool USBJack::devicePresent() {
 }
 
 int USBJack::getDeviceType(){
-    return deviceType;
+    if (_numDevices == -1) {
+        return -1;
+    }
+    return _deviceType[_numDevices];
 }
 
 WLFrame * USBJack::receiveFrame() {
@@ -505,6 +513,13 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
     IOReturn                    kr;
     UInt32                      type;
     
+/*    if (me->deviceType == intersil) {
+        me = (IntersilJack*)refCon;
+    }else if (me->deviceType == ralink){
+        me = (RalinkJack*)refCon;
+    } 
+*/
+    
     //NSLog(@"interruptRecieved.\n");
     if (kIOReturnSuccess != result) {
         if (result == (IOReturn)0xe00002ed) {
@@ -634,7 +649,7 @@ IOReturn USBJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     return kIOReturnSuccess;
 }
 
-IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
+IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
     IOReturn			kr;
     IOUSBFindInterfaceRequest	request;
     io_iterator_t		iterator;
@@ -649,7 +664,6 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
     int				pipeRef;
     CFRunLoopSourceRef		runLoopSource;
     BOOL                        error;
-    USBJack             *me = (USBJack *) refCon;
     
     
     request.bInterfaceClass = kIOUSBFindInterfaceDontCare;
@@ -723,9 +737,9 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
                 break;
             } else {
                 error = false;
-                if (direction == kUSBIn && transferType == kUSBBulk) me->kInPipe = pipeRef;
-                else if (direction == kUSBOut && transferType == kUSBBulk) me->kOutPipe = pipeRef;
-                else if (direction == kUSBIn && transferType  == kUSBInterrupt) me->kInterruptPipe = pipeRef;
+                if (direction == kUSBIn && transferType == kUSBBulk) kInPipe = pipeRef;
+                else if (direction == kUSBOut && transferType == kUSBBulk) kOutPipe = pipeRef;
+                else if (direction == kUSBIn && transferType  == kUSBInterrupt) kInterruptPipe = pipeRef;
                 else NSLog(@"Found unknown interface, ignoring");
             
                 
@@ -766,7 +780,6 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
         }
         
         _devicePresent = true;
-        //me->_init();
         
         if (_channel) {
             startCapture(_channel);
@@ -776,6 +789,47 @@ IOReturn USBJack::_findInterfaces(void *refCon, IOUSBDeviceInterface **dev) {
     }
     
     return kr;
+}
+
+void USBJack::_attachDevice() {
+    kern_return_t		kr;
+    IOUSBDeviceInterface    **dev=NULL;
+    
+    if ((dev = _foundDevices[_numDevices])) {
+        
+        // need to open the device in order to change its state
+        kr = (*dev)->USBDeviceOpen(dev);
+        if (kIOReturnSuccess != kr) {
+            if (kr == kIOReturnExclusiveAccess) {
+                NSLog(@"Device already in use.");
+            }
+            else {
+                NSLog(@"unable to open device: %08x\n", kr);
+            }
+            (*dev)->Release(dev);
+            return;
+        }
+        
+        kr = _configureAnchorDevice(dev);
+        if (kIOReturnSuccess != kr) {
+            NSLog(@"unable to configure device: %08x\n", kr);
+            (*dev)->USBDeviceClose(dev);
+            (*dev)->Release(dev);
+            return;
+        }
+        
+        kr = _findInterfaces(dev);
+        if (kIOReturnSuccess != kr) {
+            NSLog(@"unable to find interfaces on device: %08x\n", kr);
+            (*dev)->USBDeviceClose(dev);
+            (*dev)->Release(dev);
+            return;
+        }
+        
+        _numDevices--;
+        kr = (*dev)->USBDeviceClose(dev);
+        kr = (*dev)->Release(dev);
+    }
 }
 
 void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
@@ -822,61 +876,24 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         
         if (i < dIntersilDeviceCount) {
             NSLog(@"Intersil USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            me = (IntersilJack*)refCon;
-            me->deviceType = intersil;
+            _deviceType[++_numDevices] = intersil;
+            _foundDevices[_numDevices] = dev;
         }
         else if (i < dIntersilDeviceCount + dZydasDeviceCount) {
             NSLog(@"Zydas USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            me = (USBJack*)refCon;
-            me->deviceType = zydas;
+            _deviceType[++_numDevices] = zydas;
+            _foundDevices[_numDevices] = dev;
         }
         else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
             NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
-            me = (RalinkJack*)refCon;
-            me->deviceType = ralink;
+            _deviceType[++_numDevices] = ralink;
+            _foundDevices[_numDevices] = dev;
         }
         else {
             NSLog(@"found unwanted device  (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             (*dev)->Release(dev);
             continue;
         }
-                
-        // need to open the device in order to change its state
-        kr = (*dev)->USBDeviceOpen(dev);
-        if (kIOReturnSuccess != kr) {
-            if (kr == kIOReturnExclusiveAccess) {
-                NSLog(@"Device already in use.");
-            }
-            else {
-                NSLog(@"unable to open device: %08x\n", kr);
-            }
-            (*dev)->Release(dev);
-            continue;
-        }
-        
-        kr = me->_configureAnchorDevice(dev);
-        if (kIOReturnSuccess != kr) {
-            NSLog(@"unable to configure device: %08x\n", kr);
-            (*dev)->USBDeviceClose(dev);
-            (*dev)->Release(dev);
-            continue;
-        }
-
-        kr = me->_findInterfaces(refCon, dev);
-        if (kIOReturnSuccess != kr) {
-            NSLog(@"unable to find interfaces on device: %08x\n", kr);
-            (*dev)->USBDeviceClose(dev);
-            (*dev)->Release(dev);
-            continue;
-        }
-
-   //I think we need to hold onto the device to maintain exclusive access
-   //     kr = (*dev)->USBDeviceClose(dev);
-   //     kr = (*dev)->Release(dev);
-   //we will release it in the destructor
-        me->_dev = dev;
-        
-        break;
     }
 }
 
@@ -959,7 +976,8 @@ void USBJack::startMatching() {
     CFMutableDictionaryRef 	matchingDict;
     kern_return_t		kr;
  
-    if (_runLoopSource) return;
+    if (_runLoopSource || _matchingDone) return;
+    _matchingDone = true;
     
     // first create a master_port for my task
     kr = IOMasterPort(MACH_PORT_NULL, &masterPort);
@@ -1041,8 +1059,8 @@ USBJack::USBJack() {
 USBJack::~USBJack() {
     NSLog(@"I'm being destroyed!!!");
     stopRun();
-    (*_dev)->USBDeviceClose(_dev);
-    (*_dev)->Release(_dev);
+//(*_dev)->USBDeviceClose(_dev);
+  //  (*_dev)->Release(_dev);
     _interface = NULL;
     _frameSize = 0;
 

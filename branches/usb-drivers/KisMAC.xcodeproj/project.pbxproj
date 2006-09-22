@@ -361,7 +361,6 @@
 		008ACD6407C38DA800A76ADA /* BIGeneric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F57AAC06A876EC0035AE2F /* BIGeneric.framework */; };
 		008ACD6507C38DA800A76ADA /* BIGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F57AAD06A876EC0035AE2F /* BIGL.framework */; };
 		008ACDB707C3923D00A76ADA /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 000D15A406AAE47C00935F7C /* libcrypto.dylib */; };
-		008ACDB807C3924B00A76ADA /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		008ACE4C07C3926500A76ADA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C64E06DB37E200E357F0 /* Carbon.framework */; };
 		008ACFA607C3927900A76ADA /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C64F06DB37E200E357F0 /* IOKit.framework */; };
 		008ACFA707C3927900A76ADA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C63F06DB378F00E357F0 /* Security.framework */; };
@@ -809,7 +808,6 @@
 		00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveDriverPrismGT.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
 		6C03D76F09B547F2005B2316 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
@@ -849,7 +847,6 @@
 				008ACFA607C3927900A76ADA /* IOKit.framework in Frameworks */,
 				008ACFA707C3927900A76ADA /* Security.framework in Frameworks */,
 				008ACE4C07C3926500A76ADA /* Carbon.framework in Frameworks */,
-				008ACDB807C3924B00A76ADA /* AppKit.framework in Frameworks */,
 				008ACDB707C3923D00A76ADA /* libcrypto.dylib in Frameworks */,
 				008ACD6407C38DA800A76ADA /* BIGeneric.framework in Frameworks */,
 				008ACD6507C38DA800A76ADA /* BIGL.framework in Frameworks */,
@@ -1395,7 +1392,6 @@
 			isa = PBXGroup;
 			children = (
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
