@@ -187,7 +187,7 @@ IOReturn IntersilJack::_reset() {
 }
 
 IntersilJack::IntersilJack() {
-    _isEnabled = false;
+  /*  _isEnabled = false;
     _deviceInit = false;
     _devicePresent = false;
     deviceType = intersil;
@@ -205,10 +205,11 @@ IntersilJack::IntersilJack() {
     pthread_mutex_init(&_recv_mutex, NULL);
     pthread_cond_init (&_recv_cond, NULL);
     
-    run();
+ //   run();
     
     while (_runLoop==NULL || _intLoop==NULL)
         usleep(100);
+*/
 }
 
 IntersilJack::~IntersilJack() {

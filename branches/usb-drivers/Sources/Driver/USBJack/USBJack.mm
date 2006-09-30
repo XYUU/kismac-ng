@@ -551,15 +551,15 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
             * than the monitor mode port, or is a message type other than
             * normal, we don't want it.
             */
-       /* if (frameDescriptor->status & 0x1 ||
+/*        if (frameDescriptor->status & 0x1 ||
             (frameDescriptor->status & 0x700) != 0x700 ||
             frameDescriptor->status & 0xe000) {
             goto readon;
         }
-        */
+  */      
         if (frameDescriptor->dataLen > 2304) {
-            NSLog(@"MACJackCard::_handleRx: Oversized packet (%d bytes)\n",
-                        frameDescriptor->dataLen);
+            NSLog(@"USBJackCard::_handleRx: Oversized packet (%d bytes) %d read size\n",
+                        frameDescriptor->dataLen, len);
             goto readon;
         }
         
@@ -761,7 +761,7 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
             (void) (*intf)->Release(intf);
             break;
         }
-        CFRunLoopAddSource(_intLoop, runLoopSource, kCFRunLoopDefaultMode);
+        CFRunLoopAddSource(_runLoop, runLoopSource, kCFRunLoopDefaultMode);
         
         _interface = intf;
         
@@ -793,9 +793,9 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
 
 void USBJack::_attachDevice() {
     kern_return_t		kr;
-    IOUSBDeviceInterface    **dev=NULL;
+    IOUSBDeviceInterface    **dev;
     
-    if ((dev = _foundDevices[_numDevices])) {
+    if ((dev = _foundDevices[_numDevices--])) {
         
         // need to open the device in order to change its state
         kr = (*dev)->USBDeviceOpen(dev);
@@ -826,9 +826,9 @@ void USBJack::_attachDevice() {
             return;
         }
         
-        _numDevices--;
         kr = (*dev)->USBDeviceClose(dev);
         kr = (*dev)->Release(dev);
+    
     }
 }
 
@@ -947,7 +947,7 @@ void USBJack::_runCFRunLoop(USBJack* me) {
 } 
 
 void USBJack::_intCFRunLoop(USBJack* me) {
-    me->_intLoop = CFRunLoopGetCurrent();
+/*    me->_intLoop = CFRunLoopGetCurrent();
     while(me->_stayUp) {
         CFRunLoopRun();
     };
@@ -955,6 +955,7 @@ void USBJack::_intCFRunLoop(USBJack* me) {
         CFRunLoopStop(me->_intLoop);
         me->_intLoop = NULL;
     }
+    */
 } 
 
 bool USBJack::run() {
@@ -964,10 +965,10 @@ bool USBJack::run() {
     if (_runLoop==NULL) {
         pthread_create(&pt, NULL, (void*(*)(void*))_runCFRunLoop, this);
     }
-    if (_intLoop==NULL) {
+ /*   if (_intLoop==NULL) {
         pthread_create(&pt, NULL, (void*(*)(void*))_intCFRunLoop, this);
     }
-    
+   */ 
     return true;
 }
 
@@ -1052,7 +1053,7 @@ USBJack::USBJack() {
     
     run();
     
-    while (_runLoop==NULL || _intLoop==NULL)
+    while (_runLoop==NULL /* || _intLoop==NULL*/)
         usleep(100);
 }
 

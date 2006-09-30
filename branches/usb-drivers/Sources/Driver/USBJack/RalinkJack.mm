@@ -855,7 +855,7 @@ bool RalinkJack::getAllowedChannels(UInt16* channels) {
 bool RalinkJack::startCapture(UInt16 channel) {
     setChannel(channel);
     RTUSBWriteMACRegister(MAC_CSR20, 0x0002); //turn on led
-    RTUSBWriteMACRegister(TXRX_CSR2, 0x0046); //enable monitor mode?
+    RTUSBWriteMACRegister(TXRX_CSR2, 0x004e/*0x0046*/); //enable monitor mode?
     return true;   
 }
 
@@ -873,6 +873,11 @@ bool RalinkJack::_massagePacket(int len){
     
     bzero(frame,sizeof(_recieveBuffer));
     tempFrame = (WLFrame *)frame;
+    
+    if (len < sizeof(RXD_STRUC)) {
+        NSLog(@"WTF, packet len %d shorter than footer %d!", len, sizeof(RXD_STRUC));
+        return false;
+    }
     
     //flash the led for fun
     RTUSBWriteMACRegister(MAC_CSR20, 0x0007);        //put led under software control
@@ -902,9 +907,11 @@ bool RalinkJack::_massagePacket(int len){
         //if the packet is less than 46 bytes, we can't exactly copy any more
         if (len > 46) {
             memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,len-(32+sizeof(WLPrismHeader)));
+           // NSLog(@"Normal packet %d", len);
         }
         else {
-            NSLog(@"RalinkJack::Really short packet!");
+            NSLog(@"RalinkJack::Really short packet! %d", len);
+            return false;
         }
 
         memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
@@ -915,7 +922,8 @@ bool RalinkJack::_massagePacket(int len){
 }
 
 RalinkJack::RalinkJack() {
-    _isEnabled = false;
+    
+   /* _isEnabled = false;
     _deviceInit = false;
     _devicePresent = false;
     deviceType = ralink;
@@ -937,6 +945,7 @@ RalinkJack::RalinkJack() {
     
     while (_runLoop==NULL || _intLoop==NULL)
         usleep(100);
+    */
 }
 
 RalinkJack::~RalinkJack() {

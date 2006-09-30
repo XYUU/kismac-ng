@@ -52,7 +52,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
             _driver = new IntersilJack;
             break;
         case ralink:
-         //   delete(_driver);
+        //    delete(_driver);
             _driver = new RalinkJack;
             break;
         case zydas:
