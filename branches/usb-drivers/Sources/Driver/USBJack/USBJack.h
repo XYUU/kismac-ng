@@ -98,7 +98,6 @@ protected:
     static void         _interruptRecieved(void *refCon, IOReturn result, int len);
     virtual bool        _massagePacket(int len);
     static void         _runCFRunLoop(USBJack* me);
-    static void         _intCFRunLoop(USBJack* me);
   
   // static IOUSBDeviceInterface **_foundDevices[10];
   //  static int         _deviceType[10];
@@ -115,7 +114,6 @@ protected:
     SInt16                      _firmwareType;
     
     CFRunLoopRef                _runLoop;
-    CFRunLoopRef                _intLoop;
     UInt16                      _channel;
     IONotificationPortRef	_notifyPort;
     CFRunLoopSourceRef		_runLoopSource;

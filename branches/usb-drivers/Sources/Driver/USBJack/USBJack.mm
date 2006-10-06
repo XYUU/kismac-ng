@@ -109,11 +109,12 @@ static struct identStruct devices[] = {
     {0x0411, 0x008b},	/* Nintendo */		
     {0x5a57, 0x0260},   /* Zinwell */		
     {0x0eb0, 0x9020},   /* Novatech */		
+    {0x13b1, 0x0020},   /* WUSB54GC */
 };
 
 #define dIntersilDeviceCount 32
 #define dZydasDeviceCount 1
-#define dRalinkDeviceCount 30
+#define dRalinkDeviceCount 31
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
@@ -833,7 +834,6 @@ void USBJack::_attachDevice() {
 }
 
 void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
-    USBJack *me;
     kern_return_t		kr;
     io_service_t		usbDevice;
     IOCFPlugInInterface 	**plugInInterface=NULL;
@@ -919,7 +919,7 @@ void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
 #pragma mark -
 
 bool USBJack::stopRun() {
-    if (_runLoop == NULL && _intLoop == NULL) return false;
+    if (_runLoop == NULL) return false;
     _stayUp = false;
     if (_notifyPort) {
         IONotificationPortDestroy(_notifyPort);
@@ -927,10 +927,8 @@ bool USBJack::stopRun() {
     }
     
     if (_runLoop) CFRunLoopStop(_runLoop);
-    if (_intLoop) CFRunLoopStop(_intLoop);
-    
+        
     _runLoop = NULL;
-    _intLoop = NULL;
     return true;
 }
 
@@ -946,18 +944,6 @@ void USBJack::_runCFRunLoop(USBJack* me) {
     }
 } 
 
-void USBJack::_intCFRunLoop(USBJack* me) {
-/*    me->_intLoop = CFRunLoopGetCurrent();
-    while(me->_stayUp) {
-        CFRunLoopRun();
-    };
-    if (me->_intLoop) {
-        CFRunLoopStop(me->_intLoop);
-        me->_intLoop = NULL;
-    }
-    */
-} 
-
 bool USBJack::run() {
     pthread_t pt;
     
@@ -965,10 +951,7 @@ bool USBJack::run() {
     if (_runLoop==NULL) {
         pthread_create(&pt, NULL, (void*(*)(void*))_runCFRunLoop, this);
     }
- /*   if (_intLoop==NULL) {
-        pthread_create(&pt, NULL, (void*(*)(void*))_intCFRunLoop, this);
-    }
-   */ 
+    
     return true;
 }
 
@@ -1041,7 +1024,6 @@ USBJack::USBJack() {
     _interface = NULL;
     _runLoopSource = NULL;
     _runLoop = NULL;
-    _intLoop = NULL;
     _channel = 3;
     _frameSize = 0;
     _notifyPort = NULL;
@@ -1053,7 +1035,7 @@ USBJack::USBJack() {
     
     run();
     
-    while (_runLoop==NULL /* || _intLoop==NULL*/)
+    while (_runLoop==NULL)
         usleep(100);
 }
 

@@ -280,7 +280,7 @@ static GPSInfoController *_gc;
         name = [driverProps objectForKey:@"deviceName"];
         
         //the driver does not exist. go for it
-   //     if (![_waveDrivers objectForKey:name]) {
+        if (![_waveDrivers objectForKey:name]) {
         
             //ugly hack but it works, this makes sure that the airport card is used only once
             //prefers the viha driver
@@ -327,7 +327,7 @@ static GPSInfoController *_gc;
                 NSLog(@"Error could not instanciate driver %@", interfaceName);
                 return NO;
             }
-        //} 
+        } 
             NSLog(@"Driver %@ was created.", interfaceName);
     }
 
