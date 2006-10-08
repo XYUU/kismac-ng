@@ -12,7 +12,6 @@
 
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
-//	unsigned char			buffer[22];
 	unsigned short			temp;
 	unsigned char			Value = 0xff;
 	unsigned int			i;
@@ -24,7 +23,19 @@ IOReturn RalinkJack::_init() {
 
 	do
 	{
-		//NdisMSleep(1000);
+        //this is how we dertermine chip type?
+        RTUSBReadMACRegister(MAC_CSR0, &temp);          //read the asic version number
+        NSLog(@"Found Ralink Asic Version %d", temp);
+        if ( temp >= 3){
+            RTUSBReadMACRegister(PHY_CSR2, &temp);
+            RTUSBWriteMACRegister(PHY_CSR2, temp & 0xFFFD);		   
+        }
+        else
+        {
+            NSLog(@"LNA 3 mode\n");
+            RTUSBWriteMACRegister(PHY_CSR2, 0x3002); // LNA 3 mode
+        }
+        
 		RTUSB_VendorRequest(kUSBOut,
                             0x1,
                             0x4,
@@ -73,18 +84,8 @@ IOReturn RalinkJack::_init() {
         
         //lets mess with the leds to verify we have control
         RTUSBWriteMACRegister(MAC_CSR20, 0x0000);        //put led under software control
-                                   
         RTUSBWriteMACRegister(MAC_CSR1, 4);        //host is ready to work
-        RTUSBReadMACRegister(MAC_CSR0, &temp);          //read the asic version number
-        if ( temp >= 3){
-            RTUSBReadMACRegister(PHY_CSR2, &temp);
-            RTUSBWriteMACRegister(PHY_CSR2, temp & 0xFFFD);		   
-        }
-        else
-        {
-            NSLog(@"LNA 3 mode\n");
-            RTUSBWriteMACRegister(PHY_CSR2, 0x3002); // LNA 3 mode
-        }
+
 /*        //power save stuff
         RTUSBWriteMACRegister(MAC_CSR11, 2);
         RTUSBWriteMACRegister(MAC_CSR22, 0x53);
@@ -361,11 +362,179 @@ IOReturn	RalinkJack::RTUSBWriteRFRegister(unsigned long Value)
 	return kIOReturnSuccess;
 }
 
+IOReturn NICLoadFirmware()
+{
+	IOReturn				Status = kIOReturnSuccess;
+	unsigned char *			src = NULL;
+	struct file				*srcf;
+	int 					retval = 0, orgfsuid, orgfsgid, i;
+	//mm_segment_t			orgfs;
+	unsigned char *			pFirmwareImage;
+	unsigned int			FileLength = 0;
+	int						ret;					
+    
+	
+	NSLog(@"--> NICLoadFirmware\n");
+/*	//pAd->FirmwareVersion = (FIRMWARE_MAJOR_VERSION << 8) + FIRMWARE_MINOR_VERSION; //default version.
+    
+	src = RT2573_IMAGE_FILE_NAME;
+    
+	// Save uid and gid used for filesystem access.
+	// Set user and group to 0 (root)	
+	//orgfsuid = current->fsuid;
+	//orgfsgid = current->fsgid;
+	//current->fsuid=current->fsgid = 0;
+	//orgfs = get_fs();
+	//set_fs(KERNEL_DS);
+    
+	pFirmwareImage = kmalloc(MAX_FIRMWARE_IMAGE_SIZE, MEM_ALLOC_FLAG);
+	if (pFirmwareImage == NULL) 
+	{
+		DBGPRINT(RT_DEBUG_ERROR, "NICLoadFirmware-Memory allocate fail\n");
+		Status = NDIS_STATUS_FAILURE;
+		goto out;
+	}
+   
+	if (src && *src) 
+	{
+		srcf = filp_open(src, O_RDONLY, 0);
+		if (IS_ERR(srcf)) 
+		{
+			Status = NDIS_STATUS_FAILURE;
+			DBGPRINT(RT_DEBUG_ERROR, "--> Error %ld opening %s\n", -PTR_ERR(srcf),src);    
+		}
+		else 
+		{
+			// The object must have a read method
+			if (srcf->f_op && srcf->f_op->read) 
+			{
+				memset(pFirmwareImage, 0x00, MAX_FIRMWARE_IMAGE_SIZE);
+                
+				FileLength = srcf->f_op->read(srcf, pFirmwareImage, MAX_FIRMWARE_IMAGE_SIZE, &srcf->f_pos);
+				if (FileLength != MAX_FIRMWARE_IMAGE_SIZE)
+				{
+					DBGPRINT_ERR("NICLoadFirmware: error file length (=%d) in rt73.bin\n",FileLength);
+					Status = NDIS_STATUS_FAILURE;
+				}
+				else
+				{  //FileLength == MAX_FIRMWARE_IMAGE_SIZE
+					PUCHAR ptr = pFirmwareImage;
+					USHORT crc = 0;
+					
+					for (i=0; i<(MAX_FIRMWARE_IMAGE_SIZE-2); i++, ptr++)
+						crc = ByteCRC16(*ptr, crc);
+					crc = ByteCRC16(0x00, crc);
+					crc = ByteCRC16(0x00, crc);
+					
+					if ((pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-2] != (UCHAR)(crc>>8)) ||
+						(pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-1] != (UCHAR)(crc)))
+					{
+						DBGPRINT_ERR("NICLoadFirmware: CRC = 0x%02x 0x%02x error, should be 0x%02x 0x%02x\n",
+                                     pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-2], pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-1],
+                                     (UCHAR)(crc>>8), (UCHAR)(crc) );
+                        
+						if (retval)
+						{
+							DBGPRINT(RT_DEBUG_ERROR, "--> Error %d closing %s\n", -retval, src);
+						}
+                        
+						Status = NDIS_STATUS_FAILURE;
+					}
+					else
+					{
+                        
+						if ((pAd->FirmwareVersion) > ((pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-4] << 8) + pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-3]))
+						{
+							DBGPRINT_ERR("NICLoadFirmware: Ver=%d.%d, local Ver=%d.%d, used FirmwareImage talbe instead\n",
+                                         pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-4], pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-3],
+                                         FIRMWARE_MAJOR_VERSION, FIRMWARE_MINOR_VERSION);
+                            
+							Status = NDIS_STATUS_FAILURE;
+						}
+						else
+						{
+							pAd->FirmwareVersion = (pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-4] << 8) + pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-3];
+							DBGPRINT(RT_DEBUG_TRACE,"NICLoadFirmware OK: CRC = 0x%04x ver=%d.%d\n", crc,
+                                     pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-4], pFirmwareImage[MAX_FIRMWARE_IMAGE_SIZE-3]);
+						}
+                        
+					}
+				}
+			}
+			else
+			{
+				Status = NDIS_STATUS_FAILURE;
+				DBGPRINT(RT_DEBUG_ERROR, "--> %s does not have a write method\n", src);
+			}
+			
+			retval = filp_close(srcf, NULL);			
+			if (retval)
+			{
+				Status = NDIS_STATUS_FAILURE;
+				DBGPRINT(RT_DEBUG_ERROR, "--> Error %d closing %s\n", -retval, src);
+			}
+		}
+	}
+	else
+	{
+		Status = NDIS_STATUS_FAILURE;
+		DBGPRINT(RT_DEBUG_ERROR, "Error src not available\n");
+	}
+    
+    
+	if (Status != NDIS_STATUS_SUCCESS)
+	{	
+		FileLength = FIRMAREIMAGE_LENGTH;
+		memset(pFirmwareImage, 0x00, FileLength);
+		NdisMoveMemory(pFirmwareImage, &FirmwareImage[0], FileLength);
+		Status = NDIS_STATUS_SUCCESS; // change to success
+		
+		DBGPRINT(RT_DEBUG_ERROR, "NICLoadFirmware failed, used local Firmware(v %d.%d) instead\n", 
+                 FIRMWARE_MAJOR_VERSION, FIRMWARE_MINOR_VERSION);		
+	}
+    
+	// select 8051 program bank; write entire firmware image
+	for (i = 0; i < FileLength; i = i + 4)
+	{
+		ret = RTUSBMultiWrite(pAd, FIRMWARE_IMAGE_BASE + i, pFirmwareImage + i, 4);
+        
+		if (ret < 0)
+		{
+			Status = NDIS_STATUS_FAILURE;
+			break;
+		}
+	}
+    
+    
+out:	
+        if (pFirmwareImage != NULL)
+            kfree(pFirmwareImage);
+    
+	set_fs(orgfs);
+	current->fsuid = orgfsuid;
+	current->fsgid = orgfsgid;
+    
+	if (Status == NDIS_STATUS_SUCCESS)
+	{
+		RTUSBFirmwareRun(pAd);
+		
+		//
+		// Send LED command to Firmare after RTUSBFirmwareRun;
+		//
+		RTMPSetLED(pAd, LED_LINK_DOWN);
+        
+	}		
+    
+	DBGPRINT(RT_DEBUG_TRACE,"<-- NICLoadFirmware (src=%s)\n", src);  
+	
+    */
+	return Status;
+}
 
 
 IOReturn	RalinkJack::RTUSBReadEEPROM(unsigned short Offset,
-                            unsigned char * pData,
-                            unsigned short length)
+                                        unsigned char * pData,
+                                        unsigned short length)
 {
 	IOReturn	Status;
 	
