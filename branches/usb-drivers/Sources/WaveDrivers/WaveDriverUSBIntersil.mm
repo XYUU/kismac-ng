@@ -26,6 +26,7 @@
 #import "WaveHelper.h"
 #import "../Driver/USBJack/USBJack.h"
 #import "../Driver/USBJack/RalinkJack.h"
+#import "../Driver/USBJack/RT73Jack.h"
 //#import "../Driver/USBJack/ZydasJack.h"
 
 static bool explicitlyLoadedUSBIntersil = NO;
@@ -54,6 +55,9 @@ static bool explicitlyLoadedUSBIntersil = NO;
         case ralink:
             delete(_driver);
             _driver = new RalinkJack;
+        case rt73:
+            delete(_driver);
+            _driver = new RT73Jack;
             break;
         case zydas:
             break;

@@ -33,6 +33,7 @@ typedef struct _BBP_TUNING_PARAMETERS_STRUC
 }
 BBP_TUNING_PARAMETERS_STRUC, *PBBP_TUNING_PARAMETERS_STRUC;
 
+
 class RalinkJack: public USBJack
 {
 public:
@@ -52,9 +53,9 @@ public:
     IOReturn RTUSBSingleRead(unsigned short	Offset,
                              unsigned short	* pValue);
     
-    IOReturn	RalinkJack::RTUSBSingleWrite(unsigned short	Offset,
+    IOReturn	RTUSBSingleWrite(unsigned short	Offset,
                                              unsigned short Value);
-    
+
     IOReturn    RTUSBWriteMACRegister(unsigned short Offset,
                                       unsigned short Value);
     
@@ -67,11 +68,13 @@ public:
     IOReturn	RTUSBWriteBBPRegister(unsigned char Id,
                                       unsigned char Value);
     
-    IOReturn	RalinkJack::RTUSBWriteRFRegister(unsigned long Value);
+    IOReturn	RTUSBWriteRFRegister(unsigned long Value);
     
     IOReturn	RTUSBReadEEPROM(unsigned short Offset,
                                 unsigned char * pData,
                                 unsigned short length);
+
+
     
     void	NICReadEEPROMParameters();
     void    NICInitAsicFromEEPROM();

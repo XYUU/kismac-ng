@@ -62,7 +62,8 @@ protected:
     enum  deviceTypes {
         intersil = 1,
         zydas,
-        ralink
+        ralink,
+		rt73
     } deviceType; 
 
     IOReturn    _doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);

@@ -29,6 +29,7 @@
 //#import "../Driver/USBJack/RalinkJack.h" 
 
 class RalinkJack;
+class RT73Jack;
 
 @interface WaveDriverUSBIntersil : WaveDriver {
     USBJack *_driver;
@@ -36,7 +37,8 @@ class RalinkJack;
     enum  deviceTypes {
         intersil = 1,
         zydas,
-        ralink
+        ralink,
+		rt73
     } deviceMake;
     
     //stuff for timed sending

@@ -30,6 +30,7 @@
 #include "USBJack.h"
 #include "IntersilJack.h"
 #include "RalinkJack.h"
+#include "RT73Jack.h"
 
 #define wlcDeviceGone   (int)0xe000404f
 #define align64(a)      (((a)+63)&~63)
@@ -104,17 +105,20 @@ static struct identStruct devices[] = {
     {0x148f, 0x9020},	/* Ralink */		
     {0x14b2, 0x3c02},	/* Conceptronic */	
     {0x14f8, 0x2570},	/* Eminent */		
-    {0x2001, 0x3c00},	/* D-LINK */		
-    {0x07d1, 0x3c03},	/* D-LINK */		
+    {0x2001, 0x3c00},	/* D-LINK */
     {0x0411, 0x008b},	/* Nintendo */		
     {0x5a57, 0x0260},   /* Zinwell */		
     {0x0eb0, 0x9020},   /* Novatech */		
     {0x13b1, 0x0020},   /* WUSB54GC */
+	// ralink RT73
+    {0x07d1, 0x3c03},	/* D-LINK */
+    {0x07d1, 0x3c04},	/* D-LINK */
 };
 
 #define dIntersilDeviceCount 32
 #define dZydasDeviceCount 1
-#define dRalinkDeviceCount 31
+#define dRalinkDeviceCount 29
+#define dRT73DeviceCount 2
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
@@ -870,7 +874,7 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         kr = (*dev)->GetDeviceReleaseNumber(dev, &release);
         
         //find the correct device
-        for (i=0; i< (dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount); i++) {
+        for (i=0; i< (dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount + dRT73DeviceCount); i++) {
             if ((vendor == devices[i].vendor) && (product == devices[i].device)) break;
         }
         
@@ -887,6 +891,11 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount) {
             NSLog(@"Ralink 2500 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             _deviceType[++_numDevices] = ralink;
+            _foundDevices[_numDevices] = dev;
+        }
+        else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount + dRT73DeviceCount) {
+            NSLog(@"Ralink RT73 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            _deviceType[++_numDevices] = rt73;
             _foundDevices[_numDevices] = dev;
         }
         else {

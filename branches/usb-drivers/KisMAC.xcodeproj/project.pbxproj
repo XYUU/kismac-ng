@@ -464,19 +464,22 @@
 		6C541AAB0A72002F00B58A95 /* growl-ap-revealed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AA80A72002F00B58A95 /* growl-ap-revealed.png */; };
 		6C541AAC0A72003000B58A95 /* growl-wpa-challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */; };
 		6C541AAD0A72003000B58A95 /* growl-wpa-response.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */; };
-		6C71721F0AA17A5A00CD6879 /* rt2570.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C71721E0AA17A5A00CD6879 /* rt2570.h */; };
+		6C8390230AE09EFB00B7654B /* IntersilJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C8390170AE09EFB00B7654B /* IntersilJack.h */; };
+		6C8390240AE09EFB00B7654B /* IntersilJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C8390180AE09EFB00B7654B /* IntersilJack.mm */; };
+		6C8390250AE09EFB00B7654B /* prism2.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C8390190AE09EFB00B7654B /* prism2.h */; };
+		6C8390260AE09EFB00B7654B /* RalinkJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C83901A0AE09EFB00B7654B /* RalinkJack.h */; };
+		6C8390270AE09EFB00B7654B /* RalinkJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C83901B0AE09EFB00B7654B /* RalinkJack.mm */; };
+		6C8390280AE09EFB00B7654B /* rt2570.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C83901C0AE09EFB00B7654B /* rt2570.h */; };
+		6C8390290AE09EFB00B7654B /* RT73.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C83901D0AE09EFB00B7654B /* RT73.h */; };
+		6C83902A0AE09EFB00B7654B /* RT73Jack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C83901E0AE09EFB00B7654B /* RT73Jack.h */; };
+		6C83902B0AE09EFB00B7654B /* RT73Jack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C83901F0AE09EFB00B7654B /* RT73Jack.mm */; };
+		6C83902C0AE09EFB00B7654B /* structs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C8390200AE09EFB00B7654B /* structs.h */; };
+		6C83902D0AE09EFB00B7654B /* USBJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C8390210AE09EFB00B7654B /* USBJack.h */; };
+		6C83902E0AE09EFB00B7654B /* USBJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C8390220AE09EFB00B7654B /* USBJack.mm */; };
 		6C87C31A0AB1168100182BC6 /* GPSInfoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C87C3180AB1168100182BC6 /* GPSInfoController.h */; };
 		6C87C31B0AB1168100182BC6 /* GPSInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87C3190AB1168100182BC6 /* GPSInfoController.m */; };
 		6C87C3260AB1170200182BC6 /* GPSDialog.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6C87C3240AB1170200182BC6 /* GPSDialog.nib */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
-		6CE20615C5B043AF00A26C3A /* IntersilJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE2060FC5B043AF00A26C3A /* IntersilJack.h */; };
-		6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE20610C5B043AF00A26C3A /* IntersilJack.mm */; };
-		6CE20617C5B043AF00A26C3A /* prism2.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20611C5B043AF00A26C3A /* prism2.h */; };
-		6CE20618C5B043AF00A26C3A /* structs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20612C5B043AF00A26C3A /* structs.h */; };
-		6CE20619C5B043AF00A26C3A /* USBJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE20613C5B043AF00A26C3A /* USBJack.h */; };
-		6CE2061AC5B043AF00A26C3A /* USBJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE20614C5B043AF00A26C3A /* USBJack.mm */; };
-		6CE206E8C5B0502200A26C3A /* RalinkJack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CE206E6C5B0502200A26C3A /* RalinkJack.h */; };
-		6CE206E9C5B0502200A26C3A /* RalinkJack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE206E7C5B0502200A26C3A /* RalinkJack.mm */; };
 		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
 		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
 		8D1107280486CEB800E47090 /* KisMAC_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */; };
@@ -818,19 +821,22 @@
 		6C541AA80A72002F00B58A95 /* growl-ap-revealed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-ap-revealed.png"; sourceTree = "<group>"; };
 		6C541AA90A72002F00B58A95 /* growl-wpa-challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-challenge.png"; sourceTree = "<group>"; };
 		6C541AAA0A72002F00B58A95 /* growl-wpa-response.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "growl-wpa-response.png"; sourceTree = "<group>"; };
-		6C71721E0AA17A5A00CD6879 /* rt2570.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rt2570.h; path = USBJack/rt2570.h; sourceTree = "<group>"; };
+		6C8390170AE09EFB00B7654B /* IntersilJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = IntersilJack.h; sourceTree = "<group>"; };
+		6C8390180AE09EFB00B7654B /* IntersilJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = IntersilJack.mm; sourceTree = "<group>"; };
+		6C8390190AE09EFB00B7654B /* prism2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = prism2.h; sourceTree = "<group>"; };
+		6C83901A0AE09EFB00B7654B /* RalinkJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RalinkJack.h; sourceTree = "<group>"; };
+		6C83901B0AE09EFB00B7654B /* RalinkJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = RalinkJack.mm; sourceTree = "<group>"; };
+		6C83901C0AE09EFB00B7654B /* rt2570.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rt2570.h; sourceTree = "<group>"; };
+		6C83901D0AE09EFB00B7654B /* RT73.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RT73.h; sourceTree = "<group>"; };
+		6C83901E0AE09EFB00B7654B /* RT73Jack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RT73Jack.h; sourceTree = "<group>"; };
+		6C83901F0AE09EFB00B7654B /* RT73Jack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = RT73Jack.mm; sourceTree = "<group>"; };
+		6C8390200AE09EFB00B7654B /* structs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
+		6C8390210AE09EFB00B7654B /* USBJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = USBJack.h; sourceTree = "<group>"; };
+		6C8390220AE09EFB00B7654B /* USBJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = USBJack.mm; sourceTree = "<group>"; };
 		6C87C3180AB1168100182BC6 /* GPSInfoController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GPSInfoController.h; sourceTree = "<group>"; };
 		6C87C3190AB1168100182BC6 /* GPSInfoController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GPSInfoController.m; sourceTree = "<group>"; };
 		6C87C3250AB1170200182BC6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GPSDialog.nib; sourceTree = "<group>"; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		6CE2060FC5B043AF00A26C3A /* IntersilJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = IntersilJack.h; path = USBJack/IntersilJack.h; sourceTree = "<group>"; };
-		6CE20610C5B043AF00A26C3A /* IntersilJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = IntersilJack.mm; path = USBJack/IntersilJack.mm; sourceTree = "<group>"; };
-		6CE20611C5B043AF00A26C3A /* prism2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = prism2.h; path = USBJack/prism2.h; sourceTree = "<group>"; };
-		6CE20612C5B043AF00A26C3A /* structs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = structs.h; path = USBJack/structs.h; sourceTree = "<group>"; };
-		6CE20613C5B043AF00A26C3A /* USBJack.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = USBJack.h; path = USBJack/USBJack.h; sourceTree = "<group>"; };
-		6CE20614C5B043AF00A26C3A /* USBJack.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = USBJack.mm; path = USBJack/USBJack.mm; sourceTree = "<group>"; };
-		6CE206E6C5B0502200A26C3A /* RalinkJack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RalinkJack.h; path = USBJack/RalinkJack.h; sourceTree = "<group>"; };
-		6CE206E7C5B0502200A26C3A /* RalinkJack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RalinkJack.mm; path = USBJack/RalinkJack.mm; sourceTree = "<group>"; };
 		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
 		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* KisMAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KisMAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1101,7 +1107,7 @@
 		003533D206A5DD8500AB4577 /* Driver */ = {
 			isa = PBXGroup;
 			children = (
-				6CE2060EC5B0439100A26C3A /* USBJack */,
+				6C8390160AE09EFB00B7654B /* USBJack */,
 			);
 			name = Driver;
 			path = Sources/Driver;
@@ -1456,20 +1462,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6CE2060EC5B0439100A26C3A /* USBJack */ = {
+		6C8390160AE09EFB00B7654B /* USBJack */ = {
 			isa = PBXGroup;
 			children = (
-				6CE2060FC5B043AF00A26C3A /* IntersilJack.h */,
-				6CE20610C5B043AF00A26C3A /* IntersilJack.mm */,
-				6CE20611C5B043AF00A26C3A /* prism2.h */,
-				6CE20612C5B043AF00A26C3A /* structs.h */,
-				6CE20613C5B043AF00A26C3A /* USBJack.h */,
-				6CE20614C5B043AF00A26C3A /* USBJack.mm */,
-				6C71721E0AA17A5A00CD6879 /* rt2570.h */,
-				6CE206E6C5B0502200A26C3A /* RalinkJack.h */,
-				6CE206E7C5B0502200A26C3A /* RalinkJack.mm */,
+				6C8390170AE09EFB00B7654B /* IntersilJack.h */,
+				6C8390180AE09EFB00B7654B /* IntersilJack.mm */,
+				6C8390190AE09EFB00B7654B /* prism2.h */,
+				6C83901A0AE09EFB00B7654B /* RalinkJack.h */,
+				6C83901B0AE09EFB00B7654B /* RalinkJack.mm */,
+				6C83901C0AE09EFB00B7654B /* rt2570.h */,
+				6C83901D0AE09EFB00B7654B /* RT73.h */,
+				6C83901E0AE09EFB00B7654B /* RT73Jack.h */,
+				6C83901F0AE09EFB00B7654B /* RT73Jack.mm */,
+				6C8390200AE09EFB00B7654B /* structs.h */,
+				6C8390210AE09EFB00B7654B /* USBJack.h */,
+				6C8390220AE09EFB00B7654B /* USBJack.mm */,
 			);
-			name = USBJack;
+			path = USBJack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1645,13 +1654,15 @@
 				00DF456308B1E969003F3C7E /* WaveDriverAirportExtreme.h in Headers */,
 				87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */,
 				6C1D31C009F37BC70005A9F8 /* PrefsAdvanced.h in Headers */,
-				6CE20615C5B043AF00A26C3A /* IntersilJack.h in Headers */,
-				6CE20617C5B043AF00A26C3A /* prism2.h in Headers */,
-				6CE20618C5B043AF00A26C3A /* structs.h in Headers */,
-				6CE20619C5B043AF00A26C3A /* USBJack.h in Headers */,
-				6CE206E8C5B0502200A26C3A /* RalinkJack.h in Headers */,
-				6C71721F0AA17A5A00CD6879 /* rt2570.h in Headers */,
 				6C87C31A0AB1168100182BC6 /* GPSInfoController.h in Headers */,
+				6C8390230AE09EFB00B7654B /* IntersilJack.h in Headers */,
+				6C8390250AE09EFB00B7654B /* prism2.h in Headers */,
+				6C8390260AE09EFB00B7654B /* RalinkJack.h in Headers */,
+				6C8390280AE09EFB00B7654B /* rt2570.h in Headers */,
+				6C8390290AE09EFB00B7654B /* RT73.h in Headers */,
+				6C83902A0AE09EFB00B7654B /* RT73Jack.h in Headers */,
+				6C83902C0AE09EFB00B7654B /* structs.h in Headers */,
+				6C83902D0AE09EFB00B7654B /* USBJack.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2041,10 +2052,11 @@
 				00DF456408B1E969003F3C7E /* WaveDriverAirportExtreme.m in Sources */,
 				87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */,
 				6C1D31C109F37BC70005A9F8 /* PrefsAdvanced.m in Sources */,
-				6CE20616C5B043AF00A26C3A /* IntersilJack.mm in Sources */,
-				6CE2061AC5B043AF00A26C3A /* USBJack.mm in Sources */,
-				6CE206E9C5B0502200A26C3A /* RalinkJack.mm in Sources */,
 				6C87C31B0AB1168100182BC6 /* GPSInfoController.m in Sources */,
+				6C8390240AE09EFB00B7654B /* IntersilJack.mm in Sources */,
+				6C8390270AE09EFB00B7654B /* RalinkJack.mm in Sources */,
+				6C83902B0AE09EFB00B7654B /* RT73Jack.mm in Sources */,
+				6C83902E0AE09EFB00B7654B /* USBJack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
