@@ -10,7 +10,89 @@
 
 #import <Cocoa/Cocoa.h>
 #import "USBJack.h"
-#include "RT73.h"
+//temporary to fix linking errors
+#define	NUM_EEPROM_BBP_PARMS		19
+#define	NUM_EEPROM_BBP_TUNING_PARMS	7
+
+#define USHORT unsigned short
+#define UCHAR unsigned char
+#ifdef __BIG_ENDIAN__
+typedef union  _MCU_LEDCS_STRUC {
+	struct	{
+		USHORT		PolarityRDY_A:1;
+		USHORT		PolarityRDY_G:1;
+		USHORT		PolarityACT:1;
+		USHORT		PolarityGPIO_4:1;
+		USHORT		PolarityGPIO_3:1;
+		USHORT		PolarityGPIO_2:1;
+		USHORT		PolarityGPIO_1:1;
+		USHORT		PolarityGPIO_0:1;
+		USHORT		LinkAStatus:1;
+		USHORT		LinkGStatus:1;
+		USHORT		RadioStatus:1;
+		USHORT		LedMode:5;		
+	} field;
+	USHORT			word;
+} MCU_LEDCS_STRUC, *PMCU_LEDCS_STRUC;
+#else
+typedef union  _MCU_LEDCS_STRUC {
+	struct	{
+		USHORT		LedMode:5;
+		USHORT		RadioStatus:1;
+		USHORT		LinkGStatus:1;
+		USHORT		LinkAStatus:1;
+		USHORT		PolarityGPIO_0:1;
+		USHORT		PolarityGPIO_1:1;
+		USHORT		PolarityGPIO_2:1;
+		USHORT		PolarityGPIO_3:1;
+		USHORT		PolarityGPIO_4:1;
+		USHORT		PolarityACT:1;
+		USHORT		PolarityRDY_G:1;
+		USHORT		PolarityRDY_A:1;
+	} field;
+	USHORT			word;
+} MCU_LEDCS_STRUC, *PMCU_LEDCS_STRUC;
+#endif
+
+#define ETH_LENGTH_OF_ADDRESS	6
+// structure to store channel TX power
+typedef struct _CHANNEL_TX_POWER {
+	unsigned char	Channel;
+	char	Power;
+}	CHANNEL_TX_POWER, *PCHANNEL_TX_POWER;
+
+#ifdef __BIG_ENDIAN__
+typedef	union	_EEPROM_TXPOWER_DELTA_STRUC	{
+	struct	{
+		UCHAR	TxPowerEnable:1;// Enable
+		UCHAR	Type:1;			// 1: plus the delta value, 0: minus the delta value
+		UCHAR	DeltaValue:6;	// Tx Power dalta value (MAX=4)
+	}	field;
+	UCHAR	value;
+}	EEPROM_TXPOWER_DELTA_STRUC, *PEEPROM_TXPOWER_DELTA_STRUC;
+#else
+typedef	union	_EEPROM_TXPOWER_DELTA_STRUC	{
+	struct	{
+		UCHAR	DeltaValue:6;	// Tx Power dalta value (MAX=4)
+		UCHAR	Type:1;			// 1: plus the delta value, 0: minus the delta value
+		UCHAR	TxPowerEnable:1;// Enable
+	}	field;
+	UCHAR	value;
+}	EEPROM_TXPOWER_DELTA_STRUC, *PEEPROM_TXPOWER_DELTA_STRUC;
+#endif
+
+typedef struct	_RTMP_RF_REGS
+{
+	UCHAR	Channel;
+	ULONG	R1;
+	ULONG	R2;
+	ULONG	R3;
+	ULONG	R4;
+}	RTMP_RF_REGS, *PRTMP_RF_REGS;
+
+#define MAX_NUM_OF_CHANNELS		43	//1-14, 36/40/44/48/52/56/60/64/100/104/108/112/116/120/124/ 
+									//128/132/136/140/149/153/157/161/165/34/38/42/46 + 1 as NULL termination
+//end temp
 
 class RT73Jack: public USBJack
 {

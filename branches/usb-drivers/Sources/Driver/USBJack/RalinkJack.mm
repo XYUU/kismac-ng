@@ -141,7 +141,7 @@ IOReturn RalinkJack::_init() {
 		}
 		while (i < RETRY_LIMIT);
 		
-		RTUSBWriteMACRegister(PHY_CSR7, BBPRegTable[Index]);
+		RTUSBWriteMACRegister(PHY_CSR7, RT2570BBPRegTable[Index]);
     }
     
     

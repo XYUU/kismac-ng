@@ -548,7 +548,7 @@ ULONG       :22;
 } MCU_INT_SOURCE_STRUC, *PMCU_INT_SOURCE_STRUC, MCU_INT_MASK_STRUC, *PMCU_INT_MASK_STRUC;
 #endif
 
-
+/*
 //
 // MCU_LEDCS: MCU LED Control Setting.
 //
@@ -589,7 +589,7 @@ typedef union  _MCU_LEDCS_STRUC {
 	USHORT			word;
 } MCU_LEDCS_STRUC, *PMCU_LEDCS_STRUC;
 #endif
-
+*/
 // =================================================================================
 // Register format
 // =================================================================================
@@ -1764,7 +1764,7 @@ typedef	union	_EEPROM_LED_STRUC	{
 	USHORT	word;
 }	EEPROM_LED_STRUC, *PEEPROM_LED_STRUC;
 #endif
-
+/*
 #ifdef __BIG_ENDIAN__
 typedef	union	_EEPROM_TXPOWER_DELTA_STRUC	{
 	struct	{
@@ -1784,15 +1784,15 @@ typedef	union	_EEPROM_TXPOWER_DELTA_STRUC	{
 	UCHAR	value;
 }	EEPROM_TXPOWER_DELTA_STRUC, *PEEPROM_TXPOWER_DELTA_STRUC;
 #endif
-
+*/
 ////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 // structure to store channel TX power
 typedef struct _CHANNEL_TX_POWER {
 	unsigned char	Channel;
 	char	Power;
 }	CHANNEL_TX_POWER, *PCHANNEL_TX_POWER;
-
+*/
 /*
  //
  //	configuration and status
@@ -1992,6 +1992,7 @@ typedef struct _CHANNEL_TX_POWER {
 //
 // Register set pair for initialzation register set definition
 //
+/*
 typedef struct	_RTMP_RF_REGS
 {
 	UCHAR	Channel;
@@ -2000,7 +2001,7 @@ typedef struct	_RTMP_RF_REGS
 	ULONG	R3;
 	ULONG	R4;
 }	RTMP_RF_REGS, *PRTMP_RF_REGS;
-
+*/
 RTMP_RF_REGS RF2528RegTable[] = {
     //		ch	 R1 		 R2 		 R3(TX0~4=0) R4
     {1,  0x94002c0c, 0x94000786, 0x94068255, 0x940fea0b},
@@ -2258,7 +2259,7 @@ typedef struct	_BBP_REG_PAIR
 //
 // BBP register initialization set
 //
-BBP_REG_PAIR   BBPRegTable[] = {
+BBP_REG_PAIR   RT73BBPRegTable[] = {
 	{3, 	0x80},
 	{15,	0x30},
 	{17,	0x20},
@@ -2286,7 +2287,7 @@ BBP_REG_PAIR   BBPRegTable[] = {
 	{102,	0x16},
 	{107,	0x04},
 };
-#define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(BBP_REG_PAIR))
+#define	NUM_BBP_REG_PARMS	(sizeof(RT73BBPRegTable) / sizeof(BBP_REG_PAIR))
 
 //
 // ASIC register initialization sets

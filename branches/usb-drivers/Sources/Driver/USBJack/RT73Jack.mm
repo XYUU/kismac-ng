@@ -7,7 +7,7 @@
  */
 
 #include "RT73Jack.h"
-//#include "RT73.h"
+#include "RT73.h"
 
 IOReturn RT73Jack::_init() {
     unsigned long	Index;
@@ -527,7 +527,7 @@ IOReturn RT73Jack::NICInitializeAsic()
 	// Initialize BBP register to default value
 	for (Index = 0; Index < NUM_BBP_REG_PARMS; Index++)
 	{
-		RTUSBWriteBBPRegister(BBPRegTable[Index].Register, BBPRegTable[Index].Value);
+		RTUSBWriteBBPRegister(RT73BBPRegTable[Index].Register, RT73BBPRegTable[Index].Value);
 	}
 
 	// Clear raw counters

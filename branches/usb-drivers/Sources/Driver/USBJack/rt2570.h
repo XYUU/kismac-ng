@@ -222,7 +222,7 @@ RTMP_RF_REGS RF5222RegTable[] = {
 };
 #define	NUM_OF_5222_CHNL	(sizeof(RF5222RegTable) / sizeof(RTMP_RF_REGS))
 
-USHORT	 BBPRegTable[] = {
+USHORT	 RT2570BBPRegTable[] = {
 	0x0302,  // R03
 	0x0419,  // R04
 	0x0E1C,  // R14
@@ -259,7 +259,7 @@ USHORT	 BBPRegTable[] = {
 	0x4BFF,  // R75//by MAX
 };
 
-#define	NUM_BBP_REG_PARMS	(sizeof(BBPRegTable) / sizeof(USHORT))
+#define	NUM_BBP_REG_PARMS	(sizeof(RT2570BBPRegTable) / sizeof(USHORT))
 
 //
 // P802.11 Frame control field, 16 bit
