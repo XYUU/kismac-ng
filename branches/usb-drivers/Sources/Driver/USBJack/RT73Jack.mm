@@ -1768,6 +1768,7 @@ RT73Jack::RT73Jack() {
 }
 
 RT73Jack::~RT73Jack() {
+    /*
     stopRun();
     _interface = NULL;
     _frameSize = 0;
@@ -1776,4 +1777,5 @@ RT73Jack::~RT73Jack() {
     pthread_cond_destroy(&_wait_cond);
     pthread_mutex_destroy(&_recv_mutex);
     pthread_cond_destroy(&_recv_cond);
+     */
 }

@@ -55,6 +55,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
         case ralink:
             delete(_driver);
             _driver = new RalinkJack;
+            break;
         case rt73:
             delete(_driver);
             _driver = new RT73Jack;

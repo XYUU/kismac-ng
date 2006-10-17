@@ -1051,8 +1051,6 @@ USBJack::USBJack() {
 USBJack::~USBJack() {
     NSLog(@"I'm being destroyed!!!");
     stopRun();
-//(*_dev)->USBDeviceClose(_dev);
-  //  (*_dev)->Release(_dev);
     _interface = NULL;
     _frameSize = 0;
 

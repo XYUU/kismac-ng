@@ -190,6 +190,7 @@ IntersilJack::IntersilJack() {
 }
 
 IntersilJack::~IntersilJack() {
+    /*
     stopRun();
     _interface = NULL;
     _frameSize = 0;
@@ -198,5 +199,6 @@ IntersilJack::~IntersilJack() {
     pthread_cond_destroy(&_wait_cond);
     pthread_mutex_destroy(&_recv_mutex);
     pthread_cond_destroy(&_recv_cond);
+*/
 }
 
