@@ -47,6 +47,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
     
     usleep(1000);  //we should really do locking, but since this is temp anyway...
     
+    //I don't really like how this works.
     switch(_driver->getDeviceType()){       //cast ourself to the approp type
         case intersil:
             delete(_driver);
