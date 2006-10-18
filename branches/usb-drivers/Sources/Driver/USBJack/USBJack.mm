@@ -796,7 +796,7 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
     return kr;
 }
 
-void USBJack::_attachDevice() {
+bool USBJack::_attachDevice() {
     kern_return_t		kr;
     IOUSBDeviceInterface    **dev;
     
@@ -812,7 +812,7 @@ void USBJack::_attachDevice() {
                 NSLog(@"unable to open device: %08x\n", kr);
             }
             (*dev)->Release(dev);
-            return;
+            return false;
         }
         
         kr = _configureAnchorDevice(dev);
@@ -820,7 +820,7 @@ void USBJack::_attachDevice() {
             NSLog(@"unable to configure device: %08x\n", kr);
             (*dev)->USBDeviceClose(dev);
             (*dev)->Release(dev);
-            return;
+            return false;
         }
         
         kr = _findInterfaces(dev);
@@ -828,13 +828,14 @@ void USBJack::_attachDevice() {
             NSLog(@"unable to find interfaces on device: %08x\n", kr);
             (*dev)->USBDeviceClose(dev);
             (*dev)->Release(dev);
-            return;
+            return false;
         }
         
         kr = (*dev)->USBDeviceClose(dev);
         kr = (*dev)->Release(dev);
     
     }
+    return true;
 }
 
 void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {

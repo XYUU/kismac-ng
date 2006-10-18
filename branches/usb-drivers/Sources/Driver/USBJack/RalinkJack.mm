@@ -17,7 +17,10 @@ IOReturn RalinkJack::_init() {
 	unsigned int			i;
     IOReturn                ret;
     
-    _attachDevice();
+    if(!_attachDevice()){
+        NSLog(@"Device could not be opened");
+        return kIOReturnNoDevice;
+    }
     
 	NSLog(@"--> NICInitializeAsic");
 

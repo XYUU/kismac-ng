@@ -10,15 +10,16 @@
 #include "RT73.h"
 
 IOReturn RT73Jack::_init() {
-    unsigned long	Index;
 	unsigned long	temp;
 	unsigned int	i;
-	unsigned char	Value = 0xff;
     IOReturn	ret;
 	
 	NICInitialized = false;
     
-    _attachDevice();
+    if(!_attachDevice()){
+        NSLog(@"Device could not be opened");
+        return kIOReturnNoDevice;
+    }
 
 	// Wait for hardware stable
 
@@ -82,7 +83,7 @@ IOReturn RT73Jack::_init() {
 	}
 */
 
-	return kIOReturnSuccess;
+	return ret;
 }
 
 IOReturn	RT73Jack::RTUSB_VendorRequest(UInt8 direction,

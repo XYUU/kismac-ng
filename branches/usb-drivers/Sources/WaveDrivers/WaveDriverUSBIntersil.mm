@@ -69,7 +69,9 @@ static bool explicitlyLoadedUSBIntersil = NO;
             return Nil;
     }
     
-    _driver->_init();
+    if(_driver->_init() != kIOReturnSuccess)
+        return Nil;
+    
 	_errors = 0;
 	
     return self;

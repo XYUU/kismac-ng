@@ -109,8 +109,11 @@ IOReturn IntersilJack::_init() {
     WLHardwareAddress macAddr;
     int i; 
     
+    if(!_attachDevice()){
+        NSLog(@"Device could not be opened");
+        return kIOReturnNoDevice;
+    }
     
-    _attachDevice();
     _firmwareType = -1;
     
     for (i = 0; i< wlResetTries; i++) {
