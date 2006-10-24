@@ -522,7 +522,12 @@ IOReturn RT73Jack::NICInitializeAsic()
 	do 
 	{
 		RTUSBReadBBPRegister(BBP_R0, &Value);
-		NSLog(@"BBP version = %d\n", Value);
+        if (Value == 0) {
+            NSLog(@"This is probably an rt73 chipset, please report your vendor and product id to http://trac.kismac.de");
+            return kIOReturnNoDevice;
+        }
+		else NSLog(@"BBP version = %d\n", Value);
+        
 	} while ((++Index < 100) && ((Value == 0xff) || (Value == 0x00)));
 		  
 	// Initialize BBP register to default value

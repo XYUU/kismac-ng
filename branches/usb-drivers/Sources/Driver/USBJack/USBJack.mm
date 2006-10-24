@@ -85,7 +85,6 @@ static struct identStruct devices[] = {
     {0x0411, 0x0067},	/* Melco */		
     {0x050d, 0x7050},	/* Belkin */		
     {0x050d, 0x7051},	/* Belkin */		
-    {0x050d, 0x705a},   /* Belkin */		
     {0x06f8, 0xe000},   /* GUILLEMOT */		
     {0x0707, 0xee13},	/* SMC */		
     {0x0b05, 0x1706},	/* ASUS */		
@@ -113,12 +112,13 @@ static struct identStruct devices[] = {
 	// ralink RT73
     {0x07d1, 0x3c03},	/* D-LINK */
     {0x07d1, 0x3c04},	/* D-LINK */
+    {0x050d, 0x705a},   /* Belkin */
 };
 
 #define dIntersilDeviceCount 32
 #define dZydasDeviceCount 1
-#define dRalinkDeviceCount 29
-#define dRT73DeviceCount 2
+#define dRalinkDeviceCount 28
+#define dRT73DeviceCount 3
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
