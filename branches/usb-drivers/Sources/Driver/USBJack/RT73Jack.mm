@@ -40,7 +40,10 @@ IOReturn RT73Jack::_init() {
 
 	// Load firmware
 	
-	NICLoadFirmware();
+	ret = NICLoadFirmware();
+    if(ret != kIOReturnSuccess){
+        return kIOReturnIOError;
+    }
 
 	// Initialize Asics
 
@@ -524,7 +527,7 @@ IOReturn RT73Jack::NICInitializeAsic()
 	do 
 	{
 		RTUSBReadBBPRegister(BBP_R0, &Value);
-		else NSLog(@"BBP version = %d\n", Value);
+		NSLog(@"BBP version = %d\n", Value);
         
 	} while ((++Index < 100) && ((Value == 0xff) || (Value == 0x00)));
 		  
