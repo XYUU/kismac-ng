@@ -113,6 +113,10 @@ IOReturn RalinkJack::_init() {
         do
         {
             ret = RTUSBReadBBPRegister(BBP_Version, &Value);
+            if (Value == 0) {
+                NSLog(@"This is probably an rt73 chipset, please report your vendor and product id to http://trac.kismac.de");
+                return kIOReturnNoDevice;
+            }
             NSLog(@"Read BBP_Version Value = %d\n", Value);
             i++;
         }while (((Value == 0xff) || (Value == 0x00)) && (i < 50));

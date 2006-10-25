@@ -107,7 +107,9 @@ IOReturn	RT73Jack::RTUSB_VendorRequest(UInt8 direction,
 	else
 	{
 
-#if __BIG_ENDIAN__
+#if 0
+        //__BIG_ENDIAN__
+        //I don't think we ever need to swap going to the device --geoff
         //data is returned in the bus endian
         //we need to swap
         //this is going to be bad when we run on intel
@@ -522,10 +524,6 @@ IOReturn RT73Jack::NICInitializeAsic()
 	do 
 	{
 		RTUSBReadBBPRegister(BBP_R0, &Value);
-        if (Value == 0) {
-            NSLog(@"This is probably an rt73 chipset, please report your vendor and product id to http://trac.kismac.de");
-            return kIOReturnNoDevice;
-        }
 		else NSLog(@"BBP version = %d\n", Value);
         
 	} while ((++Index < 100) && ((Value == 0xff) || (Value == 0x00)));
