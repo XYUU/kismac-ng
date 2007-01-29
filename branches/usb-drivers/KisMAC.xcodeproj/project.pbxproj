@@ -480,6 +480,8 @@
 		6C87C31B0AB1168100182BC6 /* GPSInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87C3190AB1168100182BC6 /* GPSInfoController.m */; };
 		6C87C3260AB1170200182BC6 /* GPSDialog.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6C87C3240AB1170200182BC6 /* GPSDialog.nib */; };
 		6CA3BCCB09B2A58F00DCB407 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */; };
+		6CF9EE6E0B6E9D2A00F54524 /* WaveDriverKismet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF9EE6C0B6E9D2A00F54524 /* WaveDriverKismet.h */; };
+		6CF9EE6F0B6E9D2A00F54524 /* WaveDriverKismet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF9EE6D0B6E9D2A00F54524 /* WaveDriverKismet.m */; };
 		87CEBA8209AEF03700AEB0B8 /* GrowlController.h in Headers */ = {isa = PBXBuildFile; fileRef = 87CEBA8009AEF03700AEB0B8 /* GrowlController.h */; };
 		87CEBA8309AEF03700AEB0B8 /* GrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEBA8109AEF03700AEB0B8 /* GrowlController.m */; };
 		8D1107280486CEB800E47090 /* KisMAC_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */; };
@@ -837,6 +839,8 @@
 		6C87C3190AB1168100182BC6 /* GPSInfoController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GPSInfoController.m; sourceTree = "<group>"; };
 		6C87C3250AB1170200182BC6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GPSDialog.nib; sourceTree = "<group>"; };
 		6CA3BCCA09B2A58F00DCB407 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		6CF9EE6C0B6E9D2A00F54524 /* WaveDriverKismet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WaveDriverKismet.h; sourceTree = "<group>"; };
+		6CF9EE6D0B6E9D2A00F54524 /* WaveDriverKismet.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WaveDriverKismet.m; sourceTree = "<group>"; };
 		87CEBA8009AEF03700AEB0B8 /* GrowlController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GrowlController.h; sourceTree = "<group>"; };
 		87CEBA8109AEF03700AEB0B8 /* GrowlController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GrowlController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* KisMAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KisMAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1222,6 +1226,8 @@
 		0035340E06A5DD8500AB4577 /* WaveDrivers */ = {
 			isa = PBXGroup;
 			children = (
+				6CF9EE6C0B6E9D2A00F54524 /* WaveDriverKismet.h */,
+				6CF9EE6D0B6E9D2A00F54524 /* WaveDriverKismet.m */,
 				0035340F06A5DD8500AB4577 /* WaveDriver.h */,
 				0035341006A5DD8500AB4577 /* WaveDriver.m */,
 				0035341106A5DD8500AB4577 /* WaveDriverAironet.h */,
@@ -1663,6 +1669,7 @@
 				6C83902A0AE09EFB00B7654B /* RT73Jack.h in Headers */,
 				6C83902C0AE09EFB00B7654B /* structs.h in Headers */,
 				6C83902D0AE09EFB00B7654B /* USBJack.h in Headers */,
+				6CF9EE6E0B6E9D2A00F54524 /* WaveDriverKismet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2057,6 +2064,7 @@
 				6C8390270AE09EFB00B7654B /* RalinkJack.mm in Sources */,
 				6C83902B0AE09EFB00B7654B /* RT73Jack.mm in Sources */,
 				6C83902E0AE09EFB00B7654B /* USBJack.mm in Sources */,
+				6CF9EE6F0B6E9D2A00F54524 /* WaveDriverKismet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
