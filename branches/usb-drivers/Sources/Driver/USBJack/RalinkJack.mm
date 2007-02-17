@@ -1056,7 +1056,7 @@ int RalinkJack::WriteTxDescriptor(WLFrame * theFrame){
     pTxD->MoreFrag = false;
     pTxD->ACK         = false;
 	pTxD->Timestamp   = false;
-	pTxD->newseq      = new_seq;
+	//pTxD->newseq      = new_seq;
 	//pTxD->IFS         = Ifs;
 	pTxD->DataByteCnt = theFrame->length;
 	pTxD->Cipher	  = false;
