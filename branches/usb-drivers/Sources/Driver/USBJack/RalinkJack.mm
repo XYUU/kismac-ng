@@ -1041,6 +1041,119 @@ bool RalinkJack::stopCapture(){
     return true;
 }
 
+int RalinkJack::WriteTxDescriptor(WLFrame * theFrame){
+    //here we will constrict a TXD_STRUC from the contents of theFrame
+    //and some defaults taken from the linux driver
+    //then, WLFrame will be overwritten with the TXD_STRUC and
+    //sizeof(TXD_STRUC) will be returned
+    TXD_STRUC *	pTxD;
+    UInt8 tempFrame[sizeof(TXD_STRUC)];
+    pTxD = (TXD_STRUC *)&tempFrame;
+    //todo fixme!!
+    
+    //stuff it
+    pTxD->RetryLimit = 0;
+    pTxD->MoreFrag = false;
+    pTxD->ACK         = false;
+	pTxD->Timestamp   = false;
+	pTxD->newseq      = new_seq;
+	//pTxD->IFS         = Ifs;
+	pTxD->DataByteCnt = theFrame->length;
+	pTxD->Cipher	  = false;
+	pTxD->KeyID		  = 0;
+	pTxD->CWmin       = 2^5-1;// = 31
+	pTxD->CWmax       = 2^10 -1;// = 1023
+	pTxD->Aifs        = 2;   // TC0: SIFS + 2*Slot + Random(CWmin,CWmax)*Slot
+    //maybe?
+    pTxD->Ofdm = 1;
+    
+    
+/*
+                               	Fragment, //false
+                               IN	UCHAR		RetryLimit, 0
+                               IN	BOOLEAN		Ack, //false
+                               IN  BOOLEAN     InsTimestamp, //false
+                               IN  BOOLEAN     new_seq, //true
+                               IN	UCHAR		Ifs, //IFS_BACKOFF
+                               IN	UINT		Length, //length of packet
+                               IN	BOOLEAN		Cipher, //false
+                               IN	UCHAR		KeyID,  //0
+                               IN	UCHAR		CWMin, // CW_MIN_IN_BITS
+                               IN	UCHAR		CWMax, //CW_MAX_IN_BITS
+                               IN	UINT		PLCPLength, //len + 4
+                               IN	UINT		Rate,   //tx rate
+                               IN	UCHAR		Service,    //4
+                               IN  USHORT      TxPreamble) //preamble
+	UINT	Residual;
+    
+	pTxD->RetryLimit  = RetryLimit;
+	pTxD->MoreFrag    = Fragment;
+	pTxD->ACK         = Ack;
+	pTxD->Timestamp   = InsTimestamp;
+	pTxD->newseq      = new_seq;
+	pTxD->IFS         = Ifs;
+	pTxD->DataByteCnt = Length;
+	pTxD->Cipher	  = Cipher;
+	pTxD->KeyID		  = KeyID;
+	pTxD->CWmin       = CWMin;   // 2^5-1 = 31
+	pTxD->CWmax       = CWMax;  // 2^10 -1 = 1023
+	pTxD->Aifs        = 2;   // TC0: SIFS + 2*Slot + Random(CWmin,CWmax)*Slot
+    
+	if (Rate < RATE_FIRST_OFDM_RATE)
+		pTxD->Ofdm = 0;
+	else
+		pTxD->Ofdm = 1;
+    
+	// fill up PLCP SIGNAL field
+	pTxD->PlcpSignal = PlcpSignal[Rate];
+	if (((Rate == RATE_2) || (Rate == RATE_5_5) || (Rate == RATE_11)) && (TxPreamble == Rt802_11PreambleShort)) // no short preamble for RATE_1
+	{
+		pTxD->PlcpSignal |= 0x0008;
+	}
+    
+	// fill up PLCP SERVICE field, not used for OFDM rates
+	pTxD->PlcpService = Service;
+    
+	// file up PLCP LENGTH_LOW and LENGTH_HIGH fields
+	if (Rate < RATE_FIRST_OFDM_RATE)    // 11b - RATE_1, RATE_2, RATE_5_5, RATE_11
+	{
+		if ((Rate == RATE_1) || ( Rate == RATE_2))
+		{
+			PLCPLength = PLCPLength * 8 / (Rate + 1);
+		}
+		else
+		{
+			Residual = ((PLCPLength * 16) % (11 * (1 + Rate - RATE_5_5)));
+			PLCPLength = PLCPLength * 16 / (11 * (1 + Rate - RATE_5_5));
+			if (Residual != 0)
+			{
+				PLCPLength++;
+			}
+			if (Rate == RATE_11)
+			{
+                if ((Residual <= (3 * (1 + Rate - RATE_5_5))) && (Residual != 0))
+                {
+                    pTxD->PlcpService |= 0x80; // 11b's PLCP Length extension bit
+                }
+			}
+		}
+        
+		pTxD->PlcpLengthHigh = PLCPLength / 256;
+		pTxD->PlcpLengthLow = PLCPLength % 256;
+	}
+	else    // OFDM - RATE_6, RATE_9, RATE_12, RATE_18, RATE_24, RATE_36, RATE_48, RATE_54
+	{
+		pTxD->PlcpLengthHigh = PLCPLength / 64;  // high 6-bit of total byte count
+		pTxD->PlcpLengthLow = PLCPLength % 64;   // low 6-bit of total byte count
+	}
+}
+*/
+    //now copy the txd_struc over the old wlframe
+     memcpy(theFrame, tempFrame, sizeof(TXD_STRUC));
+     
+    return sizeof(TXD_STRUC);
+}
+
 bool RalinkJack::_massagePacket(int len){
     unsigned char* pData;
     UInt8 frame[sizeof(_recieveBuffer)];

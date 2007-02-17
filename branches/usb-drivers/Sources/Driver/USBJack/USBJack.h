@@ -98,6 +98,7 @@ protected:
     static void         _handleDeviceRemoval(void *refCon, io_iterator_t iterator);
     static void         _interruptRecieved(void *refCon, IOReturn result, int len);
     virtual bool        _massagePacket(int len);
+    virtual int         WriteTxDescriptor(WLFrame * theFrame);
     static void         _runCFRunLoop(USBJack* me);
   
   // static IOUSBDeviceInterface **_foundDevices[10];

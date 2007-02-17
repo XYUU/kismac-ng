@@ -41,6 +41,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
     _driver = new USBJack;
     //this will only occur once!
     _driver->startMatching();
+    NSLog(@"Matching finished\n");
     
     while(!_driver->getDeviceType() && timeoutCount++ < 10)        //wait until the device is found
         usleep(100);
@@ -65,6 +66,7 @@ static bool explicitlyLoadedUSBIntersil = NO;
             break;
         default:
             NSLog(@"No supported USB Device found!");
+            delete(_driver);
             _errors++;
             return Nil;
     }

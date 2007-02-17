@@ -24,6 +24,7 @@ public:
     bool    getChannel(UInt16* channel);
     bool    getAllowedChannels(UInt16* channel);
     bool    setChannel(UInt16 channel);
+    int     WriteTxDescriptor(WLFrame * theFrame);
     
     
 private:

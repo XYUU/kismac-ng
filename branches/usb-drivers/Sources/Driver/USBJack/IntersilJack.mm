@@ -189,6 +189,13 @@ IOReturn IntersilJack::_reset() {
     return kIOReturnSuccess;
 }
 
+int IntersilJack::WriteTxDescriptor(WLFrame * theFrame){
+    theFrame->rate = 0x6e;	//11 MBit/s
+    theFrame->tx_rate = 0x6e;	//11 MBit/s 
+    //where does this come from?  sizeof(WLFrame)?
+    return 0x3C;
+}
+
 IntersilJack::IntersilJack() {
 }
 

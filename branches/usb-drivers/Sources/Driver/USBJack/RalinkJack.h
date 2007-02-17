@@ -85,6 +85,8 @@ public:
     bool stopCapture();
     
     bool _massagePacket(int len);
+    int WriteTxDescriptor(WLFrame * theFrame);
+
     
 private:
     int temp;

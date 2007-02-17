@@ -177,8 +177,11 @@ bool USBJack::sendFrame(UInt8* data) {
     WLFrame *frameDescriptor;
     UInt8 aData[2364];
     IOByteCount pktsize;
+    int descriptorLength;
     
+    //copy the wl frame to the tx buff
     memcpy(aData, data, sizeof(WLFrame));
+    //modify the frame descriptor in the txbuff
     frameDescriptor = (WLFrame*)aData;
     switch(frameDescriptor->frameControl & 0x0c) {
         case 0x08:
@@ -194,15 +197,19 @@ bool USBJack::sendFrame(UInt8* data) {
         default:
             return kIOReturnBadArgument;
     }
-
+    
     frameDescriptor->txControl=NSSwapHostShortToLittle(0x08 | _TX_RETRYSTRAT_SET(3)| _TX_CFPOLL_SET(1) | _TX_TXEX_SET(0) | _TX_TXOK_SET(0) | _TX_MACPORT_SET(0));
     
-    frameDescriptor->rate = 0x6e;	//11 MBit/s
-    frameDescriptor->tx_rate = 0x6e;	//11 MBit/s
-
-    memcpy(aData + 0x3C, data + sizeof(WLFrame), pktsize);
-
-    if (_sendFrame(aData, pktsize + 0x3C) != kIOReturnSuccess)
+    //write the device dependant descriptor and return the length to copy
+    //note frame descriptor = txbuff
+    descriptorLength = WriteTxDescriptor(frameDescriptor);
+    //copy the packet data to the end of the descriptor
+    //this is 0x3c on prismII
+    //todo fixme!! we need to make sure the buffer is long enough!
+    memcpy(aData + descriptorLength, data + sizeof(WLFrame), pktsize);
+ 
+    //send the frame
+    if (_sendFrame(aData, pktsize + descriptorLength) != kIOReturnSuccess)
         return NO;
     
     return YES;
@@ -466,6 +473,7 @@ IOReturn USBJack::_sendFrame(UInt8* data, IOByteCount size) {
     _lockDevice();
 
     memcpy(&_outputBuffer, data, size);
+    //not sure about this
     _outputBuffer.type =   NSSwapHostShortToLittle(_USB_TXFRM);
     
     numBytes =  align64(size);
@@ -636,6 +644,7 @@ IOReturn USBJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     IOUSBConfigurationDescriptorPtr	confDesc;
     
     kr = (*dev)->GetNumberOfConfigurations(dev, &numConf);
+    NSLog(@"Number of configs found: %d\n", numConf);
     if (!numConf)
         return kIOReturnError;
     
@@ -1060,4 +1069,11 @@ USBJack::~USBJack() {
     pthread_mutex_destroy(&_recv_mutex);
     pthread_cond_destroy(&_recv_cond);
     
+}
+
+int USBJack::WriteTxDescriptor(WLFrame * theFrame){
+    theFrame->rate = 0x6e;	//11 MBit/s
+    theFrame->tx_rate = 0x6e;	//11 MBit/s 
+                                //where does this come from?  sizeof(WLFrame)?
+    return 0x3C;
 }
