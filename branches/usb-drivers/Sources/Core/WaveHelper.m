@@ -324,11 +324,11 @@ static GPSInfoController *_gc;
                 name],
                 OK, Nil, Nil);
             
-                NSLog(@"Error could not instanciate driver %@", interfaceName);
+                //NSLog(@"Error could not instanciate driver %@", interfaceName);  //todo fixme!!
                 return NO;
             }
         } 
-            NSLog(@"Driver %@ was created.", interfaceName);
+            //NSLog(@"Driver %@ was created.", interfaceName);
     }
 
    
