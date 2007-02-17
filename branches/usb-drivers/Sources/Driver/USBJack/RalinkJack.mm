@@ -1147,7 +1147,7 @@ int RalinkJack::WriteTxDescriptor(WLFrame * theFrame){
 		pTxD->PlcpLengthLow = PLCPLength % 64;   // low 6-bit of total byte count
 	}
 }
-*/
+*/ 
     //now copy the txd_struc over the old wlframe
      memcpy(theFrame, tempFrame, sizeof(TXD_STRUC));
      
