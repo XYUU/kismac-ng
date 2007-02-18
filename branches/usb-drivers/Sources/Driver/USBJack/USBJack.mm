@@ -178,36 +178,42 @@ bool USBJack::sendFrame(UInt8* data) {
     UInt8 aData[2364];
     IOByteCount pktsize;
     int descriptorLength;
+    WLIEEEFrame * wifiFrame;
     
-    //copy the wl frame to the tx buff
+    //we have an inFrame and an outFrame
+    //this function is a transformation between the two
+    //copy the wlframe to the tx buff
+    //we will redo part off_t this //todo fixme!!
     memcpy(aData, data, sizeof(WLFrame));
-    //modify the frame descriptor in the txbuff
+    
+    //set pointers to sectons of frame
     frameDescriptor = (WLFrame*)aData;
-    switch(frameDescriptor->frameControl & 0x0c) {
+    pktsize = frameDescriptor->dataLen + sizeof(WLFrame) - sizeof(WLPrismHeader);
+    
+    //convert prism header into device specific header 
+    //returns the length of the device specific header
+    //note frame descriptor = txbuff
+    descriptorLength = WriteTxDescriptor(frameDescriptor);
+    
+    //copy the 802.11 frame to the right  place
+    memcpy(aData + descriptorLength, data + sizeof(WLPrismHeader),  pktsize);
+    wifiFrame = (WLIEEEFrame*)(aData + descriptorLength);
+
+    switch(wifiFrame->frameControl & 0x0c) {
         case 0x08:
         case 0x00:
-            pktsize = frameDescriptor->dataLen;
-            if ((pktsize + sizeof(WLFrame)) > 2364) return kIOReturnBadArgument;
-            frameDescriptor->dataLen=NSSwapHostShortToLittle(frameDescriptor->dataLen);
+            pktsize = wifiFrame->dataLen;
+            if ((pktsize + descriptorLength) > 2364) return kIOReturnBadArgument;
+                wifiFrame->dataLen=NSSwapHostShortToLittle(wifiFrame->dataLen);
             break;
         case 0x04:
             pktsize = 0;
-            frameDescriptor->dataLen = 0;
+            wifiFrame->dataLen = 0;
             break;
         default:
             return kIOReturnBadArgument;
     }
-    
-    frameDescriptor->txControl=NSSwapHostShortToLittle(0x08 | _TX_RETRYSTRAT_SET(3)| _TX_CFPOLL_SET(1) | _TX_TXEX_SET(0) | _TX_TXOK_SET(0) | _TX_MACPORT_SET(0));
-    
-    //write the device dependant descriptor and return the length to copy
-    //note frame descriptor = txbuff
-    descriptorLength = WriteTxDescriptor(frameDescriptor);
-    //copy the packet data to the end of the descriptor
-    //this is 0x3c on prismII
-    //todo fixme!! we need to make sure the buffer is long enough!
-    memcpy(aData + descriptorLength, data + sizeof(WLFrame), pktsize);
- 
+     
     //send the frame
     if (_sendFrame(aData, pktsize + descriptorLength) != kIOReturnSuccess)
         return NO;

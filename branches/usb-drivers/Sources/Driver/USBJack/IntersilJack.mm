@@ -190,10 +190,10 @@ IOReturn IntersilJack::_reset() {
 }
 
 int IntersilJack::WriteTxDescriptor(WLFrame * theFrame){
+    theFrame->txControl=NSSwapHostShortToLittle(0x08 | _TX_RETRYSTRAT_SET(3)| _TX_CFPOLL_SET(1) | _TX_TXEX_SET(0) | _TX_TXOK_SET(0) | _TX_MACPORT_SET(0));
     theFrame->rate = 0x6e;	//11 MBit/s
     theFrame->tx_rate = 0x6e;	//11 MBit/s 
-    //where does this come from?  sizeof(WLFrame)?
-    return 0x3C;
+    return sizeof(WLPrismHeader);
 }
 
 IntersilJack::IntersilJack() {

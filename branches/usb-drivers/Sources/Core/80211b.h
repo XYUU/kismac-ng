@@ -81,6 +81,7 @@ typedef struct _WLIEEEFrame {
     UInt8  address3[6];
     UInt16 sequenceControl;
     UInt8  address4[6];
+    UInt16 dataLen;
 } __attribute__((packed)) WLIEEEFrame;
 
 
