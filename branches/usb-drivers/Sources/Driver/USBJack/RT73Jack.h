@@ -109,8 +109,7 @@ public:
                                     UInt16 wValue, 
                                     UInt16 wIndex, 
                                     void *pData,
-                                    UInt16 wLength,
-                                    bool swap);
+                                    UInt16 wLength);
     
     IOReturn	RTUSBMultiRead(
                                unsigned short	Offset,
@@ -157,6 +156,8 @@ public:
                                 unsigned char	*pData,
                                 unsigned short	length);
     
+	IOReturn	RTUSBReadMacAddress(unsigned char	*pData);
+
 	IOReturn	NICInitializeAsic();
     
 	IOReturn	NICLoadFirmware();

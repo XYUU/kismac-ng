@@ -78,7 +78,7 @@ IOReturn RT73Jack::_init() {
 	{
 		RTUSBBulkReceive(pAd);
 */
-        RTUSBWriteMACRegister(TXRX_CSR0, 0x025eb032);    // enable RX of MAC block, Staion not drop control frame
+        RTUSBWriteMACRegister(TXRX_CSR0, 0x024eb032);    // enable RX of MAC block, Staion not drop control frame, Station not drop not to me unicast frame
 /*
         // Initialize RF register to default value
 	    AsicSwitchChannel(pAd, pAd->PortCfg.Channel);
@@ -94,11 +94,11 @@ IOReturn	RT73Jack::RTUSB_VendorRequest(UInt8 direction,
                         UInt16 wValue, 
                         UInt16 wIndex, 
                         void *pData,
-                        UInt16 wLength,
-                        bool swap) {
+                        UInt16 wLength) {
     
     IOReturn ret;
-#if __BIG_ENDIAN__
+#if 0
+    //__BIG_ENDIAN__
     char * buf;
 #endif
     
@@ -134,7 +134,7 @@ IOReturn	RT73Jack::RTUSB_VendorRequest(UInt8 direction,
         
         ret = (*_interface)->ControlRequest(_interface, 0, &theRequest);
         
-#if __BIG_ENDIAN__
+#if 0
         //data is returned in the bus endian
         //we need to swap
         //this is going to be bad when we run on intel
@@ -163,8 +163,7 @@ IOReturn	RT73Jack::RTUSBMultiRead(
 		0,
 		Offset,
 		pData,
-		length,
-		TRUE);
+		length);
 
 	return Status;
 }
@@ -182,8 +181,7 @@ IOReturn	RT73Jack::RTUSBMultiWrite(
 		0,
 		Offset,
 		pData,
-		length,
-		TRUE);
+		length);
 
 	return Status;
 }
@@ -198,8 +196,7 @@ IOReturn	RT73Jack::RTUSBFirmwareRun()
 		0x8,
 		0,
 		NULL,
-		0,
-		TRUE);
+		0);
 
 	return Status;
 }
@@ -223,8 +220,7 @@ IOReturn	RT73Jack::RTUSBSetLED(
 		LedStatus.word,
 		LedIndicatorStrength,
 		NULL,
-		0,
-		TRUE);
+		0);
 //	NSLog(@"Set LED, status=%x & indicatorstrength=%x\n", LedStatus.word, LedIndicatorStrength);
 
 	return	Status;
@@ -318,14 +314,13 @@ IOReturn RT73Jack::RTUSBWriteMACRegister(
 	IOReturn Status;
 //	if (Offset == TXRX_CSR2)
 //        NSLog(@" !!!!!set Rx control = %x\n", Value);
-    
+    UInt32 reg = CFSwapInt32HostToLittle(Value);
 	Status = RTUSB_VendorRequest(kUSBOut,
                                  0x6,
                                  0,
                                  Offset,
-                                 &Value,
-                                 4,
-                                 TRUE);	
+                                 &reg,
+                                 4);	
 	return Status;
 }
 
@@ -334,14 +329,14 @@ IOReturn	RT73Jack::RTUSBReadMACRegister(
 				unsigned long	*pValue)
 {
 	IOReturn Status;
-	
+	UInt32 reg;
 	Status = RTUSB_VendorRequest(kUSBIn,
                                  0x7,
                                  0,
                                  Offset,
-                                 pValue,
-                                 4,
-                                 TRUE);	
+                                 &reg,
+                                 4);	
+    *pValue = CFSwapInt32LittleToHost(reg);
 	return Status;
 }
 
@@ -471,14 +466,40 @@ IOReturn	RT73Jack::RTUSBReadEEPROM(
 				unsigned short	length)
 {
 	IOReturn	Status;
-	
+
+#ifdef __BIG_ENDIAN__
+    char *buf;
+#endif
+
 	Status = RTUSB_VendorRequest(kUSBIn,
                                  0x9,
                                  0,
                                  Offset,
                                  pData,
-                                 length,
-                                 FALSE);
+                                 length);
+
+#ifdef __BIG_ENDIAN__
+    // EEPROM data is returned in little endian format (16 bit).
+    buf = (char*) malloc(sizeof(char) * length);
+    swab(pData, buf, length);
+    memcpy(pData, buf,length);
+    free(buf);
+#endif
+
+	return Status;
+}
+
+IOReturn	RT73Jack::RTUSBReadMacAddress(unsigned char	*pData)
+{
+	IOReturn	Status;
+
+	Status = RTUSB_VendorRequest(kUSBIn,
+                                 0x9,
+                                 0,
+                                 EEPROM_MAC_ADDRESS_BASE_OFFSET,
+                                 pData,
+                                 MAC_ADDR_LEN);
+
 	return Status;
 }
 
@@ -596,7 +617,7 @@ void	RT73Jack::NICReadEEPROMParameters()
 	NSLog(@"--> NICReadEEPROMParameters\n");
 
 	//Read MAC address.
-	RTUSBReadEEPROM(EEPROM_MAC_ADDRESS_BASE_OFFSET, PermanentAddress, MAC_ADDR_LEN);
+	RTUSBReadMacAddress(PermanentAddress);
 	NSLog(@"Local MAC = %02x:%02x:%02x:%02x:%02x:%02x\n",
 			PermanentAddress[0], PermanentAddress[1], PermanentAddress[2],
 			PermanentAddress[3], PermanentAddress[4], PermanentAddress[5]);
