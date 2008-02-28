@@ -304,7 +304,7 @@ int lengthSort(id string1, id string2, void *context)
 		[_netView setName:_SSID];
 		[_netView setCoord:wp];
 	}
-		
+	
     _packetsLog = [[NSMutableArray arrayWithCapacity:20] retain];
     _ARPLog  = [[NSMutableArray arrayWithCapacity:20] retain];
     _ACKLog  = [[NSMutableArray arrayWithCapacity:20] retain];
@@ -314,7 +314,7 @@ int lengthSort(id string1, id string2, void *context)
     aElev = [[NSString stringWithString:@""] retain];
     _coordinates = [[NSMutableDictionary dictionary] retain];
     _netID = 0;
-
+	
     _gotData = NO;
     _liveCaptured = NO;
     recentTraffic = 0;
@@ -893,15 +893,15 @@ int lengthSort(id string1, id string2, void *context)
     if ([w netType]) _type=[w netType];	//gets the type of network
     
     [_dataLock lock];
+    body = [w payload];
+    bodyLength = [w payloadLength];
     
     //do some special parsing depending on the packet type
     switch ([w type]) {
         case IEEE80211_TYPE_DATA: //Data frame                        
             _dataPackets++;
-            body = [w framebody];
-            bodyLength = [w bodyLength];
-            
-            if (_isWep > encryptionTypeNone && bodyLength > 3) memcpy(_IV, body, 3);	//sets the last IV thingy
+            if (_isWep > encryptionTypeNone && bodyLength > 3)
+                memcpy(_IV, body, 3);	//sets the last IV thingy
             
             if (_isWep==encryptionTypeWEP || _isWep==encryptionTypeWEP40) {
                 
@@ -909,19 +909,21 @@ int lengthSort(id string1, id string2, void *context)
                     
                     //this packet might be interesting for password checking, use the packet if we do not have enough, or f it is smaller than our smallest
                     if ([_packetsLog count]<20 || [(NSString*)[_packetsLog objectAtIndex:0] length] > bodyLength) {
-                        [_packetsLog addObject:[NSData dataWithBytes:[w framebody] length:bodyLength]];
+                        [_packetsLog addObject:[NSData dataWithBytes:body length:bodyLength]];
                         //sort them so that the smallest packet is in front of the array => faster cracking
                         [_packetsLog sortUsingFunction:lengthSort context:Nil];
                     }
 
                     //log those packets for reinjection attack
                     if (bodyLength == ARP_SIZE || bodyLength == ARP_SIZE_PADDING) {
+//						NSLog(@"ARP PACKET");
                         if ([[w clientToID] isEqualToString:@"FF:FF:FF:FF:FF:FF"]) {
                             [_ARPLog addObject:[NSData dataWithBytes:[w frame] length:[w length]]];
 							if ([_ARPLog count] > 100) [_ARPLog removeObjectAtIndex:0];
 						}
                     }
                     if (([_ACKLog count]<20)&&((bodyLength>=TCPACK_MIN_SIZE)||(bodyLength<=TCPACK_MAX_SIZE))) {
+//						NSLog(@"ACK PACKET");
                         [_ACKLog addObject:[NSData dataWithBytes:[w frame] length:[w length]]];
                     }
                     
@@ -938,19 +940,49 @@ int lengthSort(id string1, id string2, void *context)
             }
             break;
         case IEEE80211_TYPE_MGT:        //this is a management packet
-			if ([w SSIDs]) [WaveHelper secureReplace:&_SSIDs withObject:[w SSIDs]];
+			if ([w SSIDs])
+				[WaveHelper secureReplace:&_SSIDs withObject:[w SSIDs]];
 			[self updateSSID:[w SSID] withSound:sound]; //might contain SSID infos
             
-			if ([w primaryChannel]) _primaryChannel = [w primaryChannel];
-			if ([w subType] == IEEE80211_SUBTYPE_BEACON) _rateCount = [w getRates:_rates];
+			if ([w primaryChannel])
+				_primaryChannel = [w primaryChannel];
+			switch ([w subType]) {
+				case IEEE80211_SUBTYPE_BEACON:
+					_rateCount = [w getRates:_rates];
+					break;
+				case IEEE80211_SUBTYPE_AUTH:
+					NSLog(@"Authentication Frame");
+					_authState = 0;
+					switch (_authState) {
+						case 0:
+							switch (((Ieee80211_Auth_Frame *)[w frame])->wi_algo) {
+								case 0x00:
+									NSLog(@"Auth Type Open");
+                                    break;
+								case 0x01:
+									NSLog(@"Auth Type Shared-Key");
+                                    break;
+								default:
+									break;
+							}
+							break;
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+					}
+					break;
+			}
     }
 
     //update the clients to out client array
     //if they are not in add them
     clientid=[w clientToID];
-    if (clientid!=Nil) {
+    if (clientid != Nil) {
         lWCl=[aClients objectForKey:clientid];
-        if (lWCl==nil) {
+        if (lWCl == nil) {
             lWCl=[[WaveClient alloc] init];
             [aClients setObject:lWCl forKey:clientid];
             [aClientKeys addObject:clientid];  
@@ -1626,8 +1658,8 @@ int signalSort(WaveClient* w1, WaveClient* w2, int ascend) {
     return ascend * compValues( [w1 curSignal], [w2 curSignal]);
 }
 
-int recievedSort(WaveClient* w1, WaveClient* w2, int ascend) {
-    return ascend * compFloatValues([w1 recievedBytes], [w2 recievedBytes]);
+int receivedSort(WaveClient* w1, WaveClient* w2, int ascend) {
+    return ascend * compFloatValues([w1 receivedBytes], [w2 receivedBytes]);
 }
 
 int sentSort(WaveClient* w1, WaveClient* w2, int ascend) {
@@ -1669,7 +1701,7 @@ typedef int (*SORTFUNC)(id, id, void *);
     else if ([ident isEqualToString:@"client"]) sf = (SORTFUNC)clientSort;
     else if ([ident isEqualToString:@"vendor"]) sf = (SORTFUNC)vendorSort;
     else if ([ident isEqualToString:@"signal"]) sf = (SORTFUNC)signalSort;
-    else if ([ident isEqualToString:@"recieved"]) sf=(SORTFUNC)recievedSort;
+    else if ([ident isEqualToString:@"received"]) sf=(SORTFUNC)receivedSort;
     else if ([ident isEqualToString:@"sent"])   sf = (SORTFUNC)sentSort;
     else if ([ident isEqualToString:@"lastseen"]) sf=(SORTFUNC)dateSort;
     else if ([ident isEqualToString:@"ipa"])      sf=(SORTFUNC)ipSort;

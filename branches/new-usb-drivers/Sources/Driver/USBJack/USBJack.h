@@ -29,9 +29,16 @@
 #include <IOKit/usb/IOUSBLib.h>
 #include <pthread.h>
 #include "../../Core/80211b.h"
+#include "../../Core/KisMAC80211.h"
 #include <unistd.h>
 #include "prism2.h"
 #include "structs.h"
+
+struct __framelist {
+    struct __framelist *prev;
+    struct __framelist *next;
+    KFrame *frame;
+};
 
 class USBJack {
 public:
@@ -43,8 +50,8 @@ public:
     bool    devicePresent();
     int     getDeviceType();
     
-    WLFrame * receiveFrame();
-    bool    sendFrame(UInt8* data);
+    KFrame *receiveFrame();
+    virtual bool    sendFrame(UInt8* data, int size);
     
     void    startMatching();
     virtual IOReturn    _init();
@@ -63,7 +70,8 @@ protected:
         intersil = 1,
         zydas,
         ralink,
-		rt73
+		rt73,
+        rtl8187
     } deviceType; 
 
     IOReturn    _doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param1 = 0, UInt16 param2 = 0);
@@ -86,8 +94,8 @@ protected:
     IOReturn    _enable();
     virtual IOReturn    _reset();
     
-    inline void        _lockDevice();
-    inline void        _unlockDevice();
+    void        _lockDevice();
+    void        _unlockDevice();
     inline IOReturn    _writeWaitForResponse(UInt32 size);
     
     IOReturn    _configureAnchorDevice(IOUSBDeviceInterface **dev);
@@ -96,9 +104,18 @@ protected:
     bool                _attachDevice();
     static void         _addDevice(void *refCon, io_iterator_t iterator);
     static void         _handleDeviceRemoval(void *refCon, io_iterator_t iterator);
-    static void         _interruptRecieved(void *refCon, IOReturn result, int len);
-    virtual bool        _massagePacket(int len);
-    virtual int         WriteTxDescriptor(WLFrame * theFrame);
+    static void         _interruptReceived(void *refCon, IOReturn result, int len);
+
+    int USBJack::initFrameQueue(void);
+    int USBJack::destroyFrameQueue(void);
+    KFrame *USBJack::allocFrame(void);
+    void USBJack::freeFrame(KFrame *f);
+    int USBJack::insertFrameIntoQueue(KFrame *f);
+    KFrame *USBJack::removeFrameFromQueue();
+    
+	// Method for convert driver native data to KFrame
+    virtual bool        _massagePacket(UInt16 len);	
+
     static void         _runCFRunLoop(USBJack* me);
   
   // static IOUSBDeviceInterface **_foundDevices[10];
@@ -125,9 +142,13 @@ protected:
     IOUSBDeviceInterface**      _dev;           //save this so we can't use the same device twice!
     union _usbout               _outputBuffer;
     union _usbin                _inputBuffer;
-    union _usbin                _recieveBuffer;
-    UInt8                       _frameBuffer[3000];
+    union _usbin                _receiveBuffer;
+
+    KFrame                       _frameBuffer;
     UInt16                      _frameSize;
+    
+    struct __framelist          *_frameQueue;
+    struct __framelist          *_frameQueueLast;
     
     pthread_mutex_t             _wait_mutex;
     pthread_cond_t              _wait_cond;

@@ -456,6 +456,11 @@
 		00F9C65106DB37E200E357F0 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F9C64F06DB37E200E357F0 /* IOKit.framework */; };
 		00FF593E06C630CC006C7F1E /* WaveDriverPrismGT.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF593C06C630CC006C7F1E /* WaveDriverPrismGT.h */; };
 		00FF593F06C630CC006C7F1E /* WaveDriverPrismGT.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */; };
+		6914ABD10D687C81008183E9 /* KisMAC80211.h in Headers */ = {isa = PBXBuildFile; fileRef = 6914ABD00D687C80008183E9 /* KisMAC80211.h */; };
+		69E5B4D20D715E590009EB65 /* rtl8187.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69E5B4D10D715E590009EB65 /* rtl8187.mm */; };
+		69E5B4D50D715E930009EB65 /* rtl8187.h in Headers */ = {isa = PBXBuildFile; fileRef = 69E5B4D40D715E930009EB65 /* rtl8187.h */; };
+		69E5B4DA0D7161160009EB65 /* rtl818x.h in Headers */ = {isa = PBXBuildFile; fileRef = 69E5B4D90D7161160009EB65 /* rtl818x.h */; };
+		69E5B55C0D718F340009EB65 /* eeprom_93cx6.h in Headers */ = {isa = PBXBuildFile; fileRef = 69E5B55B0D718F340009EB65 /* eeprom_93cx6.h */; };
 		6C03D77009B547F2005B2316 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
 		6C03D77309B547F6005B2316 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C03D76F09B547F2005B2316 /* Growl.framework */; };
 		6C1D31C009F37BC70005A9F8 /* PrefsAdvanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1D31BE09F37BC70005A9F8 /* PrefsAdvanced.h */; };
@@ -815,6 +820,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
+		6914ABD00D687C80008183E9 /* KisMAC80211.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC80211.h; sourceTree = "<group>"; };
+		69E5B4D10D715E590009EB65 /* rtl8187.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = rtl8187.mm; sourceTree = "<group>"; };
+		69E5B4D40D715E930009EB65 /* rtl8187.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtl8187.h; sourceTree = "<group>"; };
+		69E5B4D90D7161160009EB65 /* rtl818x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtl818x.h; sourceTree = "<group>"; };
+		69E5B55B0D718F340009EB65 /* eeprom_93cx6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eeprom_93cx6.h; sourceTree = "<group>"; };
 		6C03D76F09B547F2005B2316 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Resources/Growl.framework; sourceTree = "<group>"; };
 		6C1D31BE09F37BC70005A9F8 /* PrefsAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PrefsAdvanced.h; sourceTree = "<group>"; };
 		6C1D31BF09F37BC70005A9F8 /* PrefsAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PrefsAdvanced.m; sourceTree = "<group>"; };
@@ -1053,6 +1063,7 @@
 		003533B206A5DD8500AB4577 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6914ABD00D687C80008183E9 /* KisMAC80211.h */,
 				003533B306A5DD8500AB4577 /* 80211b.h */,
 				003533B406A5DD8500AB4577 /* KisMACNotifications.h */,
 				003533B506A5DD8500AB4577 /* ScanHierarch.h */,
@@ -1471,6 +1482,10 @@
 		6C8390160AE09EFB00B7654B /* USBJack */ = {
 			isa = PBXGroup;
 			children = (
+				69E5B55B0D718F340009EB65 /* eeprom_93cx6.h */,
+				69E5B4D90D7161160009EB65 /* rtl818x.h */,
+				69E5B4D40D715E930009EB65 /* rtl8187.h */,
+				69E5B4D10D715E590009EB65 /* rtl8187.mm */,
 				6C8390170AE09EFB00B7654B /* IntersilJack.h */,
 				6C8390180AE09EFB00B7654B /* IntersilJack.mm */,
 				6C8390190AE09EFB00B7654B /* prism2.h */,
@@ -1670,6 +1685,10 @@
 				6C83902C0AE09EFB00B7654B /* structs.h in Headers */,
 				6C83902D0AE09EFB00B7654B /* USBJack.h in Headers */,
 				6CF9EE6E0B6E9D2A00F54524 /* WaveDriverKismet.h in Headers */,
+				6914ABD10D687C81008183E9 /* KisMAC80211.h in Headers */,
+				69E5B4D50D715E930009EB65 /* rtl8187.h in Headers */,
+				69E5B4DA0D7161160009EB65 /* rtl818x.h in Headers */,
+				69E5B55C0D718F340009EB65 /* eeprom_93cx6.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1722,6 +1741,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 00A915960858D6410093943F /* Build configuration list for PBXProject "KisMAC" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -1732,6 +1752,7 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* KisMAC */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* KisMAC */,
 				008AC9BF07C3889400A76ADA /* KisMACUnitTest */,
@@ -2065,6 +2086,7 @@
 				6C83902B0AE09EFB00B7654B /* RT73Jack.mm in Sources */,
 				6C83902E0AE09EFB00B7654B /* USBJack.mm in Sources */,
 				6CF9EE6F0B6E9D2A00F54524 /* WaveDriverKismet.m in Sources */,
+				69E5B4D20D715E590009EB65 /* rtl8187.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

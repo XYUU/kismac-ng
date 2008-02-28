@@ -9,6 +9,25 @@
 #include "RT73Jack.h"
 #include "RT73.h"
 
+#define align64(a)      (((a)+63)&~63)
+
+void RT73Jack::dumpFrame(UInt8 *data, UInt16 size) {
+    NSLog(@"--FRAME LENGTH %d--", size);
+    int idx = 0;
+    int i,j;
+	for (i=0;i<size;i=i+8) {
+        fprintf(stderr, "0x%.4x ", i);
+        for (j=0;j<8;j++) {
+            if (idx < size)
+                fprintf(stderr, "%.2x ", data[idx]);
+            else
+                fprintf(stderr, "   ");
+            idx += 1;
+        }
+        fprintf(stderr, "\n");
+    }
+}
+
 IOReturn RT73Jack::_init() {
 	unsigned long	temp;
 	unsigned int	i;
@@ -78,14 +97,16 @@ IOReturn RT73Jack::_init() {
 	{
 		RTUSBBulkReceive(pAd);
 */
-        RTUSBWriteMACRegister(TXRX_CSR0, 0x024eb032);    // enable RX of MAC block, Staion not drop control frame, Station not drop not to me unicast frame
+
+	RTUSBWriteMACRegister(TXRX_CSR0, 0x025eb032);    // enable RX of MAC block, Staion not drop control frame, Station not drop not to me unicast frame
+	RTUSBWriteMACRegister(TXRX_CSR5, 0x0000015f);    // enable RX of MAC block, Staion not drop control frame, Station not drop not to me unicast frame
 /*
         // Initialize RF register to default value
 	    AsicSwitchChannel(pAd, pAd->PortCfg.Channel);
 	    AsicLockChannel(pAd, pAd->PortCfg.Channel);
 	}
 */
-
+    currentRate = RATE_54;
 	return ret;
 }
 
@@ -203,9 +224,28 @@ IOReturn	RT73Jack::RTUSBFirmwareRun()
 
 IOReturn	RT73Jack::RTUSBWriteHWMACAddress()
 {
-	IOReturn	Status;
+    IOReturn        Status = kIOReturnSuccess;
+    
+    MAC_CSR2_STRUC             StaMacReg0;
+    MAC_CSR3_STRUC             StaMacReg1;
+ 
+    // Write New MAC address to MAC_CSR2 & MAC_CSR3 & let ASIC know our new MAC
+    StaMacReg0.field.Byte0 = PermanentAddress[0];
+    StaMacReg0.field.Byte1 = PermanentAddress[1];
+    StaMacReg0.field.Byte2 = PermanentAddress[2];
+    StaMacReg0.field.Byte3 = PermanentAddress[3];
+    StaMacReg1.field.Byte4 = PermanentAddress[4];
+    StaMacReg1.field.Byte5 = PermanentAddress[5];
+    StaMacReg1.field.U2MeMask = 0xff;
 
-	return Status;
+    NSLog(@"Local MAC = %02x:%02x:%02x:%02x:%02x:%02x\n",
+        PermanentAddress[0], PermanentAddress[1], PermanentAddress[2],
+        PermanentAddress[3], PermanentAddress[4], PermanentAddress[5]);
+
+    RTUSBWriteMACRegister(MAC_CSR2, StaMacReg0.word);
+    RTUSBWriteMACRegister(MAC_CSR3, StaMacReg1.word);
+
+    return Status;
 }
 
 IOReturn	RT73Jack::RTUSBSetLED(
@@ -1706,16 +1746,14 @@ bool RT73Jack::getAllowedChannels(UInt16* channels) {
     
     return true;
 }
-
-
-
-bool RT73Jack::startCapture(UInt16 channel) {
+bool    RT73Jack::startCapture(UInt16 channel) {
 //	NSLog(@"Start capture : ");
 	if (NICInitialized) {
 //		NSLog(@"Done.\n");
 		setChannel(channel);
 		RTMPSetLED(LED_LNK_ON);
-		RTUSBWriteMACRegister(TXRX_CSR2, 0x004e/*0x0046*/); //enable monitor mode?
+		// RTUSBWriteMACRegister(TXRX_CSR2, 0x004e/*0x0046*/); //enable monitor mode?
+		RTUSBWriteMACRegister(TXRX_CSR0, 0x024eb032);    // enable RX of MAC block, Staion not drop control frame, Station not drop not to me unicast frame
 		return true;
 	}
 	else {
@@ -1731,7 +1769,8 @@ bool RT73Jack::stopCapture(){
 	if (NICInitialized) {
 //		NSLog(@"Done.\n");
 		RTMPSetLED(LED_LNK_OFF);
-		RTUSBWriteMACRegister(TXRX_CSR2, 0xffffffff); //disable rx
+		RTUSBWriteMACRegister(TXRX_CSR0, 0x025FB032);
+		// RTUSBWriteMACRegister(TXRX_CSR2, 0xffffffff); //disable rx
 		return true;
 	}
 	else {
@@ -1741,14 +1780,18 @@ bool RT73Jack::stopCapture(){
 }
 
 
-bool RT73Jack::_massagePacket(int len){
+bool RT73Jack::_massagePacket(UInt16 len){
+
+/*  pr0gg3d: A notice... {len} field that is passed
+    is rounded at power of two. Don't use this for
+        packet length.
+*/
     unsigned char* pData;
-    UInt8 frame[sizeof(_recieveBuffer)];
-    WLFrame * tempFrame;
-    PRXD_STRUC		pRxD;
-    
-    bzero(frame,sizeof(_recieveBuffer));
-    tempFrame = (WLFrame *)frame;
+    KFrame frame;
+    KFrame *pFrame = &frame;
+    PRXD_STRUC	pRxD;
+
+    bzero(pFrame,sizeof(KFrame));
     
     if (len < sizeof(RXD_STRUC)) {
         NSLog(@"WTF, packet len %d shorter than footer %d!", len, sizeof(RXD_STRUC));
@@ -1756,41 +1799,208 @@ bool RT73Jack::_massagePacket(int len){
     }
     
     // flash the led for fun
-	RTMPSetLED(LED_ACT_ON);
-
-    pData = (unsigned char*)&_recieveBuffer;
-
-//    pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
+    RTMPSetLED(LED_ACT_ON);
+    
+    pData = (unsigned char*)&_receiveBuffer;
     pRxD = (PRXD_STRUC)(pData);
+    
+    // We needs to do some magic here, for endiannes
+#ifdef __BIG_ENDIAN__
+    RTMPDescriptorEndianChange((unsigned char *)pData, TYPE_RXD);
+#endif
+    
+    // This is real length of packet (descriptor not included)
+    frame.ctrl.len = pRxD->DataByteCnt;
+    
+    // this is probablty not the most efficient way to do this
+    frame.ctrl.signal = pRxD->PlcpRssi;    //rssi is the signal level
+    
+    // Copy entire packet
+    memcpy(frame.data, pData + sizeof(RXD_STRUC), frame.ctrl.len);
+    
+// if (len > 24) {
+//      NSLog(@"Normal packet %d", len);
+//  }
+//  else {
+//      NSLog(@"RT73Jack::Really short packet! %d", len);
+//      return false;
+//  }
 
-	// this is probablty not the most efficient way to do this
-	tempFrame->silence = pRxD->PlcpRssi;    //rssi is the signal level
-//	tempFrame->dataLen = NSSwapLittleShortToHost(len - 28 - (sizeof(RXD_STRUC)));
-	tempFrame->dataLen = NSSwapLittleShortToHost(len - 24 - (sizeof(RXD_STRUC)));
+    memcpy(&_receiveBuffer, pFrame, sizeof(_receiveBuffer));
 
-//	memcpy(frame + sizeof(WLPrismHeader), pData, 24); //copy the 80211 header,  24 not 32 bytes
-	memcpy(frame + sizeof(WLPrismHeader), pData + sizeof(RXD_STRUC), 24); //copy the 80211 header,  24 not 32 bytes
-	
-	//if the packet is less than 46 bytes, we can't exactly copy any more
-//	if (len > 46) {
-	if (len > 24 + 6 + sizeof(RXD_STRUC)) {
-//		memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,len-(32+sizeof(WLPrismHeader)));
-		memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + sizeof(RXD_STRUC) + 24,len-(sizeof(RXD_STRUC) + 24));
-		// NSLog(@"Normal packet %d", len);
-	}
-	else {
-		NSLog(@"RT73Jack::Really short packet! %d", len);
-		return false;
-	}
-
-	memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
-
-	// flash LED off
+    // flash LED off
 	RTMPSetLED(LED_ACT_OFF);
 
+//	dumpFrame(frame.data, len);
 	return true;
 }
+void    RT73Jack::RTMPDescriptorEndianChange(unsigned char *  pData, unsigned long DescriptorType) {
+    int size = (DescriptorType == TYPE_TXD) ? TXD_SIZE : RXD_SIZE;
+    int i;
+    for (i=1; i<size/4; i++) {
+        /*
+         * Handle IV and EIV with little endian
+         */
+        if (DescriptorType == TYPE_TXD) {
+             /* Skip Word 3 IV and Word 4 EIV of TXD */
+            if (i==3||i==4)  
+                continue; 
+        } else {
+             /* Skip Word 2 IV and Word 3 EIV of RXD */
+            if (i==2||i==3)  
+                continue; 
+        }
+        *((unsigned long *)(pData + i*4)) = SWAP32(*((unsigned long *)(pData + i*4))); 
+    }
+    *(unsigned long *)pData = SWAP32(*(unsigned long *)pData);  // Word 0; this must be swapped last
+}
+void    RT73Jack::WriteBackToDescriptor(unsigned char *Dest, unsigned char *Src, bool DoEncrypt, unsigned long DescriptorType) {
+        unsigned long *p1, *p2;
+        unsigned char i;
+        int size = (DescriptorType == TYPE_TXD) ? TXD_SIZE : RXD_SIZE;
 
+        p1 = ((unsigned long *)Dest) + 1;
+        p2 = ((unsigned long *)Src) + 1;
+        for (i = 1; i < size/4 ; i++)
+                *p1++ = *p2++;
+        *(unsigned long *)Dest = *(unsigned long *)Src;         // Word 0; this must be written back last
+}
+
+void    RT73Jack::RTUSBWriteTxDescriptor(
+        void *pptxd,
+        unsigned char CipherAlg,
+        unsigned char KeyTable,
+        unsigned char KeyIdx,
+        bool Ack,
+        bool Fragment,
+        bool InsTimestamp,
+        unsigned char RetryMode,
+        unsigned char Ifs,
+        unsigned int Rate,
+        unsigned long Length,
+        unsigned char QueIdx,
+        unsigned char PID,
+        bool bAfterRTSCTS) {
+
+    unsigned int Residual;
+    TXD_STRUC * pSourceTxD = (TXD_STRUC *)pptxd;
+    TXD_STRUC * pTxD = pSourceTxD; 
+
+    pTxD->HostQId       = QueIdx;
+    pTxD->MoreFrag      = Fragment;
+    pTxD->ACK           = Ack;
+    pTxD->Timestamp     = InsTimestamp;
+    pTxD->RetryMd       = RetryMode;
+    pTxD->Ofdm          = (Rate < RATE_FIRST_OFDM_RATE)? 0:1;
+    pTxD->IFS           = Ifs;
+    pTxD->PktId         = PID;
+    pTxD->Drop          = 1;   // 1:valid, 0:drop
+    pTxD->HwSeq         = 1;    // (QueIdx == QID_MGMT)? 1:0; 
+    pTxD->BbpTxPower    = DEFAULT_BBP_TX_POWER; // TODO: to be modified
+    pTxD->DataByteCnt   = Length;
+/*
+        RTMPCckBbpTuning(pAd, Rate);
+*/
+    // fill encryption related information, if required
+    pTxD->CipherAlg   = CipherAlg;
+    pTxD->Cwmin = CW_MIN_IN_BITS;
+    pTxD->Cwmax = CW_MAX_IN_BITS;
+    pTxD->Aifsn = 2;
+    
+    // fill up PLCP SIGNAL field
+    pTxD->PlcpSignal = RateIdToPlcpSignal[Rate];
+    // fill up PLCP SERVICE field, not used for OFDM rates
+    pTxD->PlcpService = 4; // Service;
+    
+    // fill up PLCP LENGTH_LOW and LENGTH_HIGH fields
+    Length += LENGTH_CRC;   // CRC length
+    
+    if (Rate < RATE_FIRST_OFDM_RATE) {
+    // 11b - RATE_1, RATE_2, RATE_5_5, RATE_11
+        if ((Rate == RATE_1) || ( Rate == RATE_2)) {
+                Length = Length * 8 / (Rate + 1);
+        } else {
+            Residual = ((Length * 16) % (11 * (1 + Rate - RATE_5_5)));
+            Length = Length * 16 / (11 * (1 + Rate - RATE_5_5));
+            if (Residual != 0) {
+                    Length++;
+            }
+            if ((Residual <= (3 * (1 + Rate - RATE_5_5))) && (Residual != 0)) {
+                if (Rate == RATE_11)                    // Only 11Mbps require length extension bit
+                    pTxD->PlcpService |= 0x80; // 11b's PLCP Length extension bit
+            }
+        }
+        pTxD->PlcpLengthHigh = Length >> 8; // 256;
+        pTxD->PlcpLengthLow = Length % 256;
+    } else {
+        // OFDM - RATE_6, RATE_9, RATE_12, RATE_18, RATE_24, RATE_36, RATE_48, RATE_54
+        pTxD->PlcpLengthHigh = Length >> 6; // 64;      // high 6-bit of total byte count
+        pTxD->PlcpLengthLow = Length % 64;       // low 6-bit of total byte count
+    }
+    pTxD->Burst  = Fragment;
+    pTxD->Burst2 = pTxD->Burst;
+}
+
+int RT73Jack::WriteTxDescriptor(void* theFrame, UInt16 length){
+    memset(theFrame, 0, sizeof(TXD_STRUC));
+    RTUSBWriteTxDescriptor(
+        (TXD_STRUC *)theFrame,
+        CIPHER_NONE,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        currentRate,
+        length,
+        0,
+        0,
+        0
+    );
+#ifdef __BIG_ENDIAN__
+    RTMPDescriptorEndianChange((unsigned char *)theFrame, TYPE_TXD);
+#endif
+    return sizeof(TXD_STRUC);
+}
+
+
+bool RT73Jack::sendFrame(UInt8* data, int size) {
+    UInt8 aData[2364];
+    unsigned int descriptorLength;
+//    NSLog(@"sendFrame %d", size);
+//    dumpFrame(data, size);
+    descriptorLength = WriteTxDescriptor(aData, size);
+    memcpy(aData+descriptorLength, data, size);
+    //send the frame
+    if (_sendFrame(aData, size + descriptorLength) != kIOReturnSuccess)
+        return NO;
+    return YES;
+}
+IOReturn RT73Jack::_sendFrame(UInt8* data, IOByteCount size) {
+    UInt32      numBytes;
+    IOReturn    kr;
+  
+    if (!_devicePresent) return kIOReturnError;
+    
+    if (_interface == NULL) {
+        NSLog(@"RT73Jack::_sendFrame called with NULL interface this is prohibited!\n");
+        return kIOReturnError;
+    }
+
+    _lockDevice();
+
+    memcpy(&_outputBuffer, data, size);
+    
+    numBytes =  align64(size);
+
+    kr = (*_interface)->WritePipe(_interface, kOutPipe, &_outputBuffer, numBytes);
+
+    _unlockDevice();
+        
+    return kr;
+}
 
 RT73Jack::RT73Jack() {
 }
@@ -1799,7 +2009,6 @@ RT73Jack::~RT73Jack() {
     /*
     stopRun();
     _interface = NULL;
-    _frameSize = 0;
     
     pthread_mutex_destroy(&_wait_mutex);
     pthread_cond_destroy(&_wait_cond);

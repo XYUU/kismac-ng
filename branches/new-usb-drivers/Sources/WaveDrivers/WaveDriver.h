@@ -25,6 +25,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "../Core/80211b.h"
+#import "../Core/KisMAC80211.h"
 
 extern char WaveDrivers [][30];
 
@@ -89,7 +90,7 @@ enum WaveDriverType {
 - (NSArray*) networksInRange;
 
 // for passive scanning
-- (WLFrame*) nextFrame;
+- (KFrame*) nextFrame;
 
 // for packet injection
 - (bool) sendFrame:(UInt8*)f withLength:(int) size atInterval:(int)interval;

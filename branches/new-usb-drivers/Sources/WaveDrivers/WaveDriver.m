@@ -287,7 +287,7 @@ char WaveDrivers [][30] = { "WaveDriverAirport", "WaveDriverKismet", "WaveDriver
     return Nil;
 }
 
-- (WLFrame*) nextFrame {
+- (KFrame*) nextFrame {
     return Nil;
 }
 

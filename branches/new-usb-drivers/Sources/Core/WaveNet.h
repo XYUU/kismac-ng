@@ -109,6 +109,8 @@ struct graphStruct {
     int _avgTime;               // how many seconds are take for average?
     ImportController *_im;
 
+/*	PRGA Snarf */
+	int _authState;
 		
 }
 

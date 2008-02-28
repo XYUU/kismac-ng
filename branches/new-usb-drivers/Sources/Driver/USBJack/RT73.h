@@ -308,8 +308,54 @@ typedef struct _HW_PAIRWISE_TA_ENTRY {  // 8-byte per entry
 // TX descriptor format, Tx	ring, Mgmt Ring
 //
 #ifdef __BIG_ENDIAN__
-typedef	struct	_TXD_STRUC {
-}	TXD_STRUC, *PTXD_STRUC;
+typedef struct  _TXD_STRUC {
+
+        //Word 5
+        ULONG       CipherAlg:3;
+        ULONG       Burst2:1;            // definition as same as "Burst", for backward compatible set this one to the same as "Burst" set.
+        ULONG       DataByteCnt:12;
+        ULONG       KeyIndex:6;         // Key index (0~31) to the pairwise KEY table; or
+                                                                        // 0~3 to shared KEY table 0 (BSS0). STA always use BSS0
+                                                                        // 4~7 to shared KEY table 1 (BSS1)
+                                                                        // 8~11 to shared KEY table 2 (BSS2)
+                                                                        // 12~15 to shared KEY table 3 (BSS3)
+        ULONG       KeyTable:1;                 // 1: use per-client pairwise KEY table, 0: shared KEY table
+        ULONG       TkipMic:1;                  // 1: ASIC is responsible for appending TKIP MIC if TKIP is inused
+        ULONG           RetryMd:1;              // 1: Long retry (4 times), 0: short retry (7 times)
+        ULONG           IFS:1;                  // 1: require a BACKOFF before this frame, 0:SIFS before this frame
+        ULONG           Ofdm:1;                 // 1: TX using OFDM rates
+        ULONG           Timestamp:1;            // 1: MAC auto overwrite current TSF into frame body
+        ULONG           ACK:1;                  // 1: ACK is required
+        ULONG           MoreFrag:1;             // 1: More fragment following this frame
+        ULONG           Drop:1;                 // 0: skip this frame, 1:valid frame inside
+        ULONG           Burst:1;                // 1: Contiguously used current End Ponit, eg, Fragment packet should turn on.
+                                                //      Tell EDCA that the next frame belongs to the same "burst" even though TXOP=0
+        //Word 4
+        ULONG       BufCount:3;         // number of buffers in this TXD
+        ULONG       HwSeq:1;            // MAC auto replace the 12-bit frame sequence #
+        ULONG       :6;
+        ULONG       IvOffset:6;
+        ULONG       Cwmax:4;
+        ULONG       Cwmin:4;
+        ULONG       Aifsn:4;
+        ULONG       HostQId:4;          // EDCA/HCCA queue ID
+        // Word 3
+        ULONG           PlcpLengthHigh:8;
+        ULONG           PlcpLengthLow:8;
+        ULONG           PlcpService:8;
+        ULONG           PlcpSignal:8;
+
+        // Word 2
+        ULONG       Iv;
+        // Word 1
+        ULONG       Eiv;
+        //Word 0
+        ULONG       Reserved:7;
+        ULONG       bWaitingDmaDoneInt:1; // pure s/w flag. 1:TXD been filled with data and waiting for TxDoneISR for housekeeping
+        ULONG       BbpTxPower:8;
+        ULONG       PktId:8;            // driver assigned packet ID to categorize TXResult in TxDoneInterrupt
+        ULONG       FrameOffset:8;      // frame start offset inside ASIC TXFIFO (after TXINFO field)
+}       TXD_STRUC, *PTXD_STRUC;
 #else
 typedef	struct	_TXD_STRUC {
 	// word 0
@@ -319,7 +365,7 @@ typedef	struct	_TXD_STRUC {
 	ULONG		MoreFrag:1;			// 1: More fragment following this frame
 	ULONG		ACK:1;              // 1: ACK is required
 	ULONG		Timestamp:1;        // 1: MAC auto overwrite current TSF into frame body
-	ULONG       	Ofdm:1;             // 1: TX using OFDM rates
+	ULONG       Ofdm:1;             // 1: TX using OFDM rates
 	ULONG		IFS:1;              // 1: require a BACKOFF before this frame, 0:SIFS before this frame
 	ULONG		RetryMd:1;          // 1: Long retry (4 times), 0: short retry (7 times)
     
@@ -378,27 +424,11 @@ ULONG       :6;
 //
 #ifdef __BIG_ENDIAN__
 typedef	struct	_RXD_STRUC	{
-    //is this right?
-    ULONG		Rsv3;	// BufPhyAddr;
-    
-    ULONG       Rsv2;
-    
-    ULONG       Eiv;                // received EIV if originally encrypted; for replay attack checking
-    
-    ULONG       Iv;                 // received IV if originally encrypted; for replay attack checking
-    
-    ULONG       Rsv1:1;
-    ULONG       FrameOffset:7;
-    ULONG       Rsv0:8;
-    ULONG       PlcpRssi:8;         // RSSI reported by BBP
-    ULONG       PlcpSignal:8;       // RX raw data rate reported by BBP
-    
-    ULONG       CipherAlg:3;
     ULONG       Rsv:1;
+    ULONG       CipherAlg:3;
     ULONG		DataByteCnt:12;
     ULONG       KeyIndex:6;         // decryption key actually used
     ULONG		CipherErr:2;        // 0: decryption okay, 1:ICV error, 2:MIC error, 3:KEY not valid
-    
     ULONG		Ofdm:1;             // 1: this frame is received in OFDM rate
     ULONG		Crc:1;              // 1: CRC error
     ULONG		MyBss:1;            // 1: this frame belongs to the same BSSID
@@ -407,51 +437,50 @@ typedef	struct	_RXD_STRUC	{
     ULONG		U2M:1;              // 1: this RX frame is unicast to me
     ULONG       Drop:1;             // 1: drop without receiving to HOST
     ULONG		Owner:1;            // 1: owned by ASIC, 0: owned by HOST driver
-    
+
+    ULONG       Rsv1:1;
+    ULONG       FrameOffset:7;
+    ULONG       Rsv0:8;
+    ULONG       PlcpRssi:8;         // RSSI reported by BBP
+    ULONG       PlcpSignal:8;       // RX raw data rate reported by BBP
+
+    ULONG       Iv;                 // received IV if originally encrypted; for replay attack checking
+
+    ULONG       Eiv;                // received EIV if originally encrypted; for replay attack checking
+
+    ULONG       Rsv2;
+
+    ULONG		Rsv3;	// BufPhyAddr;
 }	RXD_STRUC, *PRXD_STRUC;
 #else
 typedef	struct	_RXD_STRUC	{
-	// Word	0
-	ULONG		Owner:1;            // 1: owned by ASIC, 0: owned by HOST driver
-	ULONG       Drop:1;             // 1: drop without receiving to HOST
-	ULONG		U2M:1;              // 1: this RX frame is unicast to me
-	ULONG		Mcast:1;            // 1: this is a multicast frame
-	ULONG		Bcast:1;            // 1: this is a broadcast frame
-	ULONG		MyBss:1;            // 1: this frame belongs to the same BSSID
-	ULONG		Crc:1;              // 1: CRC error
-	ULONG		Ofdm:1;             // 1: this frame is received in OFDM rate
-                                    //	ULONG		PhyErr:1;           // 1: this frame is received with PHY error
-	ULONG		CipherErr:2;        // 0: decryption okay, 1:ICV error, 2:MIC error, 3:KEY not valid
-	ULONG       KeyIndex:6;         // decryption key actually used
-	ULONG		DataByteCnt:12;
-	ULONG       Rsv:1;
-	ULONG       CipherAlg:3;
-    
-	// word 1
-	ULONG       PlcpSignal:8;       // RX raw data rate reported by BBP
-	ULONG       PlcpRssi:8;         // RSSI reported by BBP
-	ULONG       Rsv0:8;
-	ULONG       FrameOffset:7;
-	ULONG       Rsv1:1;
-    
-	// Word	2
-	ULONG       Iv;                 // received IV if originally encrypted; for replay attack checking
-    
-	// Word 3
-	ULONG       Eiv;                // received EIV if originally encrypted; for replay attack checking
-    
-	// word 4
-	ULONG       Rsv2;
-    
-	// The above 20-byte is called RXINFO and is prepared by MAC RX block and passed
-	// the HOST driver.
-    
-	// The following fields are for DMA block and HOST usage only. Can't be touched 
-	// by ASIC MAC block.
-	
-	// Word	5
-	ULONG		Rsv3;	// BufPhyAddr;
+    ULONG		Owner:1;            // 1: owned by ASIC, 0: owned by HOST driver
+    ULONG       Drop:1;             // 1: drop without receiving to HOST
+    ULONG		U2M:1;              // 1: this RX frame is unicast to me
+    ULONG		Mcast:1;            // 1: this is a multicast frame
+    ULONG		Bcast:1;            // 1: this is a broadcast frame
+    ULONG		MyBss:1;            // 1: this frame belongs to the same BSSID
+    ULONG		Crc:1;              // 1: CRC error
+    ULONG		Ofdm:1;             // 1: this frame is received in OFDM rate
+    ULONG		CipherErr:2;        // 0: decryption okay, 1:ICV error, 2:MIC error, 3:KEY not valid
+    ULONG       KeyIndex:6;         // decryption key actually used
+    ULONG		DataByteCnt:12;
+    ULONG       CipherAlg:3;
+    ULONG       Rsv:1;
 
+    ULONG       PlcpSignal:8;       // RX raw data rate reported by BBP
+    ULONG       PlcpRssi:8;         // RSSI reported by BBP
+    ULONG       Rsv0:8;
+    ULONG       FrameOffset:7;
+    ULONG       Rsv1:1;
+
+    ULONG       Iv;                 // received IV if originally encrypted; for replay attack checking
+
+    ULONG       Eiv;                // received EIV if originally encrypted; for replay attack checking
+
+    ULONG       Rsv2;
+
+    ULONG		Rsv3;	// BufPhyAddr;
 }	RXD_STRUC, *PRXD_STRUC;
 #endif
 
@@ -2131,6 +2160,57 @@ static RTMP_RF_REGS RF5225RegTable[] = {
     
 };
 UCHAR	NUM_OF_5225_CHNL = (sizeof(RF5225RegTable) / sizeof(RTMP_RF_REGS));
+
+unsigned char   RateIdToPlcpSignal[12] = { 
+         0, /* RATE_1 */        1, /* RATE_2 */         2, /* RATE_5_5 */       3, /* RATE_11 */        // see BBP spec
+        11, /* RATE_6 */   15, /* RATE_9 */    10, /* RATE_12 */   14, /* RATE_18 */    // see IEEE802.11a-1999 p.14
+         9, /* RATE_24 */  13, /* RATE_36 */    8, /* RATE_48 */   12  /* RATE_54 */ }; // see IEEE802.11a-1999 p.14
+
+#define TYPE_TXD                                        0
+#define TYPE_RXD                                        1
+#define TXD_SIZE                                sizeof(TXD_STRUC)
+#define RXD_SIZE                                sizeof(RXD_STRUC)
+
+#define CW_MIN_IN_BITS              4         // actual CwMin = 2^CW_MIN_IN_BITS - 1
+#define CW_MAX_IN_BITS              10        // actual CwMax = 2^CW_MAX_IN_BITS - 1
+
+#define LENGTH_CRC                  4
+
+#define SWAP32(x) \
+    ((UInt32)( \
+    (((UInt32)(x) & (UInt32) 0x000000ffUL) << 24) | \
+    (((UInt32)(x) & (UInt32) 0x0000ff00UL) <<  8) | \
+    (((UInt32)(x) & (UInt32) 0x00ff0000UL) >>  8) | \
+    (((UInt32)(x) & (UInt32) 0xff000000UL) >> 24) ))
+
+#define RATE_1                                  0
+#define RATE_2                                  1
+#define RATE_5_5                                2
+#define RATE_11                                 3
+#define RATE_6                                  4       // OFDM
+#define RATE_9                                  5       // OFDM
+#define RATE_12                                 6       // OFDM
+#define RATE_18                                 7       // OFDM
+#define RATE_24                                 8       // OFDM
+#define RATE_36                                 9       // OFDM
+#define RATE_48                                 10      // OFDM
+#define RATE_54                                 11      // OFDM
+#define RATE_FIRST_OFDM_RATE    RATE_6
+#define RATE_AUTO_SWITCH                255 // for UserCfg.FixedTxRate only
+
+#define DEFAULT_BBP_TX_POWER            0
+
+#define CIPHER_NONE                             0
+#define CIPHER_WEP64                    1
+#define CIPHER_WEP128                   2
+#define CIPHER_TKIP                             3
+#define CIPHER_AES                              4
+#define CIPHER_CKIP64                   5
+#define CIPHER_CKIP128                  6
+#define CIPHER_TKIP_NO_MIC              7        // MIC has been appended by driver, not a valid value in hardware key table 
+
+#define IFS_BACKOFF                             0
+#define IFS_SIFS                                1
 
 ////////////////////////////////////////////////////////////////////////////////////////
 

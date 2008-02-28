@@ -31,14 +31,15 @@
 #include "IntersilJack.h"
 #include "RalinkJack.h"
 #include "RT73Jack.h"
+#include "RTL8187.h"
 
 #define wlcDeviceGone   (int)0xe000404f
 #define align64(a)      (((a)+63)&~63)
 
-bool         _matchingDone;   //this is static so all instances of this class can see it!
-int _numDevices = -1;
+bool    _matchingDone;   //this is static so all instances of this class can see it!
+int     _numDevices = -1;
 IOUSBDeviceInterface **_foundDevices[10];
-int         _deviceType[10];
+int     _deviceType[10];
 
 struct identStruct {
     UInt16 vendor;
@@ -116,112 +117,68 @@ static struct identStruct devices[] = {
     {0x148f, 0x2573},	/* 5 CNET CWD-854 */	
     {0x14b2, 0x3c22},	/* 6 Conceptronic */
 	{0x0b05, 0x1723},   /* 7 ASUS WL-167G RALINK RT2500 */
+    // RTL8187
+    {0x0bda, 0x8187},   /* 1 Realtek */
+    {0x0846, 0x6100},	/* 2 Netgear */
+    {0x0846, 0x6a00},	/* 3 Netgear */
+    {0x03f0, 0xca02},   /* 4 HP */
+    {0x0df6, 0x000d},	/* 5 Sitecom */	
+    
 };
 
 #define dIntersilDeviceCount 33
 #define dZydasDeviceCount 1
 #define dRalinkDeviceCount 26
 #define dRT73DeviceCount 7
+#define dRTL8187DeviceCount 5
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
 
 #import <mach/mach_types.h>
 #import <mach/mach_error.h>
 
-
 bool USBJack::startCapture(UInt16 channel) {
     return false;   //this method MUST be overridden
 }
-
 bool USBJack::stopCapture() {
     return false;   //this method MUST be overridden
 }
-
- bool USBJack::getChannel(UInt16* channel) {
+bool USBJack::getChannel(UInt16* channel) {
      *channel = _channel;
     return true;   //this method MUST be overridden
 }
-
 bool USBJack::getAllowedChannels(UInt16* channels) {
     return false;   //this method MUST be overridden
 }
-
 bool USBJack::setChannel(UInt16 channel) {
     return false;   //this method MUST be overridden
 }
-
 bool USBJack::devicePresent() {
     return _devicePresent;
 }
-
 int USBJack::getDeviceType(){
     if (_numDevices == -1) {
         return -1;
     }
     return _deviceType[_numDevices];
 }
-
-WLFrame * USBJack::receiveFrame() {
-    WLFrame* ret;
-    
-    if (!_devicePresent) return NULL;
-    
-    pthread_mutex_lock(&_recv_mutex);
-    pthread_cond_wait(&_recv_cond, &_recv_mutex);
-    if (_frameSize==0) ret = NULL;
-    else {
-        ret = (WLFrame*)_frameBuffer;
+KFrame *USBJack::receiveFrame() {
+    KFrame *ret = &_frameBuffer;
+    KFrame *receivedFrame;
+    if (!_devicePresent)
+        return NULL;
+    receivedFrame = removeFrameFromQueue();
+    if (receivedFrame) {
+        memcpy(&_frameBuffer, receivedFrame, sizeof(KFrame));
+        freeFrame(receivedFrame);
+        return ret;
+    } else {
+        return NULL;
     }
-    pthread_mutex_unlock(&_recv_mutex);
-    return ret;
 }
-
-bool USBJack::sendFrame(UInt8* data) {
-    WLFrame *frameDescriptor;
-    UInt8 aData[2364];
-    IOByteCount pktsize;
-    int descriptorLength;
-    WLIEEEFrame * wifiFrame;
-    
-    //we have an inFrame and an outFrame
-    //this function is a transformation between the two
-    //copy the wlframe to the tx buff
-    //we will redo part off_t this //todo fixme!!
-    memcpy(aData, data, sizeof(WLFrame));
-    
-    //set pointers to sectons of frame
-    frameDescriptor = (WLFrame*)aData;
-    pktsize = frameDescriptor->dataLen + sizeof(WLFrame) - sizeof(WLPrismHeader);
-    
-    //convert prism header into device specific header 
-    //returns the length of the device specific header
-    //note frame descriptor = txbuff
-    descriptorLength = WriteTxDescriptor(frameDescriptor);
-    
-    //copy the 802.11 frame to the right  place
-    memcpy(aData + descriptorLength, data + sizeof(WLPrismHeader),  pktsize);
-    wifiFrame = (WLIEEEFrame*)(aData + descriptorLength);
-
-    switch(wifiFrame->frameControl & 0x0c) {
-        case 0x08:
-        case 0x00:
-            pktsize = wifiFrame->dataLen;
-            if ((pktsize + descriptorLength) > 2364) return kIOReturnBadArgument;
-                wifiFrame->dataLen=NSSwapHostShortToLittle(wifiFrame->dataLen);
-            break;
-        case 0x04:
-            pktsize = 0;
-            wifiFrame->dataLen = 0;
-            break;
-        default:
-            return kIOReturnBadArgument;
-    }
-     
-    //send the frame
-    if (_sendFrame(aData, pktsize + descriptorLength) != kIOReturnSuccess)
-        return NO;
-    
-    return YES;
+bool USBJack::sendFrame(UInt8* data, int size) {
+    // Override in subclasses
+    return NO;
 }
 
 #pragma mark -
@@ -240,7 +197,6 @@ IOReturn USBJack::_getHardwareAddress(struct WLHardwareAddress* addr) {
 
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_getIdentity(WLIdentity* wli) {
     UInt32 size = sizeof(WLIdentity);
     if (_getRecord(0xFD20, (UInt16*)wli, &size) != kIOReturnSuccess) {
@@ -250,7 +206,6 @@ IOReturn USBJack::_getIdentity(WLIdentity* wli) {
 
     return kIOReturnSuccess;
 }
-
 int USBJack::_getFirmwareType() {
     UInt16 card_id;
     UInt32 size = 8;
@@ -270,7 +225,6 @@ int USBJack::_getFirmwareType() {
         return WI_LUCENT;
     }
 }
-
 IOReturn USBJack::_enable() {
     if (_doCommand(wlcEnable, 0) != kIOReturnSuccess) {
         NSLog(@"USBJackUSBJack::startCapture: _doCommand(wlcEnable) failed\n");
@@ -280,7 +234,6 @@ IOReturn USBJack::_enable() {
     
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_disable() {
     if (_doCommand(wlcDisable, 0) != kIOReturnSuccess) {
         NSLog(@"USBJack::_disable: _doCommand(wlcDisable) failed\n");
@@ -290,11 +243,9 @@ IOReturn USBJack::_disable() {
 
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_init() {
     return kIOReturnError;  //this method MUST be overridden
 }
-
 IOReturn USBJack::_reset() {
     return kIOReturnError;  //this method MUST be overridden
 }
@@ -335,7 +286,6 @@ IOReturn USBJack::_doCommand(enum WLCommandCode cmd, UInt16 param0, UInt16 param
 
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16 param1, UInt16 param2) {
     IOReturn kr;
     
@@ -357,7 +307,6 @@ IOReturn USBJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16
 
     return kr;
 }
-
 IOReturn USBJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes) {
     UInt32  readLength = 0;
     
@@ -397,7 +346,6 @@ IOReturn USBJack::_getRecord(UInt16 rid, void* buf, UInt32* n, bool swapBytes) {
     
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapBytes) {
     UInt32      numBytes;
     UInt16      status;
@@ -442,12 +390,10 @@ IOReturn USBJack::_setRecord(UInt16 rid, const void* buf, UInt32 n, bool swapByt
     
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_getValue(UInt16 rid, UInt16* v) {
     UInt32 n = 2;
     return _getRecord(rid, v, &n);
 }
-
 IOReturn USBJack::_setValue(UInt16 rid, UInt16 v) {
     UInt16 value = v;
     IOReturn ret = _setRecord(rid, &value, 2);
@@ -467,7 +413,6 @@ IOReturn USBJack::_setValue(UInt16 rid, UInt16 v) {
 
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_sendFrame(UInt8* data, IOByteCount size) {
     UInt32      numBytes;
     IOReturn    kr;
@@ -499,11 +444,9 @@ IOReturn USBJack::_sendFrame(UInt8* data, IOByteCount size) {
 void  USBJack::_lockDevice() {
     pthread_mutex_lock(&_wait_mutex);
 }
-
 void  USBJack::_unlockDevice() {
     pthread_mutex_unlock(&_wait_mutex);
 }
-
 IOReturn USBJack::_writeWaitForResponse(UInt32 size) {
     IOReturn kr;
     struct timespec to;
@@ -529,12 +472,13 @@ IOReturn USBJack::_writeWaitForResponse(UInt32 size) {
 
     return kIOReturnSuccess;
 }
- 
-void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
+void USBJack::_interruptReceived(void *refCon, IOReturn result, int len) {
     USBJack             *me = (USBJack*) refCon;
     IOReturn                    kr;
     UInt32                      type;
-    
+
+//    NSLog(@"Interrupt Received");
+    KFrame *frame;
 /*    if (me->deviceType == intersil) {
         me = (IntersilJack*)refCon;
     }else if (me->deviceType == ralink){
@@ -542,29 +486,35 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
     } 
 */
     
-    //NSLog(@"interruptRecieved.\n");
     if (kIOReturnSuccess != result) {
         if (result == (IOReturn)0xe00002ed) {
             me->_devicePresent = false;
-            //tell the recieve function that we are gone
-            pthread_mutex_lock(&me->_recv_mutex);
-            me->_frameSize = 0;
-            pthread_cond_signal(&me->_recv_cond);
-            pthread_mutex_unlock(&me->_recv_mutex);
+            //tell the receive function that we are gone
+            me->insertFrameIntoQueue(NULL);
             return;
         } else {
-            NSLog(@"error from async interruptRecieved (%08x)\n", result);
+            NSLog(@"error from async interruptReceived (%08x)\n", result);
             if (me->_devicePresent) goto readon;
         }
     }
     
-    type = NSSwapLittleShortToHost(me->_recieveBuffer.type);
+    type = NSSwapLittleShortToHost(me->_receiveBuffer.type);
     if (_USB_ISRXFRM(type)) {
-        if(!me->_massagePacket(len))  goto readon;        //if this driver needs it, it will be overridden, skip bad packets
-        WLFrame* frameDescriptor = (WLFrame*)&(me->_recieveBuffer.rxfrm);
-        frameDescriptor->status = NSSwapLittleShortToHost(frameDescriptor->status);
-        frameDescriptor->dataLen = NSSwapLittleShortToHost(frameDescriptor->dataLen);
-        frameDescriptor->channel = me->_channel;
+        // Specific driver method to convert driver packet data to KFrame
+        // Return false if this is a bad packet
+        if(!me->_massagePacket((UInt16)len))
+			goto readon;
+        
+        frame = (KFrame*)&(me->_receiveBuffer.rxfrm);
+
+        // Why do we needs to convert ?
+//        frameDescriptor->status = NSSwapLittleShortToHost(frameDescriptor->status);
+//        frameDescriptor->len = NSSwapLittleShortToHost(frameDescriptor->dataLen);
+
+        // Set channel
+        frame->ctrl.channel = me->_channel;
+
+        // TODO: And for other channels?
         if (me->_channel > 14) 
             return;
 
@@ -579,9 +529,8 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
             goto readon;
         }
   */      
-        if (frameDescriptor->dataLen > 2304) {
-            NSLog(@"USBJackCard::_handleRx: Oversized packet (%d bytes) %d read size\n",
-                        frameDescriptor->dataLen, len);
+        if (frame->ctrl.len > 2304) {
+            NSLog(@"USBJackCard::_interruptReceived: Oversized packet (%d bytes)\n", frame->ctrl.len);
             goto readon;
         }
         
@@ -589,15 +538,19 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
             * Read in the packet data.  Read 8 extra bytes for IV + ICV if
             * applicable.
         */
-        UInt16 packetLength = sizeof(WLFrame) + (frameDescriptor->dataLen) + 8;
-        
-        pthread_mutex_lock(&me->_recv_mutex);
-        memcpy(me->_frameBuffer, frameDescriptor, packetLength);
-        me->_frameSize = packetLength;
-        
-        pthread_cond_signal(&me->_recv_cond);
-        pthread_mutex_unlock(&me->_recv_mutex);
-        
+
+        // Lock for copying frame
+        KFrame *newFrame = me->allocFrame();
+        if (newFrame) {
+            memcpy(newFrame, frame, sizeof(KFrame));
+//            NSLog(@"insert %d", frame->ctrl.len);
+            if (me->insertFrameIntoQueue(newFrame) < 0) {
+                me->freeFrame(frame);
+            } 
+
+        } else {
+            NSLog(@"Internal error, can't allocate frame");
+        } 
     } else {
         switch (type) {
         case _USB_INFOFRM:
@@ -612,15 +565,15 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
         case _USB_WMEMRESP:
         case _USB_RMEMRESP:
                 pthread_mutex_lock(&me->_wait_mutex);
-                memcpy(&me->_inputBuffer, &me->_recieveBuffer, len);
+                memcpy(&me->_inputBuffer, &me->_receiveBuffer, len);
                 pthread_cond_signal(&me->_wait_cond);
                 pthread_mutex_unlock(&me->_wait_mutex);
                 break;
         case _USB_BUFAVAIL:
-                NSLog(@"Received BUFAVAIL packet, frmlen=%d\n", me->_recieveBuffer.bufavail.frmlen);
+                NSLog(@"Received BUFAVAIL packet, frmlen=%d\n", me->_receiveBuffer.bufavail.frmlen);
                 break;
         case _USB_ERROR:
-                NSLog(@"Received USB_ERROR packet, errortype=%d\n", me->_recieveBuffer.usberror.errortype);
+                NSLog(@"Received USB_ERROR packet, errortype=%d\n", me->_receiveBuffer.usberror.errortype);
                 break;
     
         default:
@@ -629,8 +582,8 @@ void USBJack::_interruptRecieved(void *refCon, IOReturn result, int len) {
     }
     
 readon:
-    bzero(&me->_recieveBuffer, sizeof(me->_recieveBuffer));
-    kr = (*me->_interface)->ReadPipeAsync((me->_interface), (me->kInPipe), &me->_recieveBuffer, sizeof(me->_recieveBuffer), (IOAsyncCallback1)_interruptRecieved, refCon);
+    bzero(&me->_receiveBuffer, sizeof(me->_receiveBuffer));
+    kr = (*me->_interface)->ReadPipeAsync((me->_interface), (me->kInPipe), &me->_receiveBuffer, sizeof(me->_receiveBuffer), (IOAsyncCallback1)_interruptReceived, refCon);
     if (kIOReturnSuccess != kr) {
         NSLog(@"unable to do async interrupt read (%08x). this means the card is stopped!\n", kr);
 		// I haven't been able to reproduce the error that caused it to hit this point in the code again since adding the following lines
@@ -640,9 +593,85 @@ readon:
     }
         
 }
-
-bool USBJack::_massagePacket(int len){
+bool USBJack::_massagePacket(UInt16 len){
     return true;         //override if needed
+}
+
+# pragma mark -
+# pragma mark Internal Packet Queue
+# pragma mark -
+
+int USBJack::initFrameQueue(void) {
+    _frameQueue = NULL;
+    _frameQueueLast = NULL;
+    pthread_mutex_init(&_recv_mutex, NULL);
+    pthread_cond_init (&_recv_cond, NULL);
+    return 0;
+}
+int USBJack::destroyFrameQueue(void) {
+    struct __framelist *e, *tmp_e;
+    pthread_mutex_lock(&_recv_mutex);
+    e = _frameQueue;
+    while (e) {
+        if (e->frame);
+            freeFrame(e->frame);
+            tmp_e = e->next;
+            free(e);
+            e = tmp_e;
+    }
+    _frameQueue = NULL;
+    _frameQueueLast = NULL;
+    pthread_mutex_unlock(&_recv_mutex);
+    pthread_mutex_destroy(&_recv_mutex);
+    pthread_cond_destroy(&_recv_cond);
+}
+KFrame *USBJack::allocFrame(void) {
+    // TODO: Implement a sort of slab allocator for performance
+    KFrame *f = (KFrame *)malloc(sizeof(KFrame));
+    return f;
+}
+void USBJack::freeFrame(KFrame *f) {
+    // TODO: Implement a sort of slab allocator for performance
+    free(f);
+}
+int USBJack::insertFrameIntoQueue(KFrame *f) {
+    // Insert a frame into framebuffer queue
+    struct __framelist *e =(struct __framelist *) malloc(sizeof(__framelist));
+    if (!e)
+        return -1;
+    bzero(e, sizeof(struct __framelist));
+    e->frame = f;
+    pthread_mutex_lock(&_recv_mutex);
+    if (_frameQueueLast) {
+        _frameQueueLast->next = e;
+        _frameQueueLast = e;
+    } else {
+        _frameQueue = e;
+        _frameQueueLast = e;
+    }
+    pthread_cond_signal(&_recv_cond);
+    pthread_mutex_unlock(&_recv_mutex);
+    return 0;
+}
+KFrame *USBJack::removeFrameFromQueue() {
+    KFrame *ret = NULL;
+    struct __framelist *e = NULL;
+
+    pthread_mutex_lock(&_recv_mutex);
+    if (!_frameQueue)
+        pthread_cond_wait(&_recv_cond, &_recv_mutex);
+    if (_frameQueue) {
+        e = _frameQueue;
+        _frameQueue = e->next;
+        if (!_frameQueue)
+            _frameQueueLast = NULL;
+    }
+    pthread_mutex_unlock(&_recv_mutex);
+    if (e) {
+        ret = e->frame;
+        free(e);
+        return ret;
+    }
 }
 
 #pragma mark -
@@ -651,7 +680,6 @@ IOReturn USBJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     UInt8				numConf;
     IOReturn				kr;
     IOUSBConfigurationDescriptorPtr	confDesc;
-    
     kr = (*dev)->GetNumberOfConfigurations(dev, &numConf);
     NSLog(@"Number of configs found: %d\n", numConf);
     if (!numConf)
@@ -666,12 +694,10 @@ IOReturn USBJack::_configureAnchorDevice(IOUSBDeviceInterface **dev) {
     kr = (*dev)->SetConfiguration(dev, confDesc->bConfigurationValue);
     if (kr) {
         NSLog(@"\tunable to set configuration to value %d (err=%08x)\n", 0, kr);
-        return kIOReturnError;
+            return kIOReturnError;
     }
-    
     return kIOReturnSuccess;
 }
-
 IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
     IOReturn			kr;
     IOUSBFindInterfaceRequest	request;
@@ -697,7 +723,7 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
     kr = (*dev)->CreateInterfaceIterator(dev, &request, &iterator);
     
     while ((usbInterface = IOIteratorNext(iterator))) {
-        //NSLog(@"Interface found.\n");
+        NSLog(@"Interface found.\n");
        
         kr = IOCreatePlugInInterfaceForService(usbInterface, kIOUSBInterfaceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
         kr = IOObjectRelease(usbInterface);				// done with the usbInterface object now that I have the plugin
@@ -791,9 +817,9 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
         NSLog(@"USBJack is now ready to start working.\n");
         
         //startUp Interrupt handling
-        UInt32 numBytesRead = sizeof(_recieveBuffer); // leave one byte at the end for NUL termination
-        bzero(&_recieveBuffer, numBytesRead);
-        kr = (*intf)->ReadPipeAsync(intf, kInPipe, &_recieveBuffer, numBytesRead, (IOAsyncCallback1)_interruptRecieved, this);
+        UInt32 numBytesRead = sizeof(_receiveBuffer); // leave one byte at the end for NUL termination
+        bzero(&_receiveBuffer, numBytesRead);
+        kr = (*intf)->ReadPipeAsync(intf, kInPipe, &_receiveBuffer, numBytesRead, (IOAsyncCallback1)_interruptReceived, this);
         
         if (kIOReturnSuccess != kr) {
             NSLog(@"unable to do async interrupt read (%08x)\n", kr);
@@ -813,7 +839,6 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
     
     return kr;
 }
-
 bool USBJack::_attachDevice() {
     kern_return_t		kr;
     IOUSBDeviceInterface    **dev;
@@ -855,7 +880,6 @@ bool USBJack::_attachDevice() {
     }
     return true;
 }
-
 void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
     kern_return_t		kr;
     io_service_t		usbDevice;
@@ -893,7 +917,7 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         kr = (*dev)->GetDeviceReleaseNumber(dev, &release);
         
         //find the correct device
-        for (i=0; i< (dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount + dRT73DeviceCount); i++) {
+        for (i=0; i< (dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount + dRT73DeviceCount + dRTL8187DeviceCount); i++) {
             if ((vendor == devices[i].vendor) && (product == devices[i].device)) break;
         }
         
@@ -917,6 +941,11 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
             _deviceType[++_numDevices] = rt73;
             _foundDevices[_numDevices] = dev;
         }
+        else if (i < dIntersilDeviceCount + dZydasDeviceCount + dRalinkDeviceCount + dRT73DeviceCount + dRTL8187DeviceCount) {
+            NSLog(@"Realtek RTL8187 USB Device found (vendor = 0x%x, product = 0x%x)\n", vendor, product);
+            _deviceType[++_numDevices] = rtl8187;
+            _foundDevices[_numDevices] = dev;
+        }
         else {
             NSLog(@"found unwanted device  (vendor = 0x%x, product = 0x%x)\n", vendor, product);
             (*dev)->Release(dev);
@@ -924,7 +953,6 @@ void USBJack::_addDevice(void *refCon, io_iterator_t iterator) {
         }
     }
 }
-
 void USBJack::_handleDeviceRemoval(void *refCon, io_iterator_t iterator) {
     kern_return_t	kr;
     io_service_t	obj;
@@ -959,7 +987,6 @@ bool USBJack::stopRun() {
     _runLoop = NULL;
     return true;
 }
-
 void USBJack::_runCFRunLoop(USBJack* me) {
     me->_runLoop = CFRunLoopGetCurrent();
     while(me->_stayUp) {
@@ -971,7 +998,6 @@ void USBJack::_runCFRunLoop(USBJack* me) {
         me->_runLoop = NULL;
     }
 } 
-
 bool USBJack::run() {
     pthread_t pt;
     
@@ -982,7 +1008,6 @@ bool USBJack::run() {
     
     return true;
 }
-
 void USBJack::startMatching() {
     mach_port_t 		masterPort;
     CFMutableDictionaryRef 	matchingDict;
@@ -1043,7 +1068,6 @@ void USBJack::startMatching() {
     // Now done with the master_port
     masterPort = 0;
 }
-
 USBJack::USBJack() {
     _isEnabled = false;
     _deviceInit = false;
@@ -1053,36 +1077,25 @@ USBJack::USBJack() {
     _runLoopSource = NULL;
     _runLoop = NULL;
     _channel = 3;
-    _frameSize = 0;
     _notifyPort = NULL;
+    
+    initFrameQueue();
     
     pthread_mutex_init(&_wait_mutex, NULL);
     pthread_cond_init (&_wait_cond, NULL);
-    pthread_mutex_init(&_recv_mutex, NULL);
-    pthread_cond_init (&_recv_cond, NULL);
     
     run();
     
     while (_runLoop==NULL)
         usleep(100);
 }
-
 USBJack::~USBJack() {
    // NSLog(@"I'm being destroyed!!!");
     stopRun();
     _interface = NULL;
-    _frameSize = 0;
 
     pthread_mutex_destroy(&_wait_mutex);
     pthread_cond_destroy(&_wait_cond);
-    pthread_mutex_destroy(&_recv_mutex);
-    pthread_cond_destroy(&_recv_cond);
-    
+    destroyFrameQueue();    
 }
 
-int USBJack::WriteTxDescriptor(WLFrame * theFrame){
-    theFrame->rate = 0x6e;	//11 MBit/s
-    theFrame->tx_rate = 0x6e;	//11 MBit/s 
-                                //where does this come from?  sizeof(WLFrame)?
-    return 0x3C;
-}

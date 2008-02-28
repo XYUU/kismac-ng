@@ -402,53 +402,17 @@ enum ieee80211_radiotap_type {
 						 */
 #define	IEEE80211_RADIOTAP_F_BADFCS	0x40	/* does not pass FCS check */
 
-- (int)headerLenForFrameControl:(UInt16)frameControl {
-	UInt16 isToDS, isFrDS, subtype, headerLength = 0;
-
-	UInt16 type=(frameControl & IEEE80211_TYPE_MASK);
-	//depending on the frame we have to figure the length of the header
-	switch(type) {
-		case IEEE80211_TYPE_DATA: //Data Frames
-			isToDS = ((frameControl & IEEE80211_DIR_TODS) ? YES : NO);
-			isFrDS = ((frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
-			if (isToDS&&isFrDS) headerLength=30; //WDS Frames are longer
-			else headerLength=24;
-			break;
-		case IEEE80211_TYPE_CTL: //Control Frames
-			subtype=(frameControl & IEEE80211_SUBTYPE_MASK);
-			switch(subtype) {
-				case IEEE80211_SUBTYPE_PS_POLL:
-				case IEEE80211_SUBTYPE_RTS:
-					headerLength=16;
-					break;
-				case IEEE80211_SUBTYPE_CTS:
-				case IEEE80211_SUBTYPE_ACK:
-					headerLength=10;
-					break;
-				default:
-					break;
-			}
-			break;
-		case IEEE80211_TYPE_MGT: //Management Frame
-			headerLength=24;
-			break;
-		default:
-			break;
-	}
-	return headerLength;
-}
-
-- (WLFrame*) nextFrame {
+- (KFrame*) nextFrame {
 	struct pcap_pkthdr			header;
 	const u_char				*data;
 	static UInt8				frame[2500];
-    WLFrame						*f;
+    KFrame						*f;
     avs_80211_1_header			*af;
 	ieee80211_radiotap_header	*rth;
-	UInt16						headerLength = 0, rthP;
+	UInt16						rthP;
 	UInt8						flags;
 	
-	f = (WLFrame*)frame;
+	f = (KFrame*)frame;
 	
 	while(YES) {
 		data = pcap_next(_device, &header);
@@ -456,32 +420,26 @@ enum ieee80211_radiotap_type {
 		if (!data) continue;
 		
 		if(_apeType == APExtTypeBcm) {
-			if ((header.caplen - sizeof(avs_80211_1_header)) < 30) continue;
-			
-			memcpy(frame + sizeof(WLPrismHeader), data + sizeof(avs_80211_1_header), 30);
-			
-			headerLength = [self headerLenForFrameControl:f->frameControl];
-			if (headerLength == 0) continue;
+			if ((header.caplen - sizeof(avs_80211_1_header)) < 30)
+                continue;
 			
 			af = (avs_80211_1_header*)data;
-			f->silence = af->ssi_signal + 155;
-			f->signal = af->ssi_noise;
-			f->channel = af->channel;
+			f->ctrl.silence = af->ssi_noise;
+			f->ctrl.signal = af->ssi_signal + 155;
+			f->ctrl.channel = af->channel;
 			
-			f->length = f->dataLen = header.caplen - headerLength - sizeof(avs_80211_1_header) - 4; //we dont want the fcs or do we?
+			f->ctrl.len = header.caplen - sizeof(avs_80211_1_header) - 4; //we dont want the fcs or do we?
 			//NSLog(@"Got packet!!! hLen %u signal: %d  noise: %d channel %u length: %u\n", headerLength, af->ssi_signal, af->ssi_noise, f->channel, f->dataLen );
-			memcpy(frame + sizeof(WLFrame), data + sizeof(avs_80211_1_header) + headerLength, f->dataLen);
+
+			memcpy(f->data, data + sizeof(avs_80211_1_header) , f->ctrl.len);
         } else {
-			if((header.caplen - sizeof(ieee80211_radiotap_header)) < 30) continue;
+			if((header.caplen - sizeof(ieee80211_radiotap_header)) < 30)
+                continue;
 			rth = (ieee80211_radiotap_header*)data;
 			
 			if(rth->it_version != 0) continue;
 			if ((header.caplen - rth->it_len) < 30) continue;
-			
-			memcpy(frame + sizeof(WLPrismHeader), data + rth->it_len, 30);
-			headerLength = [self headerLenForFrameControl:f->frameControl];
-			if (headerLength == 0) continue;
-			
+						
 			if((rth->it_present & (1 << IEEE80211_RADIOTAP_EXT)) == 0) { //we cannot process extended headers
 				rthP = sizeof(ieee80211_radiotap_header);
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_TSFT)) {
@@ -497,21 +455,24 @@ enum ieee80211_radiotap_type {
 					rthP += 1;
 				}
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_CHANNEL)) {
-					memcpy(&f->channel, data + rthP , 2);
-					if(f->channel == 2484) f->channel = 14;
-					else if(f->channel >= 2412 && f->channel < 3000) f->channel = (f->channel - 2412) / 5 + 1;
-					else f->channel = 16;
+					memcpy(&(f->ctrl.channel), data + rthP , 2);
+					if (f->ctrl.channel == 2484)
+                        f->ctrl.channel = 14;
+					else if(f->ctrl.channel >= 2412 && f->ctrl.channel < 3000)
+                        f->ctrl.channel = (f->ctrl.channel - 2412) / 5 + 1;
+					else
+                        f->ctrl.channel = 16;
 					rthP += 4;
 				} 	
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_FHSS)) {
 					rthP += 2;
 				} 
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_DBM_ANTSIGNAL)) {
-					memcpy(&f->silence, data + rthP, 1);
+					memcpy(&(f->ctrl.silence), data + rthP, 1);
 					rthP += 1;
 				}				
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_DBM_ANTNOISE)) {
-					memcpy(&f->signal, data + rthP, 1);
+					memcpy(&(f->ctrl.signal), data + rthP, 1);
 					rthP += 1;
 				}				
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_LOCK_QUALITY)) {
@@ -530,22 +491,22 @@ enum ieee80211_radiotap_type {
 					rthP += 1;
 				}
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_DB_ANTSIGNAL)) {
-					memcpy(&f->silence, data + rthP, 1);
+					memcpy(&(f->ctrl.signal), data + rthP, 1);
 					rthP += 1;
 				}				
 				if(rth->it_present & (1 << IEEE80211_RADIOTAP_DB_ANTNOISE)) {
-					memcpy(&f->signal, data + rthP, 1);
+					memcpy(&(f->ctrl.silence), data + rthP, 1);
 					rthP += 1;
 				}							
 			}
 			
-			f->length = f->dataLen = header.caplen - headerLength - rth->it_len - (flags & IEEE80211_RADIOTAP_F_FCS ? 4 : 0); //we dont want the fcs or do we?
+			f->ctrl.len = header.caplen - rth->it_len - (flags & IEEE80211_RADIOTAP_F_FCS ? 4 : 0); //we dont want the fcs or do we?
 			//NSLog(@"Got packet!!! hLen %u signal: %d  noise: %d channel %u length: %u\n", headerLength, af->ssi_signal, af->ssi_noise, f->channel, f->dataLen );
-			memcpy(frame + sizeof(WLFrame), data +  rth->it_len + headerLength, f->dataLen);
+			memcpy(f->data, data +  rth->it_len, f->ctrl.len);
 		
 		}
         _packets++;
-        return f;
+        return (KFrame *)f;
     }
 }
 

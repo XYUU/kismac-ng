@@ -35,7 +35,7 @@
     if ( [coder allowsKeyedCoding] ) {
         _curSignal=[coder decodeIntForKey:@"aCurSignal"];
 
-        _recievedBytes=[coder decodeDoubleForKey:@"aRecievedBytes"];
+        _receivedBytes=[coder decodeDoubleForKey:@"aReceivedBytes"];
         _sentBytes=[coder decodeDoubleForKey:@"aSentBytes"];
         
         _ID     = [[coder decodeObjectForKey:@"aID"] retain];
@@ -66,7 +66,7 @@
 	
 	_curSignal = [[dict objectForKey:@"curSignal"] intValue];
 
-	_recievedBytes = [[dict objectForKey:@"recievedBytes"] doubleValue];
+	_receivedBytes = [[dict objectForKey:@"receivedBytes"] doubleValue];
 	_sentBytes = [[dict objectForKey:@"sentBytes"] doubleValue];
 	
 	_ID     = [[dict objectForKey:@"ID"] retain];
@@ -93,7 +93,7 @@
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
 	[dict setObject:[NSNumber numberWithInt:_curSignal] forKey:@"curSignal"];
-	[dict setObject:[NSNumber numberWithDouble:_recievedBytes] forKey:@"recievedBytes"];
+	[dict setObject:[NSNumber numberWithDouble:_receivedBytes] forKey:@"receivedBytes"];
 	[dict setObject:[NSNumber numberWithDouble:_sentBytes] forKey:@"sentBytes"];
 	
 	[dict setObject:_ID forKey:@"ID"];
@@ -117,22 +117,25 @@
 - (void)wpaHandler:(WavePacket*) w {
     UInt8 nonce[WPA_NONCE_LENGTH];
     NSData *mic, *packet;
-    
-    if (![w isEAPPacket]) return;
+    if (![w isEAPPacket])
+        return;
     
     if ([w isWPAKeyPacket]) {
         switch ([w wpaCopyNonce:nonce]) {
             case wpaNonceANonce:
                 NSLog(@"Detected WPA challenge for %@!", _ID);
 				[GrowlController notifyGrowlWPAChallenge:@"" mac:_ID bssid:[w BSSIDString]];
+                NSLog(@"Nonce %.2X %.2X", nonce[0], nonce[WPA_NONCE_LENGTH-1]);
                 [WaveHelper secureReplace:&_aNonce withObject:[NSData dataWithBytes:nonce length:WPA_NONCE_LENGTH]];
                 break;
             case wpaNonceSNonce:
                 NSLog(@"Detected WPA response for %@!", _ID);
 				[GrowlController notifyGrowlWPAResponse:@"" mac:_ID bssid:[w BSSIDString]];
+                NSLog(@"Nonce %.2X %.2X", nonce[0], nonce[WPA_NONCE_LENGTH-1]);
                 [WaveHelper secureReplace:&_sNonce withObject:[NSData dataWithBytes:nonce length:WPA_NONCE_LENGTH]];
                 break;
             case wpaNonceNone:
+                NSLog(@"Nonce None");
                 break;
         }
         
@@ -173,7 +176,7 @@
 		}
 	}
 
-    _recievedBytes+=[w length];
+    _receivedBytes+=[w length];
     _changed = YES;
     
     if ([w destinationIPAsString] != nil && ![[w destinationIPAsString] isEqualToString:@"0.0.0.0"] ) {
@@ -182,7 +185,7 @@
     }
     
     if (![w toDS]) [self wpaHandler:w]; //dont store it in the AP client
-}
+} 
 
 -(void) parseFrameAsOutgoing:(WavePacket*)w {
     if (!_ID) {
@@ -215,8 +218,8 @@
     return _ID;
 }
 
-- (NSString *)recieved {
-    return [WaveHelper bytesToString: _recievedBytes];
+- (NSString *)received {
+    return [WaveHelper bytesToString: _receivedBytes];
 }
 
 - (NSString *)sent {
@@ -241,8 +244,8 @@
 
 #pragma mark -
 
-- (float)recievedBytes {
-    return _recievedBytes;
+- (float)receivedBytes {
+    return _receivedBytes;
 }
 
 - (float)sentBytes {

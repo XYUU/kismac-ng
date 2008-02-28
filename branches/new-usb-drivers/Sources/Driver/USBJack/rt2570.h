@@ -477,8 +477,56 @@ BBP_TUNING_PARAMETERS_STRUC, *PBBP_TUNING_PARAMETERS_STRUC;
 //
 // TX descriptor format
 //
+
+#define TYPE_TXD                                        0
+#define TYPE_RXD                                        1
+#define TXD_SIZE                                sizeof(TXD_STRUC)
+#define RXD_SIZE                                sizeof(RXD_STRUC)
+
+#define SWAP32(x) \
+((UInt32)( \
+(((UInt32)(x) & (UInt32) 0x000000ffUL) << 24) | \
+(((UInt32)(x) & (UInt32) 0x0000ff00UL) <<  8) | \
+(((UInt32)(x) & (UInt32) 0x00ff0000UL) >>  8) | \
+(((UInt32)(x) & (UInt32) 0xff000000UL) >> 24) ))
+
 typedef	struct	_TXD_STRUC
 {
+#ifdef __BIG_ENDIAN__
+	// Word    0
+	ULONG				KeyID:2;// KeyID
+	ULONG				Cipher:1;// cliper
+	ULONG				Rsv1:1;// Rev1
+	ULONG				DataByteCnt:12;// Data byte count
+	ULONG				Rsv0:1;// Rev0
+	ULONG				IFS:2;// IFS
+	ULONG				newseq:1;// new_seq
+	ULONG				Ofdm:1;// OFDM
+	ULONG				Timestamp:1;// ins_TSF
+	ULONG				ACK:1;// ACK
+	ULONG				MoreFrag:1;// More     fragment following this       tx ring
+	ULONG				RetryLimit:4;// Retry limit
+	ULONG				PacketID:4;// PacketID - write by MAC about Frame translate status
+
+	// Word    1
+	ULONG				Rsv2:16;// Rev2
+	ULONG				CWmax:4;// CWmax
+	ULONG				CWmin:4;// CWmin
+	ULONG				Aifs:2;// AIFS
+	ULONG				IvOffset:6;// IV offset
+	
+	// Word    2
+	ULONG				PlcpLengthHigh:8;// BBP R3 - PLCP length_high
+	ULONG				PlcpLengthLow:8;// BBP R2 - PLCP length_Low
+	ULONG				PlcpService:8;// BBP R1 - PLCP Service
+	ULONG				PlcpSignal:8;// BBP R0 - PLCP Singal
+	
+	// Word    3
+	ULONG				Iv;// IV
+	
+	// Word    4
+	ULONG				Eiv;// EIV    
+#else
 	// Word    0
 	ULONG				PacketID:4;// PacketID - write by MAC about Frame translate status
 	ULONG				RetryLimit:4;// Retry limit
@@ -521,6 +569,7 @@ typedef	struct	_TXD_STRUC
 	
 	// Word    4
 	ULONG				Eiv;// EIV
+#endif
 }
 TXD_STRUC, *PTXD_STRUC;
 
@@ -529,30 +578,37 @@ TXD_STRUC, *PTXD_STRUC;
 //
 typedef	struct	_RXD_STRUC
 {
-#if 0 
-    //__BIG_ENDIAN__
-    ULONG				Eiv;// EIV
-    
-    ULONG				Iv;// IV
-    
-    UCHAR				Rev3[2];// Rev3
-    UCHAR				BBR0;// BBP R1 - RSSI
-    UCHAR				BBR1;// BBP R0 - SIGNAL / rate
-        
-    ULONG				Rsv2:4;// Rev2
-    ULONG				DataByteCnt:12;// data byte count 
-        
-    ULONG				Rsv1:6;// Rev1
-    ULONG				CiErr:1;// ci error
-    ULONG				Cipher:1;// cipher
-    ULONG				PhyErr:1;// phy err
-    ULONG				Ofdm:1;// OFDM
-    ULONG				Crc:1;// crc error
-    ULONG				MyBss:1;// my bss
-    ULONG				Bcast:1;// bcast
-    ULONG				Mcast:1;// mcast
-    ULONG				U2M:1;// u2me
-    ULONG				Rev0:1;// Rev0
+#if __BIG_ENDIAN__
+	// Word    0
+	ULONG				Rsv2:4;// Rev2
+	ULONG				DataByteCnt:12;// data byte count
+
+	ULONG				Rsv1:6;// Rev1
+	ULONG				CiErr:1;// ci error
+	ULONG				Cipher:1;// cipher
+
+	ULONG				PhyErr:1;// phy err
+	ULONG				Ofdm:1;// OFDM
+	ULONG				Crc:1;// crc error
+	ULONG				MyBss:1;// my bss
+	ULONG				Bcast:1;// bcast
+	ULONG				Mcast:1;// mcast
+	ULONG				U2M:1;// u2me
+	ULONG				Rev0:1;// Rev0
+	
+	
+	
+	
+	// Word    1
+	UCHAR				Rev3[2];// Rev3
+	UCHAR				BBR0;// BBP R1 - RSSI
+	UCHAR				BBR1;// BBP R0 - SIGNAL / rate
+	
+	// Word    2
+	ULONG				Iv;// IV
+	
+	// Word 3
+	ULONG				Eiv;// EIV
 #else
 	// Word    0
 	ULONG				Rev0:1;// Rev0

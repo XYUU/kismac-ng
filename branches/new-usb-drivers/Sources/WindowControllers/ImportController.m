@@ -30,13 +30,9 @@
 -(void)awakeFromNib
 {
     _canceled = NO;
-    _animate = YES;
     _isFullyInititialized = NO;
     [[self window] setDelegate:self];
-    [aProgressBar setUsesThreadedAnimation:YES];
     [aProgressBar startAnimation:self];
-    //[NSThread detachNewThreadSelector:@selector(animationThread:) toTarget:self withObject:nil];
-    //[[self window] makeKeyAndOrderFront:self];
 }
 
 -(void)setMax:(float)max {
@@ -53,19 +49,7 @@
     [aProgressBar displayIfNeeded];
 }
 
--(void)animate {
-    if (_isFullyInititialized) {
-        NS_DURING
-            [aProgressBar animate:nil];
-            [aProgressBar displayIfNeeded];
-        NS_HANDLER
-        NS_ENDHANDLER
-    }
-}
-
 -(void)stopAnimation {
-     _animate = NO;
-    [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
 }
 
 - (bool)canceled {
@@ -86,21 +70,6 @@
     [aCancel setEnabled:NO];
 }
 
-- (void)animationThread:(id)anObject {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [NSThread setThreadPriority:0.0];	//we are not important
-    NSDate *d;
-    
-    while(_animate) {
-        [self animate];
-        d = [[NSDate alloc] initWithTimeIntervalSinceNow:0.05];
-        [NSThread sleepUntilDate:d];
-        [d release];
-    }
-    
-    [pool release];
-}
-
 - (void)terminateWithCode:(int)code {
     [NSApp endSheet:[self window] returnCode:code];
 }
@@ -110,16 +79,10 @@
 }
 
 - (void)closeWindow:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    _animate = NO;
-    [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
 }
 
 
 - (void)dealloc {
-    if (_animate) {
-        _animate = NO;
-        [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
-    }
     [super dealloc];
 }
 

@@ -51,7 +51,7 @@ typedef struct _WLFrame {
     UInt16 sequenceControl;
     UInt8  address4[6];
     UInt16 dataLen;
-
+ 
     /* 802.3 Header Info (Big Endian) 14 byte*/
     UInt8  dstAddr[6];
     UInt8  srcAddr[6];
@@ -83,6 +83,24 @@ typedef struct _WLIEEEFrame {
     UInt8  address4[6];
     UInt16 dataLen;
 } __attribute__((packed)) WLIEEEFrame;
+
+typedef struct _WLMgmtFrame {
+    /* 802.11 Header Info (Little Endian) 24 bytes */
+    UInt16 frameControl;
+    UInt8  duration;
+    UInt8  idnum;
+    UInt8  address1[6];
+    UInt8  address2[6];
+    UInt8  address3[6];
+    UInt16 sequenceControl;
+} __attribute__((packed)) WLMgmtFrame;
+
+typedef struct {
+    WLMgmtFrame hdr;
+    UInt16	wi_algo;
+    UInt16	wi_seq;
+    UInt16	wi_status;
+} __attribute__ ((packed)) Ieee80211_Auth_Frame;
 
 
 typedef struct _WLCryptedFrame {
@@ -144,6 +162,7 @@ typedef struct _frameLEAP {
 #define	IEEE80211_TYPE_DATA		OSSwapBigToHostConstInt16(0x0800)
 
 #define	IEEE80211_SUBTYPE_MASK			OSSwapBigToHostConstInt16(0xf000)
+
 #define	IEEE80211_SUBTYPE_ASSOC_REQ		OSSwapBigToHostConstInt16(0x0000)
 #define	IEEE80211_SUBTYPE_ASSOC_RESP	OSSwapBigToHostConstInt16(0x1000)
 #define	IEEE80211_SUBTYPE_REASSOC_REQ	OSSwapBigToHostConstInt16(0x2000)

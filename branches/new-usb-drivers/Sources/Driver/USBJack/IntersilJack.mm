@@ -142,7 +142,6 @@ IOReturn IntersilJack::_init() {
     return kIOReturnSuccess;
 }
 
-
 IOReturn IntersilJack::_reset() {
     int i;
     
@@ -189,6 +188,54 @@ IOReturn IntersilJack::_reset() {
     return kIOReturnSuccess;
 }
 
+bool IntersilJack::sendFrame(UInt8* data, int size) {
+    WLFrame *frameDescriptor;
+    UInt8 aData[2364];
+    IOByteCount pktsize;
+    int descriptorLength;
+    WLIEEEFrame * wifiFrame;
+    //we have an inFrame and an outFrame
+    //this function is a transformation between the two
+    //copy the wlframe to the tx buff
+    //we will redo part off_t this //todo fixme!!
+    memcpy(aData, data, sizeof(WLFrame));
+    
+    //set pointers to sectons of frame
+    frameDescriptor = (WLFrame*)aData;
+    pktsize = frameDescriptor->dataLen + sizeof(WLFrame) - sizeof(WLPrismHeader);
+    
+    //convert prism header into device specific header 
+    //returns the length of the device specific header
+    //note frame descriptor = txbuff
+    descriptorLength = WriteTxDescriptor(frameDescriptor);
+    
+    //copy the 802.11 frame to the right  place
+    memcpy(aData + descriptorLength, data + sizeof(WLPrismHeader),  pktsize);
+    wifiFrame = (WLIEEEFrame*)(aData + descriptorLength);
+    
+    switch(wifiFrame->frameControl & 0x0c) {
+        case 0x08:
+        case 0x00:
+            pktsize = wifiFrame->dataLen;
+            if ((pktsize + descriptorLength) > 2364)
+                return kIOReturnBadArgument;
+            wifiFrame->dataLen=NSSwapHostShortToLittle(wifiFrame->dataLen);
+            break;
+        case 0x04:
+            pktsize = 0;
+            wifiFrame->dataLen = 0;
+            break;
+        default:
+            return kIOReturnBadArgument;
+    }
+    
+    //send the frame
+    if (_sendFrame(aData, pktsize + descriptorLength) != kIOReturnSuccess)
+        return NO;
+    
+    return YES;
+}
+
 int IntersilJack::WriteTxDescriptor(WLFrame * theFrame){
     theFrame->txControl=NSSwapHostShortToLittle(0x08 | _TX_RETRYSTRAT_SET(3)| _TX_CFPOLL_SET(1) | _TX_TXEX_SET(0) | _TX_TXOK_SET(0) | _TX_MACPORT_SET(0));
     theFrame->rate = 0x6e;	//11 MBit/s
@@ -203,7 +250,6 @@ IntersilJack::~IntersilJack() {
     /*
     stopRun();
     _interface = NULL;
-    _frameSize = 0;
     
     pthread_mutex_destroy(&_wait_mutex);
     pthread_cond_destroy(&_wait_cond);

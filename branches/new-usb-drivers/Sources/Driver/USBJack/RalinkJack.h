@@ -12,6 +12,11 @@
 #import <Cocoa/Cocoa.h>
 #import "USBJack.h"
 
+#define TYPE_TXD                                        0
+#define TYPE_RXD                                        1
+#define TXD_SIZE                                sizeof(TXD_STRUC)
+#define RXD_SIZE                                sizeof(RXD_STRUC)
+
 //this stuff goes here for now because something is funkey with the include order
 #define	NUM_EEPROM_BBP_PARMS		19
 #define	NUM_EEPROM_BBP_TUNING_PARMS	7
@@ -84,9 +89,11 @@ public:
     bool startCapture(UInt16 channel);
     bool stopCapture();
     
-    bool _massagePacket(int len);
-    int WriteTxDescriptor(WLFrame * theFrame);
-
+    bool _massagePacket(UInt16 len);
+    int         WriteTxDescriptor(void* theFrame, UInt16 length);
+    bool        sendFrame(UInt8* data, int size);
+    IOReturn    _sendFrame(UInt8* data, IOByteCount size);
+    void    RTMPDescriptorEndianChange(unsigned char *  pData, unsigned long DescriptorType);
     
 private:
     int temp;

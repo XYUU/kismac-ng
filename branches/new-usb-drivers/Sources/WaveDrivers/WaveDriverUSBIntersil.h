@@ -38,7 +38,8 @@ class RT73Jack;
         intersil = 1,
         zydas,
         ralink,
-		rt73
+		rt73,
+        rtl8187
     } deviceMake;
     
     //stuff for timed sending

@@ -10,6 +10,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "USBJack.h"
+
 //temporary to fix linking errors
 #define	NUM_EEPROM_BBP_PARMS		19
 #define	NUM_EEPROM_BBP_TUNING_PARMS	7
@@ -100,7 +101,9 @@ public:
     
     RT73Jack();
     ~RT73Jack();
-    
+
+    void dumpFrame(UInt8 *data, UInt16 size);
+
     IOReturn _init();
     
     IOReturn	RTUSB_VendorRequest(
@@ -171,8 +174,31 @@ public:
     bool startCapture(UInt16 channel);
     bool stopCapture();
     
-    bool _massagePacket(int len);
+    bool _massagePacket(UInt16 len);
+
+    int         WriteTxDescriptor(void* theFrame, UInt16 length);
+    bool        sendFrame(UInt8* data, int size);
+    IOReturn    _sendFrame(UInt8* data, IOByteCount size);
     
+    void RTMPDescriptorEndianChange(unsigned char *  pData, unsigned long DescriptorType);
+    void WriteBackToDescriptor(unsigned char *Dest, unsigned char *Src, bool DoEncrypt, unsigned long DescriptorType);
+    void   RTUSBWriteTxDescriptor(
+            void *pptxd,
+            unsigned char CipherAlg,
+            unsigned char KeyTable,
+            unsigned char KeyIdx,
+            bool Ack,
+            bool Fragment,
+            bool InsTimestamp,
+            unsigned char RetryMode,
+            unsigned char Ifs,
+            unsigned int Rate,
+            unsigned long Length,
+            unsigned char QueIdx,
+            unsigned char PID,
+            bool bAfterRTSCTS);
+    UInt32 currentRate;
+
 private:
         
         //    int temp;

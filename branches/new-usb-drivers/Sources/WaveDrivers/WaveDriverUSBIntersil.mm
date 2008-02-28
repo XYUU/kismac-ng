@@ -27,6 +27,7 @@
 #import "../Driver/USBJack/USBJack.h"
 #import "../Driver/USBJack/RalinkJack.h"
 #import "../Driver/USBJack/RT73Jack.h"
+#import "../Driver/USBJack/rtl8187.h"
 //#import "../Driver/USBJack/ZydasJack.h"
 
 static bool explicitlyLoadedUSBIntersil = NO;
@@ -36,9 +37,11 @@ static bool explicitlyLoadedUSBIntersil = NO;
 - (id)init {
     int timeoutCount = 0;
     self=[super init];
-    if(!self) return Nil;
+    if (!self)
+        return Nil;
 
     _driver = new USBJack;
+
     //this will only occur once!
     _driver->startMatching();
     NSLog(@"Matching finished\n");
@@ -63,6 +66,10 @@ static bool explicitlyLoadedUSBIntersil = NO;
             _driver = new RT73Jack;
             break;
         case zydas:
+            break;
+        case rtl8187:
+            delete(_driver);
+            _driver = new RTL8187Jack;
             break;
         default:
             NSLog(@"No supported USB Device found!");
@@ -147,7 +154,8 @@ static bool explicitlyLoadedUSBIntersil = NO;
 }
 
 - (bool) setChannel:(unsigned short)newChannel {
-    if (((_allowedChannels >> (newChannel - 1)) & 0x0001) == 0) return NO;
+    if (((_allowedChannels >> (newChannel - 1)) & 0x0001) == 0)
+        return NO;
     
     return _driver->setChannel(newChannel);
 }
@@ -174,9 +182,9 @@ static bool explicitlyLoadedUSBIntersil = NO;
 
 #pragma mark -
 
-- (WLFrame*) nextFrame {
-    WLFrame *f;
-    
+- (KFrame *) nextFrame {
+    KFrame *f;
+
     f = _driver->receiveFrame();
     if (f==NULL) {
 		_errors++;
@@ -198,10 +206,10 @@ static bool explicitlyLoadedUSBIntersil = NO;
                 OK, Nil, Nil);
 
     } else {
+//        NSLog(@"nextFrame %d", f->ctrl.len);
         _packets++;
 		_errors=0;
 	}
-    
     return f;
 }
 
@@ -210,8 +218,11 @@ static bool explicitlyLoadedUSBIntersil = NO;
 - (void)doInjection:(NSData*)data {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
+    UInt8 *f = (UInt8 *)[data bytes];
+    int size = [data length];  
+    
     while(_transmitting) {
-        _driver->sendFrame((UInt8*)[data bytes]);
+        _driver->sendFrame(f, size);
         [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:_interval]];
     }
     [data release];
@@ -229,13 +240,13 @@ static bool explicitlyLoadedUSBIntersil = NO;
         _interval = (float)interval / 1000.0;
         [NSThread detachNewThreadSelector:@selector(doInjection:) toTarget:self withObject:data];
     } else {
-        _driver->sendFrame(f);
+        _driver->sendFrame(f, size);
     }
     
     return YES;
 }
 
--(bool) stopSendingFrames {    
+-(bool) stopSendingFrames {
     _transmitting = NO;
     [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:_interval]];
     return YES;

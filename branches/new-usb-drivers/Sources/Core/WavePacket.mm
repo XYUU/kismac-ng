@@ -26,11 +26,15 @@
 #import "WavePacket.h"
 #import "WaveHelper.h"
 #import "80211b.h"
-
+#import "KisMAC80211.h"
 #import <pcap.h>
 
 #define AMOD(x, y) ((x) % (y) < 0 ? ((x) % (y)) + (y) : (x) % (y))
 #define N 256
+
+NSString *macToString(UInt8 *m) {
+    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", m[0], m[1], m[2], m[3], m[4], m[5], m[6]];
+}
 
 bool inline is8021xPacket(const UInt8* fileData) {
     if (fileData[0] == 0xAA &&
@@ -59,6 +63,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
     
     [WaveHelper secureRelease:&_SSID];
 	[WaveHelper secureRelease:&_SSIDs];
+
 	_rateCount = 0;
 	
     while(length>2) {
@@ -137,16 +142,34 @@ bool inline is8021xPacket(const UInt8* fileData) {
 }
 
 //this initializes the structure with a raw frame
-- (bool)parseFrame:(WLFrame*) f {
+- (bool)parseFrame:(KFrame*) f {
     //WLCryptedFrame *cf;
     int i;
-    UInt16 p;
     NSMutableArray *ar;
     UInt8* data;
 	
-    if (f==NULL) return NO;
+    struct ieee80211_hdr *hdr1;
+    struct ieee80211_hdr_3addr *hdr3;
+    struct ieee80211_hdr_4addr *hdr4;
+    struct ieee80211_probe_beacon *beacon;
+    struct ieee80211_probe_request *probe_req;
+    struct ieee80211_assoc_request *assoc_req;
+    struct ieee80211_reassoc_request *reassoc_req;
     
-	if ((f->frameControl & IEEE80211_VERSION_MASK) != IEEE80211_VERSION_0) {
+    if (f==NULL)
+        return NO;
+    
+    hdr1 = (struct ieee80211_hdr *)(f->data);
+    hdr3 = (struct ieee80211_hdr_3addr *)(f->data);
+    hdr4 = (struct ieee80211_hdr_4addr *)(f->data);
+    
+    beacon = (struct ieee80211_probe_beacon *)(f->data);
+    probe_req = (struct ieee80211_probe_request *)(f->data);
+    assoc_req = (struct ieee80211_assoc_request *)(f->data);
+    reassoc_req = (struct ieee80211_reassoc_request *)(f->data);
+
+    // Check IEEE80211 Version
+	if ((hdr1->frame_ctl & IEEE80211_VERSION_MASK) != IEEE80211_VERSION_0) {
 		NSLog(@"Packet with illegal 802.11 version captured.\n");
 		return NO;
 	}
@@ -155,83 +178,86 @@ bool inline is8021xPacket(const UInt8* fileData) {
     _netType = networkTypeUnknown;
     _isWep = encryptionTypeUnknown;
     _isEAP = NO;
-    _rawFrame = (UInt8*)(f);
     _revelsKeyByte = -2;
-    if (_frame) {
-        delete [] _frame;
-        _frame = NULL;
-    }
-	
-    _type =    (f->frameControl & IEEE80211_TYPE_MASK);
-    _subtype = (f->frameControl & IEEE80211_SUBTYPE_MASK);
-    _isToDS = ((f->frameControl & IEEE80211_DIR_TODS) ? YES : NO);
-    _isFrDS = ((f->frameControl & IEEE80211_DIR_FROMDS) ? YES : NO);
 
-    //the viha driver actually switches these fields
-    //and macjack doesn't, so now it is the silence field
-    _signal = f->silence - f->signal;
-    if (_signal < 0) _signal=0;	
+    // Set frame
+    _length=f->ctrl.len;
+    _frame = (UInt8*)(f->data);
 
-    _channel=(f->channel>14 || f->channel<1 ? 1 : f->channel);
-        
+    _payload = NULL;
+    _payloadLength = 0;
+    
+    _type =    (hdr1->frame_ctl & IEEE80211_TYPE_MASK);
+    _subtype = (hdr1->frame_ctl & IEEE80211_SUBTYPE_MASK);
+    _isToDS = ((hdr1->frame_ctl & IEEE80211_DIR_TODS) ? YES : NO);
+    _isFrDS = ((hdr1->frame_ctl & IEEE80211_DIR_FROMDS) ? YES : NO);
+
+    _signal = f->ctrl.signal - f->ctrl.silence;
+    if (_signal < 0)
+        _signal=0;
+
+    _channel=(f->ctrl.channel>14 || f->ctrl.channel<1 ? 1 : f->ctrl.channel);
+    
     //depending on the frame we have to figure the length of the header
+    // TODO: Parse
     switch(_type) {
         case IEEE80211_TYPE_DATA:               //Data Frames
             if (_isToDS && _isFrDS) {
-                _headerLength=30;               //WDS Frames are longer
+                _payload = hdr4->payload;
+                _payloadLength = _length - sizeof(struct ieee80211_hdr_4addr);
                 _netType = networkTypeTunnel;   //what can i say? it is a tunnel
             } else {
-                _headerLength=24;               //3 macs in the header
-                
+                _payload = hdr3->payload;
+                _payloadLength = _length - sizeof(struct ieee80211_hdr_3addr);
                 // if either the from or the to ap bit set we are managed
-                if (_isToDS|_isFrDS) _netType = networkTypeManaged;
-                else if (memcmp(&_MACAddress[12], "\x00\x00\x00\x00\x00\x00", 6)==0) _netType = networkTypeLucentTunnel;
-                else _netType = networkTypeAdHoc;
-            }
-            
-            _length=f->dataLen;	//this was prepared in kernel land
-            data = (UInt8*)(f + 1);
-            if (_length >= 24 && is8021xPacket((UInt8*)(f+1))) {
+                if (_isToDS|_isFrDS)
+					_netType = networkTypeManaged;
+                else if (memcmp(_addr3, "\x00\x00\x00\x00\x00\x00", 6)==0) 
+					_netType = networkTypeLucentTunnel;
+                else 
+					_netType = networkTypeAdHoc;
+            }            
+            if (_length >= 24 && is8021xPacket(_payload)) {
                 _isEAP = YES;
-                
                 if ([self isWPAKeyPacket]) 
 					_isWep = encryptionTypeWPA;
-                else if ([self isLEAPKeyPacket]) _isWep = encryptionTypeLEAP;
-                else if (f->frameControl & IEEE80211_WEP) {
-					if (data[3] & WPA_EXT_IV_PRESENT) _isWep = encryptionTypeWPA;
-					else _isWep = encryptionTypeWEP;     //is just WEP
+                else if ([self isLEAPKeyPacket])
+					_isWep = encryptionTypeLEAP;
+                else if (hdr1->frame_ctl & IEEE80211_WEP) {
+					if (_payload[3] & WPA_EXT_IV_PRESENT) 
+						_isWep = encryptionTypeWPA;
+					else
+						_isWep = encryptionTypeWEP;     //is just WEP
 				}
-                else _isWep = encryptionTypeNone;
+                else
+					_isWep = encryptionTypeNone;
             } else {
-                if (f->frameControl & IEEE80211_WEP) {     //is just WEP
-					if ((_length > 16) && (data[3] & WPA_EXT_IV_PRESENT)) _isWep = encryptionTypeWPA;
-					else _isWep = encryptionTypeWEP;
+                if (hdr1->frame_ctl & IEEE80211_WEP) {     //is just WEP
+					if ((_length > 16) && (_payload[3] & WPA_EXT_IV_PRESENT))
+						_isWep = encryptionTypeWPA;
+					else
+						_isWep = encryptionTypeWEP;
 				}
-				else _isWep = encryptionTypeNone;
+				else
+					_isWep = encryptionTypeNone;
             }
             break;            
         case IEEE80211_TYPE_CTL: //Control Frames
             switch(_subtype) {
                 case IEEE80211_SUBTYPE_PS_POLL:
                 case IEEE80211_SUBTYPE_RTS:
-                    _headerLength=16;
-                    break;
                 case IEEE80211_SUBTYPE_CTS:
                 case IEEE80211_SUBTYPE_ACK:
-                    _headerLength=10;
                     break;
                 default:
                     return NO;
             }
-            _length=0;
             break;
         case IEEE80211_TYPE_MGT: //Management Frame
-            _headerLength=24;
-            _length=f->dataLen; //this was prepared in kernel land
             switch (_subtype) {
                 case IEEE80211_SUBTYPE_PROBE_REQ:
-                    if (memcmp(f->address3,"\xff\xff\xff\xff\xff\xff",6)==0) {
-                        ar = [WaveHelper getProbeArrayForID:(char*)f->address2];
+                    if (IS_BCAST_MACADDR(probe_req->header.addr3)) {
+                        ar = [WaveHelper getProbeArrayForID:(char*)probe_req->header.addr2];
                         i = [[ar objectAtIndex:1] intValue];
                         if (i==-1) {
                             _netType = networkTypeProbe;
@@ -241,33 +267,34 @@ bool inline is8021xPacket(const UInt8* fileData) {
                             [ar replaceObjectAtIndex:0 withObject:[NSDate date]];
                             [ar replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:1]];
                         } else if (i>=15) { 
-                            NSLog(@"WARNING!!! Recieved a Probe flood from %@. This usually means that this computer uses a cheap stumbler such as iStumbler, Macstumbler or Netstumbler!", [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", f->address2[0], f->address2[1], f->address2[2], f->address2[3], f->address2[4], f->address2[5]]);
+                            NSLog(@"WARNING!!! Received a Probe flood from %@. This usually means that this computer uses a cheap stumbler such as iStumbler, Macstumbler or Netstumbler!", [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", hdr3->addr2[0], hdr3->addr2[1], hdr3->addr2[2], hdr3->addr2[3], hdr3->addr2[4], hdr3->addr2[5]]);
                             [ar replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:-1]];
                             _netType = networkTypeProbe;
                         } else {
                             [ar replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:i+1]];
                         }
-                        
                     }
                     break;
                 case IEEE80211_SUBTYPE_PROBE_RESP:
                 case IEEE80211_SUBTYPE_BEACON:
-                    p=*((UInt16 *)(((char*)f)+sizeof(WLFrame)+10)); //offset to capabilities
-                    _isWep=((p & IEEE80211_CAPINFO_PRIVACY) ? encryptionTypeWEP : encryptionTypeNone);
-                    if (p & IEEE80211_CAPINFO_ESS) _netType = networkTypeManaged;
-                    else if (p & IEEE80211_CAPINFO_IBSS) _netType = networkTypeAdHoc;
-                    
-                    
-                    [self parseTaggedData:((unsigned char*)f)+sizeof(WLFrame)+12 length:_length-12]; //12 byte fixed info
+                    _isWep=((beacon->capability & IEEE80211_CAPINFO_PRIVACY) ? encryptionTypeWEP : encryptionTypeNone);
+                    if (beacon->capability & IEEE80211_CAPINFO_ESS)
+						_netType = networkTypeManaged;
+                    else if (beacon->capability & IEEE80211_CAPINFO_IBSS)
+						_netType = networkTypeAdHoc;
+                    // TODO: Toggle cast
+                    [self parseTaggedData:(unsigned char *)beacon->info_element length:_length-12]; //12 byte fixed info
                     break;
                 case IEEE80211_SUBTYPE_ASSOC_REQ:
-                    [self parseTaggedData:((unsigned char*)f)+sizeof(WLFrame)+4 length:_length-4]; //4 byte fixed info
+                    // TODO: Toggle cast
+                    [self parseTaggedData:(unsigned char *)assoc_req->info_element length:_length-4]; //4 byte fixed info
                     break;
                 case IEEE80211_SUBTYPE_REASSOC_REQ:
-                    [self parseTaggedData:((unsigned char*)f)+sizeof(WLFrame)+10 length:_length-10]; //10 byte fixed info
+                    // TODO: Toggle cast
+                    [self parseTaggedData:(unsigned char *)reassoc_req->info_element length:_length-10]; //10 byte fixed info
                     break;
                 case IEEE80211_SUBTYPE_DEAUTH:
-                    NSLog(@"ATTENTION! Recieved deauthentication frame. You might want to check for other WiFi people.");
+                    NSLog(@"ATTENTION! Received deauthentication frame. You might want to check for other WiFi people.");
 					break;
             }
             break;
@@ -277,192 +304,218 @@ bool inline is8021xPacket(const UInt8* fileData) {
         
 
     //copy all those interesting MAC addresses
-    memset(_MACAddress, 0, 30);
-    for (i=0;i<18;i++) _MACAddress[i]    = f->address1[i] & 0xFF;
-    for (i=0;i<6 ;i++) _MACAddress[18+i] = f->address4[i] & 0xFF;
-    
+    memcpy(_addr1, hdr4->addr1, ETH_ALEN);
+    memcpy(_addr2, hdr4->addr2, ETH_ALEN);
+    memcpy(_addr3, hdr4->addr3, ETH_ALEN);
+    memcpy(_addr4, hdr4->addr4, ETH_ALEN);
+
     //important for pcap
     gettimeofday(&_creationTime,NULL);
     
-    return YES;        
+    return YES;
 }
 
 #pragma mark -
 
 // This function returns a unique net id for each packet. if it cannot be determined null. bssid is not useable because of tunnels
 - (NSString*)IDString {
-    int i=4, y, x[6];
-    
+    UInt8 *m = nil;
     //if (_isToDS) return nil;
     
     switch (_type) {
         case IEEE80211_TYPE_MGT:
             //probe requests are BS
-            if (_subtype!=IEEE80211_SUBTYPE_PROBE_REQ) i=2;
-            else if (_netType == networkTypeProbe) i=1;
+            if (_subtype != IEEE80211_SUBTYPE_PROBE_REQ)
+                m = _addr3;
+            else if (_netType == networkTypeProbe)
+                m = _addr2;
             break; 
         case IEEE80211_TYPE_CTL:
-            if (_subtype==IEEE80211_SUBTYPE_PS_POLL) i=0;
+            if (_subtype == IEEE80211_SUBTYPE_PS_POLL)
+                m = _addr1;
             break;
         case IEEE80211_TYPE_DATA:
             if((!_isToDS)&&(!_isFrDS)) {
-                if (_netType == networkTypeLucentTunnel) i=1;
-                else i=2;
+                if (_netType == networkTypeLucentTunnel)
+                    m = _addr2;
+                else
+                    m = _addr3;
             }
-            else if((_isToDS)&&(!_isFrDS)) i=0;
-            else if((!_isToDS)&&(_isFrDS)) i=1;
-            else for(y=0;y<6;y++) {
-                if (_MACAddress[y]>_MACAddress[y+6]) { i=0; break; }
-                else if (_MACAddress[y]<_MACAddress[y+6]) { i=1; break; }
-            }
+            else if((_isToDS)&&(!_isFrDS))
+                m = _addr1;
+            else if((!_isToDS)&&(_isFrDS))
+                m = _addr2;
+            else if (IS_GREATER_MACADDR(_addr1, _addr2)) {
+                    m = _addr1;
+                    break;
+                } else if (IS_LESS_MACADDR(_addr1, _addr2)) {
+                    m = _addr2;
+                    break;
+                }
             break;
         default:
             break;
     }
-    if (i==4) return nil;
-    
-    for (y=0;y<6;y++) x[y]=_MACAddress[(i*6)+y];
-    return [NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
-
+    if (m == nil)
+        return nil;
+    return [NSString stringWithFormat:@"%.2X%.2X%.2X%.2X%.2X%.2X", m[0], m[1], m[2], m[3], m[4], m[5], m[6]];
 }
 
 //returns the the id of the sending client
 - (UInt8*)rawSenderID {
-    int i=4;
-
     switch (_type) {
         case IEEE80211_TYPE_MGT:
-            i=1;
-            break; 
+            return _addr2;
         case IEEE80211_TYPE_CTL:
-            if (_subtype==IEEE80211_SUBTYPE_PS_POLL) i=1;
+            if (_subtype==IEEE80211_SUBTYPE_PS_POLL)
+                return _addr2;
             break;
         case IEEE80211_TYPE_DATA:
-            if((!_isToDS)&&(!_isFrDS)) i=1;
-            else if((_isToDS)&&(!_isFrDS)) i=1;
-            else if((!_isToDS)&&(_isFrDS)) i=2;
-            else i=3;
-            break;
+            if((!_isToDS)&&(!_isFrDS))
+                return _addr2;
+            else if((_isToDS)&&(!_isFrDS))
+                return _addr2;
+            else if((!_isToDS)&&(_isFrDS))
+                return _addr3;
+            else
+                return _addr4;
         default:
             break;
     }
-    if (i==4) return nil;
-    
-    return &_MACAddress[i*6];
+    return nil;
 }
-
 - (NSString*)clientFromID {
 	UInt8* mac;
 	mac = [self rawSenderID];
 	
-    if (!mac) return nil;
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]];
+    if (!mac)
+        return nil;
+    return macToString(mac);
 }
 
 //What can I say? returns the the id of the recieving client
 - (NSString*)clientToID {
-    int i=4, y, x[6];
-
+    UInt8 *m = nil;
+    
     switch (_type) {
         case IEEE80211_TYPE_MGT:
-            i=0;
+            m = _addr1;
             break;
         case IEEE80211_TYPE_CTL:
             //ps polls only have a transmitter
-            if (_subtype!=IEEE80211_SUBTYPE_PS_POLL) i=0;
+            if (_subtype!=IEEE80211_SUBTYPE_PS_POLL)
+                m = _addr1;
             break;
         case IEEE80211_TYPE_DATA:
-            if((!_isToDS)&&(!_isFrDS)) i=0;
-            else if((_isToDS)&&(!_isFrDS)) i=2;
-            else if((!_isToDS)&&(_isFrDS)) i=0;
-            else i=2;
+            if((!_isToDS)&&(!_isFrDS))
+                m = _addr1;
+            else if((_isToDS)&&(!_isFrDS))
+                m = _addr3;
+            else if((!_isToDS)&&(_isFrDS))
+                m = _addr1;
+            else
+                m = _addr3;
             break;
         default:
             break;
     }
-    if (i==4) return Nil;
+    if (m == nil)
+        return Nil;
     
-    for (y=0;y<6;y++) x[y]=_MACAddress[(i*6)+y];
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", x[0], x[1], x[2], x[3], x[4], x[5]];
+    return macToString(m);
 }
 
 //What can I say? returns the bssid
 - (UInt8*)rawBSSID {
-    int i=4;
-
+    UInt8 *m;
+    
     switch (_type) {
         case IEEE80211_TYPE_MGT:
             //probe requests are BS
-            if (_subtype != IEEE80211_SUBTYPE_PROBE_REQ) i=2;
-            else if (_netType == networkTypeProbe) i=1;
+            if (_subtype != IEEE80211_SUBTYPE_PROBE_REQ)
+                m = _addr3;
+            else if (_netType == networkTypeProbe)
+                m = _addr2;
             break; 
         case IEEE80211_TYPE_CTL:
-            if (_subtype==IEEE80211_SUBTYPE_PS_POLL) i=0;
+            if (_subtype==IEEE80211_SUBTYPE_PS_POLL)
+                m = _addr1;
             break;
         case IEEE80211_TYPE_DATA:
             if((!_isToDS)&&(!_isFrDS)) {
-                if (_netType == networkTypeLucentTunnel) i=1;
-                else i=2;
+                if (_netType == networkTypeLucentTunnel)
+                    m = _addr2;
+                else
+                    m = _addr3;
             }
-            else if((_isToDS)&&(!_isFrDS)) i=0;
-            else if((!_isToDS)&&(_isFrDS)) i=1;
+            else if((_isToDS)&&(!_isFrDS))
+                m = _addr1;
+            else if((!_isToDS)&&(_isFrDS))
+                m = _addr2;
             break;
         default:
             break;
     }
-    if (i==4) return nil;
-    
-    return &_MACAddress[i*6];
+    return m;
 }
-
 - (NSString*)BSSIDString {
 	UInt8* mac;
 	mac = [self rawBSSID];
 	
-    if (!mac) return @"<no bssid>";
-    return [NSString stringWithFormat:@"%.2X:%.2X:%.2X:%.2X:%.2X:%.2X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]];
+    if (!mac)
+        return @"<no bssid>";
+    return macToString(mac);
 }
-
 - (bool)BSSID:(UInt8*)bssid {
 	UInt8* mac;
 	mac = [self rawBSSID];
 	
     if (!mac) return NO;
-    memcpy(bssid, mac, 6);
+    memcpy(bssid, mac, ETH_ALEN);
 	
     return YES;
 }
-
 - (bool)ID:(UInt8*)netid {
-    int i=4, y;
-    
+    UInt8 *m = nil;
+
     switch (_type) {
         case IEEE80211_TYPE_MGT:
             //probe requests are BS
-            if (_subtype!=IEEE80211_SUBTYPE_PROBE_REQ) i=2;
-            else if (_netType == networkTypeProbe) i=1;
+            if (_subtype!=IEEE80211_SUBTYPE_PROBE_REQ) 
+                m = _addr3;
+            else if (_netType == networkTypeProbe)
+                m = _addr2;
             break; 
         case IEEE80211_TYPE_CTL:
-            if (_subtype==IEEE80211_SUBTYPE_PS_POLL) i=0;
+            if (_subtype==IEEE80211_SUBTYPE_PS_POLL)
+                m = _addr1;
             break;
         case IEEE80211_TYPE_DATA:
             if((!_isToDS)&&(!_isFrDS)) {
-                if (_netType == networkTypeLucentTunnel) i=1;
-                i=2;
+                if (_netType == networkTypeLucentTunnel)
+                    m = _addr2;
+                else
+                    m = _addr3;
             }
-            else if((_isToDS)&&(!_isFrDS)) i=0;
-            else if((!_isToDS)&&(_isFrDS)) i=1;
-            else for(y=0;y<6;y++) {
-                if (_MACAddress[y] > _MACAddress[y+6]) { i=0; break; }
-                else if (_MACAddress[y] < _MACAddress[y+6]) { i=1; break; }
-            }
+            else if((_isToDS)&&(!_isFrDS))
+                m = _addr1;
+            else if((!_isToDS)&&(_isFrDS))
+                m = _addr2;
+            else if (IS_GREATER_MACADDR(_addr1, _addr2)) {
+                    m = _addr1;
+                    break;
+                } else if (IS_LESS_MACADDR(_addr1, _addr2)) {
+                    m = _addr2;
+                    break;
+                }
             break;
         default:
             break;
     }
-    if (i==4) return NO;
+    if (m == nil)
+        return NO;
     
-    for (y=0;y<6;y++) netid[y] = _MACAddress[(i*6)+y];
+    memcpy(netid, m, ETH_ALEN);
     return YES;
 }
 
@@ -470,25 +523,28 @@ bool inline is8021xPacket(const UInt8* fileData) {
 
 //writes the frame into the pcap file f
 -(void)dump:(void*)f {
-    if (!f) return; //this happens when dumping was switched on while scanning
+    if (!f)
+        return; //this happens when dumping was switched on while scanning
     pcap_pkthdr h;
 
     memcpy(&h.ts, &_creationTime, sizeof(struct timeval));
-	h.len = h.caplen = _length + _headerLength;
-    
-    pcap_dump((u_char*)f, &h, (u_char*)[self frame]);
+	h.len = h.caplen = _length;
+    pcap_dump((u_char*)f, &h, (u_char*)_frame);
 }
 
 -(id)init {
     if ((self = [super init]) != nil) {
-        memset(_MACAddress, 0, 30);
+        bzero(_addr1, ETH_ALEN);
+        bzero(_addr2, ETH_ALEN);
+        bzero(_addr3, ETH_ALEN);
+        bzero(_addr4, ETH_ALEN);
         _frame = NULL;
+        _payload = NULL;
     }
     return self;
 }
 
 -(void) dealloc {
-    if (_frame) delete [] _frame;
     [super dealloc];
 }
 
@@ -496,10 +552,10 @@ bool inline is8021xPacket(const UInt8* fileData) {
     return _signal;
 }
 - (int)length {
-    return _length+_headerLength;
-}
-- (int)bodyLength {
     return _length;
+}
+- (int)payloadLength {
+    return _payloadLength;
 }
 - (int)channel {
     return _channel;
@@ -535,16 +591,10 @@ bool inline is8021xPacket(const UInt8* fileData) {
 	memcpy(rates, _rates, _rateCount);
 	return _rateCount;
 }
-- (UInt8*) framebody {
-    return _rawFrame + sizeof(WLFrame);
+- (UInt8*) payload {
+    return _payload;
 }
 - (UInt8*) frame {
-    if (!_frame) {
-        _frame = (UInt8*) new char[_headerLength + _length];
-        memcpy(_frame,                        (_rawFrame) + sizeof(struct sAirportFrame),_headerLength);
-        memcpy(((char*)_frame)+_headerLength, (_rawFrame) + sizeof(WLFrame),             _length);
-    }
-	
     return _frame;
 }
 - (bool)isEAPPacket {
@@ -556,28 +606,24 @@ bool inline is8021xPacket(const UInt8* fileData) {
 //which keybyte will be reveled by this packet
 //-1 if none
 - (int)isResolved {
-    unsigned char *p;
-    
     if (_revelsKeyByte != -2) return _revelsKeyByte;
     
-    if ((_isWep!=encryptionTypeWEP && _isWep!=encryptionTypeWEP40) || (_type!=IEEE80211_TYPE_DATA) || (_length<9)) {
+    if ((_isWep!=encryptionTypeWEP && _isWep!=encryptionTypeWEP40) || (_type!=IEEE80211_TYPE_DATA) || (_payloadLength<9)) {
         _revelsKeyByte = -1;
         return _revelsKeyByte;
     }
-    
-    p=(UInt8*)(_rawFrame+sizeof(WLFrame));
-    
-    int a = (p[0] + p[1]) % N;
-    int b = AMOD((p[0] + p[1]) - p[2], N);
+        
+    int a = (_payload[0] + _payload[1]) % N;
+    int b = AMOD((_payload[0] + _payload[1]) - _payload[2], N);
 
     for(UInt8 B = 0; B < 13; B++) {
       if((((0 <= a && a < B) ||
          (a == B && b == (B + 1) * 2)) &&
          (B % 2 ? a != (B + 1) / 2 : 1)) ||
          (a == B + 1 && (B == 0 ? b == (B + 1) * 2 : 1)) ||
-         (p[0] == B + 3 && p[1] == N - 1) ||
-         (B != 0 && !(B % 2) ? (p[0] == 1 && p[1] == (B / 2) + 1) ||
-         (p[0] == (B / 2) + 2 && p[1] == (N - 1) - p[0]) : 0)) {
+         (_payload[0] == B + 3 && _payload[1] == N - 1) ||
+         (B != 0 && !(B % 2) ? (_payload[0] == 1 && _payload[1] == (B / 2) + 1) ||
+         (_payload[0] == (B / 2) + 2 && _payload[1] == (N - 1) - _payload[0]) : 0)) {
             //NSLog(@"We got a weak packet reveling byte: %u",B);
             _revelsKeyByte = B;
             return _revelsKeyByte;
@@ -589,31 +635,27 @@ bool inline is8021xPacket(const UInt8* fileData) {
     _revelsKeyByte = -1;
     return _revelsKeyByte;
 }
-
 - (int)isResolved2 {
-    unsigned char *p;
     unsigned char sum, k;
     
-    if ((_isWep!=encryptionTypeWEP && _isWep!=encryptionTypeWEP40) || (_type!=IEEE80211_TYPE_DATA) || (_length<9)) return -1;
-    
-    p=(UInt8*)(_rawFrame+sizeof(WLFrame));
-    
-    if ((p[0]>3) && (p[2]>=254) && (p[1]+p[0]-p[2]==2)) 
+    if ((_isWep!=encryptionTypeWEP && _isWep!=encryptionTypeWEP40) || (_type!=IEEE80211_TYPE_DATA) || (_payloadLength<9)) return -1;
+
+    if ((_payload[0]>3) && (_payload[2]>=254) && (_payload[1]+_payload[0]-_payload[2]==2)) 
             return 0;
 
-    if (p[1] == 255 && p[0] > 2 && p[0] < 16) return p[0] - 3; //this is for the base line attack
+    if (_payload[1] == 255 && _payload[0] > 2 && _payload[0] < 16) return _payload[0] - 3; //this is for the base line attack
 
-    sum = p[0] + p[1];
+    sum = _payload[0] + _payload[1];
     if (sum == 1) {
-        if (p[2] <= 0x0A) return p[2] + 2;
-        if (p[2] == 0xFF) return 0;
+        if (_payload[2] <= 0x0A) return _payload[2] + 2;
+        if (_payload[2] == 0xFF) return 0;
         return -1;
     } if (sum < 13) {
-        k = 0xFE - p[2];
+        k = 0xFE - _payload[2];
         if (sum == k) return k;
     }
-    //k = 0xFE - p[2];
-    //if (sum == k && (p[2] >= 0xF2 && p[2] <= 0xFE)) return k;
+    //k = 0xFE - _payload[2];
+    //if (sum == k && (_payload[2] >= 0xF2 && _payload[2] <= 0xFE)) return k;
 
     return -1;
 }
@@ -645,14 +687,12 @@ int detectLLCAndSNAP(UInt8 *fileData, int fileLength) {
             return FALSE;
     }
 }
-
 int detectIPVersion(UInt8 *fileData, int fileLength) {
     if (fileLength < 9)
         return -1;
     else 
         return (fileData[8] >> 4);
 }
-
 int detectIPHeaderLength(UInt8 *fileData, int fileLength) {
     
     unsigned char shiftLeft;
@@ -665,7 +705,6 @@ int detectIPHeaderLength(UInt8 *fileData, int fileLength) {
         return (shiftLeft >> 4);
     }
 }
-
 int verifyIPv4Checksum(UInt8 *fileData, int fileLength) {
 	
     long computedChecksum;
@@ -692,7 +731,6 @@ int verifyIPv4Checksum(UInt8 *fileData, int fileLength) {
             return FALSE;
     }	
 }
-
 int isValidPacket(UInt8 *fileData, int fileLength) {
     if (detectLLCAndSNAP(fileData, fileLength) == TRUE) {
         // frame probably contains data. 
@@ -720,63 +758,71 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
         return -1;
     }
 }
-
 - (UInt8*) ipPacket {
     UInt8* body;
     
     if (_type != IEEE80211_TYPE_DATA) return nil;
     if (_isWep != encryptionTypeNone) return nil; // TODO decrypt if key is known. For later dissection
     
-    body = [self framebody];
-    if (isValidPacket(body, [self bodyLength]) != 4) return nil;
+    if (isValidPacket(_payload, _payloadLength) != 4) return nil;
     return body + 8;
 }
 
 // Methods for external use.
 
+#pragma mark -
+#pragma mark MAC Addresses
+#pragma mark -
+
+- (UInt8 *)addr1 {
+    return _addr1;
+}
+- (UInt8 *)addr2 {
+    return _addr2;
+}
+- (UInt8 *)addr3 {
+    return _addr3;
+}
+- (UInt8 *)addr4 {
+    return _addr4;
+}
+
 - (NSString *)sourceIPAsString {
-    int frameLength = [self bodyLength];
     
-    if (isValidPacket(_rawFrame+sizeof(WLFrame), frameLength) == 4) 
-        return [NSString stringWithFormat:@"%u.%u.%u.%u", _rawFrame[20+sizeof(WLFrame)], _rawFrame[21+sizeof(WLFrame)], _rawFrame[22+sizeof(WLFrame)], _rawFrame[23+sizeof(WLFrame)]];
+    if (isValidPacket(_payload, _payloadLength) == 4) 
+        return [NSString stringWithFormat:@"%u.%u.%u.%u", *(_payload+20), *(_payload+21), *(_payload+22), *(_payload+23)];
     else
         return nil;
 }
-
 - (NSString *)destinationIPAsString {
-    int frameLength = [self bodyLength];
     
-    if (isValidPacket(_rawFrame+sizeof(WLFrame), frameLength) == 4)  
-        return [NSString stringWithFormat:@"%u.%u.%u.%u", _rawFrame[24+sizeof(WLFrame)], _rawFrame[25+sizeof(WLFrame)], _rawFrame[26+sizeof(WLFrame)], _rawFrame[27+sizeof(WLFrame)]];
+    if (isValidPacket(_payload, _payloadLength) == 4)  
+        return [NSString stringWithFormat:@"%u.%u.%u.%u", *(_payload+24), *(_payload+25), *(_payload+26), *(_payload+27)];
     else
         return nil;
 }
-
 - (unsigned char *)sourceIPAsData {
-    int frameLength = [self bodyLength];
     unsigned char *targetAddress = (unsigned char *)malloc(sizeof(unsigned char) * 4);
     
     if (targetAddress == NULL) 
         return nil;
     else {
-        if (isValidPacket(_rawFrame+sizeof(WLFrame), frameLength) == 4) {
-            memcpy(&targetAddress, &_rawFrame[20 + sizeof(WLFrame)], 4);
+        if (isValidPacket(_payload, _payloadLength) == 4) {
+            memcpy(targetAddress, _payload+20, 4);
             return targetAddress;
         }
         else
             return nil;
     }
 }
-
 - (unsigned char *)destinationIPAsData {
-    int frameLength = [self bodyLength];
     unsigned char *targetAddress = (unsigned char *)malloc(sizeof(unsigned char) * 4);
     
     if (targetAddress == NULL) 
         return nil;
     else {
-        if (isValidPacket(_rawFrame+sizeof(WLFrame), frameLength) == 4) {
-            memcpy(&targetAddress, &_rawFrame[24+sizeof(WLFrame)], 4);
+        if (isValidPacket(_payload, _payloadLength) == 4) {
+            memcpy(targetAddress, _payload, 4);
             return targetAddress;
         }
         else
@@ -789,25 +835,27 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
 #pragma mark -
 
 - (bool)isWPAKeyPacket {
-    if (!_isEAP) return NO;
-    
-    int frameLength = [self bodyLength];
+    if (!_isEAP)
+        return NO;
+        
     UInt8 *zeroNonce[WPA_NONCE_LENGTH];
     frame8021x *f;
     UInt16 flags;
     
-    if (frameLength < 99) return NO;
+    if (_payloadLength < 99)
+        return NO;
     
-    f = (frame8021x*)&_rawFrame[8+sizeof(WLFrame)];
+    f = (frame8021x*)(_payload+8);
     
     if (f->version != 1 ||      //version 1
         f->type != 3 ||         //should be a key
-        _rawFrame[12+sizeof(WLFrame)] != 254)   //should be a WPA key
+        *(_payload+12) != 254)   //should be a WPA key
             return NO;
     
-    flags = *((UInt16*)(&_rawFrame[13+sizeof(WLFrame)]));
+    flags = *((UInt16*)(_payload+13));
     
-    if (flags & WPA_FLAG_KEYTYPE == WPA_FLAG_KEYTYPE_GROUPWISE) return NO; //this is not interesting
+    if (flags & WPA_FLAG_KEYTYPE == WPA_FLAG_KEYTYPE_GROUPWISE)
+         return NO; //this is not interesting
     
     _wpaCipher = flags & WPA_FLAG_KEYCIPHER;
     switch (flags & (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL)) {
@@ -816,8 +864,10 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
             break;
         case WPA_FLAG_MIC:  //only mic set
             memset(zeroNonce, 0, WPA_NONCE_LENGTH);
-            if (memcmp(zeroNonce, &_rawFrame[25+sizeof(WLFrame)], WPA_NONCE_LENGTH)) _nonce = wpaNonceSNonce;
-            else  _nonce = wpaNonceNone;
+            if (memcmp(zeroNonce, _payload+25, WPA_NONCE_LENGTH))
+                _nonce = wpaNonceSNonce;
+            else
+                _nonce = wpaNonceNone;
             break;
         case WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL:  //all set
             _nonce = wpaNonceANonce;
@@ -828,34 +878,34 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     
     return YES;
 }
-
 - (int)wpaKeyCipher {
     return _wpaCipher;
 }
-
 - (wpaNoncePresent)wpaCopyNonce:(UInt8*)destNonce {
+
     if (destNonce) {
-        memcpy(destNonce, &_rawFrame[25+sizeof(WLFrame)], WPA_NONCE_LENGTH);
+        memcpy(destNonce, _payload+25, WPA_NONCE_LENGTH);
     }
     
     return _nonce;
 }
-
 - (NSData*)eapolMIC {
-    UInt16 flags = *((UInt16*)(&_rawFrame[13+sizeof(WLFrame)]));
+    UInt16 flags = *((UInt16*)(_payload+13));
     
-    if ((flags & WPA_FLAG_MIC) == 0) return Nil; //no MIC present
+    if ((flags & WPA_FLAG_MIC) == 0)
+        return Nil; //no MIC present
 
-    return [NSData dataWithBytes:&_rawFrame[81+8+sizeof(WLFrame)] length:WPA_EAP_MIC_LENGTH];
+    return [NSData dataWithBytes:(_payload+89) length:WPA_EAP_MIC_LENGTH];
 }
-
 - (NSData*)eapolData {
-    UInt16 flags = *((UInt16*)(&_rawFrame[13+sizeof(WLFrame)]));
+    UInt16 flags = *((UInt16*)(_payload+13));
+
     NSMutableData *md;
     
-    if ((flags & WPA_FLAG_MIC) == 0) return Nil; //no MIC present
+    if ((flags & WPA_FLAG_MIC) == 0)
+        return Nil; //no MIC present
 
-    md = [NSMutableData dataWithBytes:&_rawFrame[8+sizeof(WLFrame)] length:[self bodyLength] - 8];    //copy the whole key packet
+    md = [NSMutableData dataWithBytes:(_payload+8) length:_payloadLength - 8];    //copy the whole key packet
     memset(&((UInt8*)[md mutableBytes])[81], 0, WPA_EAP_MIC_LENGTH);
     
     return md;
@@ -866,13 +916,13 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
 #pragma mark -
 
 - (bool)isLEAPKeyPacket {
-    if (!_isEAP) return NO;
-    int frameLength = [self bodyLength];
+    if (!_isEAP)
+        return NO;
     frame8021x  *f;
     frameLEAP   *l;
     int         userLength;
     
-    f = (frame8021x*)&_rawFrame[8+sizeof(WLFrame)];
+    f = (frame8021x*)(_payload+8);
     l = (frameLEAP*) &f->data;
     
     if (f->version != 1 || 
@@ -884,12 +934,12 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     switch (_leapCode) {
         case leapAuthCodeChallenge: //handle challenge
             userLength = l->length-16;
-            if (frameLength-24 < userLength) return NO;
+            if (_payloadLength-24 < userLength) return NO;
             [WaveHelper secureReplace:&_challenge   withObject:[NSData dataWithBytes:l->challenge length:8]];
             [WaveHelper secureReplace:&_username    withObject:[NSString stringWithCString:(char*)&l->name length:userLength]];
             break;
         case leapAuthCodeResponse:  //handle response
-            if (frameLength-16 < 24) return NO;
+            if (_payloadLength-16 < 24) return NO;
             [WaveHelper secureReplace:&_response   withObject:[NSData dataWithBytes:l->challenge length:24]];
             break; 
         default:
@@ -898,7 +948,6 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     
     return YES;
 }
-
 - (leapAuthCode)leapCode {
     return _leapCode;
 }

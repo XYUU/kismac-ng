@@ -10,6 +10,8 @@
 #include "RalinkJack.h"
 #include "rt2570.h"
 
+#define align64(a)      (((a)+63)&~63)
+
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
 	unsigned short			temp;
@@ -89,12 +91,12 @@ IOReturn RalinkJack::_init() {
         RTUSBWriteMACRegister(MAC_CSR20, 0x0000);        //put led under software control
         RTUSBWriteMACRegister(MAC_CSR1, 4);        //host is ready to work
 
-/*        //power save stuff
+        //power save stuff
         RTUSBWriteMACRegister(MAC_CSR11, 2);
         RTUSBWriteMACRegister(MAC_CSR22, 0x53);
         RTUSBWriteMACRegister(MAC_CSR15, 0x01ee);
         RTUSBWriteMACRegister(MAC_CSR16, 0);
-        RTUSBWriteMACRegister(MAC_CSR8, 0x0780);//steven:limit the maximum frame length
+/*        RTUSBWriteMACRegister(MAC_CSR8, 0x0780);//steven:limit the maximum frame length
             
         RTUSBReadMACRegister(TXRX_CSR0, &temp);
         temp &= 0xe007;
@@ -879,7 +881,7 @@ void RalinkJack::NICInitAsicFromEEPROM()
 	NSLog(@"<-- NICInitAsicFromEEPROM\n");
 }
 
-bool    RalinkJack::setChannel(UInt16 channel){
+bool RalinkJack::setChannel(UInt16 channel){
 	ULONG R3;
 	UCHAR index;
     
@@ -1041,47 +1043,73 @@ bool RalinkJack::stopCapture(){
     return true;
 }
 
-int RalinkJack::WriteTxDescriptor(WLFrame * theFrame){
-    //here we will constrict a TXD_STRUC from the contents of theFrame
-    //and some defaults taken from the linux driver
-    //then, WLFrame will be overwritten with the TXD_STRUC and
-    //sizeof(TXD_STRUC) will be returned
-    TXD_STRUC *	pTxD;
-    UInt8 tempFrame[sizeof(TXD_STRUC)];
-    pTxD = (TXD_STRUC *)&tempFrame;
-    //todo fixme!!
-    
-    //stuff it
-    pTxD->RetryLimit = 0;
-    pTxD->MoreFrag = false;
-    pTxD->ACK         = false;
-	pTxD->Timestamp   = false;
-	pTxD->newseq      = true; //?
-	//pTxD->IFS         = Ifs;
-	pTxD->DataByteCnt = theFrame->dataLen;
-	pTxD->Cipher	  = false;
-	pTxD->KeyID		  = 0;
-	pTxD->CWmin       = 2^5-1;// = 31
-	pTxD->CWmax       = 2^10 -1;// = 1023
-	pTxD->Aifs        = 2;   // TC0: SIFS + 2*Slot + Random(CWmin,CWmax)*Slot
-    //maybe?
-    pTxD->Ofdm = 1;
-    
-    //now copy the txd_struc over the old wlframe
-     memcpy(theFrame, tempFrame, sizeof(TXD_STRUC));
-     
-    return sizeof(TXD_STRUC);
+bool RalinkJack::sendFrame(UInt8* data, int size) {
+    NSLog(@"%s", __func__);
+    UInt8 aData[2364];
+    unsigned int descriptorLength;
+    descriptorLength = WriteTxDescriptor(aData, size);
+    memcpy(aData+descriptorLength, data, size);
+    //send the frame
+    if (_sendFrame(aData, size + descriptorLength) != kIOReturnSuccess)
+        return NO;
+    return YES;
+}
+void    RalinkJack::RTMPDescriptorEndianChange(unsigned char *  pData, unsigned long DescriptorType) {
+    int size = (DescriptorType == TYPE_TXD) ? TXD_SIZE : RXD_SIZE;
+    int i;
+    for (i=1; i<size/4; i++) {
+        /*
+         * Handle IV and EIV with little endian
+         */
+        if (DescriptorType == TYPE_TXD) {
+            /* Skip Word 3 IV and Word 4 EIV of TXD */
+            if (i==3||i==4)  
+                continue; 
+        } else {
+            /* Skip Word 2 IV and Word 3 EIV of RXD */
+            if (i==2||i==3)  
+                continue; 
+        }
+        *((unsigned long *)(pData + i*4)) = SWAP32(*((unsigned long *)(pData + i*4))); 
+    }
+    *(unsigned long *)pData = SWAP32(*(unsigned long *)pData);  // Word 0; this must be swapped last
 }
 
-bool RalinkJack::_massagePacket(int len){
+int RalinkJack::WriteTxDescriptor(void* theFrame, UInt16 length){
+    memset(theFrame, 0, sizeof(TXD_STRUC));
+    TXD_STRUC *pTxD;
+    pTxD = (TXD_STRUC *)theFrame;
+    
+    //stuff it
+    pTxD->RetryLimit  = 0;
+    pTxD->MoreFrag    = 0;
+    pTxD->ACK         = 0;
+	pTxD->Timestamp   = 0;
+	pTxD->newseq      = true; //?
+	pTxD->IFS         = 1;
+	pTxD->DataByteCnt = length;
+	pTxD->Cipher	  = 0;
+	pTxD->KeyID		  = 0;
+	pTxD->CWmin       = 5;// = 31
+	pTxD->CWmax       = 10;// = 1023
+	pTxD->Aifs        = 2;   // TC0: SIFS + 2*Slot + Random(CWmin,CWmax)*Slot
+    //maybe?
+    pTxD->Ofdm        = 1;
+
+#ifdef __BIG_ENDIAN__
+    RTMPDescriptorEndianChange((unsigned char *)pTxD, TYPE_TXD);
+#endif
+    
+    return sizeof(TXD_STRUC);
+}
+bool RalinkJack::_massagePacket(UInt16 len){
     unsigned char* pData;
-    UInt8 frame[sizeof(_recieveBuffer)];
-    WLFrame * tempFrame;
+    KFrame frame;
+    KFrame *pFrame = &frame;
     PRXD_STRUC		pRxD;
-    
-    bzero(frame,sizeof(_recieveBuffer));
-    tempFrame = (WLFrame *)frame;
-    
+        
+    bzero(pFrame, sizeof(KFrame));
+
     if (len < sizeof(RXD_STRUC)) {
         NSLog(@"WTF, packet len %d shorter than footer %d!", len, sizeof(RXD_STRUC));
         return false;
@@ -1090,9 +1118,13 @@ bool RalinkJack::_massagePacket(int len){
     //flash the led for fun
     RTUSBWriteMACRegister(MAC_CSR20, 0x0007);        //put led under software control
 
-    pData = (unsigned char*)&_recieveBuffer;
-
+    pData = (unsigned char*)&_receiveBuffer;
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
+#ifdef __BIG_ENDIAN__
+    RTMPDescriptorEndianChange((unsigned char *)pRxD, TYPE_RXD);
+#endif
+    
+    NSLog(@"DataByteCnt %d len %d", pRxD->DataByteCnt, len);
  /*   if (pRxD->Crc) {
         //NSLog(@"Bad CRC");
         return false;  //its a bad packet, signal the interrupt to continue
@@ -1107,35 +1139,47 @@ bool RalinkJack::_massagePacket(int len){
     }
     else {*/
        // NSLog(@"Good Frame : %d, %d, %d", pRxD->Crc, pRxD->CiErr, pRxD->PhyErr);
-    // this is probablty not the most efficient way to do this
-        tempFrame->silence = pRxD->BBR1;
-        tempFrame->dataLen = NSSwapLittleShortToHost(len - 28 - (sizeof(RXD_STRUC)));
-        
-        memcpy(frame + sizeof(WLPrismHeader), pData, 24); //copy the 80211 header,  24 not 32 bytes
-        //if the packet is less than 46 bytes, we can't exactly copy any more
-        if (len > 46) {
-            memcpy(frame + sizeof(WLPrismHeader) + 32 + 14, pData + 24,len-(32+sizeof(WLPrismHeader)));
-           // NSLog(@"Normal packet %d", len);
-        }
-        else {
-            NSLog(@"RalinkJack::Really short packet! %d", len);
-            return false;
-        }
 
-        memcpy(&_recieveBuffer, frame, sizeof(_recieveBuffer));
-        RTUSBWriteMACRegister(MAC_CSR20, 0x0002);  
-        return true;         //override if needed
-   // }
-   // return false;
+    // this is probablty not the most efficient way to do this
+    frame.ctrl.signal = pRxD->BBR1;
+    frame.ctrl.len = len - sizeof(RXD_STRUC);
+    
+    memcpy(frame.data, pData, frame.ctrl.len); 
+    memcpy(&_receiveBuffer, pFrame, sizeof(KFrame));
+
+    // flash LED off
+    RTUSBWriteMACRegister(MAC_CSR20, 0x0002);  
+    return true;         //override if needed
+}
+IOReturn RalinkJack::_sendFrame(UInt8* data, IOByteCount size) {
+    UInt32      numBytes;
+    IOReturn    kr;
+    
+    if (!_devicePresent) return kIOReturnError;
+    
+    if (_interface == NULL) {
+        NSLog(@"RalinkJack::_sendFrame called with NULL interface this is prohibited!\n");
+        return kIOReturnError;
+    }
+    
+    _lockDevice();
+    
+    memcpy(&_outputBuffer, data, size);
+    
+    numBytes =  align64(size);
+    
+    kr = (*_interface)->WritePipe(_interface, kOutPipe, &_outputBuffer, numBytes);
+    
+    _unlockDevice();
+    
+    return kr;
 }
 
 RalinkJack::RalinkJack() {
 }
-
 RalinkJack::~RalinkJack() {
   /*  stopRun();
     _interface = NULL;
-    _frameSize = 0;
     
     pthread_mutex_destroy(&_wait_mutex);
     pthread_cond_destroy(&_wait_cond);
