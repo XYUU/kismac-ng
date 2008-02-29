@@ -94,10 +94,18 @@ bool inline is8021xPacket(const UInt8* fileData) {
             if (len == 1 && length >= 3)
                 _primaryChannel = (UInt8)(*(packet+2));
             break;
+        case IEEE80211_ELEMID_RSN:
+            // WPA2 Detecting
+            len=(*(packet+1));
+            if (len < 6)
+                break;
+            if (memcmp(packet+4, RSN_OUI, 3) == 0)
+				_isWep = encryptionTypeWPA;                
+            break;
         case IEEE80211_ELEMID_VENDOR:
             len=(*(packet+1));
-            if (len <= 4 || length < len+2) break;
-			
+            if (len <= 4 || length < len + 2)
+                break;
 			vendorID = (UInt32*)(packet+2);
 			if ((*vendorID) == VENDOR_WPA_HEADER) {
 				_isWep = encryptionTypeWPA;
