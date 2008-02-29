@@ -1074,7 +1074,6 @@ void    RalinkJack::RTMPDescriptorEndianChange(unsigned char *  pData, unsigned 
     }
     *(unsigned long *)pData = SWAP32(*(unsigned long *)pData);  // Word 0; this must be swapped last
 }
-
 int RalinkJack::WriteTxDescriptor(void* theFrame, UInt16 length){
     memset(theFrame, 0, sizeof(TXD_STRUC));
     TXD_STRUC *pTxD;
@@ -1120,6 +1119,7 @@ bool RalinkJack::_massagePacket(UInt16 len){
 
     pData = (unsigned char*)&_receiveBuffer;
     pRxD = (PRXD_STRUC)(pData + len - sizeof(RXD_STRUC));
+
 #ifdef __BIG_ENDIAN__
     RTMPDescriptorEndianChange((unsigned char *)pRxD, TYPE_RXD);
 #endif
@@ -1142,7 +1142,7 @@ bool RalinkJack::_massagePacket(UInt16 len){
 
     // this is probablty not the most efficient way to do this
     frame.ctrl.signal = pRxD->BBR1;
-    frame.ctrl.len = len - sizeof(RXD_STRUC);
+    frame.ctrl.len = len - sizeof(RXD_STRUC) - 4;
     
     memcpy(frame.data, pData, frame.ctrl.len); 
     memcpy(&_receiveBuffer, pFrame, sizeof(KFrame));
