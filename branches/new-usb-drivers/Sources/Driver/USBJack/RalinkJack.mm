@@ -12,6 +12,11 @@
 
 #define align64(a)      (((a)+63)&~63)
 
+unsigned char   RT2570_RateIdToPlcpSignal[12] = { 
+    0, /* RATE_1 */        1, /* RATE_2 */         2, /* RATE_5_5 */       3, /* RATE_11 */        // see BBP spec
+    11, /* RATE_6 */   15, /* RATE_9 */    10, /* RATE_12 */   14, /* RATE_18 */    // see IEEE802.11a-1999 p.14
+9, /* RATE_24 */  13, /* RATE_36 */    8, /* RATE_48 */   12  /* RATE_54 */ }; // see IEEE802.11a-1999 p.14
+
 IOReturn RalinkJack::_init() {
     unsigned long			Index;
 	unsigned short			temp;
@@ -163,7 +168,8 @@ IOReturn RalinkJack::_init() {
     
     NICReadEEPROMParameters();
     NICInitAsicFromEEPROM();
-        return kIOReturnSuccess;
+    currentRate = RATE_54;
+    return kIOReturnSuccess;
 }
 
 IOReturn	RalinkJack::RTUSB_VendorRequest(UInt8 direction,
@@ -1075,32 +1081,64 @@ void    RalinkJack::RTMPDescriptorEndianChange(unsigned char *  pData, unsigned 
     *(unsigned long *)pData = SWAP32(*(unsigned long *)pData);  // Word 0; this must be swapped last
 }
 int RalinkJack::WriteTxDescriptor(void* theFrame, UInt16 length){
+    unsigned int Residual;
     memset(theFrame, 0, sizeof(TXD_STRUC));
     TXD_STRUC *pTxD;
     pTxD = (TXD_STRUC *)theFrame;
     
-    //stuff it
     pTxD->RetryLimit  = 0;
     pTxD->MoreFrag    = 0;
     pTxD->ACK         = 0;
 	pTxD->Timestamp   = 0;
-	pTxD->newseq      = true; //?
+    pTxD->Ofdm        = (currentRate < RATE_FIRST_OFDM_RATE)? 0:1;
+	pTxD->newseq      = 0;
 	pTxD->IFS         = 1;
 	pTxD->DataByteCnt = length;
 	pTxD->Cipher	  = 0;
 	pTxD->KeyID		  = 0;
-	pTxD->CWmin       = 5;// = 31
-	pTxD->CWmax       = 10;// = 1023
+    
+    //stuff it
 	pTxD->Aifs        = 2;   // TC0: SIFS + 2*Slot + Random(CWmin,CWmax)*Slot
-    //maybe?
-    pTxD->Ofdm        = 1;
+	pTxD->CWmin       = 4;   // = 31
+	pTxD->CWmax       = 10;  // = 1023
 
+    // fill up PLCP SIGNAL field
+    pTxD->PlcpSignal = RT2570_RateIdToPlcpSignal[currentRate];
+    // fill up PLCP SERVICE field, not used for OFDM rates
+    pTxD->PlcpService = 4; // Service;
+    
+    length += 4;
+    
+    if (currentRate < RATE_FIRST_OFDM_RATE) {
+        // 11b - RATE_1, RATE_2, RATE_5_5, RATE_11
+        if ((currentRate == RATE_1) || ( currentRate == RATE_2)) {
+            length = length * 8 / (currentRate + 1);
+        } else {
+            Residual = ((length * 16) % (11 * (1 + currentRate - RATE_5_5)));
+            length = length * 16 / (11 * (1 + currentRate - RATE_5_5));
+            if (Residual != 0) {
+                length++;
+            }
+            if ((Residual <= (3 * (1 + currentRate - RATE_5_5))) && (Residual != 0)) {
+                if (currentRate == RATE_11)                    // Only 11Mbps require length extension bit
+                    pTxD->PlcpService |= 0x80; // 11b's PLCP length extension bit
+            }
+        }
+        pTxD->PlcpLengthHigh = length >> 8; // 256;
+        pTxD->PlcpLengthLow = length % 256;
+    } else {
+        // OFDM - RATE_6, RATE_9, RATE_12, RATE_18, RATE_24, RATE_36, RATE_48, RATE_54
+        pTxD->PlcpLengthHigh = length >> 6; // 64;      // high 6-bit of total byte count
+        pTxD->PlcpLengthLow = length % 64;       // low 6-bit of total byte count
+    }
+
+    
 #ifdef __BIG_ENDIAN__
     RTMPDescriptorEndianChange((unsigned char *)pTxD, TYPE_TXD);
 #endif
-    
     return sizeof(TXD_STRUC);
 }
+
 bool RalinkJack::_massagePacket(UInt16 len){
     unsigned char* pData;
     KFrame frame;
@@ -1151,6 +1189,7 @@ bool RalinkJack::_massagePacket(UInt16 len){
     RTUSBWriteMACRegister(MAC_CSR20, 0x0002);  
     return true;         //override if needed
 }
+
 IOReturn RalinkJack::_sendFrame(UInt8* data, IOByteCount size) {
     UInt32      numBytes;
     IOReturn    kr;

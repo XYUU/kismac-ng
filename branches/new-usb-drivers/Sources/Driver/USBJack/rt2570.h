@@ -34,6 +34,8 @@
 #ifndef	__RT2570_H__
 #define	__RT2570_H__
 
+#include "ralink.h"
+
 #define ULONG unsigned long
 #define UCHAR unsigned char
 #define USHORT unsigned short
@@ -520,7 +522,7 @@ typedef	struct	_TXD_STRUC
 	ULONG				PlcpLengthLow:8;// BBP R2 - PLCP length_Low
 	ULONG				PlcpService:8;// BBP R1 - PLCP Service
 	ULONG				PlcpSignal:8;// BBP R0 - PLCP Singal
-	
+
 	// Word    3
 	ULONG				Iv;// IV
 	

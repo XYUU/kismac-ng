@@ -11,6 +11,11 @@
 
 #define align64(a)      (((a)+63)&~63)
 
+unsigned char   RT73_RateIdToPlcpSignal[12] = { 
+    0, /* RATE_1 */        1, /* RATE_2 */         2, /* RATE_5_5 */       3, /* RATE_11 */        // see BBP spec
+    11, /* RATE_6 */   15, /* RATE_9 */    10, /* RATE_12 */   14, /* RATE_18 */    // see IEEE802.11a-1999 p.14
+9, /* RATE_24 */  13, /* RATE_36 */    8, /* RATE_48 */   12  /* RATE_54 */ }; // see IEEE802.11a-1999 p.14
+
 void RT73Jack::dumpFrame(UInt8 *data, UInt16 size) {
     NSLog(@"--FRAME LENGTH %d--", size);
     int idx = 0;
@@ -1908,7 +1913,7 @@ void    RT73Jack::RTUSBWriteTxDescriptor(
     pTxD->Aifsn = 2;
     
     // fill up PLCP SIGNAL field
-    pTxD->PlcpSignal = RateIdToPlcpSignal[Rate];
+    pTxD->PlcpSignal = RT73_RateIdToPlcpSignal[Rate];
     // fill up PLCP SERVICE field, not used for OFDM rates
     pTxD->PlcpService = 4; // Service;
     

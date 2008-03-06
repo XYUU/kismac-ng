@@ -134,7 +134,8 @@ public:
     int         WriteTxDescriptor(void* theFrame, UInt16 length);
     bool        sendFrame(UInt8* data, int size);
     IOReturn    _sendFrame(UInt8* data, IOByteCount size);
-
+    void dumpFrame(UInt8 *data, UInt16 size);
+    
 private:
     struct rtl8187_priv *_priv;
     

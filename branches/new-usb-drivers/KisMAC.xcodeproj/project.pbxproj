@@ -457,6 +457,7 @@
 		00FF593E06C630CC006C7F1E /* WaveDriverPrismGT.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF593C06C630CC006C7F1E /* WaveDriverPrismGT.h */; };
 		00FF593F06C630CC006C7F1E /* WaveDriverPrismGT.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FF593D06C630CC006C7F1E /* WaveDriverPrismGT.m */; };
 		6914ABD10D687C81008183E9 /* KisMAC80211.h in Headers */ = {isa = PBXBuildFile; fileRef = 6914ABD00D687C80008183E9 /* KisMAC80211.h */; };
+		6961B2870D7F5F91003A61F1 /* ralink.h in Headers */ = {isa = PBXBuildFile; fileRef = 6961B2860D7F5F91003A61F1 /* ralink.h */; };
 		69E5B4D20D715E590009EB65 /* rtl8187.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69E5B4D10D715E590009EB65 /* rtl8187.mm */; };
 		69E5B4D50D715E930009EB65 /* rtl8187.h in Headers */ = {isa = PBXBuildFile; fileRef = 69E5B4D40D715E930009EB65 /* rtl8187.h */; };
 		69E5B4DA0D7161160009EB65 /* rtl818x.h in Headers */ = {isa = PBXBuildFile; fileRef = 69E5B4D90D7161160009EB65 /* rtl818x.h */; };
@@ -821,6 +822,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* KisMAC_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC_Prefix.pch; sourceTree = "<group>"; };
 		6914ABD00D687C80008183E9 /* KisMAC80211.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KisMAC80211.h; sourceTree = "<group>"; };
+		6961B2860D7F5F91003A61F1 /* ralink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ralink.h; sourceTree = "<group>"; };
 		69E5B4D10D715E590009EB65 /* rtl8187.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = rtl8187.mm; sourceTree = "<group>"; };
 		69E5B4D40D715E930009EB65 /* rtl8187.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtl8187.h; sourceTree = "<group>"; };
 		69E5B4D90D7161160009EB65 /* rtl818x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtl818x.h; sourceTree = "<group>"; };
@@ -1032,8 +1034,8 @@
 				003533A106A5DD8500AB4577 /* Apple80211.h */,
 				003533A206A5DD8500AB4577 /* quicksort.h */,
 				003533A306A5DD8500AB4577 /* quicksort.m */,
-				00122EA406B1A7E5007FA5FE /* FCS.h */,
 				00122EA506B1A7E5007FA5FE /* FCS.m */,
+				00122EA406B1A7E5007FA5FE /* FCS.h */,
 			);
 			name = "3rd Party";
 			path = "Sources/3rd Party";
@@ -1498,6 +1500,7 @@
 				6C8390200AE09EFB00B7654B /* structs.h */,
 				6C8390210AE09EFB00B7654B /* USBJack.h */,
 				6C8390220AE09EFB00B7654B /* USBJack.mm */,
+				6961B2860D7F5F91003A61F1 /* ralink.h */,
 			);
 			path = USBJack;
 			sourceTree = "<group>";
@@ -1689,6 +1692,7 @@
 				69E5B4D50D715E930009EB65 /* rtl8187.h in Headers */,
 				69E5B4DA0D7161160009EB65 /* rtl818x.h in Headers */,
 				69E5B55C0D718F340009EB65 /* eeprom_93cx6.h in Headers */,
+				6961B2870D7F5F91003A61F1 /* ralink.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

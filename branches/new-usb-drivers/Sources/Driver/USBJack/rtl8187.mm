@@ -1459,16 +1459,19 @@ bool RTL8187Jack::_massagePacket(UInt16 len) {
 	return true;
 }
 int RTL8187Jack::WriteTxDescriptor(void* theFrame, UInt16 length) {
-    struct rtl8187_tx_hdr *hdr = (struct rtl8187_tx_hdr *)theFrame;
+    struct rtl8187_tx_hdr *hdr = (struct rtl8187_tx_hdr *)(theFrame);
+    memset(hdr, 0, sizeof(struct rtl8187_tx_hdr));
     UInt32 flags = length;
     flags |= RTL8187_TX_FLAG_NO_ENCRYPT;
 //	flags |= control->rts_cts_rate << 19;
-//	flags |= control->tx_rate << 24;    
+	flags |= 11 << 24;    
     hdr->flags = CFSwapInt32HostToLittle(flags);
-    hdr->len = 0;
-    hdr->retry = 0;
     hdr->rts_duration = 0;
-    memset(theFrame, 0, sizeof(struct rtl8187_tx_hdr));
+    hdr->len = 0;
+    hdr->retry = 3; // CWMIN
+	hdr->retry |= (7<<4); //CMAX
+	hdr->retry |= (0<<8); //retry lim
+    hdr->retry = CFSwapInt32HostToLittle(hdr->retry);
     return sizeof(struct rtl8187_tx_hdr);
 }
 bool RTL8187Jack::sendFrame(UInt8* data, int size) {
@@ -1490,22 +1493,44 @@ IOReturn RTL8187Jack::_sendFrame(UInt8* data, IOByteCount size) {
     if (!_devicePresent) return kIOReturnError;
     
     if (_interface == NULL) {
-        NSLog(@"RT73Jack::_sendFrame called with NULL interface this is prohibited!\n");
+        NSLog(@"RTL8187Jack::_sendFrame called with NULL interface this is prohibited!\n");
         return kIOReturnError;
     }
-    //    NSLog(@"RT73Jack::_sendFrame");
+    
+//    NSLog(@"RT73Jack::_sendFrame");
+//    dumpFrame(data, size);
     
     _lockDevice();
     
     memcpy(&_outputBuffer, data, size);
 
-    numBytes =  (((size)+63)&~63);
-    
-    kr = (*_interface)->WritePipe(_interface, kOutPipe, &_outputBuffer, numBytes);
-    
+//    numBytes =  (((size)+63)&~63);
+    numBytes = size;
+//    NSLog(@"NumBytes %d", numBytes);
+    kr = (*_interface)->WritePipe(_interface, 3, &_outputBuffer, numBytes);
+    if (kr) {
+        NSLog(@"kr %x", kr);
+    }
     _unlockDevice();
     
     return kr;
+}
+
+void RTL8187Jack::dumpFrame(UInt8 *data, UInt16 size) {
+    NSLog(@"--FRAME LENGTH %d--", size);
+    int idx = 0;
+    int i,j;
+	for (i=0;i<size;i=i+8) {
+        fprintf(stderr, "0x%.4x ", i);
+        for (j=0;j<8;j++) {
+            if (idx < size)
+                fprintf(stderr, "%.2x ", data[idx]);
+            else
+                fprintf(stderr, "   ");
+            idx += 1;
+        }
+        fprintf(stderr, "\n");
+    }
 }
 
 RTL8187Jack::RTL8187Jack() {

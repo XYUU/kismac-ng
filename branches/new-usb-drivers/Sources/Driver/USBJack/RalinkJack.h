@@ -94,6 +94,7 @@ public:
     bool        sendFrame(UInt8* data, int size);
     IOReturn    _sendFrame(UInt8* data, IOByteCount size);
     void    RTMPDescriptorEndianChange(unsigned char *  pData, unsigned long DescriptorType);
+    UInt32 currentRate;
     
 private:
     int temp;

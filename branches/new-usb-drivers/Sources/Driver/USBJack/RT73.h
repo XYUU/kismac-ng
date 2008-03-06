@@ -40,6 +40,8 @@
 #ifndef	__RT73_H__
 #define	__RT73_H__
 
+#include "ralink.h"
+
 #define UCHAR unsigned char
 #define ULONG unsigned long
 #define USHORT unsigned short
@@ -2161,11 +2163,6 @@ static RTMP_RF_REGS RF5225RegTable[] = {
 };
 UCHAR	NUM_OF_5225_CHNL = (sizeof(RF5225RegTable) / sizeof(RTMP_RF_REGS));
 
-unsigned char   RateIdToPlcpSignal[12] = { 
-         0, /* RATE_1 */        1, /* RATE_2 */         2, /* RATE_5_5 */       3, /* RATE_11 */        // see BBP spec
-        11, /* RATE_6 */   15, /* RATE_9 */    10, /* RATE_12 */   14, /* RATE_18 */    // see IEEE802.11a-1999 p.14
-         9, /* RATE_24 */  13, /* RATE_36 */    8, /* RATE_48 */   12  /* RATE_54 */ }; // see IEEE802.11a-1999 p.14
-
 #define TYPE_TXD                                        0
 #define TYPE_RXD                                        1
 #define TXD_SIZE                                sizeof(TXD_STRUC)
@@ -2183,19 +2180,6 @@ unsigned char   RateIdToPlcpSignal[12] = {
     (((UInt32)(x) & (UInt32) 0x00ff0000UL) >>  8) | \
     (((UInt32)(x) & (UInt32) 0xff000000UL) >> 24) ))
 
-#define RATE_1                                  0
-#define RATE_2                                  1
-#define RATE_5_5                                2
-#define RATE_11                                 3
-#define RATE_6                                  4       // OFDM
-#define RATE_9                                  5       // OFDM
-#define RATE_12                                 6       // OFDM
-#define RATE_18                                 7       // OFDM
-#define RATE_24                                 8       // OFDM
-#define RATE_36                                 9       // OFDM
-#define RATE_48                                 10      // OFDM
-#define RATE_54                                 11      // OFDM
-#define RATE_FIRST_OFDM_RATE    RATE_6
 #define RATE_AUTO_SWITCH                255 // for UserCfg.FixedTxRate only
 
 #define DEFAULT_BBP_TX_POWER            0

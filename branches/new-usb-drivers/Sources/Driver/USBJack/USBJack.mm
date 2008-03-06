@@ -117,19 +117,21 @@ static struct identStruct devices[] = {
     {0x148f, 0x2573},	/* 5 CNET CWD-854 */	
     {0x14b2, 0x3c22},	/* 6 Conceptronic */
 	{0x0b05, 0x1723},   /* 7 ASUS WL-167G RALINK RT2500 */
+    {0x0df6, 0x90ac},   /* 8 Sitecom WL-172 */
+    {0x0df6, 0x9712},   /* 9 Sitecom WL-113 v.1.002*/
     // RTL8187
     {0x0bda, 0x8187},   /* 1 Realtek */
     {0x0846, 0x6100},	/* 2 Netgear */
     {0x0846, 0x6a00},	/* 3 Netgear */
     {0x03f0, 0xca02},   /* 4 HP */
-    {0x0df6, 0x000d},	/* 5 Sitecom */	
+    {0x0df6, 0x000d},	/* 5 Sitecom WL-168 */	
     
 };
 
 #define dIntersilDeviceCount 33
 #define dZydasDeviceCount 1
 #define dRalinkDeviceCount 26
-#define dRT73DeviceCount 7
+#define dRT73DeviceCount 9
 #define dRTL8187DeviceCount 5
 
 #define dbgOutPutBuf(a) NSLog( @"0x%.4x 0x%.4x 0x%.4x 0x%.4x%.4x", NSSwapLittleShortToHost(*((UInt16*)&(a) )), NSSwapLittleShortToHost(*((UInt16*)&(a)+1)), NSSwapLittleShortToHost(*((UInt16*)&(a)+2)), NSSwapLittleShortToHost(*((UInt16*)&(a)+3)), NSSwapLittleShortToHost(*((UInt16*)&(a)+4)) );              
@@ -296,8 +298,8 @@ IOReturn USBJack::_doCommandNoWait(enum WLCommandCode cmd, UInt16 param0, UInt16
     
     _lockDevice();
     /* Initialize the command */
-    _outputBuffer.cmdreq.type = 	NSSwapHostShortToLittle(_USB_CMDREQ);
-    _outputBuffer.cmdreq.cmd =          NSSwapHostShortToLittle(cmd);
+    _outputBuffer.cmdreq.type  = 	NSSwapHostShortToLittle(_USB_CMDREQ);
+    _outputBuffer.cmdreq.cmd   =    NSSwapHostShortToLittle(cmd);
     _outputBuffer.cmdreq.parm0 =	NSSwapHostShortToLittle(param0);
     _outputBuffer.cmdreq.parm1 =	NSSwapHostShortToLittle(param1);
     _outputBuffer.cmdreq.parm2 =	NSSwapHostShortToLittle(param2);
@@ -785,9 +787,13 @@ IOReturn USBJack::_findInterfaces(IOUSBDeviceInterface **dev) {
                 (void) (*intf)->Release(intf);
                 break;
             } else {
+                NSLog(@"%d %d", pipeRef, direction);
                 error = false;
                 if (direction == kUSBIn && transferType == kUSBBulk) kInPipe = pipeRef;
-                else if (direction == kUSBOut && transferType == kUSBBulk) kOutPipe = pipeRef;
+                else if (direction == kUSBOut && transferType == kUSBBulk) {
+                    NSLog(@"kOutPipe %d", kOutPipe);
+                    kOutPipe = pipeRef;
+                }
                 else if (direction == kUSBIn && transferType  == kUSBInterrupt) kInterruptPipe = pipeRef;
                 else NSLog(@"Found unknown interface, ignoring");
             
