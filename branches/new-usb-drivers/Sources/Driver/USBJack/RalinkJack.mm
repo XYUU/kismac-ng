@@ -1180,7 +1180,7 @@ bool RalinkJack::_massagePacket(UInt16 len){
 
     // this is probablty not the most efficient way to do this
     frame.ctrl.signal = pRxD->BBR1;
-    frame.ctrl.len = len - sizeof(RXD_STRUC) - 4;
+    frame.ctrl.len = pRxD->DataByteCnt - 4;
     
     memcpy(frame.data, pData, frame.ctrl.len); 
     memcpy(&_receiveBuffer, pFrame, sizeof(KFrame));
