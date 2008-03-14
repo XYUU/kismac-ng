@@ -47,7 +47,8 @@
         _aNonce = [[coder decodeObjectForKey:@"aNonce"] retain];
         _packet = [[coder decodeObjectForKey:@"packet"] retain];
         _MIC    = [[coder decodeObjectForKey:@"MIC"] retain];
-
+        _wpaKeyCipher = [[coder decodeObjectForKey:@"wpaKeyCipher"] retain];
+        
         //LEAP stuff
         _leapUsername   = [[coder decodeObjectForKey:@"leapUsername"] retain];
         _leapChallenge  = [[coder decodeObjectForKey:@"leapChallenge"] retain];
@@ -78,6 +79,7 @@
 	_aNonce = [[dict objectForKey:@"wpaANonce"] retain];
 	_packet = [[dict objectForKey:@"wpaPacket"] retain];
 	_MIC    = [[dict objectForKey:@"wpaMIC"] retain];
+    _wpaKeyCipher = [[dict objectForKey:@"wpaKeyCipher"] retain];
 
 	//LEAP stuff
 	_leapUsername   = [[dict objectForKey:@"leapUsername"] retain];
@@ -104,7 +106,8 @@
 	if (_aNonce) [dict setObject:_aNonce forKey:@"wpaANonce"];
 	if (_packet) [dict setObject:_packet forKey:@"wpaPacket"];
 	if (_MIC)    [dict setObject:_MIC forKey:@"wpaMIC"];
-		
+    if (_wpaKeyCipher) [dict setObject:_wpaKeyCipher forKey:@"wpaKeyCipher"];
+        
 	if (_leapUsername)  [dict setObject:_leapUsername forKey:@"leapUsername"];
 	if (_leapChallenge) [dict setObject:_leapChallenge forKey:@"leapChallenge"];
 	if (_leapResponse)  [dict setObject:_leapResponse forKey:@"leapResponse"];
@@ -127,6 +130,7 @@
 				[GrowlController notifyGrowlWPAChallenge:@"" mac:_ID bssid:[w BSSIDString]];
                 NSLog(@"Nonce %.2X %.2X", nonce[0], nonce[WPA_NONCE_LENGTH-1]);
                 [WaveHelper secureReplace:&_aNonce withObject:[NSData dataWithBytes:nonce length:WPA_NONCE_LENGTH]];
+                _wpaKeyCipher = [w wpaKeyCipher];
                 break;
             case wpaNonceSNonce:
                 NSLog(@"Detected WPA response for %@!", _ID);
@@ -138,7 +142,6 @@
                 NSLog(@"Nonce None");
                 break;
         }
-        
         packet = [w eapolData];
         mic = [w eapolMIC];
         if (packet) [WaveHelper secureReplace:&_packet withObject:packet];
@@ -279,6 +282,10 @@
 
 - (NSData *)eapolPacket {
     return _packet;
+}
+
+- (int)wpaKeyCipher {
+    return _wpaKeyCipher;
 }
 
 - (NSData *)rawID {

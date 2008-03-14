@@ -161,8 +161,12 @@ typedef struct _frameLEAP {
 #define	IEEE80211_TYPE_CTL		OSSwapBigToHostConstInt16(0x0400)
 #define	IEEE80211_TYPE_DATA		OSSwapBigToHostConstInt16(0x0800)
 
+
+/* Subtypes */
+
 #define	IEEE80211_SUBTYPE_MASK			OSSwapBigToHostConstInt16(0xf000)
 
+/* management subtypes */
 #define	IEEE80211_SUBTYPE_ASSOC_REQ		OSSwapBigToHostConstInt16(0x0000)
 #define	IEEE80211_SUBTYPE_ASSOC_RESP	OSSwapBigToHostConstInt16(0x1000)
 #define	IEEE80211_SUBTYPE_REASSOC_REQ	OSSwapBigToHostConstInt16(0x2000)
@@ -174,7 +178,9 @@ typedef struct _frameLEAP {
 #define	IEEE80211_SUBTYPE_DISASSOC		OSSwapBigToHostConstInt16(0xa000)
 #define	IEEE80211_SUBTYPE_AUTH			OSSwapBigToHostConstInt16(0xb000)
 #define	IEEE80211_SUBTYPE_DEAUTH		OSSwapBigToHostConstInt16(0xc000)
+#define	IEEE80211_SUBTYPE_ACTION		OSSwapBigToHostConstInt16(0xd000)
 
+/* control subtypes */
 #define	IEEE80211_SUBTYPE_PS_POLL		OSSwapBigToHostConstInt16(0xa000)
 #define	IEEE80211_SUBTYPE_RTS			OSSwapBigToHostConstInt16(0xb000)
 #define	IEEE80211_SUBTYPE_CTS			OSSwapBigToHostConstInt16(0xc000)
@@ -182,9 +188,16 @@ typedef struct _frameLEAP {
 #define	IEEE80211_SUBTYPE_CF_END		OSSwapBigToHostConstInt16(0xe000)
 #define	IEEE80211_SUBTYPE_CF_END_ACK	OSSwapBigToHostConstInt16(0xf000)
 
-#define	IEEE80211_SUBTYPE_CF_ACK		OSSwapBigToHostConstInt16(0x1000)
-#define	IEEE80211_SUBTYPE_CF_POLL		OSSwapBigToHostConstInt16(0x2000)
-#define	IEEE80211_SUBTYPE_NODATA		OSSwapBigToHostConstInt16(0x4000)
+/* data subtypes */
+#define	IEEE80211_SUBTYPE_DATA          OSSwapBigToHostConstInt16(0x0000)
+#define	IEEE80211_SUBTYPE_DATA_CFACK	OSSwapBigToHostConstInt16(0x1000)
+#define	IEEE80211_SUBTYPE_DATA_CFPOLL	OSSwapBigToHostConstInt16(0x2000)
+#define	IEEE80211_SUBTYPE_DATA_CFACKPOLL OSSwapBigToHostConstInt16(0x3000)
+#define	IEEE80211_SUBTYPE_NULLFUNC		OSSwapBigToHostConstInt16(0x4000)
+#define	IEEE80211_SUBTYPE_CFACK         OSSwapBigToHostConstInt16(0x5000)
+#define	IEEE80211_SUBTYPE_CFPOLL		OSSwapBigToHostConstInt16(0x6000)
+#define	IEEE80211_SUBTYPE_CFACKPOLL		OSSwapBigToHostConstInt16(0x7000)
+#define	IEEE80211_SUBTYPE_QOS_DATA		OSSwapBigToHostConstInt16(0x8000)
 
 #define	IEEE80211_DIR_MASK				OSSwapBigToHostConstInt16(0x0003)
 #define	IEEE80211_DIR_NODS				OSSwapBigToHostConstInt16(0x0000)	/* STA->STA */
@@ -240,11 +253,11 @@ typedef struct _frameLEAP {
 #define WPA_FLAG_INSTALL                OSSwapBigToHostConstInt16(0x0040)
 #define WPA_FLAG_KEYID                  OSSwapBigToHostConstInt16(0x0030)
 #define WPA_FLAG_KEYTYPE                OSSwapBigToHostConstInt16(0x0008)
-#define WPA_FLAG_KEYCIPHER              OSSwapBigToHostConstInt16(0x0007)
 
 #define WPA_FLAG_KEYTYPE_PAIRWISE       OSSwapBigToHostConstInt16(0x0008)
 #define WPA_FLAG_KEYTYPE_GROUPWISE      OSSwapBigToHostConstInt16(0x0000)
 
+#define WPA_FLAG_KEYCIPHER_MASK         OSSwapBigToHostConstInt16(0x0007)
 #define WPA_FLAG_KEYCIPHER_HMAC_MD5     OSSwapBigToHostConstInt16(0x0001)
 #define WPA_FLAG_KEYCIPHER_AES_CBC      OSSwapBigToHostConstInt16(0x0002)
 

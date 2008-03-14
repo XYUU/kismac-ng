@@ -37,6 +37,7 @@ struct clientData {
     const UInt8 *data;
     UInt32 dataLen;
     NSString *clientID;
+    int wpaKeyCipher;
 };
 
 
@@ -294,9 +295,10 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
     
     keys = 0;
     for (i = 0; i < [aClientKeys count]; i++) {
-        if ([[aClients objectForKey:[aClientKeys objectAtIndex:i]] eapolDataAvailable]) keys++;
+        if ([[aClients objectForKey:[aClientKeys objectAtIndex:i]] eapolDataAvailable])
+            keys++;
     }
-
+    
     NSAssert(keys!=0, @"There must be more keys");
     
     curKey = 0;
@@ -330,6 +332,7 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
                 c[curKey].dataLen       = [[wc eapolPacket] length];
                 c[curKey].mic           = [[wc eapolMIC]    bytes];
                 c[curKey].clientID      = [wc ID];
+                c[curKey].wpaKeyCipher  = [wc wpaKeyCipher];
                 curKey++;
             }
         }
@@ -371,16 +374,16 @@ inline void fastWP_passwordHashAltivec(unsigned char password[4][64], const unsi
             
             k++;
         } while(k<4);
-        
+
         fastWP_passwordHashAltivec(wrd, ssid, ssidLength, pmk);
-        
         for (l = 0; l < k; l++) {
             for (curKey = 0; curKey < keys; curKey++) {
         
             PRF(pmk[l], 32, prefix, strlen(prefix), c[curKey].ptkInput, WPA_NONCE_LENGTH*2 + 12, ptk, 16);
-        
-                fast_hmac_md5(c[curKey].data, c[curKey].dataLen, ptk, 16, digest);
-                
+                if (c[curKey].wpaKeyCipher == 1)
+                    fast_hmac_md5(c[curKey].data, c[curKey].dataLen, ptk, 16, digest);
+                else
+                    fast_hmac_sha1(c[curKey].data, c[curKey].dataLen, ptk, 16, digest);
                 if (memcmp(digest, c[curKey].mic, 16) == 0) {
                     _password = [[NSString stringWithFormat:@"%s for Client %@", wrd[l], c[curKey].clientID] retain];
                     fclose(fptr);

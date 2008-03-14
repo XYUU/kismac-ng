@@ -159,6 +159,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
     struct ieee80211_hdr *hdr1;
     struct ieee80211_hdr_3addr *hdr3;
     struct ieee80211_hdr_4addr *hdr4;
+    struct ieee80211_hdr_3addrqos *hdr3qos;
+    struct ieee80211_hdr_4addrqos *hdr4qos;
     struct ieee80211_probe_beacon *beacon;
     struct ieee80211_probe_request *probe_req;
     struct ieee80211_assoc_request *assoc_req;
@@ -170,6 +172,8 @@ bool inline is8021xPacket(const UInt8* fileData) {
     hdr1 = (struct ieee80211_hdr *)(f->data);
     hdr3 = (struct ieee80211_hdr_3addr *)(f->data);
     hdr4 = (struct ieee80211_hdr_4addr *)(f->data);
+    hdr3qos = (struct ieee80211_hdr_3addrqos *)(f->data);
+    hdr4qos = (struct ieee80211_hdr_4addrqos *)(f->data);
     
     beacon = (struct ieee80211_probe_beacon *)(f->data);
     probe_req = (struct ieee80211_probe_request *)(f->data);
@@ -206,17 +210,31 @@ bool inline is8021xPacket(const UInt8* fileData) {
 
     _channel=(f->ctrl.channel>14 || f->ctrl.channel<1 ? 1 : f->ctrl.channel);
     
-    //depending on the frame we have to figure the length of the header
-    // TODO: Parse
-    switch(_type) {
-        case IEEE80211_TYPE_DATA:               //Data Frames
+    // depending on the frame we have to figure the length of the header
+    if (_type == IEEE80211_TYPE_DATA) {
+        if (_subtype == IEEE80211_SUBTYPE_QOS_DATA) {
+//            NSLog(@"QOS");
+            if (_isToDS && _isFrDS) {
+                _payload = hdr4qos->payload;
+                _payloadLength = _length - sizeof(struct ieee80211_hdr_4addrqos);                
+            } else {
+                _payload = hdr3qos->payload;
+                _payloadLength = _length - sizeof(struct ieee80211_hdr_3addrqos);
+            }
+        } else {
             if (_isToDS && _isFrDS) {
                 _payload = hdr4->payload;
                 _payloadLength = _length - sizeof(struct ieee80211_hdr_4addr);
+            }
+            _payload = hdr3->payload;
+            _payloadLength = _length - sizeof(struct ieee80211_hdr_3addr);
+        }
+    }
+    switch(_type) {
+        case IEEE80211_TYPE_DATA:               //Data Frames
+            if (_isToDS && _isFrDS) {
                 _netType = networkTypeTunnel;   //what can i say? it is a tunnel
             } else {
-                _payload = hdr3->payload;
-                _payloadLength = _length - sizeof(struct ieee80211_hdr_3addr);
                 // if either the from or the to ap bit set we are managed
                 if (_isToDS|_isFrDS)
 					_netType = networkTypeManaged;
@@ -224,7 +242,7 @@ bool inline is8021xPacket(const UInt8* fileData) {
 					_netType = networkTypeLucentTunnel;
                 else 
 					_netType = networkTypeAdHoc;
-            }            
+            }
             if (_length >= 24 && is8021xPacket(_payload)) {
                 _isEAP = YES;
                 if ([self isWPAKeyPacket]) 
@@ -855,22 +873,29 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
     
     f = (frame8021x*)(_payload+8);
     
-    if (f->version != 1 ||      //version 1
-        f->type != 3 ||         //should be a key
-        *(_payload+12) != 254)   //should be a WPA key
-            return NO;
+//    if (f->version != 1)      //version 1
+//        return NO;
     
+    if (f->type != 3)         //should be a key
+        return NO;
+
+    if (*(_payload+12) != 254 && *(_payload+12) != 2)   //should be a WPA key or a RSN (WPA2) Key
+        return NO;
+        
     flags = *((UInt16*)(_payload+13));
     
     if (flags & WPA_FLAG_KEYTYPE == WPA_FLAG_KEYTYPE_GROUPWISE)
          return NO; //this is not interesting
     
-    _wpaCipher = flags & WPA_FLAG_KEYCIPHER;
+    _wpaCipher = flags & WPA_FLAG_KEYCIPHER_MASK;
+    NSLog(@"WPA Cipher %x", _wpaCipher);
     switch (flags & (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL)) {
         case WPA_FLAG_ACK:  //only ack set
+            NSLog(@"frame1");
             _nonce = wpaNonceANonce;
             break;
         case WPA_FLAG_MIC:  //only mic set
+            NSLog(@"frame2");
             memset(zeroNonce, 0, WPA_NONCE_LENGTH);
             if (memcmp(zeroNonce, _payload+25, WPA_NONCE_LENGTH))
                 _nonce = wpaNonceSNonce;
@@ -878,6 +903,7 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
                 _nonce = wpaNonceNone;
             break;
         case WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL:  //all set
+            NSLog(@"frame3");
             _nonce = wpaNonceANonce;
             break;
         default:
@@ -900,9 +926,9 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
 - (NSData*)eapolMIC {
     UInt16 flags = *((UInt16*)(_payload+13));
     
-    if ((flags & WPA_FLAG_MIC) == 0)
+    if ((flags & (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL)) != (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL))
         return Nil; //no MIC present
-
+    
     return [NSData dataWithBytes:(_payload+89) length:WPA_EAP_MIC_LENGTH];
 }
 - (NSData*)eapolData {
@@ -910,7 +936,7 @@ int isValidPacket(UInt8 *fileData, int fileLength) {
 
     NSMutableData *md;
     
-    if ((flags & WPA_FLAG_MIC) == 0)
+    if ((flags & (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL)) != (WPA_FLAG_MIC | WPA_FLAG_ACK | WPA_FLAG_INSTALL))
         return Nil; //no MIC present
 
     md = [NSMutableData dataWithBytes:(_payload+8) length:_payloadLength - 8];    //copy the whole key packet

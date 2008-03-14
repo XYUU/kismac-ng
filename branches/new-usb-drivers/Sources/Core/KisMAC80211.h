@@ -97,8 +97,8 @@ struct ieee80211_hdr_3addrqos {
 	UInt8 addr2[ETH_ALEN];
 	UInt8 addr3[ETH_ALEN];
 	UInt16 seq_ctl;
-	UInt8 payload[0];
 	UInt16 qos_ctl;
+	UInt8 payload[0];
 } __attribute__ ((packed));
 
 struct ieee80211_hdr_4addrqos {
@@ -109,8 +109,8 @@ struct ieee80211_hdr_4addrqos {
 	UInt8 addr3[ETH_ALEN];
 	UInt16 seq_ctl;
 	UInt8 addr4[ETH_ALEN];
-	UInt8 payload[0];
 	UInt16 qos_ctl;
+	UInt8 payload[0];
 } __attribute__ ((packed));
 
 /* More complex frametypes */
